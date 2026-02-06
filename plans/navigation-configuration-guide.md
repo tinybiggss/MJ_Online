@@ -1,0 +1,570 @@
+# Navigation Configuration Guide (Phase 2.3)
+
+**Purpose:** Configure Ghost Pro navigation menus for optimal UX and employer visibility
+**Status:** Ready for execution
+**Created:** 2026-01-28
+**Theme:** Kyoto (installed)
+**Site Type:** Career Portfolio (AI Implementation Focus)
+
+---
+
+## Navigation Strategy
+
+### Design Principles
+1. **Employer-First:** Projects featured prominently (2nd position after Home)
+2. **Simplicity:** 5 primary items maximum for clean appearance
+3. **Discoverability:** Contact and Resume easily accessible
+4. **Standards:** RSS/ActivityPub in footer for technical audience
+
+### Menu Structure
+
+```
+PRIMARY NAVIGATION (Top Menu)
+├── Home (/)
+├── Projects (/tag/projects/) ← PRIORITY: Early position for employers
+├── About (/about/)
+├── Resume (/resume/)
+└── Contact (/contact/)
+
+SECONDARY NAVIGATION (Footer)
+├── RSS Feed (/rss/)
+└── ActivityPub (/activitypub/ or @mike@MikeJones.online)
+```
+
+---
+
+## Implementation Steps
+
+### Step 1: Access Navigation Settings
+
+1. Navigate to Ghost Admin: `https://mikejones-online.ghost.io/ghost/`
+2. Click **Settings** in left sidebar
+3. Click **Design** section
+4. Scroll to **Navigation** section
+
+**Expected Interface:**
+- "Primary navigation" heading
+- "Secondary navigation" heading
+- Each with "Add item" buttons
+- Drag handles for reordering
+
+---
+
+### Step 2: Configure Primary Navigation
+
+**Clear Existing Items (if any):**
+- Click trash icon next to each existing navigation item
+- Start with clean slate
+
+**Add Navigation Items (in this exact order):**
+
+#### Item 1: Home
+- **Label:** `Home`
+- **URL:** `/`
+- **Purpose:** Standard homepage link
+- **Icon:** None (theme may add automatically)
+
+#### Item 2: Projects ⭐ CRITICAL
+- **Label:** `Projects`
+- **URL:** `/tag/projects/`
+- **Purpose:** Showcase AI implementation and context engineering work to employers
+- **Reasoning:** Early position (2nd) maximizes visibility for hiring managers
+- **Note:** This links to all posts tagged "projects" (creates automatic portfolio feed)
+
+#### Item 3: About
+- **Label:** `About`
+- **URL:** `/about/`
+- **Purpose:** Professional introduction and background
+- **Content:** Will contain about-page.md content
+
+#### Item 4: Resume
+- **Label:** `Resume`
+- **URL:** `/resume/`
+- **Purpose:** Detailed career history and skills
+- **Content:** Will contain resume-cv.md content
+- **Alternative Label:** `CV` (if preferred for international audience)
+
+#### Item 5: Contact
+- **Label:** `Contact`
+- **URL:** `/contact/`
+- **Purpose:** Contact form or contact information
+- **Note:** May need to create contact page or use theme's built-in contact functionality
+
+---
+
+### Step 3: Configure Secondary Navigation (Footer)
+
+**Purpose:** Technical/utility links for subscriptions and federation
+
+#### Item 1: RSS Feed
+- **Label:** `RSS Feed`
+- **URL:** `/rss/`
+- **Purpose:** Automatic subscription feed for RSS readers
+- **Technical Note:** Ghost generates RSS automatically at /rss/
+- **Audience:** Technical readers, developers
+
+#### Item 2: ActivityPub
+- **Label:** `ActivityPub` or `Follow on Fediverse`
+- **URL:** `/activitypub/` or `@mike@MikeJones.online`
+- **Purpose:** Mastodon/Fediverse subscription link
+- **Technical Note:** URL depends on Ghost's ActivityPub implementation
+- **Alternative Label:** `Fediverse`, `Mastodon`, or just show handle
+- **Verify URL:** Check Ghost settings after ActivityPub is enabled (Task 2.4)
+
+**Optional Footer Items (Can Add Later):**
+- Privacy Policy (`/privacy/`)
+- Terms (`/terms/`)
+- Newsletter signup (`#/portal/signup`)
+- GitHub link (external URL)
+- LinkedIn link (external URL)
+
+---
+
+### Step 4: Reordering and Customization
+
+**Drag to Reorder:**
+- Use drag handles (⋮⋮ icon) to reorder items
+- Ensure Projects is 2nd position (critical for employer visibility)
+- Order: Home → Projects → About → Resume → Contact
+
+**URL Formats Accepted:**
+- **Internal pages:** `/about/`, `/resume/`, `/contact/`
+- **Tag feeds:** `/tag/projects/`, `/tag/writing/`
+- **Special Ghost routes:** `/rss/`, `/sitemap.xml`, `/ghost/`
+- **External URLs:** `https://github.com/username`, `https://linkedin.com/in/username`
+- **Anchors:** `#/portal/signup`, `#/portal/account`
+
+**Label Best Practices:**
+- Keep labels short (1-2 words)
+- Use title case: "Projects" not "projects"
+- Clear and self-explanatory
+- No icons in labels (theme handles icons)
+
+---
+
+### Step 5: Save Configuration
+
+1. Click **Save** button in top-right of Settings page
+2. Wait for confirmation toast: "Settings saved"
+3. If errors occur:
+   - Check for invalid URLs (must start with `/` or `https://`)
+   - Check for empty labels
+   - Check for special characters in labels
+
+---
+
+### Step 6: Test Navigation (Desktop)
+
+**Open site in new tab:**
+- URL: `https://MikeJones.online/`
+- Check navigation menu appears in header
+- Verify all 5 primary items visible
+- Click each menu item to verify:
+  - Home → Returns to homepage
+  - Projects → Shows tag feed page (may be empty initially)
+  - About → Shows 404 (page not created yet) - EXPECTED
+  - Resume → Shows 404 (page not created yet) - EXPECTED
+  - Contact → Shows 404 (page not created yet) - EXPECTED
+
+**Check footer navigation:**
+- Scroll to bottom of page
+- Verify RSS Feed and ActivityPub links appear
+- RSS Feed should return XML feed (or RSS reader page)
+- ActivityPub link functionality depends on Task 2.4 completion
+
+**Visual Check:**
+- Navigation aligns with theme design (Kyoto)
+- Hover states work correctly
+- Active page highlighted (if theme supports)
+- Font size and spacing appropriate
+
+---
+
+### Step 7: Test Navigation (Mobile)
+
+**Resize browser window:**
+- Width: 375px (iPhone SE size) or narrow window
+- Navigation should collapse to hamburger menu (≡)
+
+**Test hamburger menu:**
+1. Click hamburger icon
+2. Menu should slide out or dropdown
+3. All 5 primary items should be visible
+4. Click each item to verify functionality
+5. Close menu (X icon or overlay click)
+
+**Mobile-specific checks:**
+- Menu readable on small screens
+- Touch targets large enough (44x44px minimum)
+- No horizontal scrolling
+- Footer navigation still accessible at bottom
+
+**Common Mobile Issues:**
+- Hamburger not appearing: Check theme responsive breakpoints
+- Menu not closing: JavaScript error (check browser console)
+- Items cut off: Font size too large or padding issues
+
+---
+
+### Step 8: Verify Link Functionality
+
+**Expected Behavior by Phase:**
+
+**Phase 2.3 (Current - Navigation Config):**
+- ✅ Home: Works (homepage exists)
+- ✅ Projects: Works (tag feed, may be empty)
+- ⚠️ About: 404 (page creation in Phase 3.1)
+- ⚠️ Resume: 404 (page creation in Phase 3.2)
+- ⚠️ Contact: 404 (page creation in Phase 3.3)
+- ✅ RSS Feed: Works (Ghost auto-generates)
+- ⚠️ ActivityPub: Pending (configured in Task 2.4)
+
+**Phase 3 (After Content Creation):**
+- All links should resolve to actual pages
+- No 404 errors
+
+**Testing Checklist:**
+- [ ] Home link works
+- [ ] Projects tag feed loads (empty OK)
+- [ ] About link navigates (404 expected for now)
+- [ ] Resume link navigates (404 expected for now)
+- [ ] Contact link navigates (404 expected for now)
+- [ ] RSS feed returns XML
+- [ ] Footer navigation visible
+- [ ] Mobile hamburger menu works
+- [ ] All links have correct URLs (no typos)
+
+---
+
+## Navigation Configuration Data
+
+### Primary Navigation JSON (for reference)
+
+```json
+[
+  {
+    "label": "Home",
+    "url": "/"
+  },
+  {
+    "label": "Projects",
+    "url": "/tag/projects/"
+  },
+  {
+    "label": "About",
+    "url": "/about/"
+  },
+  {
+    "label": "Resume",
+    "url": "/resume/"
+  },
+  {
+    "label": "Contact",
+    "url": "/contact/"
+  }
+]
+```
+
+### Secondary Navigation JSON (for reference)
+
+```json
+[
+  {
+    "label": "RSS Feed",
+    "url": "/rss/"
+  },
+  {
+    "label": "ActivityPub",
+    "url": "/activitypub/"
+  }
+]
+```
+
+**Note:** If using Ghost Admin API, POST to `/ghost/api/admin/settings/` with these navigation structures.
+
+---
+
+## Kyoto Theme Specific Considerations
+
+### Navigation Features in Kyoto Theme
+
+**Supported Features:**
+- ✅ Standard horizontal navigation
+- ✅ Responsive hamburger menu
+- ✅ Dropdown/mega menus (if configured)
+- ✅ Dark mode navigation variants
+- ✅ Active page highlighting
+- ✅ Smooth transitions
+
+**Kyoto Navigation Customization Options:**
+- Navigation position: Top (standard) or side
+- Background transparency
+- Font weight and size
+- Hover effects
+- Mobile breakpoint (typically 768px)
+
+**Configuration Location:**
+- Ghost Admin → Settings → Design → Site-wide → Navigation settings
+- Or Kyoto theme settings panel (if theme provides custom options)
+
+### Kyoto Theme Best Practices
+
+1. **Keep it minimal:** Kyoto excels with clean, simple navigation (5 items perfect)
+2. **Dark mode:** Ensure navigation contrast works in all 8 dark mode presets
+3. **Projects prominence:** Kyoto's portfolio focus makes Projects at position 2 ideal
+4. **Footer consistency:** Match footer nav styling to theme's footer design
+
+---
+
+## Common Issues & Troubleshooting
+
+### Issue: Navigation Not Saving
+
+**Symptoms:** Click Save, but items disappear or revert to old values
+
+**Solutions:**
+1. Check for JavaScript errors in browser console (F12)
+2. Verify URLs are valid (start with `/` or `https://`)
+3. Check for special characters in labels
+4. Try refreshing Ghost admin and re-entering
+5. Clear browser cache and try again
+
+### Issue: 404 on Navigation Links
+
+**Symptoms:** Clicking nav item shows "404 Page Not Found"
+
+**Solutions:**
+1. **Expected for About/Resume/Contact** until pages created (Phase 3)
+2. For Projects tag feed: Check if tag exists (Ghost → Tags)
+3. Verify URL spelling in navigation settings
+4. Check if page is published (not draft)
+5. Check page URL slug matches navigation URL
+
+### Issue: Mobile Menu Not Working
+
+**Symptoms:** Hamburger icon doesn't appear or menu doesn't open
+
+**Solutions:**
+1. Check browser console for JavaScript errors
+2. Verify theme is properly installed (Settings → Design → Active theme)
+3. Try different browser (rule out browser-specific issue)
+4. Check mobile viewport width (theme breakpoint may be different)
+5. Reinstall theme if corruption suspected
+
+### Issue: Navigation Styling Broken
+
+**Symptoms:** Navigation looks wrong, overlaps content, wrong colors
+
+**Solutions:**
+1. Check if theme customization was saved properly
+2. Verify accent color set correctly (Settings → Design → Branding)
+3. Check for conflicting custom CSS (Settings → Code injection)
+4. Try resetting theme to defaults
+5. Check Kyoto documentation for known issues
+
+### Issue: Too Many Navigation Items
+
+**Symptoms:** Navigation wraps to multiple lines or is cut off
+
+**Solutions:**
+1. Remove less important items (move to footer or remove entirely)
+2. Shorten label text ("CV" instead of "Resume/CV")
+3. Consider dropdown menus for grouped items (if theme supports)
+4. Check theme responsive breakpoints (mobile earlier than expected)
+
+---
+
+## Verification Checklist
+
+After completing all steps, verify:
+
+### Desktop Verification
+- [ ] All 5 primary navigation items visible
+- [ ] Items in correct order: Home, Projects, About, Resume, Contact
+- [ ] Navigation aligned properly with page layout
+- [ ] Hover effects work on all items
+- [ ] Active page highlighted (if theme supports)
+- [ ] Footer navigation visible at bottom
+- [ ] RSS Feed link works
+- [ ] ActivityPub link present (may not work until Task 2.4)
+
+### Mobile Verification
+- [ ] Hamburger menu appears at mobile breakpoint
+- [ ] Hamburger icon clickable
+- [ ] Menu opens/slides out correctly
+- [ ] All 5 items visible in mobile menu
+- [ ] Menu closes properly (X icon or overlay click)
+- [ ] Touch targets large enough
+- [ ] No horizontal scrolling
+- [ ] Footer navigation still accessible
+
+### Functionality Verification
+- [ ] Home link returns to homepage
+- [ ] Projects link shows tag feed (empty OK initially)
+- [ ] About/Resume/Contact show 404 (expected until Phase 3)
+- [ ] RSS feed returns XML feed
+- [ ] All URLs have correct format (no typos)
+- [ ] External links open in new tab (if any added)
+
+### Documentation
+- [ ] Navigation structure documented (this file)
+- [ ] Screenshots taken of desktop navigation (optional)
+- [ ] Screenshots taken of mobile menu (optional)
+- [ ] Any customizations noted
+- [ ] Issues encountered and resolved noted
+
+---
+
+## Success Criteria
+
+**Phase 2.3 is complete when:**
+
+1. ✅ Primary navigation configured with 5 items
+2. ✅ Projects featured in 2nd position (employer visibility)
+3. ✅ Secondary footer navigation configured
+4. ✅ All links functional (404s expected for uncreated pages)
+5. ✅ Desktop navigation tested and working
+6. ✅ Mobile hamburger menu tested and working
+7. ✅ Navigation structure documented
+
+**Definition of Success:**
+- Navigation menus saved in Ghost settings
+- All menu items clickable and navigating to correct URLs
+- Mobile responsive menu functional
+- Visual design consistent with Kyoto theme
+- Employer-focused structure (Projects prominent)
+
+---
+
+## Next Steps After Navigation Configuration
+
+### Immediate Next Steps (Phase 2)
+- **Task 2.4:** Configure ActivityPub (verify footer link URL)
+- **Task 2.5:** Setup Analytics (Ghost built-in)
+
+### Content Creation (Phase 3)
+- **Task 3.1:** Create About page (fix About link 404)
+- **Task 3.2:** Create Resume page (fix Resume link 404)
+- **Task 3.3:** Create Contact page (fix Contact link 404)
+- **Task 3.4:** Create first project posts (populate Projects feed)
+
+### Future Enhancements
+- Add social media links to footer navigation
+- Add Privacy Policy page (if needed)
+- Add Newsletter signup link to navigation
+- Configure dropdown menus (if theme supports and needed)
+- Add breadcrumbs navigation (if theme supports)
+
+---
+
+## Alternative Navigation Structures (For Future Consideration)
+
+### Option 1: Writing Section Added
+If SubStacks or writing section becomes important:
+
+```
+PRIMARY: Home | Projects | Writing | About | Resume | Contact
+SECONDARY: RSS Feed | ActivityPub | Privacy
+```
+
+### Option 2: External Links Added
+If social presence is prominent:
+
+```
+PRIMARY: Home | Projects | About | Resume | Contact
+SECONDARY: RSS | ActivityPub | GitHub | LinkedIn | Twitter
+```
+
+### Option 3: Dropdown Menu Structure
+For more complex sites:
+
+```
+PRIMARY:
+├── Home
+├── Work ▼
+│   ├── Projects
+│   └── Resume
+├── Writing ▼
+│   ├── Blog
+│   └── Newsletter
+├── About
+└── Contact
+
+SECONDARY: RSS | ActivityPub | Social Links
+```
+
+**Current Decision:** Keep simple 5-item structure. Can expand later if needed.
+
+---
+
+## Navigation Analytics (Future)
+
+Once analytics configured (Task 2.5), track:
+- Most clicked navigation items
+- Mobile vs desktop usage patterns
+- Which items lead to conversions (newsletter signups, contact form)
+- Drop-off points (where users leave site)
+
+**Hypothesis:** Projects link will be most clicked by employers/recruiters.
+
+**Measurement:** Ghost Analytics → "Top pages" (after Phase 2.5 complete)
+
+---
+
+## File Locations
+
+**This Guide:**
+`/Users/michaeljones/Dev/MJ_Online/plans/navigation-configuration-guide.md`
+
+**Related Files:**
+- Content drafts: `/Users/michaeljones/Dev/MJ_Online/content-drafts/`
+  - `about-page.md` - For About link destination
+  - `resume-cv.md` - For Resume link destination
+- Theme documentation: Kyoto theme docs (external)
+- Roadmap: `/Users/michaeljones/Dev/MJ_Online/plans/roadmap-ghost-pro.md`
+
+---
+
+## Execution Method
+
+### Option A: Manual Execution (Recommended for now)
+1. User opens Ghost Admin in browser
+2. User follows Step 1-8 above
+3. User verifies configuration
+4. User updates STATUS.md when complete
+
+### Option B: Browser Automation (When available)
+1. Agent navigates to Ghost Admin
+2. Agent executes Steps 1-8 programmatically
+3. Agent takes screenshots for verification
+4. Agent reports completion via NATS
+5. Agent updates documentation
+
+### Option C: Ghost Admin API (Partial support)
+```bash
+# Get current navigation
+curl -H "Authorization: Bearer {ADMIN_API_KEY}" \
+  https://mikejones-online.ghost.io/ghost/api/admin/settings/
+
+# Update navigation
+curl -X PUT \
+  -H "Authorization: Bearer {ADMIN_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{"settings": [{"key": "navigation", "value": [...]}]}' \
+  https://mikejones-online.ghost.io/ghost/api/admin/settings/
+```
+
+**Note:** Admin API key required (found in Ghost Admin → Integrations → Custom integrations)
+
+---
+
+**Status:** Ready for execution
+**Estimated Time:** 30-60 minutes (including testing)
+**Priority:** Medium (Phase 2.3 dependency for Phase 3)
+**Blocker:** None (can execute immediately)
+
+---
+
+**Created by:** Main Agent (Navigation Configuration Task)
+**Last Updated:** 2026-01-28
+**Version:** 1.0

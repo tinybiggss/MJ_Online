@@ -1,0 +1,1119 @@
+{
+  "project": {
+    "name": "MJ_Online",
+    "full_name": "MikeJones.online - Personal Website & Portfolio",
+    "tagline": "AI Implementation Expert Portfolio with RAG Knowledge Base and Multi-Agent Coordination",
+    "status": "Phase 3 - Core Content Creation",
+    "start_date": "2026-01-28",
+    "current_date": "2026-02-04",
+    "domain": "MikeJones.online",
+    "platform": "Ghost Pro (Managed Hosting)",
+    "theme": "Kyoto (Premium)",
+    "repository": "/Users/michaeljones/Dev/MJ_Online",
+    "version": "1.0-prelaunch"
+  },
+  "project_goals": {
+    "primary": "Create professional portfolio website showcasing AI implementation and LLM integration expertise to attract employment and consulting opportunities",
+    "secondary": [
+      "Demonstrate practical AI implementation (RAG, chatbot, multi-agent coordination)",
+      "Establish authoritative online presence with SEO optimization",
+      "Showcase technical projects through comprehensive case studies",
+      "Position as 'AI Implementation Expert and LLM Integration Specialist'",
+      "Create knowledge management system (RAG) for content consistency",
+      "Implement multi-agent workflow for content creation"
+    ],
+    "success_criteria": {
+      "launch": [
+        "Site live at MikeJones.online with HTTPS",
+        "2+ comprehensive case studies published",
+        "Core pages complete (Home, About, Resume, Contact, Projects)",
+        "Professional design and mobile responsive",
+        "SEO optimized with proper metadata",
+        "Fast page load times (<3 seconds)"
+      ],
+      "post_launch": [
+        "AI chatbot implemented with RAG knowledge base",
+        "3-4 case studies demonstrating breadth",
+        "Employer inquiries or consulting leads",
+        "Strong positioning in AI implementation space"
+      ]
+    }
+  },
+  "key_decisions": [
+    {
+      "id": "DEC-001",
+      "date": "2026-01-28",
+      "decision": "Use Ghost Pro instead of self-hosted",
+      "rationale": "Faster time to launch (1-2 weeks vs 3-4 weeks), no server management, focus agents on content not infrastructure, SSL/backups/email included, can migrate to self-hosted later if desired",
+      "impact": "Eliminated Phase 1 server provisioning tasks, saved ~1 week",
+      "alternatives_considered": [
+        "Self-hosted VPS",
+        "Static site (Astro/Hugo)",
+        "Next.js full-stack"
+      ],
+      "outcome": "Positive - launched Ghost Pro 2026-01-28, domain configured same day"
+    },
+    {
+      "id": "DEC-002",
+      "date": "2026-01-28",
+      "decision": "Purchase Kyoto premium theme ($89)",
+      "rationale": "Professional portfolio aesthetic, dark mode support, mobile responsive, saves development time vs building custom theme",
+      "impact": "Professional appearance achieved immediately",
+      "alternatives_considered": [
+        "Free Ghost themes",
+        "Custom theme development"
+      ],
+      "outcome": "Positive - professional look, AI-forward aesthetic"
+    },
+    {
+      "id": "DEC-003",
+      "date": "2026-01-30",
+      "decision": "Use Ghost built-in analytics instead of Google Analytics",
+      "rationale": "GDPR compliant, privacy-first, included with Ghost Pro, no additional configuration",
+      "impact": "Simpler privacy compliance, faster setup",
+      "alternatives_considered": [
+        "Google Analytics",
+        "Plausible",
+        "Fathom"
+      ],
+      "outcome": "Positive - analytics active, privacy compliant"
+    },
+    {
+      "id": "DEC-004",
+      "date": "2026-02-03",
+      "decision": "Have Ted conduct technical interviews before case study creation",
+      "rationale": "Comprehensive documentation (1,700-2,800 lines) provides depth for case studies, captures technical details Mike might not remember, creates authoritative source material, updates RAG with verified facts",
+      "impact": "High-quality case study source material, RAG enrichment, showcases technical sophistication",
+      "alternatives_considered": [
+        "Alice creates case studies from basic descriptions",
+        "Mike writes case studies directly"
+      ],
+      "outcome": "Excellent - NeighborhoodShare 2,826 lines, Local LLM 1,705 lines, 23 new RAG entries"
+    },
+    {
+      "id": "DEC-005",
+      "date": "2026-02-04",
+      "decision": "Launch with 2 AI-focused case studies, defer AI Memory and Home Media Server",
+      "rationale": "Speed to launch, laser-focused AI positioning aligns with professional title, 2 comprehensive case studies better than 3 decent ones, can add more post-launch",
+      "impact": "Faster launch (~1 week savings), clearer positioning, flexibility to iterate",
+      "alternatives_considered": [
+        "Launch with 3 case studies",
+        "Wait for 4 case studies"
+      ],
+      "outcome": "In progress - focus on NeighborhoodShare + Local LLM case studies"
+    },
+    {
+      "id": "DEC-006",
+      "date": "2026-02-04",
+      "decision": "Create MikeJones.online website case study as top post-launch priority",
+      "rationale": "Meta/self-referential (compelling narrative), demonstrates practical AI implementation in business context, showcases RAG architecture and multi-agent coordination, aligns with 2026 employer trends (AI applied to business problems)",
+      "impact": "Strong post-launch case study demonstrating complete AI implementation process",
+      "alternatives_considered": [
+        "Home Media Server first",
+        "AI Memory System"
+      ],
+      "outcome": "Planned for Phase 7.3 after chatbot implementation"
+    }
+  ],
+  "phases_completed": [
+    {
+      "phase": "Phase 1: Ghost Pro Setup & Domain Configuration",
+      "status": "Complete",
+      "completion_date": "2026-01-28",
+      "duration": "1 day",
+      "tasks_completed": [
+        "Ghost Pro account created and configured",
+        "Domain MikeJones.online configured and pointing to Ghost Pro",
+        "HTTPS/SSL enabled automatically",
+        "DNS propagation complete",
+        "Email delivery configured (mike@MikeJones.online)",
+        "Test email verified",
+        "Publication settings configured",
+        "Social accounts linked",
+        "Timezone and language set"
+      ],
+      "deliverables": [
+        "Site accessible at MikeJones.online with HTTPS",
+        "Email delivery working",
+        "Basic Ghost Pro configuration complete"
+      ],
+      "challenges": [],
+      "notes": "Extremely fast setup due to Ghost Pro managed hosting - eliminated all server provisioning tasks"
+    },
+    {
+      "phase": "Phase 2: Theme & Design Configuration",
+      "status": "Complete",
+      "completion_date": "2026-01-30",
+      "duration": "2 days",
+      "tasks_completed": [
+        "2.1: Kyoto theme purchased ($89), installed, and activated",
+        "2.2: Visual design customized (Indigo accent #4F46E5, Onyx dark mode, typography)",
+        "2.3: Navigation configured (5 primary items, 3 secondary footer items, mobile menu)",
+        "2.4: ActivityPub/Fediverse enabled (@mike@MikeJones.online)",
+        "2.5: Analytics setup (Ghost built-in, GDPR compliant)",
+        "2.6: Code injection (custom CSS for AI badges, Schema.org structured data)"
+      ],
+      "agents_used": [
+        {
+          "agent": "Web-Content-Builder-Agent",
+          "tasks": [
+            "2.4 ActivityPub",
+            "2.5 Analytics",
+            "2.6 Code Injection"
+          ],
+          "completion": "2026-01-30 23:02:57"
+        },
+        {
+          "agent": "Web-Content-Builder-2",
+          "tasks": [
+            "2.2 Visual Design",
+            "2.3 Navigation"
+          ],
+          "completion": "2026-01-30 23:47:44"
+        }
+      ],
+      "deliverables": [
+        "Professional AI-forward aesthetic",
+        "Complete navigation structure",
+        "ActivityPub federation active",
+        "Analytics tracking",
+        "Custom CSS and Schema.org markup"
+      ],
+      "challenges": [
+        {
+          "challenge": "Coordination between two agents working in parallel",
+          "solution": "NATS coordination system prevented duplicate work",
+          "outcome": "Successful parallel execution, no conflicts"
+        }
+      ],
+      "notes": "100% complete 2026-01-30. All 6 sub-phases done. Professional appearance achieved."
+    }
+  ],
+  "current_phase": {
+    "phase": "Phase 3: Core Content Creation",
+    "status": "In Progress",
+    "start_date": "2026-02-02",
+    "progress": "1 case study published (NeighborhoodShare), Alice working on 2nd case study (Local LLM)",
+    "tasks_in_progress": [
+      {
+        "task": "3.7 Local LLM Case Study",
+        "status": "In Progress",
+        "agent": "Alice",
+        "started": "2026-02-05"
+      }
+    ],
+    "tasks_completed": [
+      {
+        "task": "3.1 Content Asset Gathering",
+        "status": "Complete",
+        "completion_date": "2026-02-03",
+        "deliverables": [
+          "Professional headshot (1.2MB)",
+          "Fun/personal photos (5 files)",
+          "NeighborhoodShare assets (19 screenshots + 2 logos)",
+          "AI Memory documentation (4 files)",
+          "Local LLM documentation (5 files)",
+          "SubStack RSS feed information"
+        ]
+      },
+      {
+        "task": "3.7 Local LLM Setup - Technical Documentation",
+        "status": "Complete",
+        "agent": "Ted (Technical-Research-Agent)",
+        "completion_date": "2026-02-03",
+        "deliverable": "/content-drafts/local-llm-technical-doc.md (1,705 lines)",
+        "interview_duration": "Comprehensive structured interview",
+        "rag_entries_added": 0,
+        "notes": "Three-service architecture (Ollama + Open WebUI + mcpo), MCP integration, RAG implementation, production-grade auto-start"
+      },
+      {
+        "task": "3.7 Local LLM Setup - RAG Update",
+        "status": "Complete",
+        "agent": "Ted (Technical-Research-Agent)",
+        "completion_date": "2026-02-04",
+        "rag_entries_added": 13,
+        "entry_ids": [
+          "rag-2026-02-04-108",
+          "rag-2026-02-04-109",
+          "rag-2026-02-04-110",
+          "rag-2026-02-04-111",
+          "rag-2026-02-04-112",
+          "rag-2026-02-04-113",
+          "rag-2026-02-04-114",
+          "rag-2026-02-04-115",
+          "rag-2026-02-04-116",
+          "rag-2026-02-04-117",
+          "rag-2026-02-04-118",
+          "rag-2026-02-04-119",
+          "rag-2026-02-04-120"
+        ],
+        "topics_covered": [
+          "Hardware infrastructure",
+          "Model specifications",
+          "mcpo MCP Bridge",
+          "Auto-start infrastructure",
+          "Docker configuration",
+          "RAG implementation",
+          "Python automation",
+          "Performance reality",
+          "Cost analysis",
+          "Learning outcomes",
+          "Configuration challenges",
+          "Results and capabilities",
+          "Future plans"
+        ]
+      },
+      {
+        "task": "3.8 NeighborhoodShare - Technical Documentation",
+        "status": "Complete",
+        "agent": "Ted (Technical-Research-Agent)",
+        "completion_date": "2026-02-04",
+        "deliverable": "/content-drafts/neighborhoodshare-technical-doc.md (2,826 lines)",
+        "interview_duration": "Comprehensive structured interview",
+        "rag_entries_added": 10,
+        "entry_ids": [
+          "rag-2026-02-04-098",
+          "rag-2026-02-04-099",
+          "rag-2026-02-04-100",
+          "rag-2026-02-04-101",
+          "rag-2026-02-04-102",
+          "rag-2026-02-04-103",
+          "rag-2026-02-04-104",
+          "rag-2026-02-04-105",
+          "rag-2026-02-04-106",
+          "rag-2026-02-04-107"
+        ],
+        "topics_covered": [
+          "Platform overview",
+          "Tech stack (React, TypeScript, Node.js, PostgreSQL)",
+          "AI-powered tool categorization (GPT-4o Vision)",
+          "Dual-authentication state machine",
+          "Beta expansion with Captain governance",
+          "API key security incident",
+          "Development timeline and metrics",
+          "AI-assisted development (Replit vibe coding)",
+          "Features and UX",
+          "Future plans and strategic pivot"
+        ],
+        "notes": "Full-stack with AI integration, 170 users, 20 zip codes, 6-month development cycle"
+      },
+      {
+        "task": "3.8 NeighborhoodShare Case Study",
+        "status": "Complete",
+        "agent": "Alice (Web-Content-Builder)",
+        "completion_date": "2026-02-05",
+        "deliverable": "Published to Ghost Pro at MikeJones.online",
+        "size": "23KB comprehensive case study",
+        "source": "Ted's 2,826-line technical doc",
+        "assets_used": "None yet - text-only publish",
+        "verified_against_rag": true,
+        "notes": "Comprehensive case study based on Ted's structured interview and documentation. Published text-only; 19 screenshots to be added during Phase 5 enhancement.",
+        "enhancement_needed": "Add 19 screenshots from /assets/projects/neighborhoodshare/"
+      }
+    ],
+    "tasks_queued": [
+      {
+        "task": "3.3 About Page",
+        "status": "Draft ready, needs publishing",
+        "agent": "Alice",
+        "estimated_time": "1-2 hours"
+      },
+      {
+        "task": "3.4 Resume/CV Page",
+        "status": "Queued",
+        "agent": "Alice",
+        "estimated_time": "2-3 hours"
+      },
+      {
+        "task": "3.5 Contact Page",
+        "status": "Queued",
+        "agent": "Alice",
+        "estimated_time": "1-2 hours"
+      },
+      {
+        "task": "5.X Case Study Image Enhancement",
+        "status": "Deferred to Phase 5",
+        "agent": "Alice",
+        "priority": "MEDIUM",
+        "description": "Add screenshots to published case studies",
+        "assets": {
+          "neighborhoodshare": "19 screenshots + 2 logos in /assets/projects/neighborhoodshare/",
+          "local_llm": "TBD - check for available screenshots"
+        },
+        "estimated_time": "2-3 hours"
+      }
+    ],
+    "deferred_to_post_launch": [
+      {
+        "task": "3.6 AI Memory System Case Study",
+        "reason": "Redundant with Local LLM (both cover memory systems)",
+        "phase": "Phase 7 (Post-Launch)",
+        "priority": "Low/Optional"
+      },
+      {
+        "task": "3.9 MikeJones.online Website & AI Chatbot Case Study",
+        "reason": "Dependencies: chatbot must be implemented first",
+        "phase": "Phase 7.3 (Post-Launch)",
+        "priority": "HIGH - Top post-launch priority",
+        "notes": "Meta case study - viewing site ON the site. Demonstrates practical AI implementation."
+      },
+      {
+        "task": "3.10 Home Media Server Case Study",
+        "reason": "Prioritize speed to launch with AI-focused positioning",
+        "phase": "Phase 7.4+ (Post-Launch)",
+        "priority": "Medium",
+        "notes": "Interview script already prepared and ready"
+      }
+    ]
+  },
+  "agents": {
+    "project_manager": {
+      "name": "Project-Manager-Claude",
+      "role": "Project coordination, roadmap management, agent orchestration, documentation",
+      "responsibilities": [
+        "Maintain roadmap and track progress",
+        "Coordinate multiple agents working in parallel",
+        "Make strategic decisions on priorities and approach",
+        "Update project memory and documentation",
+        "Manage NATS coordination system",
+        "Archive completed work",
+        "Create comprehensive project documentation"
+      ],
+      "active_since": "2026-01-28",
+      "tools_used": [
+        "Roadmap updates",
+        "Archive management",
+        "Agent coordination",
+        "Status tracking",
+        "Project memory maintenance"
+      ]
+    },
+    "technical_research_agent": {
+      "name": "Ted (Technical-Research-Agent)",
+      "role": "Technical documentation through structured interviews",
+      "responsibilities": [
+        "Conduct comprehensive technical interviews with Mike",
+        "Extract implementation details, architecture, decisions",
+        "Create detailed technical documentation (1,500-3,000 lines)",
+        "Update RAG knowledge base with verified entries",
+        "Hand off documentation to content creators",
+        "Document challenges, solutions, and learning outcomes"
+      ],
+      "active_since": "2026-02-03",
+      "agent_definition": "/Users/michaeljones/.claude/agents/Technical-Research-Agent.md",
+      "completed_work": [
+        {
+          "project": "Local LLM Setup",
+          "date": "2026-02-03",
+          "deliverable": "1,705-line technical doc",
+          "rag_entries": 13
+        },
+        {
+          "project": "NeighborhoodShare",
+          "date": "2026-02-04",
+          "deliverable": "2,826-line technical doc",
+          "rag_entries": 10
+        }
+      ],
+      "workflow": "Structured interview (using prepared script) → Comprehensive documentation → RAG updates → Handoff to Alice",
+      "standard_operating_procedure": "Always update RAG with 5-15 verified entries per project documenting tech stack, decisions, challenges, outcomes"
+    },
+    "web_content_builder": {
+      "name": "Alice (Web-Content-Builder)",
+      "role": "Ghost content creation and publishing",
+      "responsibilities": [
+        "Convert technical documentation to Ghost case studies",
+        "Create core pages (Homepage, About, Resume, Contact)",
+        "Publish content with proper SEO metadata",
+        "Upload and optimize images",
+        "Verify facts against RAG knowledge base",
+        "Ensure mobile responsiveness and accessibility"
+      ],
+      "active_since": "2026-01-30",
+      "skill_definition": "/.claude/skills/web-content-builder/",
+      "current_work": [
+        "Projects Landing Page (in progress)",
+        "Homepage (in progress)"
+      ],
+      "queued_work": [
+        "NeighborhoodShare case study (Ted's doc ready)",
+        "Local LLM case study (Ted's doc ready)",
+        "About Page (draft ready)",
+        "Resume/CV Page",
+        "Contact Page"
+      ],
+      "workflow": "Receive technical doc from Ted → Convert to compelling case study → Add screenshots/assets → Verify against RAG → Publish to Ghost with SEO optimization",
+      "completed_work": [
+        {
+          "task": "3.8 NeighborhoodShare Case Study",
+          "date": "2026-02-05",
+          "deliverable": "Published to Ghost (text-only, images to be added by Debbie)"
+        },
+        {
+          "task": "3.7 Local LLM Case Study",
+          "date": "2026-02-05",
+          "deliverable": "Published to Ghost (text-only, images to be added by Debbie)"
+        }
+      ]
+    },
+    "web_design_agent": {
+      "name": "Debbie (Web-Design-Agent)",
+      "role": "Expert visual designer, information architect, Ghost/Kyoto theme specialist",
+      "expertise": "20+ years professional web design, specializing in portfolio websites",
+      "responsibilities": [
+        "Fix and redesign all existing pages",
+        "Create modern, clean, functional layouts",
+        "Add images strategically from available assets",
+        "Verify all facts against RAG (critical for accuracy)",
+        "Make expert design decisions based on current trends",
+        "Ensure mobile responsiveness and professional quality",
+        "Work autonomously with clear explanations of decisions"
+      ],
+      "active_since": "2026-02-05",
+      "agent_definition": "/.claude/agents/web-design-agent.md",
+      "design_philosophy": "Clean, minimal, functional. Modern web design with clear lines, no bells and whistles.",
+      "current_assignment": "PHASE 1: Fix all existing pages (7 pages total)",
+      "priority_queue": [
+        "1. Homepage (placeholder text, no images)",
+        "2. Resume (wrong job title, needs design)",
+        "3. About (needs design review)",
+        "4. Contact (wrong context - Velocity Partners)",
+        "5. Projects landing (needs design review)",
+        "6. NeighborhoodShare case study (add 6-10 screenshots)",
+        "7. Local LLM case study (add screenshots)"
+      ],
+      "workflow": "Research current trends → Review assets → Verify facts against RAG → Design with expert decisions → Present work with clear reasoning"
+    }
+  },
+  "tech_stack": {
+    "hosting": {
+      "platform": "Ghost Pro (Managed Hosting)",
+      "tier": "Starter",
+      "benefits": [
+        "Automatic SSL/HTTPS",
+        "Email delivery included",
+        "Automatic Ghost updates",
+        "Backups included",
+        "No server management"
+      ],
+      "url": "https://mikejones.ghost.io"
+    },
+    "domain": {
+      "name": "MikeJones.online",
+      "registrar": "Unknown (to be documented)",
+      "configured": "2026-01-28",
+      "dns_status": "Fully propagated",
+      "ssl": "Active (A+ rating expected)"
+    },
+    "theme": {
+      "name": "Kyoto",
+      "type": "Premium (Purchased)",
+      "cost": "$89",
+      "vendor": "Unknown (to be documented)",
+      "features": [
+        "Portfolio aesthetic",
+        "Dark mode",
+        "Mobile responsive",
+        "Professional design"
+      ],
+      "customizations": {
+        "accent_color": "#4F46E5 (Indigo)",
+        "dark_mode": "Onyx theme",
+        "custom_css": "AI project badges",
+        "structured_data": "Schema.org Organization + Person"
+      }
+    },
+    "analytics": {
+      "platform": "Ghost Built-in Analytics",
+      "gdpr_compliant": true,
+      "access": "Ghost Admin → Analytics",
+      "cost": "Included with Ghost Pro"
+    },
+    "activitypub": {
+      "enabled": true,
+      "username": "@mike@MikeJones.online",
+      "federation": "Active",
+      "profile_configured": "Bio and images uploaded"
+    },
+    "planned_integrations": {
+      "ai_chatbot": {
+        "platform": "Cloudflare Workers",
+        "knowledge_source": "RAG knowledge base",
+        "phase": "Phase 7.3 (Post-Launch)",
+        "estimated_time": "2-3 weeks"
+      },
+      "substack_feeds": {
+        "resilient_tomorrow": "resilienttomorrow@substack.com",
+        "organizational_intelligence": "orgintelligence@substack.com",
+        "phase": "Phase 4",
+        "integration_type": "RSS feed import"
+      }
+    }
+  },
+  "rag_knowledge_base": {
+    "purpose": "Single source of truth for all facts about Mike Jones, ensuring content consistency across all pages and agents",
+    "location": "/Cowork/content/rag/knowledge.jsonl",
+    "schema": "/Cowork/content/rag/RAG_SCHEMA.md",
+    "total_entries": 123,
+    "created_date": "2026-01-30 (initial 100 entries)",
+    "last_updated": "2026-02-04",
+    "entry_types": [
+      {
+        "type": "fact",
+        "description": "Verified factual statements",
+        "example_topics": [
+          "Career history",
+          "Skills",
+          "Project details",
+          "Business structure"
+        ]
+      },
+      {
+        "type": "narrative",
+        "description": "Story-based explanations with context",
+        "example_topics": [
+          "Project challenges",
+          "Learning outcomes",
+          "Decision rationales"
+        ]
+      },
+      {
+        "type": "qa_pair",
+        "description": "Question and answer format",
+        "example_topics": [
+          "Common questions about experience",
+          "Project explanations"
+        ]
+      },
+      {
+        "type": "technical",
+        "description": "Technical specifications and details",
+        "example_topics": [
+          "Tech stacks",
+          "Architecture",
+          "Infrastructure",
+          "Performance metrics"
+        ]
+      },
+      {
+        "type": "fit_assessment",
+        "description": "Job fit criteria and evaluations",
+        "example_topics": [
+          "Role suitability",
+          "Industry fit",
+          "Company size preferences"
+        ]
+      }
+    ],
+    "projects_documented": [
+      {
+        "project": "MikeCareer",
+        "entries": "~30",
+        "topics": [
+          "29 years experience",
+          "Microsoft Xbox",
+          "Kabam",
+          "Livescribe",
+          "Kinoo",
+          "8 Circuit Studios",
+          "Professional title",
+          "Skills",
+          "Achievements"
+        ]
+      },
+      {
+        "project": "VelocityPartners",
+        "entries": "~20",
+        "topics": [
+          "Consulting service",
+          "AAPD methodology",
+          "PM Drowning framework",
+          "Services",
+          "Newsletter"
+        ]
+      },
+      {
+        "project": "ResilientTomorrow",
+        "entries": "~15",
+        "topics": [
+          "7 Pillars framework",
+          "Articles",
+          "Engagement metrics",
+          "Community resilience"
+        ]
+      },
+      {
+        "project": "NeighborhoodShare",
+        "entries": 10,
+        "entry_ids": [
+          "098-107"
+        ],
+        "added_date": "2026-02-04",
+        "topics": [
+          "Full-stack architecture",
+          "AI integration (GPT-4o Vision)",
+          "State machine",
+          "Beta expansion",
+          "Security incident",
+          "Metrics (170 users, 20 zip codes)"
+        ]
+      },
+      {
+        "project": "OfflineAI (Local LLM)",
+        "entries": 13,
+        "entry_ids": [
+          "108-120"
+        ],
+        "added_date": "2026-02-04",
+        "topics": [
+          "Hardware (Mac Mini M4 Pro)",
+          "Models (Qwen 2.5:14B)",
+          "mcpo MCP Bridge",
+          "Auto-start infrastructure",
+          "RAG implementation",
+          "Performance assessment",
+          "Cost analysis",
+          "Learning outcomes"
+        ]
+      }
+    ],
+    "usage": [
+      "Alice verifies all facts against RAG before publishing",
+      "Ted adds verified entries after technical interviews",
+      "Project Manager references RAG for accurate status reporting",
+      "Future chatbot will query RAG for knowledge",
+      "Ensures consistency across all content"
+    ],
+    "growth": [
+      {
+        "date": "2026-01-30",
+        "entries": 100,
+        "source": "Content review compilation"
+      },
+      {
+        "date": "2026-02-04 morning",
+        "entries": 110,
+        "source": "Ted's NeighborhoodShare interview"
+      },
+      {
+        "date": "2026-02-04 afternoon",
+        "entries": 123,
+        "source": "Ted's Local LLM RAG review"
+      }
+    ],
+    "standard_operating_procedure": {
+      "ted": "Add 5-15 verified entries per project after technical interview",
+      "alice": "Verify all facts against RAG before publishing content",
+      "project_manager": "Reference RAG for project status and accurate reporting",
+      "all_agents": "RAG is authoritative source, never guess or infer information not in RAG"
+    }
+  },
+  "agent_coordination": {
+    "system": "NATS JetStream",
+    "purpose": "Multi-agent coordination, task queue management, status reporting",
+    "server": "localhost:4222",
+    "dashboard": "http://localhost:8001",
+    "stream": "MJ_ONLINE_WORK",
+    "subject_prefix": "mjwork.>",
+    "channels": {
+      "tasks_available": "mjwork.tasks.available (Queue of available tasks)",
+      "tasks_claimed": "mjwork.tasks.claimed (Tasks being worked on)",
+      "tasks_completed": "mjwork.tasks.completed (Completed tasks)",
+      "coordination": "mjwork.coordination (Agent-to-agent communication)",
+      "errors": "mjwork.errors (Error reporting)",
+      "heartbeat": "mjwork.heartbeat.{agentId} (Health checks every 30s)",
+      "roadmap": "mjwork.roadmap (Roadmap updates from PM)"
+    },
+    "workflow": {
+      "agent_startup": [
+        "Agent registers with WorkerClient",
+        "Subscribes to task queue (mjwork.tasks.available)",
+        "Sends heartbeat every 30 seconds",
+        "Publishes to coordination channel when starting work"
+      ],
+      "task_execution": [
+        "Agent claims task (publishes to mjwork.tasks.claimed)",
+        "Checks coordination channel for dependencies",
+        "Executes work",
+        "Reports completion (publishes to mjwork.tasks.completed)",
+        "PM updates roadmap based on completion"
+      ],
+      "project_manager": [
+        "Monitors mjwork.tasks.completed",
+        "Updates roadmap when tasks complete",
+        "Publishes roadmap updates to mjwork.roadmap",
+        "Coordinates agent assignments",
+        "Prevents duplicate work through coordination channel"
+      ]
+    },
+    "status": "Active since Phase 2, successfully coordinated 2 agents working in parallel without conflicts",
+    "location": "/agent_coordination/",
+    "fastapi_server": "localhost:8001",
+    "usage_example": "Phase 2: Web-Content-Builder-Agent and Web-Content-Builder-2 worked on different tasks simultaneously without conflicts"
+  },
+  "workflows": {
+    "case_study_creation": {
+      "description": "End-to-end workflow for creating comprehensive case studies",
+      "steps": [
+        {
+          "step": 1,
+          "actor": "Project Manager",
+          "action": "Identify project for case study, create Ted's interview script if needed",
+          "output": "Interview script with comprehensive question sections"
+        },
+        {
+          "step": 2,
+          "actor": "Ted (Technical-Research-Agent)",
+          "action": "Conduct structured technical interview with Mike",
+          "duration": "1-2 hours",
+          "output": "Detailed notes on architecture, decisions, challenges, outcomes"
+        },
+        {
+          "step": 3,
+          "actor": "Ted",
+          "action": "Create comprehensive technical documentation",
+          "output": "1,500-3,000 line technical doc at /content-drafts/[project]-technical-doc.md"
+        },
+        {
+          "step": 4,
+          "actor": "Ted",
+          "action": "Update RAG knowledge base with verified entries",
+          "output": "5-15 new RAG entries covering tech stack, architecture, decisions, outcomes"
+        },
+        {
+          "step": 5,
+          "actor": "Ted",
+          "action": "Announce completion and hand off to Alice via coordination channel",
+          "output": "NATS message with deliverable location and RAG update count"
+        },
+        {
+          "step": 6,
+          "actor": "Alice (Web-Content-Builder)",
+          "action": "Convert technical doc to compelling Ghost case study",
+          "duration": "3-4 hours",
+          "tasks": [
+            "Read Ted's comprehensive technical doc",
+            "Structure content for case study format",
+            "Add 6-10 screenshots with captions",
+            "Verify facts against RAG knowledge base",
+            "Add SEO metadata and tags",
+            "Publish to Ghost"
+          ],
+          "output": "Published case study at /projects/[project-name]"
+        },
+        {
+          "step": 7,
+          "actor": "Project Manager",
+          "action": "Update roadmap and archive completed task",
+          "output": "Roadmap updated, task moved to archive with completion metadata"
+        }
+      ],
+      "total_time": "5-8 hours per case study",
+      "quality_advantage": "Comprehensive technical depth from structured interviews, verified facts in RAG, professional presentation",
+      "examples": [
+        {
+          "project": "NeighborhoodShare",
+          "ted_doc": "2,826 lines",
+          "rag_entries": 10,
+          "status": "Ted complete, Alice queued"
+        },
+        {
+          "project": "Local LLM Setup",
+          "ted_doc": "1,705 lines",
+          "rag_entries": 13,
+          "status": "Ted complete, Alice queued"
+        }
+      ]
+    },
+    "rag_update_workflow": {
+      "description": "Standard workflow for maintaining RAG knowledge base",
+      "trigger": "After any technical interview or significant project documentation",
+      "steps": [
+        "Review documentation for verified facts",
+        "Read RAG schema for entry format",
+        "Check for existing entries to avoid duplicates",
+        "Create 5-15 new entries following schema",
+        "Append to /Cowork/content/rag/knowledge.jsonl",
+        "Verify entries added successfully",
+        "Include RAG update count in handoff message"
+      ],
+      "entry_structure": {
+        "id": "rag-YYYY-MM-DD-###",
+        "type": "fact|narrative|qa_pair|technical|fit_assessment",
+        "topic": "projects|skills|career_history|etc",
+        "project": "ProjectName",
+        "content": "Verified information",
+        "confidence": "verified|inferred",
+        "source": "Technical interview with Mike Jones, DATE",
+        "tags": [
+          "verified",
+          "project",
+          "tech-keywords"
+        ]
+      },
+      "responsible_agent": "Ted (Technical-Research-Agent)",
+      "frequency": "After every technical interview",
+      "quality_control": "All entries marked 'verified' from direct interview, include source attribution"
+    },
+    "parallel_agent_coordination": {
+      "description": "How multiple agents work simultaneously without conflicts",
+      "mechanism": "NATS coordination system",
+      "process": [
+        "PM assigns distinct tasks to different agents",
+        "Agents claim tasks via NATS (mjwork.tasks.claimed)",
+        "Agents monitor coordination channel for dependencies",
+        "Agents report progress and completion",
+        "PM updates roadmap based on completion messages"
+      ],
+      "success_example": "Phase 2: Two web content builders worked on different tasks (2.2/2.3 vs 2.4/2.5/2.6) simultaneously without conflicts",
+      "prevention_mechanisms": [
+        "Task claiming prevents duplicate work",
+        "Coordination channel for dependency communication",
+        "PM verification of task assignments"
+      ]
+    }
+  },
+  "challenges_and_solutions": [
+    {
+      "challenge": "Ensuring content consistency across multiple pages and agents",
+      "phase": "Phase 3",
+      "solution": "Created RAG knowledge base (123 entries) as single source of truth, all agents verify facts against RAG",
+      "outcome": "Consistent professional title, experience years, project details across all content",
+      "impact": "High - prevented conflicting information"
+    },
+    {
+      "challenge": "Creating comprehensive case studies without complete project documentation",
+      "phase": "Phase 3",
+      "solution": "Ted conducts structured technical interviews before case study creation, produces 1,500-3,000 line technical docs",
+      "outcome": "NeighborhoodShare (2,826 lines) and Local LLM (1,705 lines) comprehensive documentation",
+      "impact": "High - enables deep, accurate case studies showcasing technical sophistication"
+    },
+    {
+      "challenge": "Coordinating multiple agents working in parallel",
+      "phase": "Phase 2",
+      "solution": "NATS JetStream coordination system with task queue and coordination channel",
+      "outcome": "Two web content builders worked simultaneously on different tasks without conflicts",
+      "impact": "Medium - enabled parallel work, prevented duplicate effort"
+    },
+    {
+      "challenge": "Determining optimal case study portfolio for launch",
+      "phase": "Phase 3",
+      "solution": "Strategic decision: 2 comprehensive AI-focused case studies align with positioning, defer others post-launch",
+      "outcome": "Faster path to launch (~1 week savings), clearer AI positioning",
+      "impact": "High - prioritizes speed and positioning clarity"
+    },
+    {
+      "challenge": "Maintaining project knowledge and continuity",
+      "phase": "Ongoing",
+      "solution": "Project Manager creates and maintains comprehensive PROJECT-MEMORY.json documenting decisions, workflows, challenges",
+      "outcome": "Complete project history for case study creation and future reference",
+      "impact": "High - enables MikeJones.online case study, institutional knowledge preservation"
+    }
+  ],
+  "timeline": {
+    "project_start": "2026-01-28",
+    "phase_1_complete": "2026-01-28 (same day!)",
+    "phase_2_complete": "2026-01-30",
+    "phase_3_start": "2026-02-02",
+    "current_date": "2026-02-04",
+    "estimated_launch": "2026-02-11 (estimated, ~1 week)",
+    "actual_launch": "TBD",
+    "milestones": [
+      {
+        "date": "2026-01-28",
+        "milestone": "Ghost Pro configured, domain live with HTTPS"
+      },
+      {
+        "date": "2026-01-28",
+        "milestone": "Kyoto theme installed"
+      },
+      {
+        "date": "2026-01-30",
+        "milestone": "Phase 2 complete (6/6 tasks), professional design achieved"
+      },
+      {
+        "date": "2026-02-03",
+        "milestone": "Asset gathering sufficient for first pass"
+      },
+      {
+        "date": "2026-02-03",
+        "milestone": "Ted completes Local LLM technical documentation (1,705 lines)"
+      },
+      {
+        "date": "2026-02-04",
+        "milestone": "Ted completes NeighborhoodShare technical documentation (2,826 lines)"
+      },
+      {
+        "date": "2026-02-04",
+        "milestone": "Ted completes RAG review (13 new entries, total 123)"
+      },
+      {
+        "date": "2026-02-04",
+        "milestone": "Decision: Launch with 2 AI case studies"
+      },
+      {
+        "date": "2026-02-04",
+        "milestone": "Decision: MikeJones.online website case study as top post-launch priority"
+      }
+    ],
+    "velocity": {
+      "phase_1": "1 day (extremely fast due to Ghost Pro)",
+      "phase_2": "2 days (6 tasks completed)",
+      "phase_3_so_far": "3 days (asset gathering + 2 comprehensive technical docs)",
+      "estimated_remaining": "~7 days (case studies + core pages + testing + launch)"
+    }
+  },
+  "metrics": {
+    "documentation_created": {
+      "technical_docs": 2,
+      "total_lines": 4531,
+      "average_per_project": 2266
+    },
+    "rag_knowledge_base": {
+      "initial_entries": 100,
+      "entries_added": 23,
+      "current_total": 123,
+      "growth_rate": "23% in 5 days"
+    },
+    "phases_completed": 2,
+    "phases_remaining": 4,
+    "progress": "33% (2 of 6 phases to launch complete)",
+    "agents_coordinated": 3,
+    "nats_messages": "Unknown (dashboard at http://localhost:8001)",
+    "case_studies_ready": 2,
+    "case_studies_published": 1,
+    "case_studies_to_create": 1,
+    "estimated_days_to_launch": 7
+  },
+  "launch_checklist": {
+    "content": {
+      "case_studies": {
+        "target": 2,
+        "completed": 0,
+        "in_progress": 2,
+        "projects": [
+          "NeighborhoodShare",
+          "Local LLM Setup"
+        ]
+      },
+      "core_pages": {
+        "homepage": "In progress (Alice)",
+        "about": "Draft ready",
+        "resume": "Queued",
+        "contact": "Queued",
+        "projects_landing": "In progress (Alice)"
+      }
+    },
+    "technical": {
+      "domain": "✅ Complete",
+      "ssl_https": "✅ Complete",
+      "email_delivery": "✅ Complete",
+      "theme": "✅ Complete",
+      "design": "✅ Complete",
+      "navigation": "✅ Complete",
+      "activitypub": "✅ Complete",
+      "analytics": "✅ Complete",
+      "code_injection": "✅ Complete"
+    },
+    "quality": {
+      "mobile_responsive": "To verify",
+      "page_load_speed": "To test",
+      "seo_metadata": "To verify on each page",
+      "rag_verification": "Ongoing (Alice verifies)",
+      "link_checking": "To complete",
+      "grammar_spelling": "To review"
+    },
+    "launch_ready_when": [
+      "2 case studies published",
+      "All core pages published",
+      "All links working",
+      "Mobile responsive verified",
+      "SEO complete",
+      "Contact form tested",
+      "Final content review complete"
+    ]
+  },
+  "post_launch_plans": {
+    "phase_7_priority_queue": [
+      {
+        "priority": 1,
+        "project": "AI Chatbot Implementation",
+        "phase": "7.3",
+        "description": "Knowledge base-powered chatbot using Cloudflare Workers",
+        "estimated_time": "2-3 weeks",
+        "dependencies": [
+          "Site launched and stable"
+        ]
+      },
+      {
+        "priority": 2,
+        "project": "MikeJones.online Website Case Study",
+        "phase": "7.3",
+        "description": "Meta case study about building the site with RAG and multi-agent coordination",
+        "estimated_time": "5-7 hours",
+        "dependencies": [
+          "Chatbot implemented",
+          "Site live for 1-2 weeks"
+        ],
+        "notes": "Top priority case study post-launch - demonstrates practical AI implementation"
+      },
+      {
+        "priority": 3,
+        "project": "SubStack Feed Integration",
+        "phase": "7.1",
+        "description": "Import RSS feeds from Resilient Tomorrow and Organizational Intelligence",
+        "estimated_time": "3-5 hours",
+        "dependencies": [
+          "Site launched"
+        ]
+      },
+      {
+        "priority": 4,
+        "project": "Home Media Server Case Study",
+        "phase": "7.4",
+        "description": "Infrastructure/self-hosting case study",
+        "estimated_time": "3-5 hours",
+        "dependencies": [
+          "None"
+        ],
+        "notes": "Interview script already prepared"
+      },
+      {
+        "priority": 5,
+        "project": "AI Memory System Case Study",
+        "phase": "7.5",
+        "description": "Cross-platform memory system (optional)",
+        "estimated_time": "4-6 hours",
+        "dependencies": [
+          "None"
+        ],
+        "notes": "Optional - evaluate if adds enough value beyond Local LLM"
+      }
+    ]
+  },
+  "lessons_learned": [
+    "Ghost Pro dramatically accelerates launch vs. self-hosted (eliminated 1 week of infrastructure work)",
+    "Structured technical interviews produce exceptional case study source material (2,000+ lines per project)",
+    "RAG knowledge base ensures content consistency across multiple agents and pages",
+    "NATS coordination enables parallel agent work without conflicts",
+    "Quality over quantity: 2 comprehensive case studies > 3 decent ones",
+    "Speed to launch matters: defer non-critical features to post-launch iteration",
+    "Agent specialization works: Ted for technical depth, Alice for content creation, PM for coordination",
+    "Project memory documentation enables meta case study (MikeJones.online about building MikeJones.online)"
+  ],
+  "metadata": {
+    "document_created": "2026-02-04",
+    "document_version": "1.0",
+    "last_updated": "2026-02-04",
+    "maintained_by": "Project-Manager-Claude",
+    "update_frequency": "After significant milestones or phase completions",
+    "purpose": "Comprehensive project memory for continuity, case study material, and institutional knowledge",
+    "usage": [
+      "Project Manager reference for status and decisions",
+      "Ted interview material for MikeJones.online case study",
+      "Agent onboarding and context",
+      "Historical record of project execution",
+      "Demonstration of AI-augmented project management"
+    ]
+  }
+}

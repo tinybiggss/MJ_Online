@@ -1,0 +1,713 @@
+# Ghost ActivityPub Integration Research
+
+**Research Date:** 2026-01-27
+**Researcher:** Agent-Beta
+**Purpose:** Research ActivityPub integration for MJ_Online Ghost website
+
+---
+
+## Executive Summary
+
+Ghost officially integrated ActivityPub support in late 2024-2025, with full rollout in Ghost V6 (August 2025). This integration enables Ghost websites to become part of the Fediverse, allowing readers to follow, interact with, and discover content across Mastodon, Threads, Pixelfed, and other ActivityPub-compatible platforms.
+
+**Key Findings:**
+- **Native Support:** Ghost 6.x includes built-in ActivityPub integration
+- **Managed Service Available:** Ghost provides hosted ActivityPub server (free up to 100 interactions/day for self-hosted)
+- **Self-Hosting Option:** Full self-hosting available via Docker Compose for unlimited interactions
+- **Current Status:** Beta, actively maintained and improving
+
+**Recommendation:** Use Ghost's managed ActivityPub service for initial launch (free tier sufficient for early-stage site), with option to self-host if/when exceeding 100 daily interactions.
+
+---
+
+## What is ActivityPub?
+
+ActivityPub is an open, decentralized social networking protocol that enables different platforms and websites to communicate and share content. It powers the "Fediverse" - a network of interconnected social platforms including:
+
+- **Mastodon** (Twitter-like microblogging)
+- **Threads** (Meta's federated platform)
+- **Pixelfed** (Instagram-like photo sharing)
+- **Flipboard** (News aggregation)
+- **WriteFreely** (Blogging platform)
+- **Buttondown** (Newsletter platform)
+- **Tumblr** (Blogging/social)
+- **WordPress** (with plugins)
+- **PeerTube** (Video platform)
+
+When Ghost sites enable ActivityPub, they become federated actors that can be followed and interacted with from any of these platforms.
+
+---
+
+## Ghost's ActivityPub Implementation
+
+### Architecture Overview
+
+Ghost's ActivityPub integration uses a **multi-tenant ActivityPub server** built with **Fedify**. The architecture follows these principles:
+
+**Technical Architecture:**
+- Domain-Driven Design with immutable entities
+- Event-driven patterns
+- Result type pattern for explicit error handling
+- Class-based architecture with dependency injection
+- Repository pattern (services orchestrate business logic, repositories handle data)
+- Hash-based database lookups (SHA256 hashes for ActivityPub identifiers)
+
+**Request Routing:**
+The ActivityPub service proxies specific routes:
+- `/.ghost/activitypub/*` - ActivityPub API endpoints
+- `/.well-known/webfinger` - WebFinger protocol for actor discovery
+- `/.well-known/nodeinfo` - Node information for federation metadata
+
+All other traffic routes to Ghost normally.
+
+### How It Works
+
+**Publishing Workflow:**
+1. Publisher writes post in Ghost
+2. Ghost generates ActivityPub Create activities
+3. Activities sent to followers' inboxes on federated servers (Mastodon, Pixelfed, etc.)
+4. Content appears in followers' feeds across the Fediverse
+5. Interactions (likes, replies, boosts) flow back to Ghost site
+
+**Reader Workflow:**
+1. User on Mastodon/other platform searches for or discovers Ghost site
+2. User follows `@username@yourdomain.com`
+3. Ghost posts appear in their federated timeline
+4. User can like, reply, boost, or click through to full post on Ghost site
+
+**Unified Feed:**
+Ghost provides an ActivityPub inbox where publishers can:
+- Follow people and publications across the Fediverse
+- View federated content within Ghost admin
+- Interact with ActivityPub content from Ghost interface
+
+---
+
+## Setup Options
+
+### Option 1: Ghost Pro Hosted Service (Recommended for Hosted Ghost)
+
+**Requirements:**
+- Ghost Pro subscription (any tier)
+- Ghost 6.x or later
+
+**Setup:**
+1. Navigate to Ghost Admin → Settings → Growth → Network
+2. Toggle "Network" switch to ON
+3. Ghost automatically registers with managed ActivityPub service
+4. Your site becomes `@yourusername@yourdomain.com`
+
+**Benefits:**
+- Zero configuration required
+- Automatic updates and maintenance
+- Unlimited ActivityPub interactions
+- Full feature access
+- No infrastructure management
+
+**Cost:** Included in Ghost Pro subscription (no additional fees)
+
+---
+
+### Option 2: Self-Hosted Ghost + Managed ActivityPub Service (Recommended for MJ_Online)
+
+**Requirements:**
+- Self-hosted Ghost 6.x installation
+- Domain with SSL/TLS (HTTPS required)
+- Reverse proxy (Nginx, Apache, Caddy)
+
+**Setup Steps:**
+
+#### Step 1: Update Nginx Configuration
+Edit your Nginx config (typically `/etc/nginx/sites-enabled/yourdomain.com.conf`):
+
+```nginx
+# Allow ACME challenge for SSL (replace broad .well-known rule)
+location /.well-known/acme-challenge {
+    # Your existing ACME configuration
+}
+
+# Proxy ActivityPub endpoints to Ghost's managed service
+location /.ghost/activitypub/ {
+    proxy_pass https://ap.ghost.org;
+    proxy_set_header Host ap.ghost.org;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Authorization $http_authorization;  # CRITICAL: Include auth header
+}
+
+location /.well-known/webfinger {
+    proxy_pass https://ap.ghost.org;
+    proxy_set_header Host ap.ghost.org;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Authorization $http_authorization;  # CRITICAL: Include auth header
+}
+
+location /.well-known/nodeinfo {
+    proxy_pass https://ap.ghost.org;
+    proxy_set_header Host ap.ghost.org;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Authorization $http_authorization;  # CRITICAL: Include auth header
+}
+```
+
+**CRITICAL:** The `Authorization` header proxy is required but often missing from documentation. Without it, JWKS resource generation fails.
+
+#### Step 2: Reload Nginx
+```bash
+sudo nginx -t  # Test configuration
+sudo nginx -s reload  # Apply changes
+```
+
+#### Step 3: Enable in Ghost Admin
+1. Navigate to Settings → Growth → Network
+2. Toggle Network switch OFF (if previously attempted)
+3. **Clear browser cache** (critical - prevents redirect loop caching)
+4. Toggle Network switch ON
+5. Ghost registers with `ap.ghost.org` managed service
+
+#### Step 4: Verify Federation
+1. Test WebFinger: `curl https://yourdomain.com/.well-known/webfinger?resource=acct:username@yourdomain.com`
+2. Search for `@username@yourdomain.com` from Mastodon instance
+3. Follow your Ghost site from Mastodon
+4. Publish test post and verify it appears in Mastodon timeline
+
+**Benefits:**
+- Free up to 100 interactions/day
+- No infrastructure management for ActivityPub
+- Automatic updates from Ghost
+- Easy setup and maintenance
+- Sufficient for most small-to-medium sites
+
+**Limitations:**
+- 100 interactions/day limit (interactions = create post/note + replies + likes + reposts)
+- Dependent on Ghost's managed service availability
+
+**Cost:** Free (up to 100 interactions/day)
+
+**When to Upgrade:** If your site consistently exceeds 100 daily interactions (highly active community, viral posts, large follower base), consider self-hosting ActivityPub completely.
+
+---
+
+### Option 3: Fully Self-Hosted ActivityPub Server
+
+**Requirements:**
+- Self-hosted Ghost 6.x (installed from source, not Ghost-CLI)
+- Docker and Docker Compose
+- MySQL database
+- Public-facing domain (port 80 accessible, not just 2368)
+- Reverse proxy with proper routing
+- Technical expertise for troubleshooting
+
+**Setup Steps:**
+
+#### Step 1: Install Ghost from Source
+Ghost's Docker-based ActivityPub requires source installation rather than Ghost-CLI installation.
+
+```bash
+git clone https://github.com/TryGhost/Ghost.git
+cd Ghost
+yarn install
+```
+
+#### Step 2: Configure Docker Compose
+Create `docker-compose.yml` with ActivityPub containers:
+
+```yaml
+version: '3.8'
+
+services:
+  ghost:
+    # Your existing Ghost configuration
+
+  activitypub:
+    image: ghost/activitypub:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql://user:password@mysql:3306/activitypub
+      - GHOST_URL=https://yourdomain.com
+    depends_on:
+      - mysql
+
+  activitypub-migrate:
+    image: ghost/activitypub:latest
+    command: migrate
+    environment:
+      - DATABASE_URL=mysql://user:password@mysql:3306/activitypub
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    # MySQL configuration
+```
+
+#### Step 3: Configure Ghost
+Edit `config.local.json`:
+
+```json
+{
+  "url": "https://yourdomain.com",
+  "activitypub": {
+    "enabled": true,
+    "url": "http://activitypub:3000"
+  }
+}
+```
+
+#### Step 4: Configure Reverse Proxy
+Route ActivityPub requests to the activitypub container (port 3000) instead of `ap.ghost.org`.
+
+#### Step 5: Start Services
+```bash
+docker-compose up -d
+yarn dev:standalone && yarn logs  # ActivityPub service
+yarn dev  # Ghost
+```
+
+#### Step 6: Enable in Ghost Admin
+Same as Option 2 (Settings → Growth → Network → Toggle ON)
+
+**Benefits:**
+- Unlimited ActivityPub interactions
+- Full control over infrastructure
+- No external service dependencies
+- Complete data ownership
+
+**Challenges:**
+- Complex setup and configuration
+- Requires Docker/containerization knowledge
+- Additional infrastructure to maintain
+- More debugging required if issues arise
+- Database management overhead
+
+**Cost:** Infrastructure costs (server resources for additional containers)
+
+**Best For:** Large sites exceeding 100 daily interactions, organizations requiring complete data control, technically proficient teams
+
+---
+
+## Common Issues and Solutions
+
+### Issue 1: "Not Properly Configured" Error
+**Symptoms:** Ghost shows ActivityPub as not properly configured after enabling
+
+**Solutions:**
+1. Verify reverse proxy includes Authorization header in proxy config
+2. Check that `/.well-known/webfinger` and `/.well-known/nodeinfo` routes are proxied correctly
+3. Ensure `/.well-known/acme-challenge` is NOT blocking WebFinger requests
+4. Disable Network toggle, clear browser cache, re-enable
+5. Check Ghost logs for specific error messages
+
+### Issue 2: 401 Authorization Errors
+**Cause:** Missing Authorization header in reverse proxy configuration
+
+**Solution:** Add `proxy_set_header Authorization $http_authorization;` to all ActivityPub location blocks
+
+### Issue 3: JWKS_MISSING Error
+**Cause:** WebFinger route blocked or misconfigured, preventing JWKS resource generation
+
+**Solution:**
+1. Replace broad `location /.well-known` with specific `location /.well-known/acme-challenge`
+2. Add specific `location /.well-known/webfinger` proxy rule
+3. Reload reverse proxy configuration
+
+### Issue 4: SITE_MISSING Error
+**Cause:** Ghost site not registered with ActivityPub service
+
+**Solution:**
+1. Disable Network toggle in Ghost admin
+2. Clear browser cache completely
+3. Re-enable Network toggle
+4. Wait for registration to complete (may take a few minutes)
+
+### Issue 5: Browser Redirect Loop
+**Cause:** Browser cached incorrect redirect for ActivityPub endpoints
+
+**Solution:** Clear browser cache completely before re-enabling Network toggle
+
+### Issue 6: WebFinger Not Responding
+**Cause:** Reverse proxy not routing WebFinger requests correctly
+
+**Test:**
+```bash
+curl https://yourdomain.com/.well-known/webfinger?resource=acct:username@yourdomain.com
+```
+
+**Solution:** Verify reverse proxy has specific WebFinger location block proxying to correct endpoint
+
+---
+
+## Best Practices for Content Strategy
+
+### 1. Profile Setup
+**Customize Your Fediverse Profile:**
+- Upload professional headshot/avatar
+- Write compelling bio emphasizing AI implementation and LLM integration expertise
+- Add header image reflecting personal brand
+- Include links to key pages (Resume, Projects)
+- Choose memorable username (e.g., `@mike@mikejones.online`)
+
+### 2. Content Types
+
+**Long-Form Posts (Ghost Articles):**
+- Full project case studies
+- In-depth technical tutorials
+- Portfolio pieces
+- Long-form essays
+
+**Short-Form Posts (Notes):**
+- Quick updates on current projects
+- Links to interesting resources
+- Brief technical insights
+- Announcements
+- Behind-the-scenes content
+
+**Strategy:** Mix long-form and short-form content. Long-form showcases expertise, short-form maintains engagement and visibility between major posts.
+
+### 3. Posting Frequency
+
+**Recommendations:**
+- **Articles:** 1-2 per week (quality over quantity)
+- **Notes:** 3-5 per week (maintain visibility without overwhelming)
+- **Engagement:** Daily responses to replies/interactions
+
+**Why:** Consistent posting and active engagement significantly boost discoverability and follower growth in the Fediverse.
+
+### 4. Hashtag Strategy
+
+**Key Hashtags for AI Implementation Portfolio:**
+- `#AI` `#MachineLearning` `#ArtificialIntelligence`
+- `#LLM` `#LocalLLM` `#SelfHostedAI`
+- `#Python` `#JavaScript` (tech stack tags)
+- `#Portfolio` `#WebDev` `#Developer`
+- `#OpenSource` (if applicable to projects)
+- `#Tech` `#Programming`
+
+**Best Practices:**
+- Use 3-5 relevant hashtags per post (not more)
+- Mix broad tags (#AI) with niche tags (#LocalLLM)
+- Create consistent project-specific tags (#AIMemorySystem)
+- Research popular tags in your niche on Mastodon
+
+### 5. Cross-Platform Engagement
+
+**Follow Relevant Accounts:**
+- AI implementation researchers and practitioners
+- Developer communities
+- Open source projects
+- Tech publishers
+- Potential employers/clients
+
+**Interact Authentically:**
+- Reply thoughtfully to others' posts
+- Boost/share valuable content
+- Like posts that resonate
+- Build genuine relationships
+
+**Why:** Fediverse discovery is heavily interaction-based. Active engagement increases profile visibility.
+
+### 6. Content Formatting for Fediverse
+
+**Optimize Post Previews:**
+- Write compelling first paragraph (appears in federated previews)
+- Use clear, descriptive titles
+- Include relevant image (first image becomes preview card)
+- Front-load key information
+
+**Link Strategy:**
+- Always include link back to full article on your Ghost site
+- Use URL shorteners sparingly (Fediverse users prefer full URLs for transparency)
+- Include clear CTA (Call to Action) if applicable
+
+### 7. Monitoring and Iteration
+
+**Track Metrics:**
+- Follower growth rate
+- Post engagement (likes, boosts, replies)
+- Click-through rates to full articles
+- Popular content types/topics
+- Peak posting times
+
+**Ghost Notifications Section:**
+Ghost admin provides notifications for:
+- New followers
+- Likes on posts
+- Boosts/reposts
+- Replies
+
+**Iterate Based on Data:**
+- Double down on high-engagement content types
+- Adjust posting times based on audience activity
+- Refine hashtag strategy based on reach
+- Test different content formats (tutorials vs. case studies vs. quick tips)
+
+### 8. ActivityPub-Specific Features
+
+**Replies and Threads:**
+- Respond to replies directly from Ghost admin
+- Create threaded discussions
+- Engage with followers across platforms
+
+**Mentions:**
+- Mention other Fediverse users (e.g., `@username@mastodon.social`)
+- Tag relevant accounts when sharing related content
+- Build relationships through mentions
+
+**Content Visibility:**
+- All published Ghost posts are public by default in ActivityPub
+- Configure which post types federate (if selective sharing desired)
+- Notes are always public when shared to Fediverse
+
+---
+
+## Configuration Checklist for MJ_Online
+
+### Pre-Launch Configuration
+
+- [ ] Verify Ghost 6.x installed
+- [ ] Confirm HTTPS/SSL active on domain
+- [ ] Update reverse proxy configuration (Nginx/Apache)
+- [ ] Add ActivityPub proxy routes (`/.ghost/activitypub/*`, `/.well-known/webfinger`, `/.well-known/nodeinfo`)
+- [ ] Include Authorization header in proxy configuration
+- [ ] Reload/restart reverse proxy
+- [ ] Clear browser cache
+- [ ] Enable Network toggle in Ghost Admin (Settings → Growth → Network)
+- [ ] Verify registration successful (no error messages)
+
+### Profile Setup
+
+- [ ] Upload professional headshot/avatar
+- [ ] Write compelling Fediverse bio (emphasize AI implementation and LLM integration expertise)
+- [ ] Add header image
+- [ ] Configure profile links
+- [ ] Set display name and username
+- [ ] Review public profile appearance
+
+### Testing Federation
+
+- [ ] Test WebFinger endpoint: `curl https://mikejones.online/.well-known/webfinger?resource=acct:mike@mikejones.online`
+- [ ] Search for `@mike@mikejones.online` from Mastodon test account
+- [ ] Follow Ghost site from Mastodon
+- [ ] Publish test post in Ghost
+- [ ] Verify post appears in Mastodon timeline
+- [ ] Test interaction: like post from Mastodon
+- [ ] Verify like appears in Ghost notifications
+- [ ] Test reply from Mastodon
+- [ ] Reply to Mastodon user from Ghost
+- [ ] Verify boost/repost functionality
+
+### Content Strategy Setup
+
+- [ ] Draft hashtag strategy document
+- [ ] Create content calendar (articles + notes)
+- [ ] Identify key accounts to follow in AI implementation space
+- [ ] Set up monitoring for notifications/interactions
+- [ ] Document posting workflow for articles and notes
+- [ ] Plan initial content series (project case studies as ActivityPub posts)
+
+### Launch Strategy
+
+- [ ] Publish 2-3 initial posts (AI case studies) before promoting profile
+- [ ] Create launch announcement post
+- [ ] Share Fediverse handle on existing social platforms
+- [ ] Post introduction thread explaining Ghost site and ActivityPub presence
+- [ ] Follow key accounts in niche
+- [ ] Engage actively with early followers
+
+---
+
+## Feature Comparison: Ghost Pro vs. Self-Hosted
+
+| Feature | Ghost Pro | Self-Hosted (Managed AP) | Self-Hosted (Full) |
+|---------|-----------|-------------------------|-------------------|
+| **Setup Complexity** | Simple (toggle) | Moderate (proxy config) | Complex (Docker) |
+| **ActivityPub Interactions** | Unlimited | 100/day limit | Unlimited |
+| **Infrastructure Management** | Zero | Minimal (proxy only) | High (containers, DB) |
+| **Cost** | Included in subscription | Free (up to 100/day) | Infrastructure costs |
+| **Updates** | Automatic | Automatic (AP service) | Manual |
+| **Data Control** | Ghost manages | Hybrid (content yours, AP managed) | Complete |
+| **Troubleshooting** | Ghost support | Community + Ghost docs | Self-reliant |
+| **Best For** | Hosted sites, zero-config | Small-medium self-hosted sites | Large sites, full control |
+
+---
+
+## Recommended Setup for MJ_Online
+
+**Phase 1: Launch (Immediate)**
+- **Option:** Self-Hosted Ghost + Managed ActivityPub Service
+- **Rationale:**
+  - No Ghost Pro subscription required
+  - Free up to 100 interactions/day (sufficient for launch phase)
+  - Moderate setup complexity (achievable with documentation)
+  - Minimal ongoing maintenance
+  - Easy upgrade path if needed
+
+**Phase 2: Growth (If/When Needed)**
+- **Trigger:** Consistently exceeding 100 daily interactions
+- **Option:** Migrate to fully self-hosted ActivityPub (Docker)
+- **Rationale:** Unlimited interactions, complete control
+- **Alternative:** Consider Ghost Pro subscription if infrastructure management becomes burden
+
+---
+
+## ActivityPub Benefits for MJ_Online
+
+### 1. Extended Reach
+- **Fediverse Network:** Access 10+ million users across Mastodon, Threads, Pixelfed, etc.
+- **Organic Discovery:** Users discover content through hashtags, boosts, and federated timelines
+- **No Algorithm:** Chronological feeds mean consistent visibility for all followers
+- **Cross-Platform:** Single post reaches multiple platforms simultaneously
+
+### 2. Professional Networking
+- **AI implementation community:** Large, active AI implementation community on Mastodon
+- **Developer Presence:** Many developers and tech companies active on Fediverse
+- **Direct Engagement:** Easy interaction with potential employers, collaborators, clients
+- **Thought Leadership:** Build reputation through consistent, valuable content
+
+### 3. Content Distribution
+- **100% Deliverability:** Unlike email (spam filters, deliverability issues), ActivityPub ensures content reaches followers
+- **Engagement Tracking:** See likes, boosts, replies directly in Ghost admin
+- **Social Proof:** Fediverse engagement visible on Ghost site
+- **Backlinks:** Every federated post includes link back to Ghost site
+
+### 4. Independence and Control
+- **Own Your Platform:** Content lives on your Ghost site, federated copies are secondary
+- **No Algorithm Changes:** Not subject to platform algorithm changes or policy shifts
+- **Data Ownership:** Full control over content and audience data
+- **Platform Agnostic:** Followers can interact from any ActivityPub platform
+
+### 5. Portfolio Amplification
+- **Project Showcases:** Share case studies directly to relevant communities
+- **Visual Content:** Images and screenshots federate well to visual platforms (Pixelfed)
+- **Engagement Loop:** Fediverse engagement → Ghost site traffic → deeper portfolio exploration
+- **Resume Visibility:** Link to resume/CV from Fediverse profile, reach recruiters on federated platforms
+
+---
+
+## Integration with Other Roadmap Features
+
+### ActivityPub + Theme Selection
+**Consideration:** Choose theme with good Open Graph/social preview support
+- Clear post titles
+- Featured images for preview cards
+- Clean excerpt generation
+- Responsive social cards
+
+### ActivityPub + SEO Strategy
+**Synergy:** ActivityPub complements SEO:
+- Federated backlinks increase domain authority
+- Social engagement signals (indirectly beneficial)
+- Increased brand mentions across platforms
+- More pathways to content discovery
+
+### ActivityPub + Content Strategy
+**Integration Points:**
+- Publish AI case studies as long-form posts → federate to Fediverse
+- Use Notes feature for project updates, "now" page content, behind-the-scenes
+- Activity Feed (Phase 7) maps perfectly to ActivityPub Notes
+- Fediverse becomes primary social media presence (replaces Twitter/X, potentially)
+
+### ActivityPub + Analytics
+**Tracking:**
+- Monitor Fediverse referral traffic in analytics
+- Track engagement metrics (followers, interactions)
+- Measure conversion: Fediverse follower → resume download/contact form
+- A/B test post types and timing based on engagement data
+
+---
+
+## Timeline and Effort Estimates
+
+### Setup Time (Option 2: Self-Hosted + Managed AP)
+- **Nginx Configuration:** 30 minutes
+- **Ghost Admin Setup:** 10 minutes
+- **Testing and Verification:** 30 minutes
+- **Profile Customization:** 30 minutes
+- **Total:** ~2 hours
+
+### Ongoing Maintenance
+- **Monitoring:** 5-10 minutes/day (check notifications, respond to interactions)
+- **Content Creation:** Variable (articles + notes)
+- **Profile Updates:** As needed (minimal)
+- **Troubleshooting:** Rare (once properly configured)
+
+### Migration to Full Self-Hosting (If Needed)
+- **Docker Setup:** 2-3 hours
+- **Configuration and Testing:** 2-3 hours
+- **Troubleshooting Buffer:** 1-2 hours
+- **Total:** 5-8 hours (first-time setup)
+
+---
+
+## Key Takeaways
+
+1. **Ghost's ActivityPub integration is production-ready** (as of Ghost 6.x in 2025)
+2. **Managed service is recommended for MJ_Online launch** (free, low-maintenance, sufficient for early stage)
+3. **Proper reverse proxy configuration is critical** (especially Authorization header)
+4. **Fediverse offers significant reach and engagement opportunities** for AI implementation portfolio
+5. **Content strategy is key** - consistent posting and authentic engagement drive discoverability
+6. **ActivityPub complements other marketing/networking efforts** (not replacement)
+7. **Easy upgrade path exists** if growth exceeds managed service limits
+
+---
+
+## Additional Resources
+
+### Official Ghost Documentation
+- [Ghost ActivityPub Overview](https://activitypub.ghost.org/)
+- [Ghost Developer Docs - Hosting](https://docs.ghost.org/hosting)
+- [Ghost Docker Installation Guide](https://docs.ghost.org/install/docker)
+
+### GitHub Repositories
+- [TryGhost/ActivityPub](https://github.com/TryGhost/ActivityPub) - Official ActivityPub server
+- [TryGhost/Ghost](https://github.com/TryGhost/Ghost) - Ghost core (for source installs)
+
+### Community Resources
+- [Ghost Forum - ActivityPub Category](https://forum.ghost.org/c/integrations-api/)
+- [Self-Hosted Ghost ActivityPub Guide](https://robinmonks.com/self-hosted-ghost-activitypub/)
+- [Ghost V6 Review with ActivityPub](https://noiseamplifier.com/blog/ghost-v6-review-built-in-analytics-and-activitypub-integration/)
+
+### Fediverse Resources
+- [Mastodon Documentation](https://docs.joinmastodon.org/)
+- [WebFinger Protocol Spec](https://docs.joinmastodon.org/spec/webfinger/)
+- [ActivityPub W3C Specification](https://www.w3.org/TR/activitypub/)
+
+### Related Articles
+- [Ghost Embraces ActivityPub and the Fediverse](https://www.nevillehobson.io/ghost-embraces-activitypub-and-the-fediverse/)
+- [Publishing to the Open Social Web with Ghost](https://corti.com/publishing-to-the-open-social-web-with-ghost-activitypub-explained/)
+- [Making Your Own Mastodon Handle](https://xaviergeerinck.com/2023/02/21/making-your-own-mastodon-handle/)
+
+---
+
+## Conclusion
+
+Ghost's ActivityPub integration provides MJ_Online with a powerful, decentralized social networking capability that aligns perfectly with the project's goals of independent web publishing and audience building. The managed service option offers the ideal balance of functionality and simplicity for launch, with clear upgrade paths as the site grows.
+
+By enabling ActivityPub, MJ_Online can:
+- Reach the extensive Fediverse audience (10M+ users)
+- Engage directly with the AI implementation community on Mastodon
+- Amplify portfolio visibility across multiple platforms
+- Build professional network and thought leadership
+- Maintain content independence and ownership
+
+The integration complements the overall roadmap strategy and positions MJ_Online as a modern, federated web presence rather than a traditional siloed website.
+
+---
+
+**Research Sources:**
+- [Building ActivityPub (Ghost Official)](https://activitypub.ghost.org/)
+- [Ghost Forum - Using ActivityPub Integration](https://forum.ghost.org/t/using-ghost-s-activitypub-integration-with-existing-fediverse-handles/59245)
+- [GitHub - TryGhost/ActivityPub](https://github.com/TryGhost/ActivityPub)
+- [Ghost V6 Review - ActivityPub Integration](https://noiseamplifier.com/blog/ghost-v6-review-built-in-analytics-and-activitypub-integration/)
+- [Self-Hosted Ghost ActivityPub Guide](https://robinmonks.com/self-hosted-ghost-activitypub/)
+- [Ghost Embraces ActivityPub - Neville Hobson](https://nevillehobson.com/2025/01/17/ghost-embraces-activitypub-and-the-fediverse/)
+- [Publishing to Open Social Web with Ghost](https://corti.com/publishing-to-the-open-social-web-with-ghost-activitypub-explained/)
+- [Mastodon WebFinger Documentation](https://docs.joinmastodon.org/spec/webfinger/)
+
+**End of Research Document**

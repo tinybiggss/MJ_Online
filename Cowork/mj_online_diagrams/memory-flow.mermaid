@@ -1,0 +1,26 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#4A90A4', 'primaryTextColor': '#fff', 'lineColor': '#5C6670'}}}%%
+
+flowchart LR
+    subgraph Input["🎤 Any Conversation"]
+        Claude["🟠 Claude"]
+        ChatGPT["🟢 ChatGPT"]
+        Local["🦙 Local LLM<br/>(OpenWebUI)"]
+    end
+
+    Memory["📝 memory.jsonl<br/>━━━━━━━━━━━━━━<br/>• Decisions<br/>• Milestones<br/>• Insights<br/>• Context<br/>• Resources"]
+
+    subgraph Output["🎯 Full Context Anywhere"]
+        Claude2["🟠 Claude"]
+        ChatGPT2["🟢 ChatGPT"]
+        Local2["🦙 Local LLM"]
+    end
+
+    Claude -->|"Write"| Memory
+    ChatGPT -->|"Write*"| Memory
+    Local -->|"Write"| Memory
+
+    Memory -->|"Read"| Claude2
+    Memory -->|"Read"| ChatGPT2
+    Memory -->|"Read"| Local2
+
+    style Memory fill:#FFF3E0,stroke:#F57C00,stroke-width:3px

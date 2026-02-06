@@ -1,0 +1,307 @@
+# Kyoto Theme Installation Guide
+
+**Theme:** Kyoto by Themex Studio
+**Price:** $89
+**Target Site:** mj-online.ghost.io
+
+---
+
+## Quick Installation Steps
+
+### 1. Purchase Theme
+
+1. Visit: https://themex.studio/kyoto/
+2. Click "Buy Now" or "Purchase"
+3. Complete checkout
+4. Download the theme ZIP file (typically named `kyoto.zip` or similar)
+5. Save your license key and receipt
+
+**Expected file:** `kyoto-vX.X.X.zip` (where X.X.X is version number)
+
+---
+
+### 2. Install in Ghost Pro
+
+#### Access Ghost Admin:
+```
+URL: https://mj-online.ghost.io/ghost/
+```
+
+#### Upload Theme:
+1. Navigate to: **Settings** → **Design**
+2. Scroll down to "Change theme" section
+3. Click **"Upload theme"** button (usually a plus icon or upload button)
+4. Select the downloaded `kyoto.zip` file
+5. Wait for upload to complete
+6. Click **"Activate"** button when prompted
+
+**Important:** Do NOT unzip the file before uploading. Ghost expects a ZIP file.
+
+---
+
+### 3. Initial Configuration
+
+#### Theme Settings (in Ghost Admin → Settings → Design):
+1. Click **"Customize"** or theme settings icon
+2. **Select Dark Mode Preset:**
+   - Recommended: **Onyx** (deep blacks, professional tech aesthetic)
+   - Alternative: **Pure** (high contrast)
+3. Configure site branding:
+   - Upload logo (if you have one)
+   - Set site icon/favicon
+   - Configure colors (if customization available)
+
+#### Navigation Setup:
+1. Go to: **Settings** → **Navigation**
+2. Set up primary navigation:
+   - Home
+   - Portfolio/Projects
+   - About
+   - Blog
+   - Contact (optional)
+3. Configure secondary navigation if needed
+
+---
+
+### 4. Verification Checklist
+
+After installation, verify:
+
+- [ ] Visit https://mj-online.ghost.io and confirm Kyoto theme is active
+- [ ] Dark mode is working (check selected preset)
+- [ ] Navigation menu displays correctly
+- [ ] Site is responsive (check on mobile device or resize browser)
+- [ ] Page templates are available when creating new pages
+- [ ] Footer and header display correctly
+- [ ] No console errors (press F12 → Console tab)
+
+---
+
+### 5. Create Initial Pages
+
+Use Kyoto's custom templates to create:
+
+#### Homepage:
+- Template: "Homepage" or "Hero"
+- Content: Introduction, featured projects, call-to-action
+
+#### Portfolio:
+- Template: "Portfolio" or "Projects"
+- Content: Grid/list of AI implementation projects
+
+#### About:
+- Template: "About" or "Page"
+- Content: Professional background, skills, experience
+
+#### Case Study Template:
+- Template: "Case Study"
+- Content: Detailed project breakdown (create one as example)
+
+#### Blog:
+- Use default post template
+- Create first blog post to test layout
+
+---
+
+## Troubleshooting
+
+### Theme Won't Upload
+- **Check file size:** Ghost Pro has upload limits (typically 50MB)
+- **Verify file format:** Must be .zip, not unzipped folder
+- **Check Ghost version:** Ensure Ghost Pro is running v6.x
+- **Browser issues:** Try different browser or clear cache
+
+### Theme Activates But Looks Broken
+- **Clear browser cache:** Hard refresh (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows)
+- **Check theme version:** Ensure it's compatible with your Ghost version
+- **View console errors:** F12 → Console tab for JavaScript errors
+- **Contact support:** Themex Studio support if theme-specific issue
+
+### Dark Mode Not Working
+- **Check theme settings:** Settings → Design → Customize
+- **Verify preset selection:** Ensure dark mode preset is selected
+- **Browser settings:** Some browsers override dark mode
+- **Custom CSS conflicts:** Check if any custom CSS is interfering
+
+### Pages Missing Templates
+- **Recreate page:** Delete and create new page
+- **Check page settings:** Template dropdown should show Kyoto templates
+- **Reinstall theme:** Upload theme again if templates missing
+- **Contact support:** May be theme configuration issue
+
+---
+
+## Configuration Tips
+
+### Recommended Dark Mode Preset:
+**Onyx** - Deep blacks with excellent contrast, perfect for tech/AI aesthetic
+
+### Color Customization:
+If theme allows custom colors:
+- Primary: Tech blue (#007AFF or similar)
+- Accent: AI-forward green or purple
+- Background: True black (#000000) or near-black (#0A0A0A)
+- Text: High contrast white (#FFFFFF)
+
+### Typography:
+- Headings: Modern sans-serif (Inter, SF Pro, or theme default)
+- Body: Readable sans-serif (same as headings for consistency)
+- Code: Monospace (JetBrains Mono, Fira Code, or theme default)
+
+### Navigation Structure:
+```
+Primary Navigation:
+- Home (/)
+- Portfolio (/portfolio)
+- About (/about)
+- Blog (/blog)
+
+Secondary Navigation (Footer):
+- Contact (/contact)
+- Privacy (/privacy)
+- RSS (/rss)
+```
+
+---
+
+## Next Steps After Installation
+
+### Phase 2.2: Content Structure
+1. Create all main pages (Home, Portfolio, About, Blog)
+2. Set up portfolio project entries
+3. Create first case study as template
+4. Write initial blog post
+
+### Phase 2.3: Customization
+1. Fine-tune dark mode preset
+2. Add custom CSS for:
+   - AI implementation project badges
+   - Technology stack indicators
+   - Custom styling for code blocks
+3. Configure metadata and SEO settings
+4. Set up social media cards
+
+### Phase 2.4: Content Population
+1. Add AI implementation projects to portfolio
+2. Write case studies for key projects
+3. Create about page content
+4. Set up blog structure and categories
+
+---
+
+## Support Resources
+
+**Kyoto Documentation:**
+- Check Themex Studio website: https://themex.studio/kyoto/
+- Look for documentation link after purchase
+- May include demo content import instructions
+
+**Ghost Documentation:**
+- Theme installation: https://ghost.org/help/installing-a-theme/
+- Theme development: https://ghost.org/docs/themes/
+- Settings guide: https://ghost.org/help/
+
+**Support Channels:**
+- Themex Studio support (check your purchase email)
+- Ghost Pro support: https://ghost.org/help/
+- Ghost Forum: https://forum.ghost.org/
+
+---
+
+## Backup & Safety
+
+**Before Installing:**
+- Current theme: Casper (Ghost default) or previous theme
+- Backup not strictly necessary (can always reinstall default theme)
+- Ghost Pro handles backups automatically
+
+**Theme Switching:**
+- You can switch themes anytime without losing content
+- Posts, pages, and settings are preserved
+- Custom CSS may need adjustment
+- Navigation structure remains intact
+
+---
+
+## Success Metrics
+
+Installation successful when:
+1. ✅ Kyoto theme active and displaying correctly
+2. ✅ Dark mode preset selected and working
+3. ✅ Navigation configured
+4. ✅ All page templates accessible
+5. ✅ Site responsive on mobile and desktop
+6. ✅ No console errors or broken elements
+7. ✅ Performance maintained (fast load times)
+8. ✅ SEO settings intact
+
+---
+
+## Post-Installation Checklist
+
+After Kyoto is installed and configured:
+
+- [ ] Test all page templates (create test pages)
+- [ ] Verify dark mode on different devices
+- [ ] Check responsive design (mobile, tablet, desktop)
+- [ ] Test navigation and links
+- [ ] Verify blog post layout
+- [ ] Check portfolio/project showcase
+- [ ] Test case study template
+- [ ] Review footer and social links
+- [ ] Run Lighthouse audit (performance, SEO, accessibility)
+- [ ] Test email newsletter signup (if enabled)
+- [ ] Verify RSS feed still works
+- [ ] Check sitemap.xml
+- [ ] Test social media cards (Twitter, LinkedIn)
+
+---
+
+## Timeline
+
+**Day 1 (Today):**
+- Purchase and download Kyoto
+- Install and activate theme
+- Select dark mode preset
+- Configure basic settings
+
+**Day 2-3:**
+- Create page structure
+- Set up navigation
+- Configure branding
+
+**Week 1:**
+- Create initial content
+- Customize styling
+- Populate portfolio
+
+---
+
+## Cost Summary
+
+| Item | Cost | Notes |
+|------|------|-------|
+| Kyoto Theme | $89 | One-time, lifetime updates |
+| Ghost Pro (already purchased) | $0 | Existing subscription |
+| Custom Development | $0 | Theme handles most needs |
+| **Total Additional Cost** | **$89** | Excellent ROI |
+
+---
+
+## Notes
+
+- Keep your license key and purchase receipt safe
+- Check for theme updates periodically (Ghost Admin will notify)
+- Join Ghost community for tips and customization ideas
+- Consider creating staging site for major customizations
+- Document any custom CSS for future reference
+
+---
+
+**Last Updated:** 2026-01-28
+**Status:** Ready for installation
+**Next Action:** Purchase theme from Themex Studio
+
+---
+
+**End of Installation Guide**

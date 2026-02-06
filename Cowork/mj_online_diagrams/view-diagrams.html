@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJ_Online Architecture Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4A90A4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #4A90A4;
+            margin-top: 40px;
+        }
+        .diagram-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>OfflineAI Architecture Diagrams</h1>
+    <p>Generated for mikejones.online - January 2026</p>
+
+    <h2>1. Full System Architecture</h2>
+    <div class="diagram-container">
+        <p class="description">Complete view of the OfflineAI infrastructure: cloud AI platforms, local services, storage, and RAG system.</p>
+        <div class="mermaid">
+flowchart TB
+    subgraph CloudAI["☁️ Cloud AI Platforms"]
+        Claude["🟠 Claude<br/>(Primary)"]
+        ChatGPT["🟢 ChatGPT<br/>(Alternative)"]
+    end
+
+    subgraph LocalInfra["🖥️ Mac Mini - Local Infrastructure"]
+        subgraph Services["Auto-Start Services (LaunchAgents)"]
+            Ollama["🦙 Ollama<br/>Port 11434<br/>Local Model Inference"]
+            OpenWebUI["🌐 OpenWebUI<br/>Port 3000<br/>Chat Interface + RAG"]
+            MCP["🔌 MCP Bridge<br/>Port 11620<br/>Filesystem Access"]
+        end
+
+        subgraph Storage["📁 Persistent Storage"]
+            Memory["📝 memory.jsonl<br/>Cross-AI Memory Ledger"]
+            Articles["📚 RT_Articles/<br/>Knowledge Base Source"]
+            Projects["🗂️ Project Files<br/>Code, Docs, Assets"]
+        end
+
+        subgraph RAG["🔍 RAG System"]
+            Watcher["👁️ File Watcher<br/>Auto-sync Script"]
+            Collection["📖 RT_Articles Collection<br/>OpenWebUI Knowledge Base"]
+        end
+    end
+
+    subgraph User["👤 Mike's Workflow"]
+        Terminal["💻 Terminal<br/>'rtai' command"]
+        Browser["🌍 Browser<br/>localhost:3000"]
+    end
+
+    Claude <-->|"Read/Write Context"| Memory
+    ChatGPT <-->|"Read Context<br/>(Write needs post-processing)"| Memory
+
+    Ollama <--> OpenWebUI
+    MCP <--> OpenWebUI
+    MCP <--> Projects
+    MCP <--> Memory
+
+    Articles --> Watcher
+    Watcher -->|"API Upload"| Collection
+    Collection --> OpenWebUI
+
+    Terminal -->|"Status, Restart"| Services
+    Browser --> OpenWebUI
+
+    OpenWebUI <-->|"Read/Write"| Memory
+        </div>
+    </div>
+
+    <h2>2. Cross-Platform Memory Flow</h2>
+    <div class="diagram-container">
+        <p class="description">How context flows between AI platforms via the shared memory.jsonl ledger.</p>
+        <div class="mermaid">
+flowchart LR
+    subgraph Input["🎤 Any Conversation"]
+        Claude["🟠 Claude"]
+        ChatGPT["🟢 ChatGPT"]
+        Local["🦙 Local LLM<br/>(OpenWebUI)"]
+    end
+
+    Memory["📝 memory.jsonl<br/>━━━━━━━━━━━━━━<br/>• Decisions<br/>• Milestones<br/>• Insights<br/>• Context<br/>• Resources"]
+
+    subgraph Output["🎯 Full Context Anywhere"]
+        Claude2["🟠 Claude"]
+        ChatGPT2["🟢 ChatGPT"]
+        Local2["🦙 Local LLM"]
+    end
+
+    Claude -->|"Write"| Memory
+    ChatGPT -->|"Write*"| Memory
+    Local -->|"Write"| Memory
+
+    Memory -->|"Read"| Claude2
+    Memory -->|"Read"| ChatGPT2
+    Memory -->|"Read"| Local2
+
+    style Memory fill:#FFF3E0,stroke:#F57C00,stroke-width:3px
+        </div>
+    </div>
+
+    <h2>3. Projects ↔ 7 Pillars Connection</h2>
+    <div class="diagram-container">
+        <p class="description">How Mike's active projects implement the Resilient Tomorrow 7 Pillars framework.</p>
+        <div class="mermaid">
+flowchart TB
+    subgraph Thesis["📖 RESILIENT TOMORROW"]
+        RT["The Thesis:<br/>'Build parallel systems<br/>alongside existing ones'"]
+    end
+
+    subgraph Pillars["🏛️ THE 7 PILLARS"]
+        P1["🌱 1. Food<br/>Sovereignty"]
+        P2["⚡ 2. Energy<br/>Autonomy"]
+        P3["💰 3. Local Wealth<br/>(Access > Money)"]
+        P4["📚 4. Knowledge<br/>Stewardship"]
+        P5["📡 5. Communication<br/>Independence"]
+        P6["🤝 6. Mutual<br/>Aid"]
+        P7["🏘️ 7. Hyperlocal<br/>Community"]
+    end
+
+    subgraph Projects["🔨 MIKE'S ACTIVE PROJECTS"]
+        NS["🔧 NeighborhoodShare<br/>Tool-sharing platform"]
+        AI["🧠 OfflineAI<br/>Local LLM + Memory System"]
+        Solar["☀️ Solar Project<br/>DIY neighborhood grid"]
+        Garden["🌿 Food Systems<br/>Greenhouse + Garden"]
+        Mesh["📻 Meshtastic<br/>Mesh network comms"]
+    end
+
+    RT --> Pillars
+
+    P3 --> NS
+    P7 --> NS
+
+    P4 --> AI
+    P5 --> AI
+
+    P2 --> Solar
+
+    P1 --> Garden
+
+    P5 --> Mesh
+
+    style RT fill:#E8F5E9,stroke:#388E3C,stroke-width:2px
+    style NS fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
+    style AI fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
+    style Solar fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
+    style Garden fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
+    style Mesh fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'base' });
+    </script>
+</body>
+</html>

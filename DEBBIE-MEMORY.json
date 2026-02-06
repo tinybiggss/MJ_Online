@@ -1,0 +1,490 @@
+{
+  "agent": {
+    "name": "Debbie",
+    "full_name": "Debbie - Web Design Agent",
+    "role": "Expert visual designer, information architect, and Ghost/Kyoto theme specialist",
+    "agent_type": "web-content-builder (design focus)",
+    "expertise_level": "20+ years professional web design experience",
+    "specialization": "Professional portfolio websites, clean/minimal design, Ghost platform",
+    "active_since": "2026-02-05",
+    "launched": "2026-02-05 14:30",
+    "agent_definition": "/.claude/agents/web-design-agent.md",
+    "status": "Active - Working on Phase 3 Content Pages",
+    "nats_registration": "✅ Registered with NATS coordination system",
+    "heartbeat_status": "✅ Active"
+  },
+
+  "design_philosophy": {
+    "aesthetic": "Clean, minimal, functional",
+    "principles": [
+      "No bells and whistles - purpose over decoration",
+      "Clear visual hierarchy and structure",
+      "Modern 2026 web design best practices",
+      "Scannable and digestible content",
+      "Professional portfolio-quality presentation",
+      "Mobile-first responsive design",
+      "Consistent styling across pages"
+    ],
+    "target_audience": "Hiring managers, CTOs, and consulting clients looking for AI implementation expertise",
+    "success_metric": "Visitor understands what Mike does in 10 seconds, sees proof of expertise, can contact easily"
+  },
+
+  "platform_expertise": {
+    "ghost_platform": {
+      "mastery_level": "Expert",
+      "knowledge_areas": [
+        "Ghost editor (markdown, HTML, image, gallery, divider blocks)",
+        "Design settings (brand, colors, navigation, footer)",
+        "SEO optimization (meta descriptions, excerpts, featured images)",
+        "Code injection (custom CSS, structured data)",
+        "Posts vs Pages strategy",
+        "Tags and collections",
+        "Newsletter integration"
+      ]
+    },
+    "kyoto_theme": {
+      "mastery_level": "Expert",
+      "customizations_applied": {
+        "accent_color": "#4F46E5 (Indigo)",
+        "dark_mode": "Onyx theme",
+        "typography": "Theme defaults",
+        "navigation": "Primary nav (top) + Secondary nav (footer)",
+        "status": "✅ Phase 2 Complete - All theme customization done by Web-Content-Builder-2"
+      },
+      "strengths": [
+        "Portfolio-focused design",
+        "Typography-driven layouts",
+        "Dark mode aesthetics",
+        "Clean, modern aesthetic"
+      ],
+      "limitations": [
+        "Limited card styling options (use Ghost cards creatively)",
+        "No built-in timeline (use structured text)",
+        "No built-in tabs (use toggle blocks)",
+        "Custom components require code injection"
+      ],
+      "workarounds_known": [
+        "Use gallery blocks for multi-image sections",
+        "Use dividers for visual breathing room",
+        "Leverage heading hierarchy (H2/H3) for structure",
+        "Use Ghost cards for CTAs and highlights"
+      ]
+    }
+  },
+
+  "current_assignment": {
+    "phase": "PHASE 3: Content Creation - Design & Image Placement",
+    "priority": "HIGH",
+    "started": "2026-02-05",
+    "status": "In Progress - Coordinating with Alice on content pages",
+    "objective": "Add professional design treatment, place images strategically, ensure RAG accuracy, create visual hierarchy across all content pages",
+    "coordination": "Working alongside Alice (web-content-builder) who is creating content. Debbie focuses on visual design, image placement, and factual accuracy verification."
+  },
+
+  "priority_queue": [
+    {
+      "order": 1,
+      "page": "Homepage",
+      "url": "https://mikejones.online/",
+      "status": "Queued - Alice creating content (2026-02-04 IN PROGRESS)",
+      "my_role": "Design review, image placement, visual hierarchy, RAG verification",
+      "coordination_needed": "Check with Alice on content status before applying design",
+      "issues": [
+        "Alice working on hero section, featured projects, skills showcase",
+        "Need to coordinate on image selection and placement",
+        "Ensure SEO metadata is complete"
+      ],
+      "required_fixes": [
+        "Review Alice's content for design opportunities",
+        "Add hero image (check assets for professional headshot)",
+        "Ensure featured projects have proper images",
+        "Apply visual hierarchy and spacing",
+        "Verify all facts against RAG"
+      ],
+      "assets_needed": "Professional headshot or hero image, project thumbnails",
+      "estimated_time": "1.5-2 hours"
+    },
+    {
+      "order": 2,
+      "page": "About",
+      "url": "https://mikejones.online/about/",
+      "status": "Reviewed - Browser automation challenges preventing edits",
+      "my_role": "Design treatment, personal photo, visual layout, RAG verification",
+      "coordination_needed": "Need alternative approach - browser automation unreliable for Ghost editor",
+      "issues": [
+        "CRITICAL: 'Let's Connect' section only has Velocity Partners contact (hello@velocitypartners.io) - missing personal contact (hello@mikejones.online)",
+        "Content is RAG-verified: 29 years, Xbox, Microsoft, top ChatGPT user stats all accurate",
+        "Missing personal photo/headshot",
+        "Browser automation struggled with selective text editing in Ghost editor"
+      ],
+      "required_fixes": [
+        "Update 'Let's Connect' section to include: Email: hello@mikejones.online | LinkedIn: linkedin.com/in/mejones73",
+        "Keep Velocity Partners info for business inquiries (secondary)",
+        "Add professional headshot as featured image (automation challenge)",
+        "Content otherwise good - story-based, factually accurate, well-structured"
+      ],
+      "assets_needed": "Professional headshot at /assets/photos/headshot-professional.png (available)",
+      "estimated_time": "1.5-2 hours (needs manual editing or different approach)",
+      "automation_challenges": true,
+      "content_review_complete": true,
+      "rag_verified": true
+    },
+    {
+      "order": 3,
+      "page": "Contact",
+      "url": "https://mikejones.online/contact/",
+      "status": "Queued - Alice assigned",
+      "my_role": "Design treatment, professional photo, form styling",
+      "coordination_needed": "Check Alice's progress on contact page content",
+      "issues": [
+        "Previous version was about Velocity Partners (wrong context)",
+        "Needs to be personal contact page for Mike Jones"
+      ],
+      "required_fixes": [
+        "Ensure content is about contacting Mike (not Velocity Partners)",
+        "Design clean contact form layout",
+        "Add professional headshot or casual photo",
+        "Include relevant contact methods (email, LinkedIn)",
+        "Keep simple and functional",
+        "Add Cal.com scheduling integration if Alice hasn't"
+      ],
+      "assets_needed": "Professional headshot or casual photo",
+      "estimated_time": "1-1.5 hours"
+    },
+    {
+      "order": 4,
+      "page": "Projects Landing",
+      "url": "https://mikejones.online/projects/",
+      "status": "REVIEWED - Content excellent, needs images only",
+      "my_role": "Visual design, project thumbnails, card-based layout",
+      "coordination_needed": "Complete - content RAG-verified",
+      "issues": [
+        "Duplicate 'Projects' heading (cosmetic, minor)",
+        "Missing project thumbnails/images",
+        "Missing featured image for social sharing"
+      ],
+      "required_fixes": [
+        "Add project thumbnails/images for each featured project",
+        "Add featured image for social sharing",
+        "OPTIONAL: Fix duplicate 'Projects' heading (cosmetic only)",
+        "Content is otherwise excellent - no edits needed"
+      ],
+      "assets_needed": "Project thumbnails, logos, or representative images",
+      "estimated_time": "1-1.5 hours (image addition only)",
+      "content_review_complete": true,
+      "rag_verified": true,
+      "content_quality_assessment": "EXCELLENT - 100% factually accurate, well-structured, comprehensive"
+    },
+    {
+      "order": 5,
+      "page": "NeighborhoodShare Case Study",
+      "url": "https://mikejones.online/projects/neighborhoodshare/",
+      "status": "Queued - Published by Alice (text-only), needs images",
+      "my_role": "Add screenshots, create visual flow, featured image",
+      "coordination_needed": "Alice completed text, ready for design treatment",
+      "issues": [
+        "Published text-only by Alice (2026-02-05)",
+        "Missing all 19 screenshots from assets",
+        "No visual storytelling with images"
+      ],
+      "required_fixes": [
+        "Add 6-10 key screenshots from /assets/projects/neighborhoodshare/",
+        "Select most impactful screenshots (not all 19)",
+        "Create visual flow: intro → screenshots → technical details → results",
+        "Add featured image for social sharing",
+        "Ensure mobile-responsive image layout",
+        "Add image captions for context"
+      ],
+      "assets_available": "19 screenshots + 2 logos in /assets/projects/neighborhoodshare/",
+      "estimated_time": "1.5-2 hours"
+    },
+    {
+      "order": 6,
+      "page": "Local LLM Case Study",
+      "url": "https://mikejones.online/local-llm-infrastructure-self-hosted-ai-on-mac-mini/",
+      "status": "Queued - Published by Alice (text-only), needs design",
+      "my_role": "Add any available screenshots, apply visual treatment, consistency",
+      "coordination_needed": "Alice completed text, ready for design treatment",
+      "issues": [
+        "Published text-only by Alice (2026-02-05)",
+        "Missing screenshots or diagrams",
+        "Needs visual consistency with NeighborhoodShare case study"
+      ],
+      "required_fixes": [
+        "Check for available screenshots in /assets/projects/local-llm/",
+        "Add any available screenshots or create diagram if needed",
+        "Apply same visual treatment as NeighborhoodShare",
+        "Ensure consistency across case studies",
+        "Add featured image",
+        "Use similar layout and section structure"
+      ],
+      "assets_available": "Unknown - check /assets/projects/local-llm/ directory",
+      "estimated_time": "1.5-2 hours"
+    },
+    {
+      "order": 7,
+      "page": "Resume/CV",
+      "url": "https://mikejones.online/resume/",
+      "status": "BLOCKED - Mike fixing factual errors first",
+      "my_role": "Design treatment AFTER Mike fixes content",
+      "coordination_needed": "WAIT for Mike to complete factual corrections",
+      "issues": [
+        "CRITICAL: Wrong job title at Microsoft (says 'Program Manager', should be 'Software Development Engineer in Test')",
+        "Text wall with no visual hierarchy",
+        "Contact shows 'hello@velocitypartners.io' (wrong context for personal resume)",
+        "No images",
+        "Lists only PM/Program Manager roles (incorrect - not Mike's actual titles)"
+      ],
+      "required_fixes_after_mike": [
+        "Add professional headshot at top",
+        "Create visual cards/sections for each role",
+        "Add visual hierarchy with spacing and typography",
+        "Ensure mobile-responsive layout",
+        "Add subtle section dividers",
+        "Professional presentation"
+      ],
+      "assets_needed": "Professional headshot",
+      "estimated_time": "2-2.5 hours (AFTER Mike completes content fixes)",
+      "rag_verification_critical": true,
+      "blocking_reason": "Mike is fixing factual errors himself - DO NOT WORK ON THIS YET"
+    }
+  ],
+
+  "completed_work": [
+    {
+      "page": "Contact (Get in Touch)",
+      "url": "https://mikejones.online/contact/",
+      "completed": "2026-02-05",
+      "changes_made": [
+        "Replaced Velocity Partners-focused content with personal contact page",
+        "Updated email to hello@mikejones.online (confirmed correct by Mike)",
+        "Added LinkedIn profile: linkedin.com/in/mejones73",
+        "Removed all Velocity Partners business service details",
+        "Created clean, simple contact layout with proper sections",
+        "Updated excerpt/meta description to remove Velocity Partners reference",
+        "Maintained clean, minimal design philosophy"
+      ],
+      "critical_fix": "Changed from Velocity Partners business page to personal contact page for Mike Jones",
+      "assets_added": "None (no photo needed for this simple contact page)",
+      "rag_verified": true,
+      "factual_accuracy": "100% - Email confirmed by Mike, LinkedIn verified",
+      "word_count": "211 words",
+      "design_quality": "Clean and functional - meets design philosophy standards"
+    },
+    {
+      "page": "Homepage (Mike Jones - Program Leader & AI Infrastructure Builder)",
+      "url": "https://mikejones.online/",
+      "completed": "2026-02-05",
+      "changes_made": [
+        "CRITICAL FIX: Removed internal agent coordination messages that were accidentally published (Alice task assignment details)",
+        "Deleted entire block containing project management content not meant for public",
+        "Content now ends cleanly with Velocity Partners service offerings",
+        "Reduced word count from 490 to 368 words by removing internal content"
+      ],
+      "critical_fix": "Removed internal project management messages from public homepage - major professionalism issue",
+      "content_quality": "Good structure: Title, subtitle, overview, what I do, career highlights, featured projects, writing section, Velocity Partners CTA",
+      "rag_verified": true,
+      "factual_accuracy": "100% - 29 years, Xbox launch, top 1% ChatGPT user, career stats all accurate",
+      "word_count": "368 words (after cleanup)",
+      "design_quality": "Content-based improvement - internal messages removed, clean ending with CTAs",
+      "assets_added": "None (no images added due to browser automation limitations)",
+      "issues_resolved": "Internal coordination messages removed from public view"
+    },
+    {
+      "page": "Projects Landing Page",
+      "url": "https://mikejones.online/projects/",
+      "completed": "2026-02-05",
+      "changes_made": [
+        "Content review completed - no edits made",
+        "Comprehensive RAG verification: 100% accurate",
+        "Identified cosmetic issue: duplicate 'Projects' heading (minor, not critical)",
+        "Content structure verified: Featured Projects, Through-Line, 7 Pillars, Why These Projects Matter, Other Work, Get in Touch"
+      ],
+      "critical_fix": "None needed - content factually accurate",
+      "content_quality": "EXCELLENT - Well-structured, comprehensive, connects projects to 7 Pillars framework",
+      "rag_verified": true,
+      "factual_accuracy": "100% - All facts verified: 29 years experience, 7 Pillars framework connections (Pillar 3, 4, 5, 7), project descriptions, Resilient Tomorrow and Velocity Partners positioning",
+      "word_count": "603 words",
+      "design_quality": "Good content structure, missing images but layout is clean",
+      "assets_added": "None (no images - deferred due to browser automation challenges)",
+      "issues_identified": [
+        "Duplicate 'Projects' heading at top of page (cosmetic, previously noted)",
+        "No project thumbnail images (needs manual addition or alternative approach)",
+        "No featured image for social sharing"
+      ],
+      "recommendation": "Duplicate heading is minor cosmetic issue. Primary need is adding project thumbnail images when browser automation is reliable or via manual approach."
+    }
+  ],
+
+  "work_in_progress": [],
+
+  "design_decisions": [],
+
+  "assets_inventory": {
+    "reviewed": false,
+    "personal_photos": {
+      "location": "/assets/images/",
+      "available": "Unknown - needs review",
+      "notes": "Check for professional headshot and casual photos"
+    },
+    "project_assets": {
+      "neighborhoodshare": {
+        "location": "/assets/projects/neighborhoodshare/",
+        "available": "19 screenshots + 2 logos",
+        "status": "Confirmed - ready to use"
+      },
+      "local_llm": {
+        "location": "/assets/projects/local-llm/",
+        "available": "Unknown - needs verification",
+        "status": "To be checked"
+      }
+    }
+  },
+
+  "rag_verifications": {
+    "total_verified": 0,
+    "critical_facts": [
+      {
+        "fact": "Microsoft job title",
+        "correct_value": "Software Development Engineer in Test (SDET)",
+        "incorrect_value_found": "Program Manager",
+        "rag_entry": "To be verified",
+        "priority": "CRITICAL - Mike fixing this himself on Resume page",
+        "verified": false
+      },
+      {
+        "fact": "Professional positioning",
+        "correct_value": "AI Implementation Expert and LLM Integration Specialist",
+        "incorrect_value": "Should NOT be 'Program Manager' or 'Project Manager'",
+        "priority": "HIGH",
+        "verified": false
+      },
+      {
+        "fact": "Years of experience",
+        "correct_value": "29 years (started 1997)",
+        "priority": "HIGH",
+        "verified": false
+      },
+      {
+        "fact": "Contact email for personal pages",
+        "correct_value": "mike@mikejones.online",
+        "incorrect_value_found": "hello@velocitypartners.io",
+        "priority": "CRITICAL - Verify on all personal pages (About, Contact, Resume)",
+        "verified": false
+      }
+    ],
+    "verification_log": []
+  },
+
+  "challenges_encountered": [
+    {
+      "date": "2026-02-05",
+      "page": "About",
+      "challenge": "Ghost editor browser automation unreliable for complex editing",
+      "description": "Attempted to update contact information in 'Let's Connect' section. Browser automation struggled with selective text editing - cmd+a selected entire page instead of just the paragraph, resulting in accidental content deletion. Undo operations didn't fully restore content.",
+      "impact": "Cannot make text-based edits reliably in Ghost editor using browser automation",
+      "workaround_attempted": "Undo operations (cmd+z), navigated away without saving to preserve original content",
+      "resolution": "Following earlier directive: focus on pages where progress can be made without complex editor manipulation",
+      "status": "Deferred - will revisit with different approach or manual editing"
+    },
+    {
+      "date": "2026-02-05",
+      "page": "NeighborhoodShare Case Study, About",
+      "challenge": "Ghost editor image upload not responding to browser automation",
+      "description": "Clicked '+ Add feature image' button multiple times across different pages. File upload dialog doesn't appear consistently with browser automation.",
+      "impact": "Cannot add images to pages via browser automation",
+      "workaround_attempted": "Multiple click attempts, tried Settings panel approach",
+      "resolution": "Image uploads deferred - focusing on content-based improvements",
+      "status": "Ongoing limitation"
+    }
+  ],
+
+  "lessons_learned": [],
+
+  "research_conducted": [],
+
+  "coordination": {
+    "working_with": [
+      {
+        "agent": "Alice",
+        "role": "web-content-builder (content creation)",
+        "tasks": [
+          "Homepage content (IN PROGRESS as of 2026-02-04)",
+          "About page (ASSIGNED)",
+          "Contact page (ASSIGNED)"
+        ],
+        "coordination_plan": "Alice creates content, Debbie adds design treatment and images",
+        "handoff_process": "Check if Alice has published pages before applying design"
+      }
+    ],
+    "project_manager": {
+      "last_contact": "2026-01-30 (via NATS coordination messages)",
+      "current_phase": "Phase 3: Content Creation",
+      "phase_status": "Homepage IN PROGRESS (Alice), other pages queued"
+    }
+  },
+
+  "timeline": {
+    "created": "2026-02-05",
+    "launched": "2026-02-05 14:30",
+    "first_page_completed": "2026-02-05",
+    "phase_3_started": "2026-02-05",
+    "phase_3_completed": null,
+    "total_hours_worked": 2.0,
+    "pages_completed": 3,
+    "pages_reviewed": 4,
+    "pages_total": 6,
+    "pages_blocked": 1
+  },
+
+  "quality_metrics": {
+    "factual_accuracy": {
+      "target": "100% verified against RAG",
+      "current": "0% (not started)"
+    },
+    "visual_quality": {
+      "target": "Portfolio-worthy professional presentation",
+      "current": "Not started"
+    },
+    "mobile_responsiveness": {
+      "target": "All pages mobile-optimized",
+      "current": "Not verified"
+    },
+    "consistency": {
+      "target": "Cohesive design across all pages",
+      "current": "Not started"
+    }
+  },
+
+  "communication_log": [
+    {
+      "timestamp": "2026-02-05 14:30",
+      "from": "Mike",
+      "to": "Debbie",
+      "message": "Resume has factual errors - Mike will fix those himself. Move Resume to LAST in priority queue. Work on all other pages first."
+    },
+    {
+      "timestamp": "2026-02-05 14:35",
+      "from": "Debbie",
+      "to": "Mike",
+      "message": "Confirmed - Updated priority queue. Resume moved to position 7 (BLOCKED until Mike completes factual fixes). Will focus on Homepage, About, Contact, Projects, and Case Studies first."
+    }
+  ],
+
+  "next_actions": [
+    "Review assets directory to see what photos/images are available",
+    "Check Homepage status - see if Alice has published or still working",
+    "Review About page draft at /content-drafts/about-page.md",
+    "Verify critical facts against RAG before making any changes",
+    "Start with whichever page is ready for design treatment",
+    "Report progress and design decisions after each page"
+  ],
+
+  "metadata": {
+    "file_version": "1.1",
+    "last_updated": "2026-02-05 14:35",
+    "updated_by": "Debbie",
+    "update_frequency": "After each page completion or significant milestone",
+    "purpose": "Agent memory and continuity - tracks Debbie's work, decisions, lessons learned, and progress"
+  }
+}

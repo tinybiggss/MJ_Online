@@ -1,0 +1,45 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#4A90A4', 'lineColor': '#5C6670'}}}%%
+
+flowchart TB
+    subgraph Thesis["📖 RESILIENT TOMORROW"]
+        RT["The Thesis:<br/>'Build parallel systems<br/>alongside existing ones'"]
+    end
+
+    subgraph Pillars["🏛️ THE 7 PILLARS"]
+        P1["🌱 1. Food<br/>Sovereignty"]
+        P2["⚡ 2. Energy<br/>Autonomy"]
+        P3["💰 3. Local Wealth<br/>(Access > Money)"]
+        P4["📚 4. Knowledge<br/>Stewardship"]
+        P5["📡 5. Communication<br/>Independence"]
+        P6["🤝 6. Mutual<br/>Aid"]
+        P7["🏘️ 7. Hyperlocal<br/>Community"]
+    end
+
+    subgraph Projects["🔨 MIKE'S ACTIVE PROJECTS"]
+        NS["🔧 NeighborhoodShare<br/>Tool-sharing platform"]
+        AI["🧠 OfflineAI<br/>Local LLM + Memory System"]
+        Solar["☀️ Solar Project<br/>DIY neighborhood grid"]
+        Garden["🌿 Food Systems<br/>Greenhouse + Garden"]
+        Mesh["📻 Meshtastic<br/>Mesh network comms"]
+    end
+
+    RT --> Pillars
+
+    P3 --> NS
+    P7 --> NS
+
+    P4 --> AI
+    P5 --> AI
+
+    P2 --> Solar
+
+    P1 --> Garden
+
+    P5 --> Mesh
+
+    style RT fill:#E8F5E9,stroke:#388E3C,stroke-width:2px
+    style NS fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
+    style AI fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
+    style Solar fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
+    style Garden fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
+    style Mesh fill:#FFF3E0,stroke:#F57C00,stroke-width:2px

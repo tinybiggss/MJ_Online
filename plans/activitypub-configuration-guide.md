@@ -1,0 +1,611 @@
+# ActivityPub Configuration Guide for mikejones.online
+
+**Date:** 2026-01-28
+**Site:** mikejones.online (Ghost Pro)
+**Status:** Ready for configuration
+
+---
+
+## Overview
+
+This guide provides step-by-step instructions for enabling and configuring ActivityPub on the Ghost Pro site at mikejones.online. Based on the research documented in `activitypub-research.md`, Ghost Pro includes native ActivityPub support with unlimited interactions.
+
+---
+
+## Prerequisites
+
+- Ghost Pro subscription (active at mikejones.online)
+- Ghost 6.x or later (verify version in Settings → About)
+- Domain configured with HTTPS (already complete)
+- Admin access to Ghost dashboard
+
+---
+
+## Configuration Steps
+
+### Step 1: Access Ghost Admin
+
+1. Navigate to: https://mikejones.online/ghost
+2. Log in with your Ghost Pro credentials
+3. You should see the Ghost dashboard
+
+### Step 2: Locate ActivityPub Settings
+
+According to Ghost documentation, ActivityPub settings are typically located at:
+
+**Path 1 (Most Likely for Ghost Pro):**
+- Settings → Membership → Fediverse
+- OR Settings → Growth → Network
+
+**Path 2 (Alternative Location):**
+- Settings → Labs → ActivityPub
+- OR Settings → Beta Features → Fediverse
+
+**Note:** The exact location may vary based on Ghost version. Look for keywords: "ActivityPub", "Fediverse", "Network", or "Social Web".
+
+### Step 3: Enable ActivityPub
+
+1. Once you locate the ActivityPub/Fediverse settings section
+2. Toggle the switch to **ON** (may be labeled "Enable Network", "Enable Fediverse", or "Enable ActivityPub")
+3. Ghost Pro should automatically register with the managed ActivityPub service
+4. Wait for confirmation message (may take 30-60 seconds)
+
+**Expected Success Message:**
+"Your site is now connected to the Fediverse" or similar confirmation.
+
+**If you see an error:**
+- Note the exact error message
+- Try disabling and re-enabling after clearing browser cache
+- See Troubleshooting section below
+
+### Step 4: Configure ActivityPub Settings
+
+Look for these configuration options (availability depends on Ghost version):
+
+#### Content Settings
+- **Post federation:** Choose which content types federate (posts, pages)
+  - Recommended: Enable for "Posts" only (not pages)
+
+- **Automatic federation:** Publish new posts to Fediverse automatically
+  - Recommended: Enable
+
+#### Profile Settings
+- **Display name:** Your public name on the Fediverse
+  - Recommended: "Mike Jones" or preferred professional name
+
+- **Username:** Your Fediverse handle will be @username@mikejones.online
+  - Recommended: "mike" (results in @mike@mikejones.online)
+  - Note: Username may be set automatically based on your Ghost profile
+
+- **Bio/Description:** Short bio for Fediverse profile
+  - Recommended: Emphasize AI implementation and LLM integration expertise, portfolio focus
+  - Example: "AI Implementation Expert and LLM Integration Specialist | Building intelligent systems | Portfolio at mikejones.online"
+
+- **Avatar:** Profile picture
+  - Recommended: Upload professional headshot
+
+- **Header image:** Banner image for profile
+  - Recommended: Upload header reflecting personal brand
+
+#### Engagement Settings
+- **Show likes:** Display Fediverse likes on posts
+  - Recommended: Enable
+
+- **Show boosts:** Display Fediverse boosts/reposts on posts
+  - Recommended: Enable
+
+- **Show replies:** Display Fediverse replies as comments
+  - Recommended: Enable
+
+- **Allow replies:** Let Fediverse users reply to your posts
+  - Recommended: Enable
+
+#### Privacy Settings
+- **Visibility:** All federated content is public by default
+- **Discovery:** Allow your profile to appear in Fediverse searches
+  - Recommended: Enable
+
+### Step 5: Save Configuration
+
+1. Click "Save" or "Save settings" button
+2. Wait for confirmation
+3. Verify no error messages appear
+
+---
+
+## Verification and Testing
+
+### Test 1: Verify Ghost Configuration
+
+1. In Ghost admin, check ActivityPub status shows as "Active" or "Connected"
+2. Your Fediverse handle should be displayed: @mike@mikejones.online (or your chosen username)
+
+### Test 2: WebFinger Endpoint Test
+
+WebFinger is the protocol that allows Fediverse servers to discover your ActivityPub profile.
+
+**Using Command Line (Mac Terminal):**
+```bash
+curl https://mikejones.online/.well-known/webfinger?resource=acct:mike@mikejones.online
+```
+
+**Expected Response:**
+```json
+{
+  "subject": "acct:mike@mikejones.online",
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/activity+json",
+      "href": "https://mikejones.online/.ghost/activitypub/..."
+    }
+  ]
+}
+```
+
+**If you get a 404 error:**
+- Ghost Pro may handle WebFinger routing differently
+- This is less critical for Ghost Pro (managed service handles it)
+- Proceed to Mastodon test instead
+
+### Test 3: Search from Mastodon
+
+This is the most important test to verify federation is working.
+
+**If you have a Mastodon account:**
+1. Log into your Mastodon instance (mastodon.social, mastodon.online, etc.)
+2. In the search bar, type: @mike@mikejones.online (use your actual username)
+3. Click "Search" or press Enter
+4. Your Ghost profile should appear in search results
+5. Click "Follow" to follow your Ghost site
+
+**If you don't have a Mastodon account:**
+- Skip this test for now
+- Consider creating a test account on mastodon.social for testing purposes
+- Alternatively, ask someone with a Mastodon account to search for your profile
+
+### Test 4: Publish Test Post
+
+1. In Ghost admin, create a new post
+2. Title: "Test Post - ActivityPub Federation"
+3. Content: Brief test message
+4. Set as "Published" (not Draft)
+5. Publish the post
+
+**If you have a Mastodon follower:**
+- Check if the post appears in their timeline within a few minutes
+- The post should show title, excerpt, and link back to your Ghost site
+
+**If no Mastodon followers yet:**
+- Post will federate when you gain followers
+- Test with your own Mastodon account if you created one
+
+### Test 5: Verify Engagement Display
+
+1. If someone likes or boosts your post from Mastodon, verify the engagement appears in:
+   - Ghost admin notifications
+   - Post analytics/stats
+   - Public post view (if engagement display is enabled)
+
+---
+
+## Profile Optimization
+
+Once ActivityPub is enabled, optimize your Fediverse profile:
+
+### Avatar/Profile Picture
+1. Go to Settings → General → Publication Details
+2. Upload professional headshot (recommended: 400x400px minimum)
+3. This image will be used as your Fediverse avatar
+
+### Bio/Description
+1. Go to Settings → General → Description
+2. Write compelling bio emphasizing:
+   - AI implementation and LLM integration expertise
+   - Portfolio purpose
+   - Key skills or interests
+   - Call to action (e.g., "Hire me", "View my work")
+
+**Example Bio:**
+"AI Implementation Expert and LLM Integration Specialist specializing in local LLMs and intelligent systems. Building practical AI solutions. Portfolio and case studies at mikejones.online. Open to opportunities."
+
+### Links
+1. Add important links to Ghost site navigation
+2. These may appear in Fediverse profile (implementation varies)
+3. Recommended links:
+   - Resume/CV
+   - Projects page
+   - Contact page
+   - GitHub profile
+
+---
+
+## Content Strategy for ActivityPub
+
+### Initial Content Plan
+
+**Before promoting your Fediverse profile:**
+1. Publish 2-3 high-quality posts (AI case studies or projects)
+2. This gives new followers content to engage with immediately
+3. Empty profiles get fewer followers
+
+**Launch announcement:**
+1. Create "Introduction" post explaining:
+   - Who you are
+   - What you'll post about (AI implementation projects, insights)
+   - Your expertise and interests
+   - How to follow you
+2. Include relevant hashtags (see below)
+
+### Hashtag Strategy
+
+Use 3-5 relevant hashtags per post to increase discoverability.
+
+**Core hashtags for AI implementation content:**
+- #AI
+- #MachineLearning
+- #ArtificialIntelligence
+- #LLM
+- #LocalLLM
+- #Python
+
+**Portfolio/professional hashtags:**
+- #Portfolio
+- #Developer
+- #WebDev
+- #Tech
+- #OpenSource (if applicable)
+
+**Project-specific hashtags:**
+Create consistent tags for ongoing projects:
+- #AIMemorySystem
+- #YourProjectName
+
+### Posting Frequency Recommendations
+
+**Long-form articles (Ghost posts):**
+- 1-2 per week
+- Focus on quality over quantity
+- In-depth case studies, tutorials, project showcases
+
+**Short-form notes (if available in Ghost):**
+- 3-5 per week
+- Quick updates, links, insights
+- Behind-the-scenes content
+- Work-in-progress shares
+
+**Engagement:**
+- Daily: Check notifications and reply to comments
+- Build genuine relationships with followers
+
+### Content Format Tips
+
+**Optimize for Fediverse previews:**
+- Write compelling first paragraph (appears in federated preview)
+- Use clear, descriptive titles
+- Include featured image (becomes preview card)
+- Front-load key information
+
+**Link strategy:**
+- Every Ghost post automatically includes link back to full article
+- Encourage click-throughs with strong intro hooks
+- Use clear calls to action
+
+---
+
+## Troubleshooting
+
+### Issue 1: "Not Properly Configured" Error
+
+**Symptoms:** Ghost shows ActivityPub as not properly configured after enabling
+
+**Solution (Ghost Pro specific):**
+1. Disable the ActivityPub/Network toggle
+2. Clear your browser cache completely (Cmd+Shift+Delete on Mac, Ctrl+Shift+Delete on Windows)
+3. Close and reopen browser
+4. Log back into Ghost admin
+5. Re-enable the ActivityPub/Network toggle
+6. Wait 1-2 minutes for registration to complete
+
+**If still not working:**
+- Check Ghost status page (status.ghost.org) for service issues
+- Contact Ghost support via email or forum
+
+### Issue 2: Profile Not Searchable from Mastodon
+
+**Symptoms:** Searching @mike@mikejones.online from Mastodon returns no results
+
+**Solutions:**
+1. Verify ActivityPub is enabled and showing as "Active" in Ghost admin
+2. Wait 10-15 minutes after initial activation (propagation delay)
+3. Try searching from different Mastodon instances
+4. Verify your username is correct (check Ghost admin settings)
+5. Try alternative search formats:
+   - With @: @mike@mikejones.online
+   - Without @: mike@mikejones.online
+   - Full URL: https://mikejones.online
+
+**If profile still not found:**
+- Ghost Pro handles federation differently than self-hosted
+- Contact Ghost support with:
+  - Your site URL
+  - Your expected Fediverse handle
+  - Screenshot of ActivityPub settings showing "enabled"
+
+### Issue 3: Posts Not Appearing in Follower Timelines
+
+**Symptoms:** Followers don't see your new posts in their feeds
+
+**Solutions:**
+1. Verify post is "Published" (not Draft or Scheduled)
+2. Check if "Automatic federation" is enabled in settings
+3. Verify followers are actually following (check follower list in Ghost admin)
+4. Wait 5-10 minutes for federation (not instant)
+5. Check if post contains any federation-blocking content (very rare)
+
+**Testing:**
+- Publish another test post
+- Check from your own Mastodon account if you're following yourself
+- Ask a follower to confirm they see the post
+
+### Issue 4: Engagement Not Appearing
+
+**Symptoms:** Likes, boosts, or replies from Fediverse don't show up in Ghost
+
+**Solutions:**
+1. Verify engagement display settings are enabled
+2. Check Ghost admin → Notifications for Fediverse interactions
+3. Engagement may take a few minutes to appear
+4. Some engagement may not federate due to privacy settings on the sender's side
+
+### Issue 5: Wrong Username/Handle
+
+**Symptoms:** Your Fediverse handle is not what you expected
+
+**Solution:**
+- Ghost typically uses your author slug as the username
+- To change: Settings → Staff → Your profile → Author slug
+- Note: Changing username after gaining followers may break existing follows
+- Best to set correct username before promoting
+
+---
+
+## Ghost Pro vs Self-Hosted Differences
+
+**Note:** The research document includes extensive self-hosted configuration (Nginx, Docker, etc.). Since mikejones.online is on Ghost Pro, you can ignore:
+
+- Nginx/Apache reverse proxy configuration
+- Docker Compose setup
+- Manual WebFinger endpoint configuration
+- Authorization header proxy settings
+- Database configuration
+
+**Ghost Pro handles all of this automatically.** Your only tasks are:
+1. Enable ActivityPub in admin
+2. Configure profile settings
+3. Start publishing content
+
+---
+
+## Monitoring and Analytics
+
+### Ghost Admin - ActivityPub Metrics
+
+Look for these metrics in your Ghost admin (location varies by version):
+
+**Follower metrics:**
+- Total Fediverse followers
+- Follower growth over time
+- Followers by platform (Mastodon, Threads, Pixelfed, etc.)
+
+**Engagement metrics:**
+- Likes per post
+- Boosts/reposts per post
+- Replies per post
+- Click-through rate to full articles
+
+**Interaction tracking:**
+- Ghost admin → Notifications shows:
+  - New followers
+  - Likes
+  - Boosts
+  - Replies from Fediverse users
+
+### External Monitoring
+
+**Fediverse search engines:**
+- Search for your handle on various instances to see how your profile appears
+- Monitor hashtag performance by searching for your tags
+
+**Referral traffic:**
+- Check Ghost analytics for referral traffic from Fediverse instances
+- Common referrers: mastodon.social, mastodon.online, etc.
+
+---
+
+## Next Steps After Configuration
+
+### Immediate (Day 1)
+1. Enable ActivityPub
+2. Configure profile (avatar, bio, username)
+3. Test WebFinger and Mastodon search
+4. Create test post to verify federation
+
+### Short-term (Week 1)
+1. Publish 2-3 initial posts (AI case studies)
+2. Create introduction/announcement post
+3. Share Fediverse handle on other platforms
+4. Follow 10-20 accounts in AI implementation space
+5. Engage with early followers
+
+### Medium-term (Month 1)
+1. Establish posting rhythm (1-2 articles/week)
+2. Monitor engagement and adjust content strategy
+3. Build relationships with key accounts
+4. Refine hashtag strategy based on reach
+5. Document what content performs best
+
+### Long-term (Ongoing)
+1. Consistent content publication
+2. Active engagement with community
+3. Track follower growth and content performance
+4. Iterate on content strategy based on data
+5. Build thought leadership in AI implementation space
+
+---
+
+## Configuration Checklist
+
+Use this checklist to track your progress:
+
+### Initial Setup
+- [ ] Access Ghost admin at mikejones.online/ghost
+- [ ] Locate ActivityPub/Fediverse settings
+- [ ] Enable ActivityPub integration
+- [ ] Verify "Connected" or "Active" status
+- [ ] Note your Fediverse handle (e.g., @mike@mikejones.online)
+
+### Profile Configuration
+- [ ] Set display name
+- [ ] Verify username/handle
+- [ ] Write and save bio/description
+- [ ] Upload profile picture (avatar)
+- [ ] Upload header image (if available)
+- [ ] Configure privacy settings
+- [ ] Enable engagement display (likes, boosts, replies)
+
+### Testing
+- [ ] Test WebFinger endpoint (curl command)
+- [ ] Search for your profile from Mastodon
+- [ ] Follow your Ghost site from Mastodon (if you have account)
+- [ ] Publish test post
+- [ ] Verify test post appears in Mastodon timeline (if follower)
+- [ ] Test like/boost functionality (if follower)
+
+### Content Preparation
+- [ ] Draft 2-3 initial posts (AI case studies)
+- [ ] Create introduction post
+- [ ] Prepare hashtag list
+- [ ] Identify key accounts to follow
+- [ ] Plan first week of content
+
+### Launch
+- [ ] Publish initial 2-3 posts
+- [ ] Publish introduction post
+- [ ] Share Fediverse handle on other platforms
+- [ ] Follow key accounts in AI implementation space
+- [ ] Respond to early followers and interactions
+
+---
+
+## Support and Resources
+
+### Ghost Support
+- Ghost Pro Support: support@ghost.org
+- Ghost Forum: https://forum.ghost.org
+- Ghost Documentation: https://ghost.org/docs
+
+### ActivityPub Issues
+- Ghost ActivityPub Forum: https://forum.ghost.org/c/integrations-api/
+- ActivityPub Status: Check status.ghost.org
+
+### Community Resources
+- Mastodon Documentation: https://docs.joinmastodon.org
+- Fediverse Guide: https://fediverse.info
+- ActivityPub Spec: https://www.w3.org/TR/activitypub/
+
+### Related Documentation
+- `/Users/michaeljones/Dev/MJ_Online/plans/activitypub-research.md` - Full research document
+- `/Users/michaeljones/Dev/MJ_Online/plans/ghost-pro-setup-guide.md` - Ghost Pro setup guide
+- `/Users/michaeljones/Dev/MJ_Online/plans/requirements-specification.md` - Overall project requirements
+
+---
+
+## Expected Outcomes
+
+Once ActivityPub is successfully configured:
+
+1. **Discoverability:** Your Ghost site will be searchable from any Fediverse platform as @mike@mikejones.online
+2. **Followers:** Users from Mastodon, Threads, Pixelfed, etc. can follow your site
+3. **Federation:** Published posts automatically appear in followers' timelines
+4. **Engagement:** Fediverse users can like, boost, and reply to your posts
+5. **Reach:** Access to 10+ million Fediverse users across multiple platforms
+6. **Independence:** You own your content and platform while benefiting from federated discovery
+
+---
+
+## Limitations and Considerations
+
+### Current Limitations (Ghost 6.x Beta)
+- ActivityPub is still in beta - expect occasional issues
+- Some features may be incomplete or subject to change
+- Not all Fediverse platforms handle Ghost content identically
+- Engagement metrics may have delays
+- Some advanced ActivityPub features not yet supported
+
+### Ghost Pro Advantages
+- Zero infrastructure management (vs. self-hosted)
+- Unlimited ActivityPub interactions (vs. 100/day on self-hosted free tier)
+- Automatic updates and maintenance
+- Ghost team handles all federation issues
+- No need for Docker, databases, or custom reverse proxy configuration
+
+### Content Considerations
+- All federated content is public (no private posts to Fediverse)
+- Once federated, posts are cached on other servers (deletion doesn't remove from all servers immediately)
+- Edit functionality may be limited (depends on Ghost version)
+- Long posts may be truncated in some Fediverse clients (full content on Ghost site)
+
+---
+
+## Success Metrics
+
+Track these metrics to measure ActivityPub success:
+
+### Quantitative Metrics
+- **Follower count:** Total Fediverse followers
+- **Follower growth rate:** New followers per week/month
+- **Engagement rate:** Likes + boosts + replies per post
+- **Click-through rate:** Fediverse users clicking through to full articles
+- **Referral traffic:** Traffic from Fediverse instances (check Ghost analytics)
+
+### Qualitative Metrics
+- **Interaction quality:** Meaningful comments and discussions
+- **Network building:** Connections with AI implementation professionals
+- **Brand awareness:** Mentions and shares of your work
+- **Opportunities:** Job inquiries, collaboration requests, speaking invites
+
+### Realistic Expectations
+- **Month 1:** 10-50 followers (with consistent posting and engagement)
+- **Month 3:** 50-200 followers (with quality content and networking)
+- **Month 6:** 200-500 followers (with established presence and reputation)
+
+**Note:** Fediverse growth is slower but more authentic than algorithmic platforms. Focus on quality over quantity.
+
+---
+
+## Conclusion
+
+ActivityPub integration transforms mikejones.online from a standalone website into a federated social presence, providing:
+- Extended reach across the Fediverse
+- Direct engagement with AI implementation community
+- Professional networking opportunities
+- Content amplification
+- Platform independence
+
+The configuration should be straightforward on Ghost Pro - primarily a toggle switch and profile setup. The real work is in content strategy and community engagement.
+
+Once configured, ActivityPub becomes a powerful tool for portfolio visibility, professional networking, and thought leadership in the AI implementation space.
+
+---
+
+**Document Status:** Ready for implementation
+**Next Action:** Enable ActivityPub in Ghost admin and complete profile configuration
+**Estimated Time:** 30-60 minutes for initial setup and testing
+
+---
+
+**Related Files:**
+- Research: `/Users/michaeljones/Dev/MJ_Online/plans/activitypub-research.md`
+- Ghost Setup: `/Users/michaeljones/Dev/MJ_Online/plans/ghost-pro-setup-guide.md`
+- Project Requirements: `/Users/michaeljones/Dev/MJ_Online/plans/requirements-specification.md`

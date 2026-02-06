@@ -1,0 +1,63 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#4A90A4', 'primaryTextColor': '#fff', 'primaryBorderColor': '#2C5F71', 'lineColor': '#5C6670', 'secondaryColor': '#F4A460', 'tertiaryColor': '#E8E8E8'}}}%%
+
+flowchart TB
+    subgraph CloudAI["☁️ Cloud AI Platforms"]
+        Claude["🟠 Claude<br/>(Primary)"]
+        ChatGPT["🟢 ChatGPT<br/>(Alternative)"]
+    end
+
+    subgraph LocalInfra["🖥️ Mac Mini - Local Infrastructure"]
+        subgraph Services["Auto-Start Services (LaunchAgents)"]
+            Ollama["🦙 Ollama<br/>Port 11434<br/>Local Model Inference"]
+            OpenWebUI["🌐 OpenWebUI<br/>Port 3000<br/>Chat Interface + RAG"]
+            MCP["🔌 MCP Bridge<br/>Port 11620<br/>Filesystem Access"]
+        end
+
+        subgraph Storage["📁 Persistent Storage"]
+            Memory["📝 memory.jsonl<br/>Cross-AI Memory Ledger"]
+            Articles["📚 RT_Articles/<br/>Knowledge Base Source"]
+            Projects["🗂️ Project Files<br/>Code, Docs, Assets"]
+        end
+
+        subgraph RAG["🔍 RAG System"]
+            Watcher["👁️ File Watcher<br/>Auto-sync Script"]
+            Collection["📖 RT_Articles Collection<br/>OpenWebUI Knowledge Base"]
+        end
+    end
+
+    subgraph User["👤 Mike's Workflow"]
+        Terminal["💻 Terminal<br/>'rtai' command"]
+        Browser["🌍 Browser<br/>localhost:3000"]
+    end
+
+    %% Cloud to Memory connections
+    Claude <-->|"Read/Write Context"| Memory
+    ChatGPT <-->|"Read Context<br/>(Write needs post-processing)"| Memory
+
+    %% Local service connections
+    Ollama <--> OpenWebUI
+    MCP <--> OpenWebUI
+    MCP <--> Projects
+    MCP <--> Memory
+
+    %% RAG flow
+    Articles --> Watcher
+    Watcher -->|"API Upload"| Collection
+    Collection --> OpenWebUI
+
+    %% User interactions
+    Terminal -->|"Status, Restart"| Services
+    Browser --> OpenWebUI
+
+    %% OpenWebUI to Memory
+    OpenWebUI <-->|"Read/Write"| Memory
+
+    classDef cloud fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
+    classDef local fill:#E8F5E9,stroke:#388E3C,stroke-width:2px
+    classDef storage fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
+    classDef user fill:#FCE4EC,stroke:#C2185B,stroke-width:2px
+
+    class Claude,ChatGPT cloud
+    class Ollama,OpenWebUI,MCP local
+    class Memory,Articles,Projects,Collection storage
+    class Terminal,Browser user

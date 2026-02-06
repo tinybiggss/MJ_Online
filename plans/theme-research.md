@@ -1,0 +1,542 @@
+# Ghost Theme Research
+
+**Research Date:** 2026-01-27
+**Researcher:** Agent-Beta
+**Purpose:** Evaluate Ghost themes for MJ_Online portfolio website
+
+---
+
+## Executive Summary
+
+This research evaluates 10 Ghost themes suitable for a professional tech portfolio emphasizing AI implementation projects. The analysis covers both premium and free options, focusing on portfolio features, dark mode support, customization flexibility, and technical aesthetic alignment.
+
+**Top Recommendations:**
+1. **Kyoto** (Premium, $89) - Best overall for minimal portfolio with strong project showcase
+2. **Fumio** (Premium, $119) - Best for extensive customization and multiple layout options
+3. **Edge** (Free, Official) - Best free option for aesthetic portfolio presentation
+
+---
+
+## Research Methodology
+
+**Criteria Evaluated:**
+- Portfolio/project showcase capabilities
+- Dark mode support
+- Customization flexibility
+- Tech/AI aesthetic alignment
+- Pricing and value
+- Active maintenance status
+- Ghost version compatibility
+
+**Sources:**
+- [Ghost Official Marketplace](https://ghost.org/marketplace/)
+- [Bright Themes](https://brightthemes.com/themes)
+- [Themex Studio](https://themex.studio/)
+- [Colorlib Theme Collection](https://colorlib.com/wp/best-free-ghost-themes/)
+- GitHub repositories for open-source themes
+
+---
+
+## Theme Evaluation
+
+### Premium Themes
+
+#### 1. Kyoto (Themex Studio)
+**Price:** $89 (lifetime updates)
+**Homepage:** https://themex.studio/kyoto/
+
+**Key Features:**
+- 10+ custom page templates (homepage, portfolio, blog, case studies, timeline, books)
+- **Dark mode support** with 8 color presets (Default, Pure, Onyx, Rust, Fossil, Mint, Ice, Ember)
+- Minimal, Japan-inspired design aesthetic
+- Dedicated project showcase and case study templates
+- 100/100 SEO score
+- Ghost 6.x compatible
+- Responsive and speed-optimized
+
+**Strengths:**
+- Excellent balance of minimalism and functionality
+- Strong project showcase templates
+- Multiple dark mode themes to choose from
+- Designed specifically for designers, developers, makers, and solopreneurs
+- Clean code and professional design
+
+**Weaknesses:**
+- Medium price point ($89)
+- May require some customization for specific AI project badges
+
+**Best For:** Developers and solopreneurs wanting a minimal, professional portfolio with excellent dark mode and project showcase capabilities
+
+**Alignment with Requirements:** ⭐⭐⭐⭐⭐ (5/5)
+- Portfolio layouts: Excellent
+- Dark mode: Excellent (8 presets)
+- Tech aesthetic: Excellent (minimal, modern)
+- Customization: Very good
+
+---
+
+#### 2. Fumio (Bright Themes)
+**Price:** $149 ($119 with code FUMIO20)
+**Homepage:** https://brightthemes.com/themes/fumio
+
+**Key Features:**
+- Highly customizable homepage with hero section, projects showcase, services, team profiles, blog
+- **5 project layout options** (asymmetric-grid, grid, asymmetric-list, alternating-list, list)
+- **Dark and light themes** with user-selectable color schemes
+- Custom templates (background image variants, sidebar options, table of contents)
+- Full Ghost editor card support (galleries, buttons, callouts, toggles, audio, video)
+- Built-in search functionality via Ghost Content API
+- Membership support with subscription tiers
+- WCAG accessibility validated
+- 14-day money-back guarantee
+
+**Strengths:**
+- Most customizable option reviewed
+- Extensive project showcase layouts
+- Professional design with modern aesthetics
+- Excellent for showcasing diverse project types
+- Full membership/subscription features
+
+**Weaknesses:**
+- Highest price point ($119-149)
+- May be overwhelming with so many options
+- Requires more configuration time
+
+**Best For:** Professional portfolios requiring maximum flexibility and multiple project presentation formats
+
+**Alignment with Requirements:** ⭐⭐⭐⭐⭐ (5/5)
+- Portfolio layouts: Excellent (5 options)
+- Dark mode: Excellent
+- Tech aesthetic: Very good
+- Customization: Exceptional
+
+---
+
+#### 3. Braun (Source not fully documented)
+**Price:** Premium (exact price not confirmed in research)
+
+**Key Features:**
+- Designed specifically for developers, startups, and tech-focused portfolios
+- Modern, cutting-edge, interactive design
+- Dedicated timeline pages for milestones/project progress
+- "Now" page for highlighting current projects
+- Dynamic visuals and modern aesthetics optimized for showcasing coding projects, apps, tech products
+
+**Strengths:**
+- Explicitly designed for developer portfolios
+- Timeline feature excellent for project progression
+- "Now" page adds personal dynamic touch
+- Interactive design elements
+
+**Weaknesses:**
+- Limited information available
+- Pricing not confirmed
+- Maintenance status unknown
+
+**Best For:** Developers wanting interactive, modern portfolio with strong visual emphasis
+
+**Alignment with Requirements:** ⭐⭐⭐⭐ (4/5)
+- Portfolio layouts: Excellent
+- Dark mode: Not confirmed
+- Tech aesthetic: Excellent (developer-focused)
+- Customization: Unknown
+
+---
+
+#### 4. Lumi & Mason (Ghost Official Marketplace)
+**Price:** Premium ($69-149 USD range)
+**Category:** Portfolio (Official Ghost)
+
+**Key Features:**
+- Official Ghost portfolio themes
+- Professional design standards
+- Full Ghost integration
+- Regular updates from Ghost Foundation
+
+**Strengths:**
+- Official support and updates
+- Quality assurance from Ghost team
+- Reliable compatibility
+
+**Weaknesses:**
+- Limited detailed information available
+- Would require demo exploration
+
+**Best For:** Users wanting official Ghost-supported portfolio themes
+
+**Alignment with Requirements:** ⭐⭐⭐⭐ (4/5) - Pending detailed review
+
+---
+
+### Free Themes
+
+#### 5. Edge (Ghost Official)
+**Price:** Free (MIT License)
+**GitHub:** https://github.com/TryGhost/Edge
+**Category:** Portfolio/Photography (Official)
+
+**Key Features:**
+- Visually aesthetic design for creative professionals
+- Minimal style and presentation
+- Designed to showcase works/portfolio
+- Official Ghost Foundation theme
+- 509 commits, 9 contributors
+- Synced with TryGhost/Themes monorepo
+- MIT licensed
+
+**Strengths:**
+- Free and officially supported
+- Clean, minimal aesthetic
+- Perfect for portfolio presentation
+- Regular updates from Ghost team
+- Easy installation (upload zip to Design settings)
+
+**Weaknesses:**
+- Dark mode not confirmed in documentation
+- Fewer customization options than premium themes
+- Limited page templates
+
+**Best For:** Budget-conscious developers wanting official, minimal portfolio theme
+
+**Alignment with Requirements:** ⭐⭐⭐⭐ (4/5)
+- Portfolio layouts: Very good
+- Dark mode: Unknown (not documented)
+- Tech aesthetic: Excellent (minimal)
+- Customization: Basic
+
+---
+
+#### 6. Liebling (eddiesigner)
+**Price:** Free (MIT License)
+**GitHub:** https://github.com/eddiesigner/liebling
+**Latest Release:** v2.1.7 (April 2024)
+
+**Key Features:**
+- **Dark mode support** included
+- Search capability built-in
+- Multiple authors support
+- Secondary menu
+- Ghost Koenig editor support (bookmark, gallery, button, NFT, audio, video cards)
+- Disqus comments integration
+- Custom settings pages
+- 1.3k GitHub stars
+- 330 commits, 84 releases
+
+**Strengths:**
+- Free with active maintenance
+- Dark mode included
+- Good community support (1.3k stars)
+- Regular updates (latest April 2024)
+- Well-documented
+- Docker development environment available
+
+**Weaknesses:**
+- Primarily designed as blogging platform, not portfolio-specific
+- Lacks dedicated project showcase layouts
+- May require customization for portfolio use
+
+**Best For:** Bloggers wanting free theme with dark mode, can be adapted for portfolio
+
+**Alignment with Requirements:** ⭐⭐⭐ (3/5)
+- Portfolio layouts: Basic (not portfolio-focused)
+- Dark mode: Excellent
+- Tech aesthetic: Good
+- Customization: Moderate
+
+---
+
+#### 7. Alto (Ghost Official)
+**Price:** Free (Official)
+**GitHub:** https://github.com/TryGhost/Alto
+
+**Key Features:**
+- Clean, minimalist design
+- **Light and dark mode** built-in
+- Official Ghost Foundation theme
+- Blog/newsletter focused
+
+**Strengths:**
+- Free and official
+- Built-in dark mode
+- Clean design
+
+**Weaknesses:**
+- Blog-focused, not portfolio-specific
+- Limited project showcase features
+
+**Best For:** Minimal blog/newsletter sites with dark mode preference
+
+**Alignment with Requirements:** ⭐⭐⭐ (3/5)
+- Portfolio layouts: Basic
+- Dark mode: Excellent
+- Tech aesthetic: Good (minimal)
+- Customization: Basic
+
+---
+
+#### 8. Uno Zen (Colorlib)
+**Price:** Free
+**Source:** Colorlib collection
+
+**Key Features:**
+- Beautiful fit for developers
+- Unique sliding navigation design
+- HTML5 and CSS3
+- Portfolio and insights focused
+
+**Strengths:**
+- Free
+- Developer-friendly
+- Unique navigation design
+
+**Weaknesses:**
+- Maintenance status unknown
+- Dark mode not confirmed
+- Limited recent information
+
+**Best For:** Developers wanting unique free portfolio theme
+
+**Alignment with Requirements:** ⭐⭐⭐ (3/5)
+- Portfolio layouts: Good
+- Dark mode: Unknown
+- Tech aesthetic: Very good (developer-focused)
+- Customization: Unknown
+
+---
+
+#### 9. SREDevOps Ghost Theme (GitHub)
+**Price:** Free (Open Source)
+**GitHub:** https://github.com/sredevopsorg/sredevopsorg-ghost-theme
+
+**Key Features:**
+- Ghost v5 theme
+- Tailwind CSS based
+- Sidebar navigation
+- **Dark theme by default**
+- Responsive design
+- Tech/ops focused aesthetic
+
+**Strengths:**
+- Free
+- Dark theme by default
+- Modern tech stack (Tailwind CSS)
+- Tech-focused design
+
+**Weaknesses:**
+- Ghost v5 (may need updates for v6)
+- Limited documentation
+- Portfolio features unclear
+- Maintenance status unknown
+
+**Best For:** Tech professionals wanting dark-first, modern CSS framework
+
+**Alignment with Requirements:** ⭐⭐⭐ (3/5)
+- Portfolio layouts: Unknown
+- Dark mode: Excellent (default)
+- Tech aesthetic: Very good (tech-focused)
+- Customization: Good (Tailwind CSS)
+
+---
+
+#### 10. Simply (GitHub)
+**Price:** Free (Open Source)
+**GitHub:** https://github.com/godofredoninja/simply
+
+**Key Features:**
+- Inspired by Medium design
+- Logo light/dark mode functionality
+- Clean, readable design
+
+**Strengths:**
+- Free
+- Medium-style aesthetic
+- Light/dark logo support
+
+**Weaknesses:**
+- Content-focused, not portfolio-specific
+- Limited project showcase features
+- Maintenance status unknown
+
+**Best For:** Content publishers wanting Medium-style design
+
+**Alignment with Requirements:** ⭐⭐ (2/5)
+- Portfolio layouts: Minimal
+- Dark mode: Limited (logo only)
+- Tech aesthetic: Good (clean)
+- Customization: Unknown
+
+---
+
+## Ghost Official Marketplace Overview
+
+**Marketplace:** https://ghost.org/marketplace/
+
+**Categories Available:**
+- Blog (Taste, Solo, Edition, Alto, Sage, Luno, Spide, Juniper, Compact, Skalven)
+- Newsletter (Journal, Digest, Bulletin, Dawn)
+- News (Source, Headline, Observer)
+- Podcast (Episode, Wave)
+- Magazine (Ruby, Dope, Keel, Gicon, Echo, Haas, Ambilas)
+- **Portfolio (Lumi, Mason)**
+- Photography (Edge)
+- Docs (Ease, TinySupport)
+
+**Pricing Tiers:**
+- Free: 16 themes available
+- Premium: $69-149 USD
+
+**Notable:** Ghost's official marketplace emphasizes variety across publication styles rather than promoting specific bestsellers. The Portfolio category has limited official themes (Lumi, Mason), suggesting opportunity to explore third-party providers.
+
+---
+
+## Comparison Matrix
+
+| Theme | Price | Portfolio Features | Dark Mode | Tech Aesthetic | Maintenance | Ghost 6 Support | Recommendation Level |
+|-------|-------|-------------------|-----------|----------------|-------------|-----------------|---------------------|
+| **Kyoto** | $89 | Excellent | Excellent (8 presets) | Excellent | Active | Yes | ⭐⭐⭐⭐⭐ |
+| **Fumio** | $119 | Exceptional | Excellent | Very Good | Active | Yes | ⭐⭐⭐⭐⭐ |
+| **Braun** | Premium | Excellent | Unknown | Excellent | Unknown | Unknown | ⭐⭐⭐⭐ |
+| **Edge** | Free | Very Good | Unknown | Excellent | Active (Official) | Yes | ⭐⭐⭐⭐ |
+| **Liebling** | Free | Basic | Excellent | Good | Active | Yes (v5 optimized) | ⭐⭐⭐ |
+| **Alto** | Free | Basic | Excellent | Good | Active (Official) | Yes | ⭐⭐⭐ |
+| **Uno Zen** | Free | Good | Unknown | Very Good | Unknown | Unknown | ⭐⭐⭐ |
+| **SREDevOps** | Free | Unknown | Excellent | Very Good | Unknown | Partial (v5) | ⭐⭐⭐ |
+| **Simply** | Free | Minimal | Limited | Good | Unknown | Unknown | ⭐⭐ |
+| **Lumi/Mason** | $69-149 | Good | Unknown | Unknown | Active (Official) | Yes | ⭐⭐⭐⭐ |
+
+---
+
+## Final Recommendations
+
+### Tier 1: Highly Recommended
+
+#### 1. Kyoto - Best Overall Premium Option
+**Price:** $89
+**Why:** Perfect balance of minimalism, portfolio features, dark mode options, and professional design. Specifically designed for developers, designers, and makers. Excellent value at $89.
+
+**Use Case:** Ideal for MJ_Online if budget allows and minimal aesthetic is preferred. 8 dark mode presets provide excellent customization. Strong project showcase templates align with AI implementation portfolio requirements.
+
+---
+
+#### 2. Fumio - Best for Maximum Flexibility
+**Price:** $119 (with discount)
+**Why:** Most customizable option with 5 different project layout types. Exceptional for showcasing diverse project types with different presentation needs. Full membership features if newsletter/subscription model desired.
+
+**Use Case:** Best choice if extensive customization and multiple project presentation formats are priorities. Higher price justified by feature set.
+
+---
+
+#### 3. Edge - Best Free Option
+**Price:** Free
+**Why:** Official Ghost theme with minimal aesthetic perfect for portfolio presentation. Active maintenance guaranteed through Ghost Foundation. Clean, professional design.
+
+**Use Case:** Excellent starting point if budget is constrained or testing Ghost platform. Can upgrade to premium theme later. May need dark mode added via custom CSS.
+
+---
+
+### Tier 2: Good Alternatives
+
+#### 4. Liebling
+**Best For:** Free blog-focused theme with dark mode that can be adapted for portfolio use with customization effort.
+
+#### 5. Lumi or Mason (Official Portfolio Themes)
+**Best For:** Users wanting official Ghost portfolio theme with guaranteed compatibility and support. Requires further demo evaluation.
+
+---
+
+### Tier 3: Consider if Specific Needs Align
+
+- **Braun:** If interactive, developer-specific design is priority (pending pricing confirmation)
+- **Alto:** If minimal blog with dark mode is sufficient
+- **SREDevOps:** If Tailwind CSS and dark-first design are priorities (may need Ghost 6 updates)
+
+---
+
+## Implementation Recommendations for MJ_Online
+
+### Phase 1: Theme Selection Decision
+**Recommended Approach:**
+1. **Test Free Option First:** Start with **Edge** to validate Ghost workflow and basic portfolio structure
+2. **Evaluate Premium Needs:** Determine if project showcase complexity requires Fumio's 5 layouts or Kyoto's templates are sufficient
+3. **Make Purchase Decision:** Upgrade to **Kyoto** (best value) or **Fumio** (maximum flexibility) based on Phase 1 learnings
+
+### Phase 2: Theme Customization Requirements
+Regardless of theme chosen, plan for:
+- Custom CSS for AI project badges/tags
+- Color palette customization (AI-forward aesthetic)
+- Typography configuration (modern sans-serif + monospace for code)
+- Logo/branding integration
+- Navigation structure customization
+- Custom page templates if needed (About, Resume, Contact, Project case studies)
+
+### Phase 3: Dark Mode Implementation
+- **If Kyoto/Fumio:** Configure preferred dark mode preset
+- **If Edge:** Implement custom dark mode CSS or JavaScript toggle
+- **If Other Free Theme:** Evaluate dark mode support and implement if missing
+
+### Additional Considerations
+
+**Ghost Version Compatibility:**
+- Ensure chosen theme supports Ghost 6.x for ActivityPub integration (Kyoto, Fumio, Edge confirmed)
+- Check release notes if using community themes
+
+**Customization Complexity:**
+- Premium themes (Kyoto, Fumio) offer built-in customization interfaces
+- Free themes may require direct template file editing
+- Consider development time when comparing free vs. premium
+
+**Long-term Maintenance:**
+- Official Ghost themes (Edge, Alto, Lumi, Mason) guaranteed updates
+- Premium themes (Kyoto, Fumio) include lifetime updates
+- Community themes (Liebling, SREDevOps) depend on maintainer activity
+
+**Testing Strategy:**
+1. Install theme in Ghost dev environment
+2. Create sample project case study pages
+3. Test responsive design across devices
+4. Verify dark mode functionality
+5. Assess customization difficulty
+6. Evaluate performance (Lighthouse scores)
+
+---
+
+## Additional Resources
+
+### Theme Marketplaces
+- [Ghost Official Marketplace](https://ghost.org/marketplace/)
+- [Bright Themes](https://brightthemes.com/themes)
+- [Themex Studio](https://themex.studio/)
+- [Themes Supply](https://ghost-themes.com/)
+- [Theme My Blog](https://www.thememyblog.com/)
+
+### Free Theme Sources
+- [Ghost GitHub Organization](https://github.com/TryGhost)
+- [GitHub ghost-theme Topic](https://github.com/topics/ghost-theme)
+- [Colorlib Ghost Themes Collection](https://colorlib.com/wp/best-free-ghost-themes/)
+
+### Theme Development Resources
+- [Ghost Theme Documentation](https://ghost.org/docs/themes/)
+- [Ghost Handlebars Guide](https://ghost.org/docs/themes/helpers/)
+- [Ghost Theme Marketplace Guidelines](https://ghost.org/marketplace/)
+
+---
+
+## Conclusion
+
+For MJ_Online's AI implementation portfolio requirements, **Kyoto ($89)** offers the best balance of portfolio features, dark mode support, minimal tech aesthetic, and value. If maximum customization flexibility is required, **Fumio ($119)** provides exceptional project showcase options. For budget-constrained or testing scenarios, **Edge (Free)** provides an excellent official starting point with the option to upgrade later.
+
+All three top recommendations support Ghost 6.x, ensuring ActivityPub federation compatibility as outlined in the project roadmap.
+
+---
+
+**Research Sources:**
+- [Ghost Official Marketplace](https://ghost.org/marketplace/)
+- [Best Ghost Themes for Portfolio Websites](https://www.thememyblog.com/blog/best-ghost-themes-for-portfolio-websites/)
+- [Bright Themes Portfolio Category](https://brightthemes.com/themes/categories/portfolio)
+- [Colorlib Ghost Themes 2026](https://colorlib.com/wp/best-free-ghost-themes/)
+- [GitHub TryGhost/Edge](https://github.com/TryGhost/Edge)
+- [GitHub eddiesigner/liebling](https://github.com/eddiesigner/liebling)
+- [Themex Studio Kyoto](https://themex.studio/kyoto/)
+- [Bright Themes Fumio](https://brightthemes.com/themes/fumio)
+
+**End of Research Document**

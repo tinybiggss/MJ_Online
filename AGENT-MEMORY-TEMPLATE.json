@@ -1,0 +1,204 @@
+{
+  "_README": "This is the standard template for all agent memory files. Copy this structure and customize for each new agent.",
+
+  "agent": {
+    "name": "[Agent Name - e.g., Alice, Ted, Debbie]",
+    "full_name": "[Full Agent Name - e.g., Alice - Web Content Builder]",
+    "role": "[Primary role and expertise]",
+    "agent_type": "[Agent type - e.g., web-content-builder, technical-research, general-purpose]",
+    "expertise_level": "[Experience level - e.g., Expert, 20+ years, Specialist]",
+    "specialization": "[Specific skills or focus areas]",
+    "active_since": "[YYYY-MM-DD when agent first started work]",
+    "agent_definition": "[Path to agent definition file - e.g., /.claude/agents/agent-name.md]",
+    "status": "[Active | Paused | Complete]"
+  },
+
+  "core_responsibilities": [
+    "[Primary responsibility 1]",
+    "[Primary responsibility 2]",
+    "[Primary responsibility 3]"
+  ],
+
+  "current_assignment": {
+    "phase": "[Current phase or project]",
+    "priority": "[HIGH | MEDIUM | LOW]",
+    "started": "[YYYY-MM-DD or null if not started]",
+    "status": "[Not started | In progress | Blocked | Complete]",
+    "objective": "[What this assignment aims to achieve]",
+    "dependencies": "[What must be complete before starting]"
+  },
+
+  "priority_queue": [
+    {
+      "order": 1,
+      "task": "[Task name]",
+      "status": "[Queued | In Progress | Complete | Blocked]",
+      "description": "[What needs to be done]",
+      "dependencies": "[Prerequisites or blockers]",
+      "deliverables": "[Expected outputs]",
+      "estimated_time": "[Time estimate]",
+      "priority": "[HIGH | MEDIUM | LOW]"
+    }
+  ],
+
+  "completed_work": [
+    {
+      "task": "[Task name]",
+      "completed_date": "[YYYY-MM-DD]",
+      "time_spent": "[Hours or estimate]",
+      "deliverables": "[What was delivered]",
+      "outcome": "[Success | Partial | Failed]",
+      "notes": "[Key details, challenges, learnings]",
+      "rag_updates": "[RAG entries added, if applicable]"
+    }
+  ],
+
+  "work_in_progress": [
+    {
+      "task": "[Task name]",
+      "started": "[YYYY-MM-DD]",
+      "status": "[Percentage complete or milestone]",
+      "blockers": "[Any current blockers]",
+      "next_steps": "[What comes next]"
+    }
+  ],
+
+  "key_decisions": [
+    {
+      "decision_id": "[DEC-XXX or unique ID]",
+      "date": "[YYYY-MM-DD]",
+      "decision": "[What was decided]",
+      "reasoning": "[Why this decision was made]",
+      "alternatives_considered": ["[Alternative 1]", "[Alternative 2]"],
+      "outcome": "[Result of the decision]",
+      "impact": "[How this affected the project]"
+    }
+  ],
+
+  "resources_used": {
+    "rag_knowledge_base": {
+      "location": "/Cowork/content/rag/knowledge.jsonl",
+      "total_entries_referenced": 0,
+      "entries_added": 0,
+      "verification_log": []
+    },
+    "assets": {
+      "images": {
+        "location": "[Asset directory path]",
+        "used": ["[file1.jpg]", "[file2.png]"]
+      },
+      "documents": {
+        "location": "[Document directory path]",
+        "referenced": ["[doc1.md]", "[doc2.pdf]"]
+      }
+    },
+    "external_resources": {
+      "research_sites": ["[URL 1]", "[URL 2]"],
+      "documentation": ["[Resource 1]", "[Resource 2]"]
+    }
+  },
+
+  "challenges_encountered": [
+    {
+      "challenge_id": "[CHAL-XXX]",
+      "date": "[YYYY-MM-DD]",
+      "challenge": "[Description of the problem]",
+      "impact": "[How it affected work]",
+      "solution": "[How it was resolved]",
+      "lessons_learned": "[What was learned]",
+      "preventive_measures": "[How to avoid in future]"
+    }
+  ],
+
+  "lessons_learned": [
+    {
+      "lesson_id": "[LESSON-XXX]",
+      "date": "[YYYY-MM-DD]",
+      "category": "[Technical | Process | Communication | Design | etc.]",
+      "lesson": "[What was learned]",
+      "context": "[Situation that prompted the learning]",
+      "application": "[How to apply this going forward]"
+    }
+  ],
+
+  "research_conducted": [
+    {
+      "research_id": "[RES-XXX]",
+      "date": "[YYYY-MM-DD]",
+      "topic": "[What was researched]",
+      "sources": ["[Source 1]", "[Source 2]"],
+      "findings": "[Key findings or insights]",
+      "applied_to": "[How research was applied to the work]"
+    }
+  ],
+
+  "timeline": {
+    "created": "[YYYY-MM-DD]",
+    "launched": "[YYYY-MM-DD or null]",
+    "first_task_completed": "[YYYY-MM-DD or null]",
+    "major_milestones": [
+      {
+        "milestone": "[Milestone name]",
+        "date": "[YYYY-MM-DD]",
+        "significance": "[Why this matters]"
+      }
+    ],
+    "total_hours_worked": 0,
+    "tasks_completed": 0,
+    "tasks_total": 0
+  },
+
+  "quality_metrics": {
+    "accuracy": {
+      "target": "[Quality target]",
+      "current": "[Current status]",
+      "verification_method": "[How accuracy is verified]"
+    },
+    "completeness": {
+      "target": "[Completeness target]",
+      "current": "[Current status]"
+    },
+    "timeliness": {
+      "target": "[Time targets]",
+      "current": "[Current status]"
+    }
+  },
+
+  "collaboration": {
+    "works_with": [
+      {
+        "agent": "[Other agent name]",
+        "relationship": "[How they collaborate]",
+        "handoffs": "[What gets handed off between agents]"
+      }
+    ],
+    "dependencies_on_others": ["[What this agent needs from others]"],
+    "provides_to_others": ["[What this agent provides to others]"]
+  },
+
+  "communication_log": [
+    {
+      "date": "[YYYY-MM-DD HH:MM]",
+      "direction": "[To Mike | From Mike | To Agent | From Agent]",
+      "message_type": "[Status Update | Question | Decision | Clarification]",
+      "summary": "[Brief summary of communication]",
+      "action_items": ["[Action 1]", "[Action 2]"]
+    }
+  ],
+
+  "next_actions": [
+    "[Next immediate action]",
+    "[Subsequent action]",
+    "[Future consideration]"
+  ],
+
+  "metadata": {
+    "file_version": "1.0",
+    "template_version": "1.0",
+    "last_updated": "[YYYY-MM-DD]",
+    "updated_by": "[Agent or person who updated]",
+    "update_frequency": "[How often this should be updated]",
+    "purpose": "[Why this memory file exists]",
+    "retention": "[How long to keep this file]"
+  }
+}

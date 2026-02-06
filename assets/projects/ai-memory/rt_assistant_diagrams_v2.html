@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT-Assistant System Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+        .nav button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2d3748;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+        .nav button:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
+        }
+        .nav button.active {
+            background: #00d9ff;
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+        .diagram-container {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 0 auto 20px;
+            max-width: 1200px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            display: none;
+        }
+        .diagram-container.active {
+            display: block;
+        }
+        .diagram-title {
+            color: #1a1a2e;
+            margin: 0 0 5px 0;
+            font-size: 1.4rem;
+        }
+        .diagram-desc {
+            color: #666;
+            margin: 0 0 20px 0;
+            font-size: 0.95rem;
+        }
+        .mermaid-wrapper {
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        .mermaid-wrapper svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .code-section {
+            margin-top: 20px;
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #2d3748;
+        }
+        .code-header span {
+            color: #00d9ff;
+            font-size: 0.85rem;
+        }
+        .copy-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            background: #00d9ff;
+            color: #1a1a2e;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .copy-btn:hover {
+            background: #00b8d9;
+        }
+        pre {
+            margin: 0;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        code {
+            color: #a0aec0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        .footer a {
+            color: #00d9ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>🤖 RT-Assistant System Diagrams</h1>
+    <p class="subtitle">AI Memory System Architecture & Workflows</p>
+    
+    <div class="nav">
+        <button onclick="showDiagram(0)" class="active">1. Architecture</button>
+        <button onclick="showDiagram(1)">2. Session Flow</button>
+        <button onclick="showDiagram(2)">3. Memory Lifecycle</button>
+        <button onclick="showDiagram(3)">4. Cross-AI Sync</button>
+        <button onclick="showDiagram(4)">5. File Structure</button>
+        <button onclick="showDiagram(5)">6. Validation</button>
+        <button onclick="showDiagram(6)">7. Naming Rules</button>
+        <button onclick="showDiagram(7)">8. Sprint Integration</button>
+    </div>
+
+    <!-- Diagram 1: System Architecture -->
+    <div class="diagram-container active" id="diagram-0">
+        <h2 class="diagram-title">1. System Architecture Overview</h2>
+        <p class="diagram-desc">High-level view of all RT-Assistant components and their relationships</p>
+        <div class="mermaid-wrapper" id="mermaid-0"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(0)">📋 Copy</button>
+            </div>
+            <pre><code id="code-0"></code></pre>
+        </div>
+    </div>
+
+    <!-- Diagram 2: Session Workflow -->
+    <div class="diagram-container" id="diagram-1">
+        <h2 class="diagram-title">2. Session Workflow</h2>
+        <p class="diagram-desc">How a typical AI session flows from start to finish</p>
+        <div class="mermaid-wrapper" id="mermaid-1"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(1)">📋 Copy</button>
+            </div>
+            <pre><code id="code-1"></code></pre>
+        </div>
+    </div>
+
+    <!-- Diagram 3: Memory Entry Lifecycle -->
+    <div class="diagram-container" id="diagram-2">
+        <h2 class="diagram-title">3. Memory Entry Lifecycle</h2>
+        <p class="diagram-desc">How memory entries are created, stored, and retrieved</p>
+        <div class="mermaid-wrapper" id="mermaid-2"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(2)">📋 Copy</button>
+            </div>
+            <pre><code id="code-2"></code></pre>
+        </div>
+    </div>
+
+    <!-- Diagram 4: Cross-AI Coordination -->
+    <div class="diagram-container" id="diagram-3">
+        <h2 class="diagram-title">4. Cross-AI Coordination Flow</h2>
+        <p class="diagram-desc">Sequence diagram showing multi-AI interactions</p>
+        <div class="mermaid-wrapper" id="mermaid-3"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(3)">📋 Copy</button>
+            </div>
+            <pre><code id="code-3"></code></pre>
+        </div>
+    </div>
+
+    <!-- Diagram 5: File Structure -->
+    <div class="diagram-container" id="diagram-4">
+        <h2 class="diagram-title">5. Knowledge Base File Structure</h2>
+        <p class="diagram-desc">Organization of the knowledge base directory</p>
+        <div class="mermaid-wrapper" id="mermaid-4"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(4)">📋 Copy</button>
+            </div>
+            <pre><code id="code-4"></code></pre>
+        </div>
+    </div>
+
+    <!-- Diagram 6: Validation -->
+    <div class="diagram-container" id="diagram-5">
+        <h2 class="diagram-title">6. Memory Entry Validation</h2>
+        <p class="diagram-desc">Decision flowchart for validating memory entries</p>
+        <div class="mermaid-wrapper" id="mermaid-5"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(5)">📋 Copy</button>
+            </div>
+            <pre><code id="code-5"></code></pre>
+        </div>
+    </div>
+
+    <!-- Diagram 7: Naming Rules -->
+    <div class="diagram-container" id="diagram-6">
+        <h2 class="diagram-title">7. Naming Convention Decision Tree</h2>
+        <p class="diagram-desc">Quick reference for when to use each naming style</p>
+        <div class="mermaid-wrapper" id="mermaid-6"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(6)">📋 Copy</button>
+            </div>
+            <pre><code id="code-6"></code></pre>
+        </div>
+    </div>
+
+    <!-- Diagram 8: Sprint Integration -->
+    <div class="diagram-container" id="diagram-7">
+        <h2 class="diagram-title">8. Sprint/Task Integration</h2>
+        <p class="diagram-desc">How Notion syncs with RT-Assistant</p>
+        <div class="mermaid-wrapper" id="mermaid-7"></div>
+        <div class="code-section">
+            <div class="code-header">
+                <span>Mermaid Code</span>
+                <button class="copy-btn" onclick="copyCode(7)">📋 Copy</button>
+            </div>
+            <pre><code id="code-7"></code></pre>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>RT-Assistant Knowledge Management System | Generated 2025-02-03</p>
+        <p>Copy any diagram code and paste into <a href="https://mermaid.live" target="_blank">mermaid.live</a> to edit</p>
+    </div>
+
+    <script>
+        // Define all diagram codes
+        const diagrams = [
+            // 0: System Architecture
+`flowchart TB
+    subgraph User["👤 Mike"]
+        input[User Input]
+        review[Review Output]
+    end
+
+    subgraph Online["☁️ Online AI Layer"]
+        claude[Claude<br/>Strategy, Docs, Research]
+        chatgpt[ChatGPT<br/>Analysis, Validation]
+    end
+
+    subgraph Offline["🏠 Local AI Layer - Mac Mini"]
+        openwebui[OpenWebUI<br/>RAG, Private Processing]
+        ollama[Ollama<br/>Qwen2.5:14B]
+        chromadb[(ChromaDB<br/>Vectors)]
+    end
+
+    subgraph Storage["💾 Knowledge Base"]
+        memory[(memory.jsonl)]
+        registry[(project_registry.json)]
+        projmem[Project Memory Files]
+    end
+
+    subgraph Projects["📁 Projects"]
+        p1[OfflineAI]
+        p2[ResilientTomorrow]
+        p3[NeighborhoodShare]
+        p4[MikeCareer]
+    end
+
+    input --> claude & chatgpt & openwebui
+    claude & chatgpt <--> memory
+    openwebui <--> ollama <--> chromadb
+    chromadb <--> memory
+    memory --> projmem
+    registry --> Projects
+    claude & chatgpt & openwebui --> review`,
+
+            // 1: Session Workflow
+`flowchart TD
+    subgraph Start["🚀 Session Start"]
+        A[New Conversation] --> B[Read memory.jsonl]
+        B --> C[Check current_sprint.md]
+        C --> D[Load Project Memory]
+    end
+
+    subgraph Work["⚙️ Session Work"]
+        D --> E[Execute Tasks]
+        E --> F{Decision Made?}
+        F -->|Yes| G[Create Memory Entry]
+        F -->|No| H[Continue Work]
+        G --> H
+        H --> I{More Tasks?}
+        I -->|Yes| E
+        I -->|No| J[Wrap-up]
+    end
+
+    subgraph End["✅ Session End"]
+        J --> K[Document Decisions]
+        K --> L[Update Project Memory]
+        L --> M[Create Handoff Notes]
+        M --> N[Append to memory.jsonl]
+        N --> O[Session Complete]
+    end
+
+    style A fill:#e1f5fe
+    style O fill:#c8e6c9
+    style G fill:#fff9c4`,
+
+            // 2: Memory Lifecycle
+`flowchart LR
+    subgraph Creation["📝 Creation"]
+        A[Decision/Insight] --> B[Format Entry]
+        B --> C{Valid?}
+        C -->|No| D[Fix Format]
+        D --> C
+        C -->|Yes| E[Add Timestamp]
+    end
+
+    subgraph Storage["💾 Storage"]
+        E --> F[Append to<br/>memory.jsonl]
+        F --> G[Update Project<br/>Memory]
+        G --> H[Sync to<br/>ChromaDB]
+    end
+
+    subgraph Retrieval["🔍 Retrieval"]
+        H --> I[Index Updated]
+        I --> J[RAG Search<br/>Available]
+        J --> K[Future Sessions<br/>Load Context]
+    end
+
+    style A fill:#e3f2fd
+    style F fill:#fff8e1
+    style K fill:#e8f5e9`,
+
+            // 3: Cross-AI Coordination
+`sequenceDiagram
+    participant M as Mike
+    participant C as Claude
+    participant G as ChatGPT
+    participant O as OpenWebUI
+    participant KB as Knowledge Base
+
+    M->>C: Start session
+    C->>KB: Read memory.jsonl
+    KB-->>C: Return context
+    
+    Note over C: Primary work
+    C->>KB: Create entries
+    
+    M->>G: Request analysis
+    G->>KB: Read memory.jsonl
+    KB-->>G: Return context
+    Note over G: Cross-validate
+    G->>KB: Add entries
+    
+    M->>O: Private processing
+    O->>KB: Query ChromaDB
+    KB-->>O: RAG results
+    Note over O: Local inference
+    O->>KB: Update indexes`,
+
+            // 4: File Structure
+`flowchart TB
+    subgraph Root["/rt-assistant/knowledge/"]
+        
+        subgraph System["_system/"]
+            s1[NAMING_CONVENTIONS.md]
+            s2[project_registry.json]
+            s3[master_index.json]
+            s4[SETUP_GUIDE.md]
+        end
+
+        subgraph Memory["memory/"]
+            m1[(memory.jsonl)]
+            m2[memory.jsonl.bak]
+        end
+
+        subgraph Memories["_memories/projects/"]
+            mem1[OfflineAI.md]
+            mem2[NeighborhoodShare.md]
+            mem3[MikeCareer.md]
+        end
+
+        subgraph Projects["projects/"]
+            p1[OfflineAI/]
+            p2[NeighborhoodShare/]
+            p3[MikeCareer/]
+        end
+
+        subgraph Articles["articles/"]
+            a1[Self-Organization.md]
+            a2[Community_Defense.md]
+        end
+
+        subgraph Backlogs["backlogs/"]
+            b1[current_sprint.md]
+            b2[master_backlog.md]
+        end
+    end
+
+    Memory -.-> Memories
+    System -.-> Projects
+
+    style m1 fill:#fff9c4
+    style s2 fill:#e3f2fd`,
+
+            // 5: Validation
+`flowchart TD
+    A[New Entry] --> B{ID Format OK?<br/>mem-YYYY-MM-DD-###}
+    B -->|Yes| C{Timestamp OK?<br/>ISO 8601 Pacific}
+    B -->|No| X[❌ Reject]
+    
+    C -->|Yes| D{Projects OK?<br/>PascalCase Array}
+    C -->|No| X
+    
+    D -->|Yes| E{Tags OK?<br/>snake_case Array}
+    D -->|No| X
+    
+    E -->|Yes| F{Required Fields?}
+    E -->|No| X
+    
+    F -->|Yes| G{Type Valid?}
+    F -->|No| X
+    
+    G -->|Yes| H[✅ Valid]
+    G -->|No| X
+    
+    H --> I[Append to memory.jsonl]
+    X --> J[Return Error]
+
+    style H fill:#c8e6c9
+    style X fill:#ffcdd2`,
+
+            // 6: Naming Rules
+`flowchart TD
+    A[Need to Name?] --> B{What Type?}
+    
+    B -->|Project| C{Where Used?}
+    C -->|projects array| D[PascalCase<br/>OfflineAI]
+    C -->|tags array| E[snake_case<br/>offline_ai]
+    
+    B -->|File| F{Has Date?}
+    F -->|Yes| G[2025-01-17_notes.md]
+    F -->|No| H[meeting_notes.md]
+    
+    B -->|Folder| I{Project Folder?}
+    I -->|Yes| J[/NeighborhoodShare/]
+    I -->|No| K[/_system/]
+    
+    B -->|Collection| L[rt_articles]
+    
+    B -->|Entry Type| M[lowercase<br/>decision, milestone]
+
+    style D fill:#e3f2fd
+    style E fill:#fff9c4
+    style G fill:#e8f5e9
+    style H fill:#e8f5e9`,
+
+            // 7: Sprint Integration
+`flowchart TB
+    subgraph Notion["📋 Notion"]
+        sprint[Sprint Database]
+        tasks[Task Database]
+    end
+
+    subgraph RT["🤖 RT-Assistant"]
+        backlog[current_sprint.md]
+        memory[(memory.jsonl)]
+    end
+
+    subgraph AI["AI Systems"]
+        claude[Claude]
+        openwebui[OpenWebUI]
+    end
+
+    sprint -->|Manual Sync| backlog
+    tasks -->|Manual Sync| backlog
+    
+    backlog --> claude & openwebui
+    
+    claude & openwebui -->|Create Entry| memory
+    
+    memory -->|Decision Log| sprint
+
+    style sprint fill:#f3e5f5
+    style memory fill:#fff9c4`
+        ];
+
+        // Initialize mermaid
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            sequence: {
+                useMaxWidth: true
+            },
+            securityLevel: 'loose'
+        });
+
+        // Render all diagrams on page load
+        async function renderAllDiagrams() {
+            for (let i = 0; i < diagrams.length; i++) {
+                const container = document.getElementById('mermaid-' + i);
+                const codeElement = document.getElementById('code-' + i);
+                
+                // Set the code display
+                codeElement.textContent = diagrams[i];
+                
+                try {
+                    // Render the diagram
+                    const { svg } = await mermaid.render('diagram-svg-' + i, diagrams[i]);
+                    container.innerHTML = svg;
+                } catch (error) {
+                    console.error('Error rendering diagram ' + i, error);
+                    container.innerHTML = '<p style="color: red;">Error rendering diagram. Check console.</p>';
+                }
+            }
+        }
+
+        // Show selected diagram
+        function showDiagram(index) {
+            // Hide all diagrams
+            for (let i = 0; i < 8; i++) {
+                document.getElementById('diagram-' + i).classList.remove('active');
+            }
+            // Show selected diagram
+            document.getElementById('diagram-' + index).classList.add('active');
+            
+            // Update nav buttons
+            const buttons = document.querySelectorAll('.nav button');
+            buttons.forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+        }
+
+        // Copy code to clipboard
+        function copyCode(index) {
+            const code = diagrams[index];
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Render all diagrams when page loads
+        document.addEventListener('DOMContentLoaded', renderAllDiagrams);
+    </script>
+</body>
+</html>

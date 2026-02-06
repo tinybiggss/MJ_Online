@@ -1,0 +1,185 @@
+# Phase 2.2 Implementation Checklist
+
+**Task:** Kyoto Theme Visual Design Customization
+**Estimated Time:** 15-20 minutes
+**Guide:** See `/plans/kyoto-theme-customization-guide.md` for detailed steps
+
+---
+
+## Quick Checklist
+
+### Pre-Implementation
+- [ ] Ghost Pro admin open in browser
+- [ ] Kyoto theme installed and activated
+- [ ] Ready to configure design settings
+
+### Core Customization Tasks
+
+#### 1. Dark Mode Configuration
+- [ ] Navigate to: Settings → Design → Kyoto Theme Settings
+- [ ] Select dark mode preset: **Onyx**
+- [ ] Preview dark mode appearance
+- [ ] Save changes
+
+#### 2. Accent Color
+- [ ] Navigate to: Settings → Design → Branding
+- [ ] Set accent color: **#4F46E5** (Indigo)
+- [ ] Verify color appears on CTAs and links
+- [ ] Save changes
+
+#### 3. Typography
+- [ ] Navigate to: Settings → Design → Typography (if available)
+- [ ] Decision: **Keep Kyoto defaults** (already optimized)
+- [ ] If customizing: Select professional sans-serif + monospace
+- [ ] Save changes
+
+#### 4. Homepage Layout
+- [ ] Navigate to: Settings → Design → Homepage
+- [ ] Configure hero section:
+  - [ ] Title: "AI Implementation Expert and LLM Integration Specialist"
+  - [ ] Subtitle: "Building intelligent systems that solve real problems"
+  - [ ] CTA: "View Projects"
+- [ ] Configure featured projects section (grid/cards, 3-4 projects)
+- [ ] Configure recent writing section (list, 3 posts)
+- [ ] Save changes
+
+#### 5. Navigation Menus
+- [ ] Primary navigation:
+  - [ ] Home (/)
+  - [ ] Projects (/tag/projects/)
+  - [ ] Writing (/tag/writing/)
+  - [ ] About (/about/)
+  - [ ] Resume (/resume/)
+- [ ] Secondary navigation (footer):
+  - [ ] Contact (/contact/)
+  - [ ] RSS (/rss/)
+- [ ] Save navigation changes
+
+#### 6. Logo/Branding
+- [ ] Navigate to: Settings → Design → Branding
+- [ ] Option selected: **Text-based "Michael Jones"**
+- [ ] Site title: "Michael Jones"
+- [ ] Leave logo image empty (for now)
+- [ ] Save changes
+
+#### 7. Social Links
+- [ ] Navigate to: Settings → Design → Social accounts
+- [ ] Add GitHub URL
+- [ ] Add LinkedIn URL
+- [ ] Add email: hello@mikejones.online
+- [ ] Save social links
+
+### Verification Tasks
+
+#### 8. Preview Homepage
+- [ ] Click "Preview" in Ghost admin
+- [ ] Verify dark mode (Onyx) looks professional
+- [ ] Verify accent color (#4F46E5) on buttons/links
+- [ ] Check hero section rendering
+- [ ] Check featured projects section
+- [ ] Check recent writing section
+- [ ] Verify navigation menu works
+
+#### 9. Preview Post/Page
+- [ ] Open existing page or create test post
+- [ ] Check typography readability
+- [ ] Verify accent color on links
+- [ ] Test image display on dark background
+- [ ] Check code blocks (if applicable)
+
+#### 10. Mobile Preview
+- [ ] Use browser dev tools → Device Mode
+- [ ] Check responsive homepage
+- [ ] Verify navigation menu (hamburger)
+- [ ] Test button/link touch targets
+- [ ] Check dark mode on mobile
+
+#### 11. Cross-Browser Quick Check (Optional)
+- [ ] Chrome/Edge
+- [ ] Firefox
+- [ ] Safari (if on macOS)
+
+### Final Tasks
+
+#### 12. Save All Changes
+- [ ] Final save in Settings → Design
+- [ ] Wait for "Saved" confirmation
+- [ ] Clear browser cache if needed
+
+#### 13. Verify Live Site
+- [ ] Visit: https://mikejones.online
+- [ ] Confirm changes are live
+- [ ] Test navigation
+- [ ] Check dark mode rendering
+
+#### 14. Documentation
+- [ ] Take screenshots of customized design
+- [ ] Save to: `/screenshots/kyoto-theme-customization/`
+- [ ] Document configuration in summary below
+
+---
+
+## Configuration Summary
+
+**Fill this out after completion:**
+
+```
+Theme: Kyoto
+Dark Mode: Onyx ☐
+Accent Color: #4F46E5 ☐
+Typography: Defaults ☐
+Homepage Layout: Portfolio ☐
+Logo: Text-based ☐
+Navigation: Configured ☐
+Social Links: Added ☐
+
+Completion Date: ___________
+Total Time: ___________
+Issues: ___________
+Status: ☐ Success ☐ Partial ☐ Needs Revision
+```
+
+---
+
+## Quick Reference: Design Decisions
+
+| Setting | Value | Rationale |
+|---------|-------|-----------|
+| **Dark Mode** | Onyx preset | Professional tech aesthetic, excellent readability |
+| **Accent Color** | #4F46E5 (Indigo) | Modern AI implementation standard, WCAG compliant |
+| **Typography** | Kyoto defaults | Already optimized for dev portfolios |
+| **Homepage** | Portfolio focus | Hero + projects + writing sections |
+| **Logo** | Text: "Michael Jones" | Clean, professional, no custom logo needed yet |
+| **Navigation** | 5 primary + 2 secondary | Balanced, comprehensive coverage |
+
+---
+
+## If You Encounter Issues
+
+**Common Problems:**
+
+1. **Theme not activating:** Re-upload Kyoto zip file
+2. **Dark mode not showing:** Clear cache, hard reload (Cmd+Shift+R)
+3. **Accent color not visible:** Verify hex format (#4F46E5)
+4. **Homepage layout unchanged:** Check Kyoto homepage settings
+5. **Mobile nav broken:** Reduce primary nav items if too long
+
+**Need Help?**
+- See detailed troubleshooting: `/plans/kyoto-theme-customization-guide.md` (Part 10)
+- Kyoto support: contact@themex.studio
+- Ghost support: https://ghost.org/help/
+
+---
+
+## Next Steps After Completion
+
+1. ✅ Phase 2.2 Complete → Move to Phase 2.3 (Content Publishing)
+2. Import About page content to Ghost
+3. Import Resume content to Ghost
+4. Create first project case study
+5. Configure ActivityPub integration
+
+---
+
+**Status:** Ready for execution
+**Last Updated:** 2026-01-28

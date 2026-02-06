@@ -1,0 +1,58 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mike Jones",
+  "jobTitle": "Program Leader & AI Infrastructure Builder",
+  "description": "Program leader, systems thinker, and AI infrastructure builder with 29 years of experience in gaming, entertainment, and media.",
+  "url": "https://mikejones.online",
+  "image": "https://mikejones.online/content/images/mike-jones-headshot.jpg",
+  "knowsAbout": [
+    "Program Management",
+    "Project Management",
+    "AI Infrastructure",
+    "LLM Integration",
+    "Process Design",
+    "Fractional PMO",
+    "Gaming Industry",
+    "Entertainment Industry",
+    "Systems Thinking",
+    "Process Optimization"
+  ],
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "University of Washington"
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Jones Collaboration Company, LLC",
+    "url": "https://mikejones.online",
+    "department": {
+      "@type": "Organization",
+      "name": "Velocity Partners",
+      "description": "Fractional PMO and AI implementation for gaming, entertainment, and media companies"
+    }
+  },
+  "sameAs": [
+    "https://resilienttomorrow.substack.com"
+  ],
+  "award": [
+    "Xbox SDK Patent Holder (VINCE Instrumentation Tool)"
+  ],
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "Patent",
+    "name": "Xbox SDK Instrumentation Method",
+    "description": "Patent for game instrumentation and player behavior data visualization"
+  },
+  "knowsLanguage": [
+    "English"
+  ],
+  "email": "hello@mikejones.online",
+  "memberOf": [
+    {
+      "@type": "Organization",
+      "name": "Xbox Launch Team",
+      "description": "Microsoft Xbox and Xbox 360 launch teams, 6 AAA titles"
+    }
+  ]
+}

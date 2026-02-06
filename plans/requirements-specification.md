@@ -14,10 +14,10 @@
 MJ_Online is a personal website and career portfolio for Mike Jones that serves as a centralized hub for professional accomplishments, project showcases, and content syndication. The site will enable visitors to explore Mike's career journey while providing subscription capabilities through ActivityPub federation, allowing followers from the Fediverse (Mastodon, etc.) to receive updates.
 
 ### 1.2 Primary Goals
-1. **Career Portfolio** (Primary): Demonstrate professional skills, accomplishments, and projects to potential employers/clients
+1. **Career Portfolio** (Primary): Demonstrate professional skills, accomplishments, and projects to potential employers/clients, with particular emphasis on AI implementation and LLM integration expertise and practical AI implementation experience
 2. **Content Aggregation**: Centralize feeds from multiple SubStack publications
 3. **Social Federation** (Secondary): Enable audience building through ActivityPub integration
-4. **Skills Demonstration**: Showcase web development and technical capabilities through the website itself
+4. **Skills Demonstration**: Showcase web development, technical capabilities, and AI expertise through the website itself and featured projects
 
 ### 1.3 Success Criteria
 - Site launches within 1-2 weeks
@@ -63,11 +63,12 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 - **CMS Platform**: Ghost CMS (self-hosted)
 - **Editor**: Native Ghost editor for creating/editing content
 - **Content Types**:
-  - Blog posts/articles
-  - Project case studies
+  - **Activity Feed** posts (short updates, milestones, personal updates)
+  - Project case studies (in-depth, polished writeups)
   - Static pages (About, Resume, Contact)
 - **Draft/Publish workflow**: Standard Ghost publishing workflow
 - **Media Management**: Image uploads, optimization, galleries for project showcases
+- **Mobile Publishing**: Ghost mobile app for on-the-go updates to Activity Feed
 
 #### 3.1.2 SubStack Integration
 **Requirement**: Display content from two SubStack publications
@@ -88,44 +89,90 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 - RSS feed parsing (Python script or Ghost integration)
 - Cached feed content to avoid rate limiting
 
+#### 3.1.3 Activity Feed (Post-Launch Priority)
+**Purpose**: Replace traditional social media (Facebook, Instagram, TikTok) with owned feed that federates to where people already are.
+
+**Content Types**:
+- Short updates about current work
+- Project milestones and accomplishments
+- Personal life updates
+- Links to things built/published with context
+- Photos and media (similar to Instagram/TikTok posts)
+
+**Topic-Based Filtering**:
+- Personal life updates
+- Resilient Tomorrow content
+- Velocity Partners / Operational Intelligence
+- General tech/AI work
+- Users can subscribe to specific topics of interest
+
+**Federation & Distribution**:
+- ActivityPub integration (Fediverse/Mastodon) - built into Ghost
+- Appears in followers' timelines automatically
+- Future: Cross-posting to other platforms if needed
+
+**Content Creation**:
+- Web interface for longer updates
+- Ghost mobile app for quick posts on-the-go
+- Low-friction posting experience
+
+**Distinction from Case Studies**:
+- Activity Feed: Short, informal, frequent updates
+- Case Studies: In-depth, polished, comprehensive project writeups
+- Case study announcements can appear in Activity Feed
+
+**Implementation Note**: This is a **post-launch feature**. Initial launch focuses on portfolio content (case studies, About, Resume). Activity Feed can be added after core site is established.
+
 ### 3.2 Portfolio & Project Showcase
 
 #### 3.2.1 Project Case Studies
 **Format**: In-depth case study pages for each major project
 
 **Required Projects to Showcase**:
-1. Resilient Tomorrow (SubStack publication and associated work)
-2. NeighborhoodShare
-3. Home Management System (family project)
-4. AI Memory System (personal AI workflow)
-5. Local LLM Setup (self-hosted AI infrastructure)
+1. **AI Memory System** (personal AI workflow) - **PRIORITY: Demonstrates AI implementation and LLM integration skills**
+2. **Local LLM Setup** (self-hosted AI infrastructure) - **PRIORITY: Demonstrates AI infrastructure expertise**
+3. Resilient Tomorrow (SubStack publication and associated work - may include AI applications)
+4. NeighborhoodShare
+5. Home Management System (family project - highlight any AI integrations)
 6. AirPusher/AirShip involvement
 7. Burning Man projects/involvement
+
+**Note**: AI-related projects should be prominently featured and given priority treatment to showcase AI implementation and LLM integration expertise to potential employers.
 
 **Case Study Template Structure**:
 - Project title and summary
 - **Problem**: Challenge or need addressed
 - **Approach**: Strategy and methodology
 - **Solution**: Implementation details, technologies used
+- **AI & LLM Integration Components** (where applicable): Models used, training approaches, AI tooling, prompt engineering, LLM integration
 - **Results**: Outcomes, learnings, impact
 - **Visuals**: Screenshots, demos, diagrams
 - **Technical Details**: Architecture notes, code samples (where appropriate)
 - **Links**: Live demos, repositories, related content
 
+**For AI Projects**: Emphasize practical AI implementation, model selection rationale, challenges overcome, and measurable outcomes to demonstrate hands-on AI expertise.
+
 #### 3.2.2 Resume/CV Section
 - Dedicated page at `/resume` or `/cv`
-- Professional career history
-- Skills and technologies
-- Education and certifications
+- Professional career history with AI implementation and LLM integration experience highlighted
+- **Skills and technologies** with prominent AI & LLM Integration section:
+  - AI and LLM frameworks and tools (e.g., LangChain, OpenAI API, local LLM deployment)
+  - Prompt engineering and LLM integration
+  - AI workflow automation
+  - Self-hosted AI infrastructure
+  - Practical AI application development
+- Education and certifications (including AI-related training)
 - Downloadable PDF version
 - Structured data (Schema.org) for search engines
+- **Visual emphasis** on AI capabilities to ensure visibility to recruiters and hiring managers
 
 #### 3.2.3 About Page
 - Personal background and story
-- Professional journey overview
-- Current focus areas and interests
+- Professional journey overview with emphasis on transition into AI implementation and context engineering work
+- **Current focus areas and interests**: Highlight AI implementation exploration, practical AI implementations, LLM workflows, and self-hosted AI infrastructure as primary professional focus
 - Photo/headshot
 - Links to social profiles and SubStacks
+- **Clear statement** about AI expertise and hands-on experience for potential employers
 
 ### 3.3 ActivityPub Federation
 
@@ -138,8 +185,9 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
    - Users can follow `@mike@MikeJones.online` from Mastodon, Pixelfed, etc.
 
 2. **Auto-Publishing**:
-   - New blog posts automatically appear in followers' Fediverse timelines
+   - New posts (activity feed updates, case studies) automatically appear in followers' Fediverse timelines
    - Control over what gets published (all posts vs. tagged posts)
+   - Topic-based filtering for selective content federation
 
 3. **Engagement Display**:
    - Show Fediverse likes, boosts, and replies on post pages
@@ -155,7 +203,8 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 
 ### 3.4 User Interaction
 
-#### 3.4.1 Contact Form
+#### 3.4.1 Contact & Scheduling
+**Contact Form**:
 - Dedicated contact page at `/contact`
 - Form fields:
   - Name (required)
@@ -166,6 +215,12 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 - Email delivery to Mike's email address
 - Success/error messaging
 - Privacy notice
+
+**Meeting Scheduling**:
+- Integration with Cal.com for meeting requests
+- Link to schedule meetings/consultations
+- Display on Contact page and potentially in hero/CTA sections
+- Clear availability and meeting type options
 
 #### 3.4.2 Navigation
 - Clear, persistent navigation menu
@@ -181,16 +236,34 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 
 ### 3.5 Search & Discovery
 
-#### 3.5.1 SEO Requirements
+#### 3.5.1 SEO & AEO Requirements
+
+**Traditional SEO (Search Engine Optimization)**:
 - Semantic HTML structure
 - Meta descriptions for all pages
 - Open Graph tags for social sharing
 - Schema.org structured data for:
   - Person (Mike Jones)
-  - Article (blog posts)
+  - Article (activity feed posts, case studies)
   - CreativeWork (projects)
+  - SocialMediaPosting (for activity feed content)
 - XML sitemap
 - robots.txt
+
+**AEO (ActivityPub/Fediverse Engagement Optimization)**:
+- Proper ActivityPub actor metadata for discoverability
+- Rich preview cards when posts are shared in Fediverse
+- Hashtag strategy for Fediverse content discovery
+- Profile completeness for Fediverse identity (@mike@MikeJones.online)
+- WebFinger configuration for proper federation
+- Optimized post formatting for Mastodon/Fediverse display
+
+**SubStack Content Optimization**:
+- When displaying SubStack RSS content, include proper meta tags
+- Canonical links back to original SubStack posts
+- Author attribution and publication date
+- Rich snippets for aggregated content
+- Clear distinction between original and syndicated content for search engines
 
 #### 3.5.2 Analytics
 - Privacy-respecting analytics (Plausible, Simple Analytics, or Ghost built-in)
@@ -209,21 +282,28 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 #### 4.1.1 CMS Platform
 - **Software**: Ghost CMS (latest stable version)
 - **Language**: Node.js (Ghost core)
-- **Database**: MySQL or SQLite
+- **Database**: MySQL or SQLite (Ghost manages all database structure internally)
 - **Rationale**: Native ActivityPub, professional themes, fast deployment
+- **Database Note**: Ghost handles all database schemas, migrations, and structure automatically. No custom database design needed. While Supabase could theoretically be used, Ghost's built-in MySQL/SQLite integration is recommended for simplicity and official support.
 
 #### 4.1.2 Hosting Infrastructure
 - **Budget**: $15-30/month
 - **Recommended Options**:
-  - DigitalOcean Droplet (2GB RAM minimum)
-  - Linode VPS
-  - Ghost(Pro) managed hosting (simplest, higher cost)
+  - **DigitalOcean Droplet** (2GB RAM minimum) - VPS hosting provider
+  - **Linode VPS** (now Akamai Cloud) - Alternative VPS hosting provider
+  - **Ghost(Pro)** - Managed Ghost hosting (simplest, higher cost ~$25-50/month)
+- **What You're Hosting**:
+  - Ghost CMS application (Node.js)
+  - MySQL or SQLite database (all data lives here)
+  - Static assets (images, themes, uploaded content)
+  - Web server (Nginx)
 - **Requirements**:
   - Ubuntu 22.04 LTS or similar
   - SSL/TLS certificate (Let's Encrypt)
   - Domain configured (MikeJones.online)
   - Automated backups
   - Email delivery (SendGrid, Mailgun, or SMTP)
+- **Database Hosting Note**: The database runs on the same VPS server. No separate database hosting (like Supabase) needed since Ghost manages its own database.
 
 #### 4.1.3 Domain & DNS
 - **Domain**: MikeJones.online (already owned)
@@ -288,13 +368,15 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 ### 5.1 Visual Design
 
 #### 5.1.1 Design Style
-- **Aesthetic**: Modern tech portfolio
+- **Aesthetic**: Modern tech portfolio with AI-forward presentation
 - **Characteristics**:
   - Clean, professional appearance
   - Code-inspired elements (monospace fonts for technical content)
   - Dark mode option/toggle
   - Tech-forward but not overwhelming
   - Typography-focused with generous whitespace
+  - **Visual indicators for AI-related content** (badges, tags, or icons to highlight AI projects)
+  - Design language that communicates technical sophistication and AI expertise
 
 #### 5.1.2 Color Palette
 - Professional tech colors (to be defined in design phase)
@@ -322,20 +404,29 @@ MJ_Online is a personal website and career portfolio for Mike Jones that serves 
 Home
 ├── About
 ├── Projects
+│   ├── AI Memory System ⭐ (Featured AI Project)
+│   ├── Local LLM Setup ⭐ (Featured AI Project)
 │   ├── Resilient Tomorrow
 │   ├── NeighborhoodShare
 │   ├── Home Management System
-│   ├── AI Memory System
-│   ├── Local LLM Setup
 │   ├── AirPusher/AirShip
 │   └── Burning Man Projects
 ├── SubStacks
 │   ├── Resilient Tomorrow Feed
 │   └── Operational Intelligence Feed
+├── Activity Feed (Post-Launch)
+│   ├── All Updates
+│   ├── Personal
+│   ├── Resilient Tomorrow
+│   └── Velocity Partners
 ├── Resume/CV
-├── Blog (optional, for original content)
 └── Contact
 ```
+
+**Navigation Notes**:
+- Consider a dedicated "AI Projects" filter or section in the Projects area to make AI work immediately visible to potential employers
+- Activity Feed can be added post-launch as social media replacement
+- Topic filtering allows subscribers to choose what updates they want to follow
 
 #### 5.2.2 Homepage Design
 **Purpose**: Immediate professional impression + easy navigation
@@ -343,20 +434,23 @@ Home
 **Key Elements**:
 1. **Hero Section**:
    - Professional headshot or header image
-   - Name and professional tagline
-   - Brief elevator pitch (1-2 sentences)
-   - Primary CTA (e.g., "View Projects" or "Download Resume")
+   - Name and professional tagline emphasizing AI implementation and LLM integration expertise
+   - Brief elevator pitch (1-2 sentences) highlighting AI capabilities
+   - Primary CTA (e.g., "View AI Projects" or "Download Resume")
 
 2. **Featured Projects** (3-4 highlights):
+   - **PRIORITY**: Lead with AI projects (AI Memory System, Local LLM Setup)
    - Visual cards with project titles, brief descriptions
+   - Explicit labels/tags for AI-related projects
    - Links to full case studies
 
 3. **Recent Content**:
-   - Latest blog posts or SubStack articles
+   - Latest activity feed posts or SubStack articles (post-launch)
    - Follow/subscribe CTA for ActivityPub
 
 4. **Professional Summary**:
-   - Key skills and expertise areas
+   - **Key skills and expertise areas with AI implementation prominently featured**
+   - Specific callouts: AI implementation, LLM integration, prompt engineering, self-hosted AI infrastructure
    - Link to full resume
 
 5. **Contact CTA**:
@@ -375,21 +469,27 @@ Home
 - **Professional but personable**
 - Clear and direct
 - Technical when appropriate, accessible when needed
-- First-person narrative for About/Blog
+- First-person narrative for About/Activity Feed
 - Third-person for Resume
+- Case studies: Mix of narrative storytelling and technical detail
 
 #### 5.3.2 Content Priorities
 1. **Launch Content** (Week 1-2):
-   - About page
-   - Resume/CV
-   - 3-4 key project case studies
+   - About page (emphasizing AI expertise)
+   - Resume/CV (with AI skills prominently featured)
+   - **3-4 key project case studies with AI projects prioritized**:
+     - AI Memory System (MUST HAVE at launch)
+     - Local LLM Setup (MUST HAVE at launch)
+     - 1-2 additional projects showing breadth
    - Contact form
    - SubStack feed integrations
 
 2. **Post-Launch Content** (Ongoing):
    - Remaining project case studies
-   - Original blog posts (optional)
+   - **Activity Feed implementation** - social media replacement with topic-based filtering
    - Content updates and refinements
+   - Additional AI project showcases as developed
+   - Regular activity updates once feed is implemented
 
 ---
 
@@ -435,28 +535,32 @@ Home
 | Page | Priority | Content Status |
 |------|----------|----------------|
 | Home | Critical | To be created |
-| About | Critical | To be created |
-| Resume/CV | Critical | To be created |
+| About (with AI emphasis) | Critical | To be created |
+| Resume/CV (with AI skills featured) | Critical | To be created |
 | Contact | Critical | To be created |
+| **AI Memory System (case study)** | **Critical** | **To be created - PRIORITY for AI demonstration** |
+| **Local LLM Setup (case study)** | **Critical** | **To be created - PRIORITY for AI demonstration** |
 | Resilient Tomorrow (SubStack feed) | High | Integration needed |
 | Operational Intelligence (SubStack feed) | High | Integration needed |
 | NeighborhoodShare (case study) | High | To be created |
 | Home Management System (case study) | Medium | To be created |
-| AI Memory System (case study) | Medium | To be created |
 
 ### 7.2 Content Assets Needed
 
 **Before Launch**:
 - Professional headshot/photo
-- Project screenshots and demos
-- Resume content (text)
-- About page content (text)
+- **AI project screenshots and demos** (priority)
+- **AI Memory System documentation and visuals**
+- **Local LLM Setup architecture diagrams and screenshots**
+- Resume content (text) with AI skills prominently featured
+- About page content (text) emphasizing AI expertise
 - SubStack RSS feed URLs
 
 **Nice to Have**:
-- Project demo videos
-- Architecture diagrams
-- Code samples for technical deep-dives
+- AI project demo videos showing workflow in action
+- Architecture diagrams for AI infrastructure
+- Code samples for AI implementations and technical deep-dives
+- Before/after comparisons showing AI impact on workflows
 
 ---
 
@@ -527,15 +631,19 @@ Home
 **Professional**:
 - Contact form submissions: 5-10 quality inquiries
 - Resume downloads: Track via analytics
+- **AI-specific engagement**: Track visits to AI project pages, time spent on AI case studies
+- **AI opportunity generation**: Inquiries specifically mentioning AI implementation and LLM integration expertise
 
 ### 9.2 Long-Term Success Indicators
 
-- Regular content publishing cadence
+- Regular content publishing cadence (especially AI-related content)
 - Growing ActivityPub follower base
-- Professional opportunities generated through site
+- **Professional opportunities generated through site, particularly AI implementation roles**
 - Positive feedback from visitors
 - Low maintenance time required
-- Site demonstrates technical skills to employers
+- **Site effectively demonstrates AI implementation and LLM integration expertise and technical skills to employers**
+- Recognition as an AI practitioner through project showcases
+- Inbound interest specifically citing AI projects or capabilities
 
 ---
 
@@ -650,9 +758,11 @@ Home
 
 ### Post-Launch (Ongoing)
 - Add remaining project case studies
-- Publish original blog content
+- **Implement Activity Feed** for social media replacement
+- Begin posting regular activity updates
 - Iterate on design
-- Add Python integrations
+- Add Python integrations for enhanced SubStack integration
+- Add topic-based filtering for Activity Feed
 - Monitor and optimize
 
 ---
@@ -689,6 +799,8 @@ Home
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
 | 1.0 | 2026-01-20 | Initial requirements specification | Claude (Web Requirements Collector) |
+| 1.1 | 2026-01-26 | Updated to emphasize AI/ML skills throughout - elevated AI projects to Critical priority, added AI-specific sections to resume/about/homepage, updated content priorities and success metrics to highlight AI expertise for potential employers | Claude Code |
+| 1.2 | 2026-01-26 | Added Activity Feed section (post-launch social media replacement), integrated Cal.com for meeting scheduling, expanded SEO to include AEO (ActivityPub/Fediverse optimization), clarified database hosting (Ghost manages internally, no Supabase needed), updated all references from "blog" to "activity feed" | Claude Code |
 
 ---
 

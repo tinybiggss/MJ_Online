@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - MJ_Online Agent Coordination</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 0;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-tab:hover {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .nav-tab.active {
+            color: #38bdf8;
+            border-bottom-color: #38bdf8;
+        }
+
+        /* Filters */
+        .filters {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-label {
+            font-size: 0.85em;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        select, input {
+            background: #0f172a;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .filter-btn {
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .filter-btn:hover {
+            background: #0ea5e9;
+        }
+
+        /* Message Sections */
+        .section {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #38bdf8;
+            font-size: 1.3em;
+        }
+
+        .message-count {
+            background: #334155;
+            color: #94a3b8;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* Message Feed */
+        .message-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #38bdf8;
+        }
+
+        .message-item.coordination {
+            border-left-color: #38bdf8;
+        }
+
+        .message-item.errors {
+            border-left-color: #ef4444;
+        }
+
+        .message-item.tasks {
+            border-left-color: #10b981;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .message-agent {
+            font-weight: 600;
+            color: #38bdf8;
+        }
+
+        .message-time {
+            font-size: 0.85em;
+            color: #64748b;
+        }
+
+        .message-content {
+            color: #e2e8f0;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .message-channel {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .channel-coordination {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+        .channel-errors {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .channel-tasks {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        /* Scrollbar styling */
+        .message-feed::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .message-feed::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        .message-feed::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        .message-feed::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Export button */
+        .export-btn {
+            background: #334155;
+            color: #e2e8f0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .export-btn:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💬 Agent Messages</h1>
+            <p class="subtitle">View agent communication, errors, and task history</p>
+        </header>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <a href="/" class="nav-tab">📊 Dashboard</a>
+            <a href="/messages.html" class="nav-tab active">💬 Messages</a>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label class="filter-label">Filter by Agent</label>
+                <select id="filter-agent">
+                    <option value="">All Agents</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Filter by Channel</label>
+                <select id="filter-channel">
+                    <option value="">All Channels</option>
+                    <option value="coordination">Coordination</option>
+                    <option value="errors">Errors</option>
+                    <option value="tasks">Tasks</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Show Last</label>
+                <select id="filter-limit">
+                    <option value="50">50 messages</option>
+                    <option value="100" selected>100 messages</option>
+                    <option value="200">200 messages</option>
+                    <option value="500">500 messages</option>
+                </select>
+            </div>
+
+            <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
+            <button class="export-btn" onclick="exportMessages()">📥 Export</button>
+        </div>
+
+        <!-- Coordination Messages -->
+        <div class="section">
+            <div class="section-header">
+                <h2>💬 Coordination Messages</h2>
+                <span class="message-count" id="coord-count">-</span>
+            </div>
+            <div class="message-feed" id="coordination-feed">
+                <div class="loading">Loading coordination messages</div>
+            </div>
+        </div>
+
+        <!-- Error Messages -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🚨 Error Messages</h2>
+                <span class="message-count" id="error-count">-</span>
+            </div>
+            <div class="message-feed" id="errors-feed">
+                <div class="loading">Loading error messages</div>
+            </div>
+        </div>
+
+        <!-- Task History -->
+        <div class="section">
+            <div class="section-header">
+                <h2>📋 Task History</h2>
+                <span class="message-count" id="task-count">-</span>
+            </div>
+            <div class="message-feed" id="tasks-feed">
+                <div class="loading">Loading task history</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allMessages = {
+            coordination: [],
+            errors: [],
+            tasks: []
+        };
+
+        let allAgents = new Set();
+
+        async function loadMessages() {
+            try {
+                // Load coordination messages
+                const coordResponse = await fetch('/api/messages/coordination?limit=500');
+                allMessages.coordination = await coordResponse.json();
+
+                // Load error messages
+                const errorsResponse = await fetch('/api/messages/errors?limit=500');
+                allMessages.errors = await errorsResponse.json();
+
+                // Load all tasks (for task history)
+                const tasksResponse = await fetch('/api/tasks');
+                const tasks = await tasksResponse.json();
+
+                // Convert tasks to message format
+                allMessages.tasks = tasks.map(task => ({
+                    agent_id: task.owner || 'System',
+                    channel: 'tasks',
+                    content: `Task ${task.status}: "${task.title}" (ID: ${task.task_id})`,
+                    timestamp: task.completed_at || task.claimed_at || task.created_at,
+                    task_data: task
+                }));
+
+                // Collect all unique agents
+                [...allMessages.coordination, ...allMessages.errors, ...allMessages.tasks].forEach(msg => {
+                    if (msg.agent_id) {
+                        allAgents.add(msg.agent_id);
+                    }
+                });
+
+                // Populate agent filter
+                const agentFilter = document.getElementById('filter-agent');
+                allAgents.forEach(agent => {
+                    const option = document.createElement('option');
+                    option.value = agent;
+                    option.textContent = agent;
+                    agentFilter.appendChild(option);
+                });
+
+                // Display messages
+                applyFilters();
+
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                document.getElementById('coordination-feed').innerHTML =
+                    `<div class="empty-state">Error loading messages: ${error.message}</div>`;
+            }
+        }
+
+        function applyFilters() {
+            const selectedAgent = document.getElementById('filter-agent').value;
+            const selectedChannel = document.getElementById('filter-channel').value;
+            const limit = parseInt(document.getElementById('filter-limit').value);
+
+            // Filter coordination messages
+            displayMessages('coordination', selectedAgent, selectedChannel, limit);
+
+            // Filter error messages
+            displayMessages('errors', selectedAgent, selectedChannel, limit);
+
+            // Filter task messages
+            displayMessages('tasks', selectedAgent, selectedChannel, limit);
+        }
+
+        function displayMessages(channel, filterAgent, filterChannel, limit) {
+            const feedId = channel === 'coordination' ? 'coordination-feed' :
+                          channel === 'errors' ? 'errors-feed' : 'tasks-feed';
+            const countId = channel === 'coordination' ? 'coord-count' :
+                           channel === 'errors' ? 'error-count' : 'task-count';
+
+            const feed = document.getElementById(feedId);
+            const countEl = document.getElementById(countId);
+
+            let messages = allMessages[channel];
+
+            // Apply filters
+            if (filterAgent) {
+                messages = messages.filter(msg => msg.agent_id === filterAgent);
+            }
+
+            if (filterChannel && filterChannel !== channel && filterChannel !== '') {
+                messages = [];
+            }
+
+            // Sort by timestamp (newest first)
+            messages = messages.sort((a, b) =>
+                new Date(b.timestamp) - new Date(a.timestamp)
+            );
+
+            // Apply limit
+            messages = messages.slice(0, limit);
+
+            countEl.textContent = messages.length;
+
+            if (messages.length === 0) {
+                feed.innerHTML = '<div class="empty-state">No messages found</div>';
+                return;
+            }
+
+            feed.innerHTML = messages.map(msg => {
+                const channelClass = channel;
+                const channelBadge = channel === 'coordination' ? 'COORD' :
+                                    channel === 'errors' ? 'ERROR' : 'TASK';
+
+                // Truncate long messages for display
+                let displayContent = msg.content;
+                if (displayContent.length > 500) {
+                    displayContent = displayContent.substring(0, 500) + '...';
+                }
+
+                return `
+                    <div class="message-item ${channelClass}">
+                        <div class="message-header">
+                            <span class="message-agent">
+                                🤖 ${msg.agent_id}
+                                <span class="message-channel channel-${channelClass}">${channelBadge}</span>
+                            </span>
+                            <span class="message-time">${new Date(msg.timestamp).toLocaleString()}</span>
+                        </div>
+                        <div class="message-content">${escapeHtml(displayContent)}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function exportMessages() {
+            const selectedAgent = document.getElementById('filter-agent').value;
+            const selectedChannel = document.getElementById('filter-channel').value;
+            const limit = parseInt(document.getElementById('filter-limit').value);
+
+            // Combine all messages
+            let allMsgs = [
+                ...allMessages.coordination.map(m => ({...m, channel: 'coordination'})),
+                ...allMessages.errors.map(m => ({...m, channel: 'errors'})),
+                ...allMessages.tasks.map(m => ({...m, channel: 'tasks'}))
+            ];
+
+            // Apply filters
+            if (selectedAgent) {
+                allMsgs = allMsgs.filter(msg => msg.agent_id === selectedAgent);
+            }
+
+            if (selectedChannel) {
+                allMsgs = allMsgs.filter(msg => msg.channel === selectedChannel);
+            }
+
+            // Sort and limit
+            allMsgs = allMsgs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            allMsgs = allMsgs.slice(0, limit);
+
+            // Convert to text
+            const text = allMsgs.map(msg =>
+                `[${new Date(msg.timestamp).toLocaleString()}] ${msg.agent_id} (${msg.channel})\n${msg.content}\n\n`
+            ).join('---\n\n');
+
+            // Download as file
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `agent-messages-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Load messages on page load
+        loadMessages();
+
+        // Auto-refresh every 10 seconds
+        setInterval(loadMessages, 10000);
+    </script>
+</body>
+</html>
