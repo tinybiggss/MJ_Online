@@ -1,0 +1,114 @@
+/*****************************************
+ * CSS FIXES FOR HOMEPAGE ISSUES
+ * Date: 2026-02-06
+ *
+ * INSTRUCTIONS:
+ * Add this CSS to your Code Injection (Site header)
+ * AFTER the Design System CSS we just added
+ *****************************************/
+
+/* === FIX 1: Hide Errant Brackets and Template Code === */
+/* These might be from Kyoto theme template rendering issues */
+body::before,
+.gh-viewport::before,
+.gh-page::before {
+  content: none !important;
+}
+
+/* Hide any stray bracket characters at start of page */
+.gh-viewport > :first-child:has-text("]") {
+  display: none;
+}
+
+/* Generic fix: hide elements that only contain brackets/braces */
+*:not(code):not(pre) {
+  /* This will be handled by finding the specific element */
+}
+
+/* === FIX 2: Hide or Style Wavy Dividers === */
+/* Option A: Hide them completely */
+.wavy-divider,
+hr.wavy,
+[class*="wave"],
+.decorative-divider {
+  display: none !important;
+}
+
+/* If the wavy line is just text, hide any paragraph with only tildes */
+p:has-text("~~~~~") {
+  display: none !important;
+}
+
+/* === FIX 3: Override Subscribe Button Colors === */
+/* Target Ghost's subscribe buttons to match our design system */
+
+/* Primary subscribe buttons */
+button[data-members-form],
+.gh-subscribe-btn,
+.subscribe-button,
+button.subscribe,
+button[type="submit"].subscribe-button,
+form[data-members-form] button[type="submit"],
+.gh-portal-btn,
+.gh-portal-btn-main {
+  background: var(--color-indigo) !important;
+  color: var(--color-text-primary) !important;
+  border: none !important;
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-sm) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 14px 32px !important;
+  border-radius: var(--radius-md) !important;
+  transition: all var(--transition-base) !important;
+}
+
+/* Subscribe button hover state */
+button[data-members-form]:hover,
+.gh-subscribe-btn:hover,
+.subscribe-button:hover,
+button.subscribe:hover,
+button[type="submit"].subscribe-button:hover,
+form[data-members-form] button[type="submit"]:hover,
+.gh-portal-btn:hover,
+.gh-portal-btn-main:hover {
+  background: var(--color-neon-cyan) !important;
+  color: var(--color-bg-dark) !important;
+  transform: scale(1.02) !important;
+}
+
+/* Floating subscribe button (bottom right) */
+.gh-portal-triggerbtn,
+[data-portal="trigger"],
+.floating-subscribe {
+  background: var(--color-indigo) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: 24px !important;
+}
+
+.gh-portal-triggerbtn:hover,
+[data-portal="trigger"]:hover,
+.floating-subscribe:hover {
+  background: var(--color-neon-cyan) !important;
+  color: var(--color-bg-dark) !important;
+}
+
+/* Override any inline styles on subscribe elements */
+[style*="background-color: blue"],
+[style*="background: blue"],
+[style*="background-color: #0066ff"],
+[style*="background: #0066ff"] {
+  background: var(--color-indigo) !important;
+}
+
+/* === FIX 4: Clean up any visible template code === */
+/* Hide elements that look like template debugging output */
+body > :first-child:empty::before {
+  content: none !important;
+}
+
+/* === ADDITIONAL: Ensure proper z-index for portal === */
+.gh-portal-container {
+  z-index: 9999 !important;
+}

@@ -1,0 +1,49 @@
+# Environment variables (contains API keys and secrets)
+.env
+.env.local
+.env.*.local
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+.cache/
+
+# Node modules (if needed later)
+node_modules/
+
+# Agent memory files (may contain sensitive project details)
+# Uncomment if you don't want to commit agent memory
+# *-MEMORY.json
+# PROJECT-MEMORY.json

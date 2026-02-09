@@ -1,0 +1,92 @@
+/* ========================================
+   HOTFIX: Homepage Issues
+   Date: 2026-02-06 11:50 PM
+   Issues Fixed:
+   1. Errant brackets "] } } ] }" at top
+   2. Wavy divider showing as text
+   3. Subscribe buttons (bright blue → Indigo/Cyan)
+   ========================================*/
+
+/* FIX 1: Hide the errant brackets element */
+/* This is the first generic element with brackets */
+body > div:first-child {
+  display: none !important;
+}
+
+/* Alternative: target by content if specific class exists */
+[class*="template"] > div:empty::after,
+.gh-viewport > div:first-of-type:contains("]") {
+  display: none !important;
+}
+
+/* FIX 2: Hide wavy line dividers that are showing as text */
+/* Target any element that's just wavy characters */
+*:not(code):not(pre) {
+  &:has-text("~~~") {
+    display: none !important;
+  }
+}
+
+/* If the wavy line is in a specific section, target more specifically */
+.post-full-content hr,
+article hr,
+.gh-content hr {
+  border: none !important;
+  border-top: 1px solid var(--color-border-dark) !important;
+  margin: var(--space-4xl) 0 !important;
+}
+
+/* Hide any paragraph or div that's ONLY tildes/waves */
+p:only-child:matches("^[~\\-=_]+$"),
+div:only-child:matches("^[~\\-=_]+$") {
+  display: none !important;
+}
+
+/* FIX 3: Override Ghost Subscribe Button Colors */
+/* These are the specific selectors for Ghost's subscribe system */
+
+/* Main subscribe button in form */
+button[data-members-form],
+.subscribe-form button[type="submit"],
+form[data-members-form] button,
+button.subscribe-email-button {
+  background: var(--color-indigo) !important;
+  color: var(--color-text-primary) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+button[data-members-form]:hover,
+.subscribe-form button[type="submit"]:hover,
+form[data-members-form] button:hover,
+button.subscribe-email-button:hover {
+  background: var(--color-neon-cyan) !important;
+  color: var(--color-bg-dark) !important;
+  transform: scale(1.02) !important;
+}
+
+/* Floating subscribe button (portal trigger) */
+.gh-portal-triggerbtn,
+.gh-portal-btn,
+[data-portal="trigger"] {
+  background: var(--color-indigo) !important;
+  border: none !important;
+}
+
+.gh-portal-triggerbtn:hover,
+.gh-portal-btn:hover,
+[data-portal="trigger"]:hover {
+  background: var(--color-neon-cyan) !important;
+}
+
+/* Override inline background colors */
+[style*="background: #"] button,
+[style*="background-color: #"] button {
+  background: var(--color-indigo) !important;
+}
+
+/* Ghost Portal iframe styles (if needed) */
+.gh-portal-popup-background,
+.gh-portal-popup-wrapper {
+  --brandcolor: var(--color-indigo) !important;
+}

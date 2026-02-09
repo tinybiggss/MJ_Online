@@ -1,0 +1,57 @@
+/* ========================================
+   HOTFIX: Homepage Issues
+   Paste this AFTER your Design System CSS
+   in Ghost Code Injection (Site header)
+   ========================================*/
+
+/* FIX 1: Hide errant brackets at top */
+/* Target the first div in body that contains brackets */
+body > div:first-child:not(.gh-viewport):not(.gh-canvas) {
+  display: none !important;
+}
+
+/* FIX 2: Override Ghost Subscribe Button Colors */
+/* Main subscribe form button */
+button[data-members-form="subscribe"],
+.gh-subscribe-form button[type="submit"],
+form[data-members-form] button[type="submit"] {
+  background: #4F46E5 !important; /* Indigo */
+  color: #FFFFFF !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+}
+
+button[data-members-form="subscribe"]:hover,
+.gh-subscribe-form button[type="submit"]:hover,
+form[data-members-form] button[type="submit"]:hover {
+  background: #00D9FF !important; /* Neon Cyan */
+  color: #0A0B0D !important;
+  transform: scale(1.02) !important;
+}
+
+/* Floating subscribe button (bottom right) */
+.gh-portal-triggerbtn-iframe,
+iframe[data-frame="portal-trigger"],
+.portal-trigger-frame {
+  /* Note: iframe content is isolated, styling may not work */
+}
+
+/* Try to override Ghost Portal colors via CSS variables */
+:root {
+  --ghost-accent-color: #4F46E5 !important;
+}
+
+/* If portal button is in DOM (not iframe) */
+button[data-portal="signup"],
+.gh-portal-btn-main,
+.gh-head-button {
+  background: #4F46E5 !important;
+  color: #FFFFFF !important;
+}
+
+button[data-portal="signup"]:hover,
+.gh-portal-btn-main:hover,
+.gh-head-button:hover {
+  background: #00D9FF !important;
+  color: #0A0B0D !important;
+}

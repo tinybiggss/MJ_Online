@@ -10,13 +10,13 @@
 
 ### Professional Photos
 
-- [ ] **Professional headshot** (high resolution)
+- [ x] **Professional headshot** (high resolution)
   - Format: JPG or PNG
   - Minimum: 1000x1000px
   - Use: Homepage hero, About page, Resume, social media
   - Location to save: `/assets/photos/headshot-professional.jpg`
 
-- [ ] **Casual/approachable photo** (optional, for About page)
+- [x ] **Casual/approachable photo** (optional, for About page)
   - Shows personality
   - Location: `/assets/photos/headshot-casual.jpg`
 
@@ -26,12 +26,12 @@
 
 ### AI Memory System (Task 3.6)
 
-- [ ] **Architecture diagram** (system design)
+- [x ] **Architecture diagram** (system design)
   - Shows: User → AI Memory → LLM → Response
   - Can be: Hand-drawn and photographed, or digital
   - Location: `/assets/projects/ai-memory/architecture-diagram.png`
 
-- [ ] **Screenshots of interface/workflow**
+- [x ] **Screenshots of interface/workflow**
   - Example conversations or interactions
   - Command-line output (if applicable)
   - Location: `/assets/projects/ai-memory/screenshot-*.png`
@@ -40,7 +40,7 @@
   - Shows system in action
   - Location: `/assets/projects/ai-memory/demo.gif`
 
-- [ ] **Code snippets** (for case study)
+- [x ] **Code snippets** (for case study)
   - Key implementation examples
   - Configuration files
   - Can be text files for now
@@ -51,7 +51,7 @@
 
 **Note:** Ted will help identify what's needed during interview, but gather what you have:
 
-- [ ] **Architecture diagram** (infrastructure)
+- [x ] **Architecture diagram** (infrastructure)
   - Hardware setup (GPU, networking, storage)
   - Data flow diagram
   - Location: `/assets/projects/local-llm/architecture-*.png`
@@ -77,14 +77,14 @@
 
 ### NeighborhoodShare (Task 3.8)
 
-- [ ] **Screenshots of application:**
+- [ x] **Screenshots of application:**
   - [ ] Homepage/landing page
   - [ ] Item listing view
   - [ ] User profile or dashboard
   - [ ] Mobile view (if applicable)
   - Location: `/assets/projects/neighborhoodshare/screenshot-*.png`
 
-- [ ] **Logo or branding** (if exists)
+- [x ] **Logo or branding** (if exists)
   - Location: `/assets/projects/neighborhoodshare/logo.png`
 
 - [ ] **Architecture diagram** (optional)
@@ -97,18 +97,18 @@
 
 ### RSS Feed URLs
 
-- [ ] **Resilient Tomorrow SubStack**
+- [x ] **Resilient Tomorrow SubStack**
   - Find RSS feed URL (usually: yoursubstack.substack.com/feed)
-  - Document URL: ___________________________________
+  - Document URL: resilienttomorrow@substack.com
 
-- [ ] **Organizational Intelligence SubStack** (Velocity Partners)
+- [x ] **Organizational Intelligence SubStack** (Velocity Partners)
   - Find RSS feed URL
-  - Document URL: ___________________________________
+  - Document URL: orgintelligence@substack.com
 
 ### SubStack Branding (optional)
 
-- [ ] Cover images from SubStack pages
-- [ ] Logo or header graphics
+- [x ] Cover images from SubStack pages
+- [ x] Logo or header graphics
 - Location: `/assets/substacks/`
 
 ---
@@ -123,15 +123,15 @@
 
 ### Other Projects
 
-- [ ] AirPusher/AirShip materials (if available)
-- [ ] Burning Man project photos (if relevant)
+- [ x] AirPusher/AirShip materials (if available)
+- [x ] Burning Man project photos (if relevant)
 - Location: `/assets/projects/other/`
 
 ---
 
 ## 🎨 DESIGN ASSETS (Nice to Have)
 
-- [ ] **Logo** (if you have a personal brand logo)
+- [ x] **Logo** (if you have a personal brand logo)
   - SVG preferred, PNG acceptable
   - Location: `/assets/brand/logo.*`
 
@@ -236,12 +236,8 @@ Local LLM materials: _________________________________________
 NeighborhoodShare: ___________________________________________
 
 SubStack URLs:
-- Resilient Tomorrow: resilienttomorrow@substack.com
-- Organizational Intelligence: orgintelligence@substack.com
-
-NOTE: These appear to be email addresses. Actual RSS feed URLs are typically:
-- https://resilienttomorrow.substack.com/feed
-- https://orgintelligence.substack.com/feed
+- Resilient Tomorrow: _______________________________________
+- Organizational Intelligence: _______________________________
 
 ---
 

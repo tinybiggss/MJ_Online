@@ -3,8 +3,10 @@
 **Project:** MJ_Online Personal Website & Portfolio
 **Domain:** MikeJones.online
 **Platform:** Ghost Pro (Managed Hosting)
-**Target Launch:** 1-2 weeks from start
-**Last Updated:** 2026-01-30
+**Target Launch:** 1-2 weeks from start (revised estimate pending pilot test)
+**Last Updated:** 2026-02-06
+
+**IMPORTANT:** Phase 3 workflow revised 2026-02-06 - now using Design System → Mobiledoc → API Publishing approach (see Phase 3.0-3.0.2)
 
 ---
 
@@ -106,10 +108,181 @@ All Phase 1 work is complete. Ghost Pro is fully configured and operational at M
 ## Phase 3: Core Content Creation
 **Priority:** CRITICAL (Launch blocking)
 **Dependencies:** Phase 2 (Theme & design ready)
-**Duration:** 5-8 days
+**Duration:** 5-8 days (revised estimate pending pilot test)
 **Parallelization:** HIGH - content writing can be distributed (6-8 agents)
 
-### 3.1 Content Asset Gathering & Preparation 🟡 IN PROGRESS
+---
+
+## 🔄 REVISED WORKFLOW (2026-02-06)
+
+**Major Process Change:** Transitioning from browser automation to API-based publishing workflow.
+
+**New Approach:**
+1. **Debbie** (Design System Architect) → Creates design system, then designs pages
+2. **Mobiledoc Assembler** (New Agent) → Converts design specs to valid Mobiledoc JSON
+3. **Alice** (Publisher) → Publishes via Ghost Admin API (no browser automation)
+
+**Why the change:**
+- Browser automation with Ghost editor unreliable (complex iframe structure)
+- API-based publishing more stable, repeatable, version-controllable
+- Design system ensures consistency across all pages
+- Mobiledoc JSON can be reviewed, tested, version-controlled
+
+**Phases:**
+- **Phase 3.0:** Design System Creation (NEW - must complete first)
+- **Phase 3.0.1:** Create Mobiledoc Assembler Agent (NEW)
+- **Phase 3.0.2:** Pilot Test New Workflow on About Page (NEW)
+- **Phase 3.1-3.10:** Apply new workflow to remaining pages (revised)
+
+**See:** `/plans/workflow-questions.md` for detailed questions and decisions to be made during pilot test.
+
+---
+
+### 3.0 Design System Creation ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-06)
+**Completed by:** Debbie (Web Design Agent)
+**Duration:** ~3 hours
+
+**Deliverables:**
+- ✅ Complete design system document at `/design/DESIGN-SYSTEM.md` (1,687 lines)
+- ✅ Brand Essence: AI Implementation Expert positioning, cutting-edge yet professional
+- ✅ Color Palette: Indigo (#4F46E5) + Neon Cyan (#00D9FF) accents on dark mode
+- ✅ Typography System: Inter (primary) + JetBrains Mono (technical elements)
+- ✅ Spacing System: 8px base unit, generous whitespace (96-128px sections)
+- ✅ Visual Hierarchy: Bold headlines, scannable content, clear emphasis
+- ✅ Component Library: Hero sections, cards, buttons, badges, navigation
+- ✅ Page-Specific Guidelines: Homepage, About, Resume, Projects, Case Studies, Contact
+- ✅ Implementation CSS: Ready for Ghost Code Injection
+- ✅ Research-backed: Multiple 2026 trend sources cited
+
+**Outcome:** Comprehensive, professional design system ready for implementation. Reflects Mike's AI expertise with tech-forward aesthetic (neon cyan, dark mode, monospace accents). Ready to approve and implement.
+
+---
+
+### 3.0.1 Create Mobiledoc Assembler Agent ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-06)
+**Completed by:** Mike (user created agent definition)
+**Enhanced by:** Morgan (PM - added clarifications)
+
+**Deliverables:**
+- ✅ Agent definition at `/.claude/agents/mobiledoc-assembler.md`
+- ✅ Agent name: Doc Brown (Mobiledoc Assembler)
+- ✅ YAML frontmatter configured
+- ✅ Input specification: PAGE_SPEC from Debbie + Image URLs from Alice
+- ✅ Output specification: Valid Mobiledoc JSON only (no prose)
+- ✅ Mobiledoc v0.3.2 format documented
+- ✅ Allowed Ghost cards: heading, paragraph, image, markdown, html, button, divider, embed
+- ✅ Error reporting with @tags (Debbie, Alice, Morgan)
+- ✅ Failure protocol: Fail loudly, no guessing
+
+**Enhancements:**
+- ✅ Clarified image URL workflow (Alice uploads first)
+- ✅ RAG verification assumption (content pre-verified by Debbie)
+- ✅ Input format flexibility (TBD in pilot test)
+- ✅ Mobiledoc version verification note (validate in pilot)
+
+**Outcome:** Doc Brown ready for pilot test. Mechanical translator with scientific precision approach.
+
+---
+
+### 3.0.1a Enhance Debbie with PAGE_SPEC Output Format ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-06)
+**Completed by:** Morgan (PM)
+
+**Updates to Debbie's Agent Definition:**
+- ✅ Added explicit PAGE_SPEC output format specification
+- ✅ Enhanced Information Architecture responsibilities (visual pacing, density, CTA timing)
+- ✅ Documented Kyoto theme constraints (vertical stacking, editorial, text-forward)
+- ✅ Created PAGE_SPEC example (About page)
+- ✅ Added PAGE_SPEC handoff process (Debbie → Doc Brown → Alice)
+- ✅ Clarified UX/IA stays with Debbie (no separate UXIA agent)
+- ✅ **Added custom graphics request authority** with toolset (Canva, Napkin, Gamma, Mermaid.live)
+- ✅ IMAGE REQUEST format for custom charts, diagrams, infographics, branded visuals
+
+**Key Addition:**
+Debbie now empowered to request custom graphics Mike can create using:
+- Canva (professional graphics, infographics)
+- Napkin (sketches, diagrams)
+- Gamma (presentation-style visuals)
+- Mermaid.live (flowcharts, timelines)
+
+**Outcome:** Debbie has complete authority and clear output format. Ready to implement global CSS and design About page for pilot.
+
+---
+
+### 3.0.2 Implement Global CSS ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-06)
+**Completed by:** Debbie (Web Design Agent)
+**Duration:** ~2 hours
+
+**Tasks Completed:**
+- ✅ Add custom CSS to Ghost Code Injection (Header)
+  - ✅ Google Fonts import (Inter, JetBrains Mono)
+  - ✅ Typography overrides (H1-H6, body, code)
+  - ✅ Color variables and link styles
+  - ✅ Button styles (primary, secondary)
+  - ✅ Card styles with hover states
+  - ✅ Badge styles (category, tech, metric)
+  - ✅ Spacing utilities
+  - ✅ Responsive breakpoints
+- ✅ Tested on existing pages:
+  - ✅ Contact page
+  - ✅ Homepage
+  - ✅ Projects Landing page
+- ✅ Verified no conflicts with Kyoto theme
+- ✅ Checked mobile responsiveness (375px, 768px, 1440px)
+- ✅ Tested hover states and interactions
+
+**Deliverables:**
+- ✅ Global CSS implemented in Ghost Code Injection
+- ✅ Existing 3 pages improved with design system styling
+- ✅ Design system validated in production environment
+- ✅ CSS works cleanly with Kyoto theme
+
+**Outcome:** Design system CSS successfully deployed to production. All existing pages now use consistent typography (Inter/JetBrains Mono), color palette (Indigo/Neon Cyan), and spacing. Mobile responsive across all breakpoints. Foundation validated and ready for About page pilot test.
+
+---
+
+### 3.0.3 Pilot Test: About Page with New Workflow ⚪ READY TO START
+**Status:** ⚪ Ready to Start (3.0.2 complete)
+**Priority:** HIGH - Validates complete Design → Mobiledoc → API workflow
+**Agents:** Debbie → Doc Brown → Alice
+**Dependencies:** ✅ 3.0 (Design System), ✅ 3.0.1 (Mobiledoc Assembler), ✅ 3.0.2 (Global CSS), 3.1 (Content assets ready)
+**Estimated Time:** 3-5 hours (including iteration)
+
+**Process:**
+1. **Debbie:** Design About page using approved design system
+   - Output: PAGE_SPEC document (standardized format)
+2. **Alice (if needed):** Upload required images via Ghost API
+   - Output: Ghost-hosted image URLs for Mobiledoc Assembler
+3. **Doc Brown (Mobiledoc Assembler):** Convert PAGE_SPEC → Mobiledoc JSON
+   - Output: Valid Mobiledoc JSON file
+4. **Alice:** Publish Mobiledoc via Ghost Admin API
+   - Output: Live About page at https://mikejones.online/about
+5. **Mike:** Review published page
+   - Feedback: What works, what doesn't
+6. **Team:** Iterate and refine process
+
+**Questions to Answer:** (See `/plans/workflow-questions.md` for details)
+- What format should Debbie use for PAGE_SPEC output?
+- How do we handle image uploads in the workflow?
+- When does RAG verification happen?
+- How do we review/verify published output?
+- Is the process faster/more reliable than browser automation?
+
+**Deliverables:**
+- About page published using new workflow
+- Documented answers to workflow questions
+- Refined process ready for rollout to remaining pages
+
+**Success Criteria:**
+- About page matches design intent and RAG facts
+- Process is repeatable and documented
+- Faster and more reliable than browser automation
+- Team confident in rolling out to remaining pages
+
+
+### 3.1 Content Asset Gathering & Preparation ✅ COMPLETE
 **Status:** 🟡 In Progress (User gathering assets manually)
 **Agent Type:** manual / general-purpose
 **Dependencies:** None (can start during Phase 1/2)

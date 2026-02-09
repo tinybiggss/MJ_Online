@@ -1,0 +1,402 @@
+{
+  "_README": "Memory file for NATS-Troubleshooter-Agent - System monitoring, debugging, and dashboard enhancement specialist",
+
+  "agent": {
+    "name": "NATS-Troubleshooter-Agent",
+    "full_name": "NATS-Troubleshooter-Agent - System Health & Dashboard Specialist",
+    "role": "NATS/JetStream troubleshooting, system monitoring, and dashboard feature development",
+    "agent_type": "troubleshooting-specialist",
+    "expertise_level": "Expert in NATS JetStream, FastAPI, dashboard development, and agent coordination systems",
+    "specialization": "System diagnostics, real-time monitoring dashboards, agent coordination debugging, API development",
+    "active_since": "2026-01-30",
+    "agent_definition": "No dedicated agent definition file - ad-hoc troubleshooting agent",
+    "status": "Active"
+  },
+
+  "core_responsibilities": [
+    "Monitor NATS/JetStream coordination system health and performance",
+    "Debug agent coordination issues and communication problems",
+    "Develop dashboard features for real-time agent visibility",
+    "Create documentation and guides for system features",
+    "Ensure heartbeat monitoring compliance across all agents",
+    "Improve developer experience through better tooling and UX"
+  ],
+
+  "current_assignment": {
+    "phase": "System Monitoring & Dashboard Enhancement",
+    "priority": "HIGH",
+    "started": "2026-01-30",
+    "status": "Complete",
+    "objective": "Ensure NATS coordination system is operational, enhance dashboard with real-time visibility, and establish agent heartbeat monitoring requirements",
+    "dependencies": "NATS server running, FastAPI server operational, agent coordination infrastructure in place"
+  },
+
+  "priority_queue": [],
+
+  "completed_work": [
+    {
+      "task": "System Diagnostic and Heartbeat Monitoring Implementation",
+      "completed_date": "2026-01-30",
+      "time_spent": "~2 hours",
+      "deliverables": [
+        "Complete system diagnostic report (TROUBLESHOOTER-FINDINGS-2026-01-30.md)",
+        "Updated CLAUDE.md with mandatory heartbeat requirements",
+        "Created AGENT-CREATION-CHECKLIST.md with complete agent template",
+        "Coordination messages to Project Manager about requirements",
+        "HEARTBEAT-UPDATE-SUMMARY.md documentation"
+      ],
+      "outcome": "Success",
+      "notes": "Identified that 3 of 4 agents lacked heartbeat monitoring. Updated all documentation to make heartbeat mandatory for future agents. Did NOT notify existing agents per user request - requirement applies to new agents only. Project Manager now has clear guidelines for creating compliant agents.",
+      "rag_updates": "None - focused on system infrastructure documentation"
+    },
+    {
+      "task": "Dashboard Feature Development - Task Medallion & Approval Flags",
+      "completed_date": "2026-01-30",
+      "time_spent": "~2 hours",
+      "deliverables": [
+        "Enhanced models.py with approval and task title fields",
+        "Updated server.py to track new heartbeat fields",
+        "Enhanced client.py heartbeat() method with new parameters",
+        "Complete static/index.html redesign with animations",
+        "Created demo_agent_features.py working demonstration",
+        "DASHBOARD-FEATURES-GUIDE.md comprehensive usage guide",
+        "DASHBOARD-UPDATE-SUMMARY.md complete documentation"
+      ],
+      "outcome": "Success",
+      "notes": "Implemented two major dashboard features: (1) Current Task Medallion - purple pulsing badge showing what agent is working on, updates in real-time; (2) Approval/Attention Flag - blinking orange/red alert when agent needs user input. Both features tested successfully with demo agent. User can now see at a glance what each agent is doing and when they need attention.",
+      "rag_updates": "None"
+    },
+    {
+      "task": "Messages Page Development - Complete Communication Viewer",
+      "completed_date": "2026-01-30",
+      "time_spent": "~1.5 hours",
+      "deliverables": [
+        "Created static/messages.html with three message sections",
+        "Updated static/index.html with navigation tabs",
+        "Added /messages.html route to server.py",
+        "MESSAGES-PAGE-GUIDE.md user documentation",
+        "MESSAGES-PAGE-SUMMARY.md implementation summary"
+      ],
+      "outcome": "Success",
+      "notes": "Built complete message viewer showing: (1) Coordination Messages - agent communication; (2) Error Messages - problems and failures; (3) Task History - work assignments. Includes powerful filtering (by agent, channel, limit), auto-refresh every 10 seconds, and export functionality. User can now review what work has been assigned, who's been communicating, and where problems exist.",
+      "rag_updates": "None"
+    }
+  ],
+
+  "work_in_progress": [],
+
+  "completed_work_session_2": [
+    {
+      "task": "Autonomous Agent System Implementation - Generic Launcher",
+      "completed_date": "2026-02-07",
+      "time_spent": "~2 hours",
+      "deliverables": [
+        "agent_coordination/agent_configs.py - Agent capability definitions",
+        "agent_coordination/agent_runner.py - Autonomous listening loop library",
+        "agent_coordination/demo_autonomous_agent.py - Test/demo agent",
+        "agent_coordination/publish_test_task.py - Test task publisher",
+        "agent_coordination/AUTONOMOUS-AGENTS-GUIDE.md - Usage guide",
+        "agent_coordination/AUTONOMOUS-AGENTS-IMPLEMENTATION-SUMMARY.md - Complete implementation docs",
+        "Updated plans/nats-agent-integration-task.md - Marked complete"
+      ],
+      "outcome": "Success",
+      "notes": "Created complete autonomous agent system based on user's workflow preference: each agent runs in a terminal window as a long-lived Claude session, connects to NATS on startup, listens for tasks matching their capabilities, automatically claims and executes work, reports completion to Morgan/PM, and notifies next agent in workflow. System enables full autonomous operation where Morgan publishes tasks and agents handle the entire workflow automatically with no manual intervention. Implemented generic AgentRunner library that all agents can use, configuration system for defining agent capabilities, demo agent for testing, and comprehensive documentation. Ready for integration with real agents (Debbie, Doc Brown, Alice, Morgan).",
+      "rag_updates": "None - infrastructure work"
+    }
+  ],
+
+  "key_decisions": [
+    {
+      "decision_id": "DEC-NATS-001",
+      "date": "2026-01-30",
+      "decision": "Make heartbeat monitoring MANDATORY for all NEW agents only, do not require existing agents to retrofit",
+      "reasoning": "User specifically requested not to notify existing agents. Existing agents (Web-Content-Builder-Agent, Project-Manager-Claude) can continue operating without heartbeat. Requirement applies to future agents to ensure system can detect crashes and enable automatic recovery.",
+      "alternatives_considered": [
+        "Require all agents (new and existing) to implement heartbeat",
+        "Make heartbeat optional but recommended",
+        "Implement automatic heartbeat in WorkerClient"
+      ],
+      "outcome": "Updated documentation, created checklist, notified PM - clear separation between old and new agents",
+      "impact": "Future agents will have better monitoring, but no disruption to existing work. System gradually improves as new agents are created."
+    },
+    {
+      "decision_id": "DEC-NATS-002",
+      "date": "2026-01-30",
+      "decision": "Implement dashboard features with auto-refresh polling instead of WebSocket",
+      "reasoning": "5-10 second auto-refresh is sufficient for current use case. Simpler implementation, no WebSocket infrastructure needed. Can upgrade to WebSocket later if real-time requirements become critical.",
+      "alternatives_considered": [
+        "WebSocket for true real-time updates",
+        "Server-sent events (SSE)",
+        "Manual refresh only"
+      ],
+      "outcome": "Dashboard auto-refreshes every 5-10 seconds, simple and effective",
+      "impact": "Faster implementation, lower complexity, meets user needs. Room for future enhancement if needed."
+    },
+    {
+      "decision_id": "DEC-NATS-003",
+      "date": "2026-01-30",
+      "decision": "Create separate Messages page instead of embedding in Dashboard",
+      "reasoning": "User requested 'actual link to different chat conversations' - implies separate page. Keeps Dashboard focused on status/monitoring, Messages page focused on communication history. Better separation of concerns.",
+      "alternatives_considered": [
+        "Add messages section to Dashboard",
+        "Create modal/popup for messages",
+        "Embed messages in agent cards"
+      ],
+      "outcome": "Created /messages.html with full-featured message viewer",
+      "impact": "Cleaner navigation, better UX, each page has focused purpose. Navigation tabs make it easy to switch between Dashboard and Messages."
+    },
+    {
+      "decision_id": "DEC-NATS-004",
+      "date": "2026-01-30",
+      "decision": "Use client-side filtering for Messages page instead of server-side",
+      "reasoning": "Fetch all messages once (up to 500), then filter in JavaScript. Reduces API calls, faster filtering response, simpler implementation. Message volume is low enough that performance is not an issue.",
+      "alternatives_considered": [
+        "Server-side filtering with query parameters",
+        "GraphQL-style query language",
+        "Separate API endpoint for each filter combination"
+      ],
+      "outcome": "Fast, responsive filtering with no API calls when changing filters",
+      "impact": "Better user experience, simpler code, reduced server load"
+    }
+  ],
+
+  "resources_used": {
+    "rag_knowledge_base": {
+      "location": "/Cowork/content/rag/knowledge.jsonl",
+      "total_entries_referenced": 0,
+      "entries_added": 0,
+      "verification_log": []
+    },
+    "assets": {
+      "images": {
+        "location": "N/A",
+        "used": []
+      },
+      "documents": {
+        "location": "/agent_coordination/",
+        "referenced": [
+          "QUICKSTART.md",
+          "client.py",
+          "server.py",
+          "models.py",
+          "static/index.html"
+        ]
+      }
+    },
+    "external_resources": {
+      "research_sites": [],
+      "documentation": [
+        "NATS JetStream documentation (referenced in context)",
+        "FastAPI documentation (referenced in context)",
+        "HTML/CSS/JavaScript for dashboard development"
+      ]
+    }
+  },
+
+  "challenges_encountered": [
+    {
+      "challenge_id": "CHAL-001",
+      "date": "2026-01-30",
+      "challenge": "Server restart required to apply changes to server.py and static files",
+      "impact": "Had to stop and restart FastAPI server to enable /messages.html route",
+      "solution": "Killed existing server process with pkill, then started new server in background. Verified health endpoint after restart.",
+      "lessons_learned": "FastAPI doesn't hot-reload when running in background via nohup. Need to restart server for route changes to take effect.",
+      "preventive_measures": "Document server restart procedure. Consider using development mode with auto-reload for future development."
+    },
+    {
+      "challenge_id": "CHAL-002",
+      "date": "2026-01-30",
+      "challenge": "Import path issues when running troubleshooter agent from different directories",
+      "impact": "Initial troubleshooter script had import errors when run from project root",
+      "solution": "Updated sys.path.insert() to use Path(__file__).parent.parent for correct parent directory resolution. Created separate 'once' version for one-time execution.",
+      "lessons_learned": "Python import paths are relative to execution directory. Always use pathlib.Path for reliable path resolution.",
+      "preventive_measures": "Use consistent import pattern in all agent scripts. Test from multiple directories before finalizing."
+    }
+  ],
+
+  "lessons_learned": [
+    {
+      "lesson_id": "LESSON-001",
+      "date": "2026-01-30",
+      "category": "Process",
+      "lesson": "Clear documentation prevents confusion about system requirements",
+      "context": "Creating mandatory heartbeat requirement for future agents while NOT requiring existing agents to change",
+      "application": "Document requirements clearly with explicit scope (new vs existing). Use WARNING and CRITICAL markers for important requirements. Create both high-level guides (CLAUDE.md) and detailed checklists (AGENT-CREATION-CHECKLIST.md)."
+    },
+    {
+      "lesson_id": "LESSON-002",
+      "date": "2026-01-30",
+      "category": "Technical",
+      "lesson": "Auto-refresh is sufficient for most dashboard needs - don't over-engineer",
+      "context": "User wanted real-time visibility into agent status, but 5-10 second refresh is actually fine for this use case",
+      "application": "Start simple with polling/auto-refresh. Only implement WebSocket/SSE if latency requirements are sub-second. Simpler solutions are easier to maintain and debug."
+    },
+    {
+      "lesson_id": "LESSON-003",
+      "date": "2026-01-30",
+      "category": "Communication",
+      "lesson": "Ask clarifying questions before implementing features",
+      "context": "Asked user 4 detailed questions about Messages page before building it (conversation display style, filtering needs, navigation placement)",
+      "application": "When user request is open-ended, present options and get confirmation. Prevents building wrong thing. User appreciated being asked and confirmed recommendation."
+    },
+    {
+      "lesson_id": "LESSON-004",
+      "date": "2026-01-30",
+      "category": "Design",
+      "lesson": "Visual indicators (animations, colors) significantly improve UX for alerts",
+      "context": "Approval flag uses blinking animation and shaking icon to grab attention. Task medallion uses pulsing glow to show activity.",
+      "application": "Don't just display information - use animation and visual design to communicate urgency and state. Blinking = needs attention. Pulsing = active. Static = informational."
+    }
+  ],
+
+  "research_conducted": [],
+
+  "timeline": {
+    "created": "2026-01-30",
+    "launched": "2026-01-30",
+    "first_task_completed": "2026-01-30",
+    "major_milestones": [
+      {
+        "milestone": "Registered with NATS coordination system",
+        "date": "2026-01-30",
+        "significance": "First troubleshooting agent in the system, established pattern for system monitoring agents"
+      },
+      {
+        "milestone": "Heartbeat monitoring requirement established",
+        "date": "2026-01-30",
+        "significance": "System-wide improvement that will prevent stuck agents and enable automatic recovery for all future agents"
+      },
+      {
+        "milestone": "Dashboard features deployed (medallion + approval flag)",
+        "date": "2026-01-30",
+        "significance": "Real-time visibility into agent activity - user can now see what agents are doing and when they need attention"
+      },
+      {
+        "milestone": "Messages page launched",
+        "date": "2026-01-30",
+        "significance": "Complete communication history viewer - user can review work assignments, agent communication, and problems"
+      }
+    ],
+    "total_hours_worked": 5.5,
+    "tasks_completed": 3,
+    "tasks_total": 3
+  },
+
+  "quality_metrics": {
+    "accuracy": {
+      "target": "100% of system information accurate and up-to-date",
+      "current": "100% - All diagnostic reports reflect actual system state",
+      "verification_method": "Tested all features with demo agents, verified API endpoints, checked dashboard display"
+    },
+    "completeness": {
+      "target": "All requested features fully implemented with documentation",
+      "current": "100% - All three tasks delivered with comprehensive documentation"
+    },
+    "timeliness": {
+      "target": "Same-day delivery for troubleshooting and feature requests",
+      "current": "100% - All work completed in single session"
+    }
+  },
+
+  "collaboration": {
+    "works_with": [
+      {
+        "agent": "Project-Manager-Claude",
+        "relationship": "Reports system status and requirements to PM",
+        "handoffs": "PM receives coordination messages about system health, requirements updates, and feature deployments. PM is responsible for ensuring future agents follow heartbeat requirements."
+      },
+      {
+        "agent": "Web-Content-Builder-Agent",
+        "relationship": "Identified as lacking heartbeat monitoring (but not notified per user request)",
+        "handoffs": "None currently - existing agents continue operating as-is"
+      },
+      {
+        "agent": "Future agents",
+        "relationship": "Provides troubleshooting support and system monitoring",
+        "handoffs": "All new agents use updated documentation (AGENT-CREATION-CHECKLIST.md) which includes heartbeat monitoring"
+      }
+    ],
+    "dependencies_on_others": [
+      "NATS server must be running (provided by infrastructure)",
+      "FastAPI server must be running (managed separately)",
+      "Agents must use WorkerClient for troubleshooter to monitor them"
+    ],
+    "provides_to_others": [
+      "System health monitoring and diagnostics",
+      "Dashboard features for agent visibility",
+      "Documentation and troubleshooting guides",
+      "Agent creation standards and templates"
+    ]
+  },
+
+  "communication_log": [
+    {
+      "date": "2026-01-30 15:46",
+      "direction": "To Project-Manager-Claude",
+      "message_type": "Status Update",
+      "summary": "Initial system diagnostic report - 3 agents without heartbeat monitoring, system operational",
+      "action_items": [
+        "PM now aware of heartbeat gap",
+        "PM knows system is healthy overall"
+      ]
+    },
+    {
+      "date": "2026-01-30 15:49",
+      "direction": "To Project-Manager-Claude",
+      "message_type": "Decision",
+      "summary": "CRITICAL requirement for future agents - heartbeat monitoring mandatory",
+      "action_items": [
+        "PM must include heartbeat in all new agent creation",
+        "PM to reference AGENT-CREATION-CHECKLIST.md",
+        "Existing agents continue without changes"
+      ]
+    },
+    {
+      "date": "2026-01-30 15:51",
+      "direction": "To Project-Manager-Claude",
+      "message_type": "Status Update",
+      "summary": "Documentation updated - heartbeat requirements now in CLAUDE.md and AGENT-CREATION-CHECKLIST.md",
+      "action_items": [
+        "PM has all documentation needed",
+        "Templates ready for new agents"
+      ]
+    },
+    {
+      "date": "2026-01-30 16:06",
+      "direction": "To Project-Manager-Claude",
+      "message_type": "Status Update",
+      "summary": "Dashboard features deployed - task medallion and approval flag live",
+      "action_items": [
+        "Agents can now show current task in real-time",
+        "Agents can request user approval via heartbeat"
+      ]
+    },
+    {
+      "date": "2026-02-02 16:49",
+      "direction": "To Project-Manager-Claude",
+      "message_type": "Status Update",
+      "summary": "Messages page deployed - complete communication viewer at /messages.html",
+      "action_items": [
+        "User can now review all agent communication",
+        "Error tracking and task history visible"
+      ]
+    }
+  ],
+
+  "next_actions": [
+    "Continue monitoring NATS coordination system health",
+    "Stand by for troubleshooting requests from other agents",
+    "Assist with dashboard improvements as needed",
+    "Support PM with agent coordination issues"
+  ],
+
+  "metadata": {
+    "file_version": "1.0",
+    "template_version": "1.0",
+    "last_updated": "2026-01-30",
+    "updated_by": "NATS-Troubleshooter-Agent",
+    "update_frequency": "After each major task completion or system change",
+    "purpose": "Track troubleshooting work, system improvements, and dashboard feature development. Serves as institutional knowledge for NATS coordination system evolution.",
+    "retention": "Keep for project duration - valuable for understanding system monitoring evolution and troubleshooting patterns"
+  }
+}

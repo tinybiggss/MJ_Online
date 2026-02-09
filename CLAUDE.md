@@ -219,6 +219,209 @@ grep "AI Memory System\|OfflineAI" /Cowork/content/rag/knowledge.jsonl | head -1
 - Achievements: 80% delivery improvement, 3x efficiency gains
 - Managed teams: 50-120+ people, budgets: $4M-$12M+
 
+## Environment Variables & Ghost API Configuration
+
+**CRITICAL: Ghost API credentials are stored in `.env` file for programmatic content management.**
+
+### Environment File Location
+- **File:** `/.env` (in project root)
+- **Template:** `/.env.example` (safe to commit, shows required variables)
+- **Status:** ✅ Configured with Ghost Pro API keys
+
+### What's in `.env`
+
+```bash
+GHOST_CONTENT_API_KEY=<key>      # For reading published content
+GHOST_ADMIN_API_KEY=<id:secret>  # For creating/updating content via API
+GHOST_API_URL=https://mikejones-online.ghost.io
+```
+
+### Security
+
+**IMPORTANT:**
+- `.env` is in `.gitignore` - NEVER commit it to GitHub
+- Contains sensitive API keys for Ghost Pro
+- Agents can read it when they need Ghost API access
+- If keys are compromised, regenerate in Ghost Admin → Integrations
+
+### When Agents Need Ghost API Access
+
+**Use the .env file when:**
+- Creating or updating content programmatically via Ghost Admin API
+- Reading published content via Ghost Content API
+- Automating Ghost Pro configuration tasks
+- Building integrations (chatbot, content sync, etc.)
+
+**How to use in Python:**
+```python
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Loads from .env file
+
+GHOST_ADMIN_API_KEY = os.getenv('GHOST_ADMIN_API_KEY')
+GHOST_API_URL = os.getenv('GHOST_API_URL')
+```
+
+**How to check from command line:**
+```bash
+# Verify .env exists and is readable
+cat .env
+
+# Load in shell (if needed)
+export $(cat .env | xargs)
+echo $GHOST_API_URL
+```
+
+### Ghost API Documentation
+
+- **Admin API:** https://ghost.org/docs/admin-api/ (create/update/delete content)
+- **Content API:** https://ghost.org/docs/content-api/ (read published content)
+- **Python Client:** `pip install ghost-client` (recommended for Python agents)
+
+---
+
+## Page Creation Workflow
+
+**Updated:** 2026-02-06
+**Status:** New process - pilot testing on About page before full rollout
+
+### Overview
+
+MJ_Online uses a three-agent workflow for creating and publishing pages:
+
+```
+Design → Mobiledoc Assembly → API Publishing
+```
+
+**This replaces browser automation** with a more reliable, repeatable, version-controllable process.
+
+### The Workflow
+
+#### Step 1: Design System Foundation
+
+**Agent:** Debbie (Web Design Agent / Design System Architect)
+**Deliverable:** `/design/DESIGN-SYSTEM.md`
+
+Before any page work, Debbie creates the complete design system:
+- Brand essence and visual identity
+- Color palette (hex codes, usage rules)
+- Typography system (fonts, scale, weights)
+- Spacing system (margins, padding, white space)
+- Visual hierarchy principles
+- Component library (hero sections, cards, buttons, CTAs)
+- Page-specific guidelines
+- Visual consistency rules
+
+**Authority:** Debbie can override Kyoto theme defaults or recommend theme changes if needed to make the site "POP" and reflect Mike's AI expertise positioning.
+
+#### Step 2: Page Design
+
+**Agent:** Debbie (Web Design Agent)
+**Input:** Approved design system + page requirements
+**Deliverable:** Design specification for specific page
+
+Debbie designs each page using the approved design system:
+- Applies design system components and rules
+- Selects images from available assets
+- Verifies all facts against RAG knowledge base
+- Creates design specification (format determined in pilot test)
+
+**Design spec includes:**
+- Page structure and layout
+- Content blocks with hierarchy
+- Typography applications
+- Image placements (which assets, where, what size)
+- Spacing and visual flow
+- RAG-verified factual content
+
+#### Step 3: Mobiledoc Assembly
+
+**Agent:** Mobiledoc Assembler (specialized agent)
+**Input:** Debbie's design specification + image URLs from Alice
+**Deliverable:** Valid Mobiledoc JSON file
+
+The Mobiledoc Assembler converts design specs to Ghost-compatible format:
+- Parses design specification
+- Constructs valid Mobiledoc JSON structure
+- References uploaded image URLs
+- Applies proper formatting and hierarchy
+- **Output is strictly valid Mobiledoc JSON** (no prose, no commentary)
+
+**Agent Definition:** `/.claude/agents/mobiledoc-assembler.md` (to be created in Phase 3.0.1)
+
+#### Step 4: Image Upload
+
+**Agent:** Alice (Web Content Builder)
+**Input:** List of required images from Debbie's design
+**Deliverable:** Image URLs for Mobiledoc Assembler
+
+Alice uploads images via Ghost Admin API:
+- Reads image file paths from design spec
+- Uploads each image to Ghost via API
+- Collects returned image URLs
+- Provides URLs to Mobiledoc Assembler
+
+#### Step 5: API Publishing
+
+**Agent:** Alice (Web Content Builder)
+**Input:** Valid Mobiledoc JSON from assembler
+**Deliverable:** Published page on MikeJones.online
+
+Alice publishes content via Ghost Admin API:
+- Uses Ghost Admin API (credentials in `.env`)
+- Creates or updates page with Mobiledoc JSON
+- Sets SEO metadata (title, description, featured image)
+- Publishes page
+- Reports success or errors
+
+#### Step 6: Review & Iteration
+
+**Reviewer:** Mike Jones
+**Process:** Visual review of published page
+
+Mike reviews the live page:
+- Does it match design intent?
+- Is content accurate? (RAG-verified)
+- Does it look good on mobile?
+- Any adjustments needed?
+
+If iteration needed, return to Step 2 (Debbie adjusts design).
+
+### Why This Workflow?
+
+**Problems with browser automation:**
+- Ghost editor has complex iframe structure
+- Unreliable automation (clicks don't register, text input fails)
+- Image uploads inconsistent
+- Hard to debug when things go wrong
+
+**Benefits of API-based workflow:**
+- ✅ Stable, reliable Ghost Admin API
+- ✅ Mobiledoc JSON is version-controllable
+- ✅ Can review/test JSON before publishing
+- ✅ Repeatable process
+- ✅ Design system ensures consistency
+- ✅ Faster iteration cycles
+
+### Pilot Test
+
+**Page:** About page
+**Status:** Not started (waiting for Design System completion)
+**Purpose:** Validate workflow before rolling out to all pages
+
+**See:** `/plans/workflow-questions.md` for questions to answer during pilot test.
+
+### Current Status
+
+**Phase 3.0:** Design System Creation - ⚪ Assigned to Debbie
+**Phase 3.0.1:** Mobiledoc Assembler Agent - ⚪ Not started
+**Phase 3.0.2:** Pilot Test (About Page) - ⚪ Not started
+
+**After successful pilot:** Roll out to remaining pages (Resume, case studies, etc.)
+
+---
+
 ## Available Skills
 
 ### Project Manager (`/.claude/agents/project-manager.md`)

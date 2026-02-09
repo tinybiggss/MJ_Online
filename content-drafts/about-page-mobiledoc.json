@@ -1,0 +1,102 @@
+{
+  "mobiledoc": "0.3.2",
+  "atoms": [],
+  "cards": [
+    ["heading", {
+      "text": "About Mike Jones",
+      "level": 1
+    }],
+    ["image", {
+      "src": "https://www.mikejones.online/content/images/2026/02/headshot-professional.png",
+      "alt": "Mike Jones - AI Implementation Expert and LLM Integration Specialist",
+      "width": 400,
+      "height": 400
+    }],
+    ["paragraph", {
+      "text": "Building better systems for 29 years—from Xbox launch teams to AI implementation"
+    }],
+    ["heading", {
+      "text": "The Through-Line: Creating Better Systems",
+      "level": 2
+    }],
+    ["markdown", {
+      "markdown": "Before I ever touched code, I was optimizing systems. As a college warehouse manager, I redesigned workflows to move product faster. At Microsoft, I created the VINCE instrumentation tool that made invisible player data visible—opening new careers and eventually evolving into Halo's Kill Cam feature.\n\nEvery company since has followed the same pattern: I hear problems others are having, identify the gaps in existing systems, and create something that fills that gap. It's not about technology for its own sake—it's people-centered. When teams thrive, organizations thrive. Building better systems creates opportunities for everyone."
+    }],
+    ["heading", {
+      "text": "From Political Science to Xbox: An Accidental Path to Tech",
+      "level": 2
+    }],
+    ["markdown", {
+      "markdown": "Between ages 10 and 14, I dreamed of making video games. By college, I'd pivoted to political science—not because I wanted to run for office, but because I was fascinated by **systems**: how projects move through processes, how laws pass, how society is governed.\n\nThen came the tech pivot. My roommate was studying for Microsoft networking certifications, and I realized I understood the material better than he did. I could see how processes and projects worked together. Around the same time, I hacked the college network so we could play multiplayer Doom (1990-91).\n\nAfter graduation, I worked at Aviation Supplies & Academics doing tech support and QA for flight simulator software. I loved it, but realized my passion was software, not politics. I enrolled at the University of Washington for computer science, met someone at Microsoft Games, and within six weeks landed my dream job at Microsoft Games Organization in 1999."
+    }],
+    ["heading", {
+      "text": "Career Highlights",
+      "level": 2
+    }],
+    ["markdown", {
+      "markdown": "Over 29 years, I've worked across gaming, entertainment, media, and tech—always focused on creating systems that help people thrive.\n\n**Microsoft (1999-2007):** Xbox & Xbox 360 launch teams, contributed to 6 AAA titles. Created VINCE instrumentation tool (Xbox SDK patent) that evolved into Halo's Kill Cam feature.\n\n**Director Roles (2008-2021):** Led PMO and production teams at Kabam (hypergrowth gaming), Livescribe (digital pen systems), Kinoo (AR communication platform - 10 awards including CES Innovation Award).\n\n**8 Circuit Studios (2022-2024):** Co-founder of Web3 gaming company building \"proto-metaverse\" with player ownership and creator royalties.\n\n**Metrics:** Managed teams of `50-120+` people, budgets `$4M-$12M+`. Achieved `80%` improvement in delivery predictability, `3x` operational efficiency gains."
+    }],
+    ["heading", {
+      "text": "The AI Transition: From Systems Guy to AI Builder",
+      "level": 2
+    }],
+    ["markdown", {
+      "markdown": "I started using AI seriously about 2.5 years ago. The ChatGPT 2025 Year in Review report showed I was in the top 1% of users and top 3% for conversation volume.\n\nWhy did AI click for me? As a systems thinker, I've always seen connections others couldn't follow. AI gave me structure to create \"straight lines\" so others could see what I saw. It enabled Resilient Tomorrow, where AI helped me organize my thoughts into meaningful conversations that resonated with thousands of readers.\n\nI quickly mastered prompting, but realized the real key is **CONTEXT**—give AI the right context and it can help you find answers you didn't know you were looking for. Once I saw AI could help me code, build prototypes, create things I wanted to exist in the world—there was no stopping it.\n\nNow I'm not just using AI systems, I'm **building** them: AI Memory System for persistent context across conversations, Local LLM infrastructure for privacy and sovereignty, and AI-Augmented Process Design (AAPD) methodology for clients who need to untangle complex workflows."
+    }],
+    ["heading", {
+      "text": "Current Work",
+      "level": 2
+    }],
+    ["markdown", {
+      "markdown": "Today I'm working on parallel projects that all implement the same vision—building systems that reduce dependency and give people more agency.\n\n**Velocity Partners:** AI-augmented PMO consulting for gaming, entertainment, and media companies (50-1500 person teams). AAPD methodology, PM Drowning framework, fractional PMO services. Making work flow.\n\n**NeighborhoodShare:** Tool-sharing platform using AI to categorize items and build hyperlocal community through mutual aid. Started with an angle grinder story—solving problems with resources already around us.\n\n**AI Memory System:** Personal knowledge management infrastructure that maintains context across AI conversations and platforms. JSONL format, cross-AI compatible (Claude, ChatGPT, OpenWebUI). Solves the context loss problem.\n\n**Local LLM Infrastructure:** Self-hosted AI running on Mac Mini (Ollama + OpenWebUI). Privacy, sovereignty, offline capability. AI built to work for me, not on me.\n\n**Resilient Tomorrow:** Substack publication on community resilience and building parallel systems. 7 Pillars framework. Top articles: 989 likes, 230 restacks. Includes Offramp Assistant GPT and Community Defense Playbook."
+    }],
+    ["heading", {
+      "text": "How It All Connects",
+      "level": 2
+    }],
+    ["markdown", {
+      "markdown": "All of these projects implement the **7 Pillars** framework from Resilient Tomorrow—building parallel systems that reduce dependency on fragile centralized infrastructure.\n\nNeighborhoodShare implements Pillar 3 (Access > Money) and Pillar 7 (Hyperlocal Community). AI Memory and Local LLM implement Pillar 4 (Knowledge Stewardship) and Pillar 5 (Communication Independence). Resilient Tomorrow is the thesis tying it all together.\n\nThe core philosophy: **\"You don't burn the old system down until the new one can carry weight.\"** I'm building in parallel while still living in the world as it is. Not about purity—it's about direction."
+    }],
+    ["heading", {
+      "text": "What Drives Me",
+      "level": 2
+    }],
+    ["markdown", {
+      "markdown": "Creating efficiency and better systems has been my through-line since college warehouse days. But it's always been people-centered—hearing team problems, filling gaps, creating opportunities for others to grow.\n\nIt's not about individual mastery, it's about shared capability. Not about purity, it's about direction. I build systems that help people thrive."
+    }],
+    ["heading", {
+      "text": "Let's Talk",
+      "level": 2
+    }],
+    ["paragraph", {
+      "text": "Whether you're looking to implement AI in your organization, need help untangling complex workflows, or want to explore collaboration—I'd love to hear from you."
+    }],
+    ["button", {
+      "text": "Get in Touch",
+      "url": "/contact"
+    }]
+  ],
+  "markups": [],
+  "sections": [
+    [10, 0],
+    [10, 1],
+    [10, 2],
+    [10, 3],
+    [10, 4],
+    [10, 5],
+    [10, 6],
+    [10, 7],
+    [10, 8],
+    [10, 9],
+    [10, 10],
+    [10, 11],
+    [10, 12],
+    [10, 13],
+    [10, 14],
+    [10, 15],
+    [10, 16],
+    [10, 17],
+    [10, 18],
+    [10, 19]
+  ]
+}

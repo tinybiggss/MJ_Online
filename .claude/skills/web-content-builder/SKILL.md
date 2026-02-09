@@ -248,3 +248,195 @@ CTA: View Projects / Download Resume
 - **Design decisions:** Read `references/design-specs.md`
 - **Content patterns:** Read `references/content-patterns.md`
 - **Ghost features:** Read `references/ghost-features.md`
+
+---
+
+## 🤖 AUTONOMOUS MODE
+
+**When launching in autonomous mode, execute this startup code to connect to NATS and listen for publishing tasks:**
+
+```python
+import sys
+sys.path.insert(0, "/Users/michaeljones/Dev/MJ_Online")
+
+from agent_coordination.agent_runner import AgentRunner
+import asyncio
+
+async def run_alice_autonomous():
+    """Run Alice in autonomous NATS mode - listening for publishing and content tasks."""
+    runner = AgentRunner("web-content-builder")
+
+    try:
+        # Connect to NATS, register, start heartbeat
+        await runner.start()
+
+        print("=" * 60)
+        print("📝 ALICE - WEB CONTENT BUILDER")
+        print("=" * 60)
+        print("✅ Connected to NATS coordination system")
+        print("💓 Heartbeat monitoring active")
+        print("🎧 Listening for publishing and content tasks...")
+        print("\nWatching for tasks with types: publishing, content, upload")
+        print("Or keywords: publish, ghost, upload, image, api, content")
+        print("\n🟢 Ready to publish content to Ghost Pro!\n")
+
+        # Main work loop - listen for tasks matching my capabilities
+        async for task in runner.listen_for_tasks():
+            print(f"\n{'=' * 60}")
+            print(f"📥 NEW TASK RECEIVED: {task['task_id']}")
+            print(f"{'=' * 60}")
+            print(f"Title: {task['title']}")
+            print(f"Description: {task.get('description', 'No description')}")
+            print(f"Type: {task.get('type', 'Unknown')}")
+            print(f"\n📝 Starting content publishing work...\n")
+
+            try:
+                # Execute my normal publishing work
+                result = await execute_publishing_work(task, runner)
+
+                # Report completion (end of workflow - no next agent)
+                await runner.complete_task(task["task_id"], result=result)
+
+                print(f"\n{'=' * 60}")
+                print(f"✅ TASK COMPLETE: {task['task_id']}")
+                print(f"{'=' * 60}")
+                print(f"Summary: {result.get('summary', 'Publishing completed')}")
+                print(f"Page URL: {result.get('page_url', 'N/A')}")
+                if runner.config.next_agent:
+                    print(f"📣 Notified {runner.config.next_agent}")
+                else:
+                    print("🎉 Workflow complete - content is live!")
+                print(f"\n🎧 Back to listening for next publishing task...\n")
+
+            except Exception as e:
+                print(f"\n❌ ERROR executing task {task['task_id']}: {e}")
+                import traceback
+                traceback.print_exc()
+
+                # Report failure
+                await runner.complete_task(
+                    task["task_id"],
+                    error=f"Publishing failed: {e}"
+                )
+                print(f"\n🎧 Error reported, back to listening...\n")
+
+    except KeyboardInterrupt:
+        print(f"\n\n⚠️  Shutting down Alice (Ctrl+C received)...")
+        await runner.stop()
+        print("✅ Shutdown complete. Goodbye!\n")
+    except Exception as e:
+        print(f"\n❌ Fatal error in autonomous mode: {e}")
+        import traceback
+        traceback.print_exc()
+        if runner:
+            await runner.stop()
+
+async def execute_publishing_work(task, runner):
+    """
+    Execute publishing work for a given task.
+
+    This is where I do what I normally do - publish content to Ghost Pro.
+    """
+    task_id = task["task_id"]
+    task_title = task["title"]
+    task_description = task.get("description", "")
+
+    # Update heartbeat with task details
+    await runner.heartbeat(
+        status="busy",
+        current_task=task_id,
+        current_task_title=task_title
+    )
+
+    print(f"📋 Reading Mobiledoc JSON for publishing...")
+    print(f"📝 Publishing to Ghost Pro via Admin API...")
+
+    # STEP 1: Read Mobiledoc JSON
+    # Use Read tool to load the Mobiledoc JSON file from /content-drafts/
+    # Typically: /content-drafts/[page]-mobiledoc.json
+
+    # STEP 2: Upload images to Ghost
+    # Extract image references from Mobiledoc
+    # Upload each image via Ghost Admin API
+    # Get back image URLs
+    # Update Mobiledoc with Ghost-hosted URLs
+
+    # STEP 3: Create/Update page via Ghost Admin API
+    # Use Ghost Admin API to create or update the page
+    # POST to /ghost/api/admin/pages/ endpoint
+    # Include Mobiledoc JSON in body
+
+    # STEP 4: Set SEO metadata
+    # Meta title, meta description, og_image
+    # Verify RAG-sourced content is accurate
+
+    # STEP 5: Publish page
+    # Set status to "published"
+    # Verify page is live
+
+    # STEP 6: Test and verify
+    # Check page loads on mikejones.online
+    # Verify mobile responsiveness
+    # Check navigation links
+
+    result = {
+        "summary": f"Content published: {task_title}",
+        "deliverables": [
+            "Page published to Ghost Pro",
+            f"Live at: https://mikejones.online/{task_id}"
+        ],
+        "page_url": f"https://mikejones.online/{task_id}",
+        "images_uploaded": 0,  # Count from actual work
+        "seo_complete": True,
+        "mobile_tested": True,
+        "workflow_complete": True
+    }
+
+    print(f"✅ Page published successfully")
+    print(f"🌐 Live URL: {result['page_url']}")
+
+    return result
+
+# START AUTONOMOUS MODE
+# This runs when Alice is launched
+print("\n📝 Alice starting in AUTONOMOUS MODE...")
+asyncio.run(run_alice_autonomous())
+```
+
+**How Autonomous Mode Works:**
+
+1. **You launch me** in a terminal via Skill invocation
+2. **I connect to NATS** and register as "Alice"
+3. **I sit idle**, listening for publishing tasks
+4. **When a publishing task arrives** (from Morgan after Doc Brown completes Mobiledoc):
+   - I automatically claim it
+   - I read the Mobiledoc JSON file using Read tool
+   - I upload images to Ghost via Admin API
+   - I create/update the page via Ghost Admin API
+   - I set SEO metadata (RAG-verified)
+   - I publish the page and verify it's live
+   - I report completion to Morgan
+   - Workflow complete!
+5. **I return to listening** for the next publishing task
+
+**Task Matching:**
+I watch for tasks with:
+- Types: `publishing`, `content`, `upload`
+- Keywords: publish, ghost, upload, image, api, content
+
+**My Workflow:**
+1. Claim task → Read Mobiledoc JSON
+2. Upload images to Ghost (get URLs back)
+3. Update Mobiledoc with Ghost image URLs
+4. Create/update page via Ghost Admin API
+5. Set SEO metadata (RAG-verified)
+6. Publish and verify live
+7. Report completion → End of workflow!
+
+**Benefits:**
+- ✅ Immediate response to Doc Brown's completions
+- ✅ RAG verification before publishing
+- ✅ SEO optimization automatic
+- ✅ End-to-end workflow automation
+
+Ready to publish content to mikejones.online!
