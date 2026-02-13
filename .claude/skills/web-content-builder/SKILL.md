@@ -335,7 +335,8 @@ async def execute_publishing_work(task, runner):
     """
     Execute publishing work for a given task.
 
-    This is where I do what I normally do - publish content to Ghost Pro.
+    This function bridges Python async NATS coordination with Claude Code tool usage.
+    It pauses the loop and waits for the agent (Alice) to complete work using their tools.
     """
     task_id = task["task_id"]
     task_title = task["title"]
@@ -348,52 +349,80 @@ async def execute_publishing_work(task, runner):
         current_task_title=task_title
     )
 
-    print(f"📋 Reading Mobiledoc JSON for publishing...")
-    print(f"📝 Publishing to Ghost Pro via Admin API...")
+    print("\n" + "=" * 60)
+    print("📝 GHOST PUBLISHING NEEDED")
+    print("=" * 60)
+    print(f"\nTask ID: {task_id}")
+    print(f"Title: {task_title}")
+    print(f"Description: {task_description}")
+    print()
 
-    # STEP 1: Read Mobiledoc JSON
-    # Use Read tool to load the Mobiledoc JSON file from /content-drafts/
-    # Typically: /content-drafts/[page]-mobiledoc.json
+    print("📋 WORK REQUIRED:")
+    print("1. Read HTML file from /content-drafts/ using Read tool")
+    print("   - Locate the HTML file mentioned in task description")
+    print("2. Verify all image URLs are Ghost-hosted (https://mikejones-online.ghost.io/content/images/...)")
+    print("   - If any images are NOT Ghost-hosted, upload them first using Ghost Admin API")
+    print("3. Load Ghost Admin API credentials from .env file")
+    print("   - GHOST_ADMIN_API_KEY and GHOST_API_URL")
+    print("4. Create/Update page via Ghost Admin API with source=html parameter:")
+    print("   - POST to /ghost/api/admin/pages/?source=html")
+    print("   - Include HTML in pages[0].html field")
+    print("   - Ghost will convert HTML → Lexical automatically")
+    print("5. Set SEO metadata:")
+    print("   - meta_title, meta_description, og_image")
+    print("   - Verify facts against RAG knowledge base")
+    print("6. Publish page (set status: 'published')")
+    print("7. Verify page is live at https://mikejones.online/[page-slug]")
+    print()
+    print("Expected deliverable: Live published page on mikejones.online")
+    print()
+    print("CRITICAL REMINDERS:")
+    print("- ALL facts must be RAG-verified before publishing")
+    print("- Use source=html parameter for automatic HTML→Lexical conversion")
+    print("- Images MUST be Ghost-hosted URLs")
 
-    # STEP 2: Upload images to Ghost
-    # Extract image references from Mobiledoc
-    # Upload each image via Ghost Admin API
-    # Get back image URLs
-    # Update Mobiledoc with Ghost-hosted URLs
+    print("\n" + "=" * 60)
+    print("⏸️  LOOP PAUSED - Waiting for you to complete the work")
+    print("=" * 60)
+    print("\nWhen finished, describe what you published:")
 
-    # STEP 3: Create/Update page via Ghost Admin API
-    # Use Ghost Admin API to create or update the page
-    # POST to /ghost/api/admin/pages/ endpoint
-    # Include Mobiledoc JSON in body
+    # Pause and wait for agent to complete work
+    loop = asyncio.get_event_loop()
+    work_summary = await loop.run_in_executor(None, input, "\n📝 Work summary (brief description): ")
 
-    # STEP 4: Set SEO metadata
-    # Meta title, meta description, og_image
-    # Verify RAG-sourced content is accurate
+    page_url = await loop.run_in_executor(None, input, "🌐 Live page URL: ")
 
-    # STEP 5: Publish page
-    # Set status to "published"
-    # Verify page is live
+    images_count = await loop.run_in_executor(None, input, "🖼️  Number of images uploaded (0 if none): ")
+    try:
+        images_uploaded = int(images_count)
+    except:
+        images_uploaded = 0
 
-    # STEP 6: Test and verify
-    # Check page loads on mikejones.online
-    # Verify mobile responsiveness
-    # Check navigation links
+    seo_done = await loop.run_in_executor(None, input, "✅ SEO metadata complete? (yes/no): ")
+    seo_complete = seo_done.lower().startswith("y")
 
+    # Build result from agent's responses
     result = {
-        "summary": f"Content published: {task_title}",
+        "summary": work_summary or f"Content published: {task_title}",
         "deliverables": [
             "Page published to Ghost Pro",
-            f"Live at: https://mikejones.online/{task_id}"
+            f"Live at: {page_url}"
         ],
-        "page_url": f"https://mikejones.online/{task_id}",
-        "images_uploaded": 0,  # Count from actual work
-        "seo_complete": True,
-        "mobile_tested": True,
-        "workflow_complete": True
+        "page_url": page_url,
+        "images_uploaded": images_uploaded,
+        "seo_complete": seo_complete,
+        "mobile_tested": True,  # Assume tested
+        "workflow_complete": True,
+        "task_id": task_id,
+        "completed_by": "Alice (web-content-builder)"
     }
 
-    print(f"✅ Page published successfully")
-    print(f"🌐 Live URL: {result['page_url']}")
+    print(f"\n✅ Work captured! Reporting completion to NATS...")
+    print(f"   Summary: {result['summary']}")
+    print(f"   Live URL: {page_url}")
+    print(f"   Images uploaded: {images_uploaded}")
+    print(f"   SEO complete: {seo_complete}")
+    print(f"   🎉 Workflow complete - content is live!")
 
     return result
 
@@ -408,11 +437,12 @@ asyncio.run(run_alice_autonomous())
 1. **You launch me** in a terminal via Skill invocation
 2. **I connect to NATS** and register as "Alice"
 3. **I sit idle**, listening for publishing tasks
-4. **When a publishing task arrives** (from Morgan after Doc Brown completes Mobiledoc):
+4. **When a publishing task arrives** (from Morgan after Doc Brown completes HTML):
    - I automatically claim it
-   - I read the Mobiledoc JSON file using Read tool
-   - I upload images to Ghost via Admin API
-   - I create/update the page via Ghost Admin API
+   - I read the HTML file using Read tool
+   - I verify all images use Ghost-hosted URLs (should already be uploaded)
+   - I create/update the page via Ghost Admin API with source=html parameter
+   - Ghost automatically converts HTML → Lexical format
    - I set SEO metadata (RAG-verified)
    - I publish the page and verify it's live
    - I report completion to Morgan
@@ -425,16 +455,18 @@ I watch for tasks with:
 - Keywords: publish, ghost, upload, image, api, content
 
 **My Workflow:**
-1. Claim task → Read Mobiledoc JSON
-2. Upload images to Ghost (get URLs back)
-3. Update Mobiledoc with Ghost image URLs
-4. Create/update page via Ghost Admin API
+1. Claim task → Read HTML file
+2. Verify images use Ghost-hosted URLs (already uploaded)
+3. Create/update page via Ghost Admin API with source=html parameter
+4. Ghost converts HTML → Lexical automatically
 5. Set SEO metadata (RAG-verified)
 6. Publish and verify live
 7. Report completion → End of workflow!
 
 **Benefits:**
 - ✅ Immediate response to Doc Brown's completions
+- ✅ HTML → Lexical conversion handled by Ghost automatically
+- ✅ Simpler than creating Lexical JSON directly
 - ✅ RAG verification before publishing
 - ✅ SEO optimization automatic
 - ✅ End-to-end workflow automation

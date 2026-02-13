@@ -56,11 +56,13 @@ class NATSCoordinationClient:
         return f"{self.SUBJECT_PREFIX}.{channel}"
 
     async def publish_task(self, task: Task) -> dict:
-        """Publish a task to the available queue."""
+        """Publish a task to the tasks subject (single subject architecture)."""
         if not self.js:
             raise RuntimeError("Not connected to NATS")
 
-        subject = self._get_subject(f"tasks.{task.status}")
+        # FIX #1: Publish ALL task updates to single subject regardless of status
+        # This allows deduplicator to see all versions of a task
+        subject = self._get_subject("tasks")
 
         # Prepare task payload
         payload = task.model_dump(mode='json')
@@ -76,7 +78,7 @@ class NATSCoordinationClient:
             json.dumps(payload).encode()
         )
 
-        logger.info(f"Published task {task.task_id} to {subject} (seq: {ack.seq})")
+        logger.info(f"Published task {task.task_id} (status={task.status}) to {subject} (seq: {ack.seq})")
 
         return {
             "sequence": ack.seq,
@@ -118,53 +120,97 @@ class NATSCoordinationClient:
         status: Optional[TaskStatus] = None,
         limit: int = 100
     ) -> list[Task]:
-        """Get tasks from the queue."""
+        """Get tasks from the queue (fetches all, filters by status in memory)."""
         if not self.js:
             raise RuntimeError("Not connected to NATS")
 
         tasks = []
 
-        if status:
-            subject = self._get_subject(f"tasks.{status}")
-        else:
-            subject = self._get_subject("tasks.>")
+        # FIX #1: Fetch from BOTH new single subject AND old status-based subjects
+        # This ensures backward compatibility during migration period
+        # New messages go to "mjwork.tasks", old messages are on "mjwork.tasks.{status}"
+        # Note: We need to query BOTH "tasks" and "tasks.*" separately since "tasks.>" doesn't match "tasks"
+        # We'll fetch from both and combine them
+
+        async def fetch_from_subject(subject_pattern: str) -> list[Task]:
+            """Helper to fetch tasks from a subject."""
+            subject_tasks = []
+            try:
+                psub = await self.js.pull_subscribe(
+                    subject_pattern,
+                    durable=None,
+                    stream=self.STREAM_NAME
+                )
+
+                try:
+                    # Fetch ALL tasks in batches
+                    batch_size = 500
+                    max_messages = 10000  # Safety limit
+                    total_fetched = 0
+
+                    while total_fetched < max_messages:
+                        try:
+                            batch = await psub.fetch(batch_size, timeout=2)
+                            if not batch:
+                                break
+
+                            for msg in batch:
+                                try:
+                                    data = json.loads(msg.data.decode())
+                                    # Parse datetime strings
+                                    data['created_at'] = datetime.fromisoformat(data['created_at'])
+                                    if data.get('claimed_at'):
+                                        data['claimed_at'] = datetime.fromisoformat(data['claimed_at'])
+                                    if data.get('completed_at'):
+                                        data['completed_at'] = datetime.fromisoformat(data['completed_at'])
+
+                                    subject_tasks.append(Task(**data))
+                                    await msg.ack()
+                                except Exception as e:
+                                    logger.error(f"Error parsing task: {e}")
+                                    continue
+
+                            total_fetched += len(batch)
+
+                            if len(batch) < batch_size:
+                                break
+
+                        except TimeoutError:
+                            break
+
+                except TimeoutError:
+                    pass
+                finally:
+                    await psub.unsubscribe()
+
+            except Exception as e:
+                logger.error(f"Error fetching from {subject_pattern}: {e}")
+                # Don't raise - continue with other subjects
+
+            return subject_tasks
 
         try:
-            # Create ephemeral consumer
-            psub = await self.js.pull_subscribe(
-                subject,
-                durable=None,
-                stream=self.STREAM_NAME
-            )
+            # Fetch from NEW single subject (mjwork.tasks)
+            new_tasks = await fetch_from_subject(self._get_subject("tasks"))
+            tasks.extend(new_tasks)
+            logger.info(f"Fetched {len(new_tasks)} tasks from new subject (mjwork.tasks)")
 
-            try:
-                fetched = await psub.fetch(limit, timeout=2)
-
-                for msg in fetched:
-                    try:
-                        data = json.loads(msg.data.decode())
-                        # Parse datetime strings
-                        data['created_at'] = datetime.fromisoformat(data['created_at'])
-                        if data.get('claimed_at'):
-                            data['claimed_at'] = datetime.fromisoformat(data['claimed_at'])
-                        if data.get('completed_at'):
-                            data['completed_at'] = datetime.fromisoformat(data['completed_at'])
-
-                        tasks.append(Task(**data))
-                        await msg.ack()
-                    except Exception as e:
-                        logger.error(f"Error parsing task: {e}")
-                        continue
-
-            except TimeoutError:
-                # No messages or fewer than requested
-                pass
-            finally:
-                await psub.unsubscribe()
+            # Fetch from OLD status-based subjects (mjwork.tasks.*)
+            old_tasks = await fetch_from_subject(self._get_subject("tasks.>"))
+            tasks.extend(old_tasks)
+            logger.info(f"Fetched {len(old_tasks)} tasks from old subjects (mjwork.tasks.*)")
 
         except Exception as e:
             logger.error(f"Error fetching tasks: {e}")
             raise
+
+        # Filter by status if requested (after fetching all)
+        # The deduplicator in server.py will handle removing duplicate task_ids
+        # and we filter by status here in memory after seeing all versions
+        if status:
+            tasks = [task for task in tasks if task.status == status]
+
+        logger.info(f"Fetched {len(tasks)} tasks from tasks.> (status filter: {status or 'all'})")
 
         return tasks
 
@@ -173,7 +219,7 @@ class NATSCoordinationClient:
         channel: ChannelType,
         limit: int = 100
     ) -> list[Message]:
-        """Get messages from a channel."""
+        """Get messages from a channel (returns MOST RECENT messages, not oldest)."""
         if not self.js:
             raise RuntimeError("Not connected to NATS")
 
@@ -188,17 +234,43 @@ class NATSCoordinationClient:
             )
 
             try:
-                fetched = await psub.fetch(limit, timeout=2)
+                # FIX #2: Fetch ALL messages (not just first 100) to get recent ones
+                # Old code: fetched = await psub.fetch(limit, timeout=2)
+                # This only got the FIRST 100 messages (oldest), not LAST 100 (newest)
 
-                for msg in fetched:
+                # Fetch all messages in batches
+                batch_size = 500
+                max_messages = 10000  # Safety limit
+                total_fetched = 0
+
+                while total_fetched < max_messages:
                     try:
-                        data = json.loads(msg.data.decode())
-                        data['timestamp'] = datetime.fromisoformat(data['timestamp'])
-                        messages.append(Message(**data))
-                        await msg.ack()
-                    except Exception as e:
-                        logger.error(f"Error parsing message: {e}")
-                        continue
+                        batch = await psub.fetch(batch_size, timeout=2)
+                        if not batch:
+                            break
+
+                        for msg in batch:
+                            try:
+                                data = json.loads(msg.data.decode())
+                                data['timestamp'] = datetime.fromisoformat(data['timestamp'])
+                                messages.append(Message(**data))
+                                await msg.ack()
+                            except Exception as e:
+                                logger.error(f"Error parsing message: {e}")
+                                continue
+
+                        total_fetched += len(batch)
+
+                        # If we got fewer than requested, we've reached the end
+                        if len(batch) < batch_size:
+                            break
+
+                    except TimeoutError:
+                        # No more messages
+                        break
+
+                # Return LAST N messages (most recent), not first N (oldest)
+                messages = messages[-limit:]
 
             except TimeoutError:
                 pass
@@ -209,17 +281,17 @@ class NATSCoordinationClient:
             logger.error(f"Error fetching messages from {channel}: {e}")
             raise
 
+        logger.info(f"Returning {len(messages)} most recent messages from {channel}")
+
         return messages
 
     async def stream_tasks(self, status: Optional[TaskStatus] = None) -> AsyncIterator[Task]:
-        """Stream tasks in real-time."""
+        """Stream tasks in real-time (from single tasks subject)."""
         if not self.js:
             raise RuntimeError("Not connected to NATS")
 
-        if status:
-            subject = self._get_subject(f"tasks.{status}")
-        else:
-            subject = self._get_subject("tasks.>")
+        # Use single "tasks" subject (matches publish_task fix)
+        subject = self._get_subject("tasks")
 
         sub = await self.js.subscribe(subject)
 
@@ -233,7 +305,10 @@ class NATSCoordinationClient:
                     if data.get('completed_at'):
                         data['completed_at'] = datetime.fromisoformat(data['completed_at'])
 
-                    yield Task(**data)
+                    # Filter by status if requested (in memory, after seeing all)
+                    task = Task(**data)
+                    if status is None or task.status == status:
+                        yield task
                     await msg.ack()
                 except Exception as e:
                     logger.error(f"Error parsing streamed task: {e}")

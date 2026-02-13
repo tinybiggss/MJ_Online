@@ -74,15 +74,15 @@ AGENT_CONFIGS = {
     "mobiledoc-assembler": AgentConfig(
         agent_name="Doc-Brown",
         subagent_type="mobiledoc-assembler",
-        description="Mobiledoc JSON assembler - converts design specs to Ghost-compatible format",
+        description="HTML assembler - converts design specs to semantic HTML for Ghost",
         capabilities=[
-            "mobiledoc_assembly",
-            "json_generation",
+            "html_assembly",
+            "semantic_html",
             "ghost_api",
             "content_structure"
         ],
-        task_types=["mobiledoc_conversion", "mobiledoc"],
-        keywords=["mobiledoc", "PAGE_SPEC", "convert", "assembly", "json"],
+        task_types=["html_conversion", "content_assembly"],
+        keywords=["html", "PAGE_SPEC", "convert", "assembly", "semantic"],
         next_agent="web-content-builder"
     ),
 

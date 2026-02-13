@@ -1,0 +1,14 @@
+{
+  "task_id": "phase4-seo",
+  "title": "Phase 4.3: SEO Audit & Schema.org Implementation",
+  "description": "Comprehensive SEO audit and Schema.org structured data implementation.\n\n**Assignee:** Debbie (Design/UX expertise for metadata)\n\n**Tasks:**\n1. Audit all pages for SEO completeness (meta descriptions, Open Graph, Twitter Cards)\n2. Implement Person schema for Mike Jones (site-wide)\n3. Implement WebSite schema (site-wide)\n4. Add Article schema to case study pages\n5. Verify all images have og:image tags (1200x630px)\n6. Ensure meta descriptions are unique and compelling (150-160 chars)\n\n**Pages to audit:**\n- Homepage, About, Resume, Projects\n- AI Memory System case study\n- Local LLM case study\n- NeighborhoodShare case study\n\n**Implementation:**\n- Add schemas via Ghost Settings \u2192 Code Injection\n- Test with Google Rich Results Test\n- Validate all structured data\n\n**Deliverables:**\n- SEO audit report\n- Schema.org implementation complete\n- All pages SEO optimized\n\n**Can run in parallel with:** Alice's QA fixes, Substack integration\n\n**Estimated time:** 3-4 hours",
+  "status": "available",
+  "owner": null,
+  "blocked_by": [],
+  "priority": "high",
+  "created_at": "2026-02-11T12:10:20.478565",
+  "claimed_at": null,
+  "completed_at": null,
+  "result": null,
+  "error": null
+}

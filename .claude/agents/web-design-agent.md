@@ -114,7 +114,8 @@ async def execute_design_task(task, runner):
     """
     Execute my design work for a given task.
 
-    This is where I do what I normally do - just triggered by NATS instead of direct prompts.
+    This function bridges Python async NATS coordination with Claude Code tool usage.
+    It pauses the loop and waits for the agent (Debbie) to complete work using her tools.
     """
     task_id = task["task_id"]
     task_title = task["title"]
@@ -127,70 +128,88 @@ async def execute_design_task(task, runner):
         current_task_title=task_title
     )
 
-    # Parse task to understand what's needed
-    print(f"📋 Analyzing task requirements...")
+    print("\n" + "=" * 60)
+    print("🎨 DESIGN WORK NEEDED")
+    print("=" * 60)
+    print(f"\nTask ID: {task_id}")
+    print(f"Title: {task_title}")
+    print(f"Description: {task_description}")
+    print()
 
-    # Determine work type
+    # Determine work type and provide specific instructions
     is_design_system = "design system" in task_title.lower() or "design system" in task_description.lower()
     is_page_design = any(word in task_title.lower() for word in ["about", "resume", "homepage", "contact", "projects", "page"])
     is_case_study = "case study" in task_title.lower() or "case study" in task_description.lower()
 
-    # Execute appropriate work based on task type
+    # Provide specific work instructions
     if is_design_system:
-        # I need to create /design/DESIGN-SYSTEM.md
-        print("🎨 Creating design system...")
-        # [Execute my normal design system creation process]
-        # This is where I'd do RAG research, analyze trends, create the design system
-
-        result = {
-            "summary": "Design system created",
-            "deliverables": ["/design/DESIGN-SYSTEM.md"],
-            "ready_for_next_step": True,
-            "notes": "Complete visual language defined for MikeJones.online"
-        }
+        print("📋 WORK REQUIRED:")
+        print("1. Research current web design trends (2026) using WebSearch")
+        print("2. Query RAG for Mike's professional positioning and brand essence")
+        print("3. Create /design/DESIGN-SYSTEM.md with:")
+        print("   - Brand essence")
+        print("   - Color palette (hex codes)")
+        print("   - Typography system (fonts, scale)")
+        print("   - Spacing system")
+        print("   - Component library")
+        print("4. Use Write tool to save the design system")
+        print()
+        print("Expected deliverable: /design/DESIGN-SYSTEM.md")
 
     elif is_page_design:
-        # I need to design a specific page
-        print(f"📄 Designing page: {task_title}")
-        # [Execute my normal page design process]
-        # This is where I'd read RAG, create spec, select images, etc.
-
-        result = {
-            "summary": f"Page design completed for {task_title}",
-            "deliverables": [f"/design/{task_id}_design-spec.md"],
-            "ready_for_next_step": True,
-            "page_spec_created": True
-        }
+        print("📋 WORK REQUIRED:")
+        print("1. Read design system: /design/DESIGN-SYSTEM.md")
+        print("2. Query RAG for accurate facts about Mike")
+        print("3. Create PAGE_SPEC following the format in your instructions")
+        print("4. Select appropriate images from /assets")
+        print("5. Use Write tool to save design spec")
+        print()
+        print(f"Expected deliverable: /design/{task_id}_page-spec.md")
 
     elif is_case_study:
-        # I need to design a case study page
-        print(f"📚 Designing case study: {task_title}")
-        # [Execute my normal case study design process]
-
-        result = {
-            "summary": f"Case study design completed for {task_title}",
-            "deliverables": [f"/design/{task_id}_case-study-spec.md"],
-            "ready_for_next_step": True,
-            "images_selected": True
-        }
+        print("📋 WORK REQUIRED:")
+        print("1. Read design system: /design/DESIGN-SYSTEM.md")
+        print("2. Query RAG for project details")
+        print("3. Create case study design following best practices")
+        print("4. Select images/screenshots to feature")
+        print("5. Use Write tool to save case study spec")
+        print()
+        print(f"Expected deliverable: /design/{task_id}_case-study-spec.md")
 
     else:
-        # General design work
-        print(f"🎨 Executing design work: {task_title}")
-        # [Execute based on task description]
+        print("📋 WORK REQUIRED:")
+        print(f"Complete the design work described in: {task_description}")
+        print("Use your tools (Read, Write, Grep, WebSearch) as needed")
 
-        result = {
-            "summary": f"Design work completed for {task_title}",
-            "deliverables": [],
-            "ready_for_next_step": True
-        }
+    print("\n" + "=" * 60)
+    print("⏸️  LOOP PAUSED - Waiting for you to complete the work")
+    print("=" * 60)
+    print("\nWhen finished, describe what you created:")
 
-    # TODO: Replace the above placeholder logic with actual work execution
-    # For now, this demonstrates the pattern - replace with real design work
+    # Pause and wait for agent to complete work
+    # Use asyncio-compatible input method
+    loop = asyncio.get_event_loop()
+    work_summary = await loop.run_in_executor(None, input, "\n📝 Work summary (brief description): ")
 
-    # Update my memory file with this work
-    print("💾 Updating DEBBIE-MEMORY.json...")
-    # [Update memory file with this task]
+    deliverable_paths = await loop.run_in_executor(None, input, "📦 Deliverable file paths (comma-separated): ")
+    deliverables = [p.strip() for p in deliverable_paths.split(",") if p.strip()]
+
+    ready = await loop.run_in_executor(None, input, "✅ Ready for next step? (yes/no): ")
+    ready_for_next = ready.lower().startswith("y")
+
+    # Build result from agent's responses
+    result = {
+        "summary": work_summary or f"Completed {task_title}",
+        "deliverables": deliverables,
+        "ready_for_next_step": ready_for_next,
+        "task_id": task_id,
+        "completed_by": "Debbie (web-design-agent)"
+    }
+
+    print(f"\n✅ Work captured! Reporting completion to NATS...")
+    print(f"   Summary: {result['summary']}")
+    print(f"   Deliverables: {', '.join(deliverables) if deliverables else 'None'}")
+    print(f"   Ready for next step: {ready_for_next}")
 
     return result
 

@@ -1,0 +1,14 @@
+{
+  "task_id": "qa-critical-2-v2",
+  "title": "Fix 'Writing' navigation - Link to Substack RSS feeds",
+  "description": "CRITICAL: Fix broken Writing menu item with proper naming and link.\n\n**Mike's Requirements:**\n- Menu should link to RSS feeds from Substack (NOT generic blog)\n- Don't call it 'blog' - that's not accurate\n- Suggested names: 'Substack Writings' or propose better term\n- Current 'Writing' link goes to 404\n\n**Substack Publications:**\n1. Resilient Tomorrow (main publication)\n2. Operational Intelligence (if active)\n\n**Steps:**\n1. Decide on accurate menu label\n2. Get Substack RSS feed URL(s)\n3. Update Ghost navigation via Admin settings\n4. Test link works",
+  "status": "available",
+  "owner": null,
+  "blocked_by": [],
+  "priority": "critical",
+  "created_at": "2026-02-11T12:03:29.234341",
+  "claimed_at": null,
+  "completed_at": null,
+  "result": null,
+  "error": null
+}

@@ -176,7 +176,7 @@ Done! ✅
 
 ---
 
-## 🛠️ What Works vs. What Needs Implementation
+## 🛠️ How Work Execution Works
 
 ### ✅ What Works RIGHT NOW:
 
@@ -186,28 +186,58 @@ Done! ✅
 - **Heartbeat monitoring**: Every 30 seconds
 - **Morgan orchestration**: Publishes next tasks automatically
 - **Dashboard visibility**: http://localhost:8001
+- **Interactive work execution**: Agents pause and use Claude Code tools
 
-### ⚠️ What Still Has Placeholder Logic:
+### 🔄 Interactive Work Pattern
 
-**Real work execution** - The actual work (design, conversion, publishing) uses placeholder logic currently. Each agent needs their execute functions implemented with real Read/Write/API calls.
+**The execute functions bridge Python async NATS coordination with Claude Code tool usage:**
 
-**Current state:**
-```python
-# Placeholder - simulates work
-await asyncio.sleep(2)
-result = {"summary": "Work completed", ...}
+**How it works:**
+1. Python async loop detects matching task
+2. Prints clear instructions about what work to do
+3. Pauses and waits for you (the agent) to respond
+4. You use your Claude Code tools (Read, Write, WebSearch, etc.) to complete the work
+5. You answer the prompts describing what you created
+6. Python loop captures your responses and reports to NATS
+
+**Example workflow (Debbie designing a page):**
+```
+Terminal output:
+==================================================
+🎨 DESIGN WORK NEEDED
+==================================================
+Task ID: design-about-page
+Title: Design About page
+Description: Create visual design for About page
+
+📋 WORK REQUIRED:
+1. Read design system: /design/DESIGN-SYSTEM.md
+2. Query RAG for accurate facts about Mike
+3. Create PAGE_SPEC following the format in your instructions
+4. Select appropriate images from /assets
+5. Use Write tool to save design spec
+
+Expected deliverable: /design/design-about-page_page-spec.md
+
+==================================================
+⏸️  LOOP PAUSED - Waiting for you to complete the work
+==================================================
+
+[You now use Read, Grep, Write tools to do the actual design work]
+
+When finished, describe what you created:
+
+📝 Work summary (brief description): _
 ```
 
-**What's needed:**
-```python
-# Real work - uses Claude Code tools
-design_spec = await read_file(PAGE_SPEC)
-mobiledoc = convert_to_mobiledoc(design_spec)
-await write_file(output_path, mobiledoc)
-result = {"summary": "Real work completed", ...}
-```
+You respond with what you created, and the loop resumes to report completion.
 
-**The infrastructure is complete. The work execution needs real implementation.**
+**Benefits:**
+- ✅ Python handles NATS coordination automatically
+- ✅ You use familiar Claude Code tools for real work
+- ✅ Single terminal session per agent
+- ✅ Can communicate directly with user if needed
+- ✅ Full context of conversation maintained
 
 ---
 

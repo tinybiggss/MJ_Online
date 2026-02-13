@@ -113,28 +113,35 @@ All Phase 1 work is complete. Ghost Pro is fully configured and operational at M
 
 ---
 
-## 🔄 REVISED WORKFLOW (2026-02-06)
+## ✅ VALIDATED WORKFLOW (2026-02-09)
 
-**Major Process Change:** Transitioning from browser automation to API-based publishing workflow.
+**Major Process Change:** Successfully transitioned from browser automation to API-based HTML publishing workflow.
 
-**New Approach:**
-1. **Debbie** (Design System Architect) → Creates design system, then designs pages
-2. **Mobiledoc Assembler** (New Agent) → Converts design specs to valid Mobiledoc JSON
-3. **Alice** (Publisher) → Publishes via Ghost Admin API (no browser automation)
+**Validated Approach:**
+1. **Debbie** (Design System Architect) → Creates PAGE_SPEC from design system
+2. **Alice** (Image Uploader) → Uploads images to Ghost, provides URLs
+3. **Doc Brown** (HTML Assembler) → Converts PAGE_SPEC to semantic HTML
+4. **Alice** (Publisher) → Publishes HTML via Ghost Admin API with `source=html` parameter (Ghost auto-converts to Lexical)
 
-**Why the change:**
+**Why this works:**
 - Browser automation with Ghost editor unreliable (complex iframe structure)
-- API-based publishing more stable, repeatable, version-controllable
+- API-based publishing stable, repeatable, version-controllable
 - Design system ensures consistency across all pages
-- Mobiledoc JSON can be reviewed, tested, version-controlled
+- HTML is simpler than Mobiledoc/Lexical JSON (Ghost converts automatically)
+- **Critical discovery:** Ghost 5.x uses Lexical format, but accepts HTML with `source=html` parameter
 
 **Phases:**
-- **Phase 3.0:** Design System Creation (NEW - must complete first)
-- **Phase 3.0.1:** Create Mobiledoc Assembler Agent (NEW)
-- **Phase 3.0.2:** Pilot Test New Workflow on About Page (NEW)
-- **Phase 3.1-3.10:** Apply new workflow to remaining pages (revised)
+- ✅ **Phase 3.0:** Design System Creation (COMPLETE)
+- ✅ **Phase 3.0.1:** Create HTML Assembler Agent (COMPLETE - was "Mobiledoc Assembler", updated to HTML)
+- ✅ **Phase 3.0.2:** Implement Global CSS (COMPLETE)
+- ✅ **Phase 3.0.3:** Pilot Test New Workflow on About Page (COMPLETE - SUCCESSFUL!)
+- ✅ **Phase 3.0.4:** Resume Page (COMPLETE)
+- ✅ **Phase 3.0.5:** Projects Landing Page (COMPLETE)
+- ✅ **Phase 3.0.6:** Homepage (COMPLETE - All core pages published!)
 
-**See:** `/plans/workflow-questions.md` for detailed questions and decisions to be made during pilot test.
+**Pilot Test Result:** About page published successfully at https://www.mikejones.online/about/ - User feedback: "This page is so much better!" Workflow proven and ready for rollout.
+
+**See:** `/content-drafts/PHASE-3.0.3-COMPLETION-REPORT.md` for complete pilot test results and lessons learned.
 
 ---
 
@@ -243,44 +250,136 @@ Debbie now empowered to request custom graphics Mike can create using:
 
 ---
 
-### 3.0.3 Pilot Test: About Page with New Workflow ⚪ READY TO START
-**Status:** ⚪ Ready to Start (3.0.2 complete)
-**Priority:** HIGH - Validates complete Design → Mobiledoc → API workflow
-**Agents:** Debbie → Doc Brown → Alice
-**Dependencies:** ✅ 3.0 (Design System), ✅ 3.0.1 (Mobiledoc Assembler), ✅ 3.0.2 (Global CSS), 3.1 (Content assets ready)
-**Estimated Time:** 3-5 hours (including iteration)
+### 3.0.3 Pilot Test: About Page with New Workflow ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-09)
+**Completed by:** Debbie, Alice, Doc Brown, Morgan (coordinated team effort)
+**Duration:** 3 days (includes critical format discovery and workflow pivot)
+**Priority:** HIGH - Validated complete Design → HTML → API workflow
 
-**Process:**
-1. **Debbie:** Design About page using approved design system
-   - Output: PAGE_SPEC document (standardized format)
-2. **Alice (if needed):** Upload required images via Ghost API
-   - Output: Ghost-hosted image URLs for Mobiledoc Assembler
-3. **Doc Brown (Mobiledoc Assembler):** Convert PAGE_SPEC → Mobiledoc JSON
-   - Output: Valid Mobiledoc JSON file
-4. **Alice:** Publish Mobiledoc via Ghost Admin API
-   - Output: Live About page at https://mikejones.online/about
-5. **Mike:** Review published page
-   - Feedback: What works, what doesn't
-6. **Team:** Iterate and refine process
+**Process Executed:**
+1. ✅ **Debbie:** Designed About page using approved design system
+   - Output: PAGE_SPEC document at `/design/PAGE_SPEC-About.md` (25KB)
+2. ✅ **Alice:** Uploaded professional headshot via Ghost API
+   - Output: Ghost-hosted URL: https://www.mikejones.online/content/images/2026/02/headshot-professional.png
+3. ✅ **Doc Brown (HTML Assembler):** Converted PAGE_SPEC → semantic HTML
+   - Output: Clean HTML at `/content-drafts/about-page.html` (6.6KB)
+   - **CRITICAL FORMAT CHANGE:** Ghost 5.x uses Lexical, not Mobiledoc - workflow updated to use HTML with `source=html` parameter
+4. ✅ **Alice:** Published HTML via Ghost Admin API with `source=html` parameter
+   - Output: Live About page at https://www.mikejones.online/about/
+   - Ghost automatically converted HTML → Lexical format
+5. ✅ **Mike:** Reviewed published page
+   - Feedback: "This page is so much better!" - validates quality and approach
 
-**Questions to Answer:** (See `/plans/workflow-questions.md` for details)
-- What format should Debbie use for PAGE_SPEC output?
-- How do we handle image uploads in the workflow?
-- When does RAG verification happen?
-- How do we review/verify published output?
-- Is the process faster/more reliable than browser automation?
+**Critical Discovery:**
+- **Issue:** Ghost 5.x uses Lexical format (current editor), not Mobiledoc v0.3.2 (deprecated)
+- **Problem:** Initial Mobiledoc JSON accepted with HTTP 200 but silently failed to update content
+- **Research:** Morgan researched Ghost docs/forums - found `source=html` parameter solution
+- **Solution:** Workflow updated to use HTML format instead of Mobiledoc/Lexical JSON
+- **Impact:** Simpler workflow (HTML easier than JSON schemas), prevents silent failures, future-proof
+
+**Workflow Questions Answered:**
+- ✅ PAGE_SPEC format: Markdown document with sections, content, allowed Ghost cards, image requirements
+- ✅ Image uploads: Alice uploads first via Ghost API, provides URLs to Doc Brown for HTML assembly
+- ✅ RAG verification: Happens during Debbie's PAGE_SPEC creation (facts pre-verified before handoff)
+- ✅ Published output review: Mike reviews live page, provides feedback for iteration
+- ✅ Speed/reliability: API-based publishing 2-3x faster than browser automation (estimated)
 
 **Deliverables:**
-- About page published using new workflow
-- Documented answers to workflow questions
-- Refined process ready for rollout to remaining pages
+- ✅ About page published at https://www.mikejones.online/about/
+- ✅ PAGE_SPEC format defined and documented
+- ✅ HTML assembly process validated (Doc Brown agent)
+- ✅ Publishing script created: `/publish_about_page.py` (reusable for future pages)
+- ✅ Completion report: `/content-drafts/PHASE-3.0.3-COMPLETION-REPORT.md`
+- ✅ Workflow documented: `PHASE-3.0.3-PUBLISHING-HANDOFF-UPDATED.md`
+- ✅ Agents updated: Doc Brown (HTML output), Alice (source=html publishing)
 
-**Success Criteria:**
-- About page matches design intent and RAG facts
-- Process is repeatable and documented
-- Faster and more reliable than browser automation
-- Team confident in rolling out to remaining pages
+**Success Criteria Met:**
+- ✅ About page matches design intent and RAG facts
+- ✅ Process is repeatable and fully documented
+- ✅ Faster and more reliable than browser automation
+- ✅ Team confident in rolling out to remaining pages (Resume, Projects, Homepage)
+- ✅ User validated quality: "This page is so much better!"
 
+**Lessons Learned:**
+- Always verify API format compatibility - don't trust HTTP status codes alone
+- Silent failures dangerous - verify actual content changes, not just API responses
+- Simpler solutions often exist - HTML simpler than complex JSON formats
+- Pilot testing catches critical issues before they affect all pages
+- Design system produces high-quality, consistent pages
+
+**Outcome:** Workflow validated and proven. Ready for production rollout to Resume, Projects, Homepage pages, plus image additions to case studies.
+
+---
+
+### 3.0.4 Resume Page ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-09)
+**Completed by:** Debbie, Doc Brown, Alice (autonomous agents)
+**Priority:** HIGH - Core page for employment positioning
+**Duration:** Same day (autonomous execution)
+
+**Workflow Executed:**
+1. ✅ **Debbie:** Created PAGE_SPEC (404 lines) at `/design/PAGE_SPEC-Resume.md`
+2. ✅ **Alice:** Reused professional headshot from Phase 3.0.3 (no new uploads needed)
+3. ✅ **Doc Brown:** Converted PAGE_SPEC → semantic HTML (7.3KB) at `/content-drafts/resume-page.html`
+4. ✅ **Alice:** Published HTML via Ghost Admin API with `source=html` parameter
+
+**Deliverables:**
+- ✅ Live Resume page at https://www.mikejones.online/resume/
+- ✅ PAGE_SPEC document: 404 lines, RAG-verified content
+- ✅ Semantic HTML: 7.3KB, clean structure
+- ✅ All facts verified against RAG knowledge base
+- ✅ Professional presentation aligned with design system
+- ✅ 29 years experience, correct professional title, all achievements documented
+
+**Key Achievement:** Second successful application of validated Design → HTML → API workflow. Autonomous agents completed all steps independently.
+
+---
+
+### 3.0.5 Projects Landing Page ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-09)
+**Completed by:** Debbie, Doc Brown, Alice (autonomous agents)
+**Duration:** Same day (autonomous execution)
+
+**Workflow Executed:**
+1. ✅ **Debbie:** Created PAGE_SPEC at `/design/PAGE_SPEC-Projects-Landing.md` (27KB)
+2. ✅ **Alice:** Uploaded project thumbnails/images
+3. ✅ **Doc Brown:** Converted PAGE_SPEC → semantic HTML
+4. ✅ **Alice:** Published HTML via Ghost Admin API with `source=html` parameter
+
+**Deliverables:**
+- ✅ Live Projects page at https://www.mikejones.online/projects/
+- ✅ Project showcase with case study links
+- ✅ Professional portfolio presentation
+- ✅ All facts RAG-verified
+- ✅ Design system applied consistently
+
+**Key Achievement:** Third consecutive successful workflow execution - confirms repeatability and reliability
+
+---
+
+### 3.0.6 Homepage ✅ COMPLETE
+**Status:** ✅ COMPLETE (2026-02-10)
+**Completed by:** Debbie, Morgan (images/publishing), Doc Brown
+**Duration:** ~2 hours (streamlined execution)
+
+**Workflow Executed:**
+1. ✅ **Debbie:** Created PAGE_SPEC (26.8KB) at `/design/PAGE_SPEC-Homepage.md`
+2. ✅ **Morgan:** Uploaded 3 images (NeighborhoodShare, Local LLM, VP logo) to Ghost CDN
+3. ✅ **Doc Brown:** Converted PAGE_SPEC → semantic HTML (3.9KB) at `/content-drafts/homepage.html`
+4. ✅ **Morgan:** Published HTML via Ghost Admin API with `source=html` parameter
+
+**Deliverables:**
+- ✅ Live Homepage at https://www.mikejones.online/home/
+- ✅ 5 sections: Hero, Featured Work (3 projects), Who I Am, Core Expertise, Final CTA
+- ✅ 4 images integrated (NeighborhoodShare, Local LLM diagram, VP logo, headshot available)
+- ✅ All content RAG-verified
+- ✅ Design system applied consistently
+- ✅ SEO optimized (meta tags complete)
+- ✅ Mobile responsive
+
+**Key Achievement:** Fourth and final core page complete - all main navigation targets now published. Workflow proven across 4 consecutive successful executions.
+
+---
 
 ### 3.1 Content Asset Gathering & Preparation ✅ COMPLETE
 **Status:** 🟡 In Progress (User gathering assets manually)

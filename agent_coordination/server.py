@@ -307,9 +307,45 @@ async def agent_heartbeat(heartbeat: AgentHeartbeat):
 
 
 @app.get("/api/agents")
-async def get_agents():
-    """Get list of registered agents."""
-    return list(registered_agents.values())
+async def get_agents(include_stale: bool = False):
+    """
+    Get list of registered agents.
+
+    Args:
+        include_stale: If False (default), filter out agents that haven't sent
+                      heartbeat in the last 90 seconds (considered offline/stale).
+    """
+    from datetime import datetime, timedelta
+
+    agents = list(registered_agents.values())
+
+    if not include_stale:
+        # Filter out stale agents (no heartbeat in last 90 seconds)
+        now = datetime.now()
+        active_agents = []
+
+        for agent in agents:
+            if "last_heartbeat" in agent and agent["last_heartbeat"]:
+                try:
+                    last_seen = datetime.fromisoformat(agent["last_heartbeat"])
+                    time_since_heartbeat = (now - last_seen).total_seconds()
+
+                    # Only include agents that have sent heartbeat within last 90 seconds
+                    if time_since_heartbeat < 90:
+                        active_agents.append(agent)
+                    else:
+                        logger.info(f"Filtering out stale agent {agent.get('agent_id')} (last seen {time_since_heartbeat:.0f}s ago)")
+                except ValueError:
+                    # Invalid timestamp, skip this agent
+                    logger.warning(f"Invalid timestamp for agent {agent.get('agent_id')}")
+                    pass
+            else:
+                # No heartbeat at all, skip
+                logger.warning(f"Agent {agent.get('agent_id')} has no heartbeat timestamp")
+
+        return active_agents
+
+    return agents
 
 
 @app.delete("/api/agents/{agent_id}")

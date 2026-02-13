@@ -477,10 +477,10 @@ async def orchestrate_next_step(completed_task, publisher, runner):
             print("   → Design complete, publishing Mobiledoc conversion task")
 
             next_task = {
-                "task_id": f"mobiledoc-{task_id}",
-                "title": f"Convert {completed_task['title']} to Mobiledoc",
-                "description": f"Convert PAGE_SPEC from {task_id} to Mobiledoc JSON format for Ghost publishing.",
-                "type": "mobiledoc_conversion",
+                "task_id": f"html-{task_id}",
+                "title": f"Convert {completed_task['title']} to HTML",
+                "description": f"Convert PAGE_SPEC from {task_id} to semantic HTML for Ghost publishing.",
+                "type": "html_conversion",
                 "status": "available",
                 "priority": "high",
                 "created_at": datetime.now().isoformat(),
@@ -496,15 +496,15 @@ async def orchestrate_next_step(completed_task, publisher, runner):
                 f"following completion of design task {task_id}"
             )
 
-    # MOBILEDOC CONVERSION COMPLETED → Publish publishing task
-    elif task_type == "mobiledoc_conversion" or "mobiledoc" in task_id.lower():
+    # HTML CONVERSION COMPLETED → Publish publishing task
+    elif task_type == "html_conversion" or "html" in task_id.lower():
         if result.get("ready_for_publishing"):
-            print("   → Mobiledoc complete, publishing Ghost publishing task")
+            print("   → HTML complete, publishing Ghost publishing task")
 
             next_task = {
                 "task_id": f"publish-{task_id}",
                 "title": f"Publish {completed_task['title']} to Ghost",
-                "description": f"Publish Mobiledoc JSON from {task_id} to Ghost Pro via Admin API.",
+                "description": f"Publish HTML from {task_id} to Ghost Pro via Admin API with source=html parameter.",
                 "type": "publishing",
                 "status": "available",
                 "priority": "high",
@@ -518,7 +518,7 @@ async def orchestrate_next_step(completed_task, publisher, runner):
 
             await runner.send_coordination_message(
                 f"Morgan: Published publishing task {next_task['task_id']} "
-                f"following Mobiledoc conversion {task_id}"
+                f"following HTML conversion {task_id}"
             )
 
     # PUBLISHING COMPLETED → Workflow done, update roadmap
@@ -568,7 +568,7 @@ Publishing Complete ──→ Update Roadmap & PROJECT-MEMORY.json
 
 **Task Matching:**
 I monitor ALL completed tasks and make decisions based on:
-- Task type (`design`, `mobiledoc_conversion`, `publishing`)
+- Task type (`design`, `html_conversion`, `publishing`)
 - Task result fields (`ready_for_next_step`, `ready_for_publishing`)
 - Workflow sequence rules
 

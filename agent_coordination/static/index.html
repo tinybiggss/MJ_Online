@@ -387,6 +387,7 @@
 
         <div class="section">
             <h2>🤖 Registered Agents</h2>
+            <button class="refresh-btn" onclick="clearStaleAgents()" style="margin-left: 10px;">🧹 Clear Stale Agents</button>
             <div class="agent-list" id="agent-list">
                 <div class="empty-state">Loading agents...</div>
             </div>
@@ -440,7 +441,7 @@
                             <div class="task-meta">
                                 ID: ${task.task_id} |
                                 ${task.owner ? `Owner: ${task.owner} | ` : ''}
-                                Created: ${new Date(task.created_at).toLocaleString()}
+                                Created: ${new Date(task.created_at).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', timeZoneName: 'short' })}
                                 ${task.blocked_by && task.blocked_by.length > 0 ? ` | 🔒 Blocked by: ${task.blocked_by.join(', ')}` : ''}
                             </div>
                         </div>
@@ -505,7 +506,7 @@
 
                                 ${approvalHtml}
 
-                                ${agent.last_heartbeat ? `<div class="task-meta">Last seen: ${new Date(agent.last_heartbeat).toLocaleString()}</div>` : '<div class="task-meta">⚠️ No heartbeat</div>'}
+                                ${agent.last_heartbeat ? `<div class="task-meta">Last seen: ${new Date(agent.last_heartbeat).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', timeZoneName: 'short' })}</div>` : '<div class="task-meta">⚠️ No heartbeat</div>'}
                             </div>
                         </div>
                     `;
@@ -514,6 +515,38 @@
                 console.error('Error loading agents:', error);
                 document.getElementById('agent-list').innerHTML =
                     `<div class="empty-state">Error loading agents: ${error.message}</div>`;
+            }
+        }
+
+        async function clearStaleAgents() {
+            if (!confirm('Clear all agents that haven\'t sent a heartbeat in the last 90 seconds?')) {
+                return;
+            }
+
+            try {
+                // Get current active agents
+                const response = await fetch('/api/agents?include_stale=false');
+                const activeAgents = await response.json();
+                const activeAgentIds = activeAgents.map(a => a.agent_id);
+
+                // Call cleanup endpoint to remove all except active ones
+                const cleanupResponse = await fetch('/api/agents/cleanup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ keep_agents: activeAgentIds })
+                });
+
+                const result = await cleanupResponse.json();
+
+                if (result.success) {
+                    alert(`✅ Cleanup complete!\n\nRemoved ${result.removed_count} stale agent(s):\n${result.removed_agents.join('\n') || 'None'}`);
+                    loadData(); // Refresh the dashboard
+                } else {
+                    alert('❌ Cleanup failed');
+                }
+            } catch (error) {
+                console.error('Error cleaning up agents:', error);
+                alert(`❌ Error: ${error.message}`);
             }
         }
 
