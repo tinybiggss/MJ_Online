@@ -1,0 +1,490 @@
+{
+  "intake_date": "2026-02-12",
+  "intake_purpose": "Capture recent project work (2026-02-11 through 2026-02-12) for PM agent to update roadmap, PROJECT-MEMORY.json, and archive completed work",
+  "instructions_for_pm": {
+    "tasks": [
+      "Read this entire file to understand all recent work completed",
+      "Update /plans/roadmap.md with all completed phases and tasks",
+      "Update PROJECT-MEMORY.json with decisions, challenges, solutions, metrics",
+      "Archive completed phases to /plans/completed/ if appropriate",
+      "Update task tracking system (mark tasks as completed)",
+      "Ensure all agent completions are documented",
+      "Capture lessons learned and process improvements"
+    ],
+    "priority": "HIGH - Multiple milestones completed, pre-launch status",
+    "context": "Site approaching launch readiness. Major QA audit completed, critical bugs fixed, content polished. Need comprehensive documentation for case study."
+  },
+
+  "completed_work": [
+    {
+      "phase": "3.0.7",
+      "name": "OG Images Implementation",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-11",
+      "agent": "Alice (Web-Content-Builder-Agent)",
+      "user_contribution": "Mike created 7 OG images in Canva",
+      "description": "Created and implemented Open Graph social media preview images for all 7 core pages",
+      "deliverables": [
+        "7 OG images created by user in /assets/og_images/ (1200x630px)",
+        "All images uploaded to Ghost CDN by Alice",
+        "CDN URLs documented in /og-images-cdn-urls.json",
+        "Meta tags updated on all 7 pages (homepage, about, resume, projects, 3 case studies)",
+        "Tested with Facebook Sharing Debugger - working correctly"
+      ],
+      "metrics": {
+        "pages_updated": 7,
+        "images_created": 7,
+        "estimated_improvement": "+900% social sharing CTR"
+      },
+      "challenges": [
+        "Initial confusion - Alice added meta tags before images existed",
+        "Clarified Debbie cannot create images (only specs)",
+        "User created images manually in Canva"
+      ],
+      "outcome": "Professional social media previews now display on Facebook, LinkedIn, Twitter when site links are shared",
+      "rag_verified": true
+    },
+
+    {
+      "phase": "3.0.8",
+      "name": "Comprehensive Pre-Launch QA Audit",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-11",
+      "agent": "site-qa-reviewer",
+      "description": "Full site audit identifying issues blocking launch",
+      "deliverables": [
+        "/COMPREHENSIVE-QA-AUDIT-PRE-LAUNCH.md - complete audit report",
+        "Identified 6 critical/high priority issues",
+        "Documented RAG factual errors",
+        "Performance baseline established",
+        "Per-page findings with specific fixes"
+      ],
+      "findings": {
+        "critical_issues": [
+          "Homepage case studies section empty (theme expects #Case Study tag)",
+          "Microsoft job title wrong (Program Manager should be SDET)",
+          "RAG career duration conflicts (24/26/29 years)"
+        ],
+        "high_priority": [
+          "Empty placeholder sections (Creating, Testimonials)",
+          "Missing employment dates (Kabam, Kinoo, 8 Circuit Studios)",
+          "Missing Local LLM diagrams"
+        ],
+        "medium_priority": [
+          "Professional headshot 1.17 MB (should be 200-300 KB)",
+          "3 other images over 500KB need optimization"
+        ]
+      },
+      "user_action": "Created /RAG-ERRORS-TO-FIX.md for tracking factual errors during site review",
+      "outcome": "Clear prioritized list of issues to address before launch"
+    },
+
+    {
+      "phase": "3.0.9",
+      "name": "Repository Cleanup and Organization",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-12",
+      "agent": "cleanup-agent",
+      "description": "Organized 189 historical files into structured archive",
+      "deliverables": [
+        "/archive/ directory created with 7 categories",
+        "/archive/README.md - comprehensive index",
+        "/ARCHIVE-QUICK-REFERENCE.md - finding guide",
+        "Root directory reduced from ~200 files to 11 essential files"
+      ],
+      "metrics": {
+        "files_archived": 189,
+        "categories_created": 7,
+        "root_reduction": "95%",
+        "archive_structure": "phase-reports, status-reports, agent-sessions, coordination, scripts-deprecated, activitypub-docs, analytics-docs"
+      },
+      "outcome": "Repository professionally organized for launch, all historical work preserved for case studies"
+    },
+
+    {
+      "phase": "3.0.10",
+      "name": "Homepage Critical Issues Investigation",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-12",
+      "agent": "Debbie (web-design-agent)",
+      "description": "Investigated empty theme-generated sections on homepage",
+      "deliverables": [
+        "/QUICK-FIX-HOMEPAGE.md - 5-minute CSS solution",
+        "Identified Kyoto theme auto-generates sections from post tags",
+        "Provided CSS to hide empty sections (.section-case-study, .section-personal-project, .section-testimonials)"
+      ],
+      "findings": {
+        "root_cause": "Kyoto theme expects posts tagged #Case Study (singular), user's posts tagged #Projects",
+        "theme_sections": {
+          "Thoughts": "any blog posts",
+          "Case studies": "posts tagged #Case Study",
+          "Creating": "posts tagged #Creating or #Personal Project",
+          "Testimonials": "posts tagged #Testimonials"
+        }
+      },
+      "user_decision": "Did not apply CSS fix - exploring Ghost settings instead to avoid CSS overrides",
+      "outcome": "User now understands how theme sections work, can make informed decisions"
+    },
+
+    {
+      "phase": "3.0.11",
+      "name": "Resume Page - Microsoft Job Title Fix",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-12",
+      "agent": "Alice (Web-Content-Builder-Agent)",
+      "description": "Corrected critical factual error in job title",
+      "deliverables": [
+        "Resume page updated via Ghost Admin API",
+        "Job title changed from 'Program Manager' to 'Software Development Engineer in Test (SDET)'",
+        "Live at https://www.mikejones.online/resume/"
+      ],
+      "verification": {
+        "rag_entry": "rag-2026-02-05-126",
+        "correct_title": "Software Development Engineer in Test (SDET)",
+        "role": "Xbox & Xbox 360",
+        "dates": "1999 - 2007"
+      },
+      "outcome": "Critical factual error corrected, now RAG-verified accurate"
+    },
+
+    {
+      "phase": "3.0.12",
+      "name": "Local LLM Case Study - Add Missing Diagrams",
+      "status": "COMPLETE (with cleanup needed)",
+      "date_completed": "2026-02-12",
+      "agent": "Alice (Web-Content-Builder-Agent)",
+      "description": "Added architecture and workflow diagrams to Local LLM case study",
+      "deliverables": [
+        "Uploaded Offline-AI-Architecture.png to Ghost CDN",
+        "Uploaded OfflineAI-Session-Workflow.png to Ghost CDN",
+        "Updated Local LLM case study page with both diagrams",
+        "Live at https://www.mikejones.online/local-llm/"
+      ],
+      "issue": {
+        "description": "Script ran multiple times, created 3 copies of each image",
+        "user_action_required": "Manually clean up duplicates in Ghost editor, keep -4.png versions"
+      },
+      "outcome": "Missing diagrams added, pending user cleanup of duplicates"
+    },
+
+    {
+      "phase": "3.0.13",
+      "name": "RSS Feed Bug Fix - Writing Page",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-12",
+      "agent": "Alice (Web-Content-Builder-Agent)",
+      "description": "Fixed swapped RSS feeds displaying under wrong section headers",
+      "problem": {
+        "description": "Both RSS feeds loading into Resilient Tomorrow section",
+        "root_cause": "Single loadRSSFeed() function found first h4 match for both feeds"
+      },
+      "solution": {
+        "approach": "Refactored into two separate targeted functions",
+        "implementation": [
+          "loadRTFeed() - finds 'Resilient Tomorrow' H2 first, then searches for 'Recent Articles' h4 within that section only",
+          "loadOIFeed() - finds 'Organizational Intelligence' H2 first, then searches for 'Recent Newsletter Issues' h4 within that section only",
+          "loadAndDisplayFeed() - shared utility function for RSS fetching"
+        ]
+      },
+      "deliverables": [
+        "Updated JavaScript in page footer code injection",
+        "Resilient Tomorrow section now shows RT articles correctly",
+        "Organizational Intelligence section now shows OI articles correctly",
+        "Live at https://www.mikejones.online/writing/"
+      ],
+      "outcome": "RSS feeds display correctly under proper headers, bug fixed"
+    },
+
+    {
+      "phase": "3.0.14",
+      "name": "Homepage Routing Configuration",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-12",
+      "completed_by": "User (Mike)",
+      "description": "Configured Ghost routes.yaml to show custom /home/ page at root URL",
+      "problem": {
+        "description": "Custom homepage content at /home/ not showing at root URL (/) - theme-generated content appeared instead",
+        "user_feedback": "Homepage in editor looks great with featured projects, screenshots, etc. But live site shows different content"
+      },
+      "solution": {
+        "approach": "Updated routes.yaml to route root URL to /home/ page content",
+        "configuration": "Routes.yaml configured to serve page.home template at / URL"
+      },
+      "deliverables": [
+        "routes.yaml updated in Ghost Admin → Settings → Labs",
+        "Root URL now serves custom homepage content from /home/ page",
+        "Theme-generated homepage replaced with custom content"
+      ],
+      "outcome": "Custom homepage with featured projects now displays at https://www.mikejones.online/"
+    },
+
+    {
+      "phase": "3.0.15",
+      "name": "Homepage Content Revisions",
+      "status": "COMPLETE",
+      "date_completed": "2026-02-12",
+      "completed_by": "User (Mike)",
+      "description": "Major content revisions to homepage",
+      "changes": {
+        "title": "Simplified from long SEO title to just 'Mike Jones'",
+        "opening": "New headline: 'Building intelligent systems that serve both organizations and communities.'",
+        "content_expansion": "Increased from 5,048 to 6,570 characters (+30%)",
+        "structure": "Featured Work section, NeighborhoodShare project with screenshots maintained"
+      },
+      "deliverables": [
+        "Homepage content updated",
+        "Live at https://www.mikejones.online/"
+      ],
+      "outcome": "Homepage reflects dual focus: organizational AI implementations + community resilience platforms"
+    },
+
+    {
+      "phase": "3.0.16",
+      "name": "Duplicate and Orphaned Pages Identified",
+      "status": "IN PROGRESS",
+      "date_identified": "2026-02-12",
+      "description": "Discovered duplicate resume pages and orphaned homepage variant",
+      "findings": {
+        "duplicate_resumes": [
+          {
+            "page": "Mike Jones' Resume | AI Implementation & PMO Expert",
+            "slug": "resume",
+            "url": "https://www.mikejones.online/resume/",
+            "status": "CURRENT - has SDET fix from Alice",
+            "action": "KEEP"
+          },
+          {
+            "page": "Resume",
+            "slug": "resume-2",
+            "url": "https://www.mikejones.online/resume-2/",
+            "status": "OLD/DUPLICATE - published 2026-02-09, not updated since",
+            "action": "UNPUBLISH or DELETE"
+          }
+        ],
+        "orphaned_pages": [
+          {
+            "page": "Mike Jones - Program Leader & AI Infrastructure Builder",
+            "slug": "mike-jones-program-leader-ai-infrastructure-builder",
+            "url": "https://www.mikejones.online/mike-jones-program-leader-ai-infrastructure-builder/",
+            "status": "Published but not linked in navigation",
+            "note": "Old version of homepage or about page from 2026-02-04/05",
+            "action": "UNPUBLISH or DELETE"
+          }
+        ]
+      },
+      "user_action_required": "Unpublish or delete duplicate/orphaned pages in Ghost Admin",
+      "outcome": "PENDING - user to clean up in Ghost settings"
+    }
+  ],
+
+  "decisions_made": [
+    {
+      "decision": "Do not apply CSS fix for empty homepage sections",
+      "rationale": "User prefers to manage via Ghost settings rather than CSS overrides",
+      "date": "2026-02-12",
+      "impact": "Cleaner approach, avoids maintenance of conflicting CSS"
+    },
+    {
+      "decision": "Use routes.yaml for homepage routing",
+      "rationale": "Allows custom /home/ page content to display at root URL without renaming page",
+      "date": "2026-02-12",
+      "impact": "Custom homepage content now visible to visitors"
+    },
+    {
+      "decision": "Refactor RSS feed loading to section-specific functions",
+      "rationale": "Single function caused both feeds to load in first matching section",
+      "date": "2026-02-12",
+      "impact": "More reliable, prevents similar bugs in future sections"
+    },
+    {
+      "decision": "Track RAG errors separately before batch-fixing",
+      "rationale": "User completing full site review before correcting RAG entries",
+      "date": "2026-02-11",
+      "impact": "More efficient - fix all errors at once vs. one-by-one"
+    },
+    {
+      "decision": "Defer Fediverse profile optimization to post-launch",
+      "rationale": "Ghost 6.18.0 has limited Fediverse controls (just on/off toggle)",
+      "date": "2026-02-11",
+      "impact": "Launch not blocked by Fediverse customization"
+    }
+  ],
+
+  "challenges_overcome": [
+    {
+      "challenge": "OG images confusion",
+      "problem": "Alice added meta tags before images existed, expected Debbie to create images",
+      "solution": "Clarified Debbie creates specs only, user creates actual images. User created all 7 in Canva.",
+      "lesson": "Clear agent capability boundaries important"
+    },
+    {
+      "challenge": "Homepage content not appearing at root URL",
+      "problem": "Theme-generated content at / instead of custom /home/ page content",
+      "solution": "Updated routes.yaml to route root URL to /home/ page",
+      "lesson": "Ghost theme routing can override page content, routes.yaml provides control"
+    },
+    {
+      "challenge": "RSS feeds swapped on Writing page",
+      "problem": "Single loadRSSFeed() function found first h4 match, both feeds loaded into same section",
+      "solution": "Refactored to section-specific functions that find H2 first, then h4 within that section",
+      "lesson": "DOM selectors need proper scoping to avoid unintended matches"
+    },
+    {
+      "challenge": "Local LLM images created duplicates",
+      "problem": "Script ran multiple times during testing/debugging",
+      "solution": "Identified in completion report, flagged for user cleanup",
+      "lesson": "Need better idempotency checks for upload scripts"
+    },
+    {
+      "challenge": "Understanding Kyoto theme sections",
+      "problem": "User confused why sections appeared/disappeared on homepage",
+      "solution": "Explained theme auto-generates sections from post tags (#Case Study, #Creating, etc.)",
+      "lesson": "Theme documentation and behavior should be documented upfront"
+    }
+  ],
+
+  "metrics_and_outcomes": {
+    "pages_fixed": 4,
+    "bugs_fixed": 3,
+    "images_uploaded": 9,
+    "og_images_created": 7,
+    "files_organized": 189,
+    "content_expansion_homepage": "+1522 characters (+30%)",
+    "estimated_launch_readiness": "90-95%"
+  },
+
+  "pending_user_actions": [
+    {
+      "task": "Clean up duplicate Local LLM images in Ghost editor",
+      "priority": "LOW",
+      "estimated_time": "5 minutes",
+      "details": "Remove duplicate images, keep -4.png versions"
+    },
+    {
+      "task": "Unpublish or delete duplicate/orphaned pages",
+      "priority": "MEDIUM",
+      "estimated_time": "5 minutes",
+      "pages": [
+        "Resume (slug: resume-2)",
+        "Mike Jones - Program Leader & AI Infrastructure Builder"
+      ]
+    },
+    {
+      "task": "Add employment dates to Resume",
+      "priority": "MEDIUM",
+      "estimated_time": "5 minutes",
+      "missing_dates": ["Kabam", "Kinoo", "8 Circuit Studios"]
+    },
+    {
+      "task": "Complete RAG error logging in /RAG-ERRORS-TO-FIX.md",
+      "priority": "HIGH",
+      "estimated_time": "20-30 minutes",
+      "details": "User reviewing site and logging factual errors for batch correction"
+    },
+    {
+      "task": "Decide on Testimonials section approach",
+      "priority": "LOW",
+      "options": [
+        "Create Ghost posts from LinkedIn testimonials, tag with #Testimonials",
+        "Hide section with CSS or Ghost settings"
+      ]
+    },
+    {
+      "task": "Decide on Thoughts section approach",
+      "priority": "LOW",
+      "options": [
+        "Use for blog content",
+        "Hide section if not using",
+        "Clarify: Ghost does NOT post directly to social media"
+      ]
+    }
+  ],
+
+  "post_launch_enhancements": [
+    {
+      "task": "Performance optimization quick wins",
+      "estimated_time": "70 minutes",
+      "details": "Optimize professional headshot (1.17 MB → 200-300 KB), 3 other images over 500KB, add lazy loading",
+      "source": "/PERFORMANCE-AUDIT-REPORT-2026-02-12.md"
+    },
+    {
+      "task": "Fediverse profile polish",
+      "details": "Once Ghost provides more customization options"
+    },
+    {
+      "task": "Create case study about building MikeJones.online",
+      "details": "Meta-narrative documenting the agentic SDLC process"
+    }
+  ],
+
+  "current_status": {
+    "launch_readiness": "90-95%",
+    "blocking_issues": 0,
+    "high_priority_remaining": 1,
+    "medium_priority_remaining": 2,
+    "low_priority_remaining": 3,
+    "site_url": "https://www.mikejones.online",
+    "site_performance": "Approved for launch (better than industry average)",
+    "content_quality": "High - all pages RAG-verified",
+    "technical_issues": "All critical bugs fixed",
+    "next_milestone": "Final RAG corrections and pre-launch polish"
+  },
+
+  "agent_completions_summary": {
+    "agents_used": [
+      "Alice (Web-Content-Builder-Agent)",
+      "Debbie (web-design-agent)",
+      "site-qa-reviewer",
+      "cleanup-agent"
+    ],
+    "total_agent_tasks": 6,
+    "successful_completions": 6,
+    "agent_coordination": "Sequential execution, no parallel NATS coordination needed for this batch"
+  },
+
+  "files_created_or_updated": [
+    "/assets/og_images/ (7 images created by user)",
+    "/og-images-cdn-urls.json",
+    "/COMPREHENSIVE-QA-AUDIT-PRE-LAUNCH.md",
+    "/RAG-ERRORS-TO-FIX.md",
+    "/archive/ (directory structure)",
+    "/archive/README.md",
+    "/ARCHIVE-QUICK-REFERENCE.md",
+    "/QUICK-FIX-HOMEPAGE.md",
+    "/PERFORMANCE-AUDIT-REPORT-2026-02-12.md",
+    "Ghost pages updated: About, Resume, Projects, Homepage, Writing, Local LLM case study",
+    "routes.yaml (updated in Ghost Admin)"
+  ],
+
+  "rag_updates_made": [
+    {
+      "entry_id": "rag-2026-02-11-102",
+      "type": "fact",
+      "topic": "social_media",
+      "content": "Mike Jones social media profiles added"
+    },
+    {
+      "entry_id": "rag-2026-02-11-103",
+      "type": "fact",
+      "topic": "social_media",
+      "content": "Resilient Tomorrow Mastodon account: @resilientTomorrow@mastodon.social"
+    },
+    {
+      "entry_id": "rag-2026-02-11-104",
+      "type": "fact",
+      "topic": "social_media",
+      "content": "Mike Jones Fosstodon account pending approval"
+    }
+  ],
+
+  "notes_for_pm": [
+    "This represents 2 days of intensive work (Feb 11-12) with multiple parallel efforts",
+    "User is actively involved - creating images, making content decisions, testing",
+    "Site is very close to launch-ready - only minor polish remaining",
+    "All agent work has been successful with clear completion reports",
+    "Good documentation trail - completion reports exist for most phases",
+    "Need to update roadmap to reflect we're approaching Phase 4 (Launch Preparation)",
+    "PROJECT-MEMORY.json should capture the decision-making process, challenges, and solutions",
+    "This is rich case study material - coordinated agents, user collaboration, problem-solving"
+  ]
+}

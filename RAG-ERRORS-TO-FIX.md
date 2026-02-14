@@ -35,7 +35,7 @@ As you review the site and find errors:
 
 ---
 
-### Error #2: on the heading on the page underneath where it says MikeJones.online, I changed the header, I guess, to read the folllowing:  
+### Error #2: on the heading on the page underneath where it says MikeJones.online, I changed the header, to read the folllowing: AI Integration | PMO Consultation | Platform Development | Community Resilience 
 - **Current (Wrong):**
 - **Should Be (Correct):**
 - **Found On:**
@@ -44,11 +44,11 @@ As you review the site and find errors:
 
 ---
 
-### Error #3: [Brief description]
-- **Current (Wrong):**
-- **Should Be (Correct):**
-- **Found On:**
-- **Source of Truth:**
+### Error #3: Resume page, professional experience. Jones Collaboration Company, second bullet: Published "PM Drowning" framework (Resilient Tomorrow) reaching 100,000+ readers
+- **Current (Wrong):** This was published through org intelligence, not Resilient Tomorrow, and I don't think it reached a hundred thousand plus readers. I have no idea what the number of readers it reached. 
+- **Should Be (Correct):** So the correction should be published in PM Drowning framework (org intelligence) reaching, we'll say, 10,000+ readers. 
+- **Found On:** 02-13-2026
+- **Source of Truth:** Mike
 - **RAG Entry ID (if known):**
 
 ---

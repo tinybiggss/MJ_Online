@@ -1,0 +1,3127 @@
+// Auto-generated knowledge base module (CommonJS)
+// Generated at: 2026-02-13T23:57:52.073Z
+// Entries: 190
+
+const knowledgeBase = [
+  {
+    "id": "rag-2026-01-27-001",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones has 24+ years of experience in program and project management, specializing in gaming, entertainment, and media industries.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "career",
+      "experience",
+      "program_management",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-002",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike contributed to Microsoft Xbox and Xbox 360 launch teams, working on 6 AAA titles.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "career",
+      "microsoft",
+      "xbox",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-003",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike holds an Xbox SDK patent for an instrumentation method related to video game data organization.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "career",
+      "microsoft",
+      "patent",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-004",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike held director-level roles at Kabam, Livescribe, and Kinoo.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "career",
+      "director",
+      "kabam",
+      "livescribe",
+      "kinoo",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-005",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike was co-founder of 8 Circuit Studio, a Web3 gaming company.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "career",
+      "cofounder",
+      "8_circuit_studio",
+      "web3",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-006",
+    "type": "fact",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "content": "Mike achieved 80% improvement in delivery predictability and 3x operational efficiency improvements in past roles.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "achievements",
+      "metrics",
+      "delivery",
+      "efficiency",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-007",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike has managed teams of 50-120+ people and budgets of $4M-$12M+.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "career",
+      "leadership",
+      "team_size",
+      "budget",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-008",
+    "type": "fact",
+    "topic": "services",
+    "project": "MikeCareer",
+    "content": "Mike's consulting business operates under Jones Collaboration Company, LLC.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "business",
+      "consulting",
+      "legal_entity",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-009",
+    "type": "qa_pair",
+    "topic": "services",
+    "project": "MikeCareer",
+    "question": "What services does Mike offer?",
+    "answer": "Mike offers three consulting service tiers: (1) Workflow Assessment + Playbook - a 2-week engagement at $4k-$12k that includes systems audit, RACI/swimlanes, operating cadence design, and metrics specification; (2) Implementation Sprint - a 3-week engagement at $8k-$25k for hands-on implementation; (3) Fractional PMO Retainer - ongoing support at $6k-$18k per month.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "services",
+      "pricing",
+      "consulting",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-010",
+    "type": "qa_pair",
+    "topic": "fit",
+    "project": "MikeCareer",
+    "question": "What kind of companies does Mike work with?",
+    "answer": "Mike works best with companies of 50-500 employees in gaming, entertainment, media, and content production industries. His ideal clients are teams experiencing the pain point of 'we're in too many meetings and still missing clarity' - typically organizations moving from ad hoc processes to repeatable delivery.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "icp",
+      "target_market",
+      "fit",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-011",
+    "type": "qa_pair",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "question": "What makes Mike different from other PMO consultants?",
+    "answer": "Mike positions himself as an 'AI-Augmented Organizational Intelligence Architect' who combines traditional PMO/process design (RACI, cadences, value streams) with modern automation (n8n, AI agents, webhooks) and organizational memory systems. He doesn't just design processes - he implements automation that makes work visible and reduces meeting overhead.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "differentiation",
+      "value_proposition",
+      "ai",
+      "automation",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-012",
+    "type": "fit_assessment",
+    "topic": "fit",
+    "project": "MikeCareer",
+    "fit_type": "good_fit",
+    "criteria": "Teams of 50-500 people in gaming, entertainment, or media struggling with delivery visibility and meeting overload",
+    "explanation": "Mike's expertise is optimized for mid-sized teams where process improvements have measurable impact. He specializes in making work visible, reducing meeting overhead, and implementing automation. His background in gaming (Xbox, Kabam) and media gives him industry-specific context.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "fit",
+      "good_fit",
+      "icp",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-013",
+    "type": "fit_assessment",
+    "topic": "fit",
+    "project": "MikeCareer",
+    "fit_type": "not_ideal",
+    "criteria": "Early-stage startups under 30 people or companies outside gaming/entertainment/media",
+    "explanation": "Very small teams may not have enough process complexity to justify the engagement cost. Companies outside Mike's core industries won't benefit from his domain-specific experience in gaming launches, content production, and media operations.",
+    "confidence": "inferred",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "fit",
+      "not_ideal",
+      "icp",
+      "inferred"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-014",
+    "type": "technical",
+    "topic": "project_ai_memory",
+    "project": "OfflineAI",
+    "title": "Memory Ledger Format",
+    "content": "The AI Memory System uses JSONL (JSON Lines) format for cross-AI compatibility. Each entry contains: id (mem-YYYY-MM-DD-###), timestamp (ISO 8601 Pacific), projects array (PascalCase), author, type (decision/milestone/insight/resource/context/note/todo), summary, details, tags (snake_case), related_files, links, source_convo, and source (claude/chatgpt/openwebui).",
+    "confidence": "verified",
+    "source": "chatgpt-memory-template.md",
+    "tags": [
+      "architecture",
+      "jsonl",
+      "memory_ledger",
+      "technical",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-015",
+    "type": "technical",
+    "topic": "project_ai_memory",
+    "project": "OfflineAI",
+    "title": "Cross-AI Compatibility",
+    "content": "The memory system is designed to work across multiple AI platforms: Claude (primary documentation), ChatGPT (alternative analysis), and OpenWebUI (local processing and RAG). All systems read from and write to the same memory.jsonl file using a consistent schema.",
+    "confidence": "verified",
+    "source": "chatgpt-memory-template.md",
+    "tags": [
+      "architecture",
+      "cross_ai",
+      "compatibility",
+      "technical",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-016",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Local AI Infrastructure Services",
+    "content": "Mike's local LLM setup runs three main services: Ollama (port 11434) for local model inference, OpenWebUI (port 3000) for the chat interface, and mcpo (port 11620) for MCP filesystem bridge. Everything auto-starts via LaunchAgents and is managed with the 'rtai' command.",
+    "confidence": "verified",
+    "source": "AUTOSTART_SETUP.md",
+    "tags": [
+      "infrastructure",
+      "ollama",
+      "openwebui",
+      "mcp",
+      "technical",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-017",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "RAG Knowledge Base Integration",
+    "content": "The local AI setup includes continuous sync to an RT_Articles knowledge collection in OpenWebUI. A watcher script monitors the articles folder and automatically uploads new/changed files to the knowledge base via API, enabling RAG-powered responses about Mike's writing and projects.",
+    "confidence": "verified",
+    "source": "OfflineAI_Ops_CheatSheet.md",
+    "tags": [
+      "rag",
+      "knowledge_base",
+      "sync",
+      "technical",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-018",
+    "type": "narrative",
+    "topic": "project_ai_memory",
+    "project": "OfflineAI",
+    "title": "What is the AI Memory System?",
+    "content": "The AI Memory System is a personal knowledge management infrastructure that maintains context across AI conversations and platforms. It solves the problem of 'context loss' - where each new AI session starts fresh with no memory of previous work. The system uses a structured JSONL ledger that both humans and AI can read/write, enabling continuous project context across Claude, ChatGPT, and local AI (OpenWebUI/Ollama). It's part of Mike's broader 'Offline AI' infrastructure that demonstrates practical AI implementation skills.",
+    "confidence": "verified",
+    "source": "chatgpt-memory-template.md",
+    "tags": [
+      "overview",
+      "ai_memory",
+      "context",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-019",
+    "type": "narrative",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "What is the Local LLM Setup?",
+    "content": "The Local LLM Setup is a self-hosted AI infrastructure running on a Mac Mini that provides private, offline AI capabilities. It combines Ollama (for running local models like Qwen 2.5:14B), OpenWebUI (for a ChatGPT-like interface), and an MCP bridge (for filesystem access). The system auto-starts via macOS LaunchAgents and integrates with the AI Memory System for persistent context. This setup demonstrates Mike's hands-on AI infrastructure expertise and enables AI work without cloud dependencies or privacy concerns.",
+    "confidence": "verified",
+    "source": "AUTOSTART_SETUP.md",
+    "tags": [
+      "overview",
+      "local_llm",
+      "infrastructure",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-020",
+    "type": "qa_pair",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "question": "What has Mike been doing since 2022?",
+    "answer": "From 2022-2025, Mike has been in an 'entrepreneurial R&D phase' focused on independent research, AI system development, and parallel projects. This includes building the OfflineAI infrastructure (memory system, local LLM setup), writing for Resilient Tomorrow (his Substack on community resilience), and developing NeighborhoodShare. This phase demonstrates self-directed innovation and deep AI expertise.",
+    "confidence": "verified",
+    "source": "mike_career_prompt.md",
+    "tags": [
+      "career",
+      "recent",
+      "2022_2025",
+      "ai",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-27-021",
+    "type": "fact",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "content": "Resilient Tomorrow is Mike's Substack publication focused on community resilience, organizing, and preparedness. The editorial voice is urgent but grounded, practical over theoretical.",
+    "confidence": "verified",
+    "source": "Resilient_Tomorrow_Article_Writing_System_Prompt.md",
+    "tags": [
+      "resilient_tomorrow",
+      "substack",
+      "content",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-001",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "The VINCE Tool - Mike's First Patent and Industry Impact",
+    "content": "In 2003 at Microsoft Game Studios, Mike created the first game instrumentation system for Xbox. Working on Voodoo Vince (Xbox 360 launch title), user testing revealed the game was 'too difficult' but the 3rd party developer dismissed the feedback. Mike invented a tool to capture death coordinates in the 3D environment, aggregate deaths by location, and correlate with player types. When data showed 8 testers died 300+ times in 30 minutes on one level (none completing it), he loaded the data into a dev build allowing designers to 'fly' through and see colored cubes marking every death. The visual proof convinced the team to fix specific problem areas. The tool was patented, rolled into the Xbox SDK, and demonstrated to Bungie who integrated it into Halo 2 - ultimately creating the now-standard 'Kill Cam' feature.",
+    "confidence": "verified",
+    "source": "Amazon Writing Assessment.md",
+    "tags": [
+      "microsoft",
+      "patent",
+      "innovation",
+      "vince_tool",
+      "kill_cam",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-002",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "Verizon Content Pipeline Transformation",
+    "content": "As a consultant at Verizon, Mike was hired to help the Go90 team (IPTV-to-social-media content) reduce their 24-36 hour content delivery time. He mapped workflows across 5 different business groups (IPTV, Internal Tools, Content Management, QA, Video Entertainment), identified gaps and inefficiencies, and implemented JIRA workflows with automation. Within 3 months: reduced to under 24 hours. By 6 months: hit 'overnight' target of 8 hours. By 9 months: under 6 hours. Within a year: fully automated process delivering in 2-4 hours for most content. This resulted in over $2 million annual cost savings. When Verizon merged with AOL, his consultancy was extended to oversee process convergence.",
+    "confidence": "verified",
+    "source": "Interview Prep and Notes.md",
+    "tags": [
+      "verizon",
+      "process_improvement",
+      "metrics",
+      "consulting",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-003",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "Kinoo: MQTT Firmware Update Decision",
+    "content": "At Kinoo, Mike led the decision to use MQTT instead of a traditional API for over-the-air firmware updates on their AR controller. The initial API approach caused problems: users created error states while waiting for updates, Bluetooth connections dropped during 3-minute updates, and version sync issues between paired devices. Mike researched IoT approaches, led discussions with FW, HW, and SW teams weighing risks and benefits. MQTT allowed background updates while the device was cradled, with seamless download interruption if picked up mid-update. The decision worked well despite a longer implementation timeline (WiFi support took 3 weeks instead of 1 due to unknown-unknowns with error handling). The solution also gave the build manager better control over test environments.",
+    "confidence": "verified",
+    "source": "Amazon Interview Prep and Notes.md",
+    "tags": [
+      "kinoo",
+      "mqtt",
+      "technical_decision",
+      "firmware",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-004",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "Kinoo: Overcoming Planning Resistance",
+    "content": "At Kinoo, the Development Director (Dave) resisted planning meetings, preferring to stay 'heads down' coding. This created bottlenecks - other teams couldn't proceed without engineering input on requirements, timelines, and dependencies. Mike tried multiple engagement approaches, escalated to CEO for support, and eventually discovered that JIRA overwhelmed Dave. The solution: Mike created a simple Gantt chart in Miro where Dave could drag blocks to represent tasks. After a few weeks when Miro became overloaded, Mike transitioned Dave to SmartSheets. Eventually, Dave became the company's biggest schedule advocate, often saying 'let's look at the schedule' whenever questions arose. The experience taught Mike to start with the simplest tools to gain engagement, then evolve as comfort grows.",
+    "confidence": "verified",
+    "source": "Interview Prep - FTF.md",
+    "tags": [
+      "kinoo",
+      "leadership",
+      "planning",
+      "coaching",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-005",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "Kinoo: Hardware Testing Under Pressure",
+    "content": "With 6 weeks until ship, Kinoo's Hardware Manager had forgotten to plan field testing despite it being on the roadmap. Mike stepped in to cover this gap. Requirements: 400 hours of testing, data-driven decisions, paired testing over internet, data collection, product distribution, and documentation. In one week, Mike had basics together; by week two, products were shipping to testers. He recruited 20 testers testing in pairs, provided scheduling tools, created feedback mechanisms, built data collection on the backend, automated time tracking submission to accounting, and rolled out multiple firmware builds. Result: 400+ hours of testing completed in 8 weeks.",
+    "confidence": "verified",
+    "source": "Amazon Interview Prep and Notes.md",
+    "tags": [
+      "kinoo",
+      "ownership",
+      "hardware_testing",
+      "crisis_management",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-006",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "8 Circuit Studios: Building the Proto-Metaverse",
+    "content": "Mike co-founded 8 Circuit Studios with a vision to create an open gaming ecosystem that would be 'the cornerstone of the metaverse' - before the term became popular. The vision: players own their in-game items (as NFTs), carry identity across games via wallet addresses, get paid for contributions, and participate in community-driven development. Mike wrote the white paper, designed the 8Bit Token (for funding and voting rights), wrote specifications for 'evolving' NFT contracts, planned IPFS integration for distributed data storage, and built partnerships with other Web3 companies. While the company ultimately pivoted away from Web3 due to high Ethereum transaction fees, many of the ideas Mike developed became industry standards. He describes it as 'what Roblox is, but with openness.'",
+    "confidence": "verified",
+    "source": "Amazon Interview Prep and Notes.md",
+    "tags": [
+      "8cs",
+      "web3",
+      "founder",
+      "innovation",
+      "blockchain",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-007",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "8CS: Customer Communication Document",
+    "content": "At 8 Circuit Studios, Mike recognized the team didn't fully understand their customers or market segments. He created a 3-dimensional spreadsheet (pivot table) that cross-referenced market segments with motivations, segment strength, likelihood of product interest, feature priorities, and communication language. This document helped every team: design and art prioritized features, engineering understood user needs, customer service learned appropriate language, executives aligned roadmaps, and marketing knew how to communicate. The document enabled anyone to identify what segment a customer came from and tailor their communication accordingly.",
+    "confidence": "verified",
+    "source": "Interview Preparation.md",
+    "tags": [
+      "8cs",
+      "market_segmentation",
+      "communication",
+      "leadership",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-008",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "8CS: Alien Arsenal vs Project Genesis Decision",
+    "content": "At 8CS, the lead engineer and producer became excited about creating a Crypto Kitties-style fast-follow game (Alien Arsenal) instead of the planned AAA ecosystem (Project Genesis). Mike initially let them pursue it for 3 months with a split team. After 3 months: working prototype but lacking engagement and clear NFT value. They asked for more time; Mike gave 2 months with full team access. After 2 months: still insufficient progress. Despite being close friends, Mike made the difficult call to cancel Alien Arsenal and refocus everyone on the original vision. Learnings: trust your gut, the 5 months provided valuable NFT learnings, but he should have had the hard discussion earlier rather than being lured by potential quick profit.",
+    "confidence": "verified",
+    "source": "Interview Preparation.md",
+    "tags": [
+      "8cs",
+      "decision_making",
+      "prioritization",
+      "leadership",
+      "narrative",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-009",
+    "type": "qa_pair",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "question": "How would Mike describe his leadership style?",
+    "answer": "Mike describes himself as a 'player-coach' - he maintains solid understanding of what he's working on so he can get hands dirty if needed, ask knowledgeable questions, and make good estimations. He excels at identifying people's strengths (sometimes before they recognize them themselves), helping them see their value, and coaching them to grow. He believes in creating environments where teams communicate, collaborate, and connect. For remote teams, he emphasizes daily standups, regular in-person meetings (3-4x per year ideal), and tools that make sharing natural.",
+    "confidence": "verified",
+    "source": "Interview Prep - 2k.md",
+    "tags": [
+      "leadership",
+      "player_coach",
+      "management_style",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-010",
+    "type": "qa_pair",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "question": "How does Mike approach technical challenges?",
+    "answer": "Mike's approach: (1) Identify and clarify the issue to ensure alignment, (2) Determine known options with clear understanding, (3) Discuss risks and requirements for each option, (4) Evaluate resources needed for implementation, (5) Make informed decisions with team input. He maintains risk registers that are reviewed before EVERY meeting including standups. He believes if risks aren't kept front-and-center, they escalate from risks into issues. He also creates slack channels for tech discussions and encourages team members to share industry developments.",
+    "confidence": "verified",
+    "source": "Interview Prep - 2k.md",
+    "tags": [
+      "problem_solving",
+      "technical",
+      "methodology",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-011",
+    "type": "technical",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "title": "Kinoo Technical Stack",
+    "content": "Kinoo's AR communication platform used: Unity Game Engine (C++), Twilio for data conferencing, Photon for networking, Auth0 for OAuth, Computer Vision for tracking LED positions on the hardware controller. Backend: AWS (DynamoDB, S3, Redshift), custom interfaces for DB management, analytics (Tableau → PowerBI), ML semi-supervised learning (TensorFlow) for controller motion prediction, MQTT for OTA updates. Hardware: ESP32 chipset, speaker, memory, LED spheres, two triggers and two buttons, dual-layer board, IMU with 6 DOF, WiFi, Bluetooth. Firmware: C++, bridging hardware signals to application.",
+    "confidence": "verified",
+    "source": "Interview Prep - FTF.md",
+    "tags": [
+      "kinoo",
+      "technical",
+      "stack",
+      "unity",
+      "aws",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-012",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Kinoo's AR gaming/communication platform won 10 awards including the CES Innovation Award.",
+    "confidence": "verified",
+    "source": "Amazon Interview Prep and Notes.md",
+    "tags": [
+      "kinoo",
+      "awards",
+      "ces",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-013",
+    "type": "qa_pair",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "question": "What process did Mike create at Kinoo?",
+    "answer": "Mike created the 'C3PO' (Creative Content Production Process Overview) - a comprehensive production pipeline document that defined: process stages for each team, communication protocols, stakeholders at each step, signoff requirements, handoff requirements, gates, and templates for producers. Combined with JIRA for task management and SmartSheets for cross-team scheduling, this created dashboards anyone in the company could use to see project status at a glance and drill down into individual assignments.",
+    "confidence": "verified",
+    "source": "Amazon Interview Prep and Notes.md",
+    "tags": [
+      "kinoo",
+      "process",
+      "c3po",
+      "methodology",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-014",
+    "type": "qa_pair",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "question": "How does Mike foster innovation within teams?",
+    "answer": "Mike reserves time after daily standups for team discussions. At least weekly, he brings up new tech developments, industry changes, or interesting approaches and facilitates thought experiments on potential applications. This encourages others to do the same. He creates dedicated Slack channels for sharing articles (with the rule: you must add your thoughts, not just drop a link). At 8CS, this approach led to discovering GameTech (acquired by Amazon) as a backend solution, pivoting from an internally-built asset database.",
+    "confidence": "verified",
+    "source": "Interview Prep - 2k.md",
+    "tags": [
+      "innovation",
+      "team_culture",
+      "communication",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-015",
+    "type": "narrative",
+    "topic": "about",
+    "project": "MikeCareer",
+    "title": "Mike's Origin Story",
+    "content": "Mike's path to tech started with a childhood dream (age 10-14) of making video games. In college, he pursued political science - not for politics itself, but fascinated by systems: how projects move through processes, how laws pass, how society is governed. The tech pivot came accidentally: a roommate studying Microsoft networking certification (early 1990s) would discuss concepts with Mike, who realized he understood the material better than the person studying it - he could see how the processes and projects worked together. Mike applied this knowledge to hack his college network for multiplayer Doom (1990-91). After graduating, he joined Aviation Supplies and Academics doing tech support and QA for flight simulator software. Realizing his passion was software not politics, he enrolled at University of Washington for computer science, where he met someone working at Microsoft Games. Within six weeks, Mike had his dream job at Microsoft Games Organization.",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "origin_story",
+      "about",
+      "personal",
+      "gaming",
+      "systems_thinking",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-016",
+    "type": "narrative",
+    "topic": "about",
+    "project": "MikeCareer",
+    "title": "The Through-Line: Creating Better Systems",
+    "content": "Across 26+ years, Mike's career has one consistent thread: creating better systems. This started before tech - as a college warehouse manager for a plumbing distributor, he optimized inflow/outflow workflow. His manager constantly told him 'You're so efficient!' At Microsoft (1999), he created the VINCE instrumentation tool to make player struggle data visible, transforming subjective feedback into evidence developers couldn't ignore. At Oberon Media/iPlay: streamlined content delivery to web. At Platum: came in early, defined processes and delivery methods. At Kabam: started managing departments, kept acquiring more by identifying gaps and showing 'this is how we should do this work.' The pattern repeated at every company. It's not systems for systems' sake - it's always people-centered: hearing problems, filling gaps, and creating career opportunities for the people he works with.",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "through_line",
+      "about",
+      "systems_thinking",
+      "efficiency",
+      "career_philosophy",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-017",
+    "type": "qa_pair",
+    "topic": "about",
+    "project": "MikeCareer",
+    "question": "What drives Mike's approach to work?",
+    "answer": "Mike is driven by creating efficiency and better systems. This has been consistent since before his tech career - even as a college warehouse manager, his boss constantly noted 'you're so efficient.' He approaches every role by identifying how work should flow, where the gaps are, and how to make the invisible visible (like the VINCE tool turning player frustration into data). But it's always people-centered: hearing team problems, filling gaps, and creating opportunities for growth. At Kabam, he kept acquiring departments not by asking for them, but by demonstrating 'here's how we should do this work, here are the gaps, here's what we need.'",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "motivation",
+      "values",
+      "efficiency",
+      "systems_thinking",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-018",
+    "type": "narrative",
+    "topic": "about",
+    "project": "MikeCareer",
+    "title": "8CS: The Deeper Why - Rewarding Creators",
+    "content": "Mike's motivation for co-founding 8 Circuit Studios went beyond building a metaverse. After years in gaming, he observed that the people doing the real work - creatives, developers, QA testers working 60-hour weeks through crunch - rarely saw significant returns even on successful products. He saw Web3 as an opportunity to fix this: by tracking asset ownership on blockchain, every transaction (resale of a gun, skin, or item) could be traced back to the original creators, giving them ongoing royalties. If someone made something people loved and traded for years, that creator would continue benefiting. The vision: a system where the people who make the product are the ones who get rewarded.",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "8cs",
+      "motivation",
+      "web3",
+      "creator_economy",
+      "values",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-019",
+    "type": "narrative",
+    "topic": "about",
+    "project": "MikeCareer",
+    "title": "Insight Float: Community Wellness Venture (2016)",
+    "content": "In 2016, Mike opened Insight Float, a flotation center and spa dedicated to sensory deprivation tanks in Silicon Valley. The venture reflected his desire to serve his community by offering stressed-out tech workers a place to rest, recover, and find meaning. The tanks provide an environment to slow down, think, and understand what they want from life. This wasn't a tech play - it was Mike applying his systems thinking to human wellness: creating a structure that helps people recover and be their best.",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "insight_float",
+      "entrepreneurship",
+      "wellness",
+      "community",
+      "values",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-020",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "In 2016, Mike founded Insight Float, a sensory deprivation flotation center in Silicon Valley focused on wellness and recovery.",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "insight_float",
+      "entrepreneurship",
+      "2016",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-021",
+    "type": "narrative",
+    "topic": "about",
+    "project": "MikeCareer",
+    "title": "AI Transition: From Systems Guy to AI Builder",
+    "content": "Mike's transition to AI started about 2.5 years ago. His 2025 ChatGPT report showed he was in the top 1% of users and top 3% for conversations. What drew him in: AI could take his big ideas and make them actionable. As a systems thinker, he'd always seen connections and dots that others couldn't follow when he tried to explain them. AI provided structure - it helped him create a 'straight line' for others to see what he saw. This enabled Resilient Tomorrow, where AI helped organize his thoughts into meaningful conversations. He quickly mastered prompting, but realized the real key is context: give AI the right context and it can help you find answers. Once he saw AI could help him code, build prototypes, and create things he wanted to see in the world - 'there was no stopping it.'",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "ai_transition",
+      "about",
+      "chatgpt",
+      "context",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-022",
+    "type": "fact",
+    "topic": "about",
+    "project": "MikeCareer",
+    "content": "Mike is in the top 1% of ChatGPT users and top 3% for conversation volume, according to his 2025 ChatGPT year-in-review report.",
+    "confidence": "verified",
+    "source": "About Page Interview 2026-01-29",
+    "tags": [
+      "ai",
+      "chatgpt",
+      "credentials",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-023",
+    "type": "qa_pair",
+    "topic": "project_ai_memory",
+    "project": "OfflineAI",
+    "question": "What triggered Mike to build the AI Memory System?",
+    "answer": "Context loss frustration. Mike kept having to re-explain the same things to AI every new session. The system solves this by maintaining persistent context across conversations and platforms.",
+    "confidence": "verified",
+    "source": "AI Memory Interview 2026-01-29",
+    "tags": [
+      "ai_memory",
+      "motivation",
+      "context_loss",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-024",
+    "type": "qa_pair",
+    "topic": "project_ai_memory",
+    "project": "OfflineAI",
+    "question": "Why did Mike choose JSONL format for the memory system?",
+    "answer": "JSONL hit the trifecta: (1) Cross-AI compatibility - all AI systems can read/write it, (2) Human-readable - Mike can read and edit entries directly, (3) Simplicity - databases felt like overkill. Plus JSON is the modern standard for this kind of structured data work.",
+    "confidence": "verified",
+    "source": "AI Memory Interview 2026-01-29",
+    "tags": [
+      "ai_memory",
+      "jsonl",
+      "architecture",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-025",
+    "type": "narrative",
+    "topic": "project_ai_memory",
+    "project": "OfflineAI",
+    "title": "AI Memory System: Challenges and Lessons",
+    "content": "Building the memory system had multiple challenges: Schema design was manageable with AI assistance. Workflow integration proved harder - MCP connectivity issues, Claude sometimes unable to find files. The biggest friction: cross-AI quirks. Claude and local LLMs work great with the schema, but ChatGPT consistently outputs incorrect formats despite detailed instructions, requiring post-processing through another LLM to correct entries. The system isn't as foolproof as Mike would like, but it works.",
+    "confidence": "verified",
+    "source": "AI Memory Interview 2026-01-29",
+    "tags": [
+      "ai_memory",
+      "challenges",
+      "lessons",
+      "cross_ai",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-026",
+    "type": "narrative",
+    "topic": "project_ai_memory",
+    "project": "OfflineAI",
+    "title": "AI Memory System: Workflow Impact",
+    "content": "The workflow is still evolving - Mike notes it always will be. About 2-3 months after building the system, Claude gained native memory, which helped. But the real value: Mike can take context from any conversation on any platform, go to another LLM, say 'this is what I'm talking about,' and it can review all that information and understand the last conversation. 'Has been amazing!' - the system enables true cross-platform AI continuity.",
+    "confidence": "verified",
+    "source": "AI Memory Interview 2026-01-29",
+    "tags": [
+      "ai_memory",
+      "workflow",
+      "impact",
+      "cross_platform",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-027",
+    "type": "narrative",
+    "topic": "project_neighborhood_share",
+    "project": "NeighborhoodShare",
+    "title": "NeighborhoodShare: The Angle Grinder Origin Story",
+    "content": "NeighborhoodShare started with a neighbor asking Mike for help. The neighbor's son had inherited his mom's bike, but the seat post was too high and wouldn't lower enough. Mike suggested using an angle grinder with a cutting wheel. The neighbor stared blankly and repeated 'angle grinder?' Mike invited him over, demonstrated, and fixed the problem. That moment sparked a realization: the solutions to our problems exist all around us. Neighbors have the skills, capacity, and tools to help each other - but most people don't even talk to their neighbors.",
+    "confidence": "verified",
+    "source": "Current Projects Interview 2026-01-29",
+    "tags": [
+      "neighborhood_share",
+      "origin_story",
+      "community",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-028",
+    "type": "narrative",
+    "topic": "project_neighborhood_share",
+    "project": "NeighborhoodShare",
+    "title": "NeighborhoodShare: How It Works",
+    "content": "NeighborhoodShare is a tool-sharing platform designed to build community connections. Users photograph any item (garage tools, sewing machines, kitchen equipment) and AI categorizes it automatically, lowering the barrier to entry. Users set their 'neighborhood size' based on location (2 miles in urban San Jose, up to 25-50 miles in rural areas). The workflow: search for items, request to borrow, owner approves via text message, mark pickup and return. A timing system lets borrowers specify how long they need items, with reminders until the item is marked returned. The goal: reduce spending, utilize idle resources, and most importantly - give neighbors a reason to connect through helping with each other's projects.",
+    "confidence": "verified",
+    "source": "Current Projects Interview 2026-01-29",
+    "tags": [
+      "neighborhood_share",
+      "features",
+      "product",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-029",
+    "type": "narrative",
+    "topic": "project_neighborhood_share",
+    "project": "NeighborhoodShare",
+    "title": "NeighborhoodShare: The Bigger Vision",
+    "content": "NeighborhoodShare is a prototype for a larger vision. Mike observes that getting to know someone is easier when you understand their projects and can help. Looking at the next 5-10 years, he anticipates harder times where mutual aid and hyper-local community support will be essential. NeighborhoodShare tests whether tool-sharing can bring neighbors together. The broader platform vision connects to Resilient Tomorrow's '7 Pillars' framework for community resilience.",
+    "confidence": "verified",
+    "source": "Current Projects Interview 2026-01-29",
+    "tags": [
+      "neighborhood_share",
+      "vision",
+      "mutual_aid",
+      "resilience",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-030",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "The 7 Pillars Framework",
+    "content": "The 7 Pillars is Resilient Tomorrow's core framework for building parallel systems alongside existing ones. The pillars are organized into three groups. Material Foundations: (1) Food Sovereignty - grow, preserve, trade; control food = control fate. (2) Energy Autonomy - solar, battery backup, not helpless without grid. Capacity & Leverage: (3) Local Wealth Systems - security is access, not money; barter, trade, relationships over cash. (4) Knowledge Stewardship - document what works, keep offline copies. (5) Communication Independence - mesh networks, redundant comms, own your channels. Social Infrastructure: (6) Mutual Aid - safety net is other people; infrastructure, not charity. (7) Hyperlocal Community - your block still exists; relationships over permission.",
+    "confidence": "verified",
+    "source": "7 Pillars-POSTED.md",
+    "tags": [
+      "resilient_tomorrow",
+      "7_pillars",
+      "framework",
+      "resilience",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-031",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "Resilient Tomorrow: The Core Thesis",
+    "content": "Resilient Tomorrow's thesis: 'You don't burn the old system down until the new one can carry weight.' The publication argues that the systems we rely on weren't designed with our wellbeing in mind - they're designed to keep us dependent, distracted, and depleted. But you can begin removing yourself piece by piece, dependency by dependency. The point isn't individual mastery - it's shared capability. Resilience emerges as a property of the group, not the individual. Mike's framing: 'Loosen the grip, one dependency at a time' while 'building parallel systems alongside the ones we're already navigating.'",
+    "confidence": "verified",
+    "source": "7 Pillars-POSTED.md",
+    "tags": [
+      "resilient_tomorrow",
+      "thesis",
+      "philosophy",
+      "resilience",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-032",
+    "type": "qa_pair",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "question": "What is Resilient Tomorrow and who is it for?",
+    "answer": "Resilient Tomorrow is Mike's Substack publication focused on community resilience and building parallel systems. Target readers: people who sense something is off with the conventional path but aren't ready to 'drop out' - they want practical ways to reduce dependency on fragile systems while still living in the world as it is. The publication combines wake-up calls (recognizing systemic problems), practical playbooks (concrete steps), and movement building (creating community around these ideas). Key articles include '7 Pillars to Loosen the System's Grip' and 'The Game Was Rigged—So Why Are We Still Playing?'",
+    "confidence": "verified",
+    "source": "7 Pillars-POSTED.md",
+    "tags": [
+      "resilient_tomorrow",
+      "overview",
+      "audience",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-033",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "Mike's Personal Journey in RT",
+    "content": "Mike writes from lived experience, not theory. He followed 'the blueprint' - years building products in tech, always with a nagging question: 'Is this something the world actually needs, or are we just trying to create a market for it?' The money was always what mattered in the end. When promises didn't materialize, there was no alternative path offered - just more encouragement to stay the course. So the question shifted from 'Is this working?' to 'What am I actually doing about it?' The 7 Pillars framework is his answer - building in parallel while still living inside the world as it is.",
+    "confidence": "verified",
+    "source": "7 Pillars-POSTED.md",
+    "tags": [
+      "resilient_tomorrow",
+      "personal",
+      "journey",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-034",
+    "type": "fact",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "content": "Mike is actively building what he writes about in Resilient Tomorrow: food systems (greenhouse, garden), energy experiments (solar/battery with permitting challenges), local sharing infrastructure (NeighborhoodShare), communication redundancy (Meshtastic mesh networks), and his own AI systems 'built to work for me, not on me.'",
+    "confidence": "verified",
+    "source": "7 Pillars-POSTED.md",
+    "tags": [
+      "resilient_tomorrow",
+      "building",
+      "practice",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-035",
+    "type": "fact",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "content": "The '7 Steps to Quietly Exit a System' article (May 2025) received 989 likes and 230 restacks on Substack, indicating strong reader engagement with Resilient Tomorrow's message.",
+    "confidence": "verified",
+    "source": "7 Steps article",
+    "tags": [
+      "resilient_tomorrow",
+      "metrics",
+      "engagement",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-036",
+    "type": "qa_pair",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "question": "Why does Mike self-host AI instead of just using Claude or ChatGPT?",
+    "answer": "Privacy and sovereignty. Mike's data stays on his machine - no one else has access. The system works without internet, has no subscription dependency, and can't be taken away. This directly implements Resilient Tomorrow's Pillar 4 (Knowledge Stewardship - 'systems that don't require permission') and Pillar 5 (Communication Independence - 'own your channels'). As Mike writes: AI 'built to work for me, not on me, and to keep my data where it belongs.'",
+    "confidence": "verified",
+    "source": "Current Projects Interview 2026-01-29",
+    "tags": [
+      "local_llm",
+      "motivation",
+      "privacy",
+      "sovereignty",
+      "7_pillars",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-037",
+    "type": "narrative",
+    "topic": "about",
+    "project": "MikeCareer",
+    "title": "How Mike's Projects Connect: The Unified Vision",
+    "content": "Mike's parallel projects form a coherent whole, all implementing his 7 Pillars framework for resilience. NeighborhoodShare addresses Pillar 3 (Access > Money) and Pillar 7 (Hyperlocal Community) - building local relationships through resource sharing. The Local LLM and AI Memory System address Pillar 4 (Knowledge Stewardship) and Pillar 5 (Communication Independence) - AI that works for him, not on him, with data sovereignty. Resilient Tomorrow is the thesis that ties it all together: building parallel systems that reduce dependency on fragile centralized infrastructure while still living in the world as it is.",
+    "confidence": "verified",
+    "source": "Current Projects Interview 2026-01-29",
+    "tags": [
+      "unified_vision",
+      "7_pillars",
+      "projects",
+      "about",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-038",
+    "type": "fact",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "content": "Resilient Tomorrow engagement metrics across key articles: 'Self-Organization is Resistance' (310 likes, 118 restacks), 'Convenience Is the Cage' (536 likes, 118 restacks), 'You've Been Trained to Depend on the System' (200 likes, 43 restacks), '7 Steps to Quietly Exit' (989 likes, 230 restacks). Total audience shows strong engagement with practical resilience content.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "metrics",
+      "engagement",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-039",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Additional Projects: Offramp Assistant",
+    "content": "The Offramp Assistant is a GPT-based tool Mike built that combines Resilient Tomorrow articles with the Prefigurative Community Building series to help readers create personalized 'exit plans' from system dependency. It includes a personal dashboard for tracking custom progress. This represents Mike applying AI to make his resilience framework actionable and personalized for each reader.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "offramp_assistant",
+      "ai",
+      "tool",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-040",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Additional Projects: Community Defense Playbook",
+    "content": "The Community Defense Playbook is a 200+ page living document for Resilient Tomorrow paid subscribers. It expands on 'Your Neighborhood Is Being Sold While You Sleep' with step-by-step instructions, templates, and proven strategies for community resilience. Includes: Community Health Assessment Tool, 30-Day Quick Start Plan, Emergency Response Plans, Early Warning Detection System, case studies (Boston Dudley Street, Jackson Rising), and Community Land Trust models.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "community_defense_playbook",
+      "guide",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-041",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Energy Project: DIY Solar with Neighbors",
+    "content": "Mike is building a neighborhood solar backup system with 5 neighbors. Target: $10,000-$18,000 per household with battery backup (vs. $40,000+ professional install). Approach: sourcing used commercial panels with 10+ years lifespan remaining, EG4 inverters, developing hot-swappable battery packs for shared resilience. Goal: Power entire household with 3-5 days battery backup. A 'Power Playbook' guide is available for subscribers with sourcing, installation, and cooperative formation steps.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "solar",
+      "energy",
+      "diy",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-042",
+    "type": "qa_pair",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "question": "What is Mike's writing voice like in Resilient Tomorrow?",
+    "answer": "Mike's RT voice is direct, urgent, and emotionally resonant - alternating between systemic critique and actionable guidance. Key characteristics: uses vivid metaphors (cage, heist, hamster wheel, offramp), includes personal anecdotes grounding larger arguments, action-oriented ('Here's what I did...'), empowering without preaching. Signature phrases include 'This isn't about purity. It's about direction' and 'The future belongs to the builders.' He reframes 'prepping' as dignity and sovereignty, not paranoia.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "voice",
+      "writing_style",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-043",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Key Article: The Game Was Rigged",
+    "content": "'The Game Was Rigged—So Why Are We Still Playing?' (March 2025) identifies five hidden rules of the system: (1) Keep people in debt so they must work forever, (2) Control access to essentials so you always have to pay, (3) Suppress wages and destroy worker protections, (4) Control knowledge and information, (5) Rig the political system so it can never be changed. Key quote: 'If society had a maturity level, we'd be about 16 years old.' The article argues a teenager wants freedom; an adult creates it.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "game_was_rigged",
+      "system_critique",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-044",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Key Article: The Imagination Heist",
+    "content": "'The Imagination Heist' (June 2025) argues that systems of power deliberately narrowed our capacity to imagine alternatives. Key insight: 'The first step in any transformation isn't action—it's vision.' The article frames storytelling not as decorative but as 'critical infrastructure' for building new systems. Reclaiming imagination is framed as a revolutionary act that precedes all systemic change.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "imagination_heist",
+      "vision",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-045",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Key Article: Self-Organization is Resistance",
+    "content": "'Self-Organization is Resistance' (February 2025) was an early foundational piece arguing that building parallel, decentralized alternatives makes old systems irrelevant. Applies principles from nature (bird flocking, ant colonies) to human systems. Key quote: 'We don't wait for permission. We don't need validation from centralized authorities. We create the networks, tools, and communities that will outlast them.' 310 likes, 118 restacks.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "self_organization",
+      "resistance",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-046",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Key Article: Convenience Is the Cage",
+    "content": "'Convenience Is the Cage' (June 2025) redefines wealth: 'Wealth is not the number in your bank account—it's the number of needs you can meet without spending it.' The article argues convenience is marketed as freedom but often keeps people on the treadmill. Promotes tools like NeighborhoodShare, Buy Nothing Groups, community gardens, and timebanks. One of the highest engagement articles: 536 likes, 118 restacks.",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "convenience_cage",
+      "wealth",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-047",
+    "type": "narrative",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "title": "RT Key Article: Your Neighborhood Is Being Sold",
+    "content": "'Your Neighborhood Is Being Sold While You Sleep' (August 2025) exposes how private equity giants like Blackstone systematically acquire residential property clusters to create modern 'company towns.' Includes case study: Blackstone's $1B acquisition of 66 apartment complexes in San Diego leading to 38% rent increases. Key insight: 'Organized communities negotiate from strength. Unorganized ones have little choice but to accept what's offered.'",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "private_equity",
+      "housing",
+      "community_defense",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-048",
+    "type": "fact",
+    "topic": "project_resilient_tomorrow",
+    "project": "ResilientTomorrow",
+    "content": "Resilient Tomorrow article catalog (2025): Self-Organization is Resistance (Feb 20), The Game Was Rigged (Mar 6), Stop Waiting for Heroes (Apr 2), The First System I Changed Was My Own (Apr 21), 7 Steps to Quietly Exit (May 6), You Didn't Opt In (May 15), Every Time I Scroll This Feed (May 21), You've Been Trained to Depend (May 30), Convenience Is the Cage (Jun 6), Power to the People (Jun 13), The Imagination Heist (Jun 24), You Wanted Action (Jul 21), What Happens When Neighbors Build Their Own Power Grid (Aug 28), Community Defense Playbook (Aug 14), Your Neighborhood Is Being Sold (Aug 14).",
+    "confidence": "verified",
+    "source": "RT Articles Analysis 2026-01-29",
+    "tags": [
+      "resilient_tomorrow",
+      "article_catalog",
+      "2025",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-29-049",
+    "type": "fact",
+    "topic": "homepage",
+    "project": "MJOnline",
+    "content": "Hero tagline for mikejones.online: 'I build systems that help people thrive' - captures the through-line of 26+ years creating better systems while emphasizing the human-centered approach. Works for both consulting clients and project explorers.",
+    "confidence": "verified",
+    "source": "Hero Tagline Session 2026-01-29",
+    "tags": [
+      "homepage",
+      "tagline",
+      "branding",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-071",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners is a division of Jones Collaboration Company, LLC that provides AI-augmented PMO solutions for gaming, entertainment, and media companies. Tagline: 'Make Work Flow'. Based in San Francisco Bay Area. Contact: hello@velocitypartners.io, Website: velocitypartners.io.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "business",
+      "overview",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-072",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners targets gaming studios (50-1500 person teams), entertainment/EdTech production companies, and media companies. Decision makers: CTO, COO, VP of Product, studio head. Sweet spot: organizations that have outgrown startup improvisation but haven't built organizational muscle for repeatable delivery.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "target_market",
+      "icp",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-073",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners identifies four common organizational pain points: (1) Meeting Overload - calendars packed but teams lack clarity on priorities and handoffs, (2) Documentation Drowning - engineers spend more time on status updates than building, (3) AI Anxiety - competitors adopting AI while org debates where to start, (4) Chaotic Handoffs - information lost between teams causing delays and rework.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "pain_points",
+      "problems",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-074",
+    "type": "qa_pair",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "question": "What makes Velocity Partners different from traditional PMO consulting?",
+    "answer": "Traditional PMO consulting provides generic frameworks that don't fit culture, heavy documentation nobody reads, theory without hands-on execution, and one-size-fits-all solutions. Velocity Partners provides gaming/entertainment-specific workflows, AI-augmented process automation, player/coach implementation model, and pragmatic measurable outcomes. Mike positions as 'organizational intelligence architects' who implement systems that work, not just deliver decks.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "differentiation",
+      "value_proposition",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-075",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners offers three service tiers: (1) Workflow Assessment + Playbook (2-3 weeks) - deep diagnostic, workflow mapping, bottleneck identification, custom playbook for transformation. (2) Implementation Sprints (3 weeks, modular phases) - hands-on execution building RACI matrices, establishing cadences, deploying automation tools, training teams. (3) Fractional PMO Retainer (monthly) - ongoing optimization and management, dedicated PMO expert, troubleshooting, systems evolution.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "services",
+      "offerings",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-076",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Every Velocity Partners engagement starts with a discovery call to understand specific challenges and scope the right solution. Pricing is customized based on company size, complexity, and desired outcomes - not one-size-fits-all packages.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "engagement_model",
+      "pricing",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-077",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners proven impact metrics from gaming studios, entertainment production companies, and media organizations: 60% Predictability Gains (teams hit delivery commitments more consistently with clear workflows and accountability), +30% Meeting Reduction (fewer status meetings needed when information flows through automated systems), +20% Velocity Increase (development speed improves when handoffs are smooth and clarity is high). These are actual results from implementations, not theoretical projections.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "results",
+      "metrics",
+      "impact",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-078",
+    "type": "narrative",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "title": "Velocity Partners 5-Step Process",
+    "content": "Velocity Partners follows a systematic 5-step process: (1) Discovery Call - explore pain points, understand context, determine fit, no obligation honest conversation. (2) Diagnostic Phase - shadow workflows, interview key stakeholders, map current state to identify highest-impact improvement opportunities. (3) Custom Playbook - deliver comprehensive roadmap with prioritized recommendations, implementation timelines, and expected outcomes tailored to the organization. (4) Hands-On Implementation - execute the plan alongside teams, building systems, training staff, deploying automation tools that stick. (5) Continuous Optimization - through fractional PMO support or check-ins, ensure workflows evolve with business and deliver sustained value.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "process",
+      "methodology",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-079",
+    "type": "narrative",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "title": "AI-Augmented Organizational Intelligence",
+    "content": "Velocity Partners bridges traditional process design with cutting-edge AI automation. The approach: organizational dysfunction isn't new, but the tools to solve it are evolving rapidly. Implements systems using n8n workflows, webhook integrations, and organizational memory tools that reduce manual coordination and surface insights automatically. Result: teams focus on creative work while AI handles status updates, handoff coordination, and documentation synthesis. Three core capabilities: (1) Workflow Automation - eliminate repetitive coordination tasks, (2) Organizational Memory - capture and surface institutional knowledge instead of letting it live in Slack threads, (3) Integration Architecture - connect existing tools into cohesive workflows instead of forcing new platform adoption.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "ai_augmentation",
+      "automation",
+      "methodology",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-080",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Mike Jones founded Velocity Partners bringing 29 years of industry expertise (corrected from 24-26 in older materials). Career highlights: Xbox launch team member and SDK patent holder, PMO leadership at Kabam during hypergrowth establishing workflows for distributed teams building top-grossing games, AI infrastructure implementation at Kinoo and 8 Circuit Studio including AI-augmented production systems and organizational memory tools.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf + user correction",
+    "tags": [
+      "velocity_partners",
+      "mike_jones",
+      "experience",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-081",
+    "type": "qa_pair",
+    "topic": "aapd",
+    "project": "VelocityPartners",
+    "question": "What is AI-Augmented Process Design (AAPD)?",
+    "answer": "AI-Augmented Process Design (AAPD) is Mike's signature methodology that treats AI as an execution multiplier - one that only works when the underlying process is sound. Core principle: 'The fastest way to waste money on AI is to automate a broken workflow. The fastest way to create leverage is to design the process first—then deploy agents where friction actually lives.' AAPD forces clarity before automation. When teams skip process design, AI doesn't create leverage—it just accelerates confusion.",
+    "confidence": "verified",
+    "source": "AI-Augmented Process Design article",
+    "tags": [
+      "aapd",
+      "methodology",
+      "ai",
+      "process_design",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-082",
+    "type": "narrative",
+    "topic": "aapd",
+    "project": "VelocityPartners",
+    "title": "AAPD Core Principles",
+    "content": "AI-Augmented Process Design follows three core principles: (1) Design Before Delegation - don't ask AI to 'build me a system.' Design the system first (requirements, workflows, ownership, constraints), then delegate execution where friction lives. (2) Orchestration Beats Replacement - no single tool does everything. With clear handoffs, AI tools orchestrate work across boundaries that normally require meetings, tickets, and manual coordination. AI creates leverage not by replacing people or tools, but by amplifying them. (3) Test Small, Then Scale - low-stakes tests expose instruction gaps and tool limits early when they're cheap to fix. Iteration isn't hesitation, it's control. Failures scale as fast as successes.",
+    "confidence": "verified",
+    "source": "AI-Augmented Process Design article",
+    "tags": [
+      "aapd",
+      "principles",
+      "methodology",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-083",
+    "type": "narrative",
+    "topic": "aapd",
+    "project": "VelocityPartners",
+    "title": "Home Management System Case Study",
+    "content": "Mike built a home management system using AAPD methodology as a practical case study. Problem: commercial tools (Skylight, Cozi) cost monthly fees, store data on vendor servers, have rigid workflows, and don't adapt to how his household operates. Solution: Used Claude Code for planning/orchestration and Claude Chrome for interface-level execution to systematically design and implement a Notion-based system. Process: Set up multiple specialized agents working in parallel (requirements analysis, business prioritization, process design, technical architecture, project orchestration). Within an hour: clear process framework, phased execution plan, prioritized backlog, requirements with done criteria, realistic roadmap. When hitting Notion API limits, shifted to Claude Chrome for browser-based configuration. Key insight: Value wasn't speed, it was 'offloading attention' - Mike could answer messages while work progressed.",
+    "confidence": "verified",
+    "source": "AI-Augmented Process Design article",
+    "tags": [
+      "aapd",
+      "case_study",
+      "home_management",
+      "notion",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-084",
+    "type": "narrative",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "The PM Drowning Pattern",
+    "content": "'Your PM is Drowning' framework identifies a common organizational dysfunction where the PM becomes the human router for all information. Every question flows through them, every handoff requires their coordination, every blocker needs their escalation. They're not managing the product—they're managing the chaos. Root causes: (1) Invisible workflows - nobody documented how work flows from idea to release, it's tribal knowledge the PM holds. (2) Informal handoffs - 'Design will let Engineering know' actually means 'Design will forget until Engineering asks three times.' (3) No operating cadence - no rhythm to information flow, so everything is urgent. (4) Tools without process - multiple tools but nobody knows which answers which question, so they ask the PM. The trap: managing chaos feels productive (busy, needed, firefighting), but building systems feels like 'not working' (slow, boring, no dopamine hit). Result: PM stays in chaos management mode and can't build the systems needed to escape.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "pm_drowning",
+      "framework",
+      "organizational_dysfunction",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-085",
+    "type": "narrative",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "PM Drowning: The Real Cost",
+    "content": "At a 50-person company with a PM spending 16 hours/week being the human router: $1000/week in wasted salary (at $120k/year), equals $52,000/year. Multiply by 2-3 PMs = $100k-$150k/year in pure coordination overhead. But the real cost is invisible: product strategy that never gets done, customer research that gets deprioritized, technical debt that accumulates, team morale that tanks, PM burnout and turnover (replacing a PM costs 6-9 months of salary + ramp time). Example: 120-person team building AR platform, PM spending 18+ hours/week coordinating between mechanical, electrical, firmware, software, creative, QA, and release teams. Predictability: 20% (hitting commitments 2 out of 10 times). After implementing the fix: 80% predictability, 4 hours/week coordination time, PM had bandwidth for actual product work. The PM didn't work harder—the system worked better.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "pm_drowning",
+      "costs",
+      "metrics",
+      "roi",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-086",
+    "type": "narrative",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "PM Drowning Fix: 3-Week Framework",
+    "content": "Week 1: Make the invisible work visible. Conduct 5-10 stakeholder interviews (Design, Creative, Engineering, QA, Release, Product) asking: review processes, approval/sign-off ownership, how work arrives, what 'done' looks like, handoff targets, what breaks down. Map the actual workflow (not fantasy version) using swimlane diagrams showing how work moves team-to-team. Mark where information gets stuck, handoffs are informal, PM is the glue. Reveal to leadership: 'the PM is involved in 23 handoffs.' Week 2: Build minimum viable system covering RACI (who owns what for every key activity), Operating Cadence (when information flows on schedule not on-demand), Handoff Procedures (explicit triggers, required inputs, sign-off). Week 3: PM transforms from router to architect - role shifts from 'What's the status? Let me coordinate that' to 'Check the dashboard. Design hands off when spec has Ready for Dev tag. RACI shows QA Lead owns sign-off.'",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "pm_drowning",
+      "framework",
+      "solution",
+      "workflow_assessment",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-087",
+    "type": "technical",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "RACI Matrix Framework",
+    "content": "RACI eliminates 70% of 'who's doing this?' questions. For every key activity (write spec, design mockups, develop code, test, deploy), define: (R)esponsible - who does the work, (A)ccountable - who owns the outcome (only ONE person), (C)onsulted - who provides input, (I)nformed - who needs to know. This creates explicit ownership instead of everything defaulting to 'ask the PM.'",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "raci",
+      "framework",
+      "ownership",
+      "technical",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-088",
+    "type": "technical",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "Operating Cadence Framework",
+    "content": "Operating cadence establishes rhythm for information flow on schedule, not on-demand through PM: Daily - async standups (Slack thread, 5 min to write), Weekly - cross-team sync (30 min, agenda-driven), Bi-weekly - sprint planning and retrospectives, Monthly - roadmap review. Information flows on schedule, not through ad-hoc PM coordination.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "operating_cadence",
+      "framework",
+      "communication",
+      "technical",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-089",
+    "type": "technical",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "Handoff Procedures Framework",
+    "content": "For every major handoff (Design → Engineering, Engineering → QA, QA → Release), document: (1) Trigger - what signals work is ready (e.g., 'Spec marked Ready for Dev in Notion'), (2) Required inputs - what must be complete, use checklist (e.g., Figma link, acceptance criteria, edge cases), (3) Meeting - optional sync if needed, (4) Sign-off - explicit acceptance (e.g., Engineering Lead comments 'Accepted' in Notion). Eliminates 'I thought you were done' and 'I didn't know this was ready.' This isn't process for process sake—it's understanding workflow to create foundation for effective, systemic process.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "handoffs",
+      "framework",
+      "process",
+      "technical",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-090",
+    "type": "narrative",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "PM Drowning Results: Kinoo AR Platform",
+    "content": "120-person team, $12M+ budget, AR platform launch. Before: Principal PM spending 18+ hours/week in coordination meetings, ~20% predictability, no leadership visibility without asking, teams frustrated and PM burned out in constant crunch mode. After 2 full sprints (3-4 weeks of implementation): PM down to 8 hours/week coordination, ~60% predictability, usable dashboards with clear status/handoffs/priorities, teams empowered and PM doing product work again. Ultimately the product shipped in time for holiday season, winning the CES Innovation Award. The PM didn't work harder—we stopped making them BE the system.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "pm_drowning",
+      "kinoo",
+      "results",
+      "case_study",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-091",
+    "type": "qa_pair",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "question": "What tools and technologies does Velocity Partners use for AI automation?",
+    "answer": "Velocity Partners implements systems using n8n workflows (for workflow automation), webhook integrations (for connecting systems), and organizational memory tools (for capturing and surfacing institutional knowledge). The approach emphasizes connecting existing tools into cohesive workflows rather than forcing adoption of new platforms. AI handles repetitive coordination tasks, status updates, handoff coordination, and documentation synthesis - freeing teams to focus on creative work.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "tools",
+      "technology",
+      "n8n",
+      "automation",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-092",
+    "type": "narrative",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "title": "Velocity Partners Positioning Statement",
+    "content": "'We're not strategy consultants who disappear after delivering a deck. We're organizational intelligence architects who roll up our sleeves and implement systems that actually work—combining 29 years of industry experience with modern AI tools.' This player/coach model means Velocity Partners doesn't just design processes, they execute implementation alongside teams, train staff, and deploy automation tools that stick. The positioning emphasizes gaming/entertainment industry expertise ('not generic consulting applied to your industry—it's industry expertise applied to your organizational challenges'), understanding unique pressures of creative production, complexity of cross-functional game development, and realities of balancing artistic vision with delivery commitments.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf",
+    "tags": [
+      "velocity_partners",
+      "positioning",
+      "value_proposition",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-093",
+    "type": "qa_pair",
+    "topic": "aapd",
+    "project": "VelocityPartners",
+    "question": "How does AAPD differ from traditional automation approaches?",
+    "answer": "Traditional automation tries to automate first, then fix problems. AAPD inverts this: design the process first, then deploy AI where friction actually lives. Key insight: 'The fastest way to waste money on AI is to automate a broken workflow.' AAPD uses AI for orchestration across boundaries (not replacement of people/tools) and emphasizes testing small before scaling. The methodology treats AI as an execution multiplier that only works when the underlying process is sound - forcing clarity before automation prevents AI from just 'accelerating confusion.'",
+    "confidence": "verified",
+    "source": "AI-Augmented Process Design article",
+    "tags": [
+      "aapd",
+      "automation",
+      "methodology",
+      "differentiation",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-094",
+    "type": "narrative",
+    "topic": "aapd",
+    "project": "VelocityPartners",
+    "title": "AAPD Phase Structure",
+    "content": "AAPD uses specialized agents working in parallel during requirements phase: (1) Requirements analysis - structure scattered notes into clear inputs, (2) Business prioritization - distinguish foundational needs from nice-to-haves and assess risk, (3) Process design - map workflow logic and handoffs, (4) Technical architecture - determine what's feasible within platform constraints, (5) Project orchestration - coordinate sequencing, dependencies, and validation. This parallelizes thinking that normally happens sequentially in meetings, documents, and Slack threads. The approach surfaces hard constraints early when they're still cheap to deal with - good planning doesn't remove platform limits, it reveals them before you've automated the wrong thing.",
+    "confidence": "verified",
+    "source": "AI-Augmented Process Design article",
+    "tags": [
+      "aapd",
+      "phases",
+      "planning",
+      "agents",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-095",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners publishes 'Organizational Intelligence' newsletter on Substack (orgintelligence.substack.com) with practical frameworks, real-world case studies with metrics, downloadable templates (RACI, handoff checklists, workflow maps), and honest takes on what's broken in modern PMO. Published bi-weekly. The newsletter shares frameworks, templates, and case studies from Mike's consulting practice.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "velocity_partners",
+      "newsletter",
+      "content",
+      "substack",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-096",
+    "type": "narrative",
+    "topic": "pm_drowning",
+    "project": "VelocityPartners",
+    "title": "90-Minute Workflow Fix",
+    "content": "You don't need a consultant to start fixing PM drowning. 90-minute DIY process: (1) Map your workflow (60 min) - gather 5 people (Product, Design, Creative, Engineering, QA, Release), whiteboard workflow from idea to launch, mark every decision point/sign-off/handoff, mark where PM gets involved, take photo. (2) Pick one handoff to fix (20 min) - choose most painful handoff (likely Design→Engineering or Engineering→QA), define trigger ('Spec marked Ready for Dev in Notion'), required inputs (Figma link, acceptance criteria, edge cases), sign-off (Engineering Lead comments 'Accepted'). Ensure buy-in, document it, make explicit. (3) Tell everyone (10 min) - post in Slack announcing new process. Bonus (30 min): Create Project Status Slack channel, connect to task tracking tool, create rule to post handoff triggers to Slack. Do this for 3-4 handoffs and watch PM's coordination load drop by 40%.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "pm_drowning",
+      "diy",
+      "workflow",
+      "quick_fix",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-097",
+    "type": "fit_assessment",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "fit_type": "red_flags",
+    "criteria": "When to call in Velocity Partners for help instead of DIY",
+    "explanation": "Red flags indicating need for external help: (1) You've tried to document processes before and they got ignored, (2) Leadership doesn't see the problem ('Just hire another PM') or you have too many PMs, (3) Teams resist change ('This is fine, we're used to it'), (4) You don't know where to start (everything feels broken), (5) Everyone has 'too much to do' to discuss process, (6) The PM has already quit or is about to. These situations need someone who's done this 20+ times, knows the patterns, and can get buy-in from skeptical stakeholders.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "velocity_partners",
+      "fit",
+      "red_flags",
+      "when_to_hire",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-098",
+    "type": "narrative",
+    "topic": "aapd",
+    "project": "VelocityPartners",
+    "title": "AAPD and Context Engineering Alignment",
+    "content": "AAPD aligns with the 2026 industry shift from prompt engineering to context engineering. Mike's approach focuses on giving AI the right context so it can help find answers - not just clever prompts. The home management system case study demonstrates this: clear requirements, documented workflows, explicit ownership, and defined constraints enabled effective AI delegation. The methodology treats context as infrastructure: design the information architecture first, then AI can execute within that structured environment. This mirrors Mike's broader expertise in 'context engineering' - curating optimal information for LLM inference rather than training models.",
+    "confidence": "inferred",
+    "source": "AI-Augmented Process Design article + content review report",
+    "tags": [
+      "aapd",
+      "context_engineering",
+      "alignment",
+      "methodology",
+      "inferred"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-099",
+    "type": "fact",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners templates and deliverables for subscribers include: 90-Minute Workflow Mapping Guide (step-by-step exercise to visualize process), RACI Template for Product Teams (spreadsheet with examples from gaming, media, tech), Handoff Checklist Template (customizable for Design→Engineering, Engineering→QA handoffs). These are the same templates Mike uses with every client.",
+    "confidence": "verified",
+    "source": "PM Drowning article",
+    "tags": [
+      "velocity_partners",
+      "templates",
+      "deliverables",
+      "tools",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-01-30-100",
+    "type": "qa_pair",
+    "topic": "velocity_partners",
+    "project": "VelocityPartners",
+    "question": "What is the relationship between Velocity Partners and Resilient Tomorrow?",
+    "answer": "Velocity Partners is Mike's consulting service focused on fractional PMO with AI implementation for gaming/entertainment/media companies (50-1500 person teams). Resilient Tomorrow is Mike's Substack publication on community resilience and building parallel systems. Both are divisions of Jones Collaboration Company, LLC. Velocity Partners implements Mike's professional expertise (29 years in tech, program management, AI infrastructure), while Resilient Tomorrow explores personal/community resilience. The 'Organizational Intelligence' newsletter on Substack serves Velocity Partners clients and prospects with PMO frameworks and case studies.",
+    "confidence": "verified",
+    "source": "Velocity-Partners-web-v1.pdf + Content Review Report",
+    "tags": [
+      "velocity_partners",
+      "resilient_tomorrow",
+      "relationship",
+      "business_structure",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-098",
+    "type": "fact",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "content": "NeighborhoodShare is a community tool-sharing platform built by Mike Jones in 2025. Core functionality: neighbors list tools (power tools, kitchen equipment, camping gear) with AI-powered categorization from photos, browse available items within adjustable search radius (2-50 miles depending on urban/rural context), request to borrow with pickup/return dates, dual authentication at pickup and return (both parties confirm to prevent disputes), automated email/SMS reminders for overdue items. Built Feb-Sept 2025, reached 170 users across 20 zip codes. Paused development due to adoption challenges - tool borrowing insufficient frequency for sustained engagement.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "projects",
+      "tool_sharing",
+      "community",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-099",
+    "type": "technical",
+    "topic": "tech_stack",
+    "project": "NeighborhoodShare",
+    "title": "NeighborhoodShare Technical Architecture",
+    "content": "Full-stack web application built entirely in Replit. Frontend: React 18 + TypeScript, Vite build tool, Wouter routing, Tailwind CSS. Backend: Node.js with PostgreSQL (Neon hosting), Drizzle ORM. Database: Single Neon PostgreSQL with schema separation (public=dev, production=prod). AI: OpenAI GPT-4o Vision API for tool categorization from photos. Email: Resend (switched from SendGrid). SMS: Twilio. Analytics: PostHog (product) + Plausible (web). Session management: express-session with PostgreSQL storage, Passport.js authentication. Landing page: Gamma (iframe embed). Development approach: AI-assisted (Replit agent), first vibe coding attempt, required detailed PRDs and feature specs. Mobile-responsive web app, not native mobile.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "tech_stack",
+      "react",
+      "postgresql",
+      "openai",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-100",
+    "type": "technical",
+    "topic": "ai_implementation",
+    "project": "NeighborhoodShare",
+    "title": "AI-Powered Tool Categorization System",
+    "content": "Users photograph tools from 2-4 angles including any text/labels. OpenAI GPT-4o Vision API processes images (30-60 seconds) and auto-fills: tool name, category selection, brand identification (DeWalt, Milwaukee, even sewing machine models), power type (battery/electric/manual), condition assessment (New/Like New/Good/Fair/Poor), and description. Took ~1 week to develop effective prompts. System can identify specific tool models from labels and assess condition from visual inspection. Significantly reduces friction - users don't manually enter tool details. Alternative manual entry mode available. This AI categorization feature was the most technically interesting part of the project and successfully reduced barrier to creating tool inventory.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "ai",
+      "computer_vision",
+      "openai",
+      "innovation",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-101",
+    "type": "narrative",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "title": "Loan State Machine with Dual Authentication",
+    "content": "Most complex technical feature: tracking tool lifecycle with state machine. States: Available → Requested (pending approval) → Approved (waiting pickup) → Checked Out → Overdue (if not returned) → Returned. Key innovation: dual authentication at transitions. When borrower picks up item, BOTH parties must confirm pickup (prevents 'he said she said' disputes). When item returned, BOTH parties confirm return. Notification escalation for overdue: day before due (both users), day of due (both users), 3 days overdue, 5 days overdue, then daily reminders. Both borrower AND lender receive all reminders - uses 'mutual annoyance' as dispute resolution mechanism. Includes date negotiation feature where lender can counter-propose pickup/return dates. Loan table stores: item location, ownership, pickup date, return date, status, communication history. Notifications triggered by Node.js events + cron jobs (9-10am, 5-6pm Pacific) for time-based reminders.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "state_machine",
+      "trust",
+      "workflow",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-102",
+    "type": "narrative",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "title": "Beta Expansion System and Captain Governance",
+    "content": "Sophisticated geographic expansion strategy using zip code clustering. Activation criteria: 20+ users in single zip code OR 18 users in primary zip code + 2 in adjacent zip code (within 5-mile radius). Admin dashboard tracks: total users (170 at peak), active zip codes (20), interested users awaiting activation (82), zip codes ready to activate (20+ users + captain), watch list (15+ users, needs captain), needs more users (near 15, needs push). Captain system: neighborhood moderators with authority to authorize new users in their zip code, manage local disputes, email neighborhood members. Captains promoted by flipping admin flag in database, provided with email instructions. System designed for decentralized community moderation as platform scales. Dashboard allows manual zip code activation and readiness checking.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "beta",
+      "community_management",
+      "governance",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-103",
+    "type": "narrative",
+    "topic": "security",
+    "project": "NeighborhoodShare",
+    "title": "API Key Security Incident and Response",
+    "content": "Security incident: OpenAI API key stolen, resulted in $50 unauthorized charges. Timeline: (1) Replit project defaulted to public visibility, someone visited project, (2) Mike made project private but too late, (3) 1-2 months later received OpenAI budget exceeded notifications, (4) Compared app usage analytics to token usage, discovered mismatch, (5) Disabled compromised key, (6) Worked with Replit AI to audit codebase, found multiple exposure points, (7) Properly obfuscated API key using Replit secrets/environment variables, (8) Implemented rate limiting (10 queries/hour per verified registered user), (9) Added origin verification (API calls must come from app), (10) Created AI Monitoring admin dashboard to track usage patterns, blocked IPs, users exceeding limits. Lesson: Replit projects default to public - must manually set to private. Created admin dashboard for ongoing security monitoring.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "security",
+      "incident_response",
+      "api_security",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-104",
+    "type": "fact",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "content": "NeighborhoodShare development timeline: Feb 2025 (planning), May 2025 (prototype launch), June 2025 (beta opened), Sept 2025 (development paused). Solo project, 5-20 hours/week initially, 20-30 hours/week during beta expansion. Total spend at peak: ~$180-225/month (Replit $20-50/month base + $50/week during active development, OpenAI $10/month, Twilio ~$20/month). Grassroots marketing: door-to-door flyers, neighborhood association presentations, Resilient Tomorrow Substack promotion. Validation results: 170 total signups, 20 active zip codes, 75-80 tools listed (Mike added ~75 of them, only 5 from other users), adoption challenge identified - tool borrowing not frequent enough for sustained engagement. Mike's assessment: technically successful, market validation revealed need for broader community platform.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "timeline",
+      "validation",
+      "metrics",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-105",
+    "type": "fact",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "content": "NeighborhoodShare was Mike Jones' first vibe coding attempt using Replit. Development approach: created detailed PRD (product requirements document) upfront, then used Replit AI agent for implementation. When adding features, would create feature specs and Mermaid diagrams in ChatGPT, then provide to Replit agent. Key learning: AI-assisted development works better with detailed specs upfront - 'we've gone full circle from Agile back to Waterfall.' Challenges with Replit: limited context window caused agent to 'forget things,' code ownership issues (difficult to export to GitHub), became expensive during active development. Mike's 30 years of product/QA experience enabled effective AI direction - could identify when AI troubleshooting was wrong and redirect it. Quote: 'I could not have written this product. I'm a product manager and designer. I know my way around code but don't know syntax. This was largely AI-generated with me making decisions about approach.'",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "ai_assisted_development",
+      "vibe_coding",
+      "replit",
+      "process",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-106",
+    "type": "narrative",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "title": "Key Features and User Experience",
+    "content": "Core user workflows: (1) Onboarding with email verification required before borrowing, (2) Adding tools via AI (photo upload) or manual entry, (3) Searching tools by location (adjustable 2-50 mile radius), (4) Borrowing workflow with calendar-based pickup/return scheduling, (5) In-app notifications (bell icon with badge counts) + email/SMS (user preference). Privacy features: exact address hidden until loan approved, lenders can specify alternate pickup locations (coffee shop, library), public profile shows only city/state. Interactive tours for first-time users explaining all features. Admin system added post-MVP for remote management without database queries. Lenders can toggle tool availability on/off with optional return date. Communication channel within borrow requests allows date negotiation. Built-in trust features: transaction history stored (not yet exposed to users but available for dispute resolution), dual authentication prevents disputes. Notification preferences: email default, SMS opt-in, users control channels.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "features",
+      "ux",
+      "privacy",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-107",
+    "type": "fact",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "content": "NeighborhoodShare future plans: Mike paused development after identifying adoption challenges. Current assessment: tool borrowing alone insufficient for sustained engagement, needs to be part of broader community organizing platform. Quote: 'We don't need another platform where we just are talking; we need a platform for organizing.' Evaluating Mobilizon as potential technical foundation for community-first approach. Vision: NeighborhoodShare tool-sharing becomes feature set within larger community platform enabling event coordination, project collaboration, mutual aid. Connection to Resilient Tomorrow: implements Pillar 3 (Access > Money: wealth as access to resources not ownership) and Pillar 7 (Hyperlocal Community: build relationships within walking distance). Philosophy: tool-sharing gives neighbors low-stakes practical reason to connect, tools are excuse but connection is goal, preparing communities for harder times ahead through mutual aid infrastructure.",
+    "confidence": "verified",
+    "source": "TED technical interview 2026-02-04",
+    "tags": [
+      "neighborhoodshare",
+      "future",
+      "strategy",
+      "resilient_tomorrow",
+      "community",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-108",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Local LLM Hardware Infrastructure",
+    "content": "Mike's Local LLM runs on an Apple Mac Mini M4 Pro (2024) with 24GB unified memory and 4TB external storage (MacMini_Extended volume). The hardware was purchased specifically for LLM deployment with AI in mind. Performance: The M4 Pro handles 14B parameter models comfortably with plenty of RAM headroom, never maxes out during LLM operations, and runs LLM continuously in background while Mike uses the machine for regular work (web browsing, development) with no noticeable performance degradation. The only RAM pressure experienced comes from Claude Code usage, not the local LLM. Storage usage is minimal (nowhere near 1TB) including all model files, context/memory files, and Docker volumes. The system demonstrates that concurrent usage works seamlessly - LLM available on-demand while performing other tasks.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "hardware",
+      "mac_mini",
+      "m4_pro",
+      "performance",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-109",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Local LLM Model Specifications",
+    "content": "Primary inference model: Qwen 2.5:14b-instruct (14 billion parameters, instruct-tuned with tool support), selected based on community recommendations. Embeddings model: nomic-embed-text (for RAG/semantic search in Open WebUI). Additional experimental models installed: Qwen 2.5 variations, Qwen 2.5 Coder, Qwen 3, Llama 3.1, Gemma 3, TinyLlama, and MXBai Embed Large (alternative embeddings). Ollama handles model management automatically. Mike occasionally swaps models to test alternatives, primarily experimenting with larger models for writing quality improvements. Tool support in Qwen 2.5:14b-instruct is critical for MCP integration - enables the model to invoke filesystem tools for read/write access to the memory system.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "models",
+      "qwen",
+      "ollama",
+      "embeddings",
+      "nomic",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-110",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "mcpo MCP Bridge - Detailed Architecture",
+    "content": "mcpo is THE critical third service that enables Local LLM filesystem access. What it does: Translates Model Context Protocol (MCP) to OpenAPI, bridging the gap between Open WebUI (which speaks OpenAPI) and Filesystem MCP server (which speaks STDIO). Configuration: Runs on port 11620, bound to 127.0.0.1 (localhost only for security), root directory /Volumes/MacMini_Extended/rt-assistant. Command: 'uvx mcpo --host 127.0.0.1 --port 11620 -- npx -y @modelcontextprotocol/server-filesystem /Volumes/MacMini_Extended/rt-assistant'. Open WebUI connects via http://host.docker.internal:11620 (Docker container to host networking). Significance: This is THE mechanism enabling the LLM to actively read and write files, not just passively access mounted volumes. Without mcpo, memory integration would be read-only via Docker mounts. With mcpo + MCP, the LLM has active filesystem access for true read/write memory persistence. The LLM can invoke MCP tools to read/write using relative paths like 'memory/memory.jsonl' or '_scratch/hello.txt'.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03 + AUTOSTART_SETUP.md",
+    "tags": [
+      "local_llm",
+      "mcpo",
+      "mcp",
+      "bridge",
+      "filesystem",
+      "architecture",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-111",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Auto-Start Infrastructure - Complete System",
+    "content": "The Local LLM uses macOS LaunchAgents for complete three-service auto-start on boot: (1) Ollama service - local.rt.ollama.plist, port 11434, logs to ~/rt-offlineai/logs/ollama.log, auto-restart enabled (KeepAlive). (2) Open WebUI service - local.rt.openwebui.plist, port 3000, waits for Docker Desktop to be ready, auto-creates container if doesn't exist, logs to ~/rt-offlineai/logs/openwebui.log, auto-restart enabled. (3) mcpo MCP bridge - local.rt.mcpo.plist, port 11620, logs to ~/rt-offlineai/logs/mcpo.log, auto-restart enabled. Boot sequence: User logs in → Docker Desktop starts → Ollama starts via LaunchAgent → Open WebUI waits for Docker then starts/creates container → mcpo starts MCP bridge → All services ready in ~30-60 seconds. Management CLI: rtai (located at ~/rt-offlineai/bin/rtai) provides unified control: 'rtai status/start/stop/restart/logs' commands manage all three services. This is NOT just 'installed Ollama' - it's a production-grade auto-start infrastructure with complete service orchestration.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03 + AUTOSTART_SETUP.md",
+    "tags": [
+      "local_llm",
+      "autostart",
+      "launchagents",
+      "rtai",
+      "infrastructure",
+      "automation",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-112",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Docker Configuration and Volume Mounts",
+    "content": "Open WebUI runs in Docker container with specific configuration for memory and knowledge base integration. Key volumes: (1) openwebui_data → /app/backend/data (persistent Open WebUI data), (2) rt-assistant → /rt:rw (full knowledge base access, read-write), (3) knowledge/memory → /app/backend/data/memory:rw (memory ledger integration, read-write). Environment variables: DOCS_DIR=/rt/knowledge/articles (RAG document source directory). Network access: --add-host=host.docker.internal:host-gateway enables container to reach host services (Ollama at host.docker.internal:11434, mcpo at host.docker.internal:11620). Auto-restart: --restart unless-stopped ensures container restarts on Docker daemon restart. The configuration took ~1 week to fully understand - biggest challenge was understanding Open WebUI configuration settings, profiles/skills setup, model tuning for desired output, and MCP tool configuration with relative path conventions.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03 + start_openwebui.sh",
+    "tags": [
+      "local_llm",
+      "docker",
+      "openwebui",
+      "configuration",
+      "mounts",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-113",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "RAG Implementation Details",
+    "content": "The Local LLM implements Retrieval-Augmented Generation using nomic-embed-text embeddings (via Ollama) for semantic search over published articles and knowledge base documents. Knowledge Collections in Open WebUI: rt_articles (collection ID: 2d5ac00f-faa0-4a20-8297-36e657f78c2d) - published ResilientTomorrow and Velocity Partners content from /rt/knowledge/articles; rt_memories - structured memory entries; rt_projects - project documentation; rt_backlogs - sprint planning and task information. Auto-Sync Workflow: Continuous watcher script (rt_watch_poll.sh) monitors /knowledge/articles directory, detects new/modified files, uploads to Open WebUI via /api/v1/files/ endpoint, adds to RT_Articles collection, makes content available for RAG semantic search. When LLM receives queries, it can perform semantic search across indexed documents, retrieve relevant article excerpts, augment responses with published content context, and reference specific articles in answers. The system demonstrates practical RAG architecture with continuous knowledge base synchronization.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03 + offline_ai_setup_rag_checklist.md",
+    "tags": [
+      "local_llm",
+      "rag",
+      "embeddings",
+      "nomic",
+      "knowledge_base",
+      "semantic_search",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-114",
+    "type": "technical",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Python Automation Workflows",
+    "content": "Three automated Python workflows manage the Local LLM memory system: (1) Nightly Memory Compaction - Python script + LaunchAgent (com.offlineai.memorycompact.v2.plist), runs daily at 02:05 AM + on system load, reads memory.jsonl (full ledger), keeps last 8 entries per topic + 20 most recent overall, writes memory_compact.json (compressed version), logs to /tmp/memory_compact_v2.log. (2) Session Context Rendering - Python script (render_memory.py) triggered manually per session, reads memory_compact.json, renders human-readable context block, outputs to session_context.txt for pasting into Open WebUI System Prompt. (3) Continuous Article Sync - Bash script (rt_watch_poll.sh) with polling, watches /knowledge/articles folder, on new/modified file uploads to Open WebUI /api/v1/files/ and adds to RT_Articles collection, logs to /tmp/rt_watch_poll.log, uses token from ~/.offlineai/token, respects .ragignore patterns (*.private.md, draft_*, *.tmp, .DS_Store). All scripts located in ~/Library/Application Support/offlineai/ with deployment managed by install_autostart.sh.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03 + offline_ai_setup_rag_checklist.md",
+    "tags": [
+      "local_llm",
+      "automation",
+      "python",
+      "memory_compaction",
+      "article_sync",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-115",
+    "type": "fact",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "content": "Local LLM performance reality (honest assessment): Speed is medium-slow compared to cloud APIs - noticeably slower than Claude/ChatGPT for text generation. Quality required significant tuning to match desired writing style; cloud APIs had advantage of prior interaction history. Resource utilization: M4 Pro handles LLM + regular work comfortably, never maxed out, 24GB RAM provides plenty of headroom (only RAM pressure from Claude Code, not local LLM). Storage usage minimal. Concurrent usage works seamlessly - always running in background, no noticeable system slowdown. Comparison: Local (Qwen 2.5:14B) = medium-slow speed, required tuning, low cost (hardware owned), complete privacy, always available. Cloud (Claude/ChatGPT) = fast speed, better quality (knows user's style), higher cost (but increased usage), data sent to providers, requires internet, immediate productivity. Mike's current workflow: Daily work returned primarily to cloud APIs. Local LLM used for privacy-sensitive projects, prototype development, learning, and experimentation.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "performance",
+      "speed",
+      "comparison",
+      "cloud",
+      "honest_assessment",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-116",
+    "type": "fact",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "content": "Local LLM cost analysis (honest assessment): Hardware investment ~$1,799-2,299 for Mac Mini M4 Pro (2024) + ~$100-300 for 4TB external storage. Initial goal was to reduce cloud AI spending. Reality: Cloud expenses actually INCREASED due to heavy Claude Code usage. ChatGPT usage decreased significantly but net effect was that local LLM did NOT reduce overall AI spending. Long-term value lies elsewhere: capability building for client deployments, foundation for AI prototype development, avoided expensive API costs for prototype testing, skills to deploy production alternatives to ChatGPT API. This project is about learning and skill development, NOT immediate cost savings or ROI. The educational value and infrastructure knowledge gained made the effort worthwhile regardless of not achieving cost reduction goals.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "cost",
+      "investment",
+      "cloud_spending",
+      "honest_assessment",
+      "learning_value",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-117",
+    "type": "narrative",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Local LLM Learning Outcomes and Technical Skills Gained",
+    "content": "Timeline: Total setup time ~1 week to fully operational. Breakdown: Ollama + model install (hours), Docker + Open WebUI (hours), configuration and tuning (1 week - biggest challenge), automation setup (additional time, incremental). Technical knowledge gained: (1) LLM Operations - deep understanding of how LLMs work under the hood, practical hands-on deployment experience, model serving/inference/context windows/batch processing. (2) Chunking - moved from basic conceptual understanding to deep practical understanding of chunking strategies, critical for RAG implementations. (3) Configuration & Tuning - understanding model parameters, system prompt structuring, performance tuning (speed/quality/resource balance). (4) Model Context Protocol (MCP) - understanding MCP concepts (new technology), configuring mcpo bridge (STDIO to OpenAPI translation), learning relative path conventions for filesystem access. (5) Open Source Alternatives - discovered viable open source replacements for paid tools, significant cost savings for development/testing. (6) Comfort with AI - increased confidence in daily AI usage and infrastructure management, technical depth beyond surface-level API usage. The project delivered significant learning and capability-building rather than immediate productivity gains. Mike gained deep technical knowledge that positions him for enterprise AI implementation work. This isn't just 'installed Ollama' - it's understanding production-grade AI infrastructure deployment.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "learning",
+      "skills",
+      "timeline",
+      "technical_depth",
+      "capability_building",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-118",
+    "type": "narrative",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Local LLM Configuration Challenges and What Was Learned",
+    "content": "Biggest hurdle: Understanding Open WebUI configuration settings. Specific challenges: (1) Configuration settings - unclear documentation, trial-and-error required. (2) Profiles/skills setup - learning curve for creating custom behaviors. (3) Model tuning - iterative refinement to get desired output quality matching Mike's writing style. (4) System prompts - understanding how to structure effective prompts. (5) MCP tool integration - understanding mcpo bridge, STDIO vs OpenAPI translation, relative path conventions, debugging tool invocation failures, ensuring mcpo stays running and auto-restarts. (6) RAG configuration - setting up collections, embeddings models, document sources, not well documented. (7) Documentation gaps - Open WebUI and MCP/mcpo bridge documentation limited (newer technology), had to experiment to understand effects of settings. Recent incident: Something broke requiring complete reinstall. Solution: Used Claude to backup all configuration files, saved workspaces/projects, created fresh backup, reinstalled everything from scratch, restored configurations. Lesson learned: Importance of backing up Open WebUI configurations separately from container data, need to backup mcpo configuration and LaunchAgents too. Challenge: Some automations forgotten - multiple Python scripts configured months ago, don't always recall what each automation does, need to review scripts to understand current state.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "challenges",
+      "configuration",
+      "learning",
+      "backup",
+      "lessons",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-119",
+    "type": "narrative",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Local LLM Results - Capabilities Unlocked",
+    "content": "Primary achievement: Built complete understanding of LLM deployment, configuration, and operations while creating foundation for AI prototype development without expensive API costs. Capabilities unlocked: (1) Infrastructure Deployment Skills - can now confidently set up LLM systems locally or in cloud, deploy for personal use or client projects, configure and tune model serving infrastructure. (2) Prototype Development Without API Costs - can deploy self-hosted alternative for production workloads, test AI ideas without worrying about API billing. Example: Built prototype using OpenAI API that would have been expensive at scale, now has confidence to deploy production alternatives. (3) Decision Tracking & Organizational Memory - memory system provides capture of decision rationale across projects, ability to review past choices months later, particularly valuable for AI implementation decisions, foundation for potential enterprise knowledge management. (4) Foundation for Enterprise Implementation - skills gained position Mike for client deployments of AI infrastructure, enterprise knowledge management solutions, organizational decision tracking systems, privacy-preserving AI implementations. (5) Preparation for Agentic AI - local LLM experience provides foundation for understanding agentic system implementation (OpenClawd, ClawdBot), configuring agents securely, managing autonomous AI workflows. What self-hosting enables that cloud doesn't: complete data sovereignty (all processing local), unlimited experimentation (no API rate limits or costs), prototype development (build AI features without scaling costs), learning platform (hands-on understanding of LLM operations), foundation for emerging technologies.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "results",
+      "capabilities",
+      "skills",
+      "enterprise",
+      "agentic_ai",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-120",
+    "type": "narrative",
+    "topic": "project_local_llm",
+    "project": "OfflineAI",
+    "title": "Local LLM Future Plans and Vision",
+    "content": "Future plans: (1) Cloud Deployment - goal to set up cloud-hosted LLM instance for remote access, use cases include prototype testing without exposing local system and remote access to private LLM. Blocker: security concerns (not a security specialist, researching secure deployment practices, don't want to expose data through misconfiguration). Timeline: when security research complete. (2) Enhanced Content Automation - current state has article atomization for content repurposing, next steps include multi-platform distribution automation and social media automation for atomized content, goal of fully automated content distribution pipeline. (3) Agentic AI Systems - new emerging technology (OpenClawd/ClawdBot/Moltbot, independent AI agents), local LLM experience provides foundation for understanding agentic implementation, configuring agents securely, managing autonomous workflows. Current exploration: Claude Code (actively using), OpenAI Codex (investigating), Google Galaxy (investigating). Confidence level: well-prepared for this work based on local LLM experience. (4) Enterprise Applications - vision for organizational knowledge management, potential offering to deploy memory systems for small companies with employee-specific knowledge bases, consolidated executive/management views, decision tracking and rationale preservation, organizational context maintenance. Status: conceptual, not yet offered to clients. (5) Continued Experimentation - testing different models for specific use cases, refining automation workflows, exploring RAG implementations, building prototype AI features.",
+    "confidence": "verified",
+    "source": "TED Local LLM technical interview 2026-02-03",
+    "tags": [
+      "local_llm",
+      "future",
+      "plans",
+      "vision",
+      "enterprise",
+      "agentic_ai",
+      "automation",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-121",
+    "type": "technical",
+    "topic": "project_management",
+    "project": "MJ_Online",
+    "title": "Project Memory System - Comprehensive Documentation",
+    "content": "Mike requested Project Manager create comprehensive project memory documentation (PROJECT-MEMORY.json) capturing all project decisions, phases, agent workflows, challenges, solutions, and technical details. Created 2026-02-04 during Phase 3. Purpose: (1) Institutional knowledge and project continuity, (2) Source material for MikeJones.online case study post-launch, (3) Demonstrates AI-augmented project management practices, (4) Documents multi-agent coordination and RAG usage. System tracks: project goals, key decisions with rationale, phases completed, current work, agents and their responsibilities, tech stack, RAG knowledge base growth, agent coordination via NATS, workflows (case study creation, RAG updates, parallel coordination), challenges and solutions, timeline and velocity, metrics. Standard operating procedure: PM updates project memory after significant milestones or phase completions.",
+    "confidence": "verified",
+    "source": "Project execution 2026-02-04",
+    "tags": [
+      "project_management",
+      "documentation",
+      "project_memory",
+      "ai_augmented_pm",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-122",
+    "type": "fact",
+    "topic": "project_management",
+    "project": "MJ_Online",
+    "content": "MJ_Online project uses multi-agent coordination system with 3 primary agents: (1) Project Manager (Claude) - roadmap management, agent orchestration, strategic decisions, project memory maintenance, (2) Ted (Technical-Research-Agent) - structured technical interviews producing 1,500-3,000 line documentation + RAG updates, (3) Alice (Web-Content-Builder) - converts technical docs to Ghost case studies and creates core pages. Agents coordinate via NATS JetStream (localhost:4222, dashboard http://localhost:8001) with channels for task queue, coordination, completion reporting, and heartbeats. Workflow: PM assigns → Agent claims → Agent executes → Agent reports completion → PM updates roadmap. Successfully executed in Phase 2 with 2 agents working in parallel without conflicts.",
+    "confidence": "verified",
+    "source": "Project execution 2026-01-30 to 2026-02-04",
+    "tags": [
+      "project_management",
+      "multi_agent",
+      "nats",
+      "coordination",
+      "workflow",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-123",
+    "type": "narrative",
+    "topic": "project_management",
+    "project": "MJ_Online",
+    "title": "Case Study Creation Workflow - End-to-End",
+    "content": "Complete workflow for creating comprehensive case studies: (1) PM identifies project and creates/assigns Ted's interview script, (2) Ted conducts structured technical interview with Mike (1-2 hours), (3) Ted creates comprehensive technical documentation (1,500-3,000 lines) at /content-drafts/[project]-technical-doc.md, (4) Ted updates RAG with 5-15 verified entries covering tech stack, architecture, decisions, outcomes, (5) Ted announces completion via NATS coordination channel with deliverable location, (6) Alice converts technical doc to compelling Ghost case study (3-4 hours) - reads doc, structures content, adds 6-10 screenshots, verifies facts against RAG, adds SEO metadata, publishes to /projects/[name], (7) PM updates roadmap and archives completed task. Total time: 5-8 hours per case study. Quality advantage: comprehensive technical depth from structured interviews, verified facts in RAG, professional presentation. Examples: NeighborhoodShare (2,826 lines, 10 RAG entries), Local LLM (1,705 lines, 13 RAG entries).",
+    "confidence": "verified",
+    "source": "Project execution Phase 3, 2026-02-03 to 2026-02-04",
+    "tags": [
+      "workflow",
+      "case_study",
+      "multi_agent",
+      "process",
+      "documentation",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-124",
+    "type": "fact",
+    "topic": "rag_system",
+    "project": "MJ_Online",
+    "content": "RAG knowledge base serves as single source of truth for all facts about Mike Jones, ensuring content consistency across pages and agents. Location: /Cowork/content/rag/knowledge.jsonl. Schema: /Cowork/content/rag/RAG_SCHEMA.md. Total entries: 123 (as of 2026-02-04). Entry types: fact, narrative, qa_pair, technical, fit_assessment. Projects documented: MikeCareer (~30 entries), VelocityPartners (~20), ResilientTomorrow (~15), NeighborhoodShare (10), OfflineAI/Local LLM (13). Standard operating procedure: Ted adds 5-15 verified entries per project after technical interviews, Alice verifies all facts against RAG before publishing, PM references RAG for accurate reporting, all agents treat RAG as authoritative source. Growth: 100 initial entries (2026-01-30), 110 after NeighborhoodShare (2026-02-04 morning), 123 after Local LLM review (2026-02-04 afternoon). Future chatbot will query RAG for knowledge.",
+    "confidence": "verified",
+    "source": "Project execution 2026-01-30 to 2026-02-04",
+    "tags": [
+      "rag",
+      "knowledge_base",
+      "consistency",
+      "verified",
+      "multi_agent"
+    ]
+  },
+  {
+    "id": "rag-2026-02-04-125",
+    "type": "narrative",
+    "topic": "project_management",
+    "project": "MJ_Online",
+    "title": "Strategic Decision Making - Launch Portfolio",
+    "content": "Series of strategic decisions shaped launch approach: DEC-005 (2026-02-04) - Launch with 2 AI-focused case studies instead of 3-4. Rationale: Speed to launch (~1 week savings), laser-focused AI positioning aligns with 'AI Implementation Expert' title, 2 comprehensive case studies (4,531 combined lines) better than 3 decent ones, flexibility to iterate post-launch. Deferred AI Memory (redundant with Local LLM memory systems) and Home Media Server (infrastructure, lower priority) to Phase 7. DEC-006 (2026-02-04) - MikeJones.online website case study as top post-launch priority. Rationale: Meta/self-referential (compelling narrative), demonstrates practical AI implementation in business context (RAG architecture, chatbot, multi-agent coordination), aligns with 2026 employer trends (AI applied to business problems not just AI projects). Impact: Clear path to launch with strong AI positioning, strategic post-launch enhancement queue prioritizing highest-value content.",
+    "confidence": "verified",
+    "source": "Project planning discussions 2026-02-04",
+    "tags": [
+      "strategy",
+      "decision_making",
+      "launch",
+      "prioritization",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-05-126",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' official title at Microsoft was 'Software Development Engineer in Test' (SDET), not 'Program Manager'. He worked on Xbox and Xbox 360 platforms from 1999-2007 in Redmond, WA. He was a launch team member for both platforms and contributed to 6 AAA game titles.",
+    "confidence": "verified",
+    "source": "Direct clarification from Mike Jones, 2026-02-05",
+    "tags": [
+      "microsoft",
+      "job_title",
+      "xbox",
+      "sdet",
+      "verified",
+      "correction"
+    ]
+  },
+  {
+    "id": "rag-2026-02-06-127",
+    "type": "fact",
+    "topic": "about",
+    "project": "MikeCareer",
+    "content": "Mike Jones' 2025 ChatGPT year-in-review detailed stats: First 1% of users, Top 3% for messages sent. Specifics: 439 total chats, 9,751 messages sent, 198 images generated, 9,984 em-dashes exchanged, chattiest day Oct 10, 2025. ChatGPT archetype: 'The Strategist' (3.6% of users share this archetype). These metrics demonstrate Mike's deep engagement with AI tools and early adopter status.",
+    "confidence": "verified",
+    "source": "ChatGPT 2025 Year-in-Review images (assets/chatGPT_Year-in-review/)",
+    "tags": [
+      "chatgpt",
+      "ai",
+      "credentials",
+      "year_in_review",
+      "2025",
+      "verified",
+      "top_1_percent",
+      "the_strategist"
+    ]
+  },
+  {
+    "id": "rag-2026-02-06-128",
+    "type": "narrative",
+    "topic": "about",
+    "project": "MikeCareer",
+    "title": "First 1% ChatGPT User - What This Means",
+    "content": "Mike's 'First 1% of users' designation from ChatGPT's 2025 year-in-review signals early, sustained power usage - not just heavy current usage. This metric likely indicates: (1) Early adoption - using ChatGPT meaningfully before it was mainstream, with multiple sessions, non-trivial prompts, and real work use; (2) Early pattern formation - demonstrated 'power user' behavior before the average user figured out what the tool was good for, the kind of users product teams value because they surface edge cases, stretch the model, and reveal emergent use patterns; (3) Sustained engagement from early on - many early users dropped off, Mike didn't. In essence: 'First 1%' identifies people who figured out how to use ChatGPT early and kept using it deeply. This is distinct from 'Top 3% for messages sent' which measures current usage volume. Combined, these metrics show Mike was both an early power user and remains a heavy user.",
+    "confidence": "inferred",
+    "source": "ChatGPT analysis of year-in-review metrics, corroborated 2026-02-06",
+    "tags": [
+      "chatgpt",
+      "early_adopter",
+      "power_user",
+      "first_1_percent",
+      "sustained_usage",
+      "ai_expertise",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-11-102",
+    "type": "fact",
+    "topic": "social_media",
+    "project": "MikeCareer",
+    "content": "Mike Jones social media profiles: LinkedIn (https://www.linkedin.com/in/mejones73/), GitHub (https://github.com/tinybiggss), Twitter/X (https://x.com/IsMikeJones), Facebook (https://facebook.com/mejones73). Professional presence primarily on LinkedIn. GitHub showcases technical projects and code samples.",
+    "confidence": "verified",
+    "source": "User provided 2026-02-11",
+    "tags": [
+      "social_media",
+      "linkedin",
+      "github",
+      "twitter",
+      "facebook",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-11-103",
+    "type": "fact",
+    "topic": "social_media",
+    "project": "ResilientTomorrow",
+    "content": "Resilient Tomorrow has a Mastodon account: @resilientTomorrow@mastodon.social. This is the Fediverse/ActivityPub presence for the Resilient Tomorrow publication (separate from MikeJones.online Ghost Pro ActivityPub integration at @index@mikejones.online). Used for community resilience content and engagement on the Fediverse.",
+    "confidence": "verified",
+    "source": "User provided 2026-02-11",
+    "tags": [
+      "resilient_tomorrow",
+      "mastodon",
+      "fediverse",
+      "activitypub",
+      "social_media",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-11-104",
+    "type": "fact",
+    "topic": "social_media",
+    "project": "MikeCareer",
+    "content": "Mike Jones has requested a Fosstodon account (fosstodon.org - Mastodon instance for FOSS/open source community). As of 2026-02-11, account is pending approval (Fosstodon is closed beta/invite-only). This would provide a personal Mastodon presence for Mike separate from the Resilient Tomorrow account (@resilientTomorrow@mastodon.social) and the MikeJones.online Ghost ActivityPub broadcast (@index@mikejones.online).",
+    "confidence": "verified",
+    "source": "User provided 2026-02-11",
+    "tags": [
+      "social_media",
+      "mastodon",
+      "fediverse",
+      "fosstodon",
+      "pending",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-105",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' employment at Jones Collaboration Company, LLC (Velocity Partners) as Principal Technical Program Manager (Self-Employed Consultant): January 2020 - Present",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "employment-dates",
+      "velocity-partners",
+      "consulting"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-106",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' employment at Kinoo as Principal Technical Program Manager: April 2020 - December 2022 (Mountain View, CA, Remote)",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "employment-dates",
+      "kinoo"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-107",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' employment at 8 Circuit Studio as Co-Founder & Program Manager: April 2017 - March 2020 (San Jose, CA, Remote)",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "employment-dates",
+      "8-circuit-studios",
+      "web3"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-108",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' employment at Verizon as Project Manager - Video on Demand: October 2015 - March 2017 (San Jose, CA)",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "employment-dates",
+      "verizon"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-109",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' employment at Livescribe as Director, Software Engineering Services: May 2012 - February 2015 (Oakland, CA)",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "employment-dates",
+      "livescribe"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-110",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' employment at Kabam as Director of Engineering Services: April 2010 - January 2012 (San Francisco, CA)",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "employment-dates",
+      "kabam"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-111",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones' employment at Microsoft as Software Development Engineer in Test (SDET): 1999 - 2007 (Redmond, WA). Core team member for Xbox and Xbox 360 platform launches.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "employment-dates",
+      "microsoft",
+      "xbox"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-112",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "Mike Jones has 26+ years of experience in technology (as of 2026). Started career in 1999 at Microsoft, though career timeline suggests earlier start if counting 26+ years from 2026.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "career-length",
+      "experience"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-113",
+    "type": "fact",
+    "topic": "ai_expertise",
+    "project": "OfflineAI",
+    "content": "Mike Jones was recognized as First 1% ChatGPT user globally (2023-2025), demonstrating early AI adoption and sustained power usage applying LLMs to real-world business problems.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "chatgpt",
+      "ai-expertise",
+      "early-adopter"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-114",
+    "type": "technical",
+    "topic": "ai_expertise",
+    "project": "OfflineAI",
+    "content": "ChatGPT Year-in-Review 2025 Metrics: Top 3% for message volume (9,751 messages sent across 439 conversations), designated as 'The Strategist' archetype (elite user category representing 3.6% of all users), indicating advanced strategic AI application.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "chatgpt",
+      "metrics",
+      "ai-expertise"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-115",
+    "type": "technical",
+    "topic": "projects",
+    "project": "MikeJonesOnline",
+    "content": "Mike architected multi-agent coordination system using Claude API with NATS JetStream messaging, delivering professional portfolio website in 2 weeks vs. traditional 2-3 month timeline (6-10x efficiency improvement).",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "multi-agent",
+      "nats",
+      "efficiency",
+      "portfolio"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-116",
+    "type": "technical",
+    "topic": "projects",
+    "project": "MikeJonesOnline",
+    "content": "Implemented production RAG (Retrieval-Augmented Generation) system with 200+ verified knowledge entries ensuring content consistency across automated workflows and AI agents.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "rag",
+      "knowledge-management"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-117",
+    "type": "technical",
+    "topic": "projects",
+    "project": "OfflineAI",
+    "content": "Deployed local LLM infrastructure using Ollama (8+ models) achieving enterprise-grade AI functionality with zero external data transmission for privacy-sensitive applications.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "local-llm",
+      "ollama",
+      "privacy",
+      "security"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-118",
+    "type": "technical",
+    "topic": "projects",
+    "project": "MikeJonesOnline",
+    "content": "Designed multiple specialized AI agents coordinating autonomously via pub/sub architecture: Project Manager Agent (roadmap management, agent orchestration, strategic decisions), Ted (Technical-Research-Agent for structured interviews and documentation), Alice (Web-Content-Builder for case study creation), Requirements Gathering, Business Analyst agents.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "multi-agent",
+      "autonomous-agents",
+      "coordination"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-119",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "MikeJonesOnline",
+    "content": "Case study production workflow achieves 5-8 hours total per case study vs. 2-3 weeks traditional process: PM assigns → Agent claims → Structured interview → Technical documentation → RAG update → Web content creation → Publication → Roadmap update.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "workflow",
+      "efficiency",
+      "case-study"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-120",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kinoo",
+    "content": "At Kinoo, Mike coordinated 120+ professionals with a 3-year $12M+ budget for AI-powered social communication and gaming platform.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "kinoo",
+      "budget",
+      "team-size"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-121",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kinoo",
+    "content": "Kinoo platform won 10 prestigious awards including 2022 CES Innovation Award and 2021 Good Housekeeping Best Toy Award for connected hardware platform launch.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "kinoo",
+      "awards",
+      "ces"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-122",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kinoo",
+    "content": "At Kinoo, achieved 100% product launch success rate and 30%+ planning time reduction through standardized templates, naming conventions, scheduling frameworks, and build environments.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "kinoo",
+      "metrics",
+      "efficiency"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-123",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kabam",
+    "content": "At Kabam, managed 50+ staff with $4M+ annual budget across QA, Automation, Build & Release, and User Research departments.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "kabam",
+      "budget",
+      "team-size"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-124",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Verizon",
+    "content": "At Verizon, managed software development lifecycle for IPTV service and mobile social entertainment application, unifying 250+ employees across five departments and two business units.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "verizon",
+      "scale",
+      "team-size"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-125",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Microsoft",
+    "content": "At Microsoft, contributed to 6 AAA game titles across Xbox and Xbox 360 platforms as core team member for both platform launches.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "microsoft",
+      "xbox",
+      "game-titles"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-126",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Microsoft",
+    "content": "Mike Jones was awarded a patent for video game instrumentation method (Xbox SDK) enabling kill shot replay feature in Halo franchise.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "microsoft",
+      "patent",
+      "xbox-sdk",
+      "halo"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-127",
+    "type": "fact",
+    "topic": "professional_identity",
+    "project": "MikeCareer",
+    "content": "Mike Jones' current professional title: AI Implementation Expert & Technical Program Leader. Alternative positioning: AI-Augmented Organizational Intelligence Architect.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "professional-title",
+      "positioning"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-128",
+    "type": "fact",
+    "topic": "professional_identity",
+    "project": "MikeCareer",
+    "content": "Mike Jones specializes in AI Integration, PMO Excellence, Platform Development, and Cross-Functional Leadership. Core expertise areas: Strategic AI Integration, Multi-Agent System Architecture, RAG Implementation, Process Automation, Agile & Hybrid Methodologies, Product Lifecycle Management.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "expertise",
+      "specialization"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-129",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "VelocityPartners",
+    "content": "Velocity Partners consulting achievements: 80%+ improvement in delivery predictability through AI-augmented process standardization, 3x operational efficiency gains via automation and workflow optimization, 30%+ planning time reduction through template and standard development.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "velocity-partners",
+      "metrics",
+      "efficiency"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-130",
+    "type": "technical",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "content": "AI & Machine Learning technical skills: Large Language Models (Claude, ChatGPT, GPT-4, Ollama), RAG Architecture, Multi-Agent Systems, Prompt Engineering, AI Workflow Automation, Local LLM Deployment, Python AI Integration.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "technical-skills",
+      "ai",
+      "llm"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-131",
+    "type": "technical",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "content": "Program & Project Management tools: JIRA, Confluence, Smartsheet, Asana, Trello, Microsoft Project, Agile Methodologies, Scrum, Kanban, Waterfall, Hybrid Development, RACI Matrices, Swimlane Diagrams, Value Stream Mapping, OKRs, KPIs.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "technical-skills",
+      "pmo",
+      "tools"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-132",
+    "type": "technical",
+    "topic": "skills",
+    "project": "MikeCareer",
+    "content": "Technical Tools & Platforms: Git/GitHub, Docker, CI/CD Pipelines, n8n Automation, NATS Messaging, Ghost CMS, WordPress, Linux Administration, API Integration, Webhook Development, Python, JavaScript, SQL.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "technical-skills",
+      "development",
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-133",
+    "type": "fact",
+    "topic": "education",
+    "project": "MikeCareer",
+    "content": "Mike Jones holds a Bachelor of Applied Science in Computing & Software Systems from University of Washington, Bothell, WA.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "education",
+      "university-of-washington"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-134",
+    "type": "fact",
+    "topic": "education",
+    "project": "MikeCareer",
+    "content": "Mike Jones holds a Bachelor of Arts in Political Science & International Relations from University of Washington, Seattle, WA.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "education",
+      "university-of-washington"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-135",
+    "type": "fact",
+    "topic": "certifications",
+    "project": "MikeCareer",
+    "content": "Mike Jones professional certifications: Project Management Professional (PMP) - Project Management Institute, Certified Scrum Master (CSM) - Scrum Alliance, Certified Scrum Product Owner (CSPO) - Scrum Alliance, Product Management - Skillsoft, NLP Master Practitioner - NLP Institute of California.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "certifications",
+      "pmp",
+      "scrum",
+      "nlp"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-136",
+    "type": "fact",
+    "topic": "publications",
+    "project": "MikeCareer",
+    "content": "MikeJones.online - Professional portfolio launched January 2026 showcasing AI implementation case studies including multi-agent coordination, RAG architecture, local LLM infrastructure, and platform cooperative development.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "portfolio",
+      "publications",
+      "mikejones-online"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-137",
+    "type": "fact",
+    "topic": "publications",
+    "project": "MikeCareer",
+    "content": "Org Intelligence - Substack publication (2025-Present) exploring AI-augmented organizational systems, practical implementation guides for AI workflow automation, multi-agent coordination, and productivity solutions for mid-market companies.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "publications",
+      "substack",
+      "org-intelligence"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-138",
+    "type": "fact",
+    "topic": "publications",
+    "project": "ResilientTomorrow",
+    "content": "ResilientTomorrow - Substack publication (2025-Present) with 2,000+ subscribers exploring community resilience, mutual aid networks, and cooperative economics, demonstrating content strategy and thought leadership.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md, Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "publications",
+      "substack",
+      "resilient-tomorrow",
+      "subscribers"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-139",
+    "type": "fact",
+    "topic": "publications",
+    "project": "ResilientTomorrow",
+    "content": "ResilientTomorrow Mastodon presence: @resilientTomorrow@mastodon.social. The publication demonstrates expertise in content strategy, editorial voice, and consistent publishing cadence.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "social-media",
+      "mastodon",
+      "resilient-tomorrow"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-140",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "VelocityPartners",
+    "title": "Velocity Partners Service Model",
+    "content": "Velocity Partners offers AI-augmented PMO consulting for mid-market companies (50-1500 employees) in gaming, entertainment, and media. Service model includes: Workflow Assessment, Implementation Sprint, and Fractional PMO Retainer. Target clients experiencing 'too many meetings, still missing clarity.' Competitive differentiation: Pioneering PMO approach combining RACI/swimlanes/cadence design with n8n workflows, AI agents, webhooks, and organizational memory systems.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "velocity-partners",
+      "service-model",
+      "ai-augmented-pmo"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-141",
+    "type": "narrative",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "title": "NeighborhoodShare Evolution",
+    "content": "NeighborhoodShare - Platform cooperative design for hyperlocal resource sharing; evolved from tool-sharing to party rental micro-businesses showcasing product development and market validation skills. Developed as parallel innovation project during Velocity Partners consulting period.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "neighborhoodshare",
+      "platform-cooperative",
+      "product-development"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-142",
+    "type": "technical",
+    "topic": "projects",
+    "project": "OfflineAI",
+    "title": "Local AI Infrastructure Implementation",
+    "content": "OfflineAI Project (2023-2024): Deployed production-grade local LLM infrastructure using Ollama with 8+ models (Llama 3.2, DeepSeek-R1, Qwen2.5) achieving ChatGPT-comparable performance without cloud dependencies. Architected family management AI system with persistent memory, automated scheduling, and multi-domain knowledge organization. Implemented n8n automation workflows connecting local AI with calendar systems, document processing, and task management. Security achievement: Zero external data transmission while maintaining enterprise-grade functionality.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "offline-ai",
+      "local-llm",
+      "ollama",
+      "privacy",
+      "security"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-143",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "Livescribe",
+    "title": "Livescribe Hybrid Methodology Innovation",
+    "content": "At Livescribe (May 2012 - February 2015), Mike pioneered hybrid methodology innovation for hardware/software integration: agile methodology for software development, waterfall methodologies for hardware, ensuring cross-departmental compatibility. Established Build & Release and Automation teams improving release frequency and stability. Revolutionized estimation process with standardized workflows improving production forecasting and stakeholder communication.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "livescribe",
+      "hybrid-methodology",
+      "agile",
+      "waterfall"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-144",
+    "type": "narrative",
+    "topic": "career_history",
+    "project": "8CircuitStudios",
+    "title": "8 Circuit Studio Web3 Gaming Vision",
+    "content": "At 8 Circuit Studio (April 2017 - March 2020), Mike co-founded Web3 gaming company integrating blockchain technology into gaming experiences. Defined new product ecosystem, managed full lifecycle from concept to launch to post-release operations. Built relationships with technical and non-technical partners, licensors, and service providers. Conducted extensive user interviews, polls, and alpha/beta testing ensuring high-quality player experiences. Charted B2B and B2C growth roadmap based on industry trends.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "8-circuit-studios",
+      "web3",
+      "blockchain",
+      "gaming"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-145",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "MikeCareer",
+    "content": "Career-wide key metrics: 80%+ improvement in delivery predictability, 3x operational efficiency gains, 100% product launch success rate, 30%+ planning time reduction, 10+ industry awards, $4M+ annual budgets managed, 120+ person teams led, 6 AAA game titles shipped.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "metrics",
+      "achievements",
+      "career-summary"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-146",
+    "type": "technical",
+    "topic": "projects",
+    "project": "MikeJonesOnline",
+    "title": "MikeJones.online Technical Stack",
+    "content": "MikeJones.online technical stack: Python, NATS JetStream (message bus at localhost:4222), Ghost CMS Pro with ActivityPub integration, RAG architecture with 200+ entries, Claude API integration, automated deployment pipelines, Git version control. Website features multi-agent case studies, project portfolio, AI implementation demonstrations, RAG-powered chatbot integration (planned), Fediverse/ActivityPub publishing (@index@mikejones.online).",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "mikejones-online",
+      "technical-stack",
+      "ghost-cms",
+      "nats",
+      "rag"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-147",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "MikeJonesOnline",
+    "content": "Strategic launch decision for MikeJones.online: Launched with 2 comprehensive AI-focused case studies (4,531 combined documentation lines) instead of 3-4 decent ones—prioritizing depth and speed to market. Website itself serves as case study demonstrating practical AI implementation in business context.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "strategy",
+      "launch",
+      "case-studies"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-148",
+    "type": "technical",
+    "topic": "projects",
+    "project": "MikeJonesOnline",
+    "title": "Specialized AI Agent Architecture",
+    "content": "Specialized AI agents for MikeJones.online: (1) Project Manager Agent - roadmap management, agent orchestration, strategic decisions, project memory maintenance; (2) Ted (Technical-Research-Agent) - conducts structured technical interviews (1-2 hours) producing comprehensive documentation (1,500-3,000 lines) + RAG updates (5-15 verified entries per project); (3) Alice (Web-Content-Builder) - converts technical docs to compelling Ghost CMS case studies with automated screenshot capture, SEO optimization, fact verification against RAG; (4) Requirements Gathering and Business Analyst agents for product development methodology.",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "multi-agent",
+      "agent-architecture",
+      "specialization"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-149",
+    "type": "fact",
+    "topic": "contact_info",
+    "project": "MikeCareer",
+    "content": "Mike Jones contact information: Location - San Jose, CA 95126; Phone - 206-818-7673; Email - mejones73@pm.me; LinkedIn - linkedin.com/in/mejones73; GitHub - github.com/tinybiggss; Portfolio - mikejones.online",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md, Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "contact",
+      "location"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-150",
+    "type": "fact",
+    "topic": "social_media",
+    "project": "MikeCareer",
+    "content": "Mike Jones social media profiles: LinkedIn (linkedin.com/in/mejones73), GitHub (github.com/tinybiggss), Twitter/X (@IsMikeJones), Mastodon (Pending - fosstodon.org), Portfolio ActivityPub (@index@mikejones.online).",
+    "confidence": "verified",
+    "source": "Mike_Jones_AI_Resume_Final.md",
+    "tags": [
+      "verified",
+      "social-media",
+      "professional-profiles"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-151",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "VelocityPartners",
+    "content": "At Velocity Partners, created comprehensive RACI matrices, swimlanes, operating cadences, and value stream maps resulting in 30%+ planning time reduction for client engagements.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "velocity-partners",
+      "process-design",
+      "raci"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-152",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "VelocityPartners",
+    "content": "At Velocity Partners, implemented JIRA/Confluence, Smartsheet, Notion and other ecosystems with custom workflows, automation, and dashboards achieving 3x operational efficiency measured by task velocity and epic completion rates.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "velocity-partners",
+      "tools",
+      "efficiency"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-153",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "VelocityPartners",
+    "content": "At Velocity Partners, designed pre-production frameworks for requirements gathering, risk management, and deliverable definition improving estimation accuracy by 80%+.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "velocity-partners",
+      "estimation",
+      "frameworks"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-154",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "VelocityPartners",
+    "content": "At Velocity Partners, built n8n and Docker based python automation workflows connecting AI systems with calendar management, document processing, and task orchestration.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "velocity-partners",
+      "automation",
+      "n8n",
+      "docker"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-155",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kinoo",
+    "content": "At Kinoo, managed cross-functional teams across Application Development, Hardware Engineering, Integration, Customer Support, Analytics, Marketing, and Sales.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "kinoo",
+      "cross-functional",
+      "leadership"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-156",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kinoo",
+    "content": "At Kinoo, established clear communication channels and cross-departmental handoff processes ensuring seamless product development from concept to post-launch support.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "kinoo",
+      "process",
+      "communication"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-157",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kabam",
+    "content": "At Kabam, pioneered agile methodology adoption improving development processes and product delivery organization-wide. Established Alpha and Beta testing programs for pre-release and post-release games ensuring products exceeded customer expectations at launch.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "kabam",
+      "agile",
+      "testing"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-158",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Kabam",
+    "content": "At Kabam, built and scaled Build & Release and Automation teams improving release frequency and system stability. Contributed to Kabam's reputation as mobile gaming industry innovator through quality excellence and operational best practices.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "kabam",
+      "build-release",
+      "automation"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-159",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Verizon",
+    "content": "At Verizon, drove operational improvements reducing costs through agile methodology adoption and hybrid development practices. Implemented agile triggers in traditionally waterfall environments improving delivery speed and team collaboration.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "verizon",
+      "agile",
+      "hybrid-methodology"
+    ]
+  },
+  {
+    "id": "rag-2026-02-13-160",
+    "type": "fact",
+    "topic": "achievements",
+    "project": "Microsoft",
+    "content": "At Microsoft, established testing frameworks and automation for first-party game development ensuring platform quality. Deep integration with SDK, development tools, and platform services supporting third-party developer success.",
+    "confidence": "verified",
+    "source": "Mike_Jones_ATS_Optimized_Resume.md",
+    "tags": [
+      "verified",
+      "microsoft",
+      "testing",
+      "automation",
+      "sdk"
+    ]
+  }
+];
+
+function getKnowledgeBase() {
+  return knowledgeBase;
+}
+
+const stats = {
+  totalEntries: 190,
+  types: {"fact":80,"qa_pair":19,"fit_assessment":3,"technical":29,"narrative":59},
+  topics: {"career_history":31,"skills":8,"services":2,"fit":3,"project_ai_memory":7,"project_local_llm":17,"project_resilient_tomorrow":18,"about":10,"project_neighborhood_share":3,"homepage":1,"velocity_partners":16,"aapd":6,"pm_drowning":8,"projects":15,"tech_stack":1,"ai_implementation":1,"security":1,"project_management":4,"rag_system":1,"social_media":4,"ai_expertise":2,"achievements":21,"professional_identity":2,"education":2,"certifications":1,"publications":4,"contact_info":1}
+};
+
+module.exports = {
+  knowledgeBase,
+  getKnowledgeBase,
+  stats
+};

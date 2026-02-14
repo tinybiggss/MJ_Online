@@ -1,0 +1,323 @@
+/* === RESUME PAGE ENHANCEMENTS === */
+/* Add to Ghost Admin → Settings → Code Injection → Site Header */
+
+/* Anchor Navigation */
+.resume-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 11, 13, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #2A2B2E;
+  padding: 16px 0;
+  margin-bottom: 48px;
+}
+
+.resume-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.resume-nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #B4B5B9;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.resume-nav a:hover {
+  color: #00D9FF;
+  background: rgba(0, 217, 255, 0.1);
+}
+
+.resume-nav a.active {
+  color: #4F46E5;
+  background: rgba(79, 70, 229, 0.15);
+  font-weight: 600;
+}
+
+/* Section Structure */
+.resume-section {
+  margin-bottom: 96px;
+}
+
+.resume-section h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #4F46E5;
+  display: inline-block;
+  letter-spacing: -0.01em;
+}
+
+.section-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.highlight-section {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.03), rgba(0, 217, 255, 0.03));
+  border-left: 4px solid #00D9FF;
+  padding: 32px;
+  border-radius: 8px;
+}
+
+/* Experience Cards */
+.experience-card {
+  background: #1A1B1E;
+  border: 1px solid #2A2B2E;
+  border-left: 4px solid #4F46E5;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.experience-card:hover {
+  border-left-color: #00D9FF;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.job-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0 0 4px 0;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #B4B5B9;
+  margin: 0;
+}
+
+.date-range {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: #6B6C70;
+  background: rgba(42, 43, 46, 0.5);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.achievement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.achievement-list li {
+  font-size: 15px;
+  color: #B4B5B9;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.achievement-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #4F46E5;
+  font-weight: bold;
+}
+
+.highlight-metric {
+  color: #00D9FF;
+  font-weight: 600;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #2A2B2E;
+}
+
+/* Badge styles */
+.badge {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(42, 43, 46, 0.5);
+  color: #B4B5B9;
+  border: 1px solid #2A2B2E;
+}
+
+.badge-ai, .badge-automation, .badge-rag {
+  background: rgba(79, 70, 229, 0.15);
+  color: #4F46E5;
+  border-color: #4F46E5;
+}
+
+.badge-python {
+  background: rgba(0, 217, 255, 0.15);
+  color: #00D9FF;
+  border-color: #00D9FF;
+}
+
+.badge-production {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border-color: #10B981;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.metric-card {
+  text-align: center;
+  padding: 32px 24px;
+  background: rgba(26, 27, 30, 0.5);
+  border: 1px solid #2A2B2E;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  border-color: #00D9FF;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
+}
+
+.metric-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 40px;
+  font-weight: 700;
+  color: #00D9FF;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.metric-context {
+  font-size: 13px;
+  color: #6B6C70;
+}
+
+/* Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.skill-category {
+  background: #1A1B1E;
+  border: 1px solid #2A2B2E;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.skill-category h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4F46E5;
+  margin: 0 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #2A2B2E;
+}
+
+.skill-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-category li {
+  font-size: 14px;
+  color: #B4B5B9;
+  padding: 6px 0 6px 20px;
+  position: relative;
+}
+
+.skill-category li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #10B981;
+  font-weight: bold;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .resume-nav ul {
+    gap: 12px;
+  }
+
+  .resume-nav a {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .resume-section {
+    margin-bottom: 64px;
+  }
+
+  .resume-section h2 {
+    font-size: 28px;
+  }
+
+  .experience-card {
+    padding: 20px;
+  }
+
+  .card-header {
+    flex-direction: column;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .metric-number {
+    font-size: 32px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .highlight-section {
+    padding: 24px 16px;
+  }
+}

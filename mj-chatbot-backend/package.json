@@ -1,0 +1,23 @@
+{
+  "name": "mj-chatbot-backend",
+  "version": "1.0.0",
+  "description": "RAG-powered AI chatbot backend for MikeJones.online",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node src/knowledge-loader.js",
+    "test": "node test/test-rag-retrieval.js",
+    "dev": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "keywords": ["chatbot", "rag", "ai", "cloudflare-workers", "openai"],
+  "author": "Mike Jones <mike@mikejones.online>",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "commonjs",
+  "devDependencies": {
+    "wrangler": "^4.65.0"
+  },
+  "dependencies": {
+    "openai": "^6.21.0"
+  }
+}
