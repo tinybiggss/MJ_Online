@@ -62,6 +62,67 @@
     return sessionId;
   }
 
+  async function sendMessageToAPI(message, sessionId) {
+    log('Sending to API:', { message, sessionId });
+
+    try {
+      const response = await fetch(CONFIG.apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Session-ID': sessionId
+        },
+        body: JSON.stringify({ message }),
+        signal: AbortSignal.timeout(10000) // 10 second timeout
+      });
+
+      log('API response status:', response.status);
+
+      // Handle rate limiting
+      if (response.status === 429) {
+        const data = await response.json();
+        throw {
+          type: 'rate_limit',
+          message: data.error,
+          retryAfter: data.retryAfter
+        };
+      }
+
+      // Handle other errors
+      if (!response.ok) {
+        throw {
+          type: 'api_error',
+          message: `Server error (${response.status})`
+        };
+      }
+
+      const data = await response.json();
+      log('API response data:', data);
+      return data;
+
+    } catch (error) {
+      log('API error:', error);
+
+      // Re-throw structured errors
+      if (error.type) {
+        throw error;
+      }
+
+      // Handle network errors
+      if (error.name === 'AbortError') {
+        throw {
+          type: 'timeout',
+          message: 'Request timed out. Please try again.'
+        };
+      }
+
+      throw {
+        type: 'network',
+        message: 'Unable to connect. Please check your internet connection.'
+      };
+    }
+  }
+
   // ============================================================================
   // STYLES
   // ============================================================================
@@ -354,6 +415,29 @@
         }
       }
 
+      /* Error Messages */
+      .mj-chatbot-message-error .mj-chatbot-message-bubble {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+      }
+
+      /* Rate Limit Message */
+      .mj-chatbot-rate-limit {
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #92400e;
+      }
+
+      .mj-chatbot-rate-limit-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
       /* ===== Suggested Questions ===== */
       .mj-chatbot-suggestions {
         display: flex;
@@ -505,11 +589,11 @@
     `;
   }
 
-  function createExpandedWindow(messages, isTyping) {
+  function createExpandedWindow(messages, isTyping, rateLimitRetryAfter) {
     return `
       <div class="mj-chatbot-window" role="dialog" aria-label="Chat with Mike Jones" aria-modal="true">
         ${createHeader()}
-        ${createMessagesContainer(messages, isTyping)}
+        ${createMessagesContainer(messages, isTyping, rateLimitRetryAfter)}
         ${createInputArea()}
       </div>
     `;
@@ -543,7 +627,7 @@
     `;
   }
 
-  function createMessagesContainer(messages, isTyping) {
+  function createMessagesContainer(messages, isTyping, rateLimitRetryAfter) {
     const hasMessages = messages && messages.length > 0;
 
     return `
@@ -554,6 +638,7 @@
         aria-atomic="false"
         aria-label="Conversation messages"
       >
+        ${rateLimitRetryAfter ? createRateLimitMessage(rateLimitRetryAfter) : ''}
         ${hasMessages
           ? messages.map(msg => createMessage(msg)).join('')
           : createGreeting()
@@ -590,13 +675,30 @@
 
   function createMessage(message) {
     const isUser = message.sender === 'user';
-    const className = isUser ? 'mj-chatbot-message-user' : 'mj-chatbot-message-bot';
+    const isError = message.sender === 'error';
+    let className = 'mj-chatbot-message-bot';
+
+    if (isUser) {
+      className = 'mj-chatbot-message-user';
+    } else if (isError) {
+      className = 'mj-chatbot-message-error';
+    }
 
     return `
       <div class="mj-chatbot-message ${className}">
         <div class="mj-chatbot-message-bubble">
           ${escapeHtml(message.text)}
         </div>
+      </div>
+    `;
+  }
+
+  function createRateLimitMessage(retryAfter) {
+    const minutes = Math.ceil(retryAfter / 60);
+    return `
+      <div class="mj-chatbot-rate-limit">
+        <div class="mj-chatbot-rate-limit-title">Rate Limit Reached</div>
+        <div>You've reached the message limit. Please try again in ${minutes} minute${minutes > 1 ? 's' : ''}.</div>
       </div>
     `;
   }
@@ -653,7 +755,8 @@
       sessionId: getOrCreateSessionId(),
       initialized: false,
       messages: [],
-      isTyping: false
+      isTyping: false,
+      rateLimitRetryAfter: null
     };
 
     let widgetContainer = null;
@@ -709,7 +812,7 @@
       if (!widgetContainer) return;
 
       const html = state.isOpen
-        ? createExpandedWindow(state.messages, state.isTyping)
+        ? createExpandedWindow(state.messages, state.isTyping, state.rateLimitRetryAfter)
         : createMinimizedBubble();
 
       widgetContainer.innerHTML = html;
@@ -795,7 +898,7 @@
       }
     }
 
-    function handleSendMessage() {
+    async function handleSendMessage() {
       const input = widgetContainer.querySelector('.mj-chatbot-input');
       if (!input) return;
 
@@ -807,36 +910,77 @@
       // Add user message to conversation
       addMessage('user', message);
 
-      // Clear input
+      // Clear input and disable send button
       input.value = '';
       input.style.height = 'auto';
       const sendBtn = widgetContainer.querySelector('.mj-chatbot-send-button');
       if (sendBtn) sendBtn.disabled = true;
 
-      // Show typing indicator
-      setState({ isTyping: true });
+      // Show typing indicator and clear any rate limit message
+      setState({ isTyping: true, rateLimitRetryAfter: null });
 
-      // Simulate bot response (TODO: Replace with actual API call in Task #5)
-      setTimeout(() => {
+      try {
+        // Call real API
+        const data = await sendMessageToAPI(message, state.sessionId);
+
+        // Hide typing indicator
         setState({ isTyping: false });
-        addMessage('bot', `Thanks for your message! You asked: "${message}"\n\nAPI integration coming in Task #5. For now, this is a placeholder response.`);
-      }, 2000);
+
+        // Add bot response
+        addMessage('bot', data.message);
+
+        // TODO: Handle suggestions from API response (data.suggestions)
+        // Could show them as clickable buttons below the message
+
+      } catch (error) {
+        // Hide typing indicator
+        setState({ isTyping: false });
+
+        // Handle different error types
+        if (error.type === 'rate_limit') {
+          setState({ rateLimitRetryAfter: error.retryAfter });
+          log('Rate limit hit:', error.retryAfter);
+        } else {
+          // Show error message in chat
+          addMessage('error', error.message || 'Something went wrong. Please try again.');
+          log('Error sending message:', error);
+        }
+      }
     }
 
-    function handleSuggestionClick(question) {
+    async function handleSuggestionClick(question) {
       log('Suggestion clicked:', question);
 
       // Add user message directly (don't populate input)
       addMessage('user', question);
 
-      // Show typing indicator
-      setState({ isTyping: true });
+      // Show typing indicator and clear any rate limit message
+      setState({ isTyping: true, rateLimitRetryAfter: null });
 
-      // Simulate bot response (TODO: Replace with actual API call in Task #5)
-      setTimeout(() => {
+      try {
+        // Call real API
+        const data = await sendMessageToAPI(question, state.sessionId);
+
+        // Hide typing indicator
         setState({ isTyping: false });
-        addMessage('bot', `Great question! You asked: "${question}"\n\nAPI integration coming in Task #5. The backend will provide a detailed answer based on the 190-entry knowledge base.`);
-      }, 2000);
+
+        // Add bot response
+        addMessage('bot', data.message);
+
+      } catch (error) {
+        // Hide typing indicator
+        setState({ isTyping: false });
+
+        // Handle different error types
+        if (error.type === 'rate_limit') {
+          setState({ rateLimitRetryAfter: error.retryAfter });
+          log('Rate limit hit:', error.retryAfter);
+        } else {
+          // Show error message in chat
+          addMessage('error', error.message || 'Something went wrong. Please try again.');
+          log('Error sending message:', error);
+        }
+      }
     }
 
     function handleEscapeKey(e) {
