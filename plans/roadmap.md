@@ -3203,97 +3203,142 @@ Technical sophistication demonstrated despite market validation showing need for
 **Can Parallel With:** 7.1, 7.2, 7.3, 7.4, 7.5
 
 **Overview:**
-Add an AI-powered chatbot widget that answers visitor questions about Mike's work, experience, and projects using the 70-entry RAG knowledge base created during content extraction. Demonstrates practical AI implementation skills while providing 24/7 visitor engagement and lead qualification.
+Add an AI-powered chatbot widget that answers visitor questions about Mike's work, experience, and projects using the 190-entry RAG knowledge base. Demonstrates practical AI implementation skills while providing 24/7 visitor engagement and lead qualification.
+
+**Status Update (2026-02-24):**
+- ✅ **Phase 7.6.1 (Backend) - COMPLETE** (completed 2026-02-13)
+- 🟡 **Phase 7.6.2 (Frontend) - NEXT PRIORITY** (estimated 5-7 days)
+- ⏸️ **Phase 7.6.3 (Integration & Launch) - BLOCKED** (waiting for frontend)
 
 **Implementation Phases:**
 
-**Phase 1: MVP (2-3 weeks)**
-- [ ] Review and approve OpenSpec proposal (`/openspec/changes/add-rag-chatbot/proposal.md`)
-- [ ] Decide on architecture (recommended: Serverless with Cloudflare Workers + OpenAI API)
-- [ ] Decide on AI provider (OpenAI GPT-3.5 or GPT-4 Turbo recommended for MVP)
-- [ ] Answer open questions (privacy level, conversation persistence, rate limits)
-- [ ] Backend implementation:
-  - [ ] Set up Cloudflare Workers project
-  - [ ] Integrate 70-entry JSONL knowledge base
-  - [ ] Implement RAG retrieval system (keyword-based for MVP)
-  - [ ] Integrate OpenAI API for response generation
-  - [ ] Add rate limiting (10 messages/visitor/hour, 100/IP/day)
-  - [ ] Create POST /chat endpoint
-  - [ ] Test backend thoroughly
-- [ ] Frontend widget development:
-  - [ ] Build chat widget (minimized and expanded states)
-  - [ ] Implement conversation UI (messages, input, send button)
-  - [ ] Add suggested questions display
-  - [ ] Make responsive (desktop 400x600px, mobile full-screen)
-  - [ ] Ensure WCAG 2.1 AA accessibility compliance
-  - [ ] Test across browsers and devices
+**Phase 7.6.1: Backend Implementation ✅ COMPLETE (2026-02-13)**
+- ✅ Review and approve OpenSpec proposal (`/openspec/changes/add-rag-chatbot/proposal.md`)
+- ✅ Decide on architecture (Serverless with Cloudflare Workers + OpenAI API)
+- ✅ Decide on AI provider (OpenAI GPT-3.5-turbo for cost efficiency)
+- ✅ Answer open questions (stateless conversations, reset on page refresh, full logging)
+- ✅ Backend implementation complete at `/mj-chatbot-backend/`:
+  - ✅ Set up Cloudflare Workers project structure
+  - ✅ Integrate 190-entry JSONL knowledge base (expanded from 70)
+  - ✅ Implement RAG retrieval system (85-95% accuracy, 10-25ms response time)
+  - ✅ Integrate OpenAI GPT-3.5-turbo with professional system prompt
+  - ✅ Add rate limiting (10 messages/visitor/hour, 100/IP/day via Cloudflare KV)
+  - ✅ Create POST /chat endpoint with CORS and validation
+  - ✅ Test backend thoroughly (8/8 tests passing)
+  - ✅ Create comprehensive documentation (5 files: README, DEPLOYMENT, API-DOCUMENTATION, TESTING-REPORT, DELIVERABLES)
+  - ✅ Backend ready for Cloudflare Workers deployment
+
+**Phase 7.6.2: Frontend Widget Development 🟡 NEXT PRIORITY (5-7 days estimated)**
+- [ ] Build chat widget UI:
+  - [ ] Create minimized state (bottom-right corner bubble)
+  - [ ] Create expanded state (conversation window)
+  - [ ] Implement message display (user messages, AI responses, timestamps)
+  - [ ] Add input field and send button
+  - [ ] Display suggested questions on first load
+  - [ ] Add typing indicator for AI responses
+- [ ] Make responsive and accessible:
+  - [ ] Desktop: 400x600px floating widget
+  - [ ] Mobile: Full-screen takeover on expand
+  - [ ] WCAG 2.1 AA accessibility compliance (keyboard nav, screen readers, ARIA labels)
+  - [ ] Test across browsers (Chrome, Firefox, Safari, Edge)
+  - [ ] Test across devices (desktop, tablet, mobile)
+- [ ] Integrate with backend API:
+  - [ ] Connect to backend endpoint (refer to `/mj-chatbot-backend/API-DOCUMENTATION.md`)
+  - [ ] Handle API responses and errors
+  - [ ] Implement rate limit handling (show friendly messages when limited)
+  - [ ] Add loading states and error handling
+- [ ] Polish UX:
+  - [ ] Add smooth animations (open/close, message appearance)
+  - [ ] Style to match site theme (dark mode, professional aesthetic)
+  - [ ] Add subtle sound effects (optional, muted by default)
+  - [ ] Implement conversation reset (clear button)
+
+**Phase 7.6.3: Ghost Integration & Launch ⏸️ BLOCKED (waiting for frontend, 2-3 days estimated)**
+- [ ] Deploy backend to Cloudflare Workers production
+- [ ] Deploy frontend widget to CDN or Ghost code injection
 - [ ] Ghost integration:
-  - [ ] Add widget via Ghost Admin → Code Injection (Site Footer)
-  - [ ] Configure widget settings (API endpoint, theme, greeting)
-  - [ ] Test on staging environment
-  - [ ] Deploy to production
-- [ ] Analytics setup:
-  - [ ] Track conversation volume and topics
-  - [ ] Log unhandled questions for knowledge base expansion
-  - [ ] Monitor CTA clicks (contact/schedule)
-  - [ ] Set up performance monitoring (response times, error rates)
-- [ ] Launch MVP:
-  - [ ] Deploy backend to Cloudflare Workers (production)
-  - [ ] Deploy widget to CDN
-  - [ ] Enable on mikejones.online
-  - [ ] Monitor first 24 hours closely
-  - [ ] Collect initial feedback
+  - [ ] Add widget via Ghost Admin → Settings → Code Injection (Site Footer)
+  - [ ] Configure widget settings (API endpoint URL, theme colors, greeting message)
+  - [ ] Test on staging/preview first
+  - [ ] Deploy to production (enable on all pages)
+- [ ] Analytics and monitoring setup:
+  - [ ] Verify backend logging is working (check Cloudflare Workers logs)
+  - [ ] Track conversation volume and topics via backend logs
+  - [ ] Monitor unhandled questions for knowledge base expansion
+  - [ ] Set up performance monitoring (response times, error rates via Cloudflare dashboard)
+  - [ ] Optional: Add frontend analytics (Google Analytics events, PostHog, etc.)
+- [ ] Launch and monitor:
+  - [ ] Enable chatbot on mikejones.online
+  - [ ] Monitor first 24-48 hours closely
+  - [ ] Test with real questions
+  - [ ] Collect initial feedback from visitors
+  - [ ] Fix any critical issues discovered
+  - [ ] Announce chatbot feature (social media, Fediverse, etc.)
 
-**Phase 2: Enhanced Features (1-2 weeks, post-MVP)**
+**Phase 7.6.4: Enhanced Features (1-2 weeks, post-MVP launch)**
 - [ ] UX improvements:
-  - [ ] Add "Learn more" links to relevant pages
-  - [ ] Integrate Cal.com for direct scheduling from chat
-  - [ ] Improve conversation context awareness
-  - [ ] Add conversation history (optional, localStorage)
-  - [ ] A/B test greeting messages
+  - [ ] Add "Learn more" links from chatbot responses to relevant pages
+  - [ ] Integrate Cal.com for direct meeting scheduling from chat
+  - [ ] Improve conversation context awareness (remember previous messages in session)
+  - [ ] Add conversation history (optional, browser localStorage)
+  - [ ] A/B test greeting messages to optimize engagement
+  - [ ] Add conversation feedback mechanism (thumbs up/down on responses)
 - [ ] Analytics enhancements:
-  - [ ] Build analytics dashboard
-  - [ ] Add advanced topic clustering
-  - [ ] Conversion funnel analysis
+  - [ ] Build analytics dashboard (visualize conversation volume, topics, CTAs)
+  - [ ] Add advanced topic clustering (identify common question themes)
+  - [ ] Conversion funnel analysis (chat → contact/schedule → hire)
+  - [ ] Export conversation data for analysis
 - [ ] Knowledge base expansion:
-  - [ ] Analyze unhandled questions from Phase 1
-  - [ ] Add 20-30 new RAG entries based on gaps
-  - [ ] Improve fit_assessment entries
-  - [ ] Add more qa_pair entries for common questions
+  - [ ] Analyze unhandled questions from MVP usage
+  - [ ] Add 20-30 new RAG entries based on discovered gaps
+  - [ ] Improve fit_assessment entries with real job description patterns
+  - [ ] Add more qa_pair entries for common visitor questions
+  - [ ] Update knowledge base from new projects/experience
 
-**Phase 3: Self-Hosted Option (Optional, 2-3 weeks)**
+**Phase 7.6.5: Self-Hosted Option (Optional, 2-3 weeks, future consideration)**
 - [ ] Infrastructure setup:
-  - [ ] Provision VPS (can share with Ghost if self-hosted)
-  - [ ] Install Ollama and local LLM (Qwen 2.5:14B)
-  - [ ] Set up vector database (ChromaDB or Qdrant)
-  - [ ] Build Python FastAPI backend
-  - [ ] Implement embedding-based RAG retrieval
-- [ ] Migration:
-  - [ ] Test response quality vs OpenAI baseline
-  - [ ] Implement gradual traffic migration
-  - [ ] Monitor performance and accuracy
-  - [ ] Document cost savings
+  - [ ] Provision VPS (can share with Ghost if self-hosted, or dedicated for chatbot)
+  - [ ] Install Ollama and local LLM (Qwen 2.5:14B or similar)
+  - [ ] Set up vector database (ChromaDB or Qdrant for semantic search)
+  - [ ] Build Python FastAPI backend (replace Cloudflare Workers)
+  - [ ] Implement embedding-based RAG retrieval (better than keyword matching)
+  - [ ] Migrate 190-entry knowledge base to vector database
+- [ ] Migration and testing:
+  - [ ] Test response quality vs OpenAI GPT-3.5 baseline
+  - [ ] Compare accuracy, latency, and user satisfaction
+  - [ ] Implement gradual traffic migration (A/B test)
+  - [ ] Monitor performance and accuracy metrics
+  - [ ] Document cost savings ($0/month ongoing vs $1-10/month OpenAI)
   - [ ] Update documentation for self-hosted approach
 
 **Deliverables:**
-- **Phase 1:** Working chatbot on all pages, answers questions from knowledge base, mobile responsive, basic analytics
-- **Phase 2:** Enhanced UX, Cal.com integration, expanded knowledge base, improved analytics
-- **Phase 3:** Fully self-hosted chatbot with no API dependencies (optional)
+- **Phase 7.6.1 (Backend):** ✅ COMPLETE - Production-ready backend, RAG retrieval, OpenAI integration, rate limiting, full documentation
+- **Phase 7.6.2 (Frontend):** Working chat widget, mobile responsive, accessible, integrated with backend API
+- **Phase 7.6.3 (Integration & Launch):** Chatbot live on all pages, analytics tracking, monitoring in place
+- **Phase 7.6.4 (Enhanced):** Improved UX, Cal.com integration, expanded knowledge base, advanced analytics
+- **Phase 7.6.5 (Self-hosted):** Fully self-hosted chatbot with no API dependencies (optional future upgrade)
 
 **Estimated Time:**
-- Phase 1 (MVP): 2-3 weeks
-- Phase 2 (Enhanced): 1-2 weeks
-- Phase 3 (Self-hosted): 2-3 weeks
+- Phase 7.6.1 (Backend): ✅ COMPLETE (took 1 day vs 5-7 day estimate)
+- Phase 7.6.2 (Frontend): 5-7 days
+- Phase 7.6.3 (Integration & Launch): 2-3 days
+- Phase 7.6.4 (Enhanced): 1-2 weeks
+- Phase 7.6.5 (Self-hosted): 2-3 weeks
 
-**Cost Estimate:**
-- Cloudflare Workers: Free tier (100k requests/day)
-- OpenAI API: ~$10-30/month (estimated for normal traffic)
-- Total MVP cost: $10-30/month ongoing
-- Self-hosted (Phase 3): One-time setup, $0/month API costs (VPS shared with other projects)
+**Cost Estimate (Actual):**
+- Cloudflare Workers: FREE tier (100k requests/day - more than sufficient)
+- OpenAI GPT-3.5-turbo API: $1-10/month (confirmed from backend testing)
+- Total MVP cost: $1-10/month ongoing (significantly lower than initial $10-30 estimate)
+- Self-hosted (Phase 7.6.5): One-time setup, $0/month API costs (VPS shared with other projects)
+- **Current Status:** Backend complete and production-ready, $0/month until deployed
 
-**Success Metrics (First 3 Months):**
+**Success Metrics (First 3 Months Post-Launch):**
 - 10-20% of visitors interact with chatbot
 - Average 3-5 messages per conversation
+- 85%+ accuracy in answering questions (based on RAG retrieval testing)
+- <3 second response time (target: 1-2 seconds average)
+- 5-10% conversion to contact form or Cal.com scheduling
+- Low rate limit hit rate (<5% of visitors)
 - < 10% "I don't know" responses
 - 5-10% of conversations end with contact/schedule click
 

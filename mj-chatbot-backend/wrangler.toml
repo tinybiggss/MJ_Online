@@ -8,4 +8,4 @@ ENVIRONMENT = "development"
 # KV namespace for rate limiting
 [[kv_namespaces]]
 binding = "RATE_LIMIT"
-id = "YOUR_KV_NAMESPACE_ID_HERE"
+id = "e872ef11e46c4f91ba2de157bdf48287"
