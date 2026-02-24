@@ -22,7 +22,9 @@ function getCorsHeaders(origin) {
     'https://mikejones.online',
     'https://www.mikejones.online',
     'http://localhost:3000', // For local testing
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'http://localhost:8000', // Python http.server
+    'http://127.0.0.1:8000'
   ];
 
   const isAllowed = allowedOrigins.some(allowed => origin?.startsWith(allowed));
