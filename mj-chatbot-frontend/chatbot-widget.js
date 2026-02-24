@@ -264,6 +264,96 @@
         margin-bottom: 24px;
       }
 
+      /* ===== Messages ===== */
+      .mj-chatbot-message {
+        margin-bottom: 16px;
+        display: flex;
+        animation: mj-chatbot-message-appear 0.3s ease-out;
+      }
+
+      @keyframes mj-chatbot-message-appear {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mj-chatbot-message-user {
+        justify-content: flex-end;
+      }
+
+      .mj-chatbot-message-bot {
+        justify-content: flex-start;
+      }
+
+      .mj-chatbot-message-bubble {
+        max-width: 80%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+        word-wrap: break-word;
+      }
+
+      .mj-chatbot-message-user .mj-chatbot-message-bubble {
+        background: ${CONFIG.primaryColor};
+        color: white;
+        border-bottom-right-radius: 4px;
+      }
+
+      .mj-chatbot-message-bot .mj-chatbot-message-bubble {
+        background: white;
+        color: #374151;
+        border-bottom-left-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Typing Indicator */
+      .mj-chatbot-typing {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 10px 14px;
+        background: white;
+        border-radius: 12px;
+        border-bottom-left-radius: 4px;
+        max-width: 60px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .mj-chatbot-typing-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #9ca3af;
+        animation: mj-chatbot-typing-bounce 1.4s infinite;
+      }
+
+      .mj-chatbot-typing-dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+
+      .mj-chatbot-typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .mj-chatbot-typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes mj-chatbot-typing-bounce {
+        0%, 60%, 100% {
+          transform: translateY(0);
+        }
+        30% {
+          transform: translateY(-8px);
+        }
+      }
+
       /* ===== Suggested Questions ===== */
       .mj-chatbot-suggestions {
         display: flex;
@@ -415,11 +505,11 @@
     `;
   }
 
-  function createExpandedWindow() {
+  function createExpandedWindow(messages, isTyping) {
     return `
       <div class="mj-chatbot-window" role="dialog" aria-label="Chat with Mike Jones" aria-modal="true">
         ${createHeader()}
-        ${createMessagesContainer()}
+        ${createMessagesContainer(messages, isTyping)}
         ${createInputArea()}
       </div>
     `;
@@ -453,7 +543,9 @@
     `;
   }
 
-  function createMessagesContainer() {
+  function createMessagesContainer(messages, isTyping) {
+    const hasMessages = messages && messages.length > 0;
+
     return `
       <div
         class="mj-chatbot-messages"
@@ -462,7 +554,11 @@
         aria-atomic="false"
         aria-label="Conversation messages"
       >
-        ${createGreeting()}
+        ${hasMessages
+          ? messages.map(msg => createMessage(msg)).join('')
+          : createGreeting()
+        }
+        ${isTyping ? createTypingIndicator() : ''}
       </div>
     `;
   }
@@ -488,6 +584,31 @@
             ${escapeHtml(question)}
           </button>
         `).join('')}
+      </div>
+    `;
+  }
+
+  function createMessage(message) {
+    const isUser = message.sender === 'user';
+    const className = isUser ? 'mj-chatbot-message-user' : 'mj-chatbot-message-bot';
+
+    return `
+      <div class="mj-chatbot-message ${className}">
+        <div class="mj-chatbot-message-bubble">
+          ${escapeHtml(message.text)}
+        </div>
+      </div>
+    `;
+  }
+
+  function createTypingIndicator() {
+    return `
+      <div class="mj-chatbot-message mj-chatbot-message-bot">
+        <div class="mj-chatbot-typing" aria-label="Mike is typing">
+          <div class="mj-chatbot-typing-dot"></div>
+          <div class="mj-chatbot-typing-dot"></div>
+          <div class="mj-chatbot-typing-dot"></div>
+        </div>
       </div>
     `;
   }
@@ -530,7 +651,9 @@
     let state = {
       isOpen: false,
       sessionId: getOrCreateSessionId(),
-      initialized: false
+      initialized: false,
+      messages: [],
+      isTyping: false
     };
 
     let widgetContainer = null;
@@ -544,6 +667,30 @@
       // Re-render if state changed
       if (JSON.stringify(prevState) !== JSON.stringify(state)) {
         render();
+      }
+    }
+
+    function addMessage(sender, text) {
+      const message = {
+        sender, // 'user' or 'bot'
+        text,
+        timestamp: Date.now()
+      };
+
+      setState({
+        messages: [...state.messages, message]
+      });
+
+      log('Message added:', message);
+
+      // Auto-scroll to bottom
+      setTimeout(scrollToBottom, 100);
+    }
+
+    function scrollToBottom() {
+      const messagesContainer = widgetContainer.querySelector('.mj-chatbot-messages');
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }
     }
 
@@ -562,14 +709,14 @@
       if (!widgetContainer) return;
 
       const html = state.isOpen
-        ? createExpandedWindow()
+        ? createExpandedWindow(state.messages, state.isTyping)
         : createMinimizedBubble();
 
       widgetContainer.innerHTML = html;
       attachEventListeners();
 
-      // Auto-focus input when opening
-      if (state.isOpen) {
+      // Auto-focus input when opening (but not when just adding messages)
+      if (state.isOpen && state.messages.length === 0) {
         setTimeout(() => {
           const input = widgetContainer.querySelector('.mj-chatbot-input');
           if (input) input.focus();
@@ -657,24 +804,39 @@
 
       log('Sending message:', message);
 
+      // Add user message to conversation
+      addMessage('user', message);
+
       // Clear input
       input.value = '';
       input.style.height = 'auto';
       const sendBtn = widgetContainer.querySelector('.mj-chatbot-send-button');
       if (sendBtn) sendBtn.disabled = true;
 
-      // TODO: Actually send to API (Task #5)
-      alert(`Message to send: "${message}"\n\nAPI integration coming in Task #5!`);
+      // Show typing indicator
+      setState({ isTyping: true });
+
+      // Simulate bot response (TODO: Replace with actual API call in Task #5)
+      setTimeout(() => {
+        setState({ isTyping: false });
+        addMessage('bot', `Thanks for your message! You asked: "${message}"\n\nAPI integration coming in Task #5. For now, this is a placeholder response.`);
+      }, 2000);
     }
 
     function handleSuggestionClick(question) {
       log('Suggestion clicked:', question);
-      const input = widgetContainer.querySelector('.mj-chatbot-input');
-      if (input) {
-        input.value = question;
-        input.focus();
-        handleInputChange({ target: input }); // Trigger input change to enable send button
-      }
+
+      // Add user message directly (don't populate input)
+      addMessage('user', question);
+
+      // Show typing indicator
+      setState({ isTyping: true });
+
+      // Simulate bot response (TODO: Replace with actual API call in Task #5)
+      setTimeout(() => {
+        setState({ isTyping: false });
+        addMessage('bot', `Great question! You asked: "${question}"\n\nAPI integration coming in Task #5. The backend will provide a detailed answer based on the 190-entry knowledge base.`);
+      }, 2000);
     }
 
     function handleEscapeKey(e) {
@@ -716,7 +878,12 @@
       init,
       open: handleOpen,
       close: handleClose,
-      getState: () => ({ ...state })
+      getState: () => ({ ...state }),
+      // For testing/debugging
+      addUserMessage: (text) => addMessage('user', text),
+      addBotMessage: (text) => addMessage('bot', text),
+      clearMessages: () => setState({ messages: [] }),
+      setTyping: (isTyping) => setState({ isTyping })
     };
   })();
 
