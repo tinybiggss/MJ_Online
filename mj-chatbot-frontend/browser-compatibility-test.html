@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Compatibility Test - MJ Chatbot Widget</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #2563eb;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 4px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        .test-item.pass {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+        .test-item.fail {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        .test-item.warn {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+        .status {
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        .pass .status { color: #10b981; }
+        .fail .status { color: #ef4444; }
+        .warn .status { color: #f59e0b; }
+        .browser-info {
+            background: #eff6ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .summary {
+            background: #2563eb;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .summary h2 {
+            margin-top: 0;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        #run-tests {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Browser Compatibility Test Suite</h1>
+    <p>This page tests browser-specific features and APIs used by the MJ Chatbot Widget.</p>
+
+    <div class="browser-info">
+        <h3>Browser Information</h3>
+        <div id="browser-info">Detecting browser...</div>
+    </div>
+
+    <button id="run-tests">▶ Run All Tests</button>
+    <button id="export-results">📄 Export Results</button>
+
+    <div id="test-results"></div>
+
+    <div class="summary" id="summary" style="display: none;">
+        <h2>Test Summary</h2>
+        <div id="summary-content"></div>
+    </div>
+
+    <script>
+        // Browser detection
+        function detectBrowser() {
+            const ua = navigator.userAgent;
+            let browserName = 'Unknown';
+            let browserVersion = 'Unknown';
+            let renderingEngine = 'Unknown';
+
+            // Detect browser
+            if (ua.indexOf('Edg/') > -1) {
+                browserName = 'Microsoft Edge (Chromium)';
+                browserVersion = ua.match(/Edg\/([0-9.]+)/)[1];
+                renderingEngine = 'Blink';
+            } else if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1) {
+                browserName = 'Google Chrome';
+                browserVersion = ua.match(/Chrome\/([0-9.]+)/)[1];
+                renderingEngine = 'Blink';
+            } else if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) {
+                browserName = 'Safari';
+                browserVersion = ua.match(/Version\/([0-9.]+)/)[1];
+                renderingEngine = 'WebKit';
+            } else if (ua.indexOf('Firefox') > -1) {
+                browserName = 'Firefox';
+                browserVersion = ua.match(/Firefox\/([0-9.]+)/)[1];
+                renderingEngine = 'Gecko';
+            }
+
+            return {
+                name: browserName,
+                version: browserVersion,
+                engine: renderingEngine,
+                userAgent: ua,
+                platform: navigator.platform,
+                language: navigator.language
+            };
+        }
+
+        // Display browser info
+        function displayBrowserInfo() {
+            const info = detectBrowser();
+            const infoDiv = document.getElementById('browser-info');
+            infoDiv.innerHTML = `
+                <strong>Browser:</strong> ${info.name} ${info.version}<br>
+                <strong>Rendering Engine:</strong> ${info.engine}<br>
+                <strong>Platform:</strong> ${info.platform}<br>
+                <strong>Language:</strong> ${info.language}<br>
+                <small><strong>User Agent:</strong> <code>${info.userAgent}</code></small>
+            `;
+        }
+
+        // Test runner
+        class BrowserTest {
+            constructor() {
+                this.results = [];
+                this.totalTests = 0;
+                this.passedTests = 0;
+                this.failedTests = 0;
+                this.warnings = 0;
+            }
+
+            addResult(name, status, details) {
+                this.results.push({ name, status, details });
+                this.totalTests++;
+                if (status === 'pass') this.passedTests++;
+                else if (status === 'fail') this.failedTests++;
+                else if (status === 'warn') this.warnings++;
+            }
+
+            test(name, testFn) {
+                try {
+                    const result = testFn();
+                    if (result === true) {
+                        this.addResult(name, 'pass', 'Feature supported');
+                    } else if (result === false) {
+                        this.addResult(name, 'fail', 'Feature not supported');
+                    } else {
+                        this.addResult(name, result.status, result.details);
+                    }
+                } catch (error) {
+                    this.addResult(name, 'fail', `Error: ${error.message}`);
+                }
+            }
+
+            render() {
+                const container = document.getElementById('test-results');
+                container.innerHTML = '';
+
+                // Group tests by category
+                const categories = {
+                    'Core JavaScript Features': [],
+                    'CSS Features': [],
+                    'DOM APIs': [],
+                    'Storage APIs': [],
+                    'Event APIs': [],
+                    'Modern Features': []
+                };
+
+                this.results.forEach(result => {
+                    // Simple categorization based on test name
+                    if (result.name.includes('CSS') || result.name.includes('dvh') || result.name.includes('Border Radius')) {
+                        categories['CSS Features'].push(result);
+                    } else if (result.name.includes('localStorage') || result.name.includes('sessionStorage')) {
+                        categories['Storage APIs'].push(result);
+                    } else if (result.name.includes('Event') || result.name.includes('Keyboard')) {
+                        categories['Event APIs'].push(result);
+                    } else if (result.name.includes('ES6') || result.name.includes('async') || result.name.includes('fetch')) {
+                        categories['Core JavaScript Features'].push(result);
+                    } else if (result.name.includes('DOM') || result.name.includes('querySelector')) {
+                        categories['DOM APIs'].push(result);
+                    } else {
+                        categories['Modern Features'].push(result);
+                    }
+                });
+
+                Object.entries(categories).forEach(([category, tests]) => {
+                    if (tests.length === 0) return;
+
+                    const section = document.createElement('div');
+                    section.className = 'test-section';
+                    section.innerHTML = `<h3>${category}</h3>`;
+
+                    tests.forEach(result => {
+                        const item = document.createElement('div');
+                        item.className = `test-item ${result.status}`;
+                        item.innerHTML = `
+                            <span class="status">${result.status === 'pass' ? '✅ PASS' : result.status === 'fail' ? '❌ FAIL' : '⚠️ WARN'}</span>
+                            <strong>${result.name}</strong><br>
+                            <small>${result.details}</small>
+                        `;
+                        section.appendChild(item);
+                    });
+
+                    container.appendChild(section);
+                });
+
+                // Show summary
+                this.showSummary();
+            }
+
+            showSummary() {
+                const summary = document.getElementById('summary');
+                const content = document.getElementById('summary-content');
+
+                const passRate = Math.round((this.passedTests / this.totalTests) * 100);
+                const status = passRate >= 95 ? '✅ EXCELLENT' : passRate >= 90 ? '✅ GOOD' : passRate >= 80 ? '⚠️ ACCEPTABLE' : '❌ POOR';
+
+                content.innerHTML = `
+                    <div style="font-size: 1.2em; margin-bottom: 15px;">
+                        <strong>Overall Status:</strong> ${status} (${passRate}% compatibility)
+                    </div>
+                    <div>
+                        <strong>Total Tests:</strong> ${this.totalTests}<br>
+                        <strong>Passed:</strong> ${this.passedTests}<br>
+                        <strong>Failed:</strong> ${this.failedTests}<br>
+                        <strong>Warnings:</strong> ${this.warnings}
+                    </div>
+                `;
+
+                summary.style.display = 'block';
+            }
+
+            export() {
+                const browser = detectBrowser();
+                const timestamp = new Date().toISOString();
+                const passRate = Math.round((this.passedTests / this.totalTests) * 100);
+
+                const report = {
+                    timestamp,
+                    browser: {
+                        name: browser.name,
+                        version: browser.version,
+                        engine: browser.engine,
+                        platform: browser.platform
+                    },
+                    summary: {
+                        total: this.totalTests,
+                        passed: this.passedTests,
+                        failed: this.failedTests,
+                        warnings: this.warnings,
+                        passRate: passRate
+                    },
+                    results: this.results
+                };
+
+                const json = JSON.stringify(report, null, 2);
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `browser-test-${browser.name.replace(/\s+/g, '-')}-${timestamp}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        // Run all tests
+        function runAllTests() {
+            const tester = new BrowserTest();
+
+            // JavaScript Features
+            tester.test('ES6 Arrow Functions', () => {
+                const test = () => true;
+                return test();
+            });
+
+            tester.test('ES6 const/let', () => {
+                const x = 1;
+                let y = 2;
+                return x === 1 && y === 2;
+            });
+
+            tester.test('ES6 Template Literals', () => {
+                const test = `test ${1 + 1}`;
+                return test === 'test 2';
+            });
+
+            tester.test('async/await Support', () => {
+                try {
+                    eval('(async () => {})');
+                    return true;
+                } catch {
+                    return false;
+                }
+            });
+
+            tester.test('fetch API', () => {
+                return typeof fetch === 'function';
+            });
+
+            tester.test('Promise Support', () => {
+                return typeof Promise === 'function';
+            });
+
+            // DOM APIs
+            tester.test('DOM querySelector', () => {
+                return typeof document.querySelector === 'function';
+            });
+
+            tester.test('DOM querySelectorAll', () => {
+                return typeof document.querySelectorAll === 'function';
+            });
+
+            tester.test('addEventListener Support', () => {
+                return typeof Element.prototype.addEventListener === 'function';
+            });
+
+            tester.test('classList API', () => {
+                return typeof Element.prototype.classList === 'object';
+            });
+
+            // Storage APIs
+            tester.test('localStorage Support', () => {
+                try {
+                    localStorage.setItem('test', '1');
+                    const result = localStorage.getItem('test') === '1';
+                    localStorage.removeItem('test');
+                    return result;
+                } catch {
+                    return false;
+                }
+            });
+
+            tester.test('sessionStorage Support', () => {
+                try {
+                    sessionStorage.setItem('test', '1');
+                    const result = sessionStorage.getItem('test') === '1';
+                    sessionStorage.removeItem('test');
+                    return result;
+                } catch {
+                    return false;
+                }
+            });
+
+            // CSS Features
+            tester.test('CSS Variables (Custom Properties)', () => {
+                const el = document.createElement('div');
+                el.style.setProperty('--test', '1');
+                return el.style.getPropertyValue('--test') === '1';
+            });
+
+            tester.test('CSS dvh Units (100dvh)', () => {
+                const el = document.createElement('div');
+                el.style.height = '100dvh';
+                // Check if the browser accepts the value
+                return el.style.height === '100dvh' || el.style.height.includes('dvh');
+            });
+
+            tester.test('CSS Flexbox', () => {
+                const el = document.createElement('div');
+                el.style.display = 'flex';
+                return el.style.display === 'flex';
+            });
+
+            tester.test('CSS box-sizing', () => {
+                const el = document.createElement('div');
+                el.style.boxSizing = 'border-box';
+                return el.style.boxSizing === 'border-box';
+            });
+
+            tester.test('CSS Border Radius', () => {
+                const el = document.createElement('div');
+                el.style.borderRadius = '12px';
+                return el.style.borderRadius === '12px';
+            });
+
+            tester.test('CSS Transitions', () => {
+                const el = document.createElement('div');
+                el.style.transition = 'all 0.3s';
+                return el.style.transition.includes('0.3s');
+            });
+
+            tester.test('CSS Animations', () => {
+                return CSS.supports('animation', 'test 1s');
+            });
+
+            tester.test('CSS calc()', () => {
+                return CSS.supports('width', 'calc(100% - 20px)');
+            });
+
+            // Event APIs
+            tester.test('Keyboard Events', () => {
+                return typeof KeyboardEvent === 'function';
+            });
+
+            tester.test('Mouse Events', () => {
+                return typeof MouseEvent === 'function';
+            });
+
+            tester.test('Touch Events', () => {
+                return typeof TouchEvent === 'function' || 'ontouchstart' in window;
+            });
+
+            tester.test('Focus Events', () => {
+                return typeof FocusEvent === 'function';
+            });
+
+            // Modern Features
+            tester.test('IntersectionObserver API', () => {
+                return typeof IntersectionObserver === 'function';
+            });
+
+            tester.test('MutationObserver API', () => {
+                return typeof MutationObserver === 'function';
+            });
+
+            tester.test('requestAnimationFrame', () => {
+                return typeof requestAnimationFrame === 'function';
+            });
+
+            // ARIA Support
+            tester.test('ARIA Attribute Support', () => {
+                const el = document.createElement('div');
+                el.setAttribute('aria-label', 'test');
+                return el.getAttribute('aria-label') === 'test';
+            });
+
+            tester.test('ARIA Role Support', () => {
+                const el = document.createElement('div');
+                el.setAttribute('role', 'button');
+                return el.getAttribute('role') === 'button';
+            });
+
+            // Performance APIs
+            tester.test('Performance API', () => {
+                return typeof performance === 'object' && typeof performance.now === 'function';
+            });
+
+            tester.render();
+            return tester;
+        }
+
+        // Event listeners
+        document.getElementById('run-tests').addEventListener('click', () => {
+            window.currentTest = runAllTests();
+        });
+
+        document.getElementById('export-results').addEventListener('click', () => {
+            if (window.currentTest) {
+                window.currentTest.export();
+            } else {
+                alert('Please run tests first before exporting results.');
+            }
+        });
+
+        // Display browser info on load
+        displayBrowserInfo();
+
+        // Auto-run tests on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                window.currentTest = runAllTests();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
