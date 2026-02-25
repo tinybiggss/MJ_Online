@@ -726,6 +726,7 @@
             rows="1"
             aria-label="Type your message"
             maxlength="500"
+            autocomplete="off"
           ></textarea>
           <button
             class="mj-chatbot-send-button"
@@ -804,6 +805,7 @@
       widgetContainer = document.createElement('div');
       widgetContainer.id = 'mj-chatbot-widget';
       widgetContainer.className = 'mj-chatbot-widget';
+      widgetContainer.setAttribute('lang', 'en'); // WCAG 3.1.1: Language of Page
       document.body.appendChild(widgetContainer);
       log('Container created');
       return widgetContainer;
