@@ -73,6 +73,7 @@
 **Lighthouse Score:** Pending manual run
 
 **Overall Progress:** 25% complete (1 of 4 browsers tested)
+**User Action Required:** Manual testing needed for Firefox, Safari, Edge (browsers not available in current session)
 
 ---
 
