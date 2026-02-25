@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touch Target Size Verification</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f9fafb;
+    }
+
+    h1 {
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+
+    .instructions {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 16px;
+      margin-bottom: 24px;
+      border-radius: 4px;
+    }
+
+    .test-section {
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .test-section h2 {
+      color: #374151;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    .result-table th,
+    .result-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .result-table th {
+      background: #f9fafb;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .pass {
+      color: #059669;
+      font-weight: 600;
+    }
+
+    .fail {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    .warning {
+      color: #d97706;
+      font-weight: 600;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #1e40af;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    code {
+      background: #e5e7eb;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.9em;
+      font-family: monospace;
+    }
+
+    .wcag-info {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 16px;
+      margin-top: 16px;
+      border-radius: 4px;
+    }
+
+    .wcag-info h3 {
+      color: #92400e;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .wcag-info p {
+      color: #78350f;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Touch Target Size Verification</h1>
+  <p class="subtitle">WCAG 2.1 AA Compliance Testing - Task #6</p>
+
+  <div class="instructions">
+    <h3>📏 What This Test Does:</h3>
+    <p>This page verifies that all interactive elements in the chatbot meet the <strong>WCAG 2.1 AA minimum touch target size of 44×44 pixels</strong>.</p>
+    <p><strong>How to use:</strong></p>
+    <ol>
+      <li>Open the chatbot widget (click the blue bubble in bottom-right)</li>
+      <li>Click "Measure Touch Targets" button below</li>
+      <li>Review the results table - all elements should show ✅ PASS</li>
+    </ol>
+  </div>
+
+  <div class="test-section">
+    <h2>Test Controls</h2>
+    <button onclick="measureTouchTargets()">Measure Touch Targets</button>
+    <div id="results"></div>
+  </div>
+
+  <div class="wcag-info">
+    <h3>WCAG 2.1 Success Criterion 2.5.5</h3>
+    <p><strong>Level AA:</strong> The size of the target for pointer inputs is at least 44 by 44 CSS pixels.</p>
+    <p><strong>Exceptions:</strong> The target is in a sentence or block of text, or the size is determined by the user agent and not modified by the author.</p>
+  </div>
+
+  <!-- Load the chatbot widget -->
+  <script>
+    window.MJ_CHATBOT_CONFIG = {
+      debug: true
+    };
+  </script>
+  <script src="chatbot-widget.js"></script>
+
+  <script>
+    function measureTouchTargets() {
+      const results = [];
+      const minSize = 44; // WCAG 2.1 AA minimum
+
+      // Wait for widget to be open
+      if (!document.querySelector('.mj-chatbot-window')) {
+        alert('Please open the chatbot widget first (click the blue bubble)');
+        return;
+      }
+
+      // Measure all interactive elements
+      const elements = [
+        { name: 'Chat Bubble (Minimized)', selector: '.mj-chatbot-bubble' },
+        { name: 'Close Button', selector: '.mj-chatbot-close' },
+        { name: 'Minimize Button', selector: '.mj-chatbot-minimize' },
+        { name: 'Send Button', selector: '.mj-chatbot-send-button' },
+        { name: 'Input Field', selector: '.mj-chatbot-input' },
+        { name: 'Suggestion Chip (first)', selector: '.mj-chatbot-suggestion' }
+      ];
+
+      elements.forEach(item => {
+        const element = document.querySelector(item.selector);
+        if (!element) {
+          results.push({
+            name: item.name,
+            width: 'N/A',
+            height: 'N/A',
+            status: 'NOT FOUND',
+            pass: false
+          });
+          return;
+        }
+
+        const rect = element.getBoundingClientRect();
+        const computedStyle = window.getComputedStyle(element);
+
+        // Get total clickable area including padding
+        const width = rect.width;
+        const height = rect.height;
+
+        const pass = width >= minSize && height >= minSize;
+
+        results.push({
+          name: item.name,
+          width: Math.round(width),
+          height: Math.round(height),
+          status: pass ? '✅ PASS' : '❌ FAIL',
+          pass: pass
+        });
+      });
+
+      displayResults(results);
+    }
+
+    function displayResults(results) {
+      const resultsDiv = document.getElementById('results');
+
+      let html = '<table class="result-table">';
+      html += '<thead><tr><th>Element</th><th>Width (px)</th><th>Height (px)</th><th>Status</th><th>Details</th></tr></thead>';
+      html += '<tbody>';
+
+      results.forEach(result => {
+        const statusClass = result.pass ? 'pass' : 'fail';
+        const details = result.pass
+          ? 'Meets WCAG 2.1 AA minimum (44×44px)'
+          : result.status === 'NOT FOUND'
+            ? 'Element not found - may not be visible'
+            : `Below minimum (need 44×44px, got ${result.width}×${result.height}px)`;
+
+        html += `<tr>
+          <td>${result.name}</td>
+          <td>${result.width}</td>
+          <td>${result.height}</td>
+          <td class="${statusClass}">${result.status}</td>
+          <td>${details}</td>
+        </tr>`;
+      });
+
+      html += '</tbody></table>';
+
+      // Summary
+      const passCount = results.filter(r => r.pass).length;
+      const totalCount = results.filter(r => r.status !== 'NOT FOUND').length;
+      const allPassed = passCount === totalCount;
+
+      html += `<div style="margin-top: 20px; padding: 16px; background: ${allPassed ? '#d1fae5' : '#fee2e2'}; border-radius: 6px;">`;
+      html += `<strong>Summary:</strong> ${passCount} of ${totalCount} elements passed WCAG 2.1 AA compliance. `;
+      html += allPassed
+        ? '✅ All touch targets meet accessibility requirements!'
+        : '❌ Some touch targets need adjustment.';
+      html += '</div>';
+
+      resultsDiv.innerHTML = html;
+    }
+
+    // Instructions on page load
+    window.addEventListener('load', () => {
+      console.log('Touch target verification page loaded.');
+      console.log('Open the chatbot and click "Measure Touch Targets" to test.');
+    });
+  </script>
+</body>
+</html>

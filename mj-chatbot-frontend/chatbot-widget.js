@@ -275,7 +275,7 @@
         border: none;
         color: white;
         cursor: pointer;
-        padding: 4px;
+        padding: 8px; /* Increased from 4px for WCAG 2.1 AA compliance (44×44px touch target) */
         border-radius: 4px;
         width: 28px;
         height: 28px;
@@ -450,7 +450,8 @@
         background: white;
         border: 1px solid #e5e7eb;
         border-radius: 8px;
-        padding: 12px 16px;
+        padding: 14px 16px; /* Increased from 12px for WCAG compliance */
+        min-height: 44px; /* Ensure minimum touch target size */
         text-align: left;
         cursor: pointer;
         transition: all 0.2s;
