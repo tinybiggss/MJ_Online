@@ -275,10 +275,10 @@
         border: none;
         color: white;
         cursor: pointer;
-        padding: 8px; /* Increased from 4px for WCAG 2.1 AA compliance (44×44px touch target) */
+        padding: 8px; /* WCAG 2.1 AA compliance: 44×44px touch target */
         border-radius: 4px;
-        width: 28px;
-        height: 28px;
+        width: 44px;  /* Total size including padding (44px = 8 + 28 + 8) */
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
