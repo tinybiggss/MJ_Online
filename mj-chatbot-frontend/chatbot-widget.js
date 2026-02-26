@@ -22,7 +22,7 @@
     primaryColor: '#2563eb',
     secondaryColor: '#1e40af',
     bubbleSize: 60,
-    spacing: 20,
+    spacing: 100,
     desktopWidth: 400,
     desktopHeight: 600,
     greeting: 'Hi! Ask me about Mike\'s experience and projects.',
