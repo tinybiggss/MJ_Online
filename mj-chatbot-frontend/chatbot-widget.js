@@ -22,7 +22,8 @@
     primaryColor: '#2563eb',
     secondaryColor: '#1e40af',
     bubbleSize: 60,
-    spacing: 100,
+    spacing: 20,
+    bottomSpacing: 120,
     desktopWidth: 400,
     desktopHeight: 600,
     greeting: 'Hi! Ask me about Mike\'s experience and projects.',
@@ -148,7 +149,7 @@
       .mj-chatbot-widget {
         position: fixed;
         ${CONFIG.position.includes('right') ? 'right' : 'left'}: ${CONFIG.spacing}px;
-        ${CONFIG.position.includes('bottom') ? 'bottom' : 'top'}: ${CONFIG.spacing}px;
+        ${CONFIG.position.includes('bottom') ? 'bottom' : 'top'}: ${CONFIG.bottomSpacing || CONFIG.spacing}px;
         z-index: 999999;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-size: 14px;
