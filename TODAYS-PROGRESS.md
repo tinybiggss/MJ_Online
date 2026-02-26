@@ -480,3 +480,222 @@
 **Total Session Time Today:** ~4.5 hours (deployment + positioning + AI labeling + documentation)
 **Final Status:** Phase 7.6 COMPLETE - Chatbot live on mikejones.online with full legal compliance
 
+
+---
+
+## Evening Session: Analytics Planning (Phase 7.6.4) ✅
+
+**Time:** ~1 hour
+**PM:** Morgan (Project Manager Agent)
+**Status:** Planning complete, ready for agent assignment
+
+---
+
+### What We Accomplished
+
+#### 1. Comprehensive Analytics Planning ✅
+
+Created detailed three-tier implementation plan for chatbot analytics and monitoring:
+
+**Tier 1: Enhanced Backend Logging** (Week 1, Task #14)
+- Expand conversation logging with session tracking, event types, performance metrics
+- Add frontend event tracking (bubble clicks, suggestions clicked, etc.)
+- Flag knowledge gaps for RAG expansion
+- Capture page context for usage analysis
+
+**Tier 2: Analytics Dashboard** (Week 2, Task #15)
+- Build password-protected `/analytics` route on Cloudflare Worker
+- Display 7 metric categories: volume, topics, gaps, performance, errors, pages, engagement
+- Chart.js visualizations
+- CSV/JSON export functionality
+
+**Tier 3: Monitor & Iterate** (Ongoing)
+- Weekly analytics reviews (30 min)
+- Monthly optimizations (2 hours)
+- RAG knowledge base expansion based on gaps
+
+---
+
+#### 2. Key Decisions Made ✅
+
+**DEC-023:** Use Cloudflare Workers-based analytics dashboard
+- **Rationale:** Free, privacy-focused, keeps all data in Cloudflare account
+- **Alternatives:** Plausible ($9/month), Simple Analytics ($9/month), Google Analytics (privacy concerns)
+- **Result:** Aligns with Mike's privacy-first brand, $0/month cost
+
+**DEC-024:** Sequential phases - backend logging first, then dashboard (2 weeks total)
+- **Rationale:** Test enhanced logging before building visualizations
+- **Result:** Can start data collection immediately
+
+**DEC-025:** Assign Ted (backend) and Alice (dashboard UI) for parallel work
+- **Rationale:** Ted's technical expertise + Alice's web skills = maximum velocity
+- **Result:** Optimal agent utilization
+
+---
+
+#### 3. Documentation Created ✅
+
+**New Files:**
+- `/plans/analytics-implementation-plan.md` (400+ lines)
+  - Complete technical specifications
+  - Expanded log schema design
+  - Dashboard UI mockup
+  - Agent assignments and deliverables
+
+**Updated Files:**
+- `/plans/roadmap.md` (Phase 7.6.4 added, phases renumbered)
+- `/PROJECT-MEMORY.json` (DEC-023 through DEC-025 documented)
+
+**Tasks Created:**
+- **Task #14:** Backend logging enhancement (Tier 1)
+- **Task #15:** Analytics dashboard (Tier 2)
+
+**Task Updated:**
+- **Task #12:** Status changed to `in_progress`
+
+---
+
+### Technical Specifications Summary
+
+#### Expanded Log Schema
+
+**Current (Basic):**
+```json
+{
+  "timestamp": "2026-02-26T10:30:00Z",
+  "question": "What's Mike's AI expertise?",
+  "topic": "skills",
+  "entriesRetrieved": 5,
+  "responseLength": 250,
+  "success": true
+}
+```
+
+**New (Enhanced - adds 9 fields):**
+- Session tracking: `sessionId`, `messageNumber`
+- Event types: `eventType` (message_sent, bubble_opened, suggestion_clicked, etc.)
+- Performance: `ragTimeMs`, `aiTimeMs`, `totalTimeMs`
+- Knowledge gaps: `noRagMatch`, `ragMatchScore`
+- Page context: `pageUrl`, `pageTitle`, `referrer`
+- Errors: `errorType`, `errorMessage`
+
+#### Dashboard Metrics (7 Categories)
+
+1. **Conversation Volume:** Total conversations, by day, messages/session, session duration
+2. **Popular Topics:** Topic distribution, most retrieved RAG entries, suggestion clicks
+3. **Knowledge Gaps:** Questions with no RAG matches → priority queue for expansion
+4. **Performance Metrics:** Avg RAG/AI/total time, 95th percentile
+5. **Error Tracking:** Error rate by type, timeline, recent errors
+6. **Page Context:** Top pages, referrer sources, time-of-day distribution
+7. **User Engagement:** Bubble open rate, messages/conversation, suggestion click rate
+
+#### Technical Stack
+
+**Backend:**
+- Cloudflare Workers + KV (existing infrastructure)
+- New `/analytics` route with HTTP Basic Auth
+- New `/analytics-event` endpoint for frontend events
+
+**Dashboard:**
+- Single-page HTML served by worker
+- Chart.js from CDN
+- Vanilla JavaScript (no framework)
+- CSV/JSON export
+
+**Widget:**
+- New `trackEvent()` helper function
+- Session ID persistence in localStorage
+
+---
+
+### Next Steps (Ready for Execution)
+
+**Immediate:**
+1. ⏸️ Assign Task #14 to Ted (or general-purpose agent)
+   - Week 1: Enhanced backend logging
+   - Timeline: 7-10 hours
+
+**Week 2:**
+2. ⏸️ Assign Task #15 to Alice (or general-purpose agent)
+   - Week 2: Analytics dashboard
+   - Timeline: 9-12 hours
+
+**Ongoing:**
+3. ⏸️ Weekly analytics reviews (Morgan + Mike)
+   - 30 min/week + 2 hours/month
+
+---
+
+### Session Metrics
+
+**Planning:**
+- Duration: ~1 hour
+- Documentation: 400+ lines technical specs
+- Decisions: 3 (DEC-023 through DEC-025)
+- Tasks: 2 created, 1 updated
+
+**Implementation Timeline (Estimated):**
+- Tier 1 (Backend): 1 week (7-10 hours)
+- Tier 2 (Dashboard): 1 week (9-12 hours)
+- Total: 2 weeks
+
+**Cost:**
+- Development: $0 (agent time)
+- Infrastructure: $0 (Cloudflare free tier)
+- Ongoing: $0
+
+---
+
+### Files Modified (Analytics Planning)
+
+**Created:**
+- `plans/analytics-implementation-plan.md`
+
+**Modified:**
+- `plans/roadmap.md`
+- `PROJECT-MEMORY.json`
+
+**Git Commit:**
+- Commit: `4042e55`
+- Message: "Plan Phase 7.6.4: Chatbot Analytics & Monitoring System"
+- Files: 3 changed, 586 insertions(+), 75 deletions(-)
+
+---
+
+## 📊 Cumulative Status (Full Day)
+
+**Morning:** Deployment troubleshooting + jsDelivr solution (2 hours)
+**Afternoon:** Positioning fixes + AI labeling compliance (1.5 hours)
+**Evening:** Analytics planning (1 hour)
+**Total Today:** ~4.5 hours
+
+**Phase 7.6 Overall:**
+- Phase 7.6.1 (Backend): ✅ COMPLETE (1 day)
+- Phase 7.6.2 (Frontend): ✅ COMPLETE (1 day)
+- Phase 7.6.3 (Integration & Launch): ✅ COMPLETE (3.5 days total)
+- Phase 7.6.4 (Analytics & Monitoring): 🟡 IN PROGRESS (planning complete)
+
+**Commits Today:**
+1. `22e4f98` - RAG updates and deployment documentation
+2. `1421566` - Move chatbot widget higher (positioning attempt)
+3. `f55bd3d` - Fix chatbot positioning (separate bottomSpacing)
+4. `5dc5de7` - Implement AI labeling compliance
+5. `04f0365` - Document positioning fixes and AI labeling
+6. `4042e55` - Plan Phase 7.6.4 analytics system
+
+**Live Site:**
+- ✅ Chatbot deployed to https://www.mikejones.online
+- ✅ AI disclosure compliant (FTC + CA/UT/CO)
+- ✅ Positioned correctly (bottom: 120px, right: 20px)
+- ✅ Full accessibility (WCAG 2.1 AA)
+- ✅ Auto-updates via @main jsDelivr CDN
+
+**What's Next:**
+- Assign Task #14 (Backend logging) to Ted
+- Assign Task #15 (Dashboard) to Alice
+- Begin data collection and analysis
+
+---
+
+**Last Updated:** 2026-02-26 (evening analytics planning session)
+**Project Status:** Phase 7.6.3 COMPLETE + Phase 7.6.4 IN PROGRESS (planning done, ready for implementation)
