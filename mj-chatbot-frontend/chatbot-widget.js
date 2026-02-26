@@ -53,6 +53,9 @@
     }
   }
 
+  // Message counter for session analytics
+  let messageCount = 0;
+
   function getOrCreateSessionId() {
     let sessionId = localStorage.getItem('mj-chatbot-session-id');
     if (!sessionId) {
@@ -63,17 +66,65 @@
     return sessionId;
   }
 
+  /**
+   * Get current page context for analytics
+   */
+  function getPageContext() {
+    return {
+      pageUrl: window.location.href,
+      pageTitle: document.title,
+      referrer: document.referrer || null
+    };
+  }
+
+  /**
+   * Track a frontend analytics event (fire-and-forget)
+   * @param {string} eventType - bubble_opened, bubble_closed, suggestion_clicked, cta_clicked, widget_loaded
+   * @param {object} metadata - Additional event data
+   */
+  function trackEvent(eventType, metadata) {
+    const sessionId = getOrCreateSessionId();
+    const pageContext = getPageContext();
+    const eventEndpoint = CONFIG.apiEndpoint.replace('/chat', '/analytics-event');
+
+    const payload = {
+      eventType: eventType,
+      sessionId: sessionId,
+      metadata: {
+        ...pageContext,
+        ...(metadata || {})
+      }
+    };
+
+    // Fire-and-forget: don't await, don't block UI
+    fetch(eventEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(error) {
+      log('Analytics event failed (non-blocking):', error);
+    });
+
+    log('Tracked event:', eventType, metadata);
+  }
+
   async function sendMessageToAPI(message, sessionId) {
     log('Sending to API:', { message, sessionId });
+    messageCount++;
+
+    const pageContext = getPageContext();
 
     try {
       const response = await fetch(CONFIG.apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Session-ID': sessionId
+          'X-Session-ID': sessionId,
+          'X-Page-URL': pageContext.pageUrl,
+          'X-Page-Title': pageContext.pageTitle,
+          'X-Referrer': pageContext.referrer || ''
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message, messageNumber: messageCount }),
         signal: AbortSignal.timeout(10000) // 10 second timeout
       });
 
@@ -984,6 +1035,7 @@
 
     async function handleSuggestionClick(question) {
       log('Suggestion clicked:', question);
+      trackEvent('suggestion_clicked', { question: question });
 
       // Add user message directly (don't populate input)
       addMessage('user', question);
@@ -1025,11 +1077,13 @@
 
     function handleOpen() {
       log('Opening widget');
+      trackEvent('bubble_opened');
       setState({ isOpen: true });
     }
 
     function handleClose() {
       log('Closing widget');
+      trackEvent('bubble_closed');
       // Remove ESC key listener
       document.removeEventListener('keydown', handleEscapeKey);
       setState({ isOpen: false });
@@ -1048,6 +1102,7 @@
       render();
 
       setState({ initialized: true });
+      trackEvent('widget_loaded');
       log('Initialization complete');
     }
 
