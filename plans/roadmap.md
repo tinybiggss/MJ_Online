@@ -3205,11 +3205,13 @@ Technical sophistication demonstrated despite market validation showing need for
 **Overview:**
 Add an AI-powered chatbot widget that answers visitor questions about Mike's work, experience, and projects using the 190-entry RAG knowledge base. Demonstrates practical AI implementation skills while providing 24/7 visitor engagement and lead qualification.
 
-**Status Update (2026-02-24):**
+**Status Update (2026-02-26):**
 - ✅ **Phase 7.6.1 (Backend) - COMPLETE** (completed 2026-02-13)
 - ✅ **Phase 7.6.2 (Frontend) - COMPLETE** (completed 2026-02-24)
-- 🟡 **Phase 7.6.3 (Testing & Polish) - IN PROGRESS** (Tasks 6-10)
-- ⏸️ **Phase 7.6.4 (Ghost Integration & Launch) - NEXT** (2-3 days estimated)
+- ✅ **Phase 7.6.3 (Integration & Launch) - COMPLETE** (completed 2026-02-26)
+- 🟡 **Phase 7.6.4 (Analytics & Monitoring) - IN PROGRESS** (Task #12, #14, #15)
+- ⏸️ **Phase 7.6.5 (Enhanced Features) - FUTURE** (UX improvements, Cal.com integration)
+- ⏸️ **Phase 7.6.6 (Self-hosted Option) - FUTURE** (Optional migration to local LLM)
 
 **Implementation Phases:**
 
@@ -3267,66 +3269,148 @@ Add an AI-powered chatbot widget that answers visitor questions about Mike's wor
 **Local Testing:** `python3 -m http.server 8000` → http://localhost:8000/test.html
 **Status:** Fully functional chatbot with real backend integration
 
-**Remaining Tasks (Phase 7.6.3 - Testing & Polish):**
-- ⏸️ Task #6: Mobile device testing (verify on iOS/Android)
-- ⏸️ Task #7: Full WCAG 2.1 AA audit and compliance verification
-- ⏸️ Task #8: Additional UX polish (if needed)
-- ⏸️ Task #9: Cross-browser testing (Chrome, Firefox, Safari, Edge)
-- ⏸️ Task #10: Deployment documentation for Ghost Pro
+**Phase 7.6.3: Integration & Launch ✅ COMPLETE (2026-02-26)**
 
-**Phase 7.6.3: Testing & Polish 🟡 IN PROGRESS (Tasks 6-10, 1-2 days)**
-- ⏸️ Task #6: Mobile responsive testing
-  - [ ] Test on iOS Safari (iPhone)
-  - [ ] Test on Chrome Android (Pixel/Samsung)
-  - [ ] Verify full-screen takeover on mobile
-  - [ ] Test keyboard handling (virtual keyboard appearance)
-  - [ ] Verify touch targets are 44px minimum
-- ⏸️ Task #7: WCAG 2.1 AA accessibility compliance audit
-  - [ ] Run automated accessibility audit (Lighthouse, axe DevTools)
-  - [ ] Screen reader testing (NVDA or VoiceOver)
-  - [ ] Keyboard navigation verification
-  - [ ] Color contrast validation (4.5:1 for text, 3:1 for UI)
-  - [ ] Focus management testing
-- ⏸️ Task #8: UX polish
-  - [ ] Review animations and transitions
-  - [ ] Fine-tune styling if needed
-  - [ ] Test conversation reset functionality
-  - [ ] Verify error messages are user-friendly
-- ⏸️ Task #9: Cross-browser testing
-  - [ ] Chrome (latest)
-  - [ ] Firefox (latest)
-  - [ ] Safari (latest)
-  - [ ] Edge (latest)
-  - [ ] Performance testing (Lighthouse score 90+)
-- ⏸️ Task #10: Deployment documentation
-  - [ ] Create DEPLOYMENT-GUIDE.md for Ghost Pro
-  - [ ] Document code injection steps
-  - [ ] Create configuration guide
-  - [ ] Document troubleshooting steps
+**Completed:**
+- ✅ Backend deployed to Cloudflare Workers (https://mj-chatbot-backend.mejones73.workers.dev)
+- ✅ Frontend widget deployed via jsDelivr CDN (@main branch for auto-updates)
+- ✅ Ghost Code Injection configured (Site Footer)
+- ✅ Chatbot live on all pages at mikejones.online
+- ✅ AI disclosure labeling implemented (FTC, CA/UT/CO compliance)
+- ✅ Positioning fixed (Subscribe button z-index conflict resolved)
+- ✅ Mobile responsive (full-screen on <768px)
+- ✅ WCAG 2.1 AA accessibility (keyboard nav, ARIA labels, screen reader support)
+- ✅ Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- ✅ Basic backend logging (conversation data to Cloudflare KV with 30-day TTL)
 
-**Phase 7.6.4: Ghost Integration & Launch ⏸️ NEXT (2-3 days estimated)**
-- [ ] Backend already deployed to Cloudflare Workers ✅
-- [ ] Deploy frontend widget to CDN or Ghost code injection
-- [ ] Ghost integration:
-  - [ ] Add widget via Ghost Admin → Settings → Code Injection (Site Footer)
-  - [ ] Configure widget settings (API endpoint URL, theme colors, greeting message)
-  - [ ] Test on staging/preview first
-  - [ ] Deploy to production (enable on all pages)
-- [ ] Analytics and monitoring setup:
-  - [ ] Verify backend logging is working (check Cloudflare Workers logs)
-  - [ ] Track conversation volume and topics via backend logs
-  - [ ] Monitor unhandled questions for knowledge base expansion
-  - [ ] Set up performance monitoring (response times, error rates via Cloudflare dashboard)
-  - [ ] Optional: Add frontend analytics (Google Analytics events, PostHog, etc.)
-- [ ] Launch and monitor:
-  - [ ] Enable chatbot on mikejones.online
-  - [ ] Monitor first 24-48 hours closely
-  - [ ] Test with real questions
-  - [ ] Collect initial feedback from visitors
-  - [ ] Fix any critical issues discovered
-  - [ ] Announce chatbot feature (social media, Fediverse, etc.)
+**Deliverables:**
+- Live chatbot at https://www.mikejones.online
+- jsDelivr CDN hosting: https://cdn.jsdelivr.net/gh/tinybiggss/MJ_Online@main/mj-chatbot-frontend/chatbot-widget.js
+- Backend API: https://mj-chatbot-backend.mejones73.workers.dev/chat
+- Comprehensive documentation: README, DEPLOYMENT, ARCHITECTURE, QA checklist
 
-**Phase 7.6.4: Enhanced Features (1-2 weeks, post-MVP launch)**
+**Key Decisions:**
+- DEC-020: Separate bottomSpacing config for independent axis control
+- DEC-021: Move chatbot widget instead of Subscribe button (Ghost Portal iframe limitations)
+- DEC-022: Use @main for jsDelivr after testing with versioned URLs
+
+**Completion Date:** 2026-02-26
+**Total Time:** 3.5 days (600% faster than 3-week estimate)
+
+---
+
+**Phase 7.6.4: Analytics & Monitoring System 🟡 IN PROGRESS (Task #12, #14, #15)**
+
+**Overview:**
+Implement comprehensive analytics system to track chatbot usage, identify knowledge gaps, monitor performance, and inform RAG knowledge base expansion. Three-tier approach: Enhanced Backend Logging → Analytics Dashboard → Ongoing Optimization.
+
+**Current State:**
+- ✅ Basic backend logging via `logConversation()` function
+- ✅ Data stored in Cloudflare KV (30-day TTL)
+- ✅ Logs capture: timestamp, question, topic, entries retrieved, response length, success
+- ❌ No analytics dashboard or visualization
+- ❌ No frontend event tracking (bubble clicks, session starts, etc.)
+- ❌ No knowledge gap analysis or performance monitoring dashboard
+
+**Tier 1: Enhanced Backend Logging (Week 1, Task #14)**
+**Agent:** Technical Research Agent (Ted) or general-purpose
+**Status:** ⏸️ Not Started
+
+**Tasks:**
+- [ ] Design expanded log schema (1 hour)
+  - Add session tracking (generate session ID, persist in localStorage)
+  - Add event types: `message_sent`, `bubble_opened`, `bubble_closed`, `suggestion_clicked`, `cta_clicked`
+  - Add performance metrics: `rag_time_ms`, `ai_time_ms`, `total_time_ms`
+  - Add knowledge gap flag: `no_rag_match: true`
+  - Add page context: `page_url`, `page_title`, `referrer`
+- [ ] Update backend `logConversation()` function (2 hours)
+  - Expand to accept new fields
+  - Ensure backward compatibility
+  - Add error logging for API failures
+- [ ] Add frontend analytics event tracking (3 hours)
+  - Create `trackEvent()` helper in chatbot-widget.js
+  - Track: bubble opened, closed, message sent, suggestion clicked
+  - Send events to backend `/analytics-event` endpoint
+  - Use session ID from localStorage
+- [ ] Test logging system (1 hour)
+  - Verify logs in Cloudflare KV
+  - Validate all event types
+  - Check schema consistency
+
+**Deliverables:**
+- `mj-chatbot-backend/src/analytics.js` - New analytics module
+- Updated `logConversation()` in `index.js`
+- Frontend `trackEvent()` function in `chatbot-widget.js`
+- `/docs/ANALYTICS-SCHEMA.md` - Log schema documentation
+
+**Tier 2: Analytics Dashboard (Week 2, Task #15)**
+**Agent:** Alice (Web Content Builder) or general-purpose
+**Status:** ⏸️ Not Started
+**Approach:** Cloudflare Workers dashboard (free, privacy-focused, self-contained)
+
+**Tasks:**
+- [ ] Create `/analytics` dashboard route (3 hours)
+  - New route in Cloudflare Worker: `/analytics`
+  - Basic HTTP auth (password from environment variable)
+  - Query KV logs: last 7 days, 30 days, all time
+- [ ] Build dashboard UI (4 hours)
+  - Single HTML page served by worker
+  - Display metrics:
+    - Total conversations (by day, week, month)
+    - Popular topics (chart/table)
+    - Knowledge gaps (questions with no RAG match)
+    - Average response time
+    - Error rate
+    - Top pages where chatbot is used
+  - Use Chart.js or similar lightweight library (CDN)
+  - Mobile responsive design
+- [ ] Add export functionality (1 hour)
+  - Export logs as CSV or JSON
+  - Download button on dashboard
+- [ ] Deploy and test (1 hour)
+  - Test with real data
+  - Verify password protection
+  - Test mobile responsiveness
+
+**Deliverables:**
+- `/analytics` route with password-protected dashboard
+- Key metrics visualization
+- CSV/JSON export functionality
+- `/docs/ANALYTICS-DASHBOARD.md` - Usage guide
+
+**Tier 3: Monitor & Iterate (Ongoing)**
+**Agent:** Morgan (PM) - coordinate with Mike
+**Status:** ⏸️ Future
+
+**Tasks:**
+- [ ] Weekly analytics review (30 min/week)
+  - Check conversation volume
+  - Identify knowledge gaps → add to RAG backlog
+  - Monitor error rates
+  - Review popular topics
+- [ ] Monthly optimization (2 hours/month)
+  - Expand knowledge base based on gaps
+  - Optimize slow queries
+  - Refine suggestion chips based on popular questions
+  - A/B test greeting messages (if volume sufficient)
+
+**Deliverables:**
+- Weekly analytics review notes
+- RAG expansion backlog
+- Optimization recommendations
+
+**Estimated Timeline:**
+- Tier 1 (Backend Logging): 1 week (7-10 hours total)
+- Tier 2 (Analytics Dashboard): 1 week (9-12 hours total)
+- Tier 3 (Ongoing): 30 min/week + 2 hours/month
+
+**Dependencies:** Chatbot live and generating data ✅
+
+**Priority:** High - Enables data-driven optimization and knowledge base expansion
+
+---
+
+**Phase 7.6.5: Enhanced Features (Future, 1-2 weeks)**
 - [ ] UX improvements:
   - [ ] Add "Learn more" links from chatbot responses to relevant pages
   - [ ] Integrate Cal.com for direct meeting scheduling from chat
@@ -3346,7 +3430,7 @@ Add an AI-powered chatbot widget that answers visitor questions about Mike's wor
   - [ ] Add more qa_pair entries for common visitor questions
   - [ ] Update knowledge base from new projects/experience
 
-**Phase 7.6.5: Self-Hosted Option (Optional, 2-3 weeks, future consideration)**
+**Phase 7.6.6: Self-Hosted Option (Optional, 2-3 weeks, future consideration)**
 - [ ] Infrastructure setup:
   - [ ] Provision VPS (can share with Ghost if self-hosted, or dedicated for chatbot)
   - [ ] Install Ollama and local LLM (Qwen 2.5:14B or similar)
@@ -3364,17 +3448,19 @@ Add an AI-powered chatbot widget that answers visitor questions about Mike's wor
 
 **Deliverables:**
 - **Phase 7.6.1 (Backend):** ✅ COMPLETE - Production-ready backend, RAG retrieval, OpenAI integration, rate limiting, full documentation
-- **Phase 7.6.2 (Frontend):** Working chat widget, mobile responsive, accessible, integrated with backend API
-- **Phase 7.6.3 (Integration & Launch):** Chatbot live on all pages, analytics tracking, monitoring in place
-- **Phase 7.6.4 (Enhanced):** Improved UX, Cal.com integration, expanded knowledge base, advanced analytics
-- **Phase 7.6.5 (Self-hosted):** Fully self-hosted chatbot with no API dependencies (optional future upgrade)
+- **Phase 7.6.2 (Frontend):** ✅ COMPLETE - Working chat widget, mobile responsive, accessible, integrated with backend API
+- **Phase 7.6.3 (Integration & Launch):** ✅ COMPLETE - Chatbot live on mikejones.online, legal compliance, proper positioning
+- **Phase 7.6.4 (Analytics & Monitoring):** 🟡 IN PROGRESS - Enhanced logging, analytics dashboard, performance monitoring
+- **Phase 7.6.5 (Enhanced Features):** Improved UX, Cal.com integration, expanded knowledge base, advanced analytics
+- **Phase 7.6.6 (Self-hosted):** Fully self-hosted chatbot with no API dependencies (optional future upgrade)
 
 **Estimated Time:**
-- Phase 7.6.1 (Backend): ✅ COMPLETE (took 1 day vs 5-7 day estimate)
-- Phase 7.6.2 (Frontend): 5-7 days
-- Phase 7.6.3 (Integration & Launch): 2-3 days
-- Phase 7.6.4 (Enhanced): 1-2 weeks
-- Phase 7.6.5 (Self-hosted): 2-3 weeks
+- Phase 7.6.1 (Backend): ✅ COMPLETE (1 day, 600% faster than estimate)
+- Phase 7.6.2 (Frontend): ✅ COMPLETE (1 day, Tasks #1-5)
+- Phase 7.6.3 (Integration & Launch): ✅ COMPLETE (3.5 days, positioning + AI labeling + deployment)
+- Phase 7.6.4 (Analytics & Monitoring): 2 weeks (in progress)
+- Phase 7.6.5 (Enhanced Features): 1-2 weeks (future)
+- Phase 7.6.6 (Self-hosted): 2-3 weeks (optional future)
 
 **Cost Estimate (Actual):**
 - Cloudflare Workers: FREE tier (100k requests/day - more than sufficient)

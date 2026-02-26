@@ -2837,9 +2837,36 @@
         "DEC-018: Use jsDelivr CDN for widget hosting (instead of inline Code Injection)",
         "DEC-019: Update AI chatbot labeling for explicit disclosure (legal compliance)"
       ]
+    },
+    {
+      "date": "2026-02-26",
+      "reason": "Analytics implementation planning for chatbot (Phase 7.6.4)",
+      "changes": [
+        "Planned three-tier analytics system: Enhanced Backend Logging → Analytics Dashboard → Ongoing Optimization",
+        "Added Phase 7.6.4 to roadmap with detailed implementation plan",
+        "Created Task #14 (Backend logging) and Task #15 (Analytics dashboard)",
+        "Created comprehensive implementation plan document at /plans/analytics-implementation-plan.md",
+        "Decided on Cloudflare Workers-based dashboard approach (free, privacy-focused)"
+      ],
+      "decisions": [
+        "DEC-023: Use Cloudflare Workers-based analytics dashboard (vs external service like Plausible or Google Analytics)",
+        "DEC-024: Implement both backend logging enhancement and dashboard in parallel phases (2 weeks total)",
+        "DEC-025: Assign Ted (backend logging) and Alice (dashboard UI) for parallel work when ready"
+      ],
+      "rationale": {
+        "DEC-023": "Cloudflare Workers dashboard keeps all data in our Cloudflare account, is free, privacy-focused, and self-contained. No external dependencies or monthly fees. Aligns with Mike's privacy-first positioning.",
+        "DEC-024": "Sequential phases (backend first, then dashboard) allows testing of enhanced logging before building visualizations. Enables data collection to start immediately.",
+        "DEC-025": "Ted's technical research expertise suits backend analytics module design. Alice's web content skills suit dashboard UI. Parallel assignment when ready maximizes velocity."
+      },
+      "next_steps": [
+        "Assign Task #14 to Ted (or general-purpose) for backend logging enhancement",
+        "Wait for Phase 1 completion and data collection",
+        "Assign Task #15 to Alice (or general-purpose) for dashboard build",
+        "Begin weekly analytics reviews once dashboard is live"
+      ]
     }
   ],
-  "current_status": "Phase 7.6 COMPLETE - Chatbot deployed to mikejones.online with legal compliance",
+  "current_status": "Phase 7.6.3 COMPLETE (Chatbot Live) + Phase 7.6.4 IN PROGRESS (Analytics Planning)",
   "last_updated": "2026-02-26",
-  "version": "1.0-live + chatbot (deployed via jsDelivr, AI labeling compliant)"
+  "version": "1.0-live + chatbot + analytics planning"
 }
