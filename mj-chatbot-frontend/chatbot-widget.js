@@ -26,13 +26,13 @@
     bottomSpacing: 120,
     desktopWidth: 400,
     desktopHeight: 600,
-    greeting: 'Hi! Ask me about Mike\'s experience and projects.',
+    greeting: 'Hi! I\'m an AI assistant here to answer questions about Mike Jones\' work, experience, and projects. Ask me about his 29 years in tech, AI implementation expertise, consulting services, or published content. What would you like to know?',
     placeholder: 'Ask me about Mike\'s work...',
     suggestedQuestions: [
-      "What has Mike worked on?",
-      "Tell me about the AI Memory System",
-      "What services does Mike offer?",
-      "How does Mike help with process optimization?",
+      "What's Mike's AI expertise?",
+      "Tell me about Velocity Partners",
+      "Mike's career highlights",
+      "What's the AI Memory System?",
       "Is Mike available for consulting?"
     ],
     debug: false
@@ -154,6 +154,35 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-size: 14px;
         line-height: 1.5;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-direction: ${CONFIG.position.includes('right') ? 'row-reverse' : 'row'};
+      }
+
+      /* ===== Bubble Label ===== */
+      .mj-chatbot-bubble-label {
+        background: white;
+        color: ${CONFIG.primaryColor};
+        padding: 10px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+        opacity: 0;
+        animation: mj-chatbot-label-slide-in 0.4s ease-out 0.5s forwards;
+      }
+
+      @keyframes mj-chatbot-label-slide-in {
+        from {
+          opacity: 0;
+          transform: translateX(${CONFIG.position.includes('right') ? '10px' : '-10px'});
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
 
       /* ===== Minimized Bubble ===== */
@@ -573,9 +602,10 @@
 
   function createMinimizedBubble() {
     return `
+      <div class="mj-chatbot-bubble-label">AI Assistant</div>
       <button
         class="mj-chatbot-bubble"
-        aria-label="Open chat with Mike Jones"
+        aria-label="Open AI assistant to ask questions about Mike Jones"
         aria-expanded="false"
         role="button"
         tabindex="0"
@@ -593,7 +623,7 @@
 
   function createExpandedWindow(messages, isTyping, rateLimitRetryAfter) {
     return `
-      <div class="mj-chatbot-window" role="dialog" aria-label="Chat with Mike Jones" aria-modal="true">
+      <div class="mj-chatbot-window" role="dialog" aria-label="AI Assistant - Ask questions about Mike Jones" aria-modal="true">
         ${createHeader()}
         ${createMessagesContainer(messages, isTyping, rateLimitRetryAfter)}
         ${createInputArea()}
@@ -604,7 +634,7 @@
   function createHeader() {
     return `
       <div class="mj-chatbot-header">
-        <h2 class="mj-chatbot-header-title">Chat with Mike</h2>
+        <h2 class="mj-chatbot-header-title">AI Assistant</h2>
         <div class="mj-chatbot-header-controls">
           <button
             class="mj-chatbot-header-button mj-chatbot-minimize"
