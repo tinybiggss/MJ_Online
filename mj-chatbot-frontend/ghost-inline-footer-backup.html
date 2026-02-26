@@ -1,0 +1,734 @@
+/* BACKUP of the Ghost Footer inline code injection before moving to GITHUB as CDN */
+<script>                                                                                          
+  /* === RESUME ANCHOR NAVIGATION - ENHANCED === */                                                 
+  document.addEventListener('DOMContentLoaded', function() {                                        
+    // Only run on resume page                                                                      
+    const resumeNav = document.querySelector('.resume-nav');                                        
+    if (!resumeNav) return;                                                                         
+                                                                                                    
+    // Map navigation links to heading text patterns                                                
+    const sectionMap = {                                                                            
+      'summary': 'Professional Summary',                                                            
+      'achievements': 'AI & Automation Achievements',                                               
+      'experience': 'Professional Experience',                                                      
+      'skills': 'Technical Skills',                                                                 
+      'education': 'Education',                                                                     
+      'publications': 'Publications',                                                               
+      'metrics': 'Key Metrics'                                                                      
+    };                                                                                              
+                                                                                                    
+    // Find all H2 headings and add IDs based on their text                                         
+    const headings = document.querySelectorAll('h2');                                               
+    headings.forEach(heading => {                                                                   
+      const headingText = heading.textContent.trim();                                               
+                                                                                                    
+      // Match heading text to section IDs                                                          
+      for (const [id, text] of Object.entries(sectionMap)) {                                        
+        if (headingText.includes(text)) {                                                           
+          heading.id = id;                                                                          
+          break;                                                                                    
+        }                                                                                           
+      }                                                                                             
+    });                                                                                             
+                                                                                                    
+    // Active state highlighting                                                                    
+    const sections = document.querySelectorAll('h2[id]');                                           
+    const navLinks = document.querySelectorAll('.resume-nav a');                                    
+                                                                                                    
+    if (sections.length === 0 || navLinks.length === 0) return;                                     
+                                                                                                    
+    window.addEventListener('scroll', () => {                                                       
+      let current = '';                                                                             
+      sections.forEach(section => {                                                                 
+        const sectionTop = section.offsetTop;                                                       
+        if (scrollY >= sectionTop - 100) {                                                          
+          current = section.getAttribute('id');                                                     
+        }                                                                                           
+      });                                                                                           
+                                                                                                    
+      navLinks.forEach(link => {                                                                    
+        link.classList.remove('active');                                                            
+        if (link.getAttribute('href').substring(1) === current) {                                   
+          link.classList.add('active');                                                             
+        }                                                                                           
+      });                                                                                           
+    });                                                                                             
+                                                                                                    
+    // Smooth scroll to section when clicking nav links                                             
+    navLinks.forEach(link => {                                                                      
+      link.addEventListener('click', function(e) {                                                  
+        e.preventDefault();                                                                         
+        const targetId = this.getAttribute('href').substring(1);                                    
+        const targetHeading = document.getElementById(targetId);                                    
+                                                                                                    
+        if (targetHeading) {                                                                        
+          // Scroll to heading with offset for sticky nav                                           
+          const navHeight = resumeNav.offsetHeight;                                                 
+          const targetPosition = targetHeading.offsetTop - navHeight - 20;                          
+                                                                                                    
+          window.scrollTo({                                                                         
+            top: targetPosition,                                                                    
+            behavior: 'smooth'                                                                      
+          });                                                                                       
+                                                                                                    
+          // Update URL without triggering scroll                                                   
+          history.pushState(null, null, '#' + targetId);                                            
+        }                                                                                           
+      });                                                                                           
+    });                                                                                             
+                                                                                                    
+    // Handle page load with hash                                                                   
+    if (window.location.hash) {                                                                     
+      setTimeout(() => {                                                                            
+        const targetId = window.location.hash.substring(1);                                         
+        const targetHeading = document.getElementById(targetId);                                    
+                                                                                                    
+        if (targetHeading) {                                                                        
+          const navHeight = resumeNav.offsetHeight;                                                 
+          const targetPosition = targetHeading.offsetTop - navHeight - 20;                          
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });                             
+        }                                                                                           
+      }, 100);                                                                                      
+    }                                                                                               
+  });                                                                                               
+  </script> 
+
+<script>                                                                                          
+  // Add Copy Buttons to Code Blocks                                                                
+  document.addEventListener('DOMContentLoaded', function() {                                        
+      const codeBlocks = document.querySelectorAll('pre code');                                     
+                                                                                                    
+      codeBlocks.forEach(function(codeBlock) {                                                      
+          const pre = codeBlock.parentElement;                                                      
+          const button = document.createElement('button');                                          
+          button.className = 'code-copy-btn';                                                       
+          button.textContent = 'Copy';                                                              
+                                                                                                    
+          button.addEventListener('click', function() {                                             
+              const code = codeBlock.textContent;                                                   
+              navigator.clipboard.writeText(code).then(function() {                                 
+                  button.textContent = 'Copied!';                                                   
+                  button.classList.add('copied');                                                   
+                  setTimeout(function() {                                                           
+                      button.textContent = 'Copy';                                                  
+                      button.classList.remove('copied');                                            
+                  }, 2000);                                                                         
+              });                                                                                   
+          });                                                                                       
+                                                                                                    
+          pre.appendChild(button);                                                                  
+      });                                                                                           
+  });                                                                                               
+                                                                                                    
+  // Track Resume Downloads                                                                         
+  document.addEventListener('DOMContentLoaded', function() {                                        
+      const resumeLinks = document.querySelectorAll('a[href*="resume"], a.resume-download-btn,      
+  a[download*="resume"]');                                                                          
+                                                                                                    
+      resumeLinks.forEach(function(link) {                                                          
+          link.addEventListener('click', function() {                                               
+              // Track in Ghost Analytics                                                           
+              if (window.plausible) {                                                               
+                  window.plausible('Resume Download');                                              
+              }                                                                                     
+              // Track in console for debugging                                                     
+              console.log('Resume download tracked:', link.href);                                   
+          });                                                                                       
+      });                                                                                           
+  });                                                                                               
+  </script>  
+
+  <!-- Social Media Links Footer -->
+<style>
+.footer-social {
+    text-align: center;
+    padding: 2rem 0 1rem 0;
+    margin-top: 2rem;
+}
+
+.footer-social-title {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.footer-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-social-link {
+    color: #00D9FF;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 217, 255, 0.1);
+}
+
+.footer-social-link:hover {
+    color: #4F46E5;
+    background: rgba(79, 70, 229, 0.1);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+    .footer-social-links {
+        gap: 1rem;
+    }
+
+    .footer-social-link {
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+    }
+}
+</style>
+
+<div class="footer-social">
+    <div class="footer-social-title">Connect</div>
+    <div class="footer-social-links">
+        <a href="https://www.linkedin.com/in/mejones73/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="footer-social-link"
+           aria-label="LinkedIn"
+           title="Connect on LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+        </a>
+
+        <a href="https://github.com/tinybiggss"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="footer-social-link"
+           aria-label="GitHub"
+           title="Follow on GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.840 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+        </a>
+
+        <a href="https://x.com/IsMikeJones"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="footer-social-link"
+           aria-label="Twitter/X"
+           title="Follow on X (Twitter)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+        </a>
+
+        <a href="https://facebook.com/mejones73"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="footer-social-link"
+           aria-label="Facebook"
+           title="Connect on Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+            </svg>
+        </a>
+
+        <a href="https://mastodon.social/@resilientTomorrow"
+           target="_blank"
+           rel="noopener me noreferrer"
+           class="footer-social-link"
+           aria-label="Mastodon"
+           title="Follow on Mastodon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+
+<script>
+// Track social media clicks
+document.querySelectorAll('.footer-social-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        var platform = this.getAttribute('aria-label');
+        if (window.gtag) {
+            gtag('event', 'social_click', {
+                'platform': platform,
+                'location': 'footer'
+            });
+        }
+        console.log('Social media click:', platform);
+    });
+});
+                                                                                                               
+<!-- MJ Chatbot Widget - Ghost Pro Version (No Template Literals) -->
+<!-- Paste this entire code block into Ghost Admin → Settings → Code Injection → Site Footer -->
+
+<style>
+  #ghost-portal-root { bottom: 120px !important; }
+</style>
+
+<script>
+(function() {
+  'use strict';
+
+  var CONFIG = {
+    apiEndpoint: 'https://mj-chatbot-backend.mejones73.workers.dev/chat',
+    rateLimitCooldown: 60000
+  };
+
+  var state = {
+    isOpen: false,
+    messages: [],
+    sessionId: localStorage.getItem('mj-chatbot-session') || generateSessionId(),
+    isLoading: false,
+    rateLimited: false,
+    rateLimitEnd: null
+  };
+
+  function generateSessionId() {
+    var id = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('mj-chatbot-session', id);
+    return id;
+  }
+
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function injectStyles() {
+    var css = '';
+    css += '.mj-chatbot-widget { position: fixed; bottom: 20px; right: 20px; z-index: 2147483647; ';
+    css += 'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; ';
+    css += 'display: flex; align-items: center; gap: 12px; }';
+
+    css += '.mj-chatbot-label { background: white; color: #2563eb; padding: 10px 16px; ';
+    css += 'border-radius: 20px; font-size: 14px; font-weight: 600; ';
+    css += 'box-shadow: 0 2px 8px rgba(0,0,0,0.1); white-space: nowrap; opacity: 0; ';
+    css += 'animation: labelSlideIn 0.4s ease-out 0.5s forwards; }';
+
+    css += '@keyframes labelSlideIn { from { opacity: 0; transform: translateX(10px); } ';
+    css += 'to { opacity: 1; transform: translateX(0); } }';
+
+    css += '.mj-chatbot-bubble { width: 60px; height: 60px; border-radius: 50%; ';
+    css += 'background: #2563eb; border: none; color: white; cursor: pointer; ';
+    css += 'box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; ';
+    css += 'justify-content: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }';
+
+    css += '.mj-chatbot-bubble:hover { background: #1e40af; ';
+    css += 'box-shadow: 0 6px 16px rgba(0,0,0,0.2); transform: scale(1.05); }';
+
+    css += '.mj-chatbot-bubble:active { transform: scale(0.95); }';
+
+    css += '.mj-chatbot-window { width: 400px; height: 600px; background: white; ';
+    css += 'border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); ';
+    css += 'display: flex; flex-direction: column; ';
+    css += 'animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1); }';
+
+    css += '@keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } ';
+    css += 'to { opacity: 1; transform: translateY(0) scale(1); } }';
+
+    css += '.mj-chatbot-header { background: #2563eb; color: white; padding: 16px; ';
+    css += 'border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }';
+
+    css += '.mj-chatbot-header-title { font-size: 16px; font-weight: 600; }';
+    css += '.mj-chatbot-header-buttons { display: flex; gap: 8px; }';
+
+    css += '.mj-chatbot-header-button { background: none; border: none; color: white; ';
+    css += 'cursor: pointer; padding: 8px; width: 44px; height: 44px; border-radius: 6px; ';
+    css += 'transition: background 0.2s; display: flex; align-items: center; justify-content: center; }';
+
+    css += '.mj-chatbot-header-button:hover { background: rgba(255,255,255,0.1); }';
+
+    css += '.mj-chatbot-messages { flex: 1; overflow-y: auto; padding: 16px; ';
+    css += 'display: flex; flex-direction: column; gap: 12px; }';
+
+    css += '.mj-chatbot-message { max-width: 80%; padding: 10px 14px; border-radius: 12px; ';
+    css += 'animation: messageAppear 0.3s ease-out; }';
+
+    css += '@keyframes messageAppear { from { opacity: 0; transform: translateY(10px); } ';
+    css += 'to { opacity: 1; transform: translateY(0); } }';
+
+    css += '.mj-chatbot-message-user { background: #2563eb; color: white; align-self: flex-end; }';
+    css += '.mj-chatbot-message-assistant { background: #f3f4f6; color: #374151; align-self: flex-start; }';
+
+    css += '.mj-chatbot-suggestions { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px; }';
+
+    css += '.mj-chatbot-suggestion { background: white; border: 1px solid #e5e7eb; ';
+    css += 'border-radius: 8px; padding: 14px 16px; cursor: pointer; font-size: 14px; color: #374151; ';
+    css += 'transition: all 0.2s; min-height: 44px; display: flex; align-items: center; }';
+
+    css += '.mj-chatbot-suggestion:hover { background: #f3f4f6; border-color: #2563eb; color: #2563eb; }';
+    css += '.mj-chatbot-suggestion:active { transform: scale(0.98); }';
+
+    css += '.mj-chatbot-input-container { padding: 16px; border-top: 1px solid #e5e7eb; ';
+    css += 'display: flex; gap: 8px; }';
+
+    css += '.mj-chatbot-input { flex: 1; border: 1px solid #e5e7eb; border-radius: 8px; ';
+    css += 'padding: 10px 12px; font-size: 14px; font-family: inherit; resize: none; ';
+    css += 'min-height: 44px; max-height: 120px; }';
+
+    css += '.mj-chatbot-input:focus { outline: 2px solid #2563eb; outline-offset: -1px; }';
+
+    css += '.mj-chatbot-send-button { background: #2563eb; border: none; border-radius: 6px; ';
+    css += 'color: white; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; ';
+    css += 'min-width: 80px; min-height: 44px; transition: all 0.2s; }';
+
+    css += '.mj-chatbot-send-button:hover:not(:disabled) { background: #1e40af; }';
+    css += '.mj-chatbot-send-button:active:not(:disabled) { transform: scale(0.98); }';
+    css += '.mj-chatbot-send-button:disabled { background: #9ca3af; cursor: not-allowed; opacity: 0.6; }';
+
+    css += '.mj-chatbot-typing { display: flex; gap: 4px; align-self: flex-start; ';
+    css += 'padding: 10px 14px; background: #f3f4f6; border-radius: 12px; }';
+
+    css += '.mj-chatbot-typing-dot { width: 8px; height: 8px; border-radius: 50%; ';
+    css += 'background: #9ca3af; animation: typingBounce 1.4s infinite; }';
+
+    css += '.mj-chatbot-typing-dot:nth-child(2) { animation-delay: 0.2s; }';
+    css += '.mj-chatbot-typing-dot:nth-child(3) { animation-delay: 0.4s; }';
+
+    css += '@keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); } ';
+    css += '30% { transform: translateY(-8px); } }';
+
+    css += '.mj-chatbot-rate-limit { background: #fef3c7; color: #92400e; ';
+    css += 'padding: 12px 16px; margin: 0 16px 16px; border-radius: 8px; ';
+    css += 'font-size: 14px; text-align: center; }';
+
+    css += '@media (max-width: 768px) {';
+    css += '.mj-chatbot-widget { flex-direction: column-reverse; align-items: flex-end; gap: 8px; }';
+    css += '.mj-chatbot-label { font-size: 12px; padding: 8px 12px; }';
+    css += '.mj-chatbot-window { width: 100vw; height: 100dvh; height: 100vh; ';
+    css += 'border-radius: 0; bottom: 0; right: 0; }';
+    css += '.mj-chatbot-header { border-radius: 0; }';
+    css += '}';
+
+    var style = document.createElement('style');
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function createBubbleView() {
+    var container = document.createElement('div');
+    container.className = 'mj-chatbot-widget';
+    container.setAttribute('lang', 'en');
+
+    var label = document.createElement('div');
+    label.className = 'mj-chatbot-label';
+    label.textContent = 'AI Assistant';
+
+    var bubble = document.createElement('button');
+    bubble.className = 'mj-chatbot-bubble';
+    bubble.setAttribute('aria-label', 'Open AI assistant to ask questions about Mike Jones');
+    bubble.setAttribute('role', 'button');
+    bubble.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>';
+
+    container.appendChild(label);
+    container.appendChild(bubble);
+
+    return container;
+  }
+
+  function createWindowView() {
+    var container = document.createElement('div');
+    container.className = 'mj-chatbot-widget';
+
+    var window = document.createElement('div');
+    window.className = 'mj-chatbot-window';
+    window.setAttribute('role', 'dialog');
+    window.setAttribute('aria-label', 'AI Assistant for Mike Jones');
+    window.setAttribute('aria-modal', 'true');
+
+    var header = document.createElement('div');
+    header.className = 'mj-chatbot-header';
+    header.innerHTML = '<div class="mj-chatbot-header-title">AI Assistant</div>' +
+      '<div class="mj-chatbot-header-buttons">' +
+      '<button class="mj-chatbot-header-button mj-chatbot-minimize" aria-label="Minimize chat">' +
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="white">' +
+      '<path d="M19 13H5v-2h14v2z"/></svg></button>' +
+      '<button class="mj-chatbot-header-button mj-chatbot-close" aria-label="Close chat">' +
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="white">' +
+      '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>' +
+      '</svg></button></div>';
+
+    var messages = document.createElement('div');
+    messages.className = 'mj-chatbot-messages';
+    messages.setAttribute('role', 'log');
+    messages.setAttribute('aria-live', 'polite');
+    messages.setAttribute('aria-label', 'Conversation messages');
+
+    if (state.messages.length === 0) {
+      var greeting = document.createElement('div');
+      greeting.className = 'mj-chatbot-message mj-chatbot-message-assistant';
+      greeting.textContent = "Hi! I'm an AI assistant here to answer questions about Mike Jones' work, experience, and projects. Ask me about his 29 years in tech, AI implementation expertise, consulting services, or published content. What would you like to know?";
+      messages.appendChild(greeting);
+    } else {
+      state.messages.forEach(function(msg) {
+        var msgDiv = document.createElement('div');
+        msgDiv.className = 'mj-chatbot-message mj-chatbot-message-' + msg.role;
+        msgDiv.innerHTML = escapeHtml(msg.content);
+        messages.appendChild(msgDiv);
+      });
+    }
+
+    window.appendChild(header);
+    window.appendChild(messages);
+
+    if (state.messages.length === 0) {
+      var suggestions = document.createElement('div');
+      suggestions.className = 'mj-chatbot-suggestions';
+
+      var suggestionsData = [
+        "What's Mike's AI expertise?",
+        'Tell me about Velocity Partners',
+        "Mike's career highlights"
+      ];
+
+      suggestionsData.forEach(function(text) {
+        var btn = document.createElement('button');
+        btn.className = 'mj-chatbot-suggestion';
+        btn.setAttribute('aria-label', 'Ask: ' + text);
+        btn.textContent = text;
+        suggestions.appendChild(btn);
+      });
+
+      window.appendChild(suggestions);
+    }
+
+    if (state.rateLimited) {
+      var rateLimit = document.createElement('div');
+      rateLimit.className = 'mj-chatbot-rate-limit';
+      rateLimit.setAttribute('role', 'alert');
+      rateLimit.textContent = 'Please wait ' + Math.ceil((state.rateLimitEnd - Date.now()) / 1000) + 's before sending another message.';
+      window.appendChild(rateLimit);
+    }
+
+    var inputContainer = document.createElement('div');
+    inputContainer.className = 'mj-chatbot-input-container';
+
+    var textarea = document.createElement('textarea');
+    textarea.className = 'mj-chatbot-input';
+    textarea.placeholder = "Ask me about Mike's work...";
+    textarea.setAttribute('aria-label', 'Type your message');
+    textarea.setAttribute('autocomplete', 'off');
+    textarea.rows = 1;
+
+    var sendButton = document.createElement('button');
+    sendButton.className = 'mj-chatbot-send-button';
+    sendButton.setAttribute('aria-label', 'Send message');
+    sendButton.textContent = state.isLoading ? 'Sending...' : 'Send';
+    if (state.isLoading) {
+      sendButton.disabled = true;
+    }
+
+    inputContainer.appendChild(textarea);
+    inputContainer.appendChild(sendButton);
+    window.appendChild(inputContainer);
+
+    container.appendChild(window);
+    return container;
+  }
+
+  function render() {
+    var existing = document.querySelector('.mj-chatbot-widget');
+    if (existing) {
+      existing.remove();
+    }
+
+    var widget = state.isOpen ? createWindowView() : createBubbleView();
+    document.body.appendChild(widget);
+    attachEventListeners();
+
+    if (state.isOpen) {
+      var input = widget.querySelector('.mj-chatbot-input');
+      if (input) {
+        setTimeout(function() { input.focus(); }, 100);
+      }
+
+      var messages = widget.querySelector('.mj-chatbot-messages');
+      if (messages) {
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+  }
+
+  function attachEventListeners() {
+    var bubble = document.querySelector('.mj-chatbot-bubble');
+    var minimize = document.querySelector('.mj-chatbot-minimize');
+    var close = document.querySelector('.mj-chatbot-close');
+    var sendButton = document.querySelector('.mj-chatbot-send-button');
+    var input = document.querySelector('.mj-chatbot-input');
+    var suggestions = document.querySelectorAll('.mj-chatbot-suggestion');
+
+    if (bubble) {
+      bubble.addEventListener('click', openChat);
+    }
+
+    if (minimize) {
+      minimize.addEventListener('click', minimizeChat);
+    }
+
+    if (close) {
+      close.addEventListener('click', closeChat);
+    }
+
+    if (sendButton) {
+      sendButton.addEventListener('click', sendMessage);
+    }
+
+    if (input) {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      input.addEventListener('input', function() {
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+      });
+    }
+
+    suggestions.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var question = btn.textContent.trim();
+        state.messages.push({ role: 'user', content: question });
+        render();
+        callAPI(question);
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && state.isOpen) {
+        closeChat();
+      }
+    });
+  }
+
+  function openChat() {
+    state.isOpen = true;
+    render();
+  }
+
+  function minimizeChat() {
+    state.isOpen = false;
+    render();
+  }
+
+  function closeChat() {
+    state.isOpen = false;
+    state.messages = [];
+    render();
+  }
+
+  function sendMessage() {
+    var input = document.querySelector('.mj-chatbot-input');
+    var message = input && input.value ? input.value.trim() : '';
+
+    if (!message || state.isLoading || state.rateLimited) {
+      return;
+    }
+
+    state.messages.push({ role: 'user', content: message });
+    input.value = '';
+    render();
+    callAPI(message);
+  }
+
+  function callAPI(message) {
+    state.isLoading = true;
+    render();
+
+    var messagesDiv = document.querySelector('.mj-chatbot-messages');
+    var typingIndicator = document.createElement('div');
+    typingIndicator.className = 'mj-chatbot-typing';
+    typingIndicator.innerHTML = '<div class="mj-chatbot-typing-dot"></div>' +
+      '<div class="mj-chatbot-typing-dot"></div>' +
+      '<div class="mj-chatbot-typing-dot"></div>';
+
+    if (messagesDiv) {
+      messagesDiv.appendChild(typingIndicator);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    fetch(CONFIG.apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Session-ID': state.sessionId
+      },
+      body: JSON.stringify({ message: message })
+    })
+    .then(function(response) {
+      if (typingIndicator && typingIndicator.parentNode) {
+        typingIndicator.remove();
+      }
+
+      if (response.status === 429) {
+        return response.json().then(function(data) {
+          state.rateLimited = true;
+          state.rateLimitEnd = Date.now() + CONFIG.rateLimitCooldown;
+
+          setTimeout(function() {
+            state.rateLimited = false;
+            render();
+          }, CONFIG.rateLimitCooldown);
+
+          render();
+        });
+      }
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
+      return response.json();
+    })
+    .then(function(data) {
+      if (data) {
+        state.messages.push({
+          role: 'assistant',
+          content: data.message || data.response || 'Sorry, I encountered an error. Please try again.'
+        });
+        state.isLoading = false;
+        render();
+      }
+    })
+    .catch(function(error) {
+      console.error('Chat error:', error);
+      if (typingIndicator && typingIndicator.parentNode) {
+        typingIndicator.remove();
+      }
+      state.messages.push({
+        role: 'assistant',
+        content: 'Sorry, there was a connection error. Please try again.'
+      });
+      state.isLoading = false;
+      render();
+    });
+  }
+
+  function init() {
+    injectStyles();
+    render();
+    console.log('[MJ Chatbot] Initialized successfully');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>

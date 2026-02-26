@@ -1,0 +1,585 @@
+<!-- MJ Chatbot Widget - Complete Inline Version for Ghost Pro -->
+<!-- Paste this entire code block into Ghost Admin → Settings → Code Injection → Site Footer -->
+
+<style>
+  /* Move Ghost Subscribe button up to avoid overlap with chatbot */
+  #ghost-portal-root {
+    bottom: 120px !important;
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+
+  const CONFIG = {
+    apiEndpoint: 'https://mj-chatbot-backend.mejones73.workers.dev/chat',
+    rateLimitCooldown: 60000
+  };
+
+  let state = {
+    isOpen: false,
+    messages: [],
+    sessionId: localStorage.getItem('mj-chatbot-session') || generateSessionId(),
+    isLoading: false,
+    rateLimited: false,
+    rateLimitEnd: null
+  };
+
+  function generateSessionId() {
+    const id = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('mj-chatbot-session', id);
+    return id;
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .mj-chatbot-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 2147483647;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .mj-chatbot-label {
+        background: white;
+        color: #2563eb;
+        padding: 10px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        white-space: nowrap;
+        opacity: 0;
+        animation: labelSlideIn 0.4s ease-out 0.5s forwards;
+      }
+      @keyframes labelSlideIn {
+        from { opacity: 0; transform: translateX(10px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .mj-chatbot-bubble {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #2563eb;
+        border: none;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .mj-chatbot-bubble:hover {
+        background: #1e40af;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        transform: scale(1.05);
+      }
+      .mj-chatbot-bubble:active { transform: scale(0.95); }
+      .mj-chatbot-window {
+        width: 400px;
+        height: 600px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .mj-chatbot-header {
+        background: #2563eb;
+        color: white;
+        padding: 16px;
+        border-radius: 12px 12px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .mj-chatbot-header-title { font-size: 16px; font-weight: 600; }
+      .mj-chatbot-header-buttons { display: flex; gap: 8px; }
+      .mj-chatbot-header-button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 8px;
+        width: 44px;
+        height: 44px;
+        border-radius: 6px;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mj-chatbot-header-button:hover { background: rgba(255,255,255,0.1); }
+      .mj-chatbot-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .mj-chatbot-message {
+        max-width: 80%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        animation: messageAppear 0.3s ease-out;
+      }
+      @keyframes messageAppear {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .mj-chatbot-message-user {
+        background: #2563eb;
+        color: white;
+        align-self: flex-end;
+      }
+      .mj-chatbot-message-assistant {
+        background: #f3f4f6;
+        color: #374151;
+        align-self: flex-start;
+      }
+      .mj-chatbot-suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0 16px 16px;
+      }
+      .mj-chatbot-suggestion {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 14px 16px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #374151;
+        transition: all 0.2s;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+      .mj-chatbot-suggestion:hover {
+        background: #f3f4f6;
+        border-color: #2563eb;
+        color: #2563eb;
+      }
+      .mj-chatbot-suggestion:active { transform: scale(0.98); }
+      .mj-chatbot-input-container {
+        padding: 16px;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        gap: 8px;
+      }
+      .mj-chatbot-input {
+        flex: 1;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-family: inherit;
+        resize: none;
+        min-height: 44px;
+        max-height: 120px;
+      }
+      .mj-chatbot-input:focus {
+        outline: 2px solid #2563eb;
+        outline-offset: -1px;
+      }
+      .mj-chatbot-send-button {
+        background: #2563eb;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        min-width: 80px;
+        min-height: 44px;
+        transition: all 0.2s;
+      }
+      .mj-chatbot-send-button:hover:not(:disabled) { background: #1e40af; }
+      .mj-chatbot-send-button:active:not(:disabled) { transform: scale(0.98); }
+      .mj-chatbot-send-button:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+      .mj-chatbot-typing {
+        display: flex;
+        gap: 4px;
+        align-self: flex-start;
+        padding: 10px 14px;
+        background: #f3f4f6;
+        border-radius: 12px;
+      }
+      .mj-chatbot-typing-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #9ca3af;
+        animation: typingBounce 1.4s infinite;
+      }
+      .mj-chatbot-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+      .mj-chatbot-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes typingBounce {
+        0%, 60%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-8px); }
+      }
+      .mj-chatbot-rate-limit {
+        background: #fef3c7;
+        color: #92400e;
+        padding: 12px 16px;
+        margin: 0 16px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        text-align: center;
+      }
+      @media (max-width: 768px) {
+        .mj-chatbot-widget {
+          flex-direction: column-reverse;
+          align-items: flex-end;
+          gap: 8px;
+        }
+        .mj-chatbot-label {
+          font-size: 12px;
+          padding: 8px 12px;
+        }
+        .mj-chatbot-window {
+          width: 100vw;
+          height: 100dvh;
+          height: 100vh;
+          border-radius: 0;
+          bottom: 0;
+          right: 0;
+        }
+        .mj-chatbot-header { border-radius: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function createBubbleView() {
+    const container = document.createElement('div');
+    container.className = 'mj-chatbot-widget';
+    container.setAttribute('lang', 'en');
+
+    const label = document.createElement('div');
+    label.className = 'mj-chatbot-label';
+    label.textContent = 'Ask the AI';
+
+    const bubble = document.createElement('button');
+    bubble.className = 'mj-chatbot-bubble';
+    bubble.setAttribute('aria-label', 'Open chat to ask questions about Mike Jones');
+    bubble.setAttribute('role', 'button');
+    bubble.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>';
+
+    container.appendChild(label);
+    container.appendChild(bubble);
+
+    return container;
+  }
+
+  function createWindowView() {
+    const container = document.createElement('div');
+    container.className = 'mj-chatbot-widget';
+
+    const window = document.createElement('div');
+    window.className = 'mj-chatbot-window';
+    window.setAttribute('role', 'dialog');
+    window.setAttribute('aria-label', 'Chat with Mike Jones');
+    window.setAttribute('aria-modal', 'true');
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'mj-chatbot-header';
+    header.innerHTML = '<div class="mj-chatbot-header-title">Chat with Mike</div><div class="mj-chatbot-header-buttons"><button class="mj-chatbot-header-button mj-chatbot-minimize" aria-label="Minimize chat"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 13H5v-2h14v2z"/></svg></button><button class="mj-chatbot-header-button mj-chatbot-close" aria-label="Close chat"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div>';
+
+    // Messages
+    const messages = document.createElement('div');
+    messages.className = 'mj-chatbot-messages';
+    messages.setAttribute('role', 'log');
+    messages.setAttribute('aria-live', 'polite');
+    messages.setAttribute('aria-label', 'Conversation messages');
+
+    if (state.messages.length === 0) {
+      const greeting = document.createElement('div');
+      greeting.className = 'mj-chatbot-message mj-chatbot-message-assistant';
+      greeting.textContent = "Hi! I'm here to help you learn about Mike's experience, projects, and consulting services. What would you like to know?";
+      messages.appendChild(greeting);
+    } else {
+      state.messages.forEach(function(msg) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'mj-chatbot-message mj-chatbot-message-' + msg.role;
+        msgDiv.innerHTML = escapeHtml(msg.content);
+        messages.appendChild(msgDiv);
+      });
+    }
+
+    window.appendChild(header);
+    window.appendChild(messages);
+
+    // Suggestions
+    if (state.messages.length === 0) {
+      const suggestions = document.createElement('div');
+      suggestions.className = 'mj-chatbot-suggestions';
+
+      const suggestions_data = [
+        'What has Mike worked on?',
+        'Tell me about Velocity Partners',
+        'How can I contact Mike?'
+      ];
+
+      suggestions_data.forEach(function(text) {
+        const btn = document.createElement('button');
+        btn.className = 'mj-chatbot-suggestion';
+        btn.setAttribute('aria-label', 'Ask: ' + text);
+        btn.textContent = text;
+        suggestions.appendChild(btn);
+      });
+
+      window.appendChild(suggestions);
+    }
+
+    // Rate limit banner
+    if (state.rateLimited) {
+      const rateLimit = document.createElement('div');
+      rateLimit.className = 'mj-chatbot-rate-limit';
+      rateLimit.setAttribute('role', 'alert');
+      rateLimit.textContent = 'Please wait ' + Math.ceil((state.rateLimitEnd - Date.now()) / 1000) + 's before sending another message.';
+      window.appendChild(rateLimit);
+    }
+
+    // Input container
+    const inputContainer = document.createElement('div');
+    inputContainer.className = 'mj-chatbot-input-container';
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'mj-chatbot-input';
+    textarea.placeholder = "Ask me about Mike's work...";
+    textarea.setAttribute('aria-label', 'Type your message');
+    textarea.setAttribute('autocomplete', 'off');
+    textarea.rows = 1;
+
+    const sendButton = document.createElement('button');
+    sendButton.className = 'mj-chatbot-send-button';
+    sendButton.setAttribute('aria-label', 'Send message');
+    sendButton.textContent = state.isLoading ? 'Sending...' : 'Send';
+    if (state.isLoading) {
+      sendButton.disabled = true;
+    }
+
+    inputContainer.appendChild(textarea);
+    inputContainer.appendChild(sendButton);
+    window.appendChild(inputContainer);
+
+    container.appendChild(window);
+    return container;
+  }
+
+  function render() {
+    const existing = document.querySelector('.mj-chatbot-widget');
+    if (existing) {
+      existing.remove();
+    }
+
+    const widget = state.isOpen ? createWindowView() : createBubbleView();
+    document.body.appendChild(widget);
+    attachEventListeners();
+
+    if (state.isOpen) {
+      const input = widget.querySelector('.mj-chatbot-input');
+      if (input) {
+        setTimeout(function() { input.focus(); }, 100);
+      }
+
+      const messages = widget.querySelector('.mj-chatbot-messages');
+      if (messages) {
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+  }
+
+  function attachEventListeners() {
+    const bubble = document.querySelector('.mj-chatbot-bubble');
+    const minimize = document.querySelector('.mj-chatbot-minimize');
+    const close = document.querySelector('.mj-chatbot-close');
+    const sendButton = document.querySelector('.mj-chatbot-send-button');
+    const input = document.querySelector('.mj-chatbot-input');
+    const suggestions = document.querySelectorAll('.mj-chatbot-suggestion');
+
+    if (bubble) {
+      bubble.addEventListener('click', openChat);
+    }
+
+    if (minimize) {
+      minimize.addEventListener('click', minimizeChat);
+    }
+
+    if (close) {
+      close.addEventListener('click', closeChat);
+    }
+
+    if (sendButton) {
+      sendButton.addEventListener('click', sendMessage);
+    }
+
+    if (input) {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      input.addEventListener('input', function() {
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+      });
+    }
+
+    suggestions.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const question = btn.textContent.trim();
+        state.messages.push({ role: 'user', content: question });
+        render();
+        callAPI(question);
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && state.isOpen) {
+        closeChat();
+      }
+    });
+  }
+
+  function openChat() {
+    state.isOpen = true;
+    render();
+  }
+
+  function minimizeChat() {
+    state.isOpen = false;
+    render();
+  }
+
+  function closeChat() {
+    state.isOpen = false;
+    state.messages = [];
+    render();
+  }
+
+  function sendMessage() {
+    const input = document.querySelector('.mj-chatbot-input');
+    const message = input && input.value ? input.value.trim() : '';
+
+    if (!message || state.isLoading || state.rateLimited) {
+      return;
+    }
+
+    state.messages.push({ role: 'user', content: message });
+    input.value = '';
+    render();
+    callAPI(message);
+  }
+
+  function callAPI(message) {
+    state.isLoading = true;
+    render();
+
+    const messagesDiv = document.querySelector('.mj-chatbot-messages');
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'mj-chatbot-typing';
+    typingIndicator.innerHTML = '<div class="mj-chatbot-typing-dot"></div><div class="mj-chatbot-typing-dot"></div><div class="mj-chatbot-typing-dot"></div>';
+    if (messagesDiv) {
+      messagesDiv.appendChild(typingIndicator);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    fetch(CONFIG.apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Session-ID': state.sessionId
+      },
+      body: JSON.stringify({ message: message })
+    })
+    .then(function(response) {
+      if (typingIndicator && typingIndicator.parentNode) {
+        typingIndicator.remove();
+      }
+
+      if (response.status === 429) {
+        return response.json().then(function(data) {
+          state.rateLimited = true;
+          state.rateLimitEnd = Date.now() + CONFIG.rateLimitCooldown;
+
+          setTimeout(function() {
+            state.rateLimited = false;
+            render();
+          }, CONFIG.rateLimitCooldown);
+
+          render();
+        });
+      }
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
+      return response.json();
+    })
+    .then(function(data) {
+      if (data) {
+        state.messages.push({
+          role: 'assistant',
+          content: data.message || data.response || 'Sorry, I encountered an error. Please try again.'
+        });
+        state.isLoading = false;
+        render();
+      }
+    })
+    .catch(function(error) {
+      console.error('Chat error:', error);
+      if (typingIndicator && typingIndicator.parentNode) {
+        typingIndicator.remove();
+      }
+      state.messages.push({
+        role: 'assistant',
+        content: 'Sorry, there was a connection error. Please try again.'
+      });
+      state.isLoading = false;
+      render();
+    });
+  }
+
+  function init() {
+    injectStyles();
+    render();
+    console.log('[MJ Chatbot] Initialized successfully');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
