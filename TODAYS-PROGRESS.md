@@ -329,7 +329,154 @@
 
 ---
 
-**Last Updated:** 2026-02-26
-**Session Duration:** ~3 hours (troubleshooting + research + documentation)
-**Outcome:** Deployment solution found, documented, and ready for production
+---
+
+## 🔧 Additional Session: Z-Index Positioning & AI Labeling Implementation
+
+**Time:** ~1.5 hours (live site troubleshooting + implementation)
+**Focus:** Subscribe button overlap fix, AI labeling compliance implementation
+
+### Issue: Subscribe Button Covering Chatbot
+
+**Problem:** After deploying to live site, Ghost Portal Subscribe button positioned over chatbot bubble, making it unclickable.
+
+**Initial Approach - Move Subscribe Button UP:**
+- Added CSS to Ghost Code Injection: `#ghost-portal-root { bottom: 120px !important; }`
+- Increased to 150px, 180px, 200px, 220px - **NO EFFECT**
+- Hard refresh, cache clear, incognito window - Subscribe button stayed in same position
+- Investigation: Subscribe button inside iframe with inline styles overriding external CSS
+
+**Root Cause:**
+- Ghost Portal (Subscribe button) renders in iframe with inline styles
+- External CSS from Code Injection cannot override iframe inline styles
+- `!important` rule ineffective against inline iframe styles
+
+**Pivot - Move Chatbot UP Instead:**
+
+**Attempt #1: Increase `spacing` config from 20px to 100px**
+- Result: Moved chatbot 100px from BOTH bottom AND right edges
+- Made problem WORSE - chatbot moved further UNDER Subscribe button
+- Why: `spacing` controls distance from both edges
+
+**Attempt #2: Separate `bottomSpacing` config**
+- Added `bottomSpacing: 120` to CONFIG
+- Modified CSS: `bottom: ${CONFIG.bottomSpacing || CONFIG.spacing}px`
+- Final position: `right: 20px` (at edge), `bottom: 120px` (above Subscribe button)
+- Result: ✅ SUCCESS - chatbot fully accessible, Subscribe button clear
+
+**Commits:**
+1. `1421566` - First attempt (spacing: 100) - incorrect approach
+2. `f55bd3d` - Final fix (bottomSpacing: 120, spacing: 20)
+
+---
+
+### Implementation: AI Labeling Compliance (DEC-019)
+
+**Status:** Research complete (documented in PHASE-7.6-DEPLOYMENT-COMPLETE.md), now implemented in code
+
+**Changes Made:**
+
+**1. Visible "AI Assistant" Label:**
+- Added `<div class="mj-chatbot-bubble-label">AI Assistant</div>` next to bubble
+- CSS: White background, blue text, slides in from right with 0.5s delay
+- Positioned left of bubble (flexbox row-reverse)
+
+**2. Updated Header:**
+- "Chat with Mike" → **"AI Assistant"**
+- Clear indication this is AI, not human support
+
+**3. Explicit AI Disclosure in Greeting:**
+- Old: "Hi! Ask me about Mike's experience and projects."
+- **New:** "Hi! I'm an AI assistant here to answer questions about Mike Jones' work, experience, and projects. Ask me about his 29 years in tech, AI implementation expertise, consulting services, or published content. What would you like to know?"
+- Explicitly states "I'm an AI assistant"
+- Lists specific capabilities
+- Includes call to action
+
+**4. Updated Suggestion Chips:**
+- "What has Mike worked on?" → **"What's Mike's AI expertise?"**
+- "Tell me about the AI Memory System" → **"Tell me about Velocity Partners"**
+- "How does Mike help with process optimization?" → **"Mike's career highlights"**
+- More specific, relevant questions
+
+**5. ARIA Label Updates:**
+- "Open chat with Mike Jones" → **"Open AI assistant to ask questions about Mike Jones"**
+- Clearly identifies as AI for screen reader users
+
+**Legal Compliance Achieved:**
+- ✅ FTC "don't mislead users" requirement
+- ✅ California SB-243 disclosure requirement
+- ✅ Utah chatbot law (disclose AI when asked)
+- ✅ Colorado AI disclosure requirement
+- ✅ Industry best practices (transparency, clarity)
+
+**Commit:**
+- `5dc5de7` - Implement AI labeling compliance (FTC, CA/UT/CO state laws)
+
+---
+
+### Deployment Process Improvements
+
+**jsDelivr Cache Management:**
+- Initial approach: Use versioned URLs (`@1421566`, `@f55bd3d`, `@5dc5de7`)
+- Forces fresh CDN fetch, bypasses all caches
+- Useful for testing changes immediately
+
+**Final Approach:**
+- Switched to `@main` for automatic updates
+- Future changes auto-deploy after cache clears (~5-10 min)
+- Can manually purge: `https://purge.jsdelivr.net/gh/tinybiggss/MJ_Online@main/mj-chatbot-frontend/chatbot-widget.js`
+
+---
+
+## 📊 Updated Metrics
+
+**Total Phase 7.6 Time:**
+- Backend (Phase 7.6.1): 1 day
+- Frontend (Phase 7.6.2 Tasks 1-5): 1 day
+- Testing & Polish (Tasks 6-10): 1 day (2026-02-25)
+- Deployment troubleshooting (jsDelivr solution): 2 hours (2026-02-26 morning)
+- Positioning + AI labeling implementation: 1.5 hours (2026-02-26 afternoon)
+- **Total: 3.5 days** (vs 15-21 day estimate) - **600% acceleration**
+
+**Live Site Status:**
+- ✅ Chatbot deployed to mikejones.online
+- ✅ jsDelivr CDN serving chatbot-widget.js from GitHub
+- ✅ Positioned correctly (bottom: 120px, right: 20px)
+- ✅ AI disclosure label visible and compliant
+- ✅ Legal compliance achieved (FTC + CA/UT/CO)
+- ✅ Fully accessible and clickable
+
+---
+
+## 📁 Additional Files Modified
+
+**Widget Code:**
+- mj-chatbot-frontend/chatbot-widget.js (3 commits: positioning fixes + AI labeling)
+
+**Git Commits Today:**
+1. `22e4f98` - RAG updates and deployment documentation
+2. `1421566` - Move chatbot widget higher (initial attempt)
+3. `f55bd3d` - Fix chatbot positioning with separate bottom/right spacing
+4. `5dc5de7` - Implement AI labeling compliance
+
+---
+
+## 🎯 Final Success Checklist
+
+✅ Ghost Code Injection working (jsDelivr CDN approach)
+✅ Repository made public (jsDelivr compatibility)
+✅ Subscribe button overlap resolved (separate bottomSpacing config)
+✅ AI Assistant label visible and animated
+✅ Legal-compliant AI disclosure messaging
+✅ Suggestion chips updated
+✅ ARIA labels updated for accessibility
+✅ Chatbot fully functional on live site
+✅ Using @main for automatic updates
+✅ Comprehensive documentation complete
+
+---
+
+**Last Updated:** 2026-02-26 (afternoon session)
+**Total Session Time Today:** ~4.5 hours (deployment + positioning + AI labeling + documentation)
+**Final Status:** Phase 7.6 COMPLETE - Chatbot live on mikejones.online with full legal compliance
 
