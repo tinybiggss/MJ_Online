@@ -23,7 +23,7 @@
     secondaryColor: '#1e40af',
     bubbleSize: 60,
     spacing: 20,
-    bottomSpacing: 120,
+    bottomSpacing: 140,
     desktopWidth: 400,
     desktopHeight: 600,
     greeting: 'Hi! I\'m an AI assistant here to answer questions about Mike Jones\' work, experience, and projects. Ask me about his 29 years in tech, AI implementation expertise, consulting services, or published content. What would you like to know?',
@@ -201,7 +201,7 @@
         position: fixed;
         ${CONFIG.position.includes('right') ? 'right' : 'left'}: ${CONFIG.spacing}px;
         ${CONFIG.position.includes('bottom') ? 'bottom' : 'top'}: ${CONFIG.bottomSpacing || CONFIG.spacing}px;
-        z-index: 999999;
+        z-index: 1000000;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-size: 14px;
         line-height: 1.5;
