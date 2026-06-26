@@ -100,6 +100,7 @@ export const projects: Project[] = [
     blurb:
       "A persistent personal AI agent — semantic memory on local Ollama embeddings, hybrid Python + LLM execution, and cron-driven daily briefings. Privacy-first, runs on a Mac Mini.",
     tags: ["Agent orchestration", "Local embeddings", "Python", "Memory design"],
+    img: "/img/projects/corvus.jpg",
     featured: true,
   },
   {

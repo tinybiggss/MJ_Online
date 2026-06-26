@@ -92,7 +92,7 @@ const hadError = Astro.url.searchParams.get("error") === "1";
     <ul>
       {ventures.map((v) => (
         <li>
-          <a href={v.href} target="_blank" rel="noopener noreferrer" class="group grid grid-cols-1 gap-2 border-b border-field-line py-6 transition-colors hover:bg-field-panel/60 md:grid-cols-[0.9fr_1.6fr_auto] md:items-baseline md:gap-8">
+          <a href={v.href} target="_blank" rel="noopener noreferrer" class="group grid grid-cols-1 gap-2 border-b border-field-line py-6 transition-colors hover:bg-field-panel/60 md:grid-cols-[0.9fr_1.6fr_0.5fr] md:items-baseline md:gap-8">
             <h3 class="font-display text-lg font-bold tracking-tight transition-colors group-hover:text-signal">{v.name}</h3>
             <p class="text-sm text-field-muted">{v.tagline}</p>
             <span class="text-sm text-field-muted md:text-right">{v.role}</span>
