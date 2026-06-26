@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+# Canonicalize on the apex: send www → mikejones.online (preserves path)
+https://www.mikejones.online/* https://mikejones.online/:splat 301
