@@ -58,8 +58,8 @@ export const ventures = [
     role: "Publishing",
     tagline: "Practical resilience for people exiting the default.",
     description:
-      "A publication and growing community on building parallel systems — 1,000+ subscribers, organized around a 7 Pillars framework. Top essay: \"7 Steps to Quietly Exit a System\" (1,000+ likes).",
-    status: "1,000+ subscribers",
+      "A publication and growing community on building parallel systems — 2,100+ subscribers, organized around a 7 Pillars framework. Top essay: \"7 Steps to Quietly Exit a System\" (1,000+ likes).",
+    status: "2,100+ subscribers",
     accent: "forest",
     href: "https://resilient-tomorrow.com",
   },
@@ -69,7 +69,7 @@ export const ventures = [
     role: "Product",
     tagline: "Your career, as an interactive AI.",
     description:
-      "An AI SaaS that turns your career documents into a chatbot that fields recruiter and hiring-manager questions. The assistant on this very page is powered by it.",
+      "An AI SaaS that turns your career into an interactive chatbot — a way for a recruiter or hiring manager to get to know you before the first call. It grew out of my own frustration with a portfolio that buried the answers people actually wanted. The assistant on this page is powered by it.",
     status: "Heading to Product Hunt",
     accent: "cyan",
     href: "https://distills.app",
@@ -106,7 +106,7 @@ export const projects: Project[] = [
     name: "AI Memory System",
     group: "AI Systems & Agents",
     blurb:
-      "A cross-AI, JSONL-based memory layer that gives Claude, ChatGPT, and local models shared, persistent context across tools.",
+      "A cross-AI JSONL memory layer I built because no tool had one — Claude had no persistent memory, ChatGPT's couldn't be exported, my local model's couldn't be reached. A shared ledger (plus a validation agent) gives all three persistent, shared context.",
     tags: ["RAG", "JSONL", "Context engineering"],
     img: "/img/projects/offline-ai-workflow.png",
     diagram: true,
@@ -161,7 +161,7 @@ export const projects: Project[] = [
     name: "NeighborhoodShare",
     group: "Community & Real-World",
     blurb:
-      "A neighbor-to-neighbor tool-sharing platform — AI-assisted cataloging, 170 users across 20 communities, now pivoting to library partnerships for distribution.",
+      "A neighbor-to-neighbor tool-sharing platform — snap a photo and AI catalogs the tool down to brand and model. It reached 170 users across 20 communities before I wound it down: tool-sharing proved too infrequent to stay top-of-mind. I'm folding the idea into a larger, multi-purpose community platform.",
     tags: ["React", "GPT-4o Vision", "Go-to-market"],
     img: "/img/projects/neighborhoodshare-home.png",
   },
