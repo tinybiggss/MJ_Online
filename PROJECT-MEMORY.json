@@ -3,11 +3,11 @@
     "name": "MJ_Online",
     "full_name": "MikeJones.online - Personal Website & Portfolio",
     "tagline": "AI Implementation Expert Portfolio with RAG Knowledge Base and Multi-Agent Coordination",
-    "status": "Phase 7.6 COMPLETE - Chatbot Deployed (External CDN Hosting)",
+    "status": "Phase 8 IN PROGRESS - Rebuilding off Ghost as self-hosted Astro site ('Field' design) for Cloudflare Pages",
     "start_date": "2026-01-28",
-    "current_date": "2026-02-26",
+    "current_date": "2026-06-25",
     "domain": "MikeJones.online",
-    "platform": "Ghost Pro (Managed Hosting)",
+    "platform": "Migrating: Ghost Pro → self-hosted static (Astro) on Cloudflare Pages",
     "theme": "Kyoto (Premium)",
     "repository": "/Users/michaeljones/Dev/MJ_Online",
     "version": "1.0-live + chatbot (deployed via jsDelivr)"
@@ -2455,6 +2455,22 @@
   },
   "update_history": [
     {
+      "date": "2026-06-25",
+      "reason": "Ghost → self-hosted rebuild on new 'Field' design direction (Phase 8)",
+      "changes": [
+        "Decided to migrate MikeJones.online off Ghost Pro to a self-hosted static site on Cloudflare Pages (drop Ghost subscription)",
+        "Ran a 3-direction design bake-off (Signal/Operator/Groundwork); all rejected as saturated 'AI-lane' reflexes per impeccable design skill",
+        "Selected Direction D 'Field': matte near-black, single signal-amber accent, Cabinet Grotesk + Satoshi, duotone portrait; no shader/gradient-text/mono",
+        "Installed impeccable design skill; wrote PRODUCT.md (register=brand, audience=consulting execs, voice=confident/technical/grounded, AA accessibility)",
+        "Built new Astro 7 + React + Tailwind v4 site in /site: Home, About, Work, Writing, Resume, Contact, 404 on a shared FieldLayout",
+        "Integrated Resilient Tomorrow Substack RSS (resilienttomorrow.substack.com/feed) fetched at build time on Home + Writing pages",
+        "Added projects from Obsidian deep-walk: Corvus (agent), AI+ADHD framework, Apollo media server, Mission Control, Local Voice Control, Home Solar, Agent Executive Suite",
+        "Chatbot: existing custom widget wired as placeholder via swappable ChatbotSlot; to be replaced by Distills career-bot embed when provided",
+        "Added @astrojs/sitemap, robots.txt, _headers (security + caching) for Cloudflare Pages; production build green (7 pages)",
+        "Corrected facts site-wide: GHN = Get Hired Now Academy; Connectioning is advisory-only (kept off site); experience = 29 years"
+      ]
+    },
+    {
       "date": "2026-02-13",
       "reason": "Major update: Feb 11-12 work completed (Phases 3.0.7-3.0.16)",
       "changes": [
@@ -2910,7 +2926,7 @@
       ]
     }
   ],
-  "current_status": "Phase 7.6.4 Tiers 1 & 2 COMPLETE - Pending deployment to Cloudflare Workers",
-  "last_updated": "2026-02-26",
-  "version": "1.0-live + chatbot + analytics (pending deploy)"
+  "current_status": "Phase 8 IN PROGRESS - New Astro 'Field' site built (Home/About/Work/Writing/Resume/Contact/404) with Substack RSS; pending Cloudflare Pages deploy, domain cutover, Distills chatbot embed, and Ghost cancellation",
+  "last_updated": "2026-06-25",
+  "version": "2.0-field (Astro static, pre-deploy)"
 }

@@ -1,0 +1,17 @@
+# Cloudflare Pages headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+# Long-cache fingerprinted build assets
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images can cache for a week
+/img/*
+  Cache-Control: public, max-age=604800

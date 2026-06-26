@@ -1,0 +1,15 @@
+---
+import FieldLayout from "../layouts/FieldLayout.astro";
+---
+
+<FieldLayout title="Not found — Mike Jones">
+  <section class="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-6 py-24 text-center">
+    <p class="font-display text-7xl font-extrabold tracking-tight text-signal">404</p>
+    <h1 class="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl">This page didn't hold up.</h1>
+    <p class="mt-4 max-w-md text-field-muted">The link is broken or the page moved. Let's get you back to something that works.</p>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href="/" class="rounded-md bg-signal px-6 py-3 text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep">Back home</a>
+      <a href="/work" class="rounded-md border border-field-line px-6 py-3 text-sm font-medium text-field-ink transition-colors hover:border-signal hover:text-signal">See the work</a>
+    </div>
+  </section>
+</FieldLayout>

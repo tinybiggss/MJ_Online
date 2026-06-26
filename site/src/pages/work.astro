@@ -1,0 +1,66 @@
+---
+import FieldLayout from "../layouts/FieldLayout.astro";
+import { ventures, projects, projectGroups } from "../lib/content";
+---
+
+<FieldLayout title="Work — Mike Jones" active="/work">
+  <!-- HEADER -->
+  <section class="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="reveal font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.0] tracking-[-0.03em] text-balance">
+      The work.
+    </h1>
+    <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-field-muted" style="animation-delay:.08s">
+      Four ventures you can engage, and the systems behind them. I build what I recommend — these are real, running, and most of them I use every day.
+    </p>
+  </section>
+
+  <!-- VENTURES -->
+  <section class="mx-auto max-w-6xl px-6 pb-8">
+    <h2 class="mb-6 border-b border-field-line pb-4 font-display text-2xl font-bold tracking-tight">Ventures — ways to engage</h2>
+    <div class="grid gap-5 sm:grid-cols-2">
+      {ventures.map((v) => (
+        <a href={v.href} target="_blank" rel="noopener noreferrer" class="group flex flex-col rounded-xl border border-field-line bg-field-panel p-6 transition-colors hover:border-signal">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-xs font-semibold text-signal">{v.role}</span>
+            <span class="text-xs text-field-faint">{v.status}</span>
+          </div>
+          <h3 class="mt-3 font-display text-xl font-bold tracking-tight transition-colors group-hover:text-signal">{v.name}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-field-muted">{v.tagline}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm text-field-muted transition-colors group-hover:text-signal">Visit <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- PROJECTS BY GROUP -->
+  {projectGroups.map((group) => (
+    <section class="mx-auto max-w-6xl px-6 py-10">
+      <h2 class="mb-2 border-b border-field-line pb-4 font-display text-2xl font-bold tracking-tight">{group}</h2>
+      <div class="grid gap-x-10 gap-y-10 py-4 md:grid-cols-2">
+        {projects.filter((p) => p.group === group).map((p) => (
+          <article class="flex flex-col">
+            {p.img && (
+              <div class:list={["mb-5 aspect-[16/9] overflow-hidden rounded-lg border border-field-line", p.diagram ? "bg-white p-3" : "bg-field-panel"]}>
+                <img src={p.img} alt={p.name} loading="lazy" class:list={["h-full w-full", p.diagram ? "object-contain" : "object-cover"]} />
+              </div>
+            )}
+            <h3 class="font-display text-xl font-bold tracking-tight">{p.name}</h3>
+            <p class="mt-2 max-w-xl text-sm leading-relaxed text-field-muted">{p.blurb}</p>
+            <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-field-faint">
+              {p.tags.map((t) => <span>{t}</span>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-5xl px-6 py-20">
+    <div class="rounded-2xl border border-field-line bg-field-panel px-8 py-14 text-center">
+      <h2 class="font-display text-3xl font-extrabold tracking-tight md:text-4xl text-balance">Want something like this inside your org?</h2>
+      <p class="mx-auto mt-4 max-w-lg text-field-muted">That's exactly what Velocity Partners does.</p>
+      <a href="/contact" class="mt-7 inline-block rounded-md bg-signal px-6 py-3 text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep">Start a conversation</a>
+    </div>
+  </section>
+</FieldLayout>

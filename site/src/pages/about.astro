@@ -1,0 +1,113 @@
+---
+import FieldLayout from "../layouts/FieldLayout.astro";
+import { identity, career, adhd } from "../lib/content";
+
+const principles = [
+  {
+    title: "Systems over heroics",
+    body: "The win isn't a clever demo — it's a process that keeps working after the excitement fades. I design for the day-to-day, not the keynote.",
+  },
+  {
+    title: "Practice what I preach",
+    body: "I run my own life on the tools I recommend: a local AI stack, a personal agent, a self-hosted everything. I won't sell what I haven't shipped.",
+  },
+  {
+    title: "Autonomy as the goal",
+    body: "Whether it's an org or a household, the point is to leave people more capable and less dependent — not more locked in.",
+  },
+];
+---
+
+<FieldLayout title="About — Mike Jones" active="/about">
+  <!-- INTRO -->
+  <section class="mx-auto grid max-w-6xl items-start gap-12 px-6 pt-16 pb-20 md:grid-cols-[1.3fr_0.7fr] md:pt-24">
+    <div>
+      <h1 class="reveal font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.0] tracking-[-0.03em] text-balance">
+        Twenty-nine years of building systems that hold.
+      </h1>
+      <div class="reveal mt-8 space-y-5 text-lg leading-relaxed text-field-muted" style="animation-delay:.08s">
+        <p>
+          I started in tech in 1997 and never stopped shipping. I helped launch the original Xbox and Xbox 360, led teams through six AAA game launches, and hold a patent from the Xbox SDK. I've run organizations of 120+ people and budgets north of $12M, in roles from director to co-founder.
+        </p>
+        <p>
+          The through-line was never a single technology — it was systems thinking. How do you take something fast, messy, and new, and turn it into something a team can depend on? That question took me from console launches to connected hardware (a CES Innovation Award at Kinoo) to a Web3 startup I co-founded, and finally to where the question is most alive today: <span class="text-field-ink">artificial intelligence.</span>
+        </p>
+        <p>
+          Since 2022 I've gone deep — not as a researcher training models, but as an implementer making them useful. I built a local LLM stack, a cross-AI memory system, and a personal agent that runs my days. Now, through <span class="text-field-ink">Velocity Partners</span>, I help organizations do the same: move AI from impressive to dependable.
+        </p>
+      </div>
+    </div>
+    <figure class="portrait relative overflow-hidden rounded-xl ring-1 ring-field-line">
+      <img src="/img/headshot-sweat.png" alt="Mike Jones" />
+      <span class="tint" aria-hidden="true"></span>
+      <span class="vignette" aria-hidden="true"></span>
+    </figure>
+  </section>
+
+  <!-- THROUGH-LINE -->
+  <section class="border-y border-field-line bg-field-panel">
+    <div class="mx-auto max-w-4xl px-6 py-20">
+      <p class="font-display text-2xl font-medium leading-[1.35] tracking-tight md:text-[1.9rem]">
+        Everything I do points at one idea: helping people and organizations operate at the intersection of
+        <span class="text-signal">AI, autonomy, and resilience</span> — more capable, less dependent, standing on their own.
+      </p>
+    </div>
+  </section>
+
+  <!-- AI + ADHD -->
+  <section id="adhd" class="mx-auto max-w-4xl px-6 py-24 scroll-mt-24">
+    <p class="font-display text-sm font-bold uppercase tracking-wide text-signal">{adhd.title}</p>
+    <h2 class="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">{adhd.lead}</h2>
+    <div class="mt-6 space-y-5 leading-relaxed text-field-muted">
+      <p>{adhd.body}</p>
+      <p>
+        I have an ADHD brain, and for most of my career I compensated with sheer effort. AI changed that. The same implementation skills I bring to organizations — externalize memory, make state visible, reduce friction between intention and action — turn out to be exactly what an ADHD brain needs. It's resilience at the scale of a single mind, and it's becoming a framework I want to teach.
+      </p>
+    </div>
+    <div class="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-sm text-field-faint">
+      {adhd.tags.map((t) => <span>{t}</span>)}
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="border-y border-field-line bg-field-panel">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+      <h2 class="mb-10 font-display text-3xl font-bold tracking-tight md:text-4xl">How I work</h2>
+      <div class="grid gap-x-10 gap-y-10 md:grid-cols-3">
+        {principles.map((p) => (
+          <div>
+            <h3 class="font-display text-xl font-bold tracking-tight text-field-ink">{p.title}</h3>
+            <p class="mt-3 leading-relaxed text-field-muted">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER SNAPSHOT -->
+  <section class="mx-auto max-w-4xl px-6 py-24">
+    <div class="mb-10 flex items-end justify-between gap-6 border-b border-field-line pb-6">
+      <h2 class="font-display text-3xl font-bold tracking-tight md:text-4xl">The short version</h2>
+      <a href="/resume" class="shrink-0 text-sm font-medium text-field-muted transition-colors hover:text-signal">Full résumé →</a>
+    </div>
+    <ol>
+      {career.map((c) => (
+        <li class="grid grid-cols-1 gap-1 border-b border-field-line py-5 sm:grid-cols-[110px_1fr] sm:gap-6">
+          <span class="text-signal">{c.years}</span>
+          <span><span class="font-medium text-field-ink">{c.org}</span> — <span class="text-field-muted">{c.what}</span></span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-5xl px-6 pb-24">
+    <div class="rounded-2xl border border-field-line bg-field-panel px-8 py-14 text-center">
+      <h2 class="font-display text-3xl font-extrabold tracking-tight md:text-4xl text-balance">Let's build something that holds.</h2>
+      <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/contact" class="min-w-[200px] rounded-md bg-signal px-6 py-3 text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep">Start a conversation</a>
+        <a href="/work" class="min-w-[200px] rounded-md border border-field-line px-6 py-3 text-sm font-medium text-field-ink transition-colors hover:border-signal hover:text-signal">See the work</a>
+      </div>
+    </div>
+  </section>
+</FieldLayout>

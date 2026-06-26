@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/*
+  MikeJones.online — "Field" design system
+  ----------------------------------------
+  Instrument-panel-at-dusk: a true near-black surface, one committed
+  signal-amber accent, Cabinet Grotesk (display) + Satoshi (body).
+  See PRODUCT.md for strategy. Tailwind v4 reads @theme and generates
+  utilities (bg-field-bg, text-signal, font-display, ...).
+*/
+@theme {
+  /* Surface + ink */
+  --color-field-bg: #0a0a0b;      /* true near-black, chroma 0 */
+  --color-field-panel: #141416;   /* raised surface */
+  --color-field-panel-2: #1b1b1e; /* second raised step */
+  --color-field-line: #262629;    /* hairline */
+  --color-field-ink: #f4f2ee;     /* primary text */
+  --color-field-muted: #a3a09a;   /* secondary text (AA on field-bg) */
+  --color-field-faint: #8a8780;   /* tertiary / metadata — ~5.5:1 on field-bg (WCAG AA) */
+
+  /* Committed accent */
+  --color-signal: #f59433;        /* signal-amber */
+  --color-signal-deep: #c2641a;   /* pressed / darker */
+  --color-danger: #f2685a;        /* form validation errors (distinct from amber) */
+
+  /* Typography — chosen off impeccable's reflex-reject list */
+  --font-display: "Cabinet Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Motion */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-signal) 35%, transparent);
+  color: var(--color-field-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Duotone portrait: grayscale base + amber hue tint + vignette bleed into the page */
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(1) contrast(1.08) brightness(0.92);
+}
+.portrait .tint {
+  position: absolute;
+  inset: 0;
+  background: var(--color-signal);
+  mix-blend-mode: color;
+  opacity: 0.45;
+}
+.portrait .vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 20%, transparent 45%, rgba(10, 10, 11, 0.55) 100%),
+    linear-gradient(180deg, transparent 70%, var(--color-field-bg) 100%);
+}
+
+/* Page-load reveal — enhances already-laid-out content (load-time, not scroll-gated) */
+.reveal {
+  animation: var(--animate-fade-up);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; }
+}

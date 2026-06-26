@@ -1,0 +1,52 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Tailwind classes applied to <body> — sets per-direction background/text. */
+  bodyClass?: string;
+  /** Which Google font families to load. */
+  fonts?: ("sans" | "mono" | "serif")[];
+}
+
+const {
+  title = "Mike Jones — AI Implementation Expert",
+  description = "Mike Jones helps people and organizations operate at the intersection of AI, autonomy, and resilience. 29 years building systems that ship.",
+  bodyClass = "bg-field-bg text-field-ink font-body antialiased",
+  fonts = [],
+} = Astro.props;
+
+// Build a single Google Fonts request for the families this page needs.
+const families: Record<string, string> = {
+  sans: "Inter:wght@300;400;500;600;700;800;900",
+  mono: "JetBrains+Mono:wght@400;500;600;700",
+  serif: "Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700",
+};
+const fontParam = fonts.map((f) => `family=${families[f]}`).join("&");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/img/logos/favicon-jones-co.png" />
+    {fonts.length > 0 && (
+      <>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href={`https://fonts.googleapis.com/css2?${fontParam}&display=swap`} rel="stylesheet" />
+      </>
+    )}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

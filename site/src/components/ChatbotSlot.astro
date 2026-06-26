@@ -1,0 +1,39 @@
+---
+/**
+ * ChatbotSlot — single swappable include for the site's AI assistant.
+ *
+ * PLACEHOLDER: currently loads the existing custom RAG widget
+ * (public/chatbot-widget.js → Cloudflare Worker backend).
+ *
+ * TO SWAP to the Distills career bot: replace the script tag below with the
+ * Distills embed snippet Mike provides. Nothing else needs to change.
+ */
+interface Props {
+  /** Accent color for the launcher bubble — themed per design direction. */
+  primaryColor?: string;
+}
+const { primaryColor = "#4f46e5" } = Astro.props;
+---
+
+<script is:inline define:vars={{ primaryColor }}>
+  window.MJ_CHATBOT_CONFIG = {
+    primaryColor: primaryColor,
+    bottomSpacing: 24,
+  };
+</script>
+<script is:inline src="/chatbot-widget.js" defer></script>
+
+<!-- Wire any [data-open-chat] trigger on the page to open the assistant -->
+<script is:inline>
+  document.addEventListener("click", function (event) {
+    const trigger = event.target.closest("[data-open-chat]");
+    if (!trigger) return;
+    event.preventDefault();
+    if (window.MJ_CHATBOT && typeof window.MJ_CHATBOT.open === "function") {
+      window.MJ_CHATBOT.open();
+      return;
+    }
+    const bubble = document.querySelector("#mj-chatbot-widget .mj-chatbot-bubble");
+    if (bubble) bubble.click();
+  });
+</script>

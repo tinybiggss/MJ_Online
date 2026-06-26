@@ -1,0 +1,78 @@
+---
+import FieldLayout from "../layouts/FieldLayout.astro";
+import { adhd } from "../lib/content";
+import { getLatestEssays } from "../lib/substack";
+
+const essays = await getLatestEssays(12);
+const [lead, ...rest] = essays;
+---
+
+<FieldLayout
+  title="Writing — Mike Jones"
+  description="Resilient Tomorrow: practical resilience for people building parallel systems, by Mike Jones."
+  active="/writing"
+>
+  <!-- HEADER -->
+  <section class="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="reveal font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.0] tracking-[-0.03em] text-balance">
+      Writing.
+    </h1>
+    <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-field-muted" style="animation-delay:.08s">
+      I write <a href="https://resilient-tomorrow.com" class="text-field-ink underline decoration-field-line underline-offset-4 transition-colors hover:text-signal hover:decoration-signal">Resilient Tomorrow</a> — practical ideas for building resilience and reducing dependency on fragile systems. 1,000+ readers and growing.
+    </p>
+  </section>
+
+  {essays.length === 0 ? (
+    <section class="mx-auto max-w-6xl px-6 pb-24">
+      <div class="rounded-xl border border-field-line bg-field-panel p-10 text-center">
+        <p class="text-field-muted">Latest essays are over at
+          <a href="https://resilient-tomorrow.com" class="text-signal underline underline-offset-4">resilient-tomorrow.com</a>.</p>
+      </div>
+    </section>
+  ) : (
+    <>
+      <!-- FEATURED LATEST -->
+      <section class="mx-auto max-w-6xl px-6">
+        <a href={lead.link} class="group block border-y border-field-line py-10">
+          {lead.dateLabel && <span class="text-sm text-field-faint">{lead.dateLabel} · latest</span>}
+          <h2 class="mt-3 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight transition-colors group-hover:text-signal md:text-4xl text-balance">{lead.title}</h2>
+          <p class="mt-4 max-w-2xl leading-relaxed text-field-muted">{lead.excerpt}</p>
+          <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-field-ink transition-colors group-hover:text-signal">Read on Substack <span aria-hidden="true">→</span></span>
+        </a>
+      </section>
+
+      <!-- THE REST -->
+      <section class="mx-auto max-w-6xl px-6 py-12">
+        <ul class="grid gap-x-10 gap-y-10 md:grid-cols-2">
+          {rest.map((e) => (
+            <li>
+              <a href={e.link} class="group flex h-full flex-col border-b border-field-line pb-6">
+                {e.dateLabel && <span class="text-sm text-field-faint">{e.dateLabel}</span>}
+                <h3 class="mt-2 font-display text-xl font-bold leading-snug tracking-tight transition-colors group-hover:text-signal">{e.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-field-muted">{e.excerpt}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  )}
+
+  <!-- RESEARCH THREAD: AI + ADHD -->
+  <section class="border-t border-field-line bg-field-panel">
+    <div class="mx-auto max-w-4xl px-6 py-20">
+      <p class="font-display text-sm font-bold uppercase tracking-wide text-signal">Current research</p>
+      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">{adhd.lead}</h2>
+      <p class="mt-5 leading-relaxed text-field-muted">{adhd.body}</p>
+      <a href="/about#adhd" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-field-ink transition-colors hover:text-signal">Read more <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE CTA -->
+  <section class="mx-auto max-w-5xl px-6 py-20">
+    <div class="rounded-2xl border border-field-line bg-field-panel px-8 py-14 text-center">
+      <h2 class="font-display text-3xl font-extrabold tracking-tight md:text-4xl text-balance">Build a future worth living, one good idea at a time.</h2>
+      <a href="https://resilient-tomorrow.com" class="mt-7 inline-block rounded-md bg-signal px-6 py-3 text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep">Subscribe to Resilient Tomorrow</a>
+    </div>
+  </section>
+</FieldLayout>

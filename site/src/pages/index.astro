@@ -1,0 +1,151 @@
+---
+import FieldLayout from "../layouts/FieldLayout.astro";
+import { identity, ventures, featuredProjects, adhd } from "../lib/content";
+import { getLatestEssays } from "../lib/substack";
+
+const essays = await getLatestEssays(3);
+const proofRun = ["Microsoft · Xbox", "Kinoo", "8 Circuit Studios", "Velocity Partners"];
+---
+
+<FieldLayout title="Mike Jones — AI that holds up under load" active="/">
+  <!-- HERO -->
+  <section class="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-16 pb-20 md:grid-cols-[1.25fr_0.75fr] md:pt-24 md:pb-28">
+    <div>
+      <h1 class="reveal font-display text-[clamp(2.75rem,7vw,5.25rem)] font-extrabold leading-[0.98] tracking-[-0.03em] text-balance">
+        AI that holds up<br />under load.
+      </h1>
+      <p class="reveal mt-7 max-w-xl text-lg leading-relaxed text-field-muted" style="animation-delay:.08s">
+        I'm Mike Jones — 29 years building systems that ship, now helping organizations turn fast-moving AI into infrastructure they can actually run. Not a demo. Daily dependable.
+      </p>
+      <div class="reveal mt-9 flex flex-col gap-3 sm:flex-row" style="animation-delay:.16s">
+        <a href="/work" class="rounded-md bg-signal px-6 py-3 text-center text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep">See the work</a>
+        <a href="/contact" class="rounded-md border border-field-line px-6 py-3 text-center text-sm font-medium text-field-ink transition-colors hover:border-signal hover:text-signal">Start a conversation</a>
+      </div>
+      <p class="reveal mt-10 text-sm text-field-muted/80" style="animation-delay:.24s">
+        {proofRun.join("    /    ")}
+      </p>
+    </div>
+    <div class="reveal" style="animation-delay:.12s">
+      <figure class="portrait relative overflow-hidden rounded-xl ring-1 ring-field-line">
+        <img src="/img/headshot-bw.png" alt="Mike Jones, AI implementation expert" />
+        <span class="tint" aria-hidden="true"></span>
+        <span class="vignette" aria-hidden="true"></span>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="border-y border-field-line bg-field-panel">
+    <div class="mx-auto max-w-6xl px-6 py-12">
+      <p class="max-w-4xl font-display text-2xl font-medium leading-snug tracking-tight md:text-[1.75rem]">
+        Across 29 years I've led teams of <span class="text-signal">120+</span>, managed
+        <span class="text-signal">$12M+</span> budgets, shipped <span class="text-signal">6 AAA</span>
+        launches, and hold a <span class="text-signal">patent</span> from the original Xbox SDK —
+        experience I now point at making AI real inside organizations.
+      </p>
+    </div>
+  </section>
+
+  <!-- VENTURES -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <div class="mb-10 flex items-end justify-between gap-6 border-b border-field-line pb-6">
+      <h2 class="font-display text-3xl font-bold tracking-tight md:text-4xl">One body of work, four front doors</h2>
+      <p class="hidden max-w-xs text-sm text-field-muted md:block">{identity.tagline}</p>
+    </div>
+    <ul>
+      {ventures.map((v) => (
+        <li>
+          <a href={v.href} target="_blank" rel="noopener noreferrer" class="group grid grid-cols-1 gap-3 border-b border-field-line py-8 transition-colors hover:bg-field-panel/60 md:grid-cols-[0.9fr_1.4fr_auto] md:items-baseline md:gap-8">
+            <div>
+              <h3 class="font-display text-2xl font-bold tracking-tight transition-colors group-hover:text-signal">{v.name}</h3>
+              <p class="mt-1 text-sm text-field-muted">{v.role}</p>
+            </div>
+            <div>
+              <p class="font-medium text-field-ink">{v.tagline}</p>
+              <p class="mt-2 max-w-xl text-sm leading-relaxed text-field-muted">{v.description}</p>
+            </div>
+            <div class="flex items-center gap-3 text-sm text-field-muted md:justify-end">
+              <span>{v.status}</span>
+              <span class="text-signal transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- AI + ADHD ANGLE -->
+  <section class="border-y border-field-line bg-field-panel">
+    <div class="mx-auto grid max-w-6xl gap-8 px-6 py-20 md:grid-cols-[1fr_1.2fr] md:items-center">
+      <div>
+        <p class="font-display text-sm font-bold uppercase tracking-wide text-signal">{adhd.title}</p>
+        <h2 class="mt-3 font-display text-3xl font-bold leading-tight tracking-tight md:text-4xl">{adhd.lead}</h2>
+      </div>
+      <div>
+        <p class="leading-relaxed text-field-muted">{adhd.body}</p>
+        <a href="/about#adhd" class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-field-ink transition-colors hover:text-signal">
+          How I think about it <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED SYSTEMS -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <div class="mb-10 flex items-end justify-between gap-6 border-b border-field-line pb-6">
+      <h2 class="font-display text-3xl font-bold tracking-tight md:text-4xl">Systems I've built</h2>
+      <a href="/work" class="shrink-0 text-sm font-medium text-field-muted transition-colors hover:text-signal">All work →</a>
+    </div>
+    <div class="grid gap-x-10 gap-y-8 md:grid-cols-3">
+      {featuredProjects.map((p) => (
+        <article class="flex flex-col border-t border-field-line pt-5">
+          <h3 class="font-display text-xl font-bold tracking-tight">{p.name}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-field-muted">{p.blurb}</p>
+          <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-field-faint">
+            {p.tags.map((t) => <span>{t}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  {essays.length > 0 && (
+    <section class="border-y border-field-line bg-field-panel">
+      <div class="mx-auto max-w-6xl px-6 py-24">
+        <div class="mb-10 flex items-end justify-between gap-6 border-b border-field-line pb-6">
+          <div>
+            <h2 class="font-display text-3xl font-bold tracking-tight md:text-4xl">From Resilient Tomorrow</h2>
+            <p class="mt-2 text-sm text-field-muted">Practical resilience for people building parallel systems. 1,000+ readers.</p>
+          </div>
+          <a href="/writing" class="shrink-0 text-sm font-medium text-field-muted transition-colors hover:text-signal">All essays →</a>
+        </div>
+        <ul class="grid gap-x-10 gap-y-8 md:grid-cols-3">
+          {essays.map((e) => (
+            <li>
+              <a href={e.link} class="group flex h-full flex-col">
+                {e.dateLabel && <span class="text-sm text-field-faint">{e.dateLabel}</span>}
+                <h3 class="mt-2 font-display text-lg font-bold leading-snug tracking-tight transition-colors group-hover:text-signal">{e.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-field-muted">{e.excerpt}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- CONTACT -->
+  <section class="mx-auto max-w-5xl px-6 py-24">
+    <div class="rounded-2xl border border-field-line bg-field-panel px-8 py-16 text-center md:py-20">
+      <h2 class="mx-auto max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight md:text-5xl text-balance">
+        Let's make AI hold up inside your organization.
+      </h2>
+      <p class="mx-auto mt-5 max-w-lg text-field-muted">Consulting, a course for your team, or a straight conversation about where AI actually fits.</p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={`mailto:${identity.email}`} class="min-w-[200px] rounded-md bg-signal px-6 py-3 text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep">Email Mike</a>
+        <a href="/contact" class="min-w-[200px] rounded-md border border-field-line px-6 py-3 text-sm font-medium text-field-ink transition-colors hover:border-signal hover:text-signal">More ways to reach me</a>
+      </div>
+    </div>
+  </section>
+</FieldLayout>

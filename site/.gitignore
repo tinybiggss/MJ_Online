@@ -1,0 +1,15 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# dev tooling
+.playwright-mcp/
+.DS_Store
+
+# local env
+.dev.vars
+.env
+.wrangler/
