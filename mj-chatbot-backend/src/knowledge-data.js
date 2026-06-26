@@ -1,6 +1,6 @@
 // Auto-generated knowledge base module (CommonJS)
-// Generated at: 2026-02-24T22:54:11.535Z
-// Entries: 190
+// Generated at: 2026-06-26T22:19:57.150Z
+// Entries: 202
 
 const knowledgeBase = [
   {
@@ -814,7 +814,7 @@ const knowledgeBase = [
     "topic": "project_neighborhood_share",
     "project": "NeighborhoodShare",
     "title": "NeighborhoodShare: How It Works",
-    "content": "NeighborhoodShare is a tool-sharing platform designed to build community connections. Users photograph any item (garage tools, sewing machines, kitchen equipment) and AI categorizes it automatically, lowering the barrier to entry. Users set their 'neighborhood size' based on location (2 miles in urban San Jose, up to 25-50 miles in rural areas). The workflow: search for items, request to borrow, owner approves via text message, mark pickup and return. A timing system lets borrowers specify how long they need items, with reminders until the item is marked returned. The goal: reduce spending, utilize idle resources, and most importantly - give neighbors a reason to connect through helping with each other's projects.",
+    "content": "STATUS: NeighborhoodShare has been discontinued as a standalone product — Mike wound it down because tool-sharing was too infrequent for users to stay engaged, and he is folding the concept into a larger multi-purpose community platform. (Historical description follows.) NeighborhoodShare is a tool-sharing platform designed to build community connections. Users photograph any item (garage tools, sewing machines, kitchen equipment) and AI categorizes it automatically, lowering the barrier to entry. Users set their 'neighborhood size' based on location (2 miles in urban San Jose, up to 25-50 miles in rural areas). The workflow: search for items, request to borrow, owner approves via text message, mark pickup and return. A timing system lets borrowers specify how long they need items, with reminders until the item is marked returned. The goal: reduce spending, utilize idle resources, and most importantly - give neighbors a reason to connect through helping with each other's projects.",
     "confidence": "verified",
     "source": "Current Projects Interview 2026-01-29",
     "tags": [
@@ -830,7 +830,7 @@ const knowledgeBase = [
     "topic": "project_neighborhood_share",
     "project": "NeighborhoodShare",
     "title": "NeighborhoodShare: The Bigger Vision",
-    "content": "NeighborhoodShare is a prototype for a larger vision. Mike observes that getting to know someone is easier when you understand their projects and can help. Looking at the next 5-10 years, he anticipates harder times where mutual aid and hyper-local community support will be essential. NeighborhoodShare tests whether tool-sharing can bring neighbors together. The broader platform vision connects to Resilient Tomorrow's '7 Pillars' framework for community resilience.",
+    "content": "STATUS: NeighborhoodShare has been discontinued as a standalone product — Mike wound it down because tool-sharing was too infrequent for users to stay engaged, and he is folding the concept into a larger multi-purpose community platform. (Historical description follows.) NeighborhoodShare is a prototype for a larger vision. Mike observes that getting to know someone is easier when you understand their projects and can help. Looking at the next 5-10 years, he anticipates harder times where mutual aid and hyper-local community support will be essential. NeighborhoodShare tests whether tool-sharing can bring neighbors together. The broader platform vision connects to Resilient Tomorrow's '7 Pillars' framework for community resilience.",
     "confidence": "verified",
     "source": "Current Projects Interview 2026-01-29",
     "tags": [
@@ -1661,7 +1661,7 @@ const knowledgeBase = [
     "type": "fact",
     "topic": "projects",
     "project": "NeighborhoodShare",
-    "content": "NeighborhoodShare is a community tool-sharing platform built by Mike Jones in 2025. Core functionality: neighbors list tools (power tools, kitchen equipment, camping gear) with AI-powered categorization from photos, browse available items within adjustable search radius (2-50 miles depending on urban/rural context), request to borrow with pickup/return dates, dual authentication at pickup and return (both parties confirm to prevent disputes), automated email/SMS reminders for overdue items. Built Feb-Sept 2025, reached 170 users across 20 zip codes. Paused development due to adoption challenges - tool borrowing insufficient frequency for sustained engagement.",
+    "content": "STATUS: NeighborhoodShare has been discontinued as a standalone product — Mike wound it down because tool-sharing was too infrequent for users to stay engaged, and he is folding the concept into a larger multi-purpose community platform. (Historical description follows.) NeighborhoodShare is a community tool-sharing platform built by Mike Jones in 2025. Core functionality: neighbors list tools (power tools, kitchen equipment, camping gear) with AI-powered categorization from photos, browse available items within adjustable search radius (2-50 miles depending on urban/rural context), request to borrow with pickup/return dates, dual authentication at pickup and return (both parties confirm to prevent disputes), automated email/SMS reminders for overdue items. Built Feb-Sept 2025, reached 170 users across 20 zip codes. Paused development due to adoption challenges - tool borrowing insufficient frequency for sustained engagement.",
     "confidence": "verified",
     "source": "TED technical interview 2026-02-04",
     "tags": [
@@ -3107,6 +3107,191 @@ const knowledgeBase = [
       "automation",
       "sdk"
     ]
+  },
+  {
+    "id": "rag-2026-06-26-001",
+    "type": "fact",
+    "topic": "experience",
+    "project": "MikeCareer",
+    "content": "Mike Jones has 29 years of experience in technology, beginning in 1997. He is an AI Implementation Expert and LLM Integration Specialist.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "experience",
+      "title",
+      "ai",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-002",
+    "type": "fact",
+    "topic": "services",
+    "project": "VelocityPartners",
+    "content": "Mike founded Velocity Partners in 2023 — an AI implementation consulting and fractional PMO practice focused on making AI dependable inside organizations, built on his AAPD (AI-Augmented Process Design) methodology.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "velocity_partners",
+      "consulting",
+      "aapd",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-003",
+    "type": "fact",
+    "topic": "teaching",
+    "project": "GHN",
+    "content": "Mike teaches AI and Claude Code courses through Get Hired Now Academy (GHN), a partnership with Ron Nash, helping directors and VPs build AI fluency and reposition their expertise. The course series launches in July 2026.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "ghn",
+      "get_hired_now",
+      "teaching",
+      "courses",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-004",
+    "type": "fact",
+    "topic": "projects",
+    "project": "Corvus",
+    "content": "Corvus is Mike's persistent personal AI agent. It uses local Ollama embeddings for private semantic memory, a hybrid Python + LLM execution model, and integrates with Obsidian and Telegram, running locally on a Mac Mini for daily briefings and task orchestration.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "corvus",
+      "ai_agent",
+      "local_llm",
+      "privacy",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-005",
+    "type": "narrative",
+    "topic": "projects",
+    "project": "AIADHD",
+    "title": "Using AI as executive function",
+    "content": "Mike is developing a framework for using AI as executive-function support for ADHD — externalizing memory, making time visible, and reducing the friction between intention and action. He lives it through his Corvus agent, treating it as resilience at the scale of a single mind.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "adhd",
+      "executive_function",
+      "applied_ai",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-006",
+    "type": "fact",
+    "topic": "products",
+    "project": "Distills",
+    "content": "Distills is Mike's AI career SaaS that turns a person's career documents into an interactive chatbot which answers recruiter and hiring-manager questions. The AI assistant on mikejones.online is powered by Distills.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "distills",
+      "product",
+      "saas",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-007",
+    "type": "fact",
+    "topic": "projects",
+    "project": "Apollo",
+    "content": "Mike built Apollo, a fully self-hosted home media server (Jellyfin, Radarr/Sonarr automation, VPN kill-switch, Tailscale remote access) on a mini PC, documented end to end.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "apollo",
+      "self_hosted",
+      "infrastructure",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-008",
+    "type": "fact",
+    "topic": "projects",
+    "project": "Solar",
+    "content": "Mike designed and permitted a DIY residential solar array with a 32 kWh battery, including full energy modeling and a phased rollout, at a fraction of typical installer cost.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "solar",
+      "energy",
+      "diy",
+      "resilience",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-009",
+    "type": "fact",
+    "topic": "career_history",
+    "project": "MikeCareer",
+    "content": "At Kinoo, Mike was Principal Technical Program Manager (2020–2022) for an AR family-communication platform that won a CES Innovation Award. He earlier co-founded 8 Circuit Studios (2017–2020), a Web3 gaming studio, as co-founder/CTO.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "kinoo",
+      "8_circuit_studios",
+      "career",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-010",
+    "type": "qa_pair",
+    "topic": "contact",
+    "project": "MikeCareer",
+    "question": "How do I get in touch with Mike?",
+    "answer": "You can email Mike at mike@mikejones.online or use the contact form at mikejones.online/contact. He takes on AI implementation work through Velocity Partners.",
+    "content": "To contact Mike Jones: email mike@mikejones.online or use the contact form at mikejones.online/contact. He takes on AI implementation work through Velocity Partners.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "contact",
+      "email",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-011",
+    "type": "fact",
+    "topic": "positioning",
+    "project": "MikeCareer",
+    "content": "Mike's through-line is helping people and organizations operate at the intersection of AI, autonomy, and resilience — spanning consulting (Velocity Partners), teaching (Get Hired Now Academy), publishing (Resilient Tomorrow, 2,100+ subscribers), and product (Distills).",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "positioning",
+      "through_line",
+      "ecosystem",
+      "verified"
+    ]
+  },
+  {
+    "id": "rag-2026-06-26-012",
+    "type": "fact",
+    "topic": "projects",
+    "project": "NeighborhoodShare",
+    "content": "NeighborhoodShare reached 170 users across 20 communities, but Mike has since wound the standalone platform down — tool-sharing proved too infrequent for users to stay engaged and they forgot about the app. He is folding the concept into a larger, multi-purpose community platform.",
+    "confidence": "verified",
+    "source": "mikejones.online rebuild 2026-06",
+    "tags": [
+      "neighborhoodshare",
+      "status",
+      "lessons_learned",
+      "verified"
+    ]
   }
 ];
 
@@ -3115,9 +3300,9 @@ function getKnowledgeBase() {
 }
 
 const stats = {
-  totalEntries: 190,
-  types: {"fact":80,"qa_pair":19,"fit_assessment":3,"technical":29,"narrative":59},
-  topics: {"career_history":31,"skills":8,"services":2,"fit":3,"project_ai_memory":7,"project_local_llm":17,"project_resilient_tomorrow":18,"about":10,"project_neighborhood_share":3,"homepage":1,"velocity_partners":16,"aapd":6,"pm_drowning":8,"projects":15,"tech_stack":1,"ai_implementation":1,"security":1,"project_management":4,"rag_system":1,"social_media":4,"ai_expertise":2,"achievements":21,"professional_identity":2,"education":2,"certifications":1,"publications":4,"contact_info":1}
+  totalEntries: 202,
+  types: {"fact":90,"qa_pair":20,"fit_assessment":3,"technical":29,"narrative":60},
+  topics: {"career_history":32,"skills":8,"services":3,"fit":3,"project_ai_memory":7,"project_local_llm":17,"project_resilient_tomorrow":18,"about":10,"project_neighborhood_share":3,"homepage":1,"velocity_partners":16,"aapd":6,"pm_drowning":8,"projects":20,"tech_stack":1,"ai_implementation":1,"security":1,"project_management":4,"rag_system":1,"social_media":4,"ai_expertise":2,"achievements":21,"professional_identity":2,"education":2,"certifications":1,"publications":4,"contact_info":1,"experience":1,"teaching":1,"products":1,"contact":1,"positioning":1}
 };
 
 module.exports = {
