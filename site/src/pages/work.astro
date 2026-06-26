@@ -40,8 +40,8 @@ import { ventures, projects, projectGroups } from "../lib/content";
         {projects.filter((p) => p.group === group).map((p) => (
           <article class="flex flex-col">
             {p.img && (
-              <div class:list={["mb-5 aspect-[16/9] overflow-hidden rounded-lg border border-field-line", p.diagram ? "bg-white p-3" : "bg-field-panel"]}>
-                <img src={p.img} alt={p.name} loading="lazy" class:list={["h-full w-full", p.diagram ? "object-contain" : "object-cover"]} />
+              <div class:list={["mb-5 aspect-[16/9] overflow-hidden rounded-lg border border-field-line", p.diagram ? "bg-white p-3" : "bg-field-panel", p.contain ? "p-2" : ""]}>
+                <img src={p.img} alt={p.name} loading="lazy" class:list={["h-full w-full", (p.diagram || p.contain) ? "object-contain" : "object-cover"]} />
               </div>
             )}
             <h3 class="font-display text-xl font-bold tracking-tight">{p.name}</h3>

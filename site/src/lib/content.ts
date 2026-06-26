@@ -90,6 +90,8 @@ export interface Project {
   img?: string;
   /** Transparent-background diagram — render on white, contained (not cropped). */
   diagram?: boolean;
+  /** Show the whole image (object-contain) on the dark panel instead of cropping. */
+  contain?: boolean;
   featured?: boolean;
 }
 
@@ -101,6 +103,7 @@ export const projects: Project[] = [
       "A persistent personal AI agent — semantic memory on local Ollama embeddings, hybrid Python + LLM execution, and cron-driven daily briefings. Privacy-first, runs on a Mac Mini.",
     tags: ["Agent orchestration", "Local embeddings", "Python", "Memory design"],
     img: "/img/projects/corvus.jpg",
+    contain: true,
     featured: true,
   },
   {
