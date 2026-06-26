@@ -70,7 +70,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   const to = env.CONTACT_TO || "mike@mikejones.online";
-  const from = env.CONTACT_FROM || "MikeJones.online <noreply@mikejones.online>";
+  // Default uses Resend's no-DNS test sender so the form works immediately.
+  // Once mikejones.online is verified in Resend, set CONTACT_FROM to e.g.
+  // "MikeJones.online <noreply@mikejones.online>".
+  const from = env.CONTACT_FROM || "Mike Jones <onboarding@resend.dev>";
 
   const html = `
     <h2>New message from mikejones.online</h2>
