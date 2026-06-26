@@ -2,7 +2,7 @@
 
 > At session start, Claude reads this file and loads tasks into the session task panel.
 
-**Last updated:** 2026-06-26 (Fully launched: domain, contact form, and Distills chatbot live)
+**Last updated:** 2026-06-26 (Phase 8 complete — site fully launched & polished)
 
 ---
 
@@ -18,36 +18,39 @@
 
 | # | Task | Priority | Notes |
 |---|------|----------|-------|
-| 1 | Cancel Ghost Pro subscription | Med | Safe — no members. Admin at mikejones-online.ghost.io/ghost/ or account.ghost.org. |
-| 2 | (Optional) www → apex redirect | Low | Add `_redirects` to avoid duplicate-content; Claude can do this. |
-| 3 | (Optional) Refresh chatbot knowledge base | Low | Bot uses existing backend (190 entries). Can rebuild from a newer export if desired. |
+| | _Nothing pending — site is live and complete_ | | |
 
 ---
 
-## 📋 Backlog
+## 📋 Backlog (future, optional)
 
 | Task | Notes |
 |------|-------|
 | Per-project deep-dive pages | Corvus, Apollo, Home Solar, AI Memory via `/work/[slug]`. |
-| Real project imagery | Screenshots/diagrams for Corvus, Apollo, Mission Control, Solar. |
+| Real project imagery | Screenshots/diagrams for Apollo, Mission Control, Solar (Corvus now has a photo). |
+| Consulting case studies | Anonymized: CEO-as-bottleneck turnaround; Kinoo Jira→Smartsheet change-management story (from interview transcripts). |
 | AI + ADHD content/course | Expand framework into essay series or course landing page. |
-| Use interview transcript | Mine `distills/` transcript to enrich About/Work copy. |
+| "Vibe coding rewards waterfall rigor" essay | Strong POV from transcripts — good for Resilient Tomorrow or a Writing piece. |
+| Refresh Distills KB | Regenerate from newest sources when Mike's positioning evolves. |
 
 ---
 
-## ✅ Completed
+## ✅ Completed (2026-06-25 → 06-26)
 
-| Task | Date | Notes |
-|------|------|-------|
-| Design bake-off → Direction D "Field" | 2026-06-25 | Rejected Signal/Operator/Groundwork as AI-lane reflexes |
-| Built full Astro site + Substack RSS | 2026-06-25 | Home/About/Work/Writing/Resume/Contact/404/Thanks |
-| impeccable critique (34/40) + polish | 2026-06-26 | a11y contrast, text-forward systems, ventures grid, motion |
-| Content edits (résumé, experience, URLs, diagrams) | 2026-06-26 | |
-| Deployed to Cloudflare Pages + git-push auto-deploy | 2026-06-26 | Project `mikejones-online`; GitHub Actions |
-| Custom domain cutover off Ghost | 2026-06-26 | Removed R2 binding on apex; activated apex + www; SSL live |
-| Contact form (Pages Function + Resend) | 2026-06-26 | from noreply@mikejones.online → mike@mikejones.online; verified |
-| Distills chatbot swapped in | 2026-06-26 | Widget → live RAG backend; verified end-to-end on live site |
+| Task | Notes |
+|------|-------|
+| Design bake-off → Direction D "Field" | Rejected 3 AI-lane reflexes; impeccable critique 34/40 + polish |
+| Built full Astro site + Substack RSS | Home/About/Work/Writing/Resume/Contact/404/Thanks |
+| Deployed to Cloudflare Pages + git-push auto-deploy | Project `mikejones-online`; GitHub Actions |
+| Custom domain cutover off Ghost | Removed R2 binding on apex; activated apex + www; SSL live |
+| Cancelled Ghost Pro | No members; nothing to migrate |
+| Contact form (Pages Function + Resend) | from noreply@mikejones.online → mike@mikejones.online (verified) |
+| Distills career-bot embedded | Pointed at live RAG backend; KB refreshed (202 entries) |
+| www → apex redirect | Pages middleware |
+| Content enrichment + fact corrections | Interview-sourced voice; RT 2,100+, NeighborhoodShare wound down |
+| Spacing/alignment fixes + Corvus photo | Astro inline-span spacing, ventures column alignment |
+| Session memory → cross-project ledger | Shared with Corvus / other AI tools |
 
 ---
 
-*Updated by Claude + Mike · 2026-06-26*
+*Updated by Claude + Mike · 2026-06-26 · Phase 8 complete*

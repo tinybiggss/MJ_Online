@@ -2455,6 +2455,20 @@
   },
   "update_history": [
     {
+      "date": "2026-06-26 (evening)",
+      "reason": "Phase 8 COMPLETE — Ghost cancelled, polish pass, content enrichment, session memory shared to Corvus ledger",
+      "changes": [
+        "Ghost Pro subscription cancelled by Mike (no members; nothing to migrate)",
+        "www → apex 301 redirect added via Pages middleware (site/functions/_middleware.ts); Cloudflare _redirects can't match by host",
+        "Contact form switched to verified domain: from noreply@mikejones.online → mike@mikejones.online (Resend domain verified)",
+        "Distills career-bot KB refreshed (202 entries): added GHN/Corvus/Distills/AI+ADHD/Apollo/Home-Solar/29-yrs/Velocity-2023; NeighborhoodShare marked discontinued",
+        "Content enriched from interview transcripts: patent origin story, 'make the invisible visible' + 'create space for people to thrive' principles, 'AI amplifies a broken process' consulting thesis, player-coach AI+ADHD framing",
+        "Fact corrections applied site-wide: Resilient Tomorrow 2,100+ subscribers; NeighborhoodShare wound down (170 users/20 communities, low-frequency retention) folding into a larger platform; removed unverified 'library partnerships'",
+        "Fixes: Astro inline-span spacing bug (white→amber boundaries lost spaces), ventures column misalignment (auto→stable grid width), added Corvus photo to /work",
+        "Session decisions/milestones + corrected facts appended to cross-project memory ledger for Corvus and other AI tools"
+      ]
+    },
+    {
       "date": "2026-06-26",
       "reason": "Launch: deployed to Cloudflare Pages, domain cutover off Ghost, auto-deploy + contact form live (Phase 8 cont.)",
       "changes": [
@@ -2939,7 +2953,7 @@
       ]
     }
   ],
-  "current_status": "Phase 8 - LIVE on Cloudflare Pages at https://mikejones.online (off Ghost). Auto-deploy on git push + working contact form (Resend → mike@jones-co.us). Pending: cancel Ghost Pro, swap in Distills chatbot embed, optional Resend domain verification + www→apex redirect",
+  "current_status": "Phase 8 COMPLETE - mikejones.online fully live on Cloudflare Pages (Ghost cancelled). Git-push auto-deploy, contact form (Resend, verified domain → mike@mikejones.online), Distills career-bot, www→apex redirect, refreshed KB, enriched+fact-corrected content. Session shared to cross-project memory ledger for Corvus.",
   "last_updated": "2026-06-26",
-  "version": "2.0-field (Astro on Cloudflare Pages, live)"
+  "version": "2.1-field (Astro on Cloudflare Pages, live + polished)"
 }
