@@ -2455,6 +2455,19 @@
   },
   "update_history": [
     {
+      "date": "2026-06-26",
+      "reason": "Launch: deployed to Cloudflare Pages, domain cutover off Ghost, auto-deploy + contact form live (Phase 8 cont.)",
+      "changes": [
+        "Deployed the Astro site to a new Cloudflare Pages project 'mikejones-online' (account mejones73@protonmail.com) via wrangler",
+        "Set up git-push auto-deploy via GitHub Actions (.github/workflows/deploy.yml, cloudflare/wrangler-action) — secrets CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN (Pages:Edit + User Details:Read)",
+        "Custom domain cutover: apex mikejones.online was squatted by an R2 custom-domain binding on the test bucket 'test1-knowledge-base' — removed it via wrangler, then activated mikejones.online + www on the Pages project (SSL active)",
+        "Ghost no longer in the DNS path; site live at https://mikejones.online. Ghost Pro to be cancelled (no members, nothing to export). Ghost admin still reachable at mikejones-online.ghost.io/ghost/",
+        "Contact form working end-to-end: Cloudflare Pages Function (functions/api/contact.ts) → Resend. Resend account email = mike@jones-co.us; in test mode (no verified domain) it only delivers to that address, so CONTACT_TO secret = mike@jones-co.us and from = onboarding@resend.dev. Verified with a live test (HTTP 200, email received)",
+        "Earlier same session: résumé PDF download, experience timeline corrections (Velocity 2023–, Kinoo=Principal TPM 2020–22, 8CS 2017–20, Disney Interactive added 2009–15, MS 1999–2009), venture URLs (velocitypartners.io, gethirednowprograms.com), external links open new tab, OfflineAI/AI-Memory diagrams on white, impeccable critique 34/40 + polish pass (a11y contrast, text-forward home systems, ventures grid, motion)",
+        "OPEN: optional Resend domain verification to send from noreply@mikejones.online to mike@mikejones.online (needs DNS records); optional www→apex redirect; pending Distills chatbot embed swap"
+      ]
+    },
+    {
       "date": "2026-06-25",
       "reason": "Ghost → self-hosted rebuild on new 'Field' design direction (Phase 8)",
       "changes": [
@@ -2926,7 +2939,7 @@
       ]
     }
   ],
-  "current_status": "Phase 8 IN PROGRESS - New Astro 'Field' site built (Home/About/Work/Writing/Resume/Contact/404) with Substack RSS; pending Cloudflare Pages deploy, domain cutover, Distills chatbot embed, and Ghost cancellation",
-  "last_updated": "2026-06-25",
-  "version": "2.0-field (Astro static, pre-deploy)"
+  "current_status": "Phase 8 - LIVE on Cloudflare Pages at https://mikejones.online (off Ghost). Auto-deploy on git push + working contact form (Resend → mike@jones-co.us). Pending: cancel Ghost Pro, swap in Distills chatbot embed, optional Resend domain verification + www→apex redirect",
+  "last_updated": "2026-06-26",
+  "version": "2.0-field (Astro on Cloudflare Pages, live)"
 }

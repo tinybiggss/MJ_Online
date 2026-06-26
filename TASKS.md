@@ -2,7 +2,7 @@
 
 > At session start, Claude reads this file and loads tasks into the session task panel.
 
-**Last updated:** 2026-06-25 (Session — Ghost → self-hosted "Field" rebuild)
+**Last updated:** 2026-06-26 (Launched on Cloudflare Pages; off Ghost)
 
 ---
 
@@ -18,12 +18,10 @@
 
 | # | Task | Priority | Notes |
 |---|------|----------|-------|
-| 1 | Deploy `/site` to Cloudflare Pages | High | See `site/DEPLOY.md`. Build cmd `npm run build`, output `dist`, root dir `site`. |
-| 2 | Point `mikejones.online` DNS to Cloudflare Pages | High | Add custom domain in Pages; update GoDaddy DNS / nameservers. Verify HTTPS. |
-| 3 | Swap chatbot to Distills career-bot embed | High | Mike to provide embed. One-file change in `site/src/components/ChatbotSlot.astro`. |
-| 4 | Cancel Ghost Pro subscription | Med | Only after DNS cutover verified + content parity confirmed. |
-| 5 | Run `/impeccable critique` + `polish` on the site | Med | Scored UX pass; tighten hierarchy/contrast/motion. |
-| 6 | Link venture cards to real destinations | Med | Velocity Partners + GHN currently `#`; RT/Distills already external. |
+| 1 | Swap chatbot to Distills career-bot embed | High | Mike to provide embed. One-file change in `site/src/components/ChatbotSlot.astro`. |
+| 2 | Cancel Ghost Pro subscription | Med | Safe — no members, nothing to export. Admin at mikejones-online.ghost.io/ghost/ or account.ghost.org. |
+| 3 | (Optional) Verify domain in Resend | Low | Lets form send from noreply@mikejones.online → mike@mikejones.online. Needs DNS records (DKIM/SPF). |
+| 4 | (Optional) www → apex redirect | Low | Avoid duplicate-content; both currently serve the site. |
 
 ---
 
@@ -31,11 +29,10 @@
 
 | Task | Notes |
 |------|-------|
-| Per-project deep-dive pages | Corvus, Apollo, Home Solar, AI Memory via `/work/[slug]` content collections. |
-| Real project imagery | Screenshots/diagrams for Corvus, Apollo, Mission Control, Solar (avoid placeholders). |
-| AI + ADHD content/course | Expand the framework into an essay series or course landing page. |
-| OG images for new pages | Regenerate per-page Open Graph images for the Field design. |
-| Cleanup pass | Drop unused dark-theme tokens in `global.css`; consider code-splitting. |
+| Per-project deep-dive pages | Corvus, Apollo, Home Solar, AI Memory via `/work/[slug]`. |
+| Real project imagery | Screenshots/diagrams for Corvus, Apollo, Mission Control, Solar. |
+| AI + ADHD content/course | Expand framework into essay series or course landing page. |
+| Bump GitHub Action node-version warnings | Cosmetic (actions run on Node 24, declare 20). |
 
 ---
 
@@ -43,13 +40,14 @@
 
 | Task | Date | Notes |
 |------|------|-------|
-| Design bake-off → selected Direction D "Field" | 2026-06-25 | Rejected Signal/Operator/Groundwork as AI-lane reflexes |
-| Installed impeccable; wrote PRODUCT.md | 2026-06-25 | Brand register, exec audience, confident/technical/grounded |
-| Built full Astro site (Home/About/Work/Writing/Resume/Contact/404) | 2026-06-25 | Astro 7 + React + Tailwind v4 in `/site` |
-| Integrated Resilient Tomorrow Substack RSS | 2026-06-25 | Build-time fetch on Home + Writing |
-| Obsidian deep-walk → added projects | 2026-06-25 | Corvus, AI+ADHD, Apollo, Mission Control, Voice, Solar, Agent Suite |
-| Cleanup + deploy scaffolding | 2026-06-25 | Removed A/B/C + Three.js; sitemap, robots, _headers; build green (7 pages) |
+| Design bake-off → Direction D "Field" | 2026-06-25 | Rejected Signal/Operator/Groundwork as AI-lane reflexes |
+| Built full Astro site + Substack RSS | 2026-06-25 | Home/About/Work/Writing/Resume/Contact/404/Thanks |
+| impeccable critique (34/40) + polish | 2026-06-26 | a11y contrast, text-forward systems, ventures grid, motion |
+| Edits: résumé PDF, experience timeline, venture URLs, new-tab links, diagram-on-white | 2026-06-26 | |
+| Deployed to Cloudflare Pages + git-push auto-deploy | 2026-06-26 | Project `mikejones-online`; GitHub Actions workflow |
+| Custom domain cutover off Ghost | 2026-06-26 | Removed R2 binding squatting on apex; activated apex + www; SSL live |
+| Contact form live (Pages Function + Resend) | 2026-06-26 | Delivers to mike@jones-co.us; verified end-to-end |
 
 ---
 
-*Updated by Claude + Mike · 2026-06-25*
+*Updated by Claude + Mike · 2026-06-26*
