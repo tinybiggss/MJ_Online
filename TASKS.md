@@ -2,7 +2,7 @@
 
 > At session start, Claude reads this file and loads tasks into the session task panel.
 
-**Last updated:** 2026-06-26 (Phase 8 complete — site fully launched & polished)
+**Last updated:** 2026-06-29 (Mobile hamburger nav fix shipped to production)
 
 ---
 
@@ -35,6 +35,14 @@
 
 ---
 
+## ✅ Completed (2026-06-29)
+
+| Task | Notes |
+|------|-------|
+| Mobile hamburger navigation | Header nav was `hidden md:flex` with no mobile fallback — iPhone users couldn't reach other pages. Added accessible animated hamburger + slide-down panel (Work/Writing/About/Contact/Résumé/CTA). Verified at 390px & 1280px; commit `7e867ec`, deployed to Cloudflare Pages. |
+
+---
+
 ## ✅ Completed (2026-06-25 → 06-26)
 
 | Task | Notes |
@@ -53,4 +61,4 @@
 
 ---
 
-*Updated by Claude + Mike · 2026-06-26 · Phase 8 complete*
+*Updated by Claude + Mike · 2026-06-29 · Mobile nav fix shipped*
