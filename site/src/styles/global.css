@@ -88,3 +88,49 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .reveal { animation: none; }
 }
+
+/* ── Mobile navigation ──────────────────────────────────────────────
+   Hamburger that morphs to a close (×), driven entirely by the button's
+   aria-expanded state, plus a height-animated slide-down panel. */
+.nav-toggle .bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s ease;
+}
+.nav-toggle .bar + .bar {
+  margin-top: 5px;
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* grid-rows 0fr→1fr gives a smooth, content-height-aware open/close */
+#mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#mobile-menu[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+#mobile-menu > .menu-inner {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle .bar,
+  #mobile-menu {
+    transition: none;
+  }
+}

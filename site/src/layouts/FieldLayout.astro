@@ -45,13 +45,91 @@ const isActive = (href: string) => active === href || (href !== "/" && active.st
           </a>
         ))}
       </div>
-      <a
-        href="/contact"
-        class="rounded-md bg-signal px-4 py-2 text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep"
-        >Start a conversation</a
-      >
+      <div class="flex items-center gap-2">
+        <a
+          href="/contact"
+          class="hidden rounded-md bg-signal px-4 py-2 text-sm font-bold text-field-bg transition-colors hover:bg-signal-deep md:inline-flex"
+          >Start a conversation</a
+        >
+        <button
+          id="menu-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="nav-toggle -mr-2 inline-flex h-10 w-10 items-center justify-center rounded-md text-field-ink transition-colors hover:bg-field-panel md:hidden"
+        >
+          <span class="sr-only">Toggle navigation</span>
+          <span aria-hidden="true">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </span>
+        </button>
+      </div>
     </nav>
+
+    <!-- Mobile navigation panel -->
+    <div id="mobile-menu" data-open="false" class="md:hidden">
+      <div class="menu-inner">
+        <div class="flex flex-col gap-1 border-t border-field-line/70 px-6 pb-6 pt-2">
+          {nav.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                "rounded-md px-2 py-3 text-base transition-colors hover:bg-field-panel",
+                isActive(item.href) ? "font-semibold text-field-ink" : "text-field-muted",
+              ]}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="/resume"
+            class:list={[
+              "rounded-md px-2 py-3 text-base transition-colors hover:bg-field-panel",
+              isActive("/resume") ? "font-semibold text-field-ink" : "text-field-muted",
+            ]}
+            aria-current={isActive("/resume") ? "page" : undefined}
+          >
+            Résumé
+          </a>
+          <a
+            href="/contact"
+            class="mt-3 rounded-md bg-signal px-4 py-3 text-center text-base font-bold text-field-bg transition-colors hover:bg-signal-deep"
+            >Start a conversation</a
+          >
+        </div>
+      </div>
+    </div>
   </header>
+
+  <script>
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    if (toggle && menu) {
+      const setOpen = (open: boolean) => {
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        menu.dataset.open = String(open);
+      };
+      toggle.addEventListener("click", () => {
+        setOpen(toggle.getAttribute("aria-expanded") !== "true");
+      });
+      // Tapping any link navigates — collapse the panel as it goes.
+      menu.querySelectorAll("a").forEach((link) =>
+        link.addEventListener("click", () => setOpen(false)),
+      );
+      // Escape closes and returns focus to the toggle.
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+    }
+  </script>
 
   <main id="main">
     <slot />
