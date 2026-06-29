@@ -328,6 +328,7 @@ window.RAG_CHATBOT_CONFIG = {
       .rag-chatbot-input {
         flex: 1; border: 1px solid #d1d5db; border-radius: 8px;
         padding: 10px 12px; font-size: 14px; font-family: inherit;
+        color: #1f2937;
         resize: none; min-height: 44px; max-height: 120px; line-height: 1.5;
         transition: border-color 0.2s;
       }
