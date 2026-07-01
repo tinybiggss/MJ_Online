@@ -34,7 +34,11 @@ export default function SlideFund() {
   // The seed is a display baseline only; it's never sent to the backend.
   const displayTotal = HOST_SEED + (view?.raisedSelfReported ?? 0);
 
-  async function handleSelfReport() {
+  // One action: record the chip-in on the thermometer AND open Venmo to pay.
+  async function handleDonate() {
+    if (amount <= 0) return;
+    // Open Venmo synchronously inside the click gesture so it isn't popup-blocked.
+    window.open(VENMO_URL, "_blank", "noopener,noreferrer");
     setStatus("sending");
     setError("");
     try {
@@ -52,7 +56,9 @@ export default function SlideFund() {
       setNote("");
       setHoney("");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(
+        err instanceof Error ? err.message : "Venmo is open — but we couldn't update the total. Thanks anyway!",
+      );
       setStatus("error");
     }
   }
@@ -77,24 +83,9 @@ export default function SlideFund() {
         </div>
       </div>
 
-      {/* Donate via Venmo */}
-      <div className="mt-4">
-        <a
-          href={VENMO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block rounded-full bg-[#008CFF] px-6 py-3 font-bold text-white"
-        >
-          Donate {formatUSD(amount)} via Venmo
-        </a>
-        <p className="mt-1 text-xs text-field-faint">
-          Opens Venmo (@tinybiggs). Enter the amount there, then tell the thermometer below.
-        </p>
-      </div>
-
-      {/* Self-report */}
-      <div className="mt-6 rounded-xl border border-field-line bg-field-panel p-4">
-        <p className="font-display font-semibold text-field-ink">After you pay, add it to the total:</p>
+      {/* One combined action: adds your amount to the thermometer AND opens Venmo. */}
+      <div className="rounded-xl border border-field-line bg-field-panel p-4">
+        <p className="font-display font-semibold text-field-ink">Chip in for the slide 🐬</p>
         <div className="mt-2 flex flex-wrap gap-2">
           <input
             placeholder="Name (optional)"
@@ -112,13 +103,18 @@ export default function SlideFund() {
           />
         </div>
         <button
-          onClick={handleSelfReport}
-          disabled={status === "sending"}
-          className="mt-3 rounded-full bg-signal px-5 py-2 font-bold text-field-bg transition-colors hover:bg-signal-deep disabled:opacity-50"
+          onClick={handleDonate}
+          disabled={status === "sending" || amount <= 0}
+          className="mt-3 rounded-full bg-[#008CFF] px-6 py-3 font-bold text-white transition-[filter] hover:brightness-95 disabled:opacity-50"
         >
-          {status === "sending" ? "Adding…" : `I chipped in ${formatUSD(amount)}`}
+          {status === "sending" ? "Opening Venmo…" : `Donate ${formatUSD(amount)} via Venmo`}
         </button>
-        {status === "done" && <p className="mt-2 text-sm text-signal">Added — thank you! 🐬</p>}
+        <p className="mt-2 text-xs text-field-faint">
+          Adds your amount to the thermometer and opens Venmo (@tinybiggs) — enter the amount there to finish paying.
+        </p>
+        {status === "done" && (
+          <p className="mt-2 text-sm text-signal">Thanks! Venmo is open — enter your amount there to finish. 🐬</p>
+        )}
         {status === "error" && <p className="mt-2 text-sm text-danger">{error}</p>}
         {/* Honeypot: visually hidden, off the tab order, ignored by AT. Bots that fill it get dropped. */}
         <input
