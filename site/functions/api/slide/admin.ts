@@ -8,8 +8,7 @@ interface Env {
 
 function authorized(request: Request, env: Env): boolean {
   if (!env.SLIDE_ADMIN_KEY) return false;
-  const url = new URL(request.url);
-  const key = url.searchParams.get("key") || request.headers.get("x-admin-key") || "";
+  const key = request.headers.get("x-admin-key") || "";
   return key === env.SLIDE_ADMIN_KEY;
 }
 

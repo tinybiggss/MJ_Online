@@ -93,6 +93,16 @@ describe("admin actions", () => {
     expect(view.raisedConfirmed).toBe(100);
   });
 
+  it("unconfirm reverts a confirmed entry", async () => {
+    const kv = fakeKV();
+    await addDonation(kv, { amount: "40" }, 1000, () => "a");
+    await adminAction(kv, { action: "confirm", id: "a" }, 2000, () => "z");
+    await adminAction(kv, { action: "unconfirm", id: "a" }, 3000, () => "z");
+    const view = await getPublicView(kv);
+    expect(view.raisedConfirmed).toBe(0);
+    expect(view.raisedSelfReported).toBe(40);
+  });
+
   it("rejects unknown actions", async () => {
     const kv = fakeKV();
     await expect(adminAction(kv, { action: "nuke" } as any, 1, () => "z")).rejects.toThrow();
