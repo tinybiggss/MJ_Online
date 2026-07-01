@@ -1,0 +1,98 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base title="Slide Fund — Admin" description="Private admin" noindex={true}>
+  <main class="mx-auto max-w-2xl px-4 py-12">
+    <h1 class="text-2xl font-black">Slide Fund — Admin</h1>
+    <p class="mt-1 text-sm text-slate-500">
+      Add <code>?key=YOUR_KEY</code> to the URL. Confirm entries as they land in Venmo.
+    </p>
+    <div id="totals" class="my-4 font-semibold"></div>
+    <form id="add-form" class="mb-6 flex flex-wrap gap-2">
+      <input id="add-amount" type="number" step="0.01" placeholder="Amount" class="w-28 rounded border px-2 py-1" required />
+      <input id="add-name" placeholder="Name" class="rounded border px-2 py-1" />
+      <input id="add-note" placeholder="Note" class="grow rounded border px-2 py-1" />
+      <button class="rounded bg-blue-600 px-3 py-1 font-bold text-white">Add manual entry</button>
+    </form>
+    <div id="list"></div>
+  </main>
+</Base>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const key = params.get("key") || "";
+  const listEl = document.getElementById("list")!;
+  const totalsEl = document.getElementById("totals")!;
+
+  async function api(method: string, body?: unknown) {
+    // Auth is header-only (x-admin-key) so the token never lands in server logs.
+    // The key is read from the page URL (?key=) for convenience but sent as a header.
+    const headers: Record<string, string> = { "x-admin-key": key };
+    if (body) headers["content-type"] = "application/json";
+    const res = await fetch(`/api/slide/admin`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    return res.json();
+  }
+
+  function money(n: number) {
+    return `$${n.toFixed(2)}`;
+  }
+
+  async function refresh() {
+    const data = await api("GET");
+    if (!data.ok) {
+      listEl.innerHTML = `<p class="text-red-600">Unauthorized. Add ?key=… to the URL.</p>`;
+      return;
+    }
+    const entries = data.entries as any[];
+    const total = entries.reduce((s, e) => s + e.amount, 0);
+    const confirmed = entries.filter((e) => e.confirmed).reduce((s, e) => s + e.amount, 0);
+    totalsEl.textContent = `Total ${money(total)} · Confirmed ${money(confirmed)} · ${entries.length} entries`;
+    listEl.innerHTML = entries
+      .map(
+        (e) => `
+      <div class="flex items-center justify-between border-b py-2 gap-2">
+        <span>${e.confirmed ? "✅" : "⬜"} <strong>${money(e.amount)}</strong>
+          — ${escapeHtml(e.name || "Anonymous")}
+          ${e.note ? `<em class="text-slate-500">"${escapeHtml(e.note)}"</em>` : ""}</span>
+        <span class="flex gap-1">
+          <button data-act="${e.confirmed ? "unconfirm" : "confirm"}" data-id="${e.id}"
+            class="rounded bg-emerald-600 px-2 py-1 text-xs text-white">${e.confirmed ? "Unconfirm" : "Confirm"}</button>
+          <button data-act="delete" data-id="${e.id}"
+            class="rounded bg-red-600 px-2 py-1 text-xs text-white">Delete</button>
+        </span>
+      </div>`,
+      )
+      .join("");
+  }
+
+  function escapeHtml(s: string) {
+    return s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]!));
+  }
+
+  listEl.addEventListener("click", async (ev) => {
+    const btn = (ev.target as HTMLElement).closest("button");
+    if (!btn) return;
+    const action = btn.dataset.act!;
+    const id = btn.dataset.id!;
+    if (action === "delete" && !confirm("Delete this entry?")) return;
+    await api("POST", { action, id });
+    refresh();
+  });
+
+  document.getElementById("add-form")!.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const amount = (document.getElementById("add-amount") as HTMLInputElement).value;
+    const name = (document.getElementById("add-name") as HTMLInputElement).value;
+    const note = (document.getElementById("add-note") as HTMLInputElement).value;
+    await api("POST", { action: "add", amount, name, note, confirmed: true });
+    (ev.target as HTMLFormElement).reset();
+    refresh();
+  });
+
+  refresh();
+</script>
