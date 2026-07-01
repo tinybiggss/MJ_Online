@@ -9,7 +9,7 @@ const POLL_MS = 10_000;
 
 export default function SlideFund() {
   const [view, setView] = useState<PublicView | null>(null);
-  const [amount, setAmount] = useState<number>(20);
+  const [amount, setAmount] = useState<number>(60);
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
