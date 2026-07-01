@@ -27,6 +27,8 @@ export default function DolphinSlider({ amount, onChange }: Props) {
   const [dragging, setDragging] = useState(false);
   const [reduce, setReduce] = useState(false);
   const inputId = useId();
+  // Unique id for the dolphin's SVG gradient so multiple instances never collide.
+  const gradientId = `${inputId}-dolphinBody`;
 
   // Detect (and live-track) the reduced-motion preference on the client only.
   useEffect(() => {
@@ -166,7 +168,7 @@ export default function DolphinSlider({ amount, onChange }: Props) {
           {/* Splash ring under the dolphin */}
           <div className="absolute -bottom-1 left-1/2 h-2 w-12 -translate-x-1/2 rounded-[100%] bg-white/50 blur-[2px]" />
           <div className={motionClass}>
-            <Dolphin />
+            <Dolphin gradientId={gradientId} />
           </div>
         </div>
       </div>
@@ -184,7 +186,7 @@ export default function DolphinSlider({ amount, onChange }: Props) {
             min={1}
             step={1}
             value={Number.isFinite(amount) ? amount : ""}
-            onChange={(event) => onChange(Math.max(0, Number(event.target.value)))}
+            onChange={(event) => onChange(Math.max(1, Number(event.target.value) || 1))}
             className="w-24 border-0 bg-transparent px-1 text-lg font-semibold tabular-nums outline-none"
           />
         </div>
@@ -230,7 +232,7 @@ export default function DolphinSlider({ amount, onChange }: Props) {
  * A cute cartoon dolphin, facing right, mid-leap. Soft blue body, lighter belly,
  * curved dorsal + pectoral fins, a friendly eye and a little smile.
  */
-function Dolphin() {
+function Dolphin({ gradientId }: { gradientId: string }) {
   return (
     <svg
       width="60"
@@ -241,7 +243,7 @@ function Dolphin() {
       className="drop-shadow-[0_3px_4px_rgba(2,32,71,0.35)]"
     >
       <defs>
-        <linearGradient id="dolphinBody" x1="12" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+        <linearGradient id={gradientId} x1="12" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse">
           <stop stopColor="#5eb3f6" />
           <stop offset="1" stopColor="#2563eb" />
         </linearGradient>
@@ -250,13 +252,13 @@ function Dolphin() {
       {/* Tail fluke */}
       <path
         d="M11 46c-4-1-8 1-9 5 4 1 6-1 8-2 1 3 0 6-2 8 5 0 8-4 8-8 0-2-2-3-5-3z"
-        fill="url(#dolphinBody)"
+        fill={`url(#${gradientId})`}
       />
 
       {/* Main body: an arched leaping curve, nose up-right */}
       <path
         d="M13 44c3-16 15-30 34-31 6 0 10 3 12 8-6-2-11-1-15 2 5 1 8 4 9 9-5-3-10-3-14-1-4 8-13 14-24 14-2 0-4-4-2-4z"
-        fill="url(#dolphinBody)"
+        fill={`url(#${gradientId})`}
       />
 
       {/* Belly highlight */}

@@ -47,6 +47,7 @@ export default function SlideFund() {
       setCelebrate((c) => c + 1);
       setName("");
       setNote("");
+      setHoney("");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setStatus("error");

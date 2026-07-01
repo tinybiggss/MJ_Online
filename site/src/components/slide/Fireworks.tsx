@@ -70,6 +70,12 @@ export default function Fireworks({ intensity, celebrate }: Props) {
     resize();
     window.addEventListener("resize", resize);
 
+    // Stop the loop if the user enables Reduce Motion mid-session.
+    const onMotionChange = () => {
+      if (media.matches) cancelAnimationFrame(raf);
+    };
+    media.addEventListener("change", onMotionChange);
+
     const cssWidth = () => canvas.width / dpr;
     const cssHeight = () => canvas.height / dpr;
 
@@ -201,6 +207,7 @@ export default function Fireworks({ intensity, celebrate }: Props) {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      media.removeEventListener("change", onMotionChange);
     };
   }, []);
 
