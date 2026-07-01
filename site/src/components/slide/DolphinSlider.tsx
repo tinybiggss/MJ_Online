@@ -37,8 +37,6 @@ export default function DolphinSlider({ amount, onChange }: Props) {
   const [hop, setHop] = useState(0);
   const prevFractionRef = useRef(fractionForAmount(amount));
   const inputId = useId();
-  // Unique id for the dolphin's SVG gradient so multiple instances never collide.
-  const gradientId = `${inputId}-dolphinBody`;
 
   // Detect (and live-track) the reduced-motion preference on the client only.
   useEffect(() => {
@@ -200,14 +198,23 @@ export default function DolphinSlider({ amount, onChange }: Props) {
           />
         ))}
 
-        {/* The dolphin thumb — glides smoothly between spots, arcing on each move. */}
+        {/* The dolphin thumb — the 🐬 emoji glides smoothly between spots,
+            porpoising (rise/arc/dive) on each move. Layering keeps concerns
+            separate so the base "face right" flip never fights the animation:
+              • outer div  → horizontal `left` position + eased glide
+              • arc layer  → per-move leap (translateY + rotate), keyed by hop
+              • motion layer → idle bob / drag porpoise (translateY + rotate)
+              • inner span → ONLY the persistent scaleX(-1) flip. Because no
+                arc/bob keyframe ever touches this element, the flip can never
+                momentarily un-flip or double-flip mid-animation. */}
         <div
           className="pointer-events-none absolute bottom-8"
           style={{
             left: `calc(0.75rem + ${fraction} * (100% - 1.5rem))`,
             transform: "translateX(-50%)",
-            // Smooth eased horizontal glide (ease-out-quart) unless dragging.
-            transition: dragging ? "none" : "left 0.32s cubic-bezier(0.25, 1, 0.5, 1)",
+            // Smooth eased horizontal glide (swim across). No transition while
+            // dragging (track the pointer 1:1) or under reduced-motion (jump).
+            transition: dragging || reduce ? "none" : "left 0.36s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           {/* Splash ring — a fresh one plays each hop (keyed) unless reduced. */}
@@ -220,7 +227,15 @@ export default function DolphinSlider({ amount, onChange }: Props) {
           {/* Arc wrapper: keyed by `hop` so the leap restarts on every move. */}
           <div key={`arc-${hop}`} className={reduce ? "" : dragging ? "" : "dolphin-arc"}>
             <div className={dolphinMotion}>
-              <Dolphin gradientId={gradientId} />
+              {/* Innermost: the emoji itself, flipped to face right (direction
+                  of travel). This is the ONLY element carrying the flip. */}
+              <span
+                aria-hidden="true"
+                className="block select-none leading-none [text-shadow:0_3px_4px_rgba(2,32,71,0.35)]"
+                style={{ fontSize: "40px", transform: "scaleX(-1)" }}
+              >
+                🐬
+              </span>
             </div>
           </div>
         </div>
@@ -259,11 +274,15 @@ export default function DolphinSlider({ amount, onChange }: Props) {
           50%  { transform: translateY(-16px) rotate(6deg); }
           100% { transform: translateY(2px)   rotate(-16deg); }
         }
-        /* Per-move leap: rise up, arc over, dive back down. Plays once per hop. */
+        /* Per-move leap: rise up, arc over the top, dive back down along a
+           shallow parabola. Nose tips up on the rise and down on the dive so it
+           reads as porpoising. Plays once per hop. (translateY + rotate only —
+           never scaleX — so the inner span's face-right flip stays intact.) */
         @keyframes dolphinArc {
-          0%   { transform: translateY(0)    rotate(-10deg); }
-          35%  { transform: translateY(-22px) rotate(-2deg); }
-          70%  { transform: translateY(-8px)  rotate(14deg); }
+          0%   { transform: translateY(0)    rotate(-8deg); }
+          30%  { transform: translateY(-24px) rotate(-3deg); }
+          50%  { transform: translateY(-28px) rotate(0deg); }
+          72%  { transform: translateY(-14px) rotate(9deg); }
           100% { transform: translateY(0)    rotate(0deg); }
         }
         /* Landing splash: a quick expand-and-fade of the surface ring. */
@@ -279,7 +298,7 @@ export default function DolphinSlider({ amount, onChange }: Props) {
 
         .dolphin-bob   { animation: dolphinBob 2.6s ease-in-out infinite; transform-origin: 50% 80%; }
         .dolphin-drag  { animation: dolphinDrag 0.7s ease-in-out infinite; transform-origin: 50% 80%; }
-        .dolphin-arc   { animation: dolphinArc 0.34s cubic-bezier(0.25, 1, 0.5, 1) 1; transform-origin: 50% 80%; }
+        .dolphin-arc   { animation: dolphinArc 0.4s cubic-bezier(0.33, 0, 0.4, 1) 1; transform-origin: 50% 80%; }
         .dolphin-splash{ animation: dolphinSplash 0.5s ease-out 1; }
         .wave-back  { animation: waveDriftA 6s linear infinite; }
         .wave-mid   { animation: waveDriftB 4.5s linear infinite; }
@@ -291,74 +310,5 @@ export default function DolphinSlider({ amount, onChange }: Props) {
         }
       `}</style>
     </div>
-  );
-}
-
-/**
- * A friendly cartoon dolphin, facing right, mid-leap: curved body, a clear
- * dorsal fin, a swept tail fluke, a pointed beak/rostrum, a pectoral fin, and
- * a smiling eye. Soft blue gradient body with a lighter belly.
- */
-function Dolphin({ gradientId }: { gradientId: string }) {
-  return (
-    <svg
-      width="66"
-      height="66"
-      viewBox="0 0 64 64"
-      fill="none"
-      aria-hidden="true"
-      className="drop-shadow-[0_3px_4px_rgba(2,32,71,0.35)]"
-    >
-      <defs>
-        <linearGradient id={gradientId} x1="10" y1="8" x2="50" y2="56" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#6cbcf7" />
-          <stop offset="1" stopColor="#2563eb" />
-        </linearGradient>
-      </defs>
-
-      {/* Tail fluke — two lobes sweeping off the lower-left */}
-      <path
-        d="M7 50c-3.5-.5-6.5 1.2-7.5 4.4 3.2.6 5-.8 6.7-1.9.4 2.6-.4 4.9-2.1 6.6 4-.2 6.9-3 7.4-6.4l.1-1.3c-1.2-.6-2.8-1.2-4.6-1.4z"
-        fill={`url(#${gradientId})`}
-      />
-
-      {/* Main body: a smooth arched leap from the tail (lower-left) up to the
-          beak (upper-right). One continuous curved silhouette. */}
-      <path
-        d="M9 52
-           C 12 40, 18 26, 30 18
-           C 38 12, 47 9, 56 9
-           C 53 12, 49 14, 45 15
-           C 51 16, 55 20, 56 26
-           C 51 22, 45 22, 40 25
-           C 33 40, 22 51, 12 54
-           C 9.5 54.7, 8.4 53.4, 9 52 Z"
-        fill={`url(#${gradientId})`}
-      />
-
-      {/* Belly highlight following the body's underside */}
-      <path
-        d="M13 51
-           C 16 40, 22 27, 33 20
-           C 28 28, 24 37, 23 45
-           C 20 49, 16 51, 13 51 Z"
-        fill="#c7e6ff"
-        opacity="0.85"
-      />
-
-      {/* Dorsal fin rising off the mid-back */}
-      <path d="M31 17c1.6-6.5 6.4-10.2 12.4-10.4-3.2 3.2-4.6 7.4-3.6 11.8-2.9-2.4-6-2.6-8.8-1.4z" fill="#2f7fe0" />
-
-      {/* Pectoral fin sweeping down from the belly */}
-      <path d="M31 40c-3 4.6-8 7.2-13.6 6.4 4.2-4.4 8.6-6.8 13.6-6.4z" fill="#2f7fe0" />
-
-      {/* Beak/rostrum tip highlight */}
-      <path d="M52 12c1.6-.8 3.2-1.4 4-2.6-1.8.2-3.4.6-5 1.2z" fill="#c7e6ff" opacity="0.8" />
-
-      {/* Eye + smile near the beak */}
-      <circle cx="49" cy="19" r="2.4" fill="#0b2545" />
-      <circle cx="49.9" cy="18.1" r="0.8" fill="#ffffff" />
-      <path d="M51.5 24c2 1.2 4 1 5.4-1" stroke="#0b2545" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
   );
 }
