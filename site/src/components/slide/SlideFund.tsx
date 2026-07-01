@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { GOAL, VENMO_URL, formatUSD, formatUSDShort } from "./config";
+import { VENMO_URL, formatUSD } from "./config";
 import { fetchView, submitDonation, type PublicView } from "./api";
+import Thermometer from "./Thermometer";
 
 const POLL_MS = 10_000;
 
@@ -24,8 +25,6 @@ export default function SlideFund() {
   }, []);
 
   const raised = view?.raisedSelfReported ?? 0;
-  const pct = Math.min(100, (raised / GOAL) * 100);
-  const previewPct = Math.min(100, ((raised + amount) / GOAL) * 100);
 
   async function handleSelfReport() {
     setStatus("sending");
@@ -44,20 +43,7 @@ export default function SlideFund() {
 
   return (
     <div className="mx-auto max-w-xl">
-      {/* Thermometer (plain bar for now) */}
-      <div className="mb-6">
-        <div className="mb-1 flex justify-between text-sm font-semibold">
-          <span>{formatUSDShort(raised)} raised</span>
-          <span>Goal {formatUSD(GOAL)}</span>
-        </div>
-        <div className="relative h-6 w-full overflow-hidden rounded-full bg-blue-100">
-          <div className="absolute inset-y-0 left-0 bg-blue-300/60" style={{ width: `${previewPct}%` }} />
-          <div className="absolute inset-y-0 left-0 bg-blue-600 transition-[width] duration-700" style={{ width: `${pct}%` }} />
-        </div>
-        <p className="mt-1 text-sm text-slate-600">
-          {raised >= GOAL ? "Goal reached — thank you! 🎉" : `${formatUSD(GOAL - raised)} to go`}
-        </p>
-      </div>
+      <Thermometer raised={raised} preview={amount} />
 
       {/* Amount picker (plain input for now) */}
       <label className="block text-sm font-semibold">Amount</label>
