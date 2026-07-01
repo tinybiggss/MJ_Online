@@ -82,39 +82,39 @@ export default function SlideFund() {
         >
           Donate {formatUSD(amount)} via Venmo
         </a>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-field-faint">
           Opens Venmo (@tinybiggs). Enter the amount there, then tell the thermometer below.
         </p>
       </div>
 
       {/* Self-report */}
-      <div className="mt-6 rounded-xl border border-slate-200 p-4">
-        <p className="font-semibold">After you pay, add it to the total:</p>
+      <div className="mt-6 rounded-xl border border-field-line bg-field-panel p-4">
+        <p className="font-display font-semibold text-field-ink">After you pay, add it to the total:</p>
         <div className="mt-2 flex flex-wrap gap-2">
           <input
             placeholder="Name (optional)"
             value={name}
             maxLength={40}
             onChange={(e) => setName(e.target.value)}
-            className="rounded-lg border border-slate-300 px-3 py-2"
+            className="rounded-lg border border-field-line bg-field-panel-2 px-3 py-2 text-field-ink placeholder:text-field-faint"
           />
           <input
             placeholder="Note (optional)"
             value={note}
             maxLength={140}
             onChange={(e) => setNote(e.target.value)}
-            className="grow rounded-lg border border-slate-300 px-3 py-2"
+            className="grow rounded-lg border border-field-line bg-field-panel-2 px-3 py-2 text-field-ink placeholder:text-field-faint"
           />
         </div>
         <button
           onClick={handleSelfReport}
           disabled={status === "sending"}
-          className="mt-3 rounded-full bg-emerald-600 px-5 py-2 font-bold text-white disabled:opacity-50"
+          className="mt-3 rounded-full bg-signal px-5 py-2 font-bold text-field-bg transition-colors hover:bg-signal-deep disabled:opacity-50"
         >
           {status === "sending" ? "Adding…" : `I chipped in ${formatUSD(amount)}`}
         </button>
-        {status === "done" && <p className="mt-2 text-sm text-emerald-700">Added — thank you! 🐬</p>}
-        {status === "error" && <p className="mt-2 text-sm text-red-600">{error}</p>}
+        {status === "done" && <p className="mt-2 text-sm text-signal">Added — thank you! 🐬</p>}
+        {status === "error" && <p className="mt-2 text-sm text-danger">{error}</p>}
         {/* Honeypot: visually hidden, off the tab order, ignored by AT. Bots that fill it get dropped. */}
         <input
           type="text"
