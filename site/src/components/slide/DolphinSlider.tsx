@@ -151,8 +151,8 @@ export default function DolphinSlider({ amount, onChange }: Props) {
         aria-label="Donation amount"
         aria-valuemin={MIN}
         aria-valuemax={MAX}
-        aria-valuenow={snapped}
-        aria-valuetext={formatUSDShort(snapped)}
+        aria-valuenow={amount > 0 ? snapped : 0}
+        aria-valuetext={amount > 0 ? formatUSDShort(snapped) : "No amount selected"}
         tabIndex={0}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}

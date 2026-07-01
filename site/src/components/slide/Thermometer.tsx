@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { COMMUNITY_GOAL, communityFraction, formatUSDShort } from "./config";
+import { useEffect, useId, useRef, useState } from "react";
+import { GOAL, goalFraction, formatUSDShort } from "./config";
 import Fireworks from "./Fireworks";
 
 interface Props {
@@ -58,11 +58,14 @@ export default function Thermometer({ raised, yourAmount, celebrate }: Props) {
     return () => ro.disconnect();
   }, []);
 
-  const totalFrac = communityFraction(raised);
-  const stackedFrac = communityFraction(raised + Math.max(0, yourAmount));
-  const reached = raised >= COMMUNITY_GOAL;
-  const gradId = "thermo-mercury";
-  const glassId = "thermo-glass";
+  const totalFrac = goalFraction(raised);
+  const stackedFrac = goalFraction(raised + Math.max(0, yourAmount));
+  const reached = raised >= GOAL;
+  // Unique per-instance IDs so multiple thermometers never collide on defs.
+  const uid = useId();
+  const gradId = `${uid}-mercury`;
+  const glassId = `${uid}-glass`;
+  const clipId = `${uid}-clip`;
 
   // Convert viewBox units → CSS pixels for the firework overlay. The SVG uses
   // preserveAspectRatio="xMidYMid meet", so it scales uniformly and may letterbox.
@@ -92,7 +95,7 @@ export default function Thermometer({ raised, yourAmount, celebrate }: Props) {
           {formatUSDShort(raised)}
         </div>
         <div className="text-[0.62rem] font-semibold uppercase tracking-wide text-slate-500 sm:text-[0.7rem]">
-          of {formatUSDShort(COMMUNITY_GOAL)}
+          of {formatUSDShort(GOAL)}
         </div>
       </div>
 
@@ -116,7 +119,7 @@ export default function Thermometer({ raised, yourAmount, celebrate }: Props) {
               <stop offset="1" stopColor="#ffffff" stopOpacity="0.25" />
             </linearGradient>
             {/* Clip so mercury + preview stay inside the glass silhouette. */}
-            <clipPath id="thermo-clip">
+            <clipPath id={clipId}>
               <path
                 d={`M${TUBE_X - TUBE_W / 2} ${TUBE_TOP + TUBE_W / 2}
                     a ${TUBE_W / 2} ${TUBE_W / 2} 0 0 1 ${TUBE_W} 0
@@ -144,7 +147,7 @@ export default function Thermometer({ raised, yourAmount, celebrate }: Props) {
               origin. Using transform: scaleY (GPU-composited, cross-browser)
               instead of animating y/height (SVG geometry transitions don't work
               in Safari and would thrash layout elsewhere). */}
-          <g clipPath="url(#thermo-clip)">
+          <g clipPath={`url(#${clipId})`}>
             {/* Preview (your amount) — translucent, stacked above the mercury. */}
             {yourAmount > 0 && stackedFrac > totalFrac && (
               <rect
@@ -221,7 +224,7 @@ export default function Thermometer({ raised, yourAmount, celebrate }: Props) {
         {reached ? (
           <span className="font-semibold text-green-700">Goal! 🎉</span>
         ) : (
-          <>{formatUSDShort(COMMUNITY_GOAL - raised)} to go</>
+          <>{formatUSDShort(GOAL - raised)} to go</>
         )}
       </p>
 

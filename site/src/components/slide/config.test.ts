@@ -1,13 +1,13 @@
 import { describe, it, expect } from "vitest";
 import {
   GOAL,
-  COMMUNITY_GOAL,
+  HOST_SEED,
   STOPS,
   snapToStop,
   amountForFraction,
   fractionForAmount,
   clamp,
-  communityFraction,
+  goalFraction,
   formatUSD,
   VENMO_URL,
 } from "./config";
@@ -44,22 +44,24 @@ describe("fraction <-> amount along an evenly spaced track", () => {
   });
 });
 
-describe("community thermometer math", () => {
-  it("keeps the slide cost and community goal distinct", () => {
+describe("thermometer math", () => {
+  it("tops out at the full slide cost with a $100 host seed", () => {
     expect(GOAL).toBe(708.49);
-    expect(COMMUNITY_GOAL).toBe(600);
+    expect(HOST_SEED).toBe(100);
   });
   it("clamp bounds a value to [lo, hi]", () => {
     expect(clamp(5, 0, 10)).toBe(5);
     expect(clamp(-3, 0, 10)).toBe(0);
     expect(clamp(42, 0, 10)).toBe(10);
   });
-  it("communityFraction fills toward $600, clamped 0..1", () => {
-    expect(communityFraction(0)).toBe(0);
-    expect(communityFraction(300)).toBe(0.5);
-    expect(communityFraction(600)).toBe(1);
-    expect(communityFraction(900)).toBe(1); // past goal clamps at full
-    expect(communityFraction(-50)).toBe(0);
+  it("goalFraction fills toward the full goal, clamped 0..1", () => {
+    expect(goalFraction(0)).toBe(0);
+    expect(goalFraction(GOAL)).toBe(1);
+    expect(goalFraction(GOAL / 2)).toBeCloseTo(0.5, 5);
+    expect(goalFraction(GOAL + 200)).toBe(1); // past goal clamps at full
+    expect(goalFraction(-50)).toBe(0);
+    // The $100 host seed alone opens the thermometer ~1/7 of the way up.
+    expect(goalFraction(HOST_SEED)).toBeCloseTo(100 / 708.49, 5);
   });
 });
 

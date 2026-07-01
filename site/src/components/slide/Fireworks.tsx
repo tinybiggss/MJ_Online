@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { MIN, MAX } from "./config";
 
 interface Pt {
   x: number;
@@ -351,9 +350,4 @@ export default function Fireworks(props: Props) {
       aria-hidden="true"
     />
   );
-}
-
-/** Map a dollar amount to a 0..1 fireworks intensity across the slider range. */
-export function amountToIntensity(amount: number): number {
-  return Math.max(0, Math.min(1, (amount - MIN) / (MAX - MIN)));
 }

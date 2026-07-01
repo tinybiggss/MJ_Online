@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { VENMO_URL, formatUSD } from "./config";
+import { VENMO_URL, HOST_SEED, formatUSD } from "./config";
 import { fetchView, submitDonation, type PublicView } from "./api";
 import Thermometer from "./Thermometer";
 import DolphinSlider from "./DolphinSlider";
@@ -30,7 +30,9 @@ export default function SlideFund() {
     };
   }, []);
 
-  const raised = view?.raisedSelfReported ?? 0;
+  // Displayed thermometer total = Mike's $100 host seed + community self-reports.
+  // The seed is a display baseline only; it's never sent to the backend.
+  const displayTotal = HOST_SEED + (view?.raisedSelfReported ?? 0);
 
   async function handleSelfReport() {
     setStatus("sending");
@@ -70,7 +72,7 @@ export default function SlideFund() {
           {/* RIGHT: slim vertical thermometer column — stays beside the dolphin
               even on a ~360px phone (fixed ~92px) so nothing has to stack. */}
           <div className="flex w-[92px] shrink-0 items-stretch rounded-2xl bg-white/92 px-1 py-3 shadow-lg ring-1 ring-inset ring-white/60 backdrop-blur-sm sm:w-28 sm:px-2">
-            <Thermometer raised={raised} yourAmount={amount} celebrate={celebrate} />
+            <Thermometer raised={displayTotal} yourAmount={amount} celebrate={celebrate} />
           </div>
         </div>
       </div>
