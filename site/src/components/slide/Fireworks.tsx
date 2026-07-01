@@ -186,11 +186,13 @@ export default function Fireworks(props: Props) {
       const w = cssWidth();
       const h = cssHeight();
 
-      // Fade the previous frame — leaves gentle light trails.
-      ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = "rgba(0,0,0,0.20)";
+      // Fade the previous frame toward TRANSPARENT (not black) so the glass
+      // thermometer behind the canvas stays visible and only the sparks trail.
+      // destination-out lowers the alpha of existing pixels each frame.
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = "rgba(0,0,0,0.28)";
       ctx.fillRect(0, 0, w, h);
-      ctx.globalCompositeOperation = "lighter"; // additive glow
+      ctx.globalCompositeOperation = "lighter"; // additive glow for the sparks
 
       const finale = finaleRef.current;
 
