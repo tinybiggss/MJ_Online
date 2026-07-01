@@ -3,6 +3,7 @@ import { VENMO_URL, formatUSD } from "./config";
 import { fetchView, submitDonation, type PublicView } from "./api";
 import Thermometer from "./Thermometer";
 import DolphinSlider from "./DolphinSlider";
+import Fireworks, { amountToIntensity } from "./Fireworks";
 
 const POLL_MS = 10_000;
 
@@ -15,6 +16,8 @@ export default function SlideFund() {
   const [error, setError] = useState("");
   // Honeypot: stays empty for humans; bots that autofill it get silently dropped server-side.
   const [honey, setHoney] = useState("");
+  // Bumped on a committed chip-in to trigger a fireworks finale.
+  const [celebrate, setCelebrate] = useState(0);
 
   useEffect(() => {
     let alive = true;
@@ -41,6 +44,7 @@ export default function SlideFund() {
       });
       setView(updated);
       setStatus("done");
+      setCelebrate((c) => c + 1);
       setName("");
       setNote("");
     } catch (err) {
@@ -51,11 +55,21 @@ export default function SlideFund() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <Thermometer raised={raised} preview={amount} />
+      {/* Night-sky stage: fireworks glow behind the thermometer + dolphin slider.
+          Bursts get bigger/more frequent as the amount climbs; a finale fires on commit. */}
+      <div className="relative mb-6 overflow-hidden rounded-3xl bg-gradient-to-b from-[#0a1440] via-[#122a6b] to-[#1e3a8a] p-5 shadow-xl ring-1 ring-inset ring-white/10">
+        <Fireworks intensity={amountToIntensity(amount)} celebrate={celebrate} />
+        <div className="relative z-10 space-y-4">
+          {/* Light cards keep the (dark-text) thermometer + slider readable over the night sky. */}
+          <div className="rounded-2xl bg-white/92 p-4 shadow-lg ring-1 ring-inset ring-white/60 backdrop-blur-sm">
+            <Thermometer raised={raised} preview={amount} />
+          </div>
 
-      {/* Dolphin slider — the dolphin IS the thumb */}
-      <div className="mb-6 rounded-3xl bg-sky-50 p-3 ring-1 ring-inset ring-sky-100">
-        <DolphinSlider amount={amount} onChange={setAmount} />
+          {/* Dolphin slider — the dolphin IS the thumb */}
+          <div className="rounded-3xl bg-sky-50 p-3 shadow-lg ring-1 ring-inset ring-sky-100">
+            <DolphinSlider amount={amount} onChange={setAmount} />
+          </div>
+        </div>
       </div>
 
       {/* Donate via Venmo */}
