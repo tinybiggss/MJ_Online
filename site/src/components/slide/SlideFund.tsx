@@ -4,6 +4,7 @@ import { fetchView, submitDonation, type PublicView } from "./api";
 import Thermometer from "./Thermometer";
 import DolphinSlider from "./DolphinSlider";
 import Fireworks, { amountToIntensity } from "./Fireworks";
+import RecentChipIns from "./RecentChipIns";
 
 const POLL_MS = 10_000;
 
@@ -128,6 +129,8 @@ export default function SlideFund() {
           aria-hidden="true"
         />
       </div>
+
+      {view && <RecentChipIns recent={view.recent} />}
     </div>
   );
 }
