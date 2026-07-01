@@ -9,8 +9,8 @@ export default function RecentChipIns({ recent }: { recent: PublicView["recent"]
     <div className="mt-8">
       <h2 className="mb-2 font-display text-sm font-bold uppercase tracking-wide text-field-faint">Recent chip-ins</h2>
       <ul className="divide-y divide-field-line">
-        {recent.map((r, i) => (
-          <li key={i} className="flex items-baseline justify-between py-2">
+        {recent.map((r) => (
+          <li key={r.ts} className="flex items-baseline justify-between py-2">
             <span className="text-field-ink">
               <strong>{r.name}</strong>
               {r.note && <span className="text-field-muted"> — "{r.note}"</span>}

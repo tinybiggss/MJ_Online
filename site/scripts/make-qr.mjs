@@ -4,14 +4,14 @@ import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-const URL = "https://mikejones.online/july4";
+const TARGET_URL = "https://mikejones.online/july4";
 const outDir = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 
 const opts = { errorCorrectionLevel: "M", margin: 2, width: 900 };
 
-const svg = await QRCode.toString(URL, { ...opts, type: "svg" });
+const svg = await QRCode.toString(TARGET_URL, { ...opts, type: "svg" });
 writeFileSync(join(outDir, "july4-qr.svg"), svg);
-await QRCode.toFile(join(outDir, "july4-qr.png"), URL, opts);
+await QRCode.toFile(join(outDir, "july4-qr.png"), TARGET_URL, opts);
 
 const printHtml = `<!doctype html><html><head><meta charset="utf-8">
 <title>Dolphin Slide — Scan to Chip In</title>
@@ -30,6 +30,6 @@ const printHtml = `<!doctype html><html><head><meta charset="utf-8">
   <p class="url">mikejones.online/july4</p>
   <button class="noprint" onclick="window.print()" style="margin-top:2vh;padding:.6em 1.4em;font-size:1.1rem;">Print this</button>
 </body></html>`;
-writeFileSync(join(outDir, "july4-qr-print.html"), printHtml);
+writeFileSync(join(outDir, "july4-qr-print.html"), printHtml + "\n");
 
 console.log("QR assets written to site/public/: july4-qr.svg, july4-qr.png, july4-qr-print.html");
