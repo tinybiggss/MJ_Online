@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import SlideFund from "../components/slide/SlideFund.tsx";
+---
+
+<Base
+  title="Help Cover the Slide 🐬🎆 | 4th of July"
+  description="We rented a giant dolphin slide for the 4th of July — chip in to help cover the cost."
+  noindex={true}
+>
+  <main class="mx-auto max-w-2xl px-4 py-12">
+    <header class="mb-8 text-center">
+      <h1 class="text-4xl font-black tracking-tight">The Great Dolphin Slide 🐬</h1>
+      <p class="mt-3 text-lg text-slate-600">
+        We rented a giant inflatable dolphin slide for the kids this 4th of July.
+        It ran us <strong>$708.49</strong> — if you and the kids had fun, chip in a few bucks!
+        Every bit helps. 🎆
+      </p>
+    </header>
+
+    <SlideFund client:load />
+
+    <p class="mt-10 text-center text-xs text-slate-400">
+      Donations go straight to Venmo. The total here is self-reported for fun — thanks for being honest!
+    </p>
+  </main>
+</Base>

@@ -8,6 +8,8 @@ interface Props {
   bodyClass?: string;
   /** Which Google font families to load. */
   fonts?: ("sans" | "mono" | "serif")[];
+  /** If true, renders a noindex/nofollow meta tag (for unlisted pages). */
+  noindex?: boolean;
 }
 
 const {
@@ -15,6 +17,7 @@ const {
   description = "Mike Jones helps people and organizations operate at the intersection of AI, autonomy, and resilience. 29 years building systems that ship.",
   bodyClass = "bg-field-bg text-field-ink font-body antialiased",
   fonts = [],
+  noindex = false,
 } = Astro.props;
 
 // Build a single Google Fonts request for the families this page needs.
@@ -44,6 +47,7 @@ const fontParam = fonts.map((f) => `family=${families[f]}`).join("&");
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <slot name="head" />
   </head>
   <body class={bodyClass}>
