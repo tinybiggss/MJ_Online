@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { VENMO_URL, formatUSD } from "./config";
 import { fetchView, submitDonation, type PublicView } from "./api";
 import Thermometer from "./Thermometer";
+import DolphinSlider from "./DolphinSlider";
 
 const POLL_MS = 10_000;
 
@@ -12,6 +13,8 @@ export default function SlideFund() {
   const [note, setNote] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");
+  // Honeypot: stays empty for humans; bots that autofill it get silently dropped server-side.
+  const [honey, setHoney] = useState("");
 
   useEffect(() => {
     let alive = true;
@@ -30,7 +33,12 @@ export default function SlideFund() {
     setStatus("sending");
     setError("");
     try {
-      const updated = await submitDonation({ amount, name: name.trim(), note: note.trim() });
+      const updated = await submitDonation({
+        amount,
+        name: name.trim(),
+        note: note.trim(),
+        _honey: honey,
+      });
       setView(updated);
       setStatus("done");
       setName("");
@@ -45,16 +53,10 @@ export default function SlideFund() {
     <div className="mx-auto max-w-xl">
       <Thermometer raised={raised} preview={amount} />
 
-      {/* Amount picker (plain input for now) */}
-      <label className="block text-sm font-semibold">Amount</label>
-      <input
-        type="number"
-        min={1}
-        step={1}
-        value={amount}
-        onChange={(e) => setAmount(Math.max(0, Number(e.target.value)))}
-        className="mt-1 w-32 rounded-lg border border-slate-300 px-3 py-2 text-lg"
-      />
+      {/* Dolphin slider — the dolphin IS the thumb */}
+      <div className="mb-6 rounded-3xl bg-sky-50 p-3 ring-1 ring-inset ring-sky-100">
+        <DolphinSlider amount={amount} onChange={setAmount} />
+      </div>
 
       {/* Donate via Venmo */}
       <div className="mt-4">
@@ -99,8 +101,17 @@ export default function SlideFund() {
         </button>
         {status === "done" && <p className="mt-2 text-sm text-emerald-700">Added — thank you! 🐬</p>}
         {status === "error" && <p className="mt-2 text-sm text-red-600">{error}</p>}
-        {/* Honeypot */}
-        <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+        {/* Honeypot: visually hidden, off the tab order, ignored by AT. Bots that fill it get dropped. */}
+        <input
+          type="text"
+          name="_honey"
+          value={honey}
+          onChange={(e) => setHoney(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden"
+          aria-hidden="true"
+        />
       </div>
     </div>
   );

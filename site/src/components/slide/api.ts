@@ -17,6 +17,8 @@ export async function submitDonation(input: {
   amount: number;
   name?: string;
   note?: string;
+  /** Honeypot field — bots fill it; humans leave it blank. Sent so the server-side spam check can fire. */
+  _honey?: string;
 }): Promise<PublicView> {
   const res = await fetch("/api/slide/donate", {
     method: "POST",
