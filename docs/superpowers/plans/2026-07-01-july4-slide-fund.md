@@ -544,9 +544,9 @@ curl -s -X POST localhost:8788/api/slide/donate -H 'content-type: application/js
   -d '{"amount":"25","name":"Test","note":"woo"}' | grep -q '"ok":true' && echo "donate ok"
 # Total reflects it
 curl -s localhost:8788/api/slide | grep -q '"raisedSelfReported":25' && echo "total ok"
-# Admin requires key
+# Admin requires key (header-only: x-admin-key)
 curl -s -o /dev/null -w '%{http_code}\n' localhost:8788/api/slide/admin  # expect 401
-curl -s 'localhost:8788/api/slide/admin?key=testkey' | grep -q '"ok":true' && echo "admin ok"
+curl -s localhost:8788/api/slide/admin -H 'x-admin-key: testkey' | grep -q '"ok":true' && echo "admin ok"
 # Honeypot stores nothing
 curl -s -X POST localhost:8788/api/slide/donate -H 'content-type: application/json' \
   -d '{"amount":"999","_honey":"bot"}' >/dev/null
@@ -1466,9 +1466,13 @@ import Base from "../../layouts/Base.astro";
   const totalsEl = document.getElementById("totals")!;
 
   async function api(method: string, body?: unknown) {
-    const res = await fetch(`/api/slide/admin?key=${encodeURIComponent(key)}`, {
+    // Auth is header-only (x-admin-key) so the token never lands in server logs.
+    // The key is read from the page URL (?key=) for convenience but sent as a header.
+    const headers: Record<string, string> = { "x-admin-key": key };
+    if (body) headers["content-type"] = "application/json";
+    const res = await fetch(`/api/slide/admin`, {
       method,
-      headers: body ? { "content-type": "application/json" } : undefined,
+      headers,
       body: body ? JSON.stringify(body) : undefined,
     });
     return res.json();
