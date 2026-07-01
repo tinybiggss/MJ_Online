@@ -1,6 +1,9 @@
 /** Shared constants + pure math for the dolphin donation widget. */
 
+/** The true cost of the slide — used only in the intro copy. */
 export const GOAL = 708.49;
+/** The thermometer's goal/top. Mercury fills toward this ($600), not the full cost. */
+export const COMMUNITY_GOAL = 600;
 export const VENMO_HANDLE = "tinybiggs";
 export const VENMO_URL = `https://venmo.com/u/${VENMO_HANDLE}`;
 
@@ -40,6 +43,19 @@ export function amountForFraction(fraction: number): number {
   const clamped = Math.max(0, Math.min(1, fraction));
   const idx = Math.round(clamped * (STOPS.length - 1));
   return STOPS[idx];
+}
+
+/** Clamp a number to the inclusive [lo, hi] range. */
+export function clamp(value: number, lo: number, hi: number): number {
+  return Math.max(lo, Math.min(hi, value));
+}
+
+/**
+ * Fraction (0..1) of the community goal that a raised total represents.
+ * Drives the thermometer's mercury height from the bulb.
+ */
+export function communityFraction(raised: number): number {
+  return clamp(raised / COMMUNITY_GOAL, 0, 1);
 }
 
 export function formatUSD(n: number): string {

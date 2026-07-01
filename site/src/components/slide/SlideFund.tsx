@@ -3,7 +3,6 @@ import { VENMO_URL, formatUSD } from "./config";
 import { fetchView, submitDonation, type PublicView } from "./api";
 import Thermometer from "./Thermometer";
 import DolphinSlider from "./DolphinSlider";
-import Fireworks, { amountToIntensity } from "./Fireworks";
 import RecentChipIns from "./RecentChipIns";
 
 const POLL_MS = 10_000;
@@ -58,19 +57,20 @@ export default function SlideFund() {
 
   return (
     <div className="mx-auto max-w-xl">
-      {/* Night-sky stage: fireworks glow behind the thermometer + dolphin slider.
-          Bursts get bigger/more frequent as the amount climbs; a finale fires on commit. */}
-      <div className="relative mb-6 overflow-hidden rounded-3xl bg-gradient-to-b from-[#0a1440] via-[#122a6b] to-[#1e3a8a] p-5 shadow-xl ring-1 ring-inset ring-white/10">
-        <Fireworks intensity={amountToIntensity(amount)} celebrate={celebrate} />
-        <div className="relative z-10 space-y-4">
-          {/* Light cards keep the (dark-text) thermometer + slider readable over the night sky. */}
-          <div className="rounded-2xl bg-white/92 p-4 shadow-lg ring-1 ring-inset ring-white/60 backdrop-blur-sm">
-            <Thermometer raised={raised} preview={amount} />
+      {/* Night-sky stage: a vertical thermometer (with its own integrated rocket
+          firework) sits beside the dolphin slider. The firework is anchored to
+          the tube — fuse at the bulb, rocket rising to "total + your pick". */}
+      <div className="relative mb-6 overflow-hidden rounded-3xl bg-gradient-to-b from-[#0a1440] via-[#122a6b] to-[#1e3a8a] p-3 shadow-xl ring-1 ring-inset ring-white/10 sm:p-5">
+        <div className="relative z-10 flex items-stretch gap-3 sm:gap-4">
+          {/* LEFT: dolphin slider + custom-amount input. Takes the remaining width. */}
+          <div className="min-w-0 flex-1 self-center rounded-3xl bg-sky-50 p-3 shadow-lg ring-1 ring-inset ring-sky-100">
+            <DolphinSlider amount={amount} onChange={setAmount} />
           </div>
 
-          {/* Dolphin slider — the dolphin IS the thumb */}
-          <div className="rounded-3xl bg-sky-50 p-3 shadow-lg ring-1 ring-inset ring-sky-100">
-            <DolphinSlider amount={amount} onChange={setAmount} />
+          {/* RIGHT: slim vertical thermometer column — stays beside the dolphin
+              even on a ~360px phone (fixed ~92px) so nothing has to stack. */}
+          <div className="flex w-[92px] shrink-0 items-stretch rounded-2xl bg-white/92 px-1 py-3 shadow-lg ring-1 ring-inset ring-white/60 backdrop-blur-sm sm:w-28 sm:px-2">
+            <Thermometer raised={raised} yourAmount={amount} celebrate={celebrate} />
           </div>
         </div>
       </div>

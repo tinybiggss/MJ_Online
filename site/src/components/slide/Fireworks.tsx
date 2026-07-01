@@ -1,24 +1,40 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MIN, MAX } from "./config";
 
+interface Pt {
+  x: number;
+  y: number;
+}
+
 interface Props {
-  /** 0..1 intensity, typically the selected amount mapped across MIN..MAX. */
-  intensity: number;
-  /** Bump this number to trigger a celebratory finale burst (e.g. on a committed chip-in). */
+  /** Pixel anchor of the bulb centre — the rocket/fuse launch point. */
+  bulb: Pt;
+  /** Pixel anchor of the goal line (top of the tube). */
+  top: Pt;
+  /** Pixel anchor of the live committed-total fill line. */
+  totalLine: Pt;
+  /** Pixel anchor of the stacked (total + your amount) fill line. */
+  stackedLine: Pt;
+  /** 0..1 committed-total fraction. */
+  totalFrac: number;
+  /** 0..1 stacked fraction (total + your amount). */
+  stackedFrac: number;
+  /** Tube width in px — scales burst radius sensibly across screen sizes. */
+  tubeWidth: number;
+  /** Bump to fire a celebratory finale (committed chip-in). */
   celebrate: number;
 }
 
-/** A rising rocket that bursts when it reaches its apex. */
 interface Rocket {
   x: number;
   y: number;
   vy: number;
   targetY: number;
   color: string;
+  /** 0..1 — how high this rocket climbs; scales the burst. */
   power: number;
 }
 
-/** A spark thrown off by a burst. */
 interface Spark {
   x: number;
   y: number;
@@ -28,27 +44,42 @@ interface Spark {
   max: number;
   color: string;
   size: number;
-  /** Recent positions for a short comet trail. */
-  trail: { x: number; y: number }[];
+  trail: Pt[];
+  /** Sparks near the mercury surface get less gravity so pops read cleanly. */
+  gravity: number;
 }
 
 // Festive July-4th palette: reds, whites, blues, plus gold + cyan sparkle.
 const COLORS = ["#ef4444", "#ffffff", "#3b82f6", "#fbbf24", "#22d3ee", "#f472b6"];
+const FUSE_COLORS = ["#fbbf24", "#fb923c", "#fde68a"];
 
-function pick(): string {
-  return COLORS[Math.floor(Math.random() * COLORS.length)];
+function pick(list: string[] = COLORS): string {
+  return list[Math.floor(Math.random() * list.length)];
 }
 
-export default function Fireworks({ intensity, celebrate }: Props) {
+export default function Fireworks(props: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const intensityRef = useRef(intensity);
-  intensityRef.current = intensity;
-  // A short-lived burst of extra energy triggered by commits; decays over time.
+  const [reduce, setReduce] = useState(false);
+
+  // Live props for the animation loop (avoids re-subscribing the RAF each frame).
+  const propsRef = useRef(props);
+  propsRef.current = props;
+
+  // A short-lived finale energy triggered by commits / reaching the top; decays.
   const finaleRef = useRef(0);
+  // Track stacked movement so a rising stack launches a rocket immediately.
+  const lastStackedRef = useRef(props.stackedFrac);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (media.matches) return; // No canvas animation at all when reduce is set.
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduce(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (reduce) return; // Static thermometer handles the reduced-motion case.
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -56,8 +87,10 @@ export default function Fireworks({ intensity, celebrate }: Props) {
     if (!ctx) return;
 
     let raf = 0;
-    let lastSpawn = 0;
     let dpr = 1;
+    let lastTotalSpawn = 0;
+    let lastRocketSpawn = 0;
+    let fuseSpawn = 0;
     const rockets: Rocket[] = [];
     const sparks: Spark[] = [];
 
@@ -70,132 +103,206 @@ export default function Fireworks({ intensity, celebrate }: Props) {
     resize();
     window.addEventListener("resize", resize);
 
-    // Stop the loop if the user enables Reduce Motion mid-session.
-    const onMotionChange = () => {
-      if (media.matches) cancelAnimationFrame(raf);
-    };
-    media.addEventListener("change", onMotionChange);
-
     const cssWidth = () => canvas.width / dpr;
     const cssHeight = () => canvas.height / dpr;
 
-    /** Launch a rocket from the bottom that will burst near a random height. */
-    function launch(power: number) {
-      const w = cssWidth();
-      const h = cssHeight();
-      const x = w * (0.12 + Math.random() * 0.76);
-      // Bigger power → bursts higher up in the sky.
-      const targetY = h * (0.5 - power * 0.35 - Math.random() * 0.1);
-      const distance = h - targetY;
+    /** Launch a rocket from the bulb up to a target y (the stacked fill line). */
+    function launchRocket(from: Pt, targetY: number, power: number) {
+      const distance = Math.max(8, from.y - targetY);
       rockets.push({
-        x,
-        y: h + 4,
-        vy: -Math.sqrt(distance) * 0.9, // just enough to reach the apex
+        x: from.x + (Math.random() - 0.5) * 4,
+        y: from.y,
+        vy: -Math.sqrt(distance) * 0.85, // just enough to reach the apex
         targetY,
         color: pick(),
         power,
       });
     }
 
-    /** Explode a rocket into a radial shell of sparks. */
-    function explode(x: number, y: number, power: number, tint: string) {
-      const count = Math.round(30 + power * 70);
-      const speed = 2.2 + power * 4.5;
-      // Occasionally give the whole shell a single color for a cleaner pop.
+    /** Explode into a radial shell of sparks. `radius` scales with burst power. */
+    function explode(x: number, y: number, power: number, tint: string, radius: number) {
+      const count = Math.round(18 + power * 60);
+      const speed = 1.2 + power * 3.6 + radius * 0.02;
       const monochrome = Math.random() < 0.5;
       for (let i = 0; i < count; i++) {
-        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.2;
-        const s = speed * (0.55 + Math.random() * 0.7);
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.3;
+        const s = speed * (0.5 + Math.random() * 0.7);
         sparks.push({
           x,
           y,
           vx: Math.cos(angle) * s,
           vy: Math.sin(angle) * s,
           life: 0,
-          max: 55 + Math.random() * 35,
+          max: 42 + Math.random() * 32,
           color: monochrome ? tint : pick(),
-          size: 1.6 + power * 1.6,
+          size: 1.2 + power * 1.5,
           trail: [],
+          gravity: 0.045,
         });
       }
     }
 
+    /** A small pop right at the mercury surface (always-on for the real total). */
+    function surfacePop(at: Pt, power: number) {
+      const count = Math.round(5 + power * 10);
+      for (let i = 0; i < count; i++) {
+        const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.1;
+        const s = 0.8 + Math.random() * (1.4 + power * 1.6);
+        sparks.push({
+          x: at.x + (Math.random() - 0.5) * 10,
+          y: at.y,
+          vx: Math.cos(angle) * s,
+          vy: Math.sin(angle) * s,
+          life: 0,
+          max: 26 + Math.random() * 20,
+          color: pick(),
+          size: 1.1 + power * 0.9,
+          trail: [],
+          gravity: 0.03,
+        });
+      }
+    }
+
+    /** A short sparking fuse at the bulb — most visible at low levels. */
+    function fuseSpark(bulb: Pt) {
+      const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.6;
+      const s = 0.6 + Math.random() * 1.4;
+      sparks.push({
+        x: bulb.x + (Math.random() - 0.5) * 6,
+        y: bulb.y - 2,
+        vx: Math.cos(angle) * s,
+        vy: Math.sin(angle) * s,
+        life: 0,
+        max: 16 + Math.random() * 12,
+        color: pick(FUSE_COLORS),
+        size: 1.2,
+        trail: [],
+        gravity: 0.06,
+      });
+    }
+
     function frame(t: number) {
+      const p = propsRef.current;
       const w = cssWidth();
       const h = cssHeight();
-      // Fade the previous frame instead of clearing — leaves gentle light trails.
+
+      // Fade the previous frame — leaves gentle light trails.
       ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = "rgba(0,0,0,0.18)";
+      ctx.fillStyle = "rgba(0,0,0,0.20)";
       ctx.fillRect(0, 0, w, h);
-      ctx.globalCompositeOperation = "lighter"; // additive glow for the sparks
+      ctx.globalCompositeOperation = "lighter"; // additive glow
 
-      // Effective power blends the selected-amount intensity with any active finale.
-      const base = intensityRef.current; // 0..1
-      const finale = finaleRef.current; // 0..1, decays
-      const power = Math.min(1, base * 0.9 + finale);
+      const finale = finaleRef.current;
 
-      // Spawn cadence: higher power → more frequent launches. Finale floods the sky.
-      const interval = finale > 0.05 ? 130 : 950 - base * 720;
-      if (power > 0.02 && t - lastSpawn > interval) {
-        lastSpawn = t;
-        launch(power);
-        // Near the top of the range (or during a finale), send up a small volley.
-        if (power > 0.75 && Math.random() < 0.6) launch(power);
+      // --- Detect a rising stack (dragging up) → launch a rocket to its apex ---
+      const rose = p.stackedFrac > lastStackedRef.current + 0.001;
+      const stackAbove = p.stackedFrac > p.totalFrac + 0.01;
+      // Cadence-limited continuous rockets whenever there's a live "your amount"
+      // segment above the real total; plus an instant one when it rises.
+      if (stackAbove) {
+        const power = p.stackedFrac; // higher stack → bigger burst
+        if (rose || t - lastRocketSpawn > 620 - power * 260) {
+          lastRocketSpawn = t;
+          launchRocket(p.bulb, p.stackedLine.y, power);
+        }
+      }
+      lastStackedRef.current = p.stackedFrac;
+
+      // --- Always-on fuse at the bulb (denser when the total is low) ---
+      const fuseRate = 90 + p.totalFrac * 220; // ms between sparks
+      if (t - fuseSpawn > fuseRate) {
+        fuseSpawn = t;
+        fuseSpark(p.bulb);
       }
 
-      // Rockets rise, trailing a spark, then burst at apex.
+      // --- Always-on little pops along the real mercury top ---
+      if (p.totalFrac > 0.001) {
+        const interval = 700 - p.totalFrac * 500; // higher total → more frequent
+        if (t - lastTotalSpawn > interval) {
+          lastTotalSpawn = t;
+          surfacePop(p.totalLine, p.totalFrac);
+        }
+      }
+
+      // --- Finale: flurry of bursts around the top ---
+      if (finale > 0.05) {
+        if (Math.random() < finale * 0.5) {
+          const fx = p.top.x + (Math.random() - 0.5) * p.tubeWidth * 3;
+          const fy = p.top.y + Math.random() * (p.bulb.y - p.top.y) * 0.4;
+          explode(fx, fy, 0.5 + Math.random() * 0.5, pick(), p.tubeWidth * 2);
+        }
+      }
+
+      // --- Rockets rise, trailing sparks, then burst at their target apex ---
       for (let i = rockets.length - 1; i >= 0; i--) {
         const r = rockets[i];
         r.y += r.vy;
-        r.vy += 0.06; // gravity slows the ascent
+        r.vy += 0.05; // gravity slows the ascent
         // Ascent trail
-        ctx.globalAlpha = 0.9;
+        ctx.globalAlpha = 0.95;
         ctx.fillStyle = r.color;
         ctx.beginPath();
-        ctx.arc(r.x, r.y, 1.8, 0, Math.PI * 2);
+        ctx.arc(r.x, r.y, 1.7, 0, Math.PI * 2);
         ctx.fill();
+        // Little sparks off the tail
+        if (Math.random() < 0.6) {
+          sparks.push({
+            x: r.x,
+            y: r.y + 2,
+            vx: (Math.random() - 0.5) * 0.6,
+            vy: 0.4 + Math.random() * 0.6,
+            life: 0,
+            max: 12 + Math.random() * 8,
+            color: pick(FUSE_COLORS),
+            size: 1,
+            trail: [],
+            gravity: 0.02,
+          });
+        }
         if (r.y <= r.targetY || r.vy >= 0) {
-          explode(r.x, r.y, r.power, r.color);
+          explode(r.x, r.y, r.power, r.color, p.tubeWidth * 2.4);
           rockets.splice(i, 1);
         }
       }
 
-      // Sparks drift, fall under gravity, fade, and drag their comet trail.
+      // --- Sparks drift, fall, fade, drag their comet trail ---
       for (let i = sparks.length - 1; i >= 0; i--) {
-        const p = sparks[i];
-        p.life++;
-        p.trail.push({ x: p.x, y: p.y });
-        if (p.trail.length > 5) p.trail.shift();
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.05; // gravity
-        p.vx *= 0.985;
-        p.vy *= 0.985;
-        const alpha = 1 - p.life / p.max;
+        const s = sparks[i];
+        s.life++;
+        s.trail.push({ x: s.x, y: s.y });
+        if (s.trail.length > 4) s.trail.shift();
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += s.gravity;
+        s.vx *= 0.985;
+        s.vy *= 0.985;
+        const alpha = 1 - s.life / s.max;
         if (alpha <= 0) {
           sparks.splice(i, 1);
           continue;
         }
-        // Trail
-        for (let j = 0; j < p.trail.length; j++) {
-          const pt = p.trail[j];
-          ctx.globalAlpha = alpha * (j / p.trail.length) * 0.5;
-          ctx.fillStyle = p.color;
+        for (let j = 0; j < s.trail.length; j++) {
+          const pt = s.trail[j];
+          ctx.globalAlpha = alpha * (j / s.trail.length) * 0.5;
+          ctx.fillStyle = s.color;
           ctx.beginPath();
-          ctx.arc(pt.x, pt.y, p.size * 0.6, 0, Math.PI * 2);
+          ctx.arc(pt.x, pt.y, s.size * 0.6, 0, Math.PI * 2);
           ctx.fill();
         }
-        // Head
         ctx.globalAlpha = alpha;
-        ctx.fillStyle = p.color;
+        ctx.fillStyle = s.color;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // Decay the finale energy back toward zero.
       if (finaleRef.current > 0) {
-        finaleRef.current = Math.max(0, finaleRef.current - 0.012);
+        finaleRef.current = Math.max(0, finaleRef.current - 0.01);
+      }
+
+      // Auto-finale when the stack reaches the very top (kept subtle / one-shot-ish).
+      if (p.stackedFrac >= 0.999 && finaleRef.current < 0.4) {
+        finaleRef.current = 0.9;
       }
 
       ctx.globalAlpha = 1;
@@ -207,15 +314,33 @@ export default function Fireworks({ intensity, celebrate }: Props) {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
-      media.removeEventListener("change", onMotionChange);
     };
-  }, []);
+  }, [reduce]);
 
-  // Celebratory finale on commit: pump the finale energy so the sky lights up.
+  // Celebratory finale on a committed chip-in.
   useEffect(() => {
-    if (celebrate === 0) return;
+    if (props.celebrate === 0) return;
     finaleRef.current = 1;
-  }, [celebrate]);
+    // Fire one big central burst immediately for punch.
+    // (Handled by the finale flurry inside the loop; this just pumps energy.)
+  }, [props.celebrate]);
+
+  if (reduce) {
+    // Static "🎆 goal" marker; no canvas animation.
+    return (
+      <div
+        className="pointer-events-none absolute select-none text-lg"
+        style={{
+          left: props.top.x,
+          top: props.top.y,
+          transform: "translate(-50%, -140%)",
+        }}
+        aria-hidden="true"
+      >
+        🎆
+      </div>
+    );
+  }
 
   return (
     <canvas

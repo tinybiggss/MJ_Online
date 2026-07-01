@@ -1,5 +1,16 @@
 import { describe, it, expect } from "vitest";
-import { GOAL, STOPS, snapToStop, amountForFraction, fractionForAmount, formatUSD, VENMO_URL } from "./config";
+import {
+  GOAL,
+  COMMUNITY_GOAL,
+  STOPS,
+  snapToStop,
+  amountForFraction,
+  fractionForAmount,
+  clamp,
+  communityFraction,
+  formatUSD,
+  VENMO_URL,
+} from "./config";
 
 describe("stops", () => {
   it("has the agreed 18 stops from 10 to 300", () => {
@@ -30,6 +41,25 @@ describe("fraction <-> amount along an evenly spaced track", () => {
   });
   it("amounts above 300 park at the far right", () => {
     expect(fractionForAmount(1000)).toBe(1);
+  });
+});
+
+describe("community thermometer math", () => {
+  it("keeps the slide cost and community goal distinct", () => {
+    expect(GOAL).toBe(708.49);
+    expect(COMMUNITY_GOAL).toBe(600);
+  });
+  it("clamp bounds a value to [lo, hi]", () => {
+    expect(clamp(5, 0, 10)).toBe(5);
+    expect(clamp(-3, 0, 10)).toBe(0);
+    expect(clamp(42, 0, 10)).toBe(10);
+  });
+  it("communityFraction fills toward $600, clamped 0..1", () => {
+    expect(communityFraction(0)).toBe(0);
+    expect(communityFraction(300)).toBe(0.5);
+    expect(communityFraction(600)).toBe(1);
+    expect(communityFraction(900)).toBe(1); // past goal clamps at full
+    expect(communityFraction(-50)).toBe(0);
   });
 });
 
