@@ -19,7 +19,7 @@ export async function submitDonation(input: {
   note?: string;
   /** Honeypot field — bots fill it; humans leave it blank. Sent so the server-side spam check can fire. */
   _honey?: string;
-}): Promise<PublicView> {
+}): Promise<PublicView | undefined> {
   const res = await fetch("/api/slide/donate", {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -27,5 +27,5 @@ export async function submitDonation(input: {
   });
   const data = await res.json();
   if (!res.ok || !data.ok) throw new Error(data.error || "Could not record your chip-in.");
-  return data.view as PublicView;
+  return data.view as PublicView | undefined;
 }

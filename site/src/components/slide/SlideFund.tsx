@@ -43,7 +43,8 @@ export default function SlideFund() {
         note: note.trim(),
         _honey: honey,
       });
-      setView(updated);
+      // A honeypot (bot) submission returns no view; don't blank the thermometer.
+      if (updated) setView(updated);
       setStatus("done");
       setCelebrate((c) => c + 1);
       setName("");
