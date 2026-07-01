@@ -99,7 +99,7 @@ export default function Thermometer({ raised, yourAmount, celebrate }: Props) {
         </div>
       </div>
 
-      <div ref={wrapRef} className="relative h-64 w-full sm:h-80">
+      <div ref={wrapRef} className="relative h-56 w-full sm:h-72">
         <svg
           viewBox={`0 0 ${VB_W} ${VB_H}`}
           preserveAspectRatio="xMidYMid meet"

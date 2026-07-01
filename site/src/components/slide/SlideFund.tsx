@@ -68,7 +68,7 @@ export default function SlideFund() {
       {/* Night-sky stage: a vertical thermometer (with its own integrated rocket
           firework) sits beside the dolphin slider. The firework is anchored to
           the tube — fuse at the bulb, rocket rising to "total + your pick". */}
-      <div className="relative mb-6 overflow-hidden rounded-3xl bg-gradient-to-b from-[#0a1440] via-[#122a6b] to-[#1e3a8a] p-3 shadow-xl ring-1 ring-inset ring-white/10 sm:p-5">
+      <div className="relative mb-4 overflow-hidden rounded-3xl bg-gradient-to-b from-[#0a1440] via-[#122a6b] to-[#1e3a8a] p-3 shadow-xl ring-1 ring-inset ring-white/10 sm:p-4">
         <div className="relative z-10 flex items-stretch gap-3 sm:gap-4">
           {/* LEFT: dolphin slider + custom-amount input. Takes the remaining width. */}
           <div className="min-w-0 flex-1 self-center rounded-3xl bg-sky-50 p-3 shadow-lg ring-1 ring-inset ring-sky-100">
