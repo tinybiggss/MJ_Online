@@ -58,3 +58,24 @@ The form is progressively enhanced: with JS it submits via `fetch` and shows inl
 - `public/robots.txt` + generated `sitemap-index.xml` are included for SEO.
 - **Chatbot:** `src/components/ChatbotSlot.astro` currently loads the existing custom widget as a placeholder. To switch to the Distills career-bot, replace the two `<script>` tags there with the Distills embed snippet — nothing else changes.
 - The Substack RSS feed is fetched **at build time**. New essays appear on the next deploy/rebuild. To auto-refresh, add a Cloudflare Pages **Deploy Hook** on a cron (e.g. daily) later.
+
+## July 4th Slide Fund (`/july4`)
+
+Unlisted donation page backed by Cloudflare KV. One-time setup in the Cloudflare dashboard:
+
+1. **Workers & Pages → KV → Create namespace** → name it `slide-fund`.
+2. In the **Pages project → Settings → Functions → KV namespace bindings**, add a
+   binding: variable name `SLIDE_KV` → the `slide-fund` namespace (for Production and Preview).
+3. In **Settings → Environment variables**, add `SLIDE_ADMIN_KEY` = a long random secret.
+4. Redeploy.
+
+- Public page: `https://mikejones.online/july4`
+- Admin: `https://mikejones.online/july4/admin?key=YOUR_SLIDE_ADMIN_KEY`
+- Venmo target: `https://venmo.com/u/tinybiggs` (money moves here; the total is self-reported)
+- Printable QR: `site/public/july4-qr-print.html` (regenerate with `npm run qr`)
+
+Local testing mirrors production bindings:
+```bash
+npm run build
+npx wrangler pages dev dist --kv SLIDE_KV --binding SLIDE_ADMIN_KEY=testkey
+```
