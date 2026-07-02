@@ -47,3 +47,8 @@ node_modules/
 # Uncomment if you don't want to commit agent memory
 # *-MEMORY.json
 # PROJECT-MEMORY.json
+
+# Build / tool caches (machine-generated)
+.playwright-mcp/
+.wrangler/
+.claude/settings.local.json
