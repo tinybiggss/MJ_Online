@@ -26,6 +26,10 @@ interface Props {
  */
 export default function DolphinSlider({ amount, onChange }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
+  // Drag state as a ref (read synchronously by the window move handler) plus a
+  // state mirror for styling/animation. The ref avoids the stale-closure / async
+  // pitfalls that make touch dragging flaky on mobile Safari.
+  const draggingRef = useRef(false);
   const [dragging, setDragging] = useState(false);
   const [reduce, setReduce] = useState(false);
   // The custom-amount field owns its own text so it can be fully cleared and
@@ -81,15 +85,28 @@ export default function DolphinSlider({ amount, onChange }: Props) {
     [onChange],
   );
 
+  // Start a drag on pointer/touch down and follow moves on `window` until release.
+  // Listening on window (rather than the element + setPointerCapture) reliably
+  // tracks touch drags on mobile Safari, where pointer capture can drop moves.
   const onPointerDown = (event: React.PointerEvent) => {
-    (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
+    draggingRef.current = true;
     setDragging(true);
     setFromClientX(event.clientX);
+
+    const onMove = (moveEvent: PointerEvent) => {
+      if (draggingRef.current) setFromClientX(moveEvent.clientX);
+    };
+    const onUp = () => {
+      draggingRef.current = false;
+      setDragging(false);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
   };
-  const onPointerMove = (event: React.PointerEvent) => {
-    if (dragging) setFromClientX(event.clientX);
-  };
-  const endDrag = () => setDragging(false);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     const idx = STOPS.indexOf(snapToStop(amount));
@@ -153,9 +170,6 @@ export default function DolphinSlider({ amount, onChange }: Props) {
         aria-valuetext={amount > 0 ? formatUSDShort(snapped) : "No amount selected"}
         tabIndex={0}
         onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
         onKeyDown={onKeyDown}
         className="group relative h-28 w-full cursor-grab touch-none overflow-hidden rounded-3xl bg-gradient-to-b from-sky-300 via-sky-400 to-blue-600 shadow-inner outline-none ring-sky-500 focus-visible:ring-4 active:cursor-grabbing"
       >
