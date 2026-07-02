@@ -52,3 +52,7 @@ node_modules/
 .playwright-mcp/
 .wrangler/
 .claude/settings.local.json
+
+# Local skill installs (impeccable critique skill)
+.impeccable/
+.claude/skills/impeccable/
