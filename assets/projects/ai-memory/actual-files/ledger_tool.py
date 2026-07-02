@@ -53,6 +53,8 @@ def main():
     ap.add_argument("--ledger", default=str(LEDGER),
                     help=f"Override ledger path (default: {LEDGER})")
     ap.add_argument("--backup", action="store_true", help="Create .bak of ledger before append")
+    ap.add_argument("--replace-session", metavar="SID", default=None,
+                    help="If a status:stub entry with this session_id exists, replace it in place; otherwise append")
     ap.add_argument("--dedupe", action="store_true", help="Run dedupe script after append (if present)")
     args = ap.parse_args()
 
@@ -71,11 +73,33 @@ def main():
     if args.backup and ledger.exists():
         shutil.copy2(ledger, ledger.with_suffix(".jsonl.bak"))
 
-    with ledger.open("a", encoding="utf-8") as f:
-        for line in to_append:
-            f.write(line + "\n")
-
-    print(f"Appended {len(to_append)} entries to {ledger}")
+    if args.replace_session:
+        existing = ledger.read_text(encoding="utf-8").splitlines() if ledger.exists() else []
+        replaced = False
+        result = []
+        for ln in existing:
+            s = ln.strip()
+            if s and not replaced:
+                try:
+                    obj = json.loads(s)
+                except json.JSONDecodeError:
+                    obj = None
+                if obj and obj.get("session_id") == args.replace_session and obj.get("status") == "stub":
+                    result.extend(to_append)  # swap the stub for the completed entry
+                    replaced = True
+                    continue
+            result.append(ln)
+        if not replaced:
+            result.extend(to_append)
+        with ledger.open("w", encoding="utf-8") as f:
+            f.write("\n".join(result) + "\n")
+        print(f"{'Replaced stub for' if replaced else 'No stub found; appended for'} "
+              f"session {args.replace_session} in {ledger}")
+    else:
+        with ledger.open("a", encoding="utf-8") as f:
+            for line in to_append:
+                f.write(line + "\n")
+        print(f"Appended {len(to_append)} entries to {ledger}")
 
     if args.dedupe:
         dedupe = ledger.with_name("dedupe_memory.py")
