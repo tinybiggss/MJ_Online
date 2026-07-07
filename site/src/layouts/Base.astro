@@ -10,6 +10,8 @@ interface Props {
   fonts?: ("sans" | "mono" | "serif")[];
   /** If true, renders a noindex/nofollow meta tag (for unlisted pages). */
   noindex?: boolean;
+  /** Social share image, relative to site root. Defaults to the branded card. */
+  image?: string;
 }
 
 const {
@@ -18,7 +20,13 @@ const {
   bodyClass = "bg-field-bg text-field-ink font-body antialiased",
   fonts = [],
   noindex = false,
+  image = "/img/og-default.png",
 } = Astro.props;
+
+// Absolute URLs for social meta (Open Graph / Twitter require them).
+// Astro.site is set to https://mikejones.online in astro.config.mjs.
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.site);
 
 // Build a single Google Fonts request for the families this page needs.
 const families: Record<string, string> = {
@@ -36,6 +44,7 @@ const fontParam = fonts.map((f) => `family=${families[f]}`).join("&");
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/png" href="/img/logos/favicon-jones-co.png" />
     {fonts.length > 0 && (
       <>
@@ -44,9 +53,21 @@ const fontParam = fonts.map((f) => `family=${families[f]}`).join("&");
         <link href={`https://fonts.googleapis.com/css2?${fontParam}&display=swap`} rel="stylesheet" />
       </>
     )}
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Mike Jones" />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mike Jones — AI Implementation Expert. AI that holds up under load." />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <slot name="head" />
   </head>
