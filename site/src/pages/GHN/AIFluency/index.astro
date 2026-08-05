@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Technique. Every Artifact. — AI Fluency Lab</title>
+<meta name="description" content="Requirements, Context, Intent — the framework Mike Jones teaches in the GHN AI Fluency Lab, walked through against a portfolio, a pitch, and a dashboard in one session.">
+<link rel="canonical" href="https://mikejones.online/GHN/AIFluency/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-900:#0D2530;
+    --teal-800:#123640;
+    --teal-700:#1B4652;
+    --teal-600:#296270;
+    --orange-600:#D4732B;
+    --orange-500:#E8863C;
+    --orange-400:#F0A868;
+    --orange-100:#FCE7D3;
+    --ink-900:#1B2427;
+    --ink-700:#3C494D;
+    --slate-500:#5C6B70;
+    --slate-400:#7C8C90;
+    --paper-0:#FFFFFF;
+    --paper-50:#FAF8F3;
+    --line-100:#E7E2D8;
+    --line-dark:#28444E;
+    --cream-100:#D8E1E2;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper-0);
+    color:var(--ink-900);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Lora',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  em{font-style:italic;color:var(--orange-500);font-weight:500;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px;}
+  .on-dark{color:var(--paper-0);}
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange-500);display:inline-block;flex-shrink:0;}
+  .eyebrow.on-light{color:var(--teal-700);}
+  .eyebrow.on-dark-pill{
+    color:var(--cream-100);
+    border:1px solid var(--line-dark);
+    background:rgba(255,255,255,.03);
+    padding:8px 16px;
+    border-radius:999px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:14px 26px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, opacity .15s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--orange-500);color:#fff;box-shadow:0 10px 26px -10px rgba(232,134,60,.55);}
+  .btn-primary:hover{background:var(--orange-600);}
+  .btn-text{background:none;padding:14px 0;color:inherit;border-bottom:1px solid currentColor;border-radius:0;}
+  .btn-text:hover{opacity:.75;}
+
+  section{padding:100px 0;position:relative;}
+  .section-tight{padding:72px 0;}
+  .bg-dark{background:linear-gradient(135deg,var(--teal-700) 0%, var(--teal-900) 78%);}
+  .bg-paper{background:var(--paper-50);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-100);
+  }
+  .navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1140px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand svg{width:26px;height:26px;flex-shrink:0;}
+  .brandmark{display:flex;flex-direction:column;line-height:1.15;}
+  .brandmark .top{font-size:14.5px;font-weight:600;color:var(--ink-900);}
+  .brandmark .sub{font-size:10.5px;color:var(--slate-400);letter-spacing:.02em;}
+  nav{display:flex;align-items:center;gap:30px;}
+  .nav-links{display:flex;gap:26px;}
+  .nav-links a{font-size:14px;color:var(--ink-700);text-decoration:none;}
+  .nav-links a:hover{color:var(--ink-900);}
+  @media (max-width:760px){.nav-links{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:100px 0 108px;overflow:hidden;}
+  .hero-center{max-width:740px;margin:0 auto;text-align:center;}
+  .hero h1{font-size:clamp(34px,4.8vw,56px);line-height:1.14;margin:22px 0 24px;color:var(--paper-0);font-weight:500;}
+  .hero p.lede{font-size:18px;color:var(--cream-100);max-width:560px;margin:0 auto 20px;}
+  .promise-line{
+    font-family:'Lora',serif;font-style:italic;
+    font-size:16.5px;color:var(--orange-400);
+    max-width:520px;margin:0 auto 32px;line-height:1.5;
+  }
+  .hero-ctas{display:flex;gap:26px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:34px;}
+  .hero-ctas .btn-text{color:var(--paper-0);}
+  .hero-meta{display:flex;gap:22px;color:var(--slate-300, #9FB0B4);font-size:13px;flex-wrap:wrap;justify-content:center;}
+  .hero-meta span{display:flex;align-items:center;gap:7px;}
+  .hero-meta .dot{width:5px;height:5px;border-radius:50%;background:var(--orange-400);display:inline-block;}
+
+  /* ---------- SHIFT / FRAMING SECTION ---------- */
+  .shift-head{max-width:660px;margin-bottom:52px;}
+  .shift-head h2{font-size:clamp(27px,3.4vw,38px);margin:16px 0;line-height:1.2;}
+  .shift-head p{color:var(--slate-500);font-size:16.5px;}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media (max-width:760px){.compare{grid-template-columns:1fr;}}
+  .compare-card{border-radius:var(--radius);padding:30px;border:1px solid var(--line-100);background:var(--paper-0);}
+  .compare-card.good{border-color:var(--orange-500);background:linear-gradient(180deg,var(--orange-100) 0%, #fff 55%);}
+  .compare-card .kicker{font-size:11.5px;color:var(--slate-400);font-weight:600;text-transform:uppercase;letter-spacing:.08em;}
+  .compare-card.good .kicker{color:var(--orange-600);}
+  .compare-card h3{font-size:21px;margin:10px 0 18px;font-weight:500;}
+  .compare-card ul{margin:0;padding:0;list-style:none;}
+  .compare-card li{padding:11px 0;border-top:1px solid var(--line-100);color:var(--slate-500);font-size:14.5px;display:flex;gap:11px;}
+  .compare-card li:first-child{border-top:none;}
+  .compare-card.good li{color:var(--ink-700);}
+  .compare-card .mark{flex-shrink:0;margin-top:1px;color:var(--slate-400);}
+  .compare-card.good .mark{color:var(--orange-500);}
+
+  /* ---------- SESSION RESOURCES ---------- */
+  .resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:900px){.resource-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:600px){.resource-grid{grid-template-columns:1fr;}}
+  .resource-card{
+    display:flex;flex-direction:column;gap:7px;
+    background:var(--paper-0);border:1px solid var(--line-100);border-radius:12px;
+    padding:22px;text-decoration:none;color:inherit;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  a.resource-card:hover{border-color:var(--orange-500);transform:translateY(-2px);}
+  .resource-card.is-pending{background:var(--paper-50);}
+  .rc-label{font-size:11px;font-weight:600;color:var(--orange-600);text-transform:uppercase;letter-spacing:.06em;}
+  .rc-title{font-family:'Lora',serif;font-size:16.5px;font-weight:500;color:var(--ink-900);}
+  .rc-desc{font-size:13px;color:var(--slate-500);line-height:1.5;}
+  .resource-card.is-pending .rc-title{color:var(--slate-500);}
+
+  /* ---------- RCI SWITCHER ---------- */
+  .switcher-head{text-align:center;max-width:680px;margin:0 auto 46px;}
+  .switcher-head h2{font-size:clamp(27px,3.4vw,38px);margin:16px 0;color:var(--paper-0);}
+  .switcher-head p{color:var(--cream-100);font-size:16.5px;}
+  .switcher-note{font-size:14.5px !important;color:#9FB4B8 !important;margin-top:16px;line-height:1.6;}
+  .switcher-head .eyebrow{justify-content:center;}
+  .tabs-hint{text-align:center;color:var(--orange-400);font-size:12.5px;font-weight:600;letter-spacing:.04em;margin-bottom:14px;}
+  .tabs{
+    display:flex;justify-content:center;gap:6px;margin-bottom:40px;flex-wrap:wrap;
+    background:rgba(0,0,0,.22);
+    border:1px solid var(--line-dark);
+    border-radius:999px;
+    padding:6px;
+    max-width:fit-content;
+    margin-left:auto;margin-right:auto;
+  }
+  .tab-btn{
+    background:rgba(255,255,255,.06);
+    border:1px solid transparent;
+    color:var(--cream-100);
+    padding:13px 24px;
+    border-radius:999px;
+    font-size:14.5px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;align-items:center;gap:9px;
+    transition:all .18s ease;
+    font-family:'Inter',sans-serif;
+    box-shadow:0 1px 0 rgba(255,255,255,.04) inset;
+  }
+  .tab-btn .num{font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.65;}
+  .tab-btn.active{background:var(--orange-500);color:#0A1519;box-shadow:0 6px 18px -6px rgba(232,134,60,.7);}
+  .tab-btn.active .num{opacity:.55;}
+  .tab-btn:hover:not(.active){background:rgba(255,255,255,.14);color:#fff;}
+  .tab-btn:focus-visible{outline:2px solid var(--orange-400);outline-offset:2px;}
+
+  .demo-panel{
+    background:rgba(255,255,255,.03);
+    border:1px solid var(--line-dark);
+    border-radius:22px;
+    padding:44px;
+    max-width:640px;
+    margin:0 auto;
+  }
+  @media (max-width:760px){.demo-panel{padding:28px;}}
+  .demo-copy .demo-eyebrow{color:var(--orange-400);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;display:block;}
+  .demo-copy h3{font-size:24px;margin-bottom:16px;color:#fff;font-weight:500;line-height:1.3;}
+  .rci-block{margin:18px 0 20px;display:flex;flex-direction:column;gap:11px;}
+  .rci-row{display:flex;gap:12px;align-items:flex-start;}
+  .rci-label{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.05em;
+    padding:4px 9px;border-radius:6px;flex-shrink:0;margin-top:2px;min-width:100px;text-align:center;
+  }
+  .rci-label.r{background:rgba(232,134,60,.15);color:var(--orange-400);}
+  .rci-label.c{background:rgba(216,225,226,.12);color:var(--cream-100);}
+  .rci-label.i{background:rgba(216,225,226,.12);color:var(--cream-100);}
+  .rci-row p{margin:0;color:#C4D2D4;font-size:14.5px;}
+  .demo-copy .result-line{
+    font-size:13.5px;color:#EDF1F1;
+    border-top:1px dashed var(--line-dark);
+    padding-top:15px;margin-top:8px;
+  }
+  .demo-copy .result-line span{color:var(--orange-400);font-weight:600;}
+
+  .resource-links{
+    display:flex;flex-direction:column;gap:8px;
+    margin-top:16px;padding-top:16px;border-top:1px solid var(--line-dark);
+  }
+  .resource-links a{
+    font-size:13px;color:var(--orange-400);text-decoration:none;
+    display:inline-flex;align-items:center;gap:6px;width:fit-content;
+  }
+  .resource-links a:hover{text-decoration:underline;}
+  .resource-links .pending-link{font-size:13px;color:#7C9096;font-style:italic;}
+
+  .switcher-close{
+    text-align:center;font-family:'Lora',serif;font-style:italic;
+    color:var(--cream-100);font-size:17px;margin:40px 0 0;
+  }
+  .switcher-close strong{color:var(--orange-400);font-weight:600;}
+
+  /* ---------- META CALLOUT ---------- */
+  .meta-callout{
+    border-radius:var(--radius);
+    background:var(--paper-0);
+    border:1px solid var(--line-100);
+    padding:38px 42px;
+    display:flex;
+    gap:30px;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .meta-callout .txt{max-width:600px;}
+  .meta-callout p{color:var(--slate-500);font-size:15.5px;margin:12px 0 0;}
+  .meta-loop{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--orange-600);
+    border:1px solid var(--orange-500);
+    padding:12px 16px;
+    border-radius:10px;
+    background:var(--orange-100);
+    white-space:nowrap;
+  }
+
+  /* ---------- INSTRUCTOR ---------- */
+  .instructor{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:38px;
+    align-items:center;
+    background:var(--paper-0);
+    border:1px solid var(--line-100);
+    border-radius:var(--radius);
+    padding:38px;
+  }
+  @media (max-width:760px){.instructor{grid-template-columns:1fr;}}
+  .avatar-ring{
+    width:150px;height:150px;border-radius:50%;
+    background:linear-gradient(135deg,var(--orange-500),var(--teal-600));
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto;padding:4px;
+  }
+  .avatar-ring img{
+    width:100%;height:100%;border-radius:50%;
+    object-fit:cover;display:block;
+  }
+  .instructor h3{font-size:22px;margin-bottom:5px;font-weight:500;}
+  .instructor .role{color:var(--orange-600);font-size:13.5px;font-weight:600;margin-bottom:14px;}
+  .instructor p{color:var(--slate-500);font-size:15px;margin:0 0 16px;}
+  .stat-row{display:flex;gap:30px;flex-wrap:wrap;}
+  .stat{display:flex;flex-direction:column;}
+  .stat .n{font-family:'Lora',serif;font-size:23px;font-weight:600;color:var(--ink-900);}
+  .stat .l{font-size:12px;color:var(--slate-400);}
+
+  /* ---------- LAB SECTION ---------- */
+  .lab-after{margin-bottom:48px;}
+  .lab-after-head{max-width:600px;margin-bottom:26px;}
+  .lab-after-head p{color:var(--slate-500);font-size:15px;margin:12px 0 0;}
+  .week-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:760px){.week-grid{grid-template-columns:1fr;}}
+  .week-card{
+    background:var(--paper-0);border:1px solid var(--line-100);border-radius:var(--radius);
+    padding:26px;display:flex;flex-direction:column;
+  }
+  .wk-label{font-size:11px;font-weight:600;color:var(--orange-600);text-transform:uppercase;letter-spacing:.06em;}
+  .week-card h4{font-size:18px;margin:10px 0 10px;font-family:'Lora',serif;font-weight:500;}
+  .wk-desc{font-size:13.5px;color:var(--slate-500);line-height:1.55;margin:0;}
+  .leaves-with{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line-100);}
+  .lw-label{font-size:10.5px;color:var(--slate-400);text-transform:uppercase;letter-spacing:.06em;font-weight:600;}
+  .leaves-with-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;}
+  .lw-tag{font-size:11.5px;background:var(--paper-50);border:1px solid var(--line-100);border-radius:999px;padding:4px 11px;color:var(--ink-700);}
+
+  .onramp-today{
+    background:linear-gradient(180deg,var(--orange-100) 0%, var(--paper-0) 60%);
+    border:1px solid var(--orange-500);border-radius:var(--radius);
+    padding:32px 36px;margin-bottom:48px;
+  }
+  .onramp-today .rc-label{font-size:11px;font-weight:600;color:var(--orange-600);text-transform:uppercase;letter-spacing:.08em;}
+  .onramp-today h3{font-size:22px;margin:10px 0 14px;font-weight:500;line-height:1.3;}
+  .onramp-today .arrow-sep{color:var(--orange-500);}
+  .onramp-today p{font-size:15px;color:var(--ink-700);line-height:1.6;margin:0;max-width:760px;}
+
+  .topics-block{margin-bottom:40px;}
+  .topics-head{max-width:600px;margin-bottom:24px;}
+  .topics-head p{color:var(--slate-500);font-size:15px;margin:12px 0 0;}
+  .topics-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:700px){.topics-grid{grid-template-columns:1fr;}}
+  .topic-item{
+    display:flex;flex-direction:column;gap:5px;
+    background:var(--paper-0);border:1px solid var(--line-100);border-radius:10px;
+    padding:16px 18px;
+  }
+  .ti-n{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--ink-900);}
+  .ti-d{font-size:13px;color:var(--slate-500);line-height:1.45;}
+
+  .goal-strip{
+    max-width:760px;border-left:3px solid var(--orange-500);
+    padding:4px 0 4px 26px;margin:0 0 48px;
+  }
+  .goal-strip p{font-size:16px;color:var(--ink-700);line-height:1.65;margin:0;}
+  .goal-strip p strong{color:var(--orange-600);font-weight:600;}
+
+  .promise-strip{
+    max-width:660px;border-left:3px solid var(--orange-500);
+    padding:6px 0 6px 26px;margin-top:8px;
+  }
+  .promise-strip p{font-family:'Lora',serif;font-size:19px;font-style:italic;color:var(--ink-700);line-height:1.55;margin:0;}
+  .promise-strip p strong{color:var(--orange-600);font-weight:600;}
+
+  /* ---------- CTA / SIGNUP ---------- */
+  .cta-section{
+    border-radius:26px;
+    padding:60px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-section h2{font-size:clamp(27px,4vw,40px);max-width:640px;margin:16px auto 18px;color:#fff;}
+  .cta-section p.sub{color:var(--cream-100);max-width:560px;margin:0 auto 32px;font-size:16px;}
+  .cta-primary-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+  .cta-note{font-size:12.5px;color:#9FB4B8;margin:0 0 44px;}
+  .cta-divider{
+    max-width:440px;margin:0 auto 28px;
+    display:flex;align-items:center;gap:14px;
+    color:#7C9096;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .cta-divider::before,.cta-divider::after{content:"";flex:1;height:1px;background:var(--line-dark);}
+  .cta-secondary p{color:var(--cream-100);font-size:14.5px;max-width:440px;margin:0 auto 18px;}
+  .waitlist-form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+  .waitlist-form input{
+    flex:1;min-width:220px;
+    padding:14px 18px;border-radius:999px;
+    border:1px solid var(--line-dark);
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    font-family:'Inter',sans-serif;font-size:14.5px;
+  }
+  .waitlist-form input::placeholder{color:#7C9096;}
+  .waitlist-form input:focus{outline:2px solid var(--orange-500);outline-offset:2px;}
+  .waitlist-note{font-size:12.5px;color:#7C9096;margin-top:18px;}
+  .success-msg{display:none;color:var(--orange-400);font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:20px;}
+  .error-msg{display:none;color:#F0A868;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:14px;}
+
+  footer{padding:44px 0;border-top:1px solid var(--line-100);background:var(--paper-0);}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;color:var(--slate-400);font-size:13px;}
+
+  ::selection{background:var(--orange-400);color:#0A1519;}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="6" r="2.6" fill="#1B2427"/>
+        <circle cx="6" cy="22" r="2.6" fill="#1B2427"/>
+        <circle cx="26" cy="22" r="2.6" fill="#1B2427"/>
+        <circle cx="16" cy="16" r="2.2" fill="#E8863C"/>
+        <line x1="16" y1="8.4" x2="16" y2="14" stroke="#1B2427" stroke-width="1.3"/>
+        <line x1="7.6" y1="20.5" x2="14.2" y2="17.2" stroke="#1B2427" stroke-width="1.3"/>
+        <line x1="24.4" y1="20.5" x2="17.8" y2="17.2" stroke="#1B2427" stroke-width="1.3"/>
+      </svg>
+      <div class="brandmark">
+        <span class="top">GHN Career Academy</span>
+        <span class="sub">Powered by CareerOS™</span>
+      </div>
+    </div>
+    <nav>
+      <div class="nav-links">
+        <a href="#technique">The Technique</a>
+        <a href="#demos">The Demos</a>
+        <a href="#resources">Resources</a>
+        <a href="#lab">Inside the Lab</a>
+      </div>
+      <a href="https://gethirednowprograms.com/ai-fluency-lab/#pricing" target="_blank" rel="noopener" class="btn btn-primary" style="padding:11px 22px;font-size:13.5px;">Join Now</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero bg-dark">
+    <div class="wrap hero-center">
+      <span class="eyebrow on-dark-pill"><span class="dot"></span>AI FLUENCY LAB · PREVIEW SESSION</span>
+      <h1>One prompting technique.<br><em>Every artifact you'll ever need.</em></h1>
+      <p class="lede">Requirements, Context, Intent — one framework, walked through against a portfolio, a pitch, and a dashboard, in the same 40 minutes. Not a tools tour. A method you'll actually reuse on Monday.</p>
+      <p class="promise-line">Follow the format three times in the next 45 minutes, and you'll leave better at this than when you clicked join.</p>
+      <div class="hero-ctas">
+        <a href="https://gethirednowprograms.com/ai-fluency-lab/#pricing" target="_blank" rel="noopener" class="btn btn-primary">Reserve Your Space →</a>
+        <a href="#demos" class="btn-text">See the three demos</a>
+        <a href="#resources" class="btn-text">Jump to today's links</a>
+      </div>
+      <div class="hero-meta">
+        <span><span class="dot"></span>Live · 45 minutes</span>
+        <span><span class="dot"></span>3 demos, one technique</span>
+        <span><span class="dot"></span>Recording included</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTRUCTOR -->
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="instructor">
+        <div class="avatar-ring"><img src="/GHN/AIFluency/mike-jones-headshot.jpg" alt="Mike Jones"></div>
+        <div>
+          <h3>Mike Jones</h3>
+          <div class="role">Founder, Velocity Partners · Session Lead, AI Fluency Lab</div>
+          <p>29 years leading product and technical programs across gaming, entertainment, and media — from the Xbox launch team to director roles at Kabam, Livescribe, and Kinoo. Built the Requirements, Context, Intent framework to teach non-engineers how to actually direct AI, not just prompt it.</p>
+          <div class="stat-row">
+            <div class="stat"><span class="n">29 yrs</span><span class="l">PM / TPM experience</span></div>
+            <div class="stat"><span class="n">1</span><span class="l">Xbox SDK patent</span></div>
+            <div class="stat"><span class="n">3</span><span class="l">artifacts, one technique</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHIFT / PROBLEM -->
+  <section id="technique">
+    <div class="wrap">
+      <div class="shift-head">
+        <span class="eyebrow on-light"><span class="dot"></span>THE FRAMING SHIFT</span>
+        <h2>Most people don't have an AI problem.<br>They have a <em>framing problem.</em></h2>
+        <p>Prompt cheat sheets go stale by the next model update. A framework doesn't — it's the same three questions, asked in order, no matter what you're trying to build.</p>
+      </div>
+      <div class="compare">
+        <div class="compare-card">
+          <span class="kicker">Without a framework</span>
+          <h3>Guess, retype, hope</h3>
+          <ul>
+            <li><span class="mark">—</span>Every new tool means starting from zero again</li>
+            <li><span class="mark">—</span>You describe the output, not the reasoning behind it</li>
+            <li><span class="mark">—</span>Great result once, no idea how to repeat it</li>
+            <li><span class="mark">—</span>You're doing the work of interpreting AI, not the reverse</li>
+          </ul>
+        </div>
+        <div class="compare-card good">
+          <span class="kicker">With Requirements · Context · Intent</span>
+          <h3>One frame, applied on repeat</h3>
+          <ul>
+            <li><span class="mark">✓</span>Requirements — what this actually needs to do</li>
+            <li><span class="mark">✓</span>Context — the real material AI works from, not a blank page</li>
+            <li><span class="mark">✓</span>Intent — the outcome in the reader's mind, stated on purpose</li>
+            <li><span class="mark">✓</span>Same three questions whether it's a résumé, a pitch, or a spreadsheet</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RCI SWITCHER -->
+  <section id="demos" class="bg-dark">
+    <div class="wrap">
+      <div class="switcher-head">
+        <span class="eyebrow on-dark-pill"><span class="dot"></span>LIVE IN THE SESSION</span>
+        <h2>Same technique.<br><em>Three completely different artifacts.</em></h2>
+        <p>One walkthrough of finished work, two built live in the room — same three questions, every time.</p>
+        <p class="switcher-note">This is on purpose. Requirements, Context, Intent is the smallest sliver of what's actually possible — not the whole practice, just the fastest way in. Watching it land three times on three unrelated things is the proof: follow the same format and you'll typically get close to what you want right out of the gate, with a lot less struggling to get there.</p>
+      </div>
+
+      <div class="tabs-hint">↓ Choose a demo to explore ↓</div>
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-target="0"><span class="num">01</span>Portfolio Page</button>
+        <button class="tab-btn" data-target="1"><span class="num">02</span>Pitch / Story Site</button>
+        <button class="tab-btn" data-target="2"><span class="num">03</span>Utility Dashboard</button>
+      </div>
+
+      <!-- Panel 0: Portfolio -->
+      <div class="demo-panel" data-panel="0">
+        <div class="demo-copy">
+          <span class="demo-eyebrow">Demo 1 · Portfolio walkthrough</span>
+          <h3>From resume to a page that sells you in one scroll</h3>
+          <div class="rci-block">
+            <div class="rci-row"><span class="rci-label r">Requirements</span><p>A portfolio that proves years of deals and delivery — in under 60 seconds.</p></div>
+            <div class="rci-row"><span class="rci-label c">Context</span><p>Resume, LinkedIn history, and one strong case study — dropped in as source material.</p></div>
+            <div class="rci-row"><span class="rci-label i">Intent</span><p>Make a stranger trust you before they finish scrolling.</p></div>
+          </div>
+          <div class="result-line"><span>Result →</span> a walkthrough of the actual chat that built it — prompt, breakdown, result, next ask — plus where it lives today.</div>
+          <div class="resource-links">
+            <a href="https://claude.ai/share/bf771729-ae09-46f5-a477-b9245c143a79" target="_blank" rel="noopener">↗ Source chat — the full prompt-by-prompt walkthrough</a>
+            <a href="https://vimeo.com/1208297898/f8697695ed?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">↗ Vimeo — Build an Executive Portfolio in 15 Minutes</a>
+            <a href="https://mikejones.online" target="_blank" rel="noopener">↗ Live site — mikejones.online</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 1: Pitch/Story Site -->
+      <div class="demo-panel" data-panel="1" style="display:none;">
+        <div class="demo-copy">
+          <span class="demo-eyebrow">Demo 2 · Built live — the meta demo</span>
+          <h3>The outline for this session becomes the site you're looking for</h3>
+          <div class="rci-block">
+            <div class="rci-row"><span class="rci-label r">Requirements</span><p>Turn a plain session outline into something people actually want to read.</p></div>
+            <div class="rci-row"><span class="rci-label c">Context</span><p>The outline itself — the same document driving this session — fed in as the source.</p></div>
+            <div class="rci-row"><span class="rci-label i">Intent</span><p>Make the syllabus feel like an invitation, not a schedule.</p></div>
+          </div>
+          <div class="result-line"><span>Result →</span> a one-page story site, generated from the session plan in real time — the same pattern from Demo 1, pointed at a different kind of outcome.</div>
+          <div class="resource-links">
+            <a href="https://claude.ai/share/acd65e36-1a9e-4a22-9f3f-806d721973f0" target="_blank" rel="noopener">↗ Source chat — this exact conversation, built live</a>
+            <a href="https://mikejones.online/GHN/AIFluency/" target="_blank" rel="noopener">↗ Live site — mikejones.online/GHN/AIFluency</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Dashboard -->
+      <div class="demo-panel" data-panel="2" style="display:none;">
+        <div class="demo-copy">
+          <span class="demo-eyebrow">Demo 3 · Built live — real data, honestly told</span>
+          <h3>A year of utility bills becomes a dashboard that shows its work</h3>
+          <div class="rci-block">
+            <div class="rci-row"><span class="rci-label r">Requirements</span><p>Show the return on a real home upgrade — without overselling it.</p></div>
+            <div class="rci-row"><span class="rci-label c">Context</span><p>Twelve months of utility interval data, spanning a window replacement partway through.</p></div>
+            <div class="rci-row"><span class="rci-label i">Intent</span><p>Make the trend line impossible to miss, without claiming a full year of proof you don't have yet.</p></div>
+          </div>
+          <div class="result-line"><span>Result →</span> a dashboard built live with the install date marked — kWh and cost, before and after, same honest framework as Demo 1 and 2, pointed at a spreadsheet instead of a story.</div>
+          <div class="resource-links">
+            <a href="https://claude.ai/share/bd6c965e-5d13-4dfb-bac2-7f2581e02e6e" target="_blank" rel="noopener">↗ Source chat — this build, prompt by prompt</a>
+            <span class="pending-link">⚬ Live dashboard link — dropped in after the session</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="switcher-close">The goal here isn't "Mike can do this." It's <strong>"I can do this."</strong></p>
+    </div>
+  </section>
+
+  <!-- META CALLOUT -->
+  <section class="section-tight bg-paper">
+    <div class="wrap">
+      <div class="meta-callout">
+        <div class="txt">
+          <span class="eyebrow on-light"><span class="dot"></span>THE LOOP DOESN'T STOP</span>
+          <h3 style="font-size:22px;margin-top:12px;font-weight:500;">This isn't a one-time trick — it's a loop you can run on anything.</h3>
+          <p>What you just clicked through is the technique doing what it's built to do: one move, ported across a portfolio, a pitch, a dashboard — and whatever you bring next. Résumé, business site, talk outline. Same three questions, asked in order.</p>
+        </div>
+        <div class="meta-loop">requirements → context → intent → result → next ask</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESSION RESOURCES -->
+  <section id="resources">
+    <div class="wrap">
+      <div class="shift-head">
+        <span class="eyebrow on-light"><span class="dot"></span>EVERYTHING FROM TODAY</span>
+        <h2>Every link from the session, <em>in one place.</em></h2>
+        <p>Bookmark this page. Nothing here requires you to have taken notes fast enough — it's all sitting right here after class too.</p>
+      </div>
+      <div class="resource-grid">
+        <a class="resource-card" href="#technique">
+          <span class="rc-label">The Technique</span>
+          <span class="rc-title">Requirements, Context, Intent</span>
+          <span class="rc-desc">The framework itself — jump back to the breakdown.</span>
+        </a>
+        <a class="resource-card" href="https://claude.ai/share/bf771729-ae09-46f5-a477-b9245c143a79" target="_blank" rel="noopener">
+          <span class="rc-label">Demo 1</span>
+          <span class="rc-title">Source chat — full walkthrough ↗</span>
+          <span class="rc-desc">Every prompt, breakdown, and next-ask from the actual portfolio build.</span>
+        </a>
+        <a class="resource-card" href="https://vimeo.com/1208297898/f8697695ed?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
+          <span class="rc-label">Demo 1</span>
+          <span class="rc-title">Vimeo recording ↗</span>
+          <span class="rc-desc">"Build an Executive Portfolio in 15 Minutes" — follow along at your own pace.</span>
+        </a>
+        <a class="resource-card" href="https://mikejones.online" target="_blank" rel="noopener">
+          <span class="rc-label">Demo 1</span>
+          <span class="rc-title">mikejones.online ↗</span>
+          <span class="rc-desc">The live result — the actual site the walkthrough builds.</span>
+        </a>
+        <a class="resource-card" href="https://claude.ai/share/acd65e36-1a9e-4a22-9f3f-806d721973f0" target="_blank" rel="noopener">
+          <span class="rc-label">Demo 2</span>
+          <span class="rc-title">Source chat ↗</span>
+          <span class="rc-desc">This exact conversation — the meta demo, built live.</span>
+        </a>
+        <a class="resource-card" href="https://mikejones.online/GHN/AIFluency/" target="_blank" rel="noopener">
+          <span class="rc-label">Demo 2</span>
+          <span class="rc-title">mikejones.online/GHN/AIFluency ↗</span>
+          <span class="rc-desc">The live result — this session's outline, turned into a site.</span>
+        </a>
+        <a class="resource-card" href="https://claude.ai/share/bd6c965e-5d13-4dfb-bac2-7f2581e02e6e" target="_blank" rel="noopener">
+          <span class="rc-label">Demo 3</span>
+          <span class="rc-title">Source chat ↗</span>
+          <span class="rc-desc">The dashboard build, prompt by prompt.</span>
+        </a>
+        <div class="resource-card is-pending">
+          <span class="rc-label">Demo 3</span>
+          <span class="rc-title">Live dashboard link</span>
+          <span class="rc-desc">Dropped in the chat right after the session, then added here.</span>
+        </div>
+        <a class="resource-card" href="#lab">
+          <span class="rc-label">Next Steps</span>
+          <span class="rc-title">How the Lab runs</span>
+          <span class="rc-desc">The weekly rhythm — and where this technique fits into it.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- COHORT CURRICULUM -->
+  <section id="lab" class="bg-paper">
+    <div class="wrap">
+      <div class="shift-head">
+        <span class="eyebrow on-light"><span class="dot"></span>WHERE THIS LEADS</span>
+        <h2>Today is the doorway.<br>The <em>Lab</em> is everything past it.</h2>
+        <p>One technique gets you moving. The Lab is where fluency actually compounds.</p>
+      </div>
+
+      <div class="onramp-today">
+        <span class="rc-label">TODAY'S PREVIEW</span>
+        <h3>One Technique, Many Artifacts <span class="arrow-sep">→</span> The Product Frame</h3>
+        <p>What you just watched — one move, ported across a portfolio, a pitch, a dashboard — is Requirements, Context, Intent doing double duty. It's a prompting technique, and it's product thinking in miniature: what does this need to do, what's the real material to work from, what outcome are you actually after. Get comfortable asking those three questions and you're already thinking like a product person, whether or not that's ever been your job title. It's also a preview of exactly what Weeks 1 and 2 of the Lab walk you through building yourself, live.</p>
+      </div>
+
+      <div class="lab-after">
+        <div class="lab-after-head">
+          <span class="eyebrow on-light"><span class="dot"></span>HOW THE LAB RUNS</span>
+          <p>Four weeks, every month, same rhythm — each one ships something or sharpens what you already built.</p>
+        </div>
+        <div class="week-grid">
+          <div class="week-card">
+            <span class="wk-label">Week 1 · 90 min · Build-heavy</span>
+            <h4>Foundations + Ship the Portfolio</h4>
+            <p class="wk-desc">Foundations move fast — a reusable project folder template and a one-click deploy pipeline, set up once here and reused for every project after. Then: define, build, and ship a live portfolio in the same session.</p>
+            <div class="leaves-with">
+              <span class="lw-label">Leaves with</span>
+              <div class="leaves-with-list">
+                <span class="lw-tag">Project folder template</span>
+                <span class="lw-tag">Working deploy pipeline</span>
+                <span class="lw-tag">Live portfolio URL</span>
+              </div>
+            </div>
+          </div>
+          <div class="week-card">
+            <span class="wk-label">Week 2 · Guided build</span>
+            <h4>Build Lab: Utility Bill Dashboard</h4>
+            <p class="wk-desc">The exact pipeline from Week 1, pointed at something completely different — your own utility bill data, turned into a live dashboard. The point isn't the dashboard. It's proof the process transfers.</p>
+            <div class="leaves-with">
+              <span class="lw-label">Leaves with</span>
+              <div class="leaves-with-list">
+                <span class="lw-tag">Live deployed dashboard</span>
+                <span class="lw-tag">Proof the pipeline repeats</span>
+              </div>
+            </div>
+          </div>
+          <div class="week-card">
+            <span class="wk-label">Week 3 · Digest + discussion</span>
+            <h4>What Changed</h4>
+            <p class="wk-desc">What actually moved in AI this month — applied against the artifacts you've already built, not floated as disconnected news. Open Q&amp;A on whatever you're hitting in your own use.</p>
+            <div class="leaves-with">
+              <span class="lw-label">Leaves with</span>
+              <div class="leaves-with-list">
+                <span class="lw-tag">What to do differently next time</span>
+              </div>
+            </div>
+          </div>
+          <div class="week-card">
+            <span class="wk-label">Week 4 · Live critique</span>
+            <h4>Build Review</h4>
+            <p class="wk-desc">Submit whichever artifact you want eyes on — portfolio, dashboard, or both. A structured feedback pass, then a peer round-robin: what worked, what broke, what you'd change.</p>
+            <div class="leaves-with">
+              <span class="lw-label">Leaves with</span>
+              <div class="leaves-with-list">
+                <span class="lw-tag">A revised artifact</span>
+                <span class="lw-tag">A personal punch-list</span>
+                <span class="lw-tag">Next month's topic preview</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topics-block">
+        <div class="topics-head">
+          <span class="eyebrow on-light"><span class="dot"></span>POTENTIAL TOPICS FOR UPCOMING LABS</span>
+          <p>Weeks 3 and 4 stay the same shape every month. Weeks 1 and 2 — the build itself — rotate. Nothing below is locked in; it's the range of what's next, based on where the room wants to go.</p>
+        </div>
+        <div class="topics-grid">
+          <div class="topic-item"><span class="ti-n">Privacy &amp; Sovereignty</span><span class="ti-d">Own your data and your stack, even outside the big platforms.</span></div>
+          <div class="topic-item"><span class="ti-n">Your Second Brain</span><span class="ti-d">A memory system that survives your next tool switch.</span></div>
+          <div class="topic-item"><span class="ti-n">Skills &amp; Plugins</span><span class="ti-d">Extend what your AI can actually do for you.</span></div>
+          <div class="topic-item"><span class="ti-n">Vibe Coding Your First Product</span><span class="ti-d">Ship something real with Claude Code — no CS degree required.</span></div>
+          <div class="topic-item"><span class="ti-n">Effective Research Techniques</span><span class="ti-d">Get AI to actually dig, not just guess.</span></div>
+          <div class="topic-item"><span class="ti-n">Prototype vs. Live Product</span><span class="ti-d">Know the line — and what it takes to cross it.</span></div>
+          <div class="topic-item"><span class="ti-n">Product Principles for Your Workflow</span><span class="ti-d">Borrow the frameworks product teams already use.</span></div>
+          <div class="topic-item"><span class="ti-n">Your Own Personal Agent</span><span class="ti-d">Where to start building something that works for you.</span></div>
+          <div class="topic-item"><span class="ti-n">Deeper Technical Dives</span><span class="ti-d">GitHub, deployments, databases, using an LLM API.</span></div>
+          <div class="topic-item"><span class="ti-n">Prompt Engineering, RAG &amp; Testing</span><span class="ti-d">What separates a demo from something that holds up.</span></div>
+        </div>
+      </div>
+
+      <div class="goal-strip">
+        <p>The goal was never that you'd use all of this. It's that you'll <strong>understand</strong> it — able to speak to it knowledgeably, hold your own opinions, and become the person people come to when they need AI explained. A background you're actually confident in, whatever you end up building with it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE BIGGER PICTURE / CLOSING HOOK -->
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="shift-head" style="margin-bottom:34px;">
+        <span class="eyebrow on-light"><span class="dot"></span>WHERE THIS IS HEADED</span>
+        <h2>Everyone is about to be working in product.<br><em>That's not a job title — it's the shift.</em></h2>
+        <p>The products you deliver are your ability to communicate your thoughts and ideas — to other people, and to yourself. Do that well and you need the language product teams already use: a one-page brief, a definition of done, a path from zero to one — an idea turned into something real enough to show someone.</p>
+      </div>
+      <div class="promise-strip">
+        <p>You're not going to have to go searching YouTube. You're not going to have to figure out what to ask AI.<br><strong>We walk through it together.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="cta-section bg-dark" id="join">
+        <span class="eyebrow on-dark-pill"><span class="dot"></span>REGISTRATION IS OPEN</span>
+        <h2>You'll leave with the framework.<br><em>The Lab is where you build the habit.</em></h2>
+        <p class="sub">$97/month as a founding member gets you all four Labs, every month — Week 1 foundations through Week 4 review, plus templates, recordings, and a free Resilient Tomorrow membership.</p>
+        <div class="cta-primary-row">
+          <a href="https://gethirednowprograms.com/ai-fluency-lab/#pricing" target="_blank" rel="noopener" class="btn btn-primary">Reserve Your Space →</a>
+        </div>
+        <p class="cta-note">Founding rate locks in while you stay subscribed.</p>
+
+        <div class="cta-divider">Not ready yet?</div>
+        <div class="cta-secondary">
+          <p>Drop your email and I'll send today's recap plus the Requirements / Context / Intent cheat sheet.</p>
+          <form class="waitlist-form" id="waitlistForm">
+            <input type="email" required placeholder="you@company.com" aria-label="Email address" id="waitlistEmail">
+            <input type="text" name="_honey" id="waitlistHoney" style="position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
+            <button type="submit" class="btn btn-primary" id="waitlistSubmit">Send It</button>
+          </form>
+          <div class="success-msg" id="successMsg">✓ Sent — check your inbox shortly.</div>
+          <div class="error-msg" id="errorMsg">Couldn't send that — email mike@mikejones.online directly.</div>
+        </div>
+        <p class="waitlist-note">No spam. Just the recap and the cheat sheet.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>GHN Career Academy × Velocity Partners · AI Fluency Lab</span>
+    <span>Requirements · Context · Intent</span>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.demo-panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.getAttribute('data-target');
+      panels.forEach(p => {
+        p.style.display = p.getAttribute('data-panel') === target ? 'grid' : 'none';
+      });
+    });
+  });
+
+  const form = document.getElementById('waitlistForm');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+  const submitBtn = document.getElementById('waitlistSubmit');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.style.display = 'none';
+    const email = document.getElementById('waitlistEmail').value.trim();
+    const honey = document.getElementById('waitlistHoney').value.trim();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    try {
+      const res = await fetch('/api/ghn-waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, _honey: honey }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Request failed');
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    } catch (err) {
+      errorMsg.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send It';
+    }
+  });
+</script>
+
+</body>
+</html>
