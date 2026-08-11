@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fallback Projects — Week 2 — AI Fluency Lab</title>
+<meta name="description" content="Four ready-to-grab co-work projects for Week 2 of the GHN AI Fluency Lab — pre-loaded source material, custom instructions, a paste-ready RCI brief, critique prompts, and an acceptance checklist.">
+<link rel="canonical" href="https://mikejones.online/GHN/AIFluency/week-2/fallback-projects/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-900:#0D2530;
+    --teal-800:#123640;
+    --teal-700:#1B4652;
+    --teal-600:#296270;
+    --orange-600:#D4732B;
+    --orange-500:#E8863C;
+    --orange-400:#F0A868;
+    --orange-100:#FCE7D3;
+    --ink-900:#1B2427;
+    --ink-700:#3C494D;
+    --slate-500:#5C6B70;
+    --slate-400:#7C8C90;
+    --paper-0:#FFFFFF;
+    --paper-50:#FAF8F3;
+    --line-100:#E7E2D8;
+    --line-dark:#28444E;
+    --cream-100:#D8E1E2;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper-0);
+    color:var(--ink-900);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Lora',serif;font-weight:500;letter-spacing:-0.01em;margin:0;}
+  em{font-style:italic;color:var(--orange-500);font-weight:500;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px;}
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange-500);display:inline-block;flex-shrink:0;}
+  .eyebrow.on-light{color:var(--teal-700);}
+  .eyebrow.on-dark-pill{
+    color:var(--cream-100);border:1px solid var(--line-dark);background:rgba(255,255,255,.03);
+    padding:8px 16px;border-radius:999px;
+  }
+
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:15px;
+    text-decoration:none;cursor:pointer;border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--orange-500);color:#fff;box-shadow:0 10px 26px -10px rgba(232,134,60,.55);}
+  .btn-primary:hover{background:var(--orange-600);}
+  .btn-copy{
+    background:rgba(255,255,255,.08);border:1px solid var(--line-dark);color:var(--cream-100);
+    font-size:12.5px;padding:8px 14px;border-radius:8px;cursor:pointer;
+  }
+  .btn-copy:hover{border-color:var(--orange-400);color:var(--orange-400);}
+  .btn-copy.copied{background:var(--orange-500);border-color:var(--orange-500);color:#0A1519;}
+
+  section{padding:80px 0;}
+  .section-tight{padding:56px 0;}
+  .bg-dark{background:linear-gradient(135deg,var(--teal-700) 0%, var(--teal-900) 78%);}
+  .bg-paper{background:var(--paper-50);}
+
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-100);
+  }
+  .navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1140px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
+  .brand img{width:28px;height:28px;flex-shrink:0;border-radius:6px;}
+  .brandmark{display:flex;flex-direction:column;line-height:1.15;}
+  .brandmark .top{font-size:14.5px;font-weight:600;color:var(--ink-900);}
+  .brandmark .sub{font-size:10.5px;color:var(--slate-400);letter-spacing:.02em;}
+  nav{display:flex;align-items:center;gap:30px;}
+  .nav-links{display:flex;gap:26px;}
+  .nav-links a{font-size:14px;color:var(--ink-700);text-decoration:none;}
+  .nav-links a:hover{color:var(--ink-900);}
+  @media (max-width:760px){.nav-links{display:none;}}
+
+  .hero{padding:64px 0 56px;}
+  .hero-center{max-width:760px;margin:0 auto;text-align:center;}
+  .hero h1{font-size:clamp(30px,4.2vw,46px);line-height:1.16;margin:20px 0 18px;color:var(--paper-0);font-weight:500;}
+  .hero p.lede{font-size:16.5px;color:var(--cream-100);max-width:600px;margin:0 auto;}
+
+  /* ---------- TABS ---------- */
+  .tabs-wrap{padding:44px 0 90px;}
+  .tabs{
+    display:flex;justify-content:center;gap:6px;margin-bottom:44px;flex-wrap:wrap;
+    background:var(--paper-50);border:1px solid var(--line-100);border-radius:999px;padding:6px;
+    max-width:fit-content;margin-left:auto;margin-right:auto;
+  }
+  .tab-btn{
+    background:transparent;border:1px solid transparent;color:var(--ink-700);padding:13px 22px;border-radius:999px;
+    font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px;
+    transition:all .18s ease;font-family:'Inter',sans-serif;
+  }
+  .tab-btn .num{font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.6;}
+  .tab-btn.active{background:var(--orange-500);color:#fff;box-shadow:0 6px 18px -6px rgba(232,134,60,.6);}
+  .tab-btn:hover:not(.active){background:var(--paper-0);}
+  .tab-btn:focus-visible{outline:2px solid var(--orange-500);outline-offset:2px;}
+
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .persona-head{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap;
+    max-width:900px;margin:0 auto 40px;
+  }
+  .persona-head h2{font-size:clamp(24px,3.2vw,32px);margin:10px 0 10px;}
+  .persona-head p{color:var(--slate-500);font-size:15px;max-width:600px;margin:0;}
+  .difficulty-flag{
+    display:inline-flex;align-items:center;gap:8px;background:var(--orange-100);border:1px solid var(--orange-500);
+    color:var(--orange-600);font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:999px;white-space:nowrap;
+  }
+
+  .panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1000px;margin:0 auto;}
+  @media (max-width:860px){.panel-grid{grid-template-columns:1fr;}}
+
+  .p-card{background:var(--paper-0);border:1px solid var(--line-100);border-radius:var(--radius);padding:28px;margin-bottom:24px;}
+  .p-card h3{font-size:16px;font-weight:600;font-family:'Inter',sans-serif;margin-bottom:12px;color:var(--ink-900);}
+  .p-card .p-eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--orange-600);margin-bottom:8px;display:block;}
+  .p-card p{font-size:13.5px;color:var(--slate-500);line-height:1.6;margin:0 0 10px;}
+  .p-card p:last-child{margin-bottom:0;}
+  .p-card ul{margin:0;padding-left:18px;}
+  .p-card li{font-size:13.5px;color:var(--slate-500);margin-bottom:6px;line-height:1.5;}
+
+  .code-block{
+    position:relative;background:var(--teal-900);border-radius:14px;padding:22px 24px;margin-bottom:0;overflow-x:auto;
+  }
+  .code-block pre{margin:0;color:#E3ECEE;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word;}
+  .code-block .btn-copy{position:absolute;top:14px;right:14px;}
+
+  .critique-item{border-top:1px solid var(--line-100);padding:16px 0;}
+  .critique-item:first-child{border-top:none;padding-top:0;}
+  .critique-item .ci-when{font-size:12px;color:var(--slate-400);margin-bottom:6px;}
+  .critique-item .ci-quote{
+    font-family:'Lora',serif;font-style:italic;font-size:13.5px;color:var(--ink-700);
+    border-left:2px solid var(--orange-500);padding-left:12px;margin:0;
+  }
+
+  .checklist{list-style:none;margin:0;padding:0;}
+  .checklist li{display:flex;gap:10px;font-size:13.5px;color:var(--slate-500);margin-bottom:9px;line-height:1.5;}
+  .checklist li::before{content:"☐";color:var(--orange-500);flex-shrink:0;}
+  .done-bar{
+    margin-top:14px;padding-top:14px;border-top:1px dashed var(--line-100);
+    font-family:'Lora',serif;font-style:italic;font-size:13.5px;color:var(--slate-500);
+  }
+  .done-bar strong{color:var(--orange-600);font-weight:600;}
+
+  footer{padding:44px 0;border-top:1px solid var(--line-100);background:var(--paper-0);}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;color:var(--slate-400);font-size:13px;}
+  .footer-row a{text-decoration:none;color:var(--slate-500);}
+  .footer-row a:hover{color:var(--orange-600);}
+
+  ::selection{background:var(--orange-400);color:#0A1519;}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a class="brand" href="/GHN/AIFluency/week-2/">
+      <img src="/GHN/AIFluency/ghn-logo.png" alt="GHN AI Fluency Lab">
+      <div class="brandmark">
+        <span class="top">AI Fluency Lab</span>
+        <span class="sub">Fallback Projects</span>
+      </div>
+    </a>
+    <nav>
+      <div class="nav-links">
+        <a href="/GHN/AIFluency/week-2/">Week 2 Syllabus</a>
+        <a href="/GHN/AIFluency/">Lab Overview</a>
+      </div>
+      <a href="/GHN/AIFluency/week-2/" class="btn btn-primary" style="padding:11px 22px;font-size:13.5px;">← Back to Syllabus</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero bg-dark">
+    <div class="wrap hero-center">
+      <span class="eyebrow on-dark-pill"><span class="dot"></span>SHOWED UP EMPTY-HANDED? GRAB ONE</span>
+      <h1>Four ready-to-build projects.<br><em>Pick one, jump straight in.</em></h1>
+      <p class="lede">Each project is pre-loaded: a persona, real source material, a custom-instructions template, a paste-ready RCI brief, critique prompts, and an acceptance checklist. No prep needed — just pick and go.</p>
+    </div>
+  </section>
+
+  <div class="tabs-wrap">
+    <div class="wrap">
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-target="0"><span class="num">01</span>Portfolio</button>
+        <button class="tab-btn" data-target="1"><span class="num">02</span>Pitch Deck</button>
+        <button class="tab-btn" data-target="2"><span class="num">03</span>Dashboard</button>
+        <button class="tab-btn" data-target="3"><span class="num">04</span>One-Pager</button>
+      </div>
+
+      <!-- PANEL 01 — PORTFOLIO -->
+      <div class="panel active" data-panel="0">
+        <div class="wrap" style="padding:0;">
+          <div class="persona-head">
+            <div>
+              <span class="eyebrow on-light"><span class="dot"></span>DIRECTOR PERSONA</span>
+              <h2>Sarah Chen — Marketing Director</h2>
+              <p>12 years in B2B SaaS and consumer tech. Builds a one-page portfolio that gets a hiring manager or client to reach out.</p>
+            </div>
+          </div>
+          <div class="panel-grid">
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">Source Material</span>
+                <h3>Who you're building for</h3>
+                <p>Marketing director leading demand gen at a Series C SaaS company (~200 employees). Known for programs that are measurable and tied to revenue, not vanity metrics.</p>
+                <p><strong>Five sample projects loaded as source:</strong></p>
+                <ul>
+                  <li>Demand gen overhaul — 65% higher conversion to opportunity, $2.1M attributed pipeline</li>
+                  <li>Content engine build — 10K → 400K monthly visitors in 18 months</li>
+                  <li>Enterprise product launch — 15 opportunities in 30 days</li>
+                  <li>ABM pilot — 1 closed deal worth $180K ARR, adopted as ongoing strategy</li>
+                  <li>Marketing ops infrastructure — real-time pipeline visibility for leadership</li>
+                </ul>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Custom Instructions</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="ci-01">Copy</button>
+                  <pre id="ci-01">You are my collaborator on Demo Portfolio — Director Persona.
+
+My role: Marketing Director at a mid-size SaaS company
+What we're building: a one-page portfolio site
+Success looks like: a hiring manager or potential client can understand my work and impact in 30 seconds of scanning
+
+Tone: warm-professional, peer-level, no jargon. Confident but not braggy.
+Push back when my brief is vague.
+Always ask for the missing context rather than guessing.
+Save artifacts to /Demo Portfolio/ so I can find them later.
+When iterating, surface what you changed and why — don't just hand me a new draft.</pre>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">RCI Brief — paste-ready</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="rci-01">Copy</button>
+                  <pre id="rci-01">I need to build a one-page portfolio site for a marketing director.
+
+Requirements:
+- Clean, scannable layout — a hiring manager should get the picture in 30 seconds
+- Hero section with name, title, and one-line value proposition
+- 3-5 featured projects with one-line impact statements (not paragraphs)
+- A short bio section (3-4 sentences, not a resume)
+- Contact section with email and LinkedIn
+- No animation, no dark patterns, no stock photo placeholders
+- Output as a single HTML file I can open in a browser
+
+Context:
+I'm a marketing director with 12 years in B2B SaaS and consumer tech. My source material is loaded in this project - bio, 5 projects with impact metrics, and contact info. Use it.
+
+Intent:
+A hiring manager or potential client lands on this page and immediately understands what I'm good at, what I've shipped, and wants to reach out. The page should feel like a confident professional, not a template.
+
+Go.</pre>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Critique Prompts — pick one</span>
+                <div class="critique-item">
+                  <div class="ci-when">When the value prop reads generic ("results-driven leader")</div>
+                  <p class="ci-quote">"The value proposition in the hero section is generic. Rewrite it to be specific — what's the one thing she does that most marketing directors don't? Lead with that."</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When projects read like a resume, not impact statements</div>
+                  <p class="ci-quote">"The project descriptions are process-focused. Rewrite each to lead with the measurable outcome, then the role. 'Grew organic traffic 40x' not 'Managed content strategy.'"</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When the layout is too dense to scan in 30 seconds</div>
+                  <p class="ci-quote">"The page is too dense. Cut it down. Hero, 3 projects max, 3-sentence bio, contact. Nothing else."</p>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">What Good Looks Like</span>
+                <ul class="checklist">
+                  <li>Hero: name, title, one-line value prop — not a paragraph</li>
+                  <li>3-5 projects, each one line, impact-first</li>
+                  <li>Value proposition is specific, not generic</li>
+                  <li>No jargon — no "synergy," "leverage," "best-in-class"</li>
+                </ul>
+                <div class="done-bar">"If I were a hiring manager and this landed in my inbox, <strong>I'd want to talk to this person</strong>." Not "it's fine."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 02 — PITCH DECK -->
+      <div class="panel" data-panel="1">
+        <div class="wrap" style="padding:0;">
+          <div class="persona-head">
+            <div>
+              <span class="eyebrow on-light"><span class="dot"></span>FOUNDER PERSONA</span>
+              <h2>Marcus Rivera — Founder, Pulseboard</h2>
+              <p>Ex-Stripe PM, pre-seed, 3 headcount, $180K raised, 9-month runway. Builds a 10-slide deck that earns a second investor meeting.</p>
+            </div>
+          </div>
+          <div class="panel-grid">
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">Source Material</span>
+                <h3>Pulseboard — the one-pager</h3>
+                <p><strong>Problem:</strong> engineering leaders lose 4-6 hrs/week to unrecorded status meetings. <strong>Solution:</strong> auto-transcribe and structure daily leader updates.</p>
+                <p><strong>Market:</strong> ~40K mid-market eng orgs, $800/mo target, path to $10M ARR via ~1,000 teams.</p>
+                <p><strong>Traction:</strong> 6 design partners, 2 paying customers ($400/mo), 14-person waitlist, NPS 71.</p>
+                <p><strong>Ask:</strong> $1.5M seed — 4 engineers, extend runway to 24mo, beta by month 6.</p>
+                <p><strong>3 investor personas loaded:</strong> Lin (operator-VC, wants founder quality), Devon (pre-seed specialist, wants a real wedge), Priya (strategic angel, wants a coachable founder).</p>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Custom Instructions</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="ci-02">Copy</button>
+                  <pre id="ci-02">You are my collaborator on Demo Pitch Deck — Founder Persona.
+
+My role: First-time founder raising a seed round
+What we're building: a 10-slide pitch deck outline with talking points per slide
+Success looks like: a partner at a seed fund hears the pitch in a 30-minute meeting and wants a second conversation
+
+Tone: direct, confident, board-ready. No hedging, no filler.
+Push back when my brief is vague.
+Always ask for the missing context rather than guessing.
+Save artifacts to /Demo Pitch Deck/ so I can find them later.
+When iterating, surface what you changed and why — don't just hand me a new draft.</pre>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">RCI Brief — paste-ready</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="rci-02">Copy</button>
+                  <pre id="rci-02">I need to build a 10-slide pitch deck outline for a pre-seed founder.
+
+Requirements:
+- Exactly 10 slides (no more, no fewer)
+- Each slide: a title, a one-sentence thesis, and 2-3 talking points
+- Order: title -> problem -> insight -> solution -> market -> traction -> business model -> team -> ask -> close
+- The opening slide should not introduce the company — it should introduce the problem
+- The "ask" slide should be specific (amount, what it funds, what it unlocks) — not "we're raising to scale"
+- The close should leave room for the partner to ask a question, not be a hard pitch
+- No investor jargon ("we're disrupting," "best-in-class," "revolutionary")
+- Include 3 personas in the deck — flag which slide matters most to each in a comment
+
+Context:
+Source material is loaded in this project — the founder's one-pager with problem/solution/market/traction/ask, plus 3 investor personas. Use them.
+
+Intent:
+A partner at a seed fund sits through the deck in a 30-minute meeting and wants a second conversation. Not because the slides are pretty — because the founder has thought harder about the problem than the partner has.
+
+Don't: pitch in the slides. The talking points are what gets pitched. The slides are anchors.
+
+Go.</pre>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Critique Prompts — pick one</span>
+                <div class="critique-item">
+                  <div class="ci-when">When the insight slide is generic ("AI changes how teams work")</div>
+                  <p class="ci-quote">"Rewrite it to be specific to Pulseboard — the non-obvious thing Marcus knows about engineering leadership that most people don't. Make it sharp."</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When the market slide uses aspirational TAM</div>
+                  <p class="ci-quote">"Replace it with the serviceable market: ~40,000 mid-market eng orgs, $800/month per team, path to $10M ARR from ~1,000 teams."</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When the ask slide is vague ("raising to scale")</div>
+                  <p class="ci-quote">"Rewrite with the specific amount ($1.5M seed), what it funds, and the milestone it unlocks. Make it concrete enough a partner could say yes or no from this slide alone."</p>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">What Good Looks Like</span>
+                <ul class="checklist">
+                  <li>Exactly 10 slides, opening slide introduces the problem, not the company</li>
+                  <li>Market slide quantifies the serviceable market, not aspirational TAM</li>
+                  <li>Traction leads with the strongest signal (NPS 71, 2 paying)</li>
+                  <li>All 3 investor personas' needs are addressed somewhere in the deck</li>
+                </ul>
+                <div class="done-bar">"If a partner asked me the three hardest questions, <strong>I could answer all three</strong> from what I already know." Not "it sounds good."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 03 — DASHBOARD -->
+      <div class="panel" data-panel="2">
+        <div class="wrap" style="padding:0;">
+          <div class="persona-head">
+            <div>
+              <span class="eyebrow on-light"><span class="dot"></span>VP OPS PERSONA</span>
+              <h2>VP of Operations — Series B SaaS</h2>
+              <p>Six months of mostly-declining metrics. Builds a board-ready HTML dashboard that surfaces bad news first and names owners.</p>
+            </div>
+          </div>
+          <div class="panel-grid">
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">Source Material</span>
+                <h3>Q3 board metrics — mostly red</h3>
+                <p>MRR, new customers, NRR, gross churn, logo churn, CAC, LTV:CAC, burn, runway, cash — quarterly table (Jul–Sep 2026) trending against targets, plus the CEO's notes on cross-team causes and the Oct 28 board ask.</p>
+                <p><strong>What's really going on:</strong> new VP Sales still ramping (outbound up 40%, conversion flat), CS health-scoring rollout (23 flagged, 11 saved / 12 churned), ABM pilot underperformed ($45K vs. $180K target), v3 API adoption slow (23% by week 30).</p>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Custom Instructions</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="ci-03">Copy</button>
+                  <pre id="ci-03">You are my collaborator on Demo Dashboard — VP Ops Persona.
+
+My role: VP of Operations at a Series B SaaS startup
+What we're building: an HTML dashboard showing 6 months of company metrics for an upcoming board meeting
+Success looks like: the board reads the dashboard in 60 seconds and walks away understanding what changed, what's off, and what we're doing about it — without needing a follow-up call
+
+Tone: executive-summary, no preamble. Surface the off-target metrics first. Plain English over jargon.
+Push back when my brief is vague.
+Always ask for the missing context rather than guessing.
+Save artifacts to /Demo Dashboard/ so I can find them later.
+When iterating, surface what you changed and why — don't just hand me a new draft.</pre>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">RCI Brief — paste-ready</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="rci-03">Copy</button>
+                  <pre id="rci-03">I need to build an HTML dashboard for a Q3 board meeting.
+
+Requirements:
+- Five metrics max on the front page: MRR, NRR, gross churn, CAC, runway. Each with: current value, target, trend arrow, comparison to last quarter.
+- One trend chart per metric (sparkline or small line chart — don't over-engineer)
+- Color coding: green at target, yellow within 5%, red off target and trending wrong
+- The "off-target metrics" appear above the "on-target" metrics — surface bad news first
+- A short "What changed" section above the metrics: 3-4 bullet points, plain English
+- A "What we're doing about it" section below: bullet per off-target metric, owned by a named exec
+- HTML output, single file, printable (light background, not dark mode)
+- No JavaScript frameworks — vanilla HTML/CSS, under 300 lines
+
+Context:
+Source material is loaded in this project — the quarterly metrics table, the CEO's notes about Q3, what the board cares about, and internal context about what's driving the numbers. Use it.
+
+Intent:
+The board reads this in 60 seconds and walks away understanding what changed, what's off, and what we're doing about it. They do not need a follow-up call.
+
+Don't: bury the bad news. Don't: use chartjunk. Don't: include every metric we track — only the ones that matter to the board.
+
+Go.</pre>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Critique Prompts — pick one</span>
+                <div class="critique-item">
+                  <div class="ci-when">When bad news is buried below on-target metrics</div>
+                  <p class="ci-quote">"Reorder it. Off-target metrics at the top, on-target below. The board needs to see what's broken first."</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When "What changed" describes numbers instead of explaining them</div>
+                  <p class="ci-quote">"Rewrite it to explain the causes: the new Sales VP is still ramping, CSM health scoring flagged 23 accounts and we lost 12, the ABM pilot underperformed."</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When remediation has no owner or date</div>
+                  <p class="ci-quote">"Rewrite each bullet with a specific action, a named owner, and a date. The board needs accountability, not intention."</p>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">What Good Looks Like</span>
+                <ul class="checklist">
+                  <li>Bad news visible within the first 5 seconds of looking at the page</li>
+                  <li>"What changed" explains why numbers moved, not just that they moved</li>
+                  <li>"What we're doing about it" names real owners with real dates</li>
+                  <li>Plain English — no "NDR compression driven by gross churn expansion"</li>
+                </ul>
+                <div class="done-bar">The CEO can walk the board through it in 5 minutes and <strong>never get asked the same question twice</strong>.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 04 — ONE-PAGER -->
+      <div class="panel" data-panel="3">
+        <div class="wrap" style="padding:0;">
+          <div class="persona-head">
+            <div>
+              <span class="eyebrow on-light"><span class="dot"></span>STRATEGY LEAD PERSONA</span>
+              <h2>James Okonkwo — Strategy Lead, Helio Logistics</h2>
+              <p>Three interdependent, competing initiatives and a board that needs a real recommendation, not a balanced summary.</p>
+            </div>
+            <span class="difficulty-flag">⚠ Hardest of the four — try after Project 01 or 02</span>
+          </div>
+          <div class="panel-grid">
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">Source Material</span>
+                <h3>Project Atlas — four workshops, one hidden tension</h3>
+                <p>$1.2B-revenue 3PL, 4,200 employees. Four cross-functional workshop notes (Ops, Technology/AI, Sales, HR) feed three board options:</p>
+                <ul>
+                  <li><strong>A — Zone Restructuring</strong> ($6M, 12-18mo, high confidence, political risk)</li>
+                  <li><strong>B — AI Capability Investment</strong> ($22M/3yr, medium confidence, vendor lock-in risk)</li>
+                  <li><strong>C — Enterprise GTM Redesign</strong> ($9M/18mo, medium confidence, depends on AI gap closing)</li>
+                </ul>
+                <p><strong>The hidden tension:</strong> all three are interdependent — restructuring needs AI data, AI needs trained people, GTM needs AI features, and talent is the binding constraint on all three. Board decision due Sept 30.</p>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Custom Instructions</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="ci-04">Copy</button>
+                  <pre id="ci-04">You are my collaborator on Demo One-Pager — Strategy Lead Persona.
+
+My role: Strategy lead at a mid-cap logistics company
+What we're building: a one-page executive summary for an upcoming board meeting
+Success looks like: the board reads it in 90 seconds, understands the situation, the options, and the tradeoffs, and walks into the discussion ready to decide
+
+Tone: brief, structured, decision-oriented. No corporate hedging.
+Push back when my brief is vague.
+Always ask for the missing context rather than guessing.
+Save artifacts to /Demo One-Pager/ so I can find them later.
+When iterating, surface what you changed and why — don't just hand me a new draft.</pre>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="p-card">
+                <span class="p-eyebrow">RCI Brief — paste-ready</span>
+                <div class="code-block">
+                  <button class="btn-copy" data-copy-target="rci-04">Copy</button>
+                  <pre id="rci-04">I need to build a one-page executive summary for a board meeting.
+
+Requirements:
+- One page. Fits on a tablet, single screen. No scrolling.
+- Five sections, in this order:
+  1. Situation (one paragraph, plain English)
+  2. Three options (one tight line each: cost, time to impact, confidence)
+  3. Tradeoffs (the hidden tension the board needs to know)
+  4. Recommendation (one paragraph: which to fund, in what sequence, why)
+  5. Decision needed (one yes/no question per initiative)
+- No charts, no tables, no jargon. Read once, possibly while the presenter is talking.
+- Decision-oriented language. "We recommend..." not "We could consider..."
+- No "we should explore" or "we might want to investigate" — those phrases are banned
+- Output as a markdown file, single page when printed
+
+Context:
+Source material is loaded in this project — meeting notes from 4 cross-functional workshops, three proposed initiatives with cost/timing/confidence, the CEO's notes about what they want from the meeting, and James's private notes about the hidden tension. Use them.
+
+Intent:
+The board reads this in 90 seconds and walks into the discussion ready to decide. Not "we'll think about it." Ready to decide — each initiative gets a clear yes or no, sequencing is explicit if more than one is approved.
+
+Don't: pad the situation paragraph. Don't: list more than three options. Don't: hide the recommendation behind neutral language.
+
+Go.</pre>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">Critique Prompts — pick one</span>
+                <div class="critique-item">
+                  <div class="ci-when">When the situation paragraph opens with corporate framing</div>
+                  <p class="ci-quote">"Rewrite it to name the actual problem in the first sentence. No corporate hedging. The board needs to know in 10 seconds what they're here to decide."</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When the three options are described but not compared</div>
+                  <p class="ci-quote">"Replace the prose with a one-line-per-option summary: cost, time to impact, confidence, what it depends on."</p>
+                </div>
+                <div class="critique-item">
+                  <div class="ci-when">When the recommendation hides behind neutral language</div>
+                  <p class="ci-quote">"Pick one. Recommend which initiative to fund first, which to defer, and what triggers the next phase. If you can't recommend, you've failed the brief."</p>
+                </div>
+              </div>
+              <div class="p-card">
+                <span class="p-eyebrow">What Good Looks Like</span>
+                <ul class="checklist">
+                  <li>Situation names the actual problem, not the symptoms</li>
+                  <li>Tradeoffs section names the interdependence explicitly — it's a sequence, not a pick-one</li>
+                  <li>Recommendation is specific: fund first, defer, and the trigger for the next phase</li>
+                  <li>Banned phrases absent — no "we should explore," no "further analysis needed"</li>
+                </ul>
+                <div class="done-bar">The board reads it in 90 seconds and says <strong>"I know what I'm being asked to vote on."</strong> Not "lots to think about."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>GHN AI Fluency Lab · Week 2 Fallback Projects</span>
+    <a href="/GHN/AIFluency/week-2/">← Back to Week 2 Syllabus</a>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.getAttribute('data-target');
+      panels.forEach(p => {
+        p.classList.toggle('active', p.getAttribute('data-panel') === target);
+      });
+      window.scrollTo({ top: document.querySelector('.tabs-wrap').offsetTop - 90, behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.btn-copy[data-copy-target]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const target = document.getElementById(btn.getAttribute('data-copy-target'));
+      if (!target) return;
+      try {
+        await navigator.clipboard.writeText(target.textContent);
+        const original = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+      } catch (err) {
+        btn.textContent = 'Select & copy';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
