@@ -392,7 +392,10 @@ const topicCount = ALL_TOPICS.length;
         li.textContent = `${p.title} — ${p.rating}/5`;
         list.appendChild(li);
       });
+      // The tracker is a sibling of the form, so hiding the form alone would
+      // strand the sticky bar with its button still reading "Sending…".
       form.style.display = 'none';
+      document.querySelector('.tracker').style.display = 'none';
       document.getElementById('done').classList.add('show');
       try { localStorage.removeItem(DRAFT_KEY); } catch {}
       window.scrollTo({ top: 0, behavior: 'smooth' });
