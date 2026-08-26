@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Teardown: Distills — Week 4 Syllabus — AI Fluency Lab</title>
+<meta name="description" content="Week 4 of the AI Fluency Lab — take apart a live production Claude app surface by surface, map every decision onto the CCAR-F exam blueprint, and ship one core loop of your own.">
+<link rel="canonical" href="https://mikejones.online/GHN/AIFluency/week-4/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-900:#0D2530;
+    --teal-800:#123640;
+    --teal-700:#1B4652;
+    --teal-600:#296270;
+    --orange-600:#D4732B;
+    --orange-500:#E8863C;
+    --orange-400:#F0A868;
+    --orange-100:#FCE7D3;
+    --ink-900:#1B2427;
+    --ink-700:#3C494D;
+    --slate-500:#5C6B70;
+    --slate-400:#7C8C90;
+    --paper-0:#FFFFFF;
+    --paper-50:#FAF8F3;
+    --line-100:#E7E2D8;
+    --line-dark:#28444E;
+    --cream-100:#D8E1E2;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper-0);
+    color:var(--ink-900);
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Lora',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  em{font-style:italic;color:var(--orange-500);font-weight:500;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px;}
+  .on-dark{color:var(--paper-0);}
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange-500);display:inline-block;flex-shrink:0;}
+  .eyebrow.on-light{color:var(--teal-700);}
+  .eyebrow.on-dark-pill{
+    color:var(--cream-100);
+    border:1px solid var(--line-dark);
+    background:rgba(255,255,255,.03);
+    padding:8px 16px;
+    border-radius:999px;
+  }
+
+  section{padding:100px 0;position:relative;}
+  .section-tight{padding:72px 0;}
+  .bg-dark{background:linear-gradient(135deg,var(--teal-700) 0%, var(--teal-900) 78%);}
+  .bg-paper{background:var(--paper-50);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-100);
+  }
+  .navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1140px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
+  .brand img{width:28px;height:28px;flex-shrink:0;border-radius:6px;}
+  .brandmark{display:flex;flex-direction:column;line-height:1.15;}
+  .brandmark .top{font-size:16px;font-weight:600;color:var(--ink-900);}
+  .brandmark .sub{font-size:11.5px;color:var(--slate-400);letter-spacing:.02em;}
+  nav{display:flex;align-items:center;gap:30px;}
+  .nav-links{display:flex;gap:26px;}
+  .nav-links a{font-size:15.5px;color:var(--ink-700);text-decoration:none;}
+  .nav-links a:hover{color:var(--ink-900);}
+  @media (max-width:900px){.nav-links{display:none;}}
+
+  /* ---------- SESSION HEADER ---------- */
+  .doc-header{padding:38px 0 0;}
+  .doc-header-row{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:44px;flex-wrap:wrap;
+    margin:18px 0 32px;
+  }
+  .dh-title{font-size:clamp(28.5px,3.4vw,42px);color:var(--paper-0);font-weight:500;line-height:1.2;max-width:620px;}
+  .dh-sub{color:var(--cream-100);font-size:16.5px;max-width:500px;margin:12px 0 0;line-height:1.6;}
+  .dh-meta{display:flex;flex-direction:column;gap:9px;flex-shrink:0;}
+  .meta-row{display:flex;gap:16px;font-size:14.5px;align-items:baseline;}
+  .meta-row .ml{font-family:'JetBrains Mono',monospace;color:#7C9096;min-width:69px;letter-spacing:.02em;}
+  .meta-row .mv{color:var(--cream-100);}
+  .doc-toc{display:flex;flex-wrap:wrap;border-top:1px solid var(--line-dark);}
+  .doc-toc a{
+    display:flex;align-items:center;gap:8px;color:var(--cream-100);text-decoration:none;font-size:15px;font-weight:500;
+    padding:16px 22px 15px 0;margin-right:24px;border-bottom:2px solid transparent;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .doc-toc a .mono{color:#7C9096;font-size:12px;}
+  .doc-toc a:hover{color:var(--orange-400);border-color:var(--orange-500);}
+  @media (max-width:700px){.doc-header-row{align-items:flex-start;}.doc-toc a{margin-right:16px;padding-right:0;}}
+
+  /* ---------- WHERE THIS FITS ---------- */
+  .fits-strip{
+    max-width:900px;margin:0 auto;padding:22px 30px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    background:var(--paper-0);border:1px solid var(--line-100);border-radius:var(--radius);
+  }
+  .fits-strip p{margin:0;font-size:16px;color:var(--slate-500);max-width:640px;}
+  .fits-strip a.link-arrow{color:var(--orange-600);font-weight:600;font-size:15.5px;text-decoration:none;white-space:nowrap;}
+  .fits-strip a.link-arrow:hover{text-decoration:underline;}
+
+  /* ---------- SECTION HEADS ---------- */
+  .shift-head{max-width:760px;margin-bottom:52px;}
+  .shift-head h2{font-size:clamp(29.5px,3.4vw,42px);margin:16px 0;line-height:1.2;}
+  .shift-head p{color:var(--slate-500);font-size:18px;}
+  .shift-head.on-dark h2{color:var(--paper-0);}
+  .shift-head.on-dark p{color:var(--cream-100);}
+  .shift-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+
+  /* ---------- REMEMBER CALLOUT ---------- */
+  .remember{
+    position:relative;background:var(--orange-100);border:1px solid var(--orange-500);
+    border-left:5px solid var(--orange-500);border-radius:var(--radius);
+    padding:26px 30px 24px;margin:34px 0;max-width:900px;
+  }
+  .remember .rm-label{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:#fff;background:var(--orange-600);border-radius:999px;padding:5px 14px;margin-bottom:16px;
+  }
+  .remember h3{font-size:22px;font-weight:500;margin:0 0 14px;}
+  .remember ol,.remember ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;}
+  .remember li{font-size:16px;color:var(--ink-700);line-height:1.6;}
+  .remember li strong{color:var(--ink-900);font-weight:600;}
+  .remember p{font-size:16px;color:var(--ink-700);margin:0;line-height:1.6;}
+  .remember p + p{margin-top:12px;}
+  .remember .rm-sub{font-size:14.5px;color:var(--slate-500);margin-top:14px;font-style:italic;font-family:'Lora',serif;}
+  .remember.on-dark-rm{background:rgba(232,134,60,.10);border-color:var(--orange-500);border-left-color:var(--orange-400);}
+  .remember.on-dark-rm h3{color:#fff;}
+  .remember.on-dark-rm li,.remember.on-dark-rm p{color:#D8E1E2;}
+  .remember.on-dark-rm li strong{color:#fff;}
+  .remember.on-dark-rm .rm-sub{color:#9FB4B8;}
+  .remember.on-dark-rm .rm-label{background:var(--orange-500);color:#0A1519;}
+  .remember.center{margin-left:auto;margin-right:auto;}
+
+  .keyline{
+    font-family:'Lora',serif;font-style:italic;font-size:16.5px;color:var(--ink-700);
+    border-left:2px solid var(--orange-500);padding-left:15px;margin:0 0 12px;
+  }
+
+  /* ---------- AGENDA TIMELINE ---------- */
+  .timeline{position:relative;max-width:820px;margin:0 auto;}
+  .timeline::before{content:"";position:absolute;left:29px;top:8px;bottom:8px;width:2px;background:var(--line-100);}
+  .t-hint-global{max-width:820px;margin:0 auto 18px;text-align:right;font-size:13px;color:var(--slate-400);font-style:italic;}
+  .t-item{position:relative;padding:0 0 14px 76px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{
+    position:absolute;left:14px;top:2px;width:32px;height:32px;border-radius:50%;
+    background:var(--paper-0);border:2px solid var(--orange-500);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--orange-600);
+    z-index:1;
+  }
+  .t-item.is-core .t-dot{background:var(--orange-500);color:#fff;box-shadow:0 6px 18px -6px rgba(232,134,60,.7);}
+  .t-item.is-buffer .t-dot{border-color:var(--line-100);color:var(--slate-400);}
+  .t-time{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--slate-400);letter-spacing:.03em;margin-bottom:5px;}
+  .t-card{background:var(--paper-0);border:1px solid var(--line-100);border-radius:12px;padding:16px 24px;cursor:pointer;transition:border-color .15s ease;}
+  .t-card:hover{border-color:var(--orange-500);}
+  .t-item.is-core .t-card{border-color:var(--orange-500);background:linear-gradient(180deg,var(--orange-100) 0%, #fff 55%);}
+  .t-card h4{font-size:18.5px;font-weight:500;margin-bottom:0;font-family:'Lora',serif;position:relative;padding-right:26px;}
+  .t-card p{margin:0;font-size:15.5px;color:var(--slate-500);line-height:1.55;}
+  .t-card .t-tag{display:inline-block;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--orange-600);margin-bottom:8px;}
+  .t-chevron{position:absolute;right:0;top:2px;font-size:16.5px;color:var(--slate-400);transition:transform .25s ease, color .25s ease;}
+  .t-card:hover .t-chevron, .t-card.expanded .t-chevron{transform:rotate(180deg);color:var(--orange-500);}
+  .t-details{max-height:0;opacity:0;overflow:hidden;transition:max-height .35s ease, opacity .25s ease, margin-top .35s ease;}
+  .t-card:hover .t-details, .t-card.expanded .t-details{max-height:560px;opacity:1;margin-top:10px;}
+
+  /* ---------- WHAT IS DISTILLS ---------- */
+  .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0 0 8px;}
+  @media (max-width:860px){.pipeline{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.pipeline{grid-template-columns:1fr;}}
+  .pipe-step{
+    background:rgba(255,255,255,.05);border:1px solid var(--line-dark);padding:24px 22px;position:relative;
+  }
+  .pipeline .pipe-step:first-child{border-radius:16px 0 0 16px;}
+  .pipeline .pipe-step:last-child{border-radius:0 16px 16px 0;}
+  @media (max-width:860px){
+    .pipeline .pipe-step{border-radius:0 !important;}
+    .pipeline .pipe-step:first-child{border-radius:16px 16px 0 0 !important;}
+    .pipeline .pipe-step:last-child{border-radius:0 0 16px 16px !important;}
+  }
+  .pipe-step .ps-n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--orange-400);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:10px;}
+  .pipe-step h4{color:#fff;font-size:18px;font-weight:500;margin:0 0 8px;font-family:'Lora',serif;}
+  .pipe-step p{color:#C4D2D4;font-size:14.5px;margin:0;line-height:1.5;}
+  .stack-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px;justify-content:center;}
+  .stack-pill{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--cream-100);
+    background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:999px;padding:7px 15px;
+  }
+
+  /* ---------- ACCORDION (SURFACES) ---------- */
+  .acc-list{display:flex;flex-direction:column;gap:14px;max-width:920px;}
+  details.acc{
+    background:var(--paper-0);border:1px solid var(--line-100);border-radius:var(--radius);
+    overflow:hidden;transition:border-color .15s ease, box-shadow .2s ease;
+  }
+  details.acc[open]{border-color:var(--orange-500);box-shadow:0 12px 30px -22px rgba(27,36,39,.5);}
+  details.acc > summary{
+    list-style:none;cursor:pointer;padding:22px 26px;display:grid;grid-template-columns:44px 1fr 22px;
+    gap:18px;align-items:center;
+  }
+  details.acc > summary::-webkit-details-marker{display:none;}
+  details.acc > summary:hover{background:var(--paper-50);}
+  .acc-n{
+    font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--orange-600);
+    border:1px solid var(--orange-500);border-radius:8px;width:42px;height:42px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  details.acc.is-twist .acc-n{background:var(--orange-500);color:#fff;border-color:var(--orange-500);}
+  .acc-title{font-family:'Lora',serif;font-size:20.5px;font-weight:500;line-height:1.3;display:block;}
+  .acc-kicker{display:block;font-family:'Inter',sans-serif;font-size:14px;color:var(--slate-500);margin-top:5px;line-height:1.5;}
+  .acc-chev{font-size:17px;color:var(--slate-400);transition:transform .25s ease,color .25s ease;justify-self:end;}
+  details.acc[open] .acc-chev{transform:rotate(180deg);color:var(--orange-500);}
+  .acc-body{padding:4px 26px 28px 88px;border-top:1px solid var(--line-100);margin-top:2px;padding-top:22px;}
+  @media (max-width:640px){
+    details.acc > summary{grid-template-columns:36px 1fr 20px;gap:12px;padding:18px;}
+    .acc-n{width:36px;height:36px;font-size:12.5px;}
+    .acc-title{font-size:18px;}
+    .acc-body{padding:20px 18px 24px;}
+  }
+  .acc-body h5{
+    font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--teal-700);margin:22px 0 10px;
+  }
+  .acc-body h5:first-child{margin-top:0;}
+  .acc-body p{font-size:15.5px;color:var(--ink-700);margin:0 0 12px;line-height:1.62;}
+  .acc-body ul{margin:0 0 14px;padding-left:20px;display:flex;flex-direction:column;gap:8px;}
+  .acc-body li{font-size:15.5px;color:var(--ink-700);line-height:1.55;}
+  .acc-body li strong,.acc-body p strong{color:var(--ink-900);font-weight:600;}
+  .acc-body code{
+    font-family:'JetBrains Mono',monospace;font-size:13.5px;background:var(--paper-50);
+    border:1px solid var(--line-100);border-radius:5px;padding:1.5px 6px;color:var(--teal-700);
+  }
+  .ask-room{
+    background:var(--paper-50);border:1px dashed var(--orange-500);border-radius:12px;
+    padding:16px 20px;margin:16px 0 0;
+  }
+  .ask-room .ar-label{
+    font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--orange-600);display:block;margin-bottom:7px;
+  }
+  .ask-room p{margin:0;font-size:15px;color:var(--ink-700);}
+  .ask-room p + p{margin-top:9px;}
+  .ask-room .answer{color:var(--slate-500);font-style:italic;font-family:'Lora',serif;}
+
+  /* code / prompt block */
+  .codeblock{
+    background:var(--teal-900);border-radius:10px;padding:18px 20px;margin:0 0 14px;overflow-x:auto;
+  }
+  .codeblock pre{margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#D8E1E2;white-space:pre;}
+  .codeblock .c-key{color:var(--orange-400);}
+  .codeblock .c-str{color:#9FD3C7;}
+  .codeblock .c-com{color:#7C9096;font-style:italic;}
+  .cb-label{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--slate-400);
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;display:block;
+  }
+
+  /* domain badges */
+  .dom-row{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 4px;}
+  .dom-badge{
+    display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+    letter-spacing:.04em;border-radius:999px;padding:4px 11px;white-space:nowrap;
+    background:var(--paper-50);border:1px solid var(--line-100);color:var(--slate-500);
+  }
+  .dom-badge .dn{font-family:'JetBrains Mono',monospace;color:var(--orange-600);}
+  .dom-badge.is-primary{background:var(--orange-100);border-color:var(--orange-500);color:var(--ink-900);}
+  .dom-badge.on-dark-badge{background:rgba(255,255,255,.06);border-color:var(--line-dark);color:var(--cream-100);}
+  .dom-badge.on-dark-badge .dn{color:var(--orange-400);}
+
+  /* ---------- PRICING SLIDER ---------- */
+  .calc{
+    max-width:940px;margin:0 auto;background:rgba(255,255,255,.05);
+    border:1px solid var(--line-dark);border-radius:18px;padding:34px 36px;
+  }
+  @media (max-width:640px){.calc{padding:24px 20px;}}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+  @media (max-width:820px){.calc-grid{grid-template-columns:1fr;gap:28px;}}
+  .ctl{margin-bottom:24px;}
+  .ctl:last-child{margin-bottom:0;}
+  .ctl-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:10px;}
+  .ctl-head label{font-size:14px;font-weight:600;color:var(--cream-100);letter-spacing:.02em;}
+  .ctl-head .val{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--orange-400);font-weight:500;}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:999px;
+    background:var(--line-dark);outline:none;margin:0;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
+    background:var(--orange-500);cursor:pointer;border:3px solid var(--teal-900);
+    box-shadow:0 0 0 1px var(--orange-500);
+  }
+  input[type=range]::-moz-range-thumb{
+    width:20px;height:20px;border-radius:50%;background:var(--orange-500);cursor:pointer;
+    border:3px solid var(--teal-900);box-shadow:0 0 0 1px var(--orange-500);
+  }
+  .seg{display:flex;gap:7px;flex-wrap:wrap;}
+  .seg button{
+    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;color:var(--cream-100);
+    background:rgba(255,255,255,.04);border:1px solid var(--line-dark);border-radius:999px;
+    padding:8px 15px;cursor:pointer;transition:all .15s ease;
+  }
+  .seg button:hover{border-color:var(--orange-500);color:var(--orange-400);}
+  .seg button[aria-pressed="true"]{background:var(--orange-500);border-color:var(--orange-500);color:#0A1519;}
+  .seg .sub{display:block;font-size:11px;font-weight:400;opacity:.75;margin-top:1px;}
+
+  .readout{display:flex;flex-direction:column;gap:0;}
+  .ro-row{
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    padding:13px 0;border-top:1px solid var(--line-dark);
+  }
+  .ro-row:first-child{border-top:none;padding-top:0;}
+  .ro-row .rl{font-size:14.5px;color:#9FB4B8;}
+  .ro-row .rv{font-family:'JetBrains Mono',monospace;font-size:16px;color:#fff;font-weight:500;}
+  .ro-row.is-hero{padding:18px 0;}
+  .ro-row.is-hero .rl{font-size:15.5px;color:var(--cream-100);font-weight:600;}
+  .ro-row.is-hero .rv{font-size:26px;}
+  .rv.pos{color:#7FD4A8;}
+  .rv.neg{color:#F0846C;}
+  .verdict{
+    margin-top:18px;border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.55;
+    border:1px solid var(--line-dark);background:rgba(255,255,255,.04);color:#C4D2D4;
+  }
+  .verdict.ok{border-color:#3F7F63;background:rgba(127,212,168,.09);color:#CDEBDB;}
+  .verdict.bad{border-color:#8E4A3C;background:rgba(240,132,108,.09);color:#F5CFC6;}
+  .verdict strong{color:#fff;}
+  .calc-note{
+    max-width:940px;margin:18px auto 0;font-size:13.5px;color:#7C9096;line-height:1.6;
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  /* ---------- DOMAIN MAP TABLE ---------- */
+  .dmap{max-width:920px;margin:0 auto;}
+  .dmap-row{
+    display:grid;grid-template-columns:64px 1fr 190px;gap:22px;align-items:center;
+    padding:20px 0;border-top:1px solid var(--line-100);
+  }
+  .dmap-row:first-of-type{border-top:none;}
+  @media (max-width:760px){.dmap-row{grid-template-columns:52px 1fr;gap:14px;}.dmap-row .dm-where{grid-column:2;}}
+  .dm-wt{
+    font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:600;color:var(--orange-600);
+    text-align:center;line-height:1.1;
+  }
+  .dm-wt span{display:block;font-size:10.5px;color:var(--slate-400);font-weight:400;letter-spacing:.06em;margin-top:3px;}
+  .dm-name{font-family:'Lora',serif;font-size:19px;font-weight:500;margin:0 0 4px;}
+  .dm-desc{font-size:14.5px;color:var(--slate-500);margin:0;line-height:1.5;}
+  .dm-where{font-size:14px;color:var(--ink-700);background:var(--paper-50);border:1px solid var(--line-100);border-radius:9px;padding:10px 13px;line-height:1.45;}
+  .dm-where strong{color:var(--orange-600);display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;}
+
+  /* ---------- HOMEWORK TIERS ---------- */
+  .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+  @media (max-width:900px){.tier-grid{grid-template-columns:1fr;}}
+  .tier{
+    background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:16px;
+    padding:26px 24px;display:flex;flex-direction:column;
+  }
+  .tier.is-default{border-color:var(--orange-500);background:rgba(232,134,60,.09);}
+  .tier .tr-n{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#0A1519;background:var(--orange-400);
+    border-radius:999px;padding:4px 12px;display:inline-block;margin-bottom:14px;align-self:flex-start;
+  }
+  .tier h4{color:#fff;font-size:20px;margin:0 0 4px;font-weight:500;}
+  .tier .tr-time{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--orange-400);margin-bottom:12px;}
+  .tier p{color:#C4D2D4;font-size:15px;line-height:1.55;margin:0 0 12px;}
+  .tier ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;}
+  .tier li{color:#C4D2D4;font-size:14.5px;line-height:1.5;}
+  .tier li strong{color:#fff;}
+
+  details.hint{
+    background:rgba(255,255,255,.04);border:1px solid var(--line-dark);border-radius:12px;
+    margin-bottom:12px;overflow:hidden;
+  }
+  details.hint[open]{border-color:var(--orange-500);}
+  details.hint > summary{
+    list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:12px;
+    color:#fff;font-size:16px;font-weight:500;font-family:'Lora',serif;
+  }
+  details.hint > summary::-webkit-details-marker{display:none;}
+  details.hint > summary:hover{background:rgba(255,255,255,.03);}
+  details.hint > summary .h-ico{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--orange-400);
+    border:1px solid var(--line-dark);border-radius:6px;padding:3px 8px;flex-shrink:0;
+  }
+  details.hint[open] > summary .h-ico{background:var(--orange-500);color:#0A1519;border-color:var(--orange-500);}
+  details.hint > summary .h-chev{margin-left:auto;color:var(--slate-400);transition:transform .25s ease;}
+  details.hint[open] > summary .h-chev{transform:rotate(180deg);color:var(--orange-500);}
+  .hint-body{padding:2px 22px 24px 22px;border-top:1px solid var(--line-dark);padding-top:20px;}
+  .hint-body p{color:#C4D2D4;font-size:15px;line-height:1.6;margin:0 0 12px;}
+  .hint-body p strong{color:#fff;}
+  .hint-body ul,.hint-body ol{margin:0 0 14px;padding-left:20px;display:flex;flex-direction:column;gap:8px;}
+  .hint-body li{color:#C4D2D4;font-size:14.8px;line-height:1.55;}
+  .hint-body li strong{color:#fff;}
+  .hint-body h6{
+    font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--orange-400);margin:20px 0 9px;
+  }
+  .hint-body h6:first-child{margin-top:0;}
+  .hint-body code{
+    font-family:'JetBrains Mono',monospace;font-size:13px;background:rgba(255,255,255,.06);
+    border-radius:5px;padding:1.5px 6px;color:var(--orange-400);
+  }
+  .checklist{list-style:none;padding-left:0 !important;}
+  .checklist li{display:flex;gap:10px;align-items:flex-start;}
+  .checklist li::before{content:"☐";color:var(--orange-400);flex-shrink:0;font-size:15px;line-height:1.4;}
+
+  /* ---------- INSTRUCTOR / FOOTER ---------- */
+  .instructor{
+    display:grid;grid-template-columns:150px 1fr;gap:32px;align-items:center;
+    background:var(--paper-0);border:1px solid var(--line-100);border-radius:var(--radius);padding:34px;
+  }
+  @media (max-width:660px){.instructor{grid-template-columns:1fr;text-align:center;}}
+  .avatar-ring{
+    width:120px;height:120px;border-radius:50%;
+    background:linear-gradient(135deg,var(--orange-500),var(--teal-600));
+    display:flex;align-items:center;justify-content:center;margin:0 auto;padding:4px;
+  }
+  .avatar-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;}
+  .instructor h3{font-size:22px;margin-bottom:5px;font-weight:500;}
+  .instructor .role{color:var(--orange-600);font-size:14.5px;font-weight:600;margin-bottom:10px;}
+  .instructor p{color:var(--slate-500);font-size:15.5px;margin:0;}
+
+  footer{padding:44px 0;border-top:1px solid var(--line-100);background:var(--paper-0);}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;color:var(--slate-400);font-size:14.5px;}
+  .footer-row .flinks{display:flex;gap:18px;}
+  .footer-row a{text-decoration:none;color:var(--slate-500);}
+  .footer-row a:hover{color:var(--orange-600);}
+
+  .expand-all{
+    background:none;border:1px solid var(--line-100);border-radius:999px;padding:7px 16px;
+    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;color:var(--slate-500);
+    cursor:pointer;transition:all .15s ease;
+  }
+  .expand-all:hover{border-color:var(--orange-500);color:var(--orange-600);}
+  .acc-toolbar{display:flex;justify-content:flex-end;max-width:920px;margin-bottom:16px;}
+
+  ::selection{background:var(--orange-400);color:#0A1519;}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <a class="brand" href="/GHN/AIFluency/week-4/">
+      <img src="/GHN/AIFluency/ghn-logo.png" alt="GHN AI Fluency Lab">
+      <div class="brandmark">
+        <span class="top">AI Fluency Lab</span>
+        <span class="sub">Week 4 · Product Teardown</span>
+      </div>
+    </a>
+    <nav>
+      <div class="nav-links">
+        <a href="#agenda">Agenda</a>
+        <a href="#what">The App</a>
+        <a href="#surfaces">Surfaces</a>
+        <a href="#economics">Economics</a>
+        <a href="#ccarf">CCAR-F</a>
+        <a href="#endpoint">What's Next</a>
+        <a href="#homework">Homework</a>
+      </div>
+      <a href="/GHN/AIFluency/" style="font-size:15px;font-weight:600;color:var(--orange-600);text-decoration:none;white-space:nowrap;">Lab Overview ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- SESSION HEADER -->
+  <section class="doc-header bg-dark">
+    <div class="wrap">
+      <span class="eyebrow on-dark-pill"><span class="dot"></span>WEEK 4 · AUGUST 2026</span>
+      <div class="doc-header-row">
+        <div>
+          <h1 class="dh-title">Take apart a real one. <em>Including the parts that don't work.</em></h1>
+          <p class="dh-sub">We're opening up a live production Claude application — every prompt, every guardrail, every cost decision — and mapping what we find onto the five domains of the CCAR-F exam. Nothing is hidden, including the shortcuts.</p>
+        </div>
+        <div class="dh-meta">
+          <div class="meta-row"><span class="ml">Date</span><span class="mv">Wed, Aug 26, 2026</span></div>
+          <div class="meta-row"><span class="ml">Time</span><span class="mv">10:00 AM PT · 75 min</span></div>
+          <div class="meta-row"><span class="ml">Format</span><span class="mv">Live teardown · discussion-led</span></div>
+          <div class="meta-row"><span class="ml">Cohort</span><span class="mv">GHN CCAR-F</span></div>
+        </div>
+      </div>
+      <nav class="doc-toc">
+        <a href="#agenda"><span class="mono">01</span>Agenda</a>
+        <a href="#what"><span class="mono">02</span>What Is Distills</a>
+        <a href="#surfaces"><span class="mono">03</span>The Six Surfaces</a>
+        <a href="#economics"><span class="mono">04</span>Unit Economics</a>
+        <a href="#ccarf"><span class="mono">05</span>The CCAR-F Map</a>
+        <a href="#endpoint"><span class="mono">06</span>What's Next</a>
+        <a href="#discussion"><span class="mono">07</span>Discussion</a>
+        <a href="#homework"><span class="mono">08</span>Homework</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- WHERE THIS FITS -->
+  <section class="section-tight" style="padding-top:44px;padding-bottom:44px;">
+    <div class="wrap">
+      <div class="fits-strip">
+        <p><strong style="color:var(--ink-900);">Where this fits:</strong> Week 3 was how to <em>plan</em> a build and how to <em>verify</em> a claim. Today you point both of those at somebody else's finished product — and then at your own.</p>
+        <a class="link-arrow" href="/GHN/AIFluency/week-3/">← Week 3 syllabus</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENDA -->
+  <section id="agenda" class="bg-paper">
+    <div class="wrap">
+      <div class="shift-head">
+        <span class="eyebrow on-light"><span class="dot"></span>THE 75 MINUTES</span>
+        <h2>Session Agenda</h2>
+        <p>The walkthrough is the class. Everything else exists to give it a frame at the front and a deliverable at the back.</p>
+      </div>
+
+      <p class="t-hint-global">Hover or tap a block for details.</p>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-dot">00</div>
+          <div class="t-time">0:00 – 0:08 · 8 min</div>
+          <div class="t-card">
+            <span class="t-tag">Open</span>
+            <h4>Ground rules: we're not defending anything<span class="t-chevron">⌄</span></h4>
+            <div class="t-details">
+              <p>Three things to land. This isn't a demo — the product is today's teaching artifact and we're ripping it apart. Reading a product is a learnable skill, the same muscle as reading a contract or a strategy deck. And you don't need to be technical: almost everything we surface is visible from the UI.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item is-core">
+          <div class="t-dot">01</div>
+          <div class="t-time">0:08 – 0:30 · 22 min</div>
+          <div class="t-card">
+            <span class="t-tag">Core block</span>
+            <h4>Where the AI actually lives — six surfaces<span class="t-chevron">⌄</span></h4>
+            <div class="t-details">
+              <p>Live click-through of the running app. At each surface: you guess what the model is doing, then we look at what it's really doing. One surface turns out to have no AI in it at all.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item is-core">
+          <div class="t-dot">02</div>
+          <div class="t-time">0:30 – 0:42 · 12 min</div>
+          <div class="t-card">
+            <span class="t-tag">Cert block</span>
+            <h4>Mapping it onto the CCAR-F blueprint<span class="t-chevron">⌄</span></h4>
+            <div class="t-details">
+              <p>Five domains, five weights. Every one of them is standing somewhere in the app you just watched — including the domain the app is missing entirely, which is the most instructive one.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-dot">03</div>
+          <div class="t-time">0:42 – 0:47 · 5 min</div>
+          <div class="t-card">
+            <span class="t-tag">Bonus · nothing built</span>
+            <h4>What if the caller isn't a person?<span class="t-chevron">⌄</span></h4>
+            <div class="t-details">
+              <p>A thought experiment about profiles as queryable endpoints — what MCP actually is, which tool you'd expose, and the three questions nobody has answered. First thing to cut if we're running long; the page carries it in full.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-dot">04</div>
+          <div class="t-time">0:47 – 0:57 · 10 min</div>
+          <div class="t-card">
+            <span class="t-tag">Discussion</span>
+            <h4>How would you improve it?<span class="t-chevron">⌄</span></h4>
+            <div class="t-details">
+              <p>Where would you add a model call — and where would you take one out? What would you give it a tool for? Bring your Skilljar training and say what it told you to do that this app doesn't.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item is-core">
+          <div class="t-dot">05</div>
+          <div class="t-time">0:57 – 1:00 · 3 min</div>
+          <div class="t-card">
+            <span class="t-tag">Deliverable</span>
+            <h4>Homework: ship one core loop<span class="t-chevron">⌄</span></h4>
+            <div class="t-details">
+              <p>Pick one loop, pick a tier, spend an hour. Three tiers, all of them complete submissions. Due Week 5.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item is-buffer">
+          <div class="t-dot">+</div>
+          <div class="t-time">1:00 – 1:15 · buffer</div>
+          <div class="t-card">
+            <span class="t-tag">Open Q&amp;A</span>
+            <h4>Overflow and questions<span class="t-chevron">⌄</span></h4>
+            <div class="t-details">
+              <p>Week 3 ran long and this one will too. The buffer is real — bring the questions you held during the walkthrough.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS DISTILLS -->
+  <section id="what" class="bg-dark">
+    <div class="wrap">
+      <div class="shift-head on-dark">
+        <span class="eyebrow" style="color:var(--orange-400);"><span class="dot"></span>THE SUBJECT</span>
+        <h2>So what is Distills?</h2>
+        <p>An AI-powered professional identity platform. You upload your career documents; it builds a hosted profile that visitors can have a conversation with. The profile answers in your voice, from your material, and admits when it doesn't know something.</p>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipe-step">
+          <span class="ps-n">Step 01</span>
+          <h4>Upload</h4>
+          <p>Resume, CV, case studies, bio — PDF, DOCX, or pasted text.</p>
+        </div>
+        <div class="pipe-step">
+          <span class="ps-n">Step 02</span>
+          <h4>Extract</h4>
+          <p>Claude turns the documents into a structured knowledge base — not a resume, a set of typed, tagged facts and stories.</p>
+        </div>
+        <div class="pipe-step">
+          <span class="ps-n">Step 03</span>
+          <h4>Interview</h4>
+          <p>A conversational agent probes the gaps and thin spots, then folds the answers back into the knowledge base.</p>
+        </div>
+        <div class="pipe-step">
+          <span class="ps-n">Step 04</span>
+          <h4>Publish</h4>
+          <p>A live profile anyone can question — answering in first person, grounded only in what's in the knowledge base.</p>
+        </div>
+      </div>
+
+      <div class="stack-row">
+        <span class="stack-pill">Cloudflare Workers</span>
+        <span class="stack-pill">Cloudflare Pages</span>
+        <span class="stack-pill">D1 · R2 · KV</span>
+        <span class="stack-pill">Claude API</span>
+        <span class="stack-pill">Stripe</span>
+        <span class="stack-pill">vanilla HTML/CSS/JS</span>
+      </div>
+
+      <div class="remember on-dark-rm center" style="margin-top:44px;">
+        <span class="rm-label">★ The one artifact to look at</span>
+        <h3>The whole product is a JSONL file</h3>
+        <p>Every surface downstream — the interview, the public chatbot, the job-description analysis — is retrieval and rendering over one line-delimited JSON file per person. If you understand the schema, you understand the product.</p>
+        <p class="rm-sub">We'll put a real one on screen. It is the highest-value thing you'll look at today.</p>
+      </div>
+
+      <div class="codeblock" style="max-width:900px;margin:0 auto;">
+        <span class="cb-label">knowledge.jsonl — one entry per line</span>
+<pre>&#123;<span class="c-key">"id"</span>: <span class="c-str">"rag-2026-08-26-004"</span>,
+ <span class="c-key">"type"</span>: <span class="c-str">"narrative"</span>,
+ <span class="c-key">"topic"</span>: <span class="c-str">"career_history"</span>,
+ <span class="c-key">"confidence"</span>: <span class="c-str">"verified"</span>,        <span class="c-com">// or "inferred" — the model flags its own guesses</span>
+ <span class="c-key">"source"</span>: <span class="c-str">"document_upload"</span>,
+ <span class="c-key">"tags"</span>: [<span class="c-str">"platform_migration"</span>, <span class="c-str">"team_leadership"</span>],
+ <span class="c-key">"title"</span>: <span class="c-str">"Migrating the billing platform"</span>,
+ <span class="c-key">"content"</span>: <span class="c-str">"Led a team of six through a nine-month..."</span>&#125;</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SIX SURFACES -->
+  <section id="surfaces">
+    <div class="wrap">
+      <div class="shift-head">
+        <span class="eyebrow on-light"><span class="dot"></span>THE WALKTHROUGH · 22 MIN</span>
+        <h2>Six surfaces, and what's really behind each one</h2>
+        <p>At each stop the question is the same: <em>what's the AI doing here?</em> Guess first. Then open the panel. Each one is tagged with the exam domains it exercises.</p>
+      </div>
+
+      <div class="acc-toolbar">
+        <button class="expand-all" id="expandAll" type="button">Expand all</button>
+      </div>
+
+      <div class="acc-list">
+
+        <!-- SURFACE 1 -->
+        <details class="acc">
+          <summary>
+            <span class="acc-n">01</span>
+            <span>
+              <span class="acc-title">Document → Knowledge Base</span>
+              <span class="acc-kicker">Everyone assumes this is "parsing a resume." It isn't.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <div class="dom-row">
+              <span class="dom-badge is-primary"><span class="dn">D4</span> Prompt Engineering &amp; Structured Output</span>
+              <span class="dom-badge"><span class="dn">D5</span> Context Management</span>
+            </div>
+
+            <h5>What you see</h5>
+            <p>You drop in a PDF. A few seconds later the product knows things about you.</p>
+
+            <h5>What it actually does</h5>
+            <p>It does not extract fields. It asks Claude to <strong>classify and decompose</strong> the document into typed knowledge entries — 8 to 12 per document — each of which must be <strong>self-contained</strong>, readable without any other entry.</p>
+            <ul>
+              <li><code>type</code> — <code>fact</code>, <code>narrative</code>, <code>qa_pair</code>, <code>technical</code>, or <code>fit_assessment</code></li>
+              <li><code>topic</code> — snake_case category (<code>career_history</code>, <code>skills</code>, <code>values</code>…)</li>
+              <li><code>confidence</code> — <code>verified</code> if directly stated, <code>inferred</code> if the model concluded it</li>
+              <li><code>tags</code> — 2–5 keywords, required, never empty</li>
+            </ul>
+            <p>The instructions are opinionated: <em>split compound claims into separate entries; write the Q&amp;A questions the way a recruiter would actually ask them; be specific — include numbers, technologies, timeframes.</em></p>
+
+            <div class="ask-room">
+              <span class="ar-label">Ask the room</span>
+              <p>Why would you make the model label its own confidence?</p>
+              <p class="answer">Because a downstream consumer needs to know whether to trust it — and because it gives the human something concrete to correct. An inferred claim presented as fact is how a profile quietly starts lying about someone.</p>
+            </div>
+
+            <div class="ask-room" style="border-style:solid;border-color:var(--line-100);">
+              <span class="ar-label">The honest critique</span>
+              <p>The schema is requested <strong>in the prompt</strong> — "output only valid JSONL, one object per line." If one line comes back malformed, that entry is silently lost. The exam's answer is <code>tool_use</code> with a JSON schema, which guarantees the shape. That's a real gap, and it's Domain 4 sitting in production.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- SURFACE 2 -->
+        <details class="acc">
+          <summary>
+            <span class="acc-n">02</span>
+            <span>
+              <span class="acc-title">The Interview — a stateful agent loop</span>
+              <span class="acc-kicker">Three phases, enforced entirely by prose.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <div class="dom-row">
+              <span class="dom-badge is-primary"><span class="dn">D1</span> Agentic Architecture &amp; Orchestration</span>
+              <span class="dom-badge"><span class="dn">D5</span> Context Management</span>
+            </div>
+
+            <h5>What you see</h5>
+            <p>A conversation that seems to know what it already asked, and doesn't repeat itself.</p>
+
+            <h5>What it actually is</h5>
+            <p>One system prompt running a <strong>three-phase script the user is never told about</strong>:</p>
+            <ul>
+              <li><strong>Phase 1 — Clarification</strong> (3–5 exchanges): probe anything ambiguous or thin in the uploaded documents.</li>
+              <li><strong>Phase 2 — Structured discovery</strong> (10–20 exchanges): STAR-format behavioural questions across experience, leadership, technical depth, collaboration style, differentiators, values.</li>
+              <li><strong>Phase 3 — Wrap-up</strong>: transition warmly, ask what was missed, mine the answer, close and point at the generate button.</li>
+            </ul>
+            <p>The knowledge base is injected into the system prompt, and the intake-form answers are injected with an explicit instruction: <em>already captured — DO NOT ask about these again.</em> There is also a rule that it must never say the word "Phase" out loud.</p>
+
+            <h5>The part that matters</h5>
+            <p><strong>The phases are enforced by instruction, not by code.</strong> There is no state machine. The model is trusted to count its own exchanges and transition on its own.</p>
+
+            <div class="ask-room">
+              <span class="ar-label">Ask the room</span>
+              <p>What happens if it doesn't transition?</p>
+              <p class="answer">Nothing catches it. This is the cleanest "prompt-based guidance vs. programmatic enforcement" example in the whole app — and Domain 1 is 27% of the exam.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- SURFACE 3 -->
+        <details class="acc">
+          <summary>
+            <span class="acc-n">03</span>
+            <span>
+              <span class="acc-title">The Public Profile Chatbot — RAG, and simpler than you'd guess</span>
+              <span class="acc-kicker">No embeddings. No vector database. Keyword scoring.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <div class="dom-row">
+              <span class="dom-badge is-primary"><span class="dn">D5</span> Context Management &amp; Reliability</span>
+              <span class="dom-badge"><span class="dn">D4</span> Prompt Engineering</span>
+              <span class="dom-badge"><span class="dn">D1</span> Orchestration</span>
+            </div>
+
+            <h5>What you see</h5>
+            <p>A live profile. Anyone with the link asks a question and gets an answer in first person, referencing real projects.</p>
+
+            <h5>What it actually is</h5>
+            <p>Retrieval, then generation. Strip the stopwords out of the question, score every knowledge-base entry, take the <strong>top 8</strong>, put them in the system prompt.</p>
+            <div class="codeblock">
+              <span class="cb-label">the entire retrieval algorithm</span>
+<pre><span class="c-com">// match in the entry body</span>       +3
+<span class="c-com">// match in topic or title</span>      +2
+<span class="c-com">// match in a tag</span>              +1
+<span class="c-com">// match in a Q&amp;A question</span>     +5   <span class="c-com">← questions are the best signal</span>
+<span class="c-com">// entry marked "verified"</span>      +1</pre>
+            </div>
+            <p>That's it. No embeddings, no similarity search, no vector store. It's about forty lines of JavaScript.</p>
+
+            <h5>The AI moment isn't retrieval — it's the guardrail</h5>
+            <p>The system prompt mandates an <strong>exact refusal phrase</strong>: <em>"If the knowledge base doesn't have enough to answer, you MUST use this exact phrase: 'I don't have details on that in my profile yet.' Do not paraphrase it."</em></p>
+
+            <h5>Then look at why</h5>
+            <p>A function watches the outgoing response for that phrase. When it matches, the question gets logged as a <strong>knowledge gap</strong> and surfaces on the owner's dashboard: <em>"here's what visitors asked that your profile couldn't answer."</em> The failure mode is instrumented and sold back to the user as a feature.</p>
+
+            <div class="ask-room">
+              <span class="ar-label">We'll do this live</span>
+              <p>We ask the demo profile something deliberately out of scope, watch it decline, then open the gap dashboard. Ninety seconds, and it reframes the whole class.</p>
+            </div>
+
+            <div class="ask-room" style="border-style:solid;border-color:var(--line-100);">
+              <span class="ar-label">The honest critique</span>
+              <p>Gap detection is a list of <strong>sixteen substring matches</strong> hoping to catch every way a model might phrase "I don't know." That's analytics data resting on string matching. The architect's answer: have the model emit a structured signal instead of parsing its own prose.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- SURFACE 4 -->
+        <details class="acc">
+          <summary>
+            <span class="acc-n">04</span>
+            <span>
+              <span class="acc-title">Job Description Mode — enum design you can see</span>
+              <span class="acc-kicker">The product's tone is enforced by an enum and two caps.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <div class="dom-row">
+              <span class="dom-badge is-primary"><span class="dn">D4</span> Structured Output</span>
+              <span class="dom-badge"><span class="dn">D5</span> Context Management</span>
+            </div>
+
+            <h5>What you see</h5>
+            <p>Paste in a job description. Get back an honest read on where you fit and where you don't.</p>
+
+            <h5>What it actually produces</h5>
+            <p>More JSONL — 3 to 5 entries of type <code>fit_assessment</code>, appended to the same knowledge base, with <code>fit_type</code> constrained to exactly three values:</p>
+            <ul>
+              <li><code>good_fit</code> — specific experience that directly matches a requirement</li>
+              <li><code>not_ideal</code> — a real gap. <strong>Capped at 2.</strong> Instruction: <em>be honest, constructive, not discouraging.</em></li>
+              <li><code>red_flag</code> — a serious mismatch. <strong>Capped at 1</strong>, "use sparingly and only if clearly warranted."</li>
+            </ul>
+
+            <h5>The part that matters</h5>
+            <p><strong>The product's bedside manner is implemented as an enum plus two numbers.</strong> Not a style guide, not a tone document — a constraint in a schema. That's a design decision you can point at.</p>
+            <p>Note what it does <em>not</em> produce: there is no match score, no percentage, no grade. Nobody has to defend a number.</p>
+
+            <div class="ask-room">
+              <span class="ar-label">Ask the room</span>
+              <p>The job description is truncated at 3,000 characters and the knowledge base at 35 entries. What breaks?</p>
+              <p class="answer">A long job posting silently loses its tail — which is frequently where the actual requirements live, after the culture boilerplate. Silent truncation is a genuine production failure mode and it's on the exam.</p>
+            </div>
+
+            <div class="ask-room" style="border-style:solid;border-color:var(--line-100);">
+              <span class="ar-label">The exam angle</span>
+              <p>The blueprint says: give enums an <code>"other"</code> escape hatch, and an <code>"unclear"</code> value for when the model genuinely can't classify — an honest escape beats a confident wrong label. <code>fit_type</code> has neither. So what does it do when a requirement maps to none of the three? <strong>That's an exam question sitting in production.</strong></p>
+            </div>
+          </div>
+        </details>
+
+        <!-- SURFACE 5 -->
+        <details class="acc">
+          <summary>
+            <span class="acc-n">05</span>
+            <span>
+              <span class="acc-title">Model Routing &amp; Rate Limits</span>
+              <span class="acc-kicker">Two different Claude models, on purpose. This is the business.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <div class="dom-row">
+              <span class="dom-badge is-primary"><span class="dn">D5</span> Reliability &amp; Cost</span>
+              <span class="dom-badge"><span class="dn">D1</span> Orchestration</span>
+            </div>
+
+            <h5>What you see</h5>
+            <p>Three tiers. Different features unlock at different prices.</p>
+
+            <h5>What's actually being gated</h5>
+            <p>Not features — <strong>inference</strong>. Two models are in play, deliberately:</p>
+            <ul>
+              <li><strong>Sonnet</strong> for the heavy pipeline — document extraction, the interview, job-description analysis. Runs rarely, matters enormously, worth paying for.</li>
+              <li><strong>Haiku</strong> for the public chatbot. Runs constantly, needs to be fast, cheap enough to give away.</li>
+            </ul>
+            <p>And the daily query caps are per tier — free profiles get 20 queries a day and 5 per visitor; paid tiers get 100/25 and 200/50.</p>
+
+            <h5>The line to read out loud</h5>
+            <p>There is a comment in the source next to those limits: <em>"At $0.006/query: Pro ($24/mo) can sustain ~3,000 queries/day before cost exceeds revenue."</em></p>
+            <p><strong>Cost per inference determined the model choice, which determined the rate limit, which determined the price of the tier.</strong> The whole business, in one line of arithmetic.</p>
+
+            <div class="ask-room" style="border-style:solid;border-color:var(--orange-500);">
+              <span class="ar-label">Now check that comment — it's wrong</span>
+              <p>Do the arithmetic. It takes twenty seconds and it does not come out.</p>
+              <div class="codeblock" style="margin:12px 0 14px;">
+<pre><span class="c-com">// the claim</span>
+3,000 queries/<span class="c-key">day</span> × 30 days × $0.006  =  <span class="c-str">$540/month</span>
+                             revenue  =  <span class="c-str">$24/month</span>
+                                          <span class="c-com">→ a 22× loss, not break-even</span>
+
+<span class="c-com">// what makes it work</span>
+3,000 queries/<span class="c-key">month</span>       × $0.006  =  <span class="c-str">$18/month</span>   <span class="c-com">✓  ≈ 100/day</span></pre>
+              </div>
+              <p>Somebody wrote <strong>"day"</strong> where they meant <strong>"month."</strong> The number has sat in the codebase ever since, quietly telling every future reader that the tier has thirty times more headroom than it actually has.</p>
+              <p>The real figures, on Haiku at roughly 3,300 tokens in and 300 out — about <strong>$0.0048 per query</strong>:</p>
+              <ul>
+                <li>At 40 queries/day: <strong>$5.78/month</strong> against $24 revenue — a healthy <strong>$18.22</strong> margin</li>
+                <li>True break-even: <strong>166 queries/day</strong>, not 3,000</li>
+                <li>Same profile on Sonnet: <strong>$17.35/month</strong> — margin drops to $6.65</li>
+                <li>Same profile on Opus: <strong>$28.92/month</strong> — <strong>underwater at −$4.92</strong></li>
+              </ul>
+              <p class="answer">Nobody was careless here. The model was right, the price was right, the units were wrong. This is what an unverified number looks like in production — Week 3's benchmark lesson, pointed at our own code. Go find the break-even yourself in the calculator below.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- SURFACE 6 -->
+        <details class="acc is-twist">
+          <summary>
+            <span class="acc-n">06</span>
+            <span>
+              <span class="acc-title">The Profile Score — the one that isn't AI at all</span>
+              <span class="acc-kicker">Zero model calls. It's regular expressions.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <div class="dom-row">
+              <span class="dom-badge is-primary"><span class="dn">D1</span> Architecture &amp; Tradeoffs</span>
+              <span class="dom-badge"><span class="dn">D5</span> Cost &amp; Latency</span>
+            </div>
+
+            <h5>What you see</h5>
+            <p>Paste a resume, get a score out of 100 across four dimensions — completeness, STAR-story coverage, recruiter red flags, ATS compatibility. It feels like the AI just read your resume.</p>
+
+            <h5>What it actually is</h5>
+            <p><strong>Pure regular expressions. Not one API call.</strong></p>
+            <ul>
+              <li>Counts buzzwords with a regex — <code>hard-working</code>, <code>team player</code>, <code>self-starter</code>, <code>detail-oriented</code> — and deducts points past a threshold</li>
+              <li>Tests whether a <code>%</code> or <code>$</code> appears near an action verb, and calls that "quantifiable impact"</li>
+              <li>Checks for a standard email pattern and the absence of table markup, and calls that "ATS compatible"</li>
+            </ul>
+
+            <div class="ask-room">
+              <span class="ar-label">Ask the room — and let it sit</span>
+              <p>Is that dishonest? Or is it good engineering?</p>
+              <p class="answer">The defensible answer: it's instant, free, deterministic, and it lives at the top of the funnel where volume is highest and stakes are lowest. Spending inference there would be slower, cost more, and be no more accurate — with the added downside that the same resume could score differently twice.</p>
+            </div>
+
+            <div class="remember" style="margin-top:22px;">
+              <span class="rm-label">★ Remember this</span>
+              <h3>Knowing when <em>not</em> to call the model is an architecture skill</h3>
+              <p>The exam frames this as a decision with four tests — complexity, value, viability, and cost of error. If the answer to any of them is no, stay at the simpler tier. Most of the AI slideware you'll be pitched this year fails at least two.</p>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIT ECONOMICS / SLIDER -->
+  <section id="economics" class="bg-dark">
+    <div class="wrap">
+      <div class="shift-head on-dark center">
+        <span class="eyebrow" style="color:var(--orange-400);"><span class="dot"></span>SURFACE 05, MADE INTERACTIVE</span>
+        <h2>The arithmetic that sets the price</h2>
+        <p>Move the sliders. Change the model. Watch a profitable tier become an unprofitable one — this is the conversation you'll actually have with your finance team about any AI feature.</p>
+      </div>
+
+      <div class="calc">
+        <div class="calc-grid">
+          <div>
+            <div class="ctl">
+              <div class="ctl-head">
+                <label for="qpd">Queries per profile, per day</label>
+                <span class="val" id="qpdVal">40</span>
+              </div>
+              <input type="range" id="qpd" min="1" max="400" value="40" step="1" aria-describedby="qpdVal">
+            </div>
+
+            <div class="ctl">
+              <div class="ctl-head"><label>Model answering the chat</label></div>
+              <div class="seg" id="modelSeg" role="group" aria-label="Model choice">
+                <button type="button" data-model="haiku" aria-pressed="true">Haiku 4.5<span class="sub">$1 / $5 per Mtok</span></button>
+                <button type="button" data-model="sonnet" aria-pressed="false">Sonnet<span class="sub">$3 / $15 per Mtok</span></button>
+                <button type="button" data-model="opus" aria-pressed="false">Opus<span class="sub">$5 / $25 per Mtok</span></button>
+              </div>
+            </div>
+
+            <div class="ctl">
+              <div class="ctl-head"><label>Tier</label></div>
+              <div class="seg" id="tierSeg" role="group" aria-label="Tier choice">
+                <button type="button" data-price="0" data-tier="Free" aria-pressed="false">Free<span class="sub">$0/mo</span></button>
+                <button type="button" data-price="24" data-tier="Pro" aria-pressed="true">Pro<span class="sub">$24/mo</span></button>
+                <button type="button" data-price="49" data-tier="Career" aria-pressed="false">Career<span class="sub">$49/mo</span></button>
+              </div>
+            </div>
+
+            <div class="ctl">
+              <div class="ctl-head">
+                <label for="ctx">Knowledge-base entries sent per query</label>
+                <span class="val" id="ctxVal">8</span>
+              </div>
+              <input type="range" id="ctx" min="2" max="35" value="8" step="1" aria-describedby="ctxVal">
+            </div>
+          </div>
+
+          <div class="readout">
+            <div class="ro-row">
+              <span class="rl">Tokens in / out per query</span>
+              <span class="rv" id="roTokens">3,320 / 300</span>
+            </div>
+            <div class="ro-row">
+              <span class="rl">Cost per query</span>
+              <span class="rv" id="roPerQuery">$0.0048</span>
+            </div>
+            <div class="ro-row">
+              <span class="rl">Inference cost / month</span>
+              <span class="rv" id="roCost">$5.78</span>
+            </div>
+            <div class="ro-row">
+              <span class="rl">Revenue / month</span>
+              <span class="rv" id="roRev">$24.00</span>
+            </div>
+            <div class="ro-row is-hero">
+              <span class="rl">Gross margin</span>
+              <span class="rv pos" id="roMargin">$18.22</span>
+            </div>
+            <div class="ro-row">
+              <span class="rl">Break-even at</span>
+              <span class="rv" id="roBreakeven">166 queries/day</span>
+            </div>
+            <div class="verdict ok" id="verdict">Comfortable. You could give away more headroom here, or spend it on a better model.</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="calc-note">
+        Assumes ~340 tokens of retrieved context per knowledge-base entry plus ~600 tokens of system prompt and conversation history; 300 tokens out.
+        Published Claude API list pricing. Real numbers move with prompt caching, which this model deliberately ignores — ask about that in the discussion.
+      </p>
+
+      <div class="remember on-dark-rm center" style="margin-top:40px;">
+        <span class="rm-label">★ Try this</span>
+        <h3>Switch the chatbot to Opus and leave everything else alone</h3>
+        <p>Same product, same tier, same traffic. The margin collapses. Nobody had to make a bad decision for that to happen — someone just picked the best model instead of the right one, which is the single most common expensive mistake in production AI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CCAR-F MAP -->
+  <section id="ccarf" class="bg-paper">
+    <div class="wrap">
+      <div class="shift-head">
+        <span class="eyebrow on-light"><span class="dot"></span>THE CERT BLOCK · 12 MIN</span>
+        <h2>Everything you just watched is on the exam</h2>
+        <p>The <strong>Claude Certified Architect – Foundations</strong> (CCAR-F) is 60 items in 120 minutes, four scenarios drawn from a published bank of six, 720 out of 1000 to pass. It's scenario-based because the job is. Here's where each domain was standing.</p>
+      </div>
+
+      <div class="dmap">
+        <div class="dmap-row">
+          <div class="dm-wt">27%<span>D1</span></div>
+          <div>
+            <h4 class="dm-name">Agentic Architecture &amp; Orchestration</h4>
+            <p class="dm-desc">Agent loops, task decomposition, subagent delegation, hooks — and when prompt-based guidance isn't good enough because you need a deterministic guarantee.</p>
+          </div>
+          <div class="dm-where"><strong>Seen in</strong> Surface 02 — three interview phases enforced entirely by instruction, with nothing to catch a missed transition.</div>
+        </div>
+
+        <div class="dmap-row">
+          <div class="dm-wt">18%<span>D2</span></div>
+          <div>
+            <h4 class="dm-name">Tool Design &amp; MCP Integration</h4>
+            <p class="dm-desc">Tool descriptions as the primary selection mechanism, structured error responses, splitting overloaded tools into purpose-specific ones.</p>
+          </div>
+          <div class="dm-where"><strong>Conspicuously absent</strong> There are no tools in this app. That gap is the most useful thing in the cert block.</div>
+        </div>
+
+        <div class="dmap-row">
+          <div class="dm-wt">20%<span>D3</span></div>
+          <div>
+            <h4 class="dm-name">Claude Code Configuration &amp; Workflows</h4>
+            <p class="dm-desc">CLAUDE.md hierarchy, @path imports, .claude/rules globs, Skills, plan mode vs. direct execution, where MCP config lives. Convention-heavy and closed-book.</p>
+          </div>
+          <div class="dm-where"><strong>Seen in</strong> How the app was built — a committed CLAUDE.md, a decision log with rationale, a staging-before-production rule.</div>
+        </div>
+
+        <div class="dmap-row">
+          <div class="dm-wt">20%<span>D4</span></div>
+          <div>
+            <h4 class="dm-name">Prompt Engineering &amp; Structured Output</h4>
+            <p class="dm-desc">JSON schemas via tool use, required vs. optional fields, nullable types, open enums with an "other" and an "unclear" escape hatch, retry with error feedback.</p>
+          </div>
+          <div class="dm-where"><strong>Seen in</strong> Surfaces 01 and 04 — the JSONL schema, and the closed <code>fit_type</code> enum with nowhere to put an unclear answer.</div>
+        </div>
+
+        <div class="dmap-row">
+          <div class="dm-wt">15%<span>D5</span></div>
+          <div>
+            <h4 class="dm-name">Context Management &amp; Reliability</h4>
+            <p class="dm-desc">Trimming verbose output before it accumulates, the lost-in-the-middle effect, honest escalation, knowing when a retry can't help.</p>
+          </div>
+          <div class="dm-where"><strong>Seen in</strong> Surface 03 — hard character caps on injected context, entries prioritised by information density, and a mandated refusal phrase.</div>
+        </div>
+      </div>
+
+      <div class="acc-list" style="margin:44px auto 0;">
+        <details class="acc">
+          <summary>
+            <span class="acc-n">D2</span>
+            <span>
+              <span class="acc-title">The missing domain — what one tool would you add?</span>
+              <span class="acc-kicker">18% of the exam, and 0% of this application.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <p>Everything in Distills is a single-shot prompt or a fixed pipeline. Nothing decides to go and get something. Meanwhile the blueprint spends nearly a fifth of the exam on tool interfaces — because tool descriptions are how the model decides what to reach for, and vague descriptions cause misrouting.</p>
+
+            <h5>Strong answers</h5>
+            <ul>
+              <li><strong>Fetch the job description from a URL</strong> — instead of asking the user to paste and silently truncating at 3,000 characters</li>
+              <li><strong>Verify a claim against its source document</strong> — the difference between "the profile says this" and "the resume supports this"</li>
+              <li><strong>Read a portfolio or repository</strong> — pull evidence the resume only alludes to</li>
+            </ul>
+
+            <h5>A weak answer, and why it's worth discussing</h5>
+            <p>"Search the internet." The description is too vague for the model to know <em>when</em> to reach for it, so it either never fires or fires constantly. That's the exact failure the exam tests — and the fix is renaming and rescoping the tool, not adding a rule to the system prompt.</p>
+
+            <div class="ask-room">
+              <span class="ar-label">Bring this to the discussion</span>
+              <p>Don't just name a tool. Say what its <strong>description</strong> would be — because that's the part the model actually reads.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS: PROFILE AS AN ENDPOINT -->
+  <section id="endpoint" class="bg-dark">
+    <div class="wrap">
+      <div class="shift-head on-dark">
+        <span class="eyebrow" style="color:var(--orange-400);"><span class="dot"></span>BONUS CONVERSATION · 5 MIN</span>
+        <h2>What if the thing asking the questions isn't a person?</h2>
+        <p>None of this is built. It's a thought experiment — and it's the most useful forward-looking argument this teardown makes.</p>
+      </div>
+
+      <div class="remember on-dark-rm" style="max-width:none;margin-top:0;">
+        <span class="rm-label">The thesis</span>
+        <p>Today a human clicks a link and asks a profile questions. The obvious next step is that the caller is <strong>an agent</strong> — a recruiter's agent screening for a role, querying a hundred candidate profiles directly. Each one answers in that candidate's voice, from that candidate's material, refusing where the material runs out.</p>
+        <p class="rm-sub">Every professional becomes a queryable endpoint that answers as themselves — and gets told what was asked.</p>
+      </div>
+
+      <div class="acc-list" style="max-width:none;">
+
+        <details class="acc" style="background:rgba(255,255,255,.05);border-color:var(--line-dark);">
+          <summary>
+            <span class="acc-n" style="color:var(--orange-400);border-color:var(--orange-500);">01</span>
+            <span>
+              <span class="acc-title" style="color:#fff;">Get the terminology right — the room will conflate these</span>
+              <span class="acc-kicker" style="color:#9FB4B8;">"Agent-to-agent" is the wrong phrase, and the right one is stronger.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body" style="border-top-color:var(--line-dark);">
+            <ul style="color:#C4D2D4;">
+              <li style="color:#C4D2D4;"><strong style="color:#fff;">MCP is client/server.</strong> The recruiter's agent is the <em>client</em>. The profile is the <em>server</em>. There is no peer agent sitting on the candidate's side.</li>
+              <li style="color:#C4D2D4;"><strong style="color:#fff;">Domain 1</strong> covers multi-agent orchestration in the coordinator-and-subagent sense — one system, one context, the <code style="background:rgba(255,255,255,.08);border:none;color:var(--orange-400);">Task</code> tool. That is <em>not</em> this.</li>
+              <li style="color:#C4D2D4;"><strong style="color:#fff;">Cross-organisation interop</strong> over MCP is Domain 2 territory, and it's more speculative than anything in the exam's scenario bank.</li>
+            </ul>
+            <p style="color:#C4D2D4;">Use the precise version — it's also the more defensible claim. Not "two agents talking," but "a professional identity that any agent can query, that still speaks for itself."</p>
+          </div>
+        </details>
+
+        <details class="acc is-twist" style="background:rgba(255,255,255,.05);border-color:var(--orange-500);">
+          <summary>
+            <span class="acc-n">02</span>
+            <span>
+              <span class="acc-title" style="color:#fff;">The design decision worth arguing about</span>
+              <span class="acc-kicker" style="color:#9FB4B8;">Two tools. One of them quietly destroys the product.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body" style="border-top-color:var(--line-dark);">
+            <p style="color:#C4D2D4;">Say you're exposing one tool to the outside world. Which?</p>
+            <div class="codeblock">
+<pre><span class="c-key">search_knowledge_base(query)</span>
+  <span class="c-com">→ returns raw KB entries</span>
+  <span class="c-com">→ the CALLING agent does the synthesis —</span>
+  <span class="c-com">  its voice, its framing, its inferences</span>
+
+<span class="c-key">ask_profile(slug, question)</span>
+  <span class="c-com">→ returns the generated answer</span>
+  <span class="c-com">→ voice, refusal phrase and gap logging all preserved</span></pre>
+            </div>
+            <p style="color:#C4D2D4;"><strong style="color:#fff;">Here's the trap.</strong> Voice, the mandated refusal, and the gap analytics all live in the chat route — <em>not</em> in retrieval. Expose retrieval and Distills becomes a <strong style="color:#fff;">data source</strong>. Expose the conversation and it stays a <strong style="color:#fff;">representative</strong>.</p>
+            <p style="color:#C4D2D4;">For a product whose entire promise is "it speaks as you," that's the whole ballgame. It's the Surface 03 lesson — the guardrail <em>is</em> the product — arriving from the opposite direction.</p>
+          </div>
+        </details>
+
+        <details class="acc" style="background:rgba(255,255,255,.05);border-color:var(--line-dark);">
+          <summary>
+            <span class="acc-n" style="color:var(--orange-400);border-color:var(--orange-500);">03</span>
+            <span>
+              <span class="acc-title" style="color:#fff;">The tool set you'd actually design</span>
+              <span class="acc-kicker" style="color:#9FB4B8;">Three of these are thin wrappers. One of them is the real work.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body" style="border-top-color:var(--line-dark);">
+            <div class="codeblock">
+<pre><span class="c-key">ask_profile</span>(slug, question)      <span class="c-com">// wraps the existing chat route</span>
+<span class="c-key">get_profile_summary</span>(slug)        <span class="c-com">// cheap orienting call — don't burn context</span>
+<span class="c-key">assess_fit</span>(slug, jd_text)        <span class="c-com">// the JD-fit prompt already exists</span>
+<span class="c-key">find_candidates</span>(criteria)        <span class="c-com">// ...this one doesn't exist at all</span></pre>
+            </div>
+            <p style="color:#C4D2D4;"><strong style="color:#fff;">Be honest about the last one.</strong> Cross-profile search is the piece the whole "agents finding ideal fits" story depends on, and it's by far the biggest build. Naming that gap out loud is the difference between a roadmap and a pitch deck.</p>
+          </div>
+        </details>
+
+        <details class="acc" style="background:rgba(255,255,255,.05);border-color:var(--line-dark);">
+          <summary>
+            <span class="acc-n" style="color:var(--orange-400);border-color:var(--orange-500);">04</span>
+            <span>
+              <span class="acc-title" style="color:#fff;">Three questions nobody has answered</span>
+              <span class="acc-kicker" style="color:#9FB4B8;">All unsolved in the app today. All Domain 2.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body" style="border-top-color:var(--line-dark);">
+            <ul style="color:#C4D2D4;">
+              <li style="color:#C4D2D4;"><strong style="color:#fff;">Consent.</strong> Public chat is open to anyone with the link. Agent traffic at scale turns that into a scraping surface. Should a profile opt into <em>agent</em> access separately from <em>human</em> access?</li>
+              <li style="color:#C4D2D4;"><strong style="color:#fff;">Rate limits break.</strong> The quotas are per-profile-per-day and per-IP-per-day — a design that assumes a human in a browser. Agent traffic arrives either from one address (legitimate agents blocked instantly) or from many (quota trivially bypassed).</li>
+              <li style="color:#C4D2D4;"><strong style="color:#fff;">Who's asking?</strong> A recruiter agent, a competitor, and a scraper are indistinguishable today. That's identity, vaults, and OAuth.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="remember on-dark-rm" style="max-width:none;margin-top:26px;">
+        <span class="rm-label">★ The closer</span>
+        <h3>"Three recruiter agents asked about Kubernetes this week — and your profile couldn't answer."</h3>
+        <p>That feature only exists <strong>because</strong> you exposed the conversation instead of the data. The architecture decision and the product feature turn out to be the same decision.</p>
+        <p class="rm-sub">If you take one thing out of today, take that.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCUSSION -->
+  <section id="discussion">
+    <div class="wrap">
+      <div class="shift-head">
+        <span class="eyebrow on-light"><span class="dot"></span>DISCUSSION · 11 MIN</span>
+        <h2>Now tear it apart</h2>
+        <p>No defending the product. Bring what your training told you, and say what this app doesn't do.</p>
+      </div>
+
+      <div class="acc-list">
+        <details class="acc">
+          <summary>
+            <span class="acc-n">Q</span>
+            <span>
+              <span class="acc-title">The prompts we'll actually use</span>
+              <span class="acc-kicker">Come with an answer to at least one of these.</span>
+            </span>
+            <span class="acc-chev">⌄</span>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Where would you <strong>add</strong> a model call that isn't there today?</li>
+              <li>Where would you <strong>remove</strong> one? (Surface 06 gives you permission to think this way.)</li>
+              <li>What felt templated versus intelligent — and what tipped you off? You now know one answer for certain. Find another.</li>
+              <li>If you could add one tool, what would it be, and what would its description say?</li>
+              <li>The job description gets truncated at 3,000 characters. <strong>How would you find out that's hurting you?</strong></li>
+              <li>What's the weakest moment in the user flow? Most products have exactly one.</li>
+              <li>If you've done the Skilljar courses: what did the training tell you to do that this app doesn't?</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <section id="homework" class="bg-dark">
+    <div class="wrap">
+      <div class="shift-head on-dark">
+        <span class="eyebrow" style="color:var(--orange-400);"><span class="dot"></span>DUE WEEK 5 · ONE HOUR</span>
+        <h2>Build one core loop</h2>
+        <p>Not an app. One loop. Pick which of the three you want, then pick your tier honestly — all three tiers are complete submissions, and the schema matters more than the interface.</p>
+      </div>
+
+      <div class="remember on-dark-rm" style="max-width:none;margin-top:0;margin-bottom:38px;">
+        <span class="rm-label">Pick one loop</span>
+        <ol>
+          <li><strong>Resume → three interview questions.</strong> Paste a resume, get three questions generated from what's actually in it.</li>
+          <li><strong>Text → a reply in your voice.</strong> Type anything, get a response that sounds like you — your vocabulary, your domain, your way of hedging.</li>
+          <li><strong>Job description → alignment analysis.</strong> Compare a posting against a resume and return the gaps as <code style="background:rgba(255,255,255,.08);color:var(--orange-400);border:none;">good_fit</code> / <code style="background:rgba(255,255,255,.08);color:var(--orange-400);border:none;">not_ideal</code> / <code style="background:rgba(255,255,255,.08);color:var(--orange-400);border:none;">red_flag</code>.</li>
+        </ol>
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier">
+          <span class="tr-n">TIER 1</span>
+          <h4>The Prompt</h4>
+          <div class="tr-time">~20 min · everyone does at least this</div>
+          <p>Don't build an app. Build the thing an app would be built out of.</p>
+          <ul>
+            <li>Write the <strong>system prompt</strong> and the <strong>JSON schema</strong></li>
+            <li>Run it in Claude against your own resume</li>
+            <li>Iterate three times</li>
+            <li>Bring the schema, the first output, and the third</li>
+          </ul>
+        </div>
+
+        <div class="tier is-default">
+          <span class="tr-n">TIER 2 · DEFAULT</span>
+          <h4>The Artifact</h4>
+          <div class="tr-time">~45 min · if you want something clickable</div>
+          <p>Have Claude build your loop as a self-contained artifact that calls Claude from inside itself.</p>
+          <ul>
+            <li><strong>No hosting. No API key. No serverless function.</strong></li>
+            <li>The share link is your live URL</li>
+            <li>Give it your Tier 1 schema as the spec</li>
+            <li>Fallback: a local HTML file, key pasted at runtime, screen-recorded — that counts too</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <span class="tr-n">TIER 3</span>
+          <h4>The Real Thing</h4>
+          <div class="tr-time">~60 min · only if you already have the accounts</div>
+          <p>Claude Code, a static page, and one serverless function holding the key.</p>
+          <ul>
+            <li>This is a genuine full hour</li>
+            <li>It's a <strong>Domain 3</strong> exercise as much as a build</li>
+            <li>Write the CLAUDE.md first</li>
+            <li>Use plan mode before you let it execute — then read the diff</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="color:#fff;font-size:24px;margin-bottom:8px;">Hints — open the one you need</h3>
+      <p style="color:#9FB4B8;font-size:15.5px;margin:0 0 22px;max-width:720px;">You do not have to read these. If you already know how you'd approach it, go. These exist so nobody stalls at a blank page for their whole hour.</p>
+
+      <details class="hint">
+        <summary><span class="h-ico">01</span>How to start if you have no idea how to start<span class="h-chev">⌄</span></summary>
+        <div class="hint-body">
+          <h6>Do this in order</h6>
+          <ol>
+            <li><strong>Write down what "done" looks like as one sentence.</strong> Not "a resume tool." Something like: <em>"Paste resume text, get exactly three interview questions that each reference a specific thing in that resume."</em> If you can't write that sentence, nothing downstream will work.</li>
+            <li><strong>Write the output shape before the prompt.</strong> What fields come back? What types? What's required? This is the schema, and it's the actual deliverable.</li>
+            <li><strong>Write the system prompt as a job description</strong> for someone you just hired: what they do, what good looks like, what they must never do.</li>
+            <li><strong>Run it once by hand</strong> in a Claude conversation against your own resume. Read the output like a critic.</li>
+            <li><strong>Change exactly one thing</strong> and run it again. Not five things. One. Then you know what caused the difference.</li>
+          </ol>
+          <p>If you stop after step 5, you've completed Tier 1 and you've done the part the exam actually tests.</p>
+        </div>
+      </details>
+
+      <details class="hint">
+        <summary><span class="h-ico">02</span>A starter schema you can steal (Loop 1 — interview questions)<span class="h-chev">⌄</span></summary>
+        <div class="hint-body">
+          <h6>Start here and change it</h6>
+          <div class="codeblock" style="background:var(--teal-900);border:1px solid var(--line-dark);">
+<pre>&#123;
+  <span class="c-key">"questions"</span>: [
+    &#123;
+      <span class="c-key">"question"</span>:  <span class="c-str">"string"</span>,
+      <span class="c-key">"targets"</span>:   <span class="c-str">"string"</span>,   <span class="c-com">// the specific résumé line it probes</span>
+      <span class="c-key">"why"</span>:       <span class="c-str">"string"</span>,   <span class="c-com">// what a good answer would reveal</span>
+      <span class="c-key">"category"</span>:  <span class="c-str">"leadership" | "technical" | "judgment" | "unclear"</span>
+    &#125;
+  ]
+&#125;</pre>
+          </div>
+          <h6>Things worth noticing about it</h6>
+          <ul>
+            <li><code>targets</code> is the anti-hallucination field. If the model has to name the résumé line it's probing, it can't invent a question about a job you never had.</li>
+            <li><code>category</code> includes <code>"unclear"</code> — the escape hatch the exam keeps asking about. Without it, an ambiguous question gets a confident wrong label.</li>
+            <li>Nothing here is a number. Resist adding a score; you'd only have to defend it.</li>
+          </ul>
+          <h6>The stretch goal</h6>
+          <p>Find an input that makes it return <code>"unclear"</code>. If you can't, your enum is doing less work than you think it is.</p>
+        </div>
+      </details>
+
+      <details class="hint">
+        <summary><span class="h-ico">03</span>A system prompt skeleton (adapt to any of the three loops)<span class="h-chev">⌄</span></summary>
+        <div class="hint-body">
+          <div class="codeblock" style="background:var(--teal-900);border:1px solid var(--line-dark);">
+<pre><span class="c-com">ROLE</span>
+You are a [technical recruiter / interview coach / hiring manager]
+reading a candidate's résumé.
+
+<span class="c-com">TASK</span>
+Produce exactly three interview questions grounded in this résumé.
+
+<span class="c-com">RULES</span>
+- Every question must reference something specifically stated.
+- Do not ask anything answerable from the résumé itself.
+- If the résumé is too thin to support three questions, say so
+  rather than inventing material.
+- Use only what is provided. Never infer employers, dates, or titles.
+
+<span class="c-com">OUTPUT</span>
+Return only JSON matching the provided schema. No preamble.</pre>
+          </div>
+          <h6>Why it's shaped like that</h6>
+          <ul>
+            <li><strong>Role first</strong> — it sets vocabulary and standards more efficiently than any amount of adjectives.</li>
+            <li><strong>"Do not ask anything answerable from the résumé"</strong> is the whole quality bar in one line. Without it you get "So you worked at Xbox?"</li>
+            <li><strong>The thin-résumé rule is the important one.</strong> It's the same move as the refusal phrase in Surface 03 — you're pre-deciding what happens when there isn't enough material, instead of letting the model improvise.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="hint">
+        <summary><span class="h-ico">04</span>Tier 2 — what to actually say to Claude<span class="h-chev">⌄</span></summary>
+        <div class="hint-body">
+          <p>Paste your Tier 1 work in and ask for the wrapper. Something close to this:</p>
+          <div class="codeblock" style="background:var(--teal-900);border:1px solid var(--line-dark);">
+<pre>Build me a single-page tool as an artifact.
+
+It should:
+- take pasted résumé text in a textarea
+- send it to Claude using the system prompt below
+- enforce the JSON schema below
+- render the three questions as cards, each showing
+  the question and which résumé line it targets
+- show a clear message if the résumé is too thin
+
+Keep it to one file. No build step. Make it look like
+something I'd put on a portfolio, not a homework assignment.
+
+SYSTEM PROMPT:
+[paste yours]
+
+SCHEMA:
+[paste yours]</pre>
+          </div>
+          <h6>Then iterate like you did in Week 2</h6>
+          <ul>
+            <li>Critique it out loud before asking for a change — name the single worst thing about it.</li>
+            <li>Ask for that one fix. Not a list of five.</li>
+            <li>Try it with a deliberately terrible résumé. That's where you find out whether your thin-material rule works.</li>
+          </ul>
+          <p><strong>Verify the artifact can call Claude in your account before you build the whole thing.</strong> If it can't, switch to the local-file fallback immediately — don't spend forty minutes discovering it at the end.</p>
+        </div>
+      </details>
+
+      <details class="hint">
+        <summary><span class="h-ico">05</span>"Should I use the Claude Agent SDK for this?" — no, and here's why<span class="h-chev">⌄</span></summary>
+        <div class="hint-body">
+          <p>Somebody always asks, and the reasoning is genuinely exam-relevant.</p>
+          <p>The <strong>Claude Agent SDK</strong> is Claude Code packaged as a library. It ships built-in file, bash, and search tools, subagents, hooks, permissions, and the full agent loop — and <strong>you still host and deploy it yourself</strong>. It's built for agents that work across a filesystem over many turns.</p>
+          <p><strong>Your homework is one prompt in, one structured object out.</strong> That's a single API call. Reaching for an agent harness to do a single-shot extraction is exactly the over-architecture the exam's "should I build an agent?" test exists to catch: complexity, value, viability, cost of error — if any answer is no, stay simpler.</p>
+          <h6>If you want that flavour of work anyway</h6>
+          <p>Better use of the same hour, and more directly on the blueprint (<strong>Domain 3, 20%</strong>): write a Claude Code slash command or a Skill that runs job-description alignment against your own resume from the terminal. No hosting, no keys, about fifteen minutes.</p>
+        </div>
+      </details>
+
+      <details class="hint">
+        <summary><span class="h-ico">06</span>Where people will lose the hour (read this one)<span class="h-chev">⌄</span></summary>
+        <div class="hint-body">
+          <ul>
+            <li><strong>Trying to build the whole product.</strong> You are building one loop. No accounts, no saving, no database, no second page.</li>
+            <li><strong>Hosting.</strong> This is the classic hour-killer. Tier 2 exists specifically so you never touch a deploy pipeline.</li>
+            <li><strong>API keys.</strong> Never put a key in client-side code — not for homework, not ever. If you hit this wall, that's a legitimate finding: say so in Week 5.</li>
+            <li><strong>Polishing the interface before the loop works.</strong> Ugly and correct beats beautiful and wrong. Style it in the last ten minutes if there are ten minutes.</li>
+            <li><strong>Changing five things at once</strong> when the output is bad, then not knowing which one helped.</li>
+          </ul>
+          <p><strong>If you're 40 minutes in and it isn't working, stop and submit Tier 1.</strong> Your schema plus an honest account of what broke is a stronger Week 5 contribution than a half-finished app — and "what broke" is the part we'll actually spend time on.</p>
+        </div>
+      </details>
+
+      <details class="hint">
+        <summary><span class="h-ico">07</span>What to bring to Week 5<span class="h-chev">⌄</span></summary>
+        <div class="hint-body">
+          <ul class="checklist">
+            <li><strong>Your schema.</strong> Every tier has one. This is the primary artifact.</li>
+            <li><strong>A link, or a screen recording.</strong> Tier 1 people: your prompt and your before/after outputs.</li>
+            <li><strong>One sentence</strong> on which loop you chose and why.</li>
+            <li><strong>One sentence</strong> on what broke — and whether you fixed it. "Didn't fix it" is a complete answer.</li>
+          </ul>
+          <h6>Optional stretch</h6>
+          <ul>
+            <li>Add an <code>"unclear"</code> value to an enum and find the input that triggers it.</li>
+            <li>Make it look like something you'd genuinely put on your portfolio.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- INSTRUCTOR -->
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="instructor" style="max-width:900px;margin:0 auto;">
+        <div class="avatar-ring">
+          <img src="/GHN/AIFluency/mike-jones-headshot.jpg" alt="Mike Jones">
+        </div>
+        <div>
+          <h3>Mike Jones</h3>
+          <div class="role">AI Implementation Expert · Jones Collaboration Company</div>
+          <p>Distills is mine — which is the only reason we can open it up this far. You get the prompts, the retrieval code, the cost comments, and the shortcuts. Bring the hardest questions you have; there's no version of this session where I have to defend the product.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>GHN AI Fluency Lab · Read the product · Map the domains · Ship the loop</span>
+    <div class="flinks">
+      <a href="/GHN/AIFluency/">Lab overview</a>
+      <a href="/GHN/AIFluency/week-3/">Week 3 syllabus</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* agenda timeline expand */
+  document.querySelectorAll('.t-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      card.classList.toggle('expanded');
+    });
+  });
+
+  /* expand-all for the surfaces accordion */
+  const expandBtn = document.getElementById('expandAll');
+  if (expandBtn) {
+    expandBtn.addEventListener('click', () => {
+      const items = document.querySelectorAll('#surfaces details.acc');
+      const shouldOpen = expandBtn.textContent.trim() === 'Expand all';
+      items.forEach(d => { d.open = shouldOpen; });
+      expandBtn.textContent = shouldOpen ? 'Collapse all' : 'Expand all';
+    });
+  }
+
+  /* ---------- unit economics calculator ---------- */
+  (function () {
+    const MODELS = {
+      haiku:  { label: 'Haiku 4.5', inp: 1,  out: 5  },
+      sonnet: { label: 'Sonnet',    inp: 3,  out: 15 },
+      opus:   { label: 'Opus',      inp: 5,  out: 25 }
+    };
+    const TOKENS_PER_ENTRY = 340;   // retrieved KB entry
+    const BASE_INPUT_TOKENS = 600;  // system prompt + recent history
+    const OUTPUT_TOKENS = 300;
+    const DAYS = 30;
+
+    let model = 'haiku';
+    let price = 24;
+    let tierName = 'Pro';
+
+    const qpd = document.getElementById('qpd');
+    const ctx = document.getElementById('ctx');
+    if (!qpd || !ctx) return;
+
+    const fmt = (n, d) => '$' + n.toFixed(d).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const int = n => Math.round(n).toLocaleString('en-US');
+
+    function render() {
+      const queries = +qpd.value;
+      const entries = +ctx.value;
+      const m = MODELS[model];
+
+      const inTok = BASE_INPUT_TOKENS + entries * TOKENS_PER_ENTRY;
+      const perQuery = (inTok / 1e6) * m.inp + (OUTPUT_TOKENS / 1e6) * m.out;
+      const monthlyCost = perQuery * queries * DAYS;
+      const margin = price - monthlyCost;
+      const breakeven = perQuery > 0 ? price / (perQuery * DAYS) : Infinity;
+
+      document.getElementById('qpdVal').textContent = int(queries);
+      document.getElementById('ctxVal').textContent = entries;
+      document.getElementById('roTokens').textContent = int(inTok) + ' / ' + int(OUTPUT_TOKENS);
+      document.getElementById('roPerQuery').textContent = '$' + perQuery.toFixed(4);
+      document.getElementById('roCost').textContent = fmt(monthlyCost, 2);
+      document.getElementById('roRev').textContent = fmt(price, 2);
+
+      const marginEl = document.getElementById('roMargin');
+      marginEl.textContent = (margin < 0 ? '−' : '') + fmt(Math.abs(margin), 2);
+      marginEl.className = 'rv ' + (margin >= 0 ? 'pos' : 'neg');
+
+      const beEl = document.getElementById('roBreakeven');
+      beEl.textContent = price === 0 ? 'never — free tier' : int(breakeven) + ' queries/day';
+
+      const v = document.getElementById('verdict');
+      if (price === 0) {
+        v.className = 'verdict';
+        v.innerHTML = '<strong>Free tier.</strong> Every query is pure cost — which is exactly why the free tier is capped at 20 a day. The cap <em>is</em> the business model.';
+      } else if (margin < 0) {
+        v.className = 'verdict bad';
+        v.innerHTML = '<strong>Underwater.</strong> This tier loses money on an average user. Your options: a cheaper model, fewer entries retrieved per query, a lower rate limit, or a higher price. Pick one before you launch, not after.';
+      } else if (margin < price * 0.35) {
+        v.className = 'verdict';
+        v.innerHTML = '<strong>Thin.</strong> Still profitable, but there is no room for a heavier model, a longer context, or a power user. One product decision away from underwater.';
+      } else {
+        v.className = 'verdict ok';
+        v.innerHTML = '<strong>Comfortable.</strong> You could give away more headroom here, or spend it on a better model. Both are real choices — make it deliberately.';
+      }
+    }
+
+    qpd.addEventListener('input', render);
+    ctx.addEventListener('input', render);
+
+    document.querySelectorAll('#modelSeg button').forEach(b => {
+      b.addEventListener('click', () => {
+        model = b.dataset.model;
+        document.querySelectorAll('#modelSeg button').forEach(x =>
+          x.setAttribute('aria-pressed', String(x === b)));
+        render();
+      });
+    });
+
+    document.querySelectorAll('#tierSeg button').forEach(b => {
+      b.addEventListener('click', () => {
+        price = +b.dataset.price;
+        tierName = b.dataset.tier;
+        document.querySelectorAll('#tierSeg button').forEach(x =>
+          x.setAttribute('aria-pressed', String(x === b)));
+        render();
+      });
+    });
+
+    render();
+  })();
+</script>
+
+</body>
+</html>
