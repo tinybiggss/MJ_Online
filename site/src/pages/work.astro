@@ -49,6 +49,11 @@ import { ventures, projects, projectGroups } from "../lib/content";
             <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-field-faint">
               {p.tags.map((t) => <span>{t}</span>)}
             </div>
+            {p.link && (
+              <a href={p.link} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1 text-sm text-field-muted transition-colors hover:text-signal">
+                {p.linkLabel} <span aria-hidden="true">→</span>
+              </a>
+            )}
           </article>
         ))}
       </div>

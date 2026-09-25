@@ -47,8 +47,8 @@ export const ventures = [
     role: "Teaching",
     tagline: "AI & Claude Code courses for senior career-changers.",
     description:
-      "A teaching partnership with Ron Nash's GHN Academy — helping directors and VPs build AI fluency and reposition their expertise. Course series launching July 2026.",
-    status: "Launching Jul 2026",
+      "A teaching partnership with Ron Nash's GHN Academy — helping directors and VPs build AI fluency and reposition their expertise. First live class ran May 2026; AI Fluency Lab cohorts have been running since August 2026 — syllabus at mikejones.online/GHN/AIFluency.",
+    status: "Cohorts running",
     accent: "amber",
     href: "https://gethirednowprograms.com/",
   },
@@ -58,8 +58,8 @@ export const ventures = [
     role: "Publishing",
     tagline: "Practical resilience for people exiting the default.",
     description:
-      "A publication and growing community on building parallel systems — 2,100+ subscribers, organized around a 7 Pillars framework. Top essay: \"7 Steps to Quietly Exit a System\" (1,000+ likes).",
-    status: "2,100+ subscribers",
+      "A publication and growing community on building parallel systems — 2,200+ readers across 27 dispatches, organized around a 7 Pillars framework. Top essay: \"7 Steps to Quietly Exit a System\" (16,000+ readers).",
+    status: "2,200+ readers",
     accent: "forest",
     href: "https://resilient-tomorrow.com",
   },
@@ -69,8 +69,8 @@ export const ventures = [
     role: "Product",
     tagline: "Your career, as an interactive AI.",
     description:
-      "An AI SaaS that turns your career into an interactive chatbot — a way for a recruiter or hiring manager to get to know you before the first call. It grew out of my own frustration with a portfolio that buried the answers people actually wanted. The assistant on this page is powered by it.",
-    status: "Heading to Product Hunt",
+      "An AI SaaS that turns your career into an interactive chatbot — a way for a recruiter or hiring manager to get to know you before the first call. It grew out of my own frustration with a portfolio that buried the answers people actually wanted. The assistant on this page is powered by it. Now open source: the engine ships as Distill (github.com/Jones-Co/distill, MIT) — parse your career docs into a knowledge base, deepen it through an AI-conducted interview, and deploy a ~15KB embeddable chat widget.",
+    status: "Open source — Feb 2026",
     accent: "cyan",
     href: "https://distills.app",
   },
@@ -93,6 +93,9 @@ export interface Project {
   /** Show the whole image (object-contain) on the dark panel instead of cropping. */
   contain?: boolean;
   featured?: boolean;
+  /** Optional external link (e.g. a published build guide) shown under the blurb. */
+  link?: string;
+  linkLabel?: string;
 }
 
 export const projects: Project[] = [
@@ -146,6 +149,8 @@ export const projects: Project[] = [
     blurb:
       "A fully self-hosted media stack — Jellyfin, Radarr/Sonarr automation, VPN kill-switch, mergerfs storage, Tailscale remote access — documented so anyone can run it.",
     tags: ["Docker", "Linux", "Storage architecture", "VPN"],
+    link: "https://resilienttomorrow.substack.com/p/apollo-build-guide-the-full-automated",
+    linkLabel: "Full build guide (June 2026)",
   },
   {
     name: "Local Voice Control",
