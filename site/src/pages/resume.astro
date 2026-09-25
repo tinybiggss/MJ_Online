@@ -59,12 +59,15 @@ const experience = [
   },
 ];
 
-const recognition = [
-  "Claude Certified Architect – Foundations (CCA-F) — Anthropic, 2026",
-  "Patent holder — Xbox SDK instrumentation method (VINCE)",
-  "CES Innovation Award — Kinoo",
-  "Top 1% ChatGPT user globally (top 3% by conversation volume)",
-  "Led teams of 50–120+ people; managed $4M–$12M+ budgets",
+const recognition: { text: string; href?: string }[] = [
+  {
+    text: "Claude Certified Architect – Foundations (CCA-F) — Anthropic, 2026",
+    href: "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification",
+  },
+  { text: "Patent holder — Xbox SDK instrumentation method (VINCE)" },
+  { text: "CES Innovation Award — Kinoo" },
+  { text: "Top 1% ChatGPT user globally (top 3% by conversation volume)" },
+  { text: "Led teams of 50–120+ people; managed $4M–$12M+ budgets" },
 ];
 ---
 
@@ -123,7 +126,13 @@ const recognition = [
       {recognition.map((r) => (
         <li class="flex gap-3 text-field-muted">
           <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" aria-hidden="true"></span>
-          <span>{r}</span>
+          <span>
+            {r.href ? (
+              <a href={r.href} target="_blank" rel="noopener noreferrer" class="underline decoration-field-line underline-offset-4 transition-colors hover:text-signal hover:decoration-signal">{r.text}</a>
+            ) : (
+              r.text
+            )}
+          </span>
         </li>
       ))}
     </ul>
