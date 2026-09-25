@@ -47,7 +47,7 @@ export const ventures = [
     role: "Teaching",
     tagline: "AI & Claude Code courses for senior career-changers.",
     description:
-      "A teaching partnership with Ron Nash's GHN Academy — helping directors and VPs build AI fluency and reposition their expertise. First live class ran May 2026; AI Fluency Lab cohorts have been running since August 2026 — syllabus at mikejones.online/GHN/AIFluency.",
+      "A teaching partnership with Ron Nash's GHN Academy — helping directors and VPs build AI fluency and reposition their expertise. First live class ran May 2026; AI Fluency Lab cohorts have been running since August 2026 — syllabus at mikejones.online/GHN/AIFluency. Now building the Claude Certified Architect – Foundations (CCAR-F) course with Ron — syllabus approved, Week 1 in active development.",
     status: "Cohorts running",
     accent: "amber",
     href: "https://gethirednowprograms.com/",
