@@ -1,6 +1,6 @@
 ---
 import FieldLayout from "../layouts/FieldLayout.astro";
-import { identity } from "../lib/content";
+import { identity, certifications } from "../lib/content";
 
 const summary =
   "AI Implementation Expert and LLM Integration Specialist with 29 years building and shipping technology — from the original Xbox launch to AI-augmented operating models today. I turn fast-moving AI capability into dependable systems, processes, and teams.";
@@ -60,10 +60,12 @@ const experience = [
 ];
 
 const recognition: { text: string; href?: string }[] = [
-  {
-    text: "Claude Certified Architect – Foundations (CCAR-F) — Anthropic, issued Aug 2026",
-    href: "https://www.credly.com/badges/d0bcd7cb-a25a-4c57-a22e-0303c6912626",
-  },
+  // CCAR-F entry is GENERATED from the KB (public: yes) — see the KB:BEGIN
+  // region in ../lib/content.ts; the items below stay hand-maintained.
+  ...certifications.map((c) => ({
+    text: `${c.name} (${c.abbrev}) — ${c.issuer}, issued ${c.issuedDisplay}`,
+    href: c.proofUrl ?? undefined,
+  })),
   { text: "Patent holder — Xbox SDK instrumentation method (VINCE)" },
   { text: "CES Innovation Award — Kinoo" },
   { text: "Top 1% ChatGPT user globally (top 3% by conversation volume)" },

@@ -220,3 +220,54 @@ export const nav = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
+
+// === KB:BEGIN generated (do not hand-edit — regenerate: node scripts/kb-to-content.mjs)
+/**
+ * GENERATED REGION — rendered from KB claims by site/scripts/kb-to-content.mjs.
+ * DO NOT hand-edit. Flow: KB (public: yes pages only, default-deny) → staging
+ * (site/content.staging/) → Mike reviews staged.diff → publish-content.mjs
+ * applies + builds + commits. Nothing pushes unattended. Design:
+ * KB/pipelines/publication-layer.md in the vault.
+ *
+ * FIELD MAP (what is generated vs hand-maintained, and why):
+ *   certifications GENERATED ← KB/concepts/ccar-f-certification.md (public: yes).
+ *   Everything below this region's exports is hand-maintained: its KB sources
+ *   are public: no (default-deny) or confidential — see the generator's FIELD
+ *   MAP header comment for the page-by-page mapping.
+ *   Provenance for Certification[] ← KB/concepts/ccar-f-certification.md (public: yes):
+ *     name ← fact table "Official name"; abbrev ← "Exam code" (first token;
+ *     CCAR-F is the only approved abbreviation); issuer ← "Issuer"
+ *     (parenthetical stripped); issued/issuedDisplay ← "Issued";
+ *     expires ← "Expires"; proofUrl ← "Proof" (Credly badge, canonical);
+ *     scope ← "Exam scope" (comma-split).
+ */
+
+export interface Certification {
+  name: string;
+  abbrev: string;
+  issuer: string;
+  issued: string;
+  issuedDisplay: string;
+  expires: string | null;
+  proofUrl: string | null;
+  scope: string[];
+}
+
+export const certifications: Certification[] = [
+    {
+      "name": "Claude Certified Architect – Foundations",
+      "abbrev": "CCAR-F",
+      "issuer": "Anthropic",
+      "issued": "2026-08-28",
+      "issuedDisplay": "Aug 2026",
+      "expires": "2027-08-28",
+      "proofUrl": "https://www.credly.com/badges/d0bcd7cb-a25a-4c57-a22e-0303c6912626",
+      "scope": [
+        "Claude Code",
+        "Claude Agent SDK",
+        "Claude API",
+        "MCP"
+      ]
+    }
+  ];
+// === KB:END generated ===
