@@ -1,0 +1,118 @@
+{
+  "generatedAt": "2026-10-09T20:38:56.735Z",
+  "site": "https://mikejones.online",
+  "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
+  "llmsTxt": "/llms.txt",
+  "pages": [
+    {
+      "id": "kb-ai-how-mike-works",
+      "title": "How Mike Works",
+      "updated": "2026-10-02",
+      "summary": "How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated.",
+      "path": "/agents/kb/kb-ai-how-mike-works.md",
+      "files": [
+        "kb-ai-how-mike-works.md"
+      ]
+    },
+    {
+      "id": "kb-business-distills",
+      "title": "Distills",
+      "updated": "2026-10-06",
+      "summary": "Product.",
+      "path": "/agents/kb/kb-business-distills.md",
+      "files": [
+        "kb-business-distills.md"
+      ]
+    },
+    {
+      "id": "kb-business-resilient-tomorrow",
+      "title": "Resilient Tomorrow",
+      "updated": "2026-10-09",
+      "summary": "Media + platform.",
+      "path": "/agents/kb/kb-business-resilient-tomorrow.md",
+      "files": [
+        "kb-business-resilient-tomorrow.md"
+      ]
+    },
+    {
+      "id": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "updated": "2026-10-06",
+      "summary": "Consulting arm.",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "files": [
+        "kb-business-velocity-partners.md"
+      ]
+    },
+    {
+      "id": "kb-company-jonesco",
+      "title": "Jones Collaboration Company",
+      "updated": "2026-10-06",
+      "summary": "The parent entity.",
+      "path": "/agents/kb/kb-company-jonesco.md",
+      "files": [
+        "kb-company-jonesco.md"
+      ]
+    },
+    {
+      "id": "kb-concepts-agentic-web",
+      "title": "The Agentic Web",
+      "updated": "2026-10-06",
+      "summary": "Thesis (Mike, DEC 2026-09-17, restated live 2026-09-29): within 12–18 months, sites stop being rendered UIs and become data/action endpoints queried by agents via protocols like MCP.",
+      "path": "/agents/kb/kb-concepts-agentic-web.md",
+      "files": [
+        "kb-concepts-agentic-web.md"
+      ]
+    },
+    {
+      "id": "kb-concepts-ccar-f-certification",
+      "title": "Claude Certified Architect - Foundations",
+      "updated": "2026-09-25",
+      "summary": "Mike's Anthropic certification, earned 2026-08-28.",
+      "path": "/agents/kb/kb-concepts-ccar-f-certification.md",
+      "files": [
+        "kb-concepts-ccar-f-certification.md"
+      ]
+    },
+    {
+      "id": "kb-pipelines-generator-registry",
+      "title": "Generator Registry",
+      "updated": "2026-10-09",
+      "summary": "What writes into this vault, where, and whether it's alive.",
+      "path": "/agents/kb/kb-pipelines-generator-registry.md",
+      "files": [
+        "kb-pipelines-generator-registry.md"
+      ]
+    },
+    {
+      "id": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "updated": "2026-10-02",
+      "summary": "What it is: the adapter layer between jonesco's KB and the public surfaces.",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "files": [
+        "kb-pipelines-publication-layer.md"
+      ]
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "updated": "2026-10-02",
+      "summary": "Intended flow: trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish.",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "files": [
+        "kb-pipelines-rt-content-pipeline.md"
+      ]
+    },
+    {
+      "id": "kb-pipelines-task-system",
+      "title": "Task System",
+      "updated": "2026-10-08",
+      "summary": "What it is: Mike's personal Kanban — the claim layer for how work is captured, decided, and tracked across all four businesses.",
+      "path": "/agents/kb/kb-pipelines-task-system.md",
+      "files": [
+        "kb-pipelines-task-system.md"
+      ]
+    }
+  ]
+}

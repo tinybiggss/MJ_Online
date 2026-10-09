@@ -10,7 +10,8 @@
     "astro": "astro",
     "test": "vitest run",
     "test:watch": "vitest",
-    "qr": "node scripts/make-qr.mjs"
+    "qr": "node scripts/make-qr.mjs",
+    "agents:export": "node scripts/kb-to-agents.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.0",

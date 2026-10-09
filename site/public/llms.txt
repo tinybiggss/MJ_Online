@@ -1,0 +1,19 @@
+# Mike Jones
+
+> Mike Jones — 29 years building systems that ship: Xbox and Xbox 360 launch teams (XDK patent), studio director roles at Kabam and Kinoo, and now Velocity Partners (agentic-web consulting), Resilient Tomorrow (publishing), and Distills (open-source AI product). CCAR-F certified by Anthropic.
+
+This site exposes a read-only, machine-readable knowledge base. Each link below is a static markdown fact sheet; `/agents/kb/index.json` is the machine index. Contact: the form at `/contact` or mike@mikejones.online.
+
+## Knowledge base
+
+- [How Mike Works](/agents/kb/kb-ai-how-mike-works.md): How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated.
+- [Distills](/agents/kb/kb-business-distills.md): Product.
+- [Resilient Tomorrow](/agents/kb/kb-business-resilient-tomorrow.md): Media + platform.
+- [Velocity Partners](/agents/kb/kb-business-velocity-partners.md): Consulting arm.
+- [Jones Collaboration Company](/agents/kb/kb-company-jonesco.md): The parent entity.
+- [The Agentic Web](/agents/kb/kb-concepts-agentic-web.md): Thesis (Mike, DEC 2026-09-17, restated live 2026-09-29): within 12–18 months, sites stop being rendered UIs and become data/action endpoints queried by agents via protocols like MCP.
+- [Claude Certified Architect - Foundations](/agents/kb/kb-concepts-ccar-f-certification.md): Mike's Anthropic certification, earned 2026-08-28.
+- [Generator Registry](/agents/kb/kb-pipelines-generator-registry.md): What writes into this vault, where, and whether it's alive.
+- [Publication Layer](/agents/kb/kb-pipelines-publication-layer.md): What it is: the adapter layer between jonesco's KB and the public surfaces.
+- [RT Content Pipeline](/agents/kb/kb-pipelines-rt-content-pipeline.md): Intended flow: trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish.
+- [Task System](/agents/kb/kb-pipelines-task-system.md): What it is: Mike's personal Kanban — the claim layer for how work is captured, decided, and tracked across all four businesses.
