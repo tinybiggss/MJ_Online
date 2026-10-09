@@ -220,7 +220,57 @@ function renderPage(page) {
   const summaryFlat = summarySource.replace(/^#{1,4}\s+.*$/gm, ' ').replace(/\s+/g, ' ').trim();
   const summary = summaryFlat ? summaryFlat.split(/(?<=[.!?])\s/)[0].slice(0, 260) : title;
   const files = chunks.map((c) => `kb-${slugify(page.rel)}${c.suffix}.md`);
-  return { title, updated, summary, chunks, files, redactedEmpty: false };
+
+  // Search-index entries: one per section (intro included, heading = null).
+  // Section text is already redacted (bodyParts derive from cleanLines), but
+  // main()'s safety belt sweeps these too. partOf-free: the packer below walks
+  // parts in the same order renderPage emitted them, so entry.path always
+  // points at the file that actually contains the section.
+  let searchAcc = [];
+  let searchPart = 0;
+  let searchLen = 0;
+  const searchChunks = [];
+  for (let i = 0; i < bodyParts.length; i++) {
+    if (chunks.length > 1 && searchAcc.length && searchLen + bodyParts[i].length > MAX_PAGE_CHARS) {
+      searchChunks.push({ fileName: files[searchPart], items: searchAcc });
+      searchAcc = [];
+      searchPart += 1;
+      searchLen = 0;
+    }
+    searchAcc.push(sectionMeta(bodyParts[i]));
+    searchLen += bodyParts[i].length;
+  }
+  if (searchAcc.length) searchChunks.push({ fileName: files[searchPart], items: searchAcc });
+
+  const seen = new Map();
+  const searchEntries = searchChunks.flatMap((sc) =>
+    sc.items.map((m) => {
+      const baseId = `kb-${slugify(page.rel)}${m.section ? '-' + slugify(m.section) : ''}`;
+      const n = seen.get(baseId) || 0;
+      seen.set(baseId, n + 1);
+      return {
+        id: n === 0 ? baseId : `${baseId}-${n + 1}`,
+        pageId: `kb-${slugify(page.rel)}`,
+        title,
+        section: m.section || null,
+        updated: updated || null,
+        path: `/agents/kb/${sc.fileName}`,
+        text: (m.raw || '').slice(0, 1500),
+      };
+    })
+  );
+
+  return { title, updated, summary, chunks, files, searchEntries, redactedEmpty: false };
+}
+
+/** Split an emitted bodyPart back into heading + prose for search entries.
+ * Also handles bare-intro pages (no heading at all → section null, text = body). */
+function sectionMeta(bodyPart) {
+  const m = /^#{1,4}\s+(.+?)\s*$/m.exec(bodyPart);
+  if (!m) return { section: null, raw: bodyPart.trim() };
+  const section = m[1].trim();
+  const text = bodyPart.replace(m[0], '').trim();
+  return { section, raw: text };
 }
 
 // ----------------------------------------------------------------------- main
@@ -244,8 +294,17 @@ function main() {
         }
       }
     }
+    for (const e of r.searchEntries || []) {
+      for (const p of CONF_PATTERNS) {
+        if (p.test(e.text) || (e.section && p.test(e.section))) {
+          console.error(`ABORT: confidential token ${p} survived redaction in KB/${page.rel} (search entry ${e.id}) — fix content or raise the pattern list.`);
+          process.exit(3);
+        }
+      }
+    }
     rendered.push({ page, ...r });
   }
+  const searchEntries = rendered.flatMap((r) => r.searchEntries || []);
 
   const summary = {
     kbDir: KB_DIR,
@@ -267,6 +326,9 @@ function main() {
 
   fs.mkdirSync(AGENTS_DIR, { recursive: true });
 
+  const QUERY_PROMO =
+    'Agent querying: GET /agents/query?q=<terms> returns JSON {query, results:[{id, title, section, path, text}]} — scored passages from these fact sheets, best first. Use it to find and cite specifics (roles, results, certifications, how to engage); cite answer text by /agents/kb/*.md path.';
+
   const indexEntries = [];
   const llmsLines = [
     '# Mike Jones',
@@ -274,6 +336,8 @@ function main() {
     '> Mike Jones — 29 years building systems that ship: Xbox and Xbox 360 launch teams (XDK patent), studio director roles at Kabam and Kinoo, and now Velocity Partners (agentic-web consulting), Resilient Tomorrow (publishing), and Distills (open-source AI product). CCAR-F certified by Anthropic.',
     '',
     'This site exposes a read-only, machine-readable knowledge base. Each link below is a static markdown fact sheet; `/agents/kb/index.json` is the machine index. Contact: the form at `/contact` or mike@mikejones.online.',
+    '',
+    QUERY_PROMO,
     '',
     '## Knowledge base',
     '',
@@ -331,7 +395,20 @@ function main() {
         site: 'https://mikejones.online',
         description: 'Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt',
         llmsTxt: '/llms.txt',
+        query: { endpoint: '/agents/query?q=<terms>', method: 'GET', returns: 'JSON {query, results:[{id, title, section, path, text}]}', note: 'Scored passages from these fact sheets, best first. Deterministic term scoring — no LLM.' },
         pages: indexEntries,
+      },
+      null,
+      2
+    ) + '\n'
+  );
+  fs.writeFileSync(
+    path.join(AGENTS_DIR, 'search-index.json'),
+    JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        endpoint: '/agents/query',
+        entries: searchEntries,
       },
       null,
       2
@@ -340,6 +417,7 @@ function main() {
 
   console.log(`\nWrote ${indexEntries.length} page(s) → ${AGENTS_DIR.replace(SITE_DIR + '/', 'site/')}`);
   console.log(`Wrote ${LLMS_TXT.replace(SITE_DIR + '/', 'site/')}`);
+  console.log(`Wrote search-index.json (${searchEntries.length} entries) — endpoint /agents/query`);
 }
 
 /** First-sentence summary helper (falls back to page summary). */

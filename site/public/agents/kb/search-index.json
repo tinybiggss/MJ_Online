@@ -1,0 +1,573 @@
+{
+  "generatedAt": "2026-10-09T20:55:03.455Z",
+  "endpoint": "/agents/query",
+  "entries": [
+    {
+      "id": "kb-ai-how-mike-works-how-mike-works",
+      "pageId": "kb-ai-how-mike-works",
+      "title": "How Mike Works",
+      "section": "How Mike Works",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-ai-how-mike-works.md",
+      "text": "How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated. Say \"I'm not sure\" over a confident wrong answer. Disagree when warranted — he wants decisions made, not options surfaced. Systems thinker: frameworks and pipelines. One deciding factor beats a pros/cons list. Agents are teammates: named, with memory and continuity. Naming convention: {Task-Description}-{Number}, e.g. Manifesto-Draft-#15 — never opaque \"Agent #15\". Mistakes are learning opportunities; explain what broke before fixing. ADD-friendly session rules apply (hot spot at open, stubby list ≤3, capture don't hold, session close = state saved): see the add-friendly-core skill and ~/dev/add-friendly-agent/."
+    },
+    {
+      "id": "kb-ai-how-mike-works-standing-conventions",
+      "pageId": "kb-ai-how-mike-works",
+      "title": "How Mike Works",
+      "section": "Standing Conventions",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-ai-how-mike-works.md",
+      "text": "PROJECT-MEMORY.json at each project root (Claude Code convention) — decisions with rationale, phases, changelog. TASKS.md alongside. Cross-project decision ledger: /Volumes/MacMini_Extended/llm-memory/memory.jsonl (append via the ledger tool, never direct writes). Voice reference for drafting Mike's prose: ~/.openclaw/workspace/Corvus/Voice/mike-voice.md"
+    },
+    {
+      "id": "kb-ai-how-mike-works-what-this-page-is-for",
+      "pageId": "kb-ai-how-mike-works",
+      "title": "How Mike Works",
+      "section": "What This Page Is For",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-ai-how-mike-works.md",
+      "text": "Any AI serving Mike across businesses should internalize this page first, then north-star for direction, then the business pages for context — starting from jonesco, the parent entity. This is also the template for the per-client \"how this client works\" page in the consulting product — every engagement starts by writing one."
+    },
+    {
+      "id": "kb-ai-mike-career-history",
+      "pageId": "kb-ai-mike-career-history",
+      "title": "Mike Jones — Career History (public facts)",
+      "section": null,
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-ai-mike-career-history.md",
+      "text": "Mike Jones has 29 years in gaming, entertainment, and media technology. Through-line in his own words: define the product, then ship it. This page carries the public, citable career facts so an agent can reference them accurately. Engagement and offers live on the business pages, not here."
+    },
+    {
+      "id": "kb-ai-mike-career-history-microsoft-xbox-and-xbox-360-launch-teams-1999-2006",
+      "pageId": "kb-ai-mike-career-history",
+      "title": "Mike Jones — Career History (public facts)",
+      "section": "Microsoft — Xbox and Xbox 360 launch teams (1999–2006)",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-ai-mike-career-history.md",
+      "text": "Core team for both the Xbox and Xbox 360 platform launches. Led test teams that shipped 6 AAA launch titles across the two platforms, and set pre-launch quality standards for SDK tooling, usability frameworks, and instrumentation strategy that became foundational for Microsoft's gaming division. Holds a patent on VINCE — a video-game instrumentation method shipped in the Xbox SDK. It captured what players actually did for usability testing (first shipped in Voodoo Vince and Halo 2) and later became the kill-shot replay feature across the Halo franchise. The design judgment he carries from it: ask what the player did, not just whether they beat the level."
+    },
+    {
+      "id": "kb-ai-mike-career-history-director-level-builds-kabam-kinoo-verizon",
+      "pageId": "kb-ai-mike-career-history",
+      "title": "Mike Jones — Career History (public facts)",
+      "section": "Director-level builds: Kabam, Kinoo, Verizon",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-ai-mike-career-history.md",
+      "text": "Kinoo — VP of Production & Product (2020–2022): first hire; built the PMO from zero and led production across hardware, firmware, app, UX, backend, marketing, and user testing. 120+ people, $12M+ budget over 2 years, 100% launch success rate. Shipped the Kinoo Wand — AR hardware with computer vision and ML, paired with a Unity iOS/Android app on an AWS backend. Result: 10 industry awards in 2021–2022 including CES Innovation 2022 and the Good Housekeeping Best Toy Award, plus an AARP Innovation Lab win. Kabam — Director-level PMO build: $4.5M program, 70+ staff. Verizon — Director-level PMO build: 250+ people across 5 departments."
+    },
+    {
+      "id": "kb-ai-mike-career-history-current-ventures",
+      "pageId": "kb-ai-mike-career-history",
+      "title": "Mike Jones — Career History (public facts)",
+      "section": "Current ventures",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-ai-mike-career-history.md",
+      "text": "Velocity Partners — consulting (product + positioning for operators); see velocity-partners. Resilient Tomorrow — publishing: 2,200+ readers, top essay 900+ likes; see resilient-tomorrow. Distills — open-source career-chatbot toolkit; see distills. Teaching: Anthropic AI-fluency course cohorts for a corporate education client; certified ccar-f-certification (issued 2026-08-28, public Credly badge). Co-founded 8 Circuit Studios and Insight Float (earlier ventures dating to 2016)."
+    },
+    {
+      "id": "kb-ai-mike-career-history-credentials-and-verified-differentiators",
+      "pageId": "kb-ai-mike-career-history",
+      "title": "Mike Jones — Career History (public facts)",
+      "section": "Credentials and verified differentiators",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-ai-mike-career-history.md",
+      "text": "Anthropic Claude Certified Architect – Foundations (CCAR-F), August 2026. Xbox SDK patent (VINCE), in continuous derivative use in the platform SDK. Named among the first 1% of ChatGPT users globally (2022–2025, verified). Working style for collaborators and agents: how-mike-works."
+    },
+    {
+      "id": "kb-ai-mike-career-history-how-to-verify",
+      "pageId": "kb-ai-mike-career-history",
+      "title": "Mike Jones — Career History (public facts)",
+      "section": "How to verify",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-ai-mike-career-history.md",
+      "text": "The Credly badge is the canonical proof link for the certification. Engagement paths and offer economics: velocity-partners and jonesco. Everything on this page is cleared public and mirrored on Mike's LinkedIn profile."
+    },
+    {
+      "id": "kb-business-distills-distills",
+      "pageId": "kb-business-distills",
+      "title": "Distills",
+      "section": "Distills",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-distills.md",
+      "text": "Product. Career knowledge, made interviewable. Career documents → AI voice interview → recruiter-facing chatbot. The pitch: a person's knowledge base becomes an AI that answers questions about them — \"makes you appear wiser and AI-forward in your thinking.\" A hiring manager using it reported: *\"I found myself asking questions of Distills that I would not ask a candidate in person, so I got a much better understanding of what their knowledge base was.\"*"
+    },
+    {
+      "id": "kb-business-distills-audiences",
+      "pageId": "kb-business-distills",
+      "title": "Distills",
+      "section": "Audiences",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-distills.md",
+      "text": "1. Job seekers 2. Fractional businesses / consulting agencies 3. Solopreneurs + small teams"
+    },
+    {
+      "id": "kb-business-distills-implementation",
+      "pageId": "kb-business-distills",
+      "title": "Distills",
+      "section": "Implementation",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-distills.md",
+      "text": "distill-app (SaaS) + RAG_ChatBot/Distill (open source) — see ~/Dev/ Sandbox stage; production push needed"
+    },
+    {
+      "id": "kb-business-distills-why-it-matters",
+      "pageId": "kb-business-distills",
+      "title": "Distills",
+      "section": "Why It Matters",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-distills.md",
+      "text": "build their own is the course's core deliverable Bridge to the Connectioning pivot (deferred — see Projects README) Career-coach channel + personal-network outreach lists exist in vault (Distills/), unworked — needs Mike's direct attention Sits under jonesco alongside its sibling businesses"
+    },
+    {
+      "id": "kb-business-distills-open-items",
+      "pageId": "kb-business-distills",
+      "title": "Distills",
+      "section": "Open Items",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-distills.md",
+      "text": "3 social-proof quotes to dig up (medical hiring manager quote above is one) Landing page: quotes above the fold Production push vs. continued sandbox Next build step (restated 2026-09-29, Todd Taber call): make portfolio data queryable by external agents — portfolio sites/K Bs become the data agents query. Source: People/David Levy.md log + Meetings/2026-09-29-Todd-Taber-Content-Signals.md"
+    },
+    {
+      "id": "kb-business-distills-grill-outcome-2026-10-05-t-2026-10-02-nhm",
+      "pageId": "kb-business-distills",
+      "title": "Distills",
+      "section": "Grill Outcome — 2026-10-05 (T-2026-10-02-NHM)",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-distills.md",
+      "text": "Keep the name. The registry/Connectioning product is a separate product with its own name (rename shortlisted; the pick is Mike's gate) — decision record: Projects/Distills-vs-Registry-Relationship-2026-10-05.md. Distills is a 60-day experiment: YouTube portfolio-demo video as the storefront; price set at build. The demo = the Friday artifact: portfolio page made agent-queryable + a read-only Distills chatbot demo on a scoped security surface (Day 1 audit done 2026-10-05, card T-2026-10-05-AQW; thesis: agentic-web)."
+    },
+    {
+      "id": "kb-business-resilient-tomorrow-resilient-tomorrow",
+      "pageId": "kb-business-resilient-tomorrow",
+      "title": "Resilient Tomorrow",
+      "section": "Resilient Tomorrow",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-business-resilient-tomorrow.md",
+      "text": "Media + platform. The legacy play (north-star): \"known for Resilient Tomorrow. Teaching people how to build technology that makes their lives more independent and connected.\""
+    },
+    {
+      "id": "kb-business-resilient-tomorrow-identity",
+      "pageId": "kb-business-resilient-tomorrow",
+      "title": "Resilient Tomorrow",
+      "section": "Identity",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-business-resilient-tomorrow.md",
+      "text": "Tagline: \"Build your exit. Without burning anything down.\" Archetype: Outlaw (60-70%) + Sage (30-40%) — the rebel who found the exits, calmly showing them NOT: prepper site, self-help, activism, guru platform, charity"
+    },
+    {
+      "id": "kb-business-resilient-tomorrow-the-staircase-model-load-bearing",
+      "pageId": "kb-business-resilient-tomorrow",
+      "title": "Resilient Tomorrow",
+      "section": "The Staircase Model (load-bearing)",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-business-resilient-tomorrow.md",
+      "text": "1. Perspective — \"The system did this to you.\" 2. Practical Path — \"Here's the audit. Here's the first step.\" 3. Peer Belonging — \"You're not alone.\" Community is the side effect, not the selling point. Evidence: individual- framed articles outperform collective-organizing CTAs by ~10x (16,316 views / 378 signups vs ~1,250 views / net subscriber loss)."
+    },
+    {
+      "id": "kb-business-resilient-tomorrow-seven-pillars",
+      "pageId": "kb-business-resilient-tomorrow",
+      "title": "Resilient Tomorrow",
+      "section": "Seven Pillars",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-business-resilient-tomorrow.md",
+      "text": "Energy · Food · Governance · Health · Shelter · Finance · Connection (voice lines for each live in Resilient Tomorrow/CLAUDE.md)"
+    },
+    {
+      "id": "kb-business-resilient-tomorrow-product-architecture",
+      "pageId": "kb-business-resilient-tomorrow",
+      "title": "Resilient Tomorrow",
+      "section": "Product Architecture",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-business-resilient-tomorrow.md",
+      "text": "` RT Tools / Scorecard (free entry — individual, not collective) → RT Community / The Commons ($50/mo) → RT Courses (member-created, revenue share) → RT Commons Fund (member-funded grants) ` Front door is Tools (individual), not Community (collective)."
+    },
+    {
+      "id": "kb-business-resilient-tomorrow-content-machinery",
+      "pageId": "kb-business-resilient-tomorrow",
+      "title": "Resilient Tomorrow",
+      "section": "Content Machinery",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-business-resilient-tomorrow.md",
+      "text": "Substack publication is live. The content generation pipeline (trend-watcher → generator → adapter) is not operational — v1 never fully worked, scheduler died 2026-07-28, v2 revision is intended. See rt-content-pipeline and generator-registry."
+    },
+    {
+      "id": "kb-business-velocity-partners-velocity-partners",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "Velocity Partners",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "text": "Consulting arm. Core revenue. The bridge that funds resilient-tomorrow."
+    },
+    {
+      "id": "kb-business-velocity-partners-offer-repositioned-2026-08-21",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "Offer (repositioned 2026-08-21)",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "text": "Shape: curriculum, one-to-many, bounded programs — not open-ended retainers IP: reusable by default (a curriculum compounds; a retainer doesn't) Stance: augment-not-replace — a commercial argument (stalled rollouts trace to fear), not just an ethical one Old offer (\"I rebuild your operations with agents\", bespoke): superseded; retained in history of Velocity Partners.md"
+    },
+    {
+      "id": "kb-business-velocity-partners-offerings-decomposition-2026-10-03-grill-date-mon-2026-10-05",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "Offerings Decomposition (2026-10-03; grill date Mon 2026-10-05)",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "text": "Velocity Partners/Offerings-Analysis-2026-10-03.md (draft-for-grill, pricing estimates) reframes VP as one fractional-executive platform with three productized components: Offering 1 AI-readiness assessment (front door, est. $7.5K–$15K fixed) · Offering 2 knowledge base as source of truth for AI (delivery, est. $15K–$25K pilot + maintenance retainer) · Offering 3 AI instruction + certification cohorts (one-to-many scale lever, aligned with full rate set 2026-10-05: $10K/mo · 40h (direction + advisory, prototyping capped ≤10h/mo; floor $7.5K; max 2 concurrent retainers by the bandwidth (zero observed demand for the public/agent-discoverability half — an R&D bet, see agentic-web). Open grill questions: 90-day wedge, the Offering-2 builder trap vs \"director, not doer\", bandwidth covenant (max retainers). Analysis is grounded but supersedes nothing until Mike grills it 2026-10-05."
+    },
+    {
+      "id": "kb-business-velocity-partners-agentic-web-offering-decided-2026-10-02-not-yet-built",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "Agentic-Web Offering Decided (2026-10-02; not yet built)",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "text": "Mike's Gamma-rebuild answers (T-2026-09-25-GAM1, resolved 2026-10-02) made the agentic web VP's site-level offering: \"prepare your business for the Agentic web\" — knowledge bases, agentic indexes, KB-driven bots (same pattern as distills). velocitypartners.io to be rebuilt as a simple house-style page with that offer, findable by agents, made indexable (was noindex), DNS moved off GoDaddy to Cloudflare, \"26 years\" → 29. Implementation cards T-2026-10-02-VK7 (VP site) and T-2026-10-02-HAJ (jones-co.us rebuild) queued — decided, not built. Thesis detail: agentic-web."
+    },
+    {
+      "id": "kb-business-velocity-partners-strategic-frame",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "Strategic Frame",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "text": "VP is a bridge, not a destination. Every engagement is judged on one question: *does this shorten the bridge or lengthen it?* Binding constraint is bandwidth, not values — a fully consumed 40-hour week is one whose work *feeds RT instead of competing with it*: aligned work produces two outputs from the same hours (the engagement + the RT material), unaligned work produces one."
+    },
+    {
+      "id": "kb-business-velocity-partners-open-items",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "Open Items",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "text": "Full VP website redesign (still shows old positioning) Pitch deck refresh to ICP-approved framing AAPD methodology: still core, role evolving RT content pipeline revival would create aligned-work capacity (rt-content-pipeline)"
+    },
+    {
+      "id": "kb-company-jonesco-jones-collaboration-company",
+      "pageId": "kb-company-jonesco",
+      "title": "Jones Collaboration Company",
+      "section": "Jones Collaboration Company",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-company-jonesco.md",
+      "text": "The parent entity. California LLC (SF). Mike Jones is founder. Everything below it is a vehicle for north-star."
+    },
+    {
+      "id": "kb-company-jonesco-what-it-contains",
+      "pageId": "kb-company-jonesco",
+      "title": "Jones Collaboration Company",
+      "section": "What It Contains",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-company-jonesco.md",
+      "text": "Entity Type One line Page Velocity Partners Consulting \"Make your people dangerous with AI\" — funds the runway velocity-partners Resilient Tomorrow Media/platform Solarpunk publication + emerging community platform resilient-tomorrow Distills Product Career docs → AI voice interview → recruiter chatbot distills MJ_Online Portfolio site mikejones.online, credibility surface — OfflineAI Builder project Local/offline AI tooling experiments —"
+    },
+    {
+      "id": "kb-company-jonesco-founder-credentials",
+      "pageId": "kb-company-jonesco",
+      "title": "Jones Collaboration Company",
+      "section": "Founder Credentials",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-company-jonesco.md",
+      "text": "Credential Detail Page Claude Certified Architect – Foundations (CCAR-F) Anthropic, issued 2026-08-28, expires 2027-08-28 · public Credly badge ccar-f-certification"
+    },
+    {
+      "id": "kb-company-jonesco-how-the-parts-relate",
+      "pageId": "kb-company-jonesco",
+      "title": "Jones Collaboration Company",
+      "section": "How the Parts Relate",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-company-jonesco.md",
+      "text": "VP is the bridge (per velocity-partners ICP): funds 12–24 months of runway while leverage assets (RT platform, Distills, curriculum) get built. RT is the legacy play (north-star): \"known for Resilient Tomorrow.\" Consulting methodology: AAPD (gaming/media studios 50–1,500 people), evolving toward broader AI implementation. Agentic web is the cross-company bet (agentic-web): VP site offering (decided 2026-10-02, cards queued), Distills' protocol-native positioning, RT's highest-strength content signal."
+    },
+    {
+      "id": "kb-company-jonesco-open-decisions",
+      "pageId": "kb-company-jonesco",
+      "title": "Jones Collaboration Company",
+      "section": "Open Decisions",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-company-jonesco.md",
+      "text": "VP positioning is resolved (ICP approved 2026-08-21) but website/pitch deck still reflect the old offer. JCC itself has no public identity — no site, no page describing the holding structure. Fine while sub-businesses carry the brand; revisit if consulting clients start asking \"who am I actually hiring?\""
+    },
+    {
+      "id": "kb-concepts-agentic-web-the-agentic-web",
+      "pageId": "kb-concepts-agentic-web",
+      "title": "The Agentic Web",
+      "section": "The Agentic Web",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-concepts-agentic-web.md",
+      "text": "Thesis (Mike, DEC 2026-09-17, restated live 2026-09-29): within 12–18 months, sites stop being rendered UIs and become data/action endpoints queried by agents via protocols like MCP. Platform-centric distribution ends; data becomes queryable; the personal agent is the interface. This is a working thesis Mike is betting businesses on, not an established market. The brief's own honest counterweight: consumer agent-first traffic is still small and no one has proven a revenue model. The shift is load-bearing at the infrastructure layer (protocols, registries, agent runtimes) while the UX layer is immature — the window where first-mover position accrues."
+    },
+    {
+      "id": "kb-concepts-agentic-web-why-it-matters-here",
+      "pageId": "kb-concepts-agentic-web",
+      "title": "The Agentic Web",
+      "section": "Why It Matters Here",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-concepts-agentic-web.md",
+      "text": "Drives live decisions across three businesses: Velocity Partners — the 2026-10-02 Gamma-rebuild answers made the agentic web the site's real offering: \"prepare your business for the Agentic web\" — knowledge bases, agentic indexes, KB-driven bots (same pattern as distills), with the site rebuilt to be findable by agents and indexable. Implementation cards T-2026-10-02-VK7 (velocitypartners.io) and T-2026-10-02-HAJ (jones-co.us), queued — decided, not built. Velocity Partners pricing stance — the \"public data made discoverable to agents + verification\" extension of the KB offering has zero observed service demand (Offerings Analysis 2026-10-03): an R&D bet with a kill criterion, not a service to lead with. Resilient Tomorrow — the agentic-web post is RT's highest-strength content signal (\"agents all the way down\"); Mike articulated the full thesis live 2026-09-29 (Todd Taber 1:1) and a prep-for-the-agentic-web social topic is staged (T-2026-10-02-63V). Distills — positioning: protocol-native personal publisher; agents consume it directly. Lead surface is authenticated audience-tagged RSS — evolution of a primitive every agent runtime already understands — before inventing MCP transport."
+    },
+    {
+      "id": "kb-concepts-agentic-web-protocol-stack-brief-verified-reachable-2026-09-18",
+      "pageId": "kb-concepts-agentic-web",
+      "title": "The Agentic Web",
+      "section": "Protocol Stack (brief, verified reachable 2026-09-18)",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-concepts-agentic-web.md",
+      "text": "Layer Protocol Stance Agent ↔ tool MCP (+ official Registry as discovery — \"listing is the new SEO\") primary surface Agent ↔ agent Google A2A watch; do not build first Docs discovery llms.txt ship everywhere now — the floor Policy agents.txt watch; ship permissive early Semantics schema.org / JSON-LD table stakes Feeds RSS/Atom + auth extensions Distills' lead surface Browser layer WebMCP watchlist Stacking rule: llms.txt + schema.org is the floor, an MCP server is the agent-native surface, A2A is the later scaling layer."
+    },
+    {
+      "id": "kb-concepts-agentic-web-smallest-viable-surface-brief-recommendation",
+      "pageId": "kb-concepts-agentic-web",
+      "title": "The Agentic Web",
+      "section": "Smallest Viable Surface (brief recommendation)",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-concepts-agentic-web.md",
+      "text": "llms.txt + schema.org markup now; a read-only MCP server this quarter; list in the MCP Registry early. Distills diverges: authenticated audience-tagged RSS first, MCP wrapper later. Deliberately deferred: A2A surfaces, agent payments, write/transaction endpoints — real but premature until read-only surfaces get agent traffic."
+    },
+    {
+      "id": "kb-concepts-agentic-web-claim-history",
+      "pageId": "kb-concepts-agentic-web",
+      "title": "The Agentic Web",
+      "section": "Claim History",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-concepts-agentic-web.md",
+      "text": "2026-09-17 — thesis decision; brief commissioned 2026-09-18 — brief delivered: evidence check, protocol map, per-project surfaces 2026-09-29 — articulated end-to-end live (Todd Taber 1:1); staged same day as draft social scripts (Resilient Tomorrow/Content Drafts/2026-09-29/) 2026-10-02 — became a named VP offering, a social topic, and the indexability ruling for both public sites 2026-10-03 — priced in the Offerings Analysis (public/verification half = bet, not service) 2026-10-05 — grill (T-2026-10-02-NHM) made the person-roof portfolio page the active instantiation: \"portfolio page agent-queryable + updated (Distills read-only demo, scoped security surface) + VP agentic-web page pointing at it\" = the Friday artifact; Day 1 live-site audit done 2026-10-05 (T-2026-10-05-AQW). The RSS-lead Distills framing above is untouched."
+    },
+    {
+      "id": "kb-concepts-agentic-web-related",
+      "pageId": "kb-concepts-agentic-web",
+      "title": "The Agentic Web",
+      "section": "Related",
+      "updated": "2026-10-06",
+      "path": "/agents/kb/kb-concepts-agentic-web.md",
+      "text": "distills — protocol-native personal publisher positioning velocity-partners — carries the agentic-web offering resilient-tomorrow — highest-strength content signal task-system — Mike's own working instantiation of agents as the interface"
+    },
+    {
+      "id": "kb-concepts-ccar-f-certification-claude-certified-architect-foundations",
+      "pageId": "kb-concepts-ccar-f-certification",
+      "title": "Claude Certified Architect - Foundations",
+      "section": "Claude Certified Architect - Foundations",
+      "updated": "2026-09-25",
+      "path": "/agents/kb/kb-concepts-ccar-f-certification.md",
+      "text": "Mike's Anthropic certification, earned 2026-08-28. Public and verified — the Credly badge is the canonical proof link and confirms the issuer (Anthropic) and recipient (Michael Jones) live on the open web. Fact Value Official name Claude Certified Architect – Foundations Exam code CCAR-F — never abbreviate as \"CCA-F\" (Mike's standing directive) Issuer Anthropic (Anthropic Academy) Issued 2026-08-28 Expires 2027-08-28 Proof Credly badge (public, verified 2026-09-25) Exam scope Claude Code, Claude Agent SDK, Claude API, MCP"
+    },
+    {
+      "id": "kb-concepts-ccar-f-certification-where-it-s-used",
+      "pageId": "kb-concepts-ccar-f-certification",
+      "title": "Claude Certified Architect - Foundations",
+      "section": "Where It's Used",
+      "updated": "2026-09-25",
+      "path": "/agents/kb/kb-concepts-ccar-f-certification.md",
+      "text": "jonesco founder credentials; live on mikejones.online /resume/ (\"issued Aug 2026\", Credly-linked) — that update ran ahead of the KB; this page closes the gap flagged in publication-layer. CCAR-F course build (coarse detail there)."
+    },
+    {
+      "id": "kb-concepts-ccar-f-certification-notes",
+      "pageId": "kb-concepts-ccar-f-certification",
+      "title": "Claude Certified Architect - Foundations",
+      "section": "Notes",
+      "updated": "2026-09-25",
+      "path": "/agents/kb/kb-concepts-ccar-f-certification.md",
+      "text": "First Anthropic credential in what Mike is building into a credential set (vault keeps the exam guide, certificate PDF, and quick-reference under Anthropic/). En-dash form (\"Claude Certified Architect – Foundations\") is the official rendering; Credly shows the hyphen form — both are the same credential."
+    },
+    {
+      "id": "kb-concepts-ccar-f-certification-related",
+      "pageId": "kb-concepts-ccar-f-certification",
+      "title": "Claude Certified Architect - Foundations",
+      "section": "Related",
+      "updated": "2026-09-25",
+      "path": "/agents/kb/kb-concepts-ccar-f-certification.md",
+      "text": "publication-layer — the run whose open work this backfill closes jonesco — parent entity the credential attaches to"
+    },
+    {
+      "id": "kb-pipelines-generator-registry-generator-registry",
+      "pageId": "kb-pipelines-generator-registry",
+      "title": "Generator Registry",
+      "section": "Generator Registry",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-pipelines-generator-registry.md",
+      "text": "What writes into this vault, where, and whether it's alive. Agents check this before trusting vault content: a note from a dead generator is stale by definition, no matter its date."
+    },
+    {
+      "id": "kb-pipelines-generator-registry-alive",
+      "pageId": "kb-pipelines-generator-registry",
+      "title": "Generator Registry",
+      "section": "Alive",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-pipelines-generator-registry.md",
+      "text": "Generator What it does Writes to Schedule hermes morning-briefing Daily brief Week and Daily Plans/ 07:00 daily, 08:00 weekend hermes important-mail monitor Mail triage Projects/*/Email-Threads/ every 30 min hermes ADD shutdown Daily close-out: hot spot, staging add-friendly-agent data/ 21:00 daily hermes ADD weekly review Sunday review sweep add-friendly-agent data/ Sun 18:00 hermes kb-nightly-maintenance Nightly KB pass: lint, last-24h sweep, stale flags, registry freshness KB/ + report (telegram) 03:00 daily hermes task-intake (adopt.py) Adopts board-root cards into Tasks/ (id, created, defaults) Tasks/ every 10 min hermes orchestrator-sweep Personal-kanban sweep: executes resolved cards, routes work cards (hermes/claude/codex), bounded inbox triage Tasks/ via task-system CLI, hermes kanban 11:00, 15:00, 00:30 daily claude-code / corvus sessions Interactive work everywhere on demand hermes LinkedIn token renewal Renews the 60-day LinkedIn OAuth token: runs the renew script, resolves the cycle card, stages the next (~day 50) Tasks/ via task-system CLI; secrets/linkedin.txt + ~/.config/linkedin-mcp/tokens.json 09:00 daily, monitor-gated (fires only when token ≥50 days old) hermes Session wrap (nightly) Wraps unwrapped Hermes sessions into the cross-system ledger, then checks Operations runbooks cross-system ledger + Operations/ 21:30 daily hermes Workday start reminder Weekday start-of-day nudge: today's calendar + 1–3 focus items report (local) 09:15 Mon–Fri hermes liveness"
+    },
+    {
+      "id": "kb-pipelines-generator-registry-paused-bounded-watches-ended-early",
+      "pageId": "kb-pipelines-generator-registry",
+      "title": "Generator Registry",
+      "section": "Paused (bounded watches ended early)",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-pipelines-generator-registry.md",
+      "text": "Generator What it does Writes to Status hermes Local AI Build Price Watch (ends Oct 8) — id 55206889f927 6-hourly price-watch ticks for Mike's local AI server build against ~/.hermes/price-watches/local-ai-build.json Telegram + price-watch state file (no vault writes) paused 2026-10-07 ~12:07 by Mike after ordering the Andromeda prebuilt (day plan 10-07); 2 of 18 ticks unused; job disabled in jobs.json hermes Local AI Build Hourly — Prime Day (Oct 6-7) — id d7e9d51b97c4 Hourly Prime-Day ticks + R9700-prebuilt sweep; final tick was to deliver the sale summary + prebuilt-vs-parts verdict Telegram + price-watch state file paused 2026-10-07 ~12:07 by Mike, same reason; the planned final 23:10 SALE-SUMMARY tick never ran (last full tick #30, 11:10: all flat, GPU floor $1,699.99 AMZ ASRock, DIY $2,910.92 vs BB prebuilt $2,899.99)"
+    },
+    {
+      "id": "kb-pipelines-generator-registry-dead-scheduler-died-2026-07-28-2-months-unrun-as-of-this-page-s-creation",
+      "pageId": "kb-pipelines-generator-registry",
+      "title": "Generator Registry",
+      "section": "Dead (scheduler died 2026-07-28, ~2 months unrun as of this page's creation)",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-pipelines-generator-registry.md",
+      "text": "Generator What it did Output went to Note rt-platform-adapter Channel adaptation (largest writer: 1,000+ notes) RT/Content Adapted/ part of rt-content-pipeline rt-content-generator Article drafts RT/Content Drafts/ same rt-trend-watcher-{reddit,youtube,substack,exa} Source scraping RT/Trend Reports/ same rt-signal-scorer Scored trends RT/Trend Reports/Scored/ same dreaming-nightly Session consolidation AI Sessions/ pattern worked; trigger died obsidian-cleanup / obsidian-bridge Vault hygiene Tasks/, Corvus/ superseded or dead ops-audit Ops audits Corvus/Operations/ dead email-triage Thread captures Projects/*/Email-Threads/ Hermes mail monitor covers part of this Interactive sessions (how-mike-works — Claude Code, Corvus) also write vault-wide but are on-demand, not scheduled."
+    },
+    {
+      "id": "kb-pipelines-generator-registry-how-to-read-this",
+      "pageId": "kb-pipelines-generator-registry",
+      "title": "Generator Registry",
+      "section": "How to Read This",
+      "updated": "2026-10-09",
+      "path": "/agents/kb/kb-pipelines-generator-registry.md",
+      "text": "Alive = scheduled today in a live scheduler (Hermes cron verified in .hermes/cron/jobs.json, or launchd agent verified via launchctl list) Dead = emitted notes exist but no scheduler references them (verified: OpenClaw crons.db empty, 0-byte, marked DEAD-20260728; jobs archived to _pre-migration-archive-2026-07-17/) The nightly KB maintenance pass (Phase 2) keeps this page current — it is the registry's designated owner"
+    },
+    {
+      "id": "kb-pipelines-publication-layer-publication-layer",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "Publication Layer",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "What it is: the adapter layer between jonesco's KB and the public surfaces. The KB holds claims; this layer renders public claims into each surface. Core built 2026-09-25 (see adapters below); remaining surfaces await migration or wiring."
+    },
+    {
+      "id": "kb-pipelines-publication-layer-the-rule",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "The rule",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "KB facts carry a public: marker (publication-grade: sourced, approved, no confidential leakage) — only marked facts flow to surfaces. Gated publish: agents stage surface changes from the KB, Mike approves once, then they fan out. Nothing publishes unattended (a typo must not go live on six domains). One direction: KB → surfaces. A surface never edits the KB directly; corrections enter through a maintenance pass, per SCHEMA."
+    },
+    {
+      "id": "kb-pipelines-publication-layer-surfaces-and-their-adapters",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "Surfaces and their adapters",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "Surface Adapter State mikejones.online Astro content.ts — KB:BEGIN/END region generated from public: yes pages adapter built (staged for approval) — see section below LinkedIn KB feeds Career/LinkedIn/Profile.md, linkedin-sync skill pushes (diff→sync gate) Profile.md exists; token expired 2026-07-01 jones-co.us Next.js; Mike decided 2026-09-25: index it, public company face — first-class surface Gamma-hosted, no repo — collect + rebuild + migrate to Cloudflare Pages before it can be a KB consumer velocitypartners.io Wire as KB consumer, keep current design; redesign later Gamma-hosted, no repo — same migration prerequisite resilient-tomorrow.com Wire as KB consumer, keep current design; redesign later live; content pipeline v2 pending (rt-content-pipeline) Distills RAG Cheapest leg: ingest KB markdown directly; feeds the JS bot on mikejones.online adapter built (pilot, staged for approval) — see section below; live chain is ~/dev/MJ_Online/mj-chatbot-backend, not ~/dev/distill-app"
+    },
+    {
+      "id": "kb-pipelines-publication-layer-decisions-mike-2026-09-25",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "Decisions (Mike, 2026-09-25)",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "1. Gated publish — agents stage, Mike approves once, then publish. 2. LinkedIn runs through one funnel: KB → Profile.md → linkedin-sync. 3. VP + RT: wire as KB consumers first; redesign is a later project. 4. jones-co.us becomes the public company face: index it, treat it as first-class."
+    },
+    {
+      "id": "kb-pipelines-publication-layer-open-work",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "Open work",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "Backfill of the facts the t_90718efd run established: DONE 2026-09-25 — ccar-f-certification (public: yes), jonesco credentials row, Stale downloadable /Mike-Jones-Resume.pdf on mikejones.online; vault resume (Career/Resume/) is also pre-cert. Regeneration needs Mike's call. Adapter mechanism per surface (build-time generation vs staged-diff script): decided for two surfaces — Distills RAG and mikejones.online content.ts both use gated staged-diff scripts writing to a staging dir (mj-chatbot-backend/staging/, site/content.staging/). Other surfaces still TBD. Vault-root CLAUDE.md WRITTEN 2026-09-25 (Mike approved in-session). Phase 2 DONE: nightly KB-maintenance cron wired 2026-09-25 (kb-nightly-maintenance, 03:00 daily); session-end convention in live use since 2026-09-25."
+    },
+    {
+      "id": "kb-pipelines-publication-layer-adapter-distills-rag-pilot-built-2026-09-25-staged-for-approval",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "Adapter: Distills RAG (pilot — built 2026-09-25, staged for approval)",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "The cheapest leg, proven end to end. Correction to the original design: the live chain is not ~/dev/distill-app (that is the multi-tenant SaaS). It is ~/dev/MJ_Online/mj-chatbot-backend — a dedicated Cloudflare Worker. Mechanism. mj-chatbot-backend/scripts/kb-to-rag.mjs reads KB//*.md directly from the vault (no content duplication), strips frontmatter and Sources/History sections, chunks each page by ## section into the distill RAG JSONL schema (narrative entries; topic from page type; source: = the KB path, so every claim stays traceable), and writes only into mj-chatbot-backend/staging/: knowledge.jsonl, knowledge-data.js (the CommonJS module the Worker ingests, same format src/knowledge-loader.js produces), staged.diff, and stage-report.md (human-readable summary for the approval gate). Live chain it feeds. mikejones.online pages → distill-chatbot-widget.js (RAG_CHATBOT_CONFIG → mj-chatbot-backend Worker /chat) → Worker loads src/knowledge-data.js at boot → src/rag-retrieval.js keyword scoring → Claude. The bot changes only when knowledge.jsonl + src/knowledge-data.js are replaced AND the Worker redeploys — apply and deploy are deliberate human steps after approval. How to run. ` cd ~/dev/MJ_Online/mj-chatbot-backend node scripts/kb-to-rag.mjs # dry run, prints summary, writes nothing node scripts/kb-to-rag.mjs --stage # writes staging/ only; live files untouched ` After Mike approves: `cp staging/knowledge.jsonl knowledge.jsonl && cp staging/knowledge-data.js src/knowled"
+    },
+    {
+      "id": "kb-pipelines-publication-layer-adapter-mikejones-online-content-ts-built-2026-09-25-staged-for-approval",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "Adapter: mikejones.online content.ts (built 2026-09-25, staged for approval)",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "Second leg. ~/dev/MJ_Online/site/scripts/kb-to-content.mjs reads KB//*.md directly (read-only input; the generator never writes into KB/), keeps only and renders them into a KB:BEGIN/KB:END region at the end of site/src/lib/content.ts — a generated region inside the hand-maintained file. Everything outside the region stays hand-edited; the page-by-page mapping (generated vs hand-maintained, and why) lives in the generator's FIELD MAP header comment. Today the only public: yes page is ccar-f-certification → generated export certifications (name, abbrev, issuer, issued/issuedDisplay, expires, proofUrl, scope — parsed from the page's Fact|Value table with per-field provenance). resume.astro renders it in Recognition; the hardcoded cert line How to run. ` cd ~/dev/MJ_Online/site node scripts/kb-to-content.mjs # dry run — summary only, writes nothing node scripts/kb-to-content.mjs --stage # writes site/content.staging/ ONLY node scripts/publish-content.mjs # plan — what --apply would do node scripts/publish-content.mjs --apply # AFTER Mike approves the staged diff: ` The commit is the approval gate: publish-content.mjs commits after approval and never pushes — git push is Mike's manual step (Cloudflare Pages auto-deploys on push to main). First publish includes the plumbing (generator, publish helper, resume.astro, site/.gitignore); later publishes need only site/src/lib/content.ts. Safety rails: apply refuses when the working tree's content.ts has hand-edits staging didn't start "
+    },
+    {
+      "id": "kb-pipelines-publication-layer-related",
+      "pageId": "kb-pipelines-publication-layer",
+      "title": "Publication Layer",
+      "section": "Related",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-publication-layer.md",
+      "text": "resilient-tomorrow — RT footer dead Bluesky/LinkedIn buttons (out of scope, flagged) generator-registry — this layer is the reader side; that page is the writer side"
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline-rt-content-pipeline",
+      "pageId": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "section": "RT Content Pipeline",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "text": "Intended flow: trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish. Current state: not operational. Details: v1 was built but \"never fully operational\" (Mike, 2026-09-24) — he moved on before finishing it OpenClaw cron scheduler died 2026-07-28; with it died the trend-watcher family and the nightly generation runs ~1,200 generated notes from the dead era now quarantined in _Archive/2026-09/ Substack publication itself is live and hand-fed; the pipeline was supposed to automate the top of the funnel"
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline-what-worked-in-v1",
+      "pageId": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "section": "What Worked in v1",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "text": "Signal scoring → trend reports have real content (147 written) Adapter produced per-channel versions with solid frontmatter conventions (source_draft, scheduled_date, platform keys) — worth keeping in v2 Draft structure: one folder per date, N drafts, per-channel files"
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline-v2-intent",
+      "pageId": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "section": "v2 Intent",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "text": "Revise into something actually functional. Open design questions: Which stages to keep vs collapse (trend-watcher alone may not justify 4 separate scrapers) Run under Hermes cron (the scheduler that actually works today) vs fixing OpenClaw's runtime Generation cadence: weekly compile vs nightly run Quality gate: v1 generated volume nobody read — v2 needs a human-review checkpoint before anything reaches drafts"
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline-related",
+      "pageId": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "section": "Related",
+      "updated": "2026-10-02",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "text": "generator-registry — this pipeline's emitters are listed there as dead resilient-tomorrow — the business this pipeline feeds"
+    },
+    {
+      "id": "kb-pipelines-task-system-task-system",
+      "pageId": "kb-pipelines-task-system",
+      "title": "Task System",
+      "section": "Task System",
+      "updated": "2026-10-08",
+      "path": "/agents/kb/kb-pipelines-task-system.md",
+      "text": "What it is: Mike's personal Kanban — the claim layer for how work is captured, decided, and tracked across all four businesses. Task files in Tasks/ are the source of truth in both directions: Mike's board view reads them, agent boards are views of them, and every agent writes status back to the files, never only to its own board. The compiled claim lives here; the how-to-run lives in Operations (links below)."
+    },
+    {
+      "id": "kb-pipelines-task-system-the-claims",
+      "pageId": "kb-pipelines-task-system",
+      "title": "Task System",
+      "section": "The claims",
+      "updated": "2026-10-08",
+      "path": "/agents/kb/kb-pipelines-task-system.md",
+      "text": "One store per direction. Tasks/*.md is canonical; the Hermes kanban board is a view. A status that lives only on an agent's board is a second store — the failure mode that killed the Distills board and stranded 71 tasks in daily notes for weeks. Statuses are board columns: backlog, on-deck, todo, in-progress, blocked, resolved, closed, parked. Only todo means today; on-deck is this week; backlog is soon-but-unscheduled; parked is not soon and carries an unpark trigger. Agents never promote across these on their own. All reads and writes go through the agent CLI (scripts/tasks.py, adopt.py in ~/Dev/openclaw_projects/task-system, 769 tests): it takes a file lock and verifies its write. Direct file edits do neither — never edit task files by hand. Intake: cards Mike makes on the board land at the vault root with no id; adopt.py (every 10 min, the task-intake cron) gives them an id and moves them into Tasks/. The 10-minute window is deliberate — editing a card resets its clock, so Mike is never interrupted mid-draft. Sweeps: the orchestrator sweep (Hermes cron, 00:30/11:00/15:00) is orchestrator AND worker — it reads the queue, executes todo work cards, executes cards Mike has moved to resolved, verifies in-progress work on disk, and triages fresh inbox cards (proposes project/priority/estimate in the Agent log; never changes status — todo is Mike's call alone). Assignee follows the doer (DEC-029): when an agent delegates work onward, it rewrites assignee so the vault shows who a"
+    },
+    {
+      "id": "kb-pipelines-task-system-open-work-as-of-2026-09-28",
+      "pageId": "kb-pipelines-task-system",
+      "title": "Task System",
+      "section": "Open work (as of 2026-09-28)",
+      "updated": "2026-10-08",
+      "path": "/agents/kb/kb-pipelines-task-system.md",
+      "text": "Retiring the rollover's task half (local.mike.task-rollover LaunchAgent still carries tasks forward in daily notes — redundant with this system, re-creates a second store). Mike wants it done as part of his cron audit, not unilaterally. Plan-3 remainder in the CLI repo: assignee-aware selection, rollup attribution, notifications, remaining crons."
+    },
+    {
+      "id": "kb-pipelines-task-system-related",
+      "pageId": "kb-pipelines-task-system",
+      "title": "Task System",
+      "section": "Related",
+      "updated": "2026-10-08",
+      "path": "/agents/kb/kb-pipelines-task-system.md",
+      "text": "generator-registry — which generators write into the vault; task-intake and the orchestrator sweep are registered there publication-layer — the reader-side rule that surface publishing is gated; the task system is where those stage-and-approve cards live how-mike-works — agent collaboration rules; the task system is where they are enforced"
+    }
+  ]
+}

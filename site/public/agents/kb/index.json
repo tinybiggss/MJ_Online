@@ -1,8 +1,14 @@
 {
-  "generatedAt": "2026-10-09T20:38:56.735Z",
+  "generatedAt": "2026-10-09T20:55:03.454Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
+  "query": {
+    "endpoint": "/agents/query?q=<terms>",
+    "method": "GET",
+    "returns": "JSON {query, results:[{id, title, section, path, text}]}",
+    "note": "Scored passages from these fact sheets, best first. Deterministic term scoring — no LLM."
+  },
   "pages": [
     {
       "id": "kb-ai-how-mike-works",
@@ -12,6 +18,16 @@
       "path": "/agents/kb/kb-ai-how-mike-works.md",
       "files": [
         "kb-ai-how-mike-works.md"
+      ]
+    },
+    {
+      "id": "kb-ai-mike-career-history",
+      "title": "Mike Jones — Career History (public facts)",
+      "updated": "2026-10-09",
+      "summary": "Mike Jones has 29 years in gaming, entertainment, and media technology.",
+      "path": "/agents/kb/kb-ai-mike-career-history.md",
+      "files": [
+        "kb-ai-mike-career-history.md"
       ]
     },
     {

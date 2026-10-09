@@ -4,9 +4,12 @@
 
 This site exposes a read-only, machine-readable knowledge base. Each link below is a static markdown fact sheet; `/agents/kb/index.json` is the machine index. Contact: the form at `/contact` or mike@mikejones.online.
 
+Agent querying: GET /agents/query?q=<terms> returns JSON {query, results:[{id, title, section, path, text}]} — scored passages from these fact sheets, best first. Use it to find and cite specifics (roles, results, certifications, how to engage); cite answer text by /agents/kb/*.md path.
+
 ## Knowledge base
 
 - [How Mike Works](/agents/kb/kb-ai-how-mike-works.md): How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated.
+- [Mike Jones — Career History (public facts)](/agents/kb/kb-ai-mike-career-history.md): Mike Jones has 29 years in gaming, entertainment, and media technology.
 - [Distills](/agents/kb/kb-business-distills.md): Product.
 - [Resilient Tomorrow](/agents/kb/kb-business-resilient-tomorrow.md): Media + platform.
 - [Velocity Partners](/agents/kb/kb-business-velocity-partners.md): Consulting arm.
