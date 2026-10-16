@@ -159,7 +159,7 @@ const hadError = Astro.url.searchParams.get("error") === "1";
           if (json.errors) Object.entries(json.errors).forEach(([k, v]) => setError(k, v));
           setStatus(json.error || "Something went wrong. Please email me directly.", true);
         } catch {
-          setStatus("Network error. Please email me directly at " + (form.dataset.email || "mike@mikejones.online") + ".", true);
+          setStatus("Network error. Please email me directly at " + (form.dataset.email || "mike@jones-co.us") + ".", true);
         } finally {
           submit.disabled = false;
           submit.textContent = original;
