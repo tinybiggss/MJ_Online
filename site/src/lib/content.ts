@@ -10,7 +10,7 @@ export const identity = {
   title: "AI Implementation Expert & LLM Integration Specialist",
   company: "Jones Collaboration Company, LLC",
   location: "San Jose, CA — serving everywhere",
-  email: "mike@mikejones.online",
+  email: "mike@jones-co.us",
   tagline: "I help people and organizations operate at the intersection of AI, autonomy, and resilience.",
   // Short positioning line used in heroes
   heroLead: "29 years building systems that ship —",
@@ -198,7 +198,7 @@ export const career = [
   { years: "2023–", org: "Velocity Partners", what: "Founder — AI implementation & fractional PMO" },
   { years: "2022–", org: "Independent R&D", what: "OfflineAI, Resilient Tomorrow, NeighborhoodShare" },
   { years: "2020–22", org: "Kinoo", what: "Principal Technical Program Manager — AR family comms (CES Innovation Award)" },
-  { years: "2017–20", org: "8 Circuit Studios", what: "Co-founder / CTO — Web3 gaming" },
+  { years: "2017–20", org: "8 Circuit Studios", what: "Co-founder / COO — Web3 gaming" },
   { years: "2009–15", org: "Livescribe · Kabam · Disney Interactive", what: "Director-level roles — gaming & connected hardware" },
   { years: "1999–2009", org: "Microsoft — Xbox & Xbox 360", what: "Launch teams, 6 AAA titles, SDK patent" },
 ];
