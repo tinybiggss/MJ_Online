@@ -9,7 +9,7 @@ rowTitle: "NeighborhoodShare: activation without retention, and the rebuild that
 diag: "The legacy beta is activation without retention, caused by behavioral frequency rather than product quality."
 navMark: "170 users across 20 communities, wound down"
 position: "Read this as a diagnosis I trust and a second version I have not proven."
-ledger: ["tool-sharing platform", "wound down, rebuilt", "170 users across 20 communities", "rebuild: Supabase + Cloudflare Workers"]
+ledger: ["tool-sharing platform", "wound down, rebuilt", "170 users across 20 communities", "rebuild: open signup, radius matching"]
 plate:
   src: /img/projects/neighborhoodshare-home.png
   alt: "NeighborhoodShare home screen"
