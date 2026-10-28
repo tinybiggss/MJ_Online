@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NeighborhoodShare case study: Mike Jones</title>
+  <meta name="description" content="Case study: activation without retention, and the rebuild that followed. The diagnosis, the shipped decisions, and what remains unproven, written from the receipts." />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="comps.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="brand" aria-label="Mike Jones, home">Mike Jones<span class="dot" aria-hidden="true">.</span></a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="work.html" aria-current="page">Work</a>
+        <a href="/writing">Writing</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <a href="/contact" class="btn">Start a conversation</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Article head -->
+    <div class="wrap article-head">
+      <nav class="crumbs mono" aria-label="Where you are">
+        <a href="work.html">Work</a>
+        <span aria-hidden="true">/</span>
+        <span>case study</span>
+        <span aria-hidden="true">/</span>
+        <span>NeighborhoodShare</span>
+      </nav>
+      <h1 class="article-title reveal">NeighborhoodShare: activation without retention, and the rebuild that followed</h1>
+
+      <p class="ledger reveal reveal-2">
+        <span>tool-sharing platform</span>
+        <span>wound down, rebuilt</span>
+        <span>170 users across 20 communities</span>
+        <span>rebuild: Supabase + Cloudflare Workers</span>
+      </p>
+
+      <p class="position-line reveal reveal-3">
+        Read this as a diagnosis I trust and a second version I have not proven.
+      </p>
+
+      <!-- Real product plate: orients the reader before the reading starts -->
+      <figure class="case-figure">
+        <div class="plate">
+          <img src="../../../site/public/img/projects/neighborhoodshare-home.png" alt="NeighborhoodShare home screen" loading="lazy" />
+        </div>
+        <figcaption>NeighborhoodShare, home screen</figcaption>
+      </figure>
+    </div>
+
+    <!-- The reading spine: five frozen sections -->
+    <article class="wrap">
+
+      <section class="case-section" aria-labelledby="s-problem">
+        <h2 id="s-problem">The problem</h2>
+        <div class="doc">
+          <p>
+            I built NeighborhoodShare twice. The first version, on my own site:
+            170 users across 20 communities before I wound it down, because
+            tool sharing proved too infrequent to stay top of mind
+            <span class="receipt">(site/src/lib/content.ts:173)</span>. The
+            rebuild is the same product, with tool lending as the whole scope.
+            Borrowing a tool is something you do every six months, maybe, and a
+            loop that runs twice a year has no second visit.
+          </p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="s-blocking">
+        <h2 id="s-blocking">What was actually blocking use</h2>
+        <div class="doc">
+          <p>
+            The legacy numbers come from a technical document
+            <span class="receipt">(content-drafts/neighborhoodshare-technical-doc.md)</span>.
+            They separate into four failures I treated as one in 2025.
+          </p>
+          <p>
+            <strong>Acquisition worked.</strong> Roughly 60 signups came from
+            door-to-door flyers and a neighborhood association meeting in my own
+            zip, 95126. Roughly 110 more came from a Resilient Tomorrow
+            newsletter post and email list.
+          </p>
+          <p>
+            <strong>Listing failed.</strong> About 75 to 80 tools sat in the
+            production database, all but about 5 of them ones I added myself.
+            Only 5 of the 95 active users ever listed anything, about 6 percent.
+            The friction I was proud of removing was not the friction that
+            stopped them.
+          </p>
+          <p>
+            <strong>Density never formed, and my rollout design was part of
+            why.</strong> A zip only activated at 20 or more users plus a
+            captain, with an adjacent-zip exception of 18 plus 2 within 5 miles.
+            Twenty zips were active and 82 people were waiting.
+          </p>
+          <p>
+            <strong>Retention failed for a reason no interface change would
+            fix.</strong> People did not come back, because a drill is not a
+            daily or weekly need. Concentration alone did not rescue it: 95126,
+            the one dense neighborhood, is where those 60 signups were, and
+            listing was rare there.
+          </p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="s-designed">
+        <h2 id="s-designed">What I designed</h2>
+        <div class="doc">
+          <div class="designed-item">
+            <p>
+              DEC-003 in PROJECT-MEMORY.json is the decision that matters for
+              growth: rollout became open signup plus address and radius
+              matching, and ZIP gating and the captain program were dropped.
+            </p>
+          </div>
+          <div class="designed-item">
+            <p>
+              Wanted posts let demand appear before supply. A neighbor posts
+              what they need, any neighbor can hit I can help, which notifies
+              the poster
+              <span class="receipt">(migration 20260712080000_m8_trust_safety.sql)</span>.
+            </p>
+          </div>
+          <div class="designed-item">
+            <p>
+              Photo-first listing: /listings/new opens with one button, Add a
+              photo to get started, creating a draft and jumping to AI autofill.
+              The manual form stays behind a toggle
+              <span class="receipt">(TASKS.md M12)</span>.
+            </p>
+          </div>
+          <div class="designed-item">
+            <p>
+              Points come only from completed exchanges, 25 for a lend and 10
+              for a borrow, clearing 24 hours later
+              <span class="receipt">(migration 20260712070000_m7_gamification.sql)</span>.
+              Precise address stays private, contact details hidden until
+              approval.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section honest" aria-labelledby="s-change">
+        <h2 id="s-change">What I'd change</h2>
+        <div class="doc">
+          <p>
+            The rebuild fixes the activation and supply problems I could name.
+            It does not fix frequency, and I should not dress it up as if it
+            does. The app at neighborhoodshare.app still asks people to borrow
+            a drill.
+          </p>
+          <p>
+            I would pick one neighborhood and stay there: seed one radius with
+            roughly 30 to 50 people recruited the way I recruited in 95126, and
+            resist channels outside it.
+          </p>
+          <p>
+            I would instrument before the first signup. The relaunch epic
+            (issue #3) defines the success measures, and I have measured none.
+            The legacy beta ran PostHog and Plausible; the rebuild has no
+            analytics dependency.
+          </p>
+          <p>
+            I would finish the referral path (issue #11) first, because density
+            from existing members does not depend on behavioral frequency. My
+            earlier write-up said tool sharing belongs inside a broader
+            community product. I did not take that route, and I would rather say
+            so than let a scope change I never made argue for me.
+          </p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="s-growth">
+        <h2 id="s-growth">Growth read</h2>
+        <div class="doc">
+          <p>
+            The legacy beta is activation without retention, caused by
+            behavioral frequency rather than product quality. Signups were
+            cheap, listing was rare, and 82 people sat behind a gate requiring
+            density nobody had.
+          </p>
+          <p>
+            The metric that matters is listings and completed exchanges per
+            radius per unit of time, not signups.
+          </p>
+          <p>
+            The rebuild bets that activation and supply can be fixed and made
+            visible. That bet is untested: no founding neighborhood has been
+            recruited, the funnel is uninstrumented, and the referral lever is
+            unshipped. Read this as a diagnosis I trust and a second version I
+            have not proven.
+          </p>
+        </div>
+      </section>
+
+      <!-- Sources: collapsed appendix -->
+      <details class="sources">
+        <summary>Sources (5)</summary>
+        <ol>
+          <li>
+            <span>Signup totals of 170, 20 active zips, 82 interested awaiting
+            activation, 75 to 80 tools listed, about 5 added by other users,
+            about 6 percent listing rate of 95 active users:
+            content-drafts/neighborhoodshare-technical-doc.md (Platform
+            Results, Market Validation Results)</span>
+          </li>
+          <li>
+            <span>Borrowing frequency of roughly every six months, tool sharing
+            as a feature rather than a standalone product, and the assessment
+            that the product was not adopted:
+            content-drafts/neighborhoodshare-technical-doc.md (Root Cause, Key
+            Validation Learnings, Honest Assessment)</span>
+          </li>
+          <li>
+            <span>Rebuild scope decisions, open signup plus radius matching,
+            dropping ZIP gating and captains: Dev/NeighborhoodShare/PRD.md
+            section 1 and PROJECT-MEMORY.json DEC-003 (2026-07-11)</span>
+          </li>
+          <li>
+            <span>ZIP activation criteria of 20 or more users plus a captain,
+            adjacent-zip exception of 18 plus 2 within 5 miles, and 82 users
+            waiting: content-drafts/neighborhoodshare-technical-doc.md (Beta
+            Management, Zip Code Clustering Logic) and
+            NeighborShare/server/routes/beta-rollout.ts</span>
+          </li>
+          <li>
+            <span>Legacy analytics stack of PostHog and Plausible:
+            content-drafts/neighborhoodshare-technical-doc.md (Data Collection
+            Minimization)</span>
+          </li>
+        </ol>
+      </details>
+
+      <!-- The other two case studies -->
+      <nav class="case-nav" aria-label="Case studies">
+        <ul>
+          <li>
+            <span>
+              <span class="here">case study, tool-sharing platform</span>
+              <span class="title">NeighborhoodShare</span>
+            </span>
+            <span class="mark">this page</span>
+          </li>
+          <li class="fwd">
+            <span>
+              <span class="here">case study, distills.app</span>
+              <span class="title">Distills</span>
+            </span>
+            <span class="mark">turning a knowledge product into a returning habit</span>
+          </li>
+          <li class="fwd">
+            <span>
+              <span class="here">case study, agent system</span>
+              <span class="title">ADD-Friendly Agent</span>
+            </span>
+            <span class="mark">29 consecutive runs, one user</span>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Contact band -->
+      <section class="contact-band">
+        <div>
+          <h2>Working on something like this?</h2>
+          <p class="note">Velocity Partners handles exactly this. The case studies are the reference; email starts the conversation.</p>
+        </div>
+        <div>
+          <a href="/contact" class="btn">Start a conversation</a>
+          <a href="mailto:mike@jones-co.us" class="btn btn-ghost">Email Mike</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <a href="/" class="brand">Mike Jones<span class="dot" aria-hidden="true">.</span></a>
+          <p class="tagline">I help people and organizations operate at the intersection of AI, autonomy, and resilience.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="/writing">Writing</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/resume">Résumé</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Ventures">
+          <ul>
+            <li><a href="https://resilient-tomorrow.com">Resilient Tomorrow</a></li>
+            <li><a href="https://distills.app">Distills</a></li>
+            <li><a href="mailto:mike@jones-co.us">mike@jones-co.us</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="legal">
+        <span>© 2026 Jones Collaboration Company, LLC</span>
+        <span>San Jose, CA — serving everywhere</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

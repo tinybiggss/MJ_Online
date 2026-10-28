@@ -1,0 +1,126 @@
+---
+import FieldLayout from "../../layouts/FieldLayout.astro";
+import { publishedCases } from "../../lib/case-studies";
+import { parseCaseBody, renderSourceLine } from "../../lib/case-format";
+import { identity } from "../../lib/content";
+import "../../styles/work.css";
+
+export async function getStaticPaths() {
+  const cases = await publishedCases();
+  return cases.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+if (data.slug !== entry.id) {
+  throw new Error(`case ${entry.id} frontmatter slug is "${data.slug}": slugs and filenames must match`);
+}
+// The frozen prose carries the canonical title; frontmatter must agree.
+const body = parseCaseBody(entry.body);
+if (body.title !== data.title) {
+  throw new Error(`case ${entry.id}: frontmatter title and the frozen H1 disagree`);
+}
+const cases = await publishedCases();
+---
+
+<FieldLayout
+  title={`${data.short} case study: Mike Jones`}
+  description={`Case study: ${data.rowTitle}. The diagnosis, the shipped decisions, and what remains unproven, written from the receipts.`}
+  active="/work"
+  dataTheme="light"
+>
+  <div>
+    <div class="wrap article-head">
+      <nav class="crumbs mono" aria-label="Where you are">
+        <a href="/work">Work</a>
+        <span aria-hidden="true">/</span>
+        <span>case study</span>
+        <span aria-hidden="true">/</span>
+        <span>{data.short}</span>
+      </nav>
+      <h1 class="article-title reveal">{body.title}</h1>
+
+      <p class="ledger reveal reveal-2">
+        {data.ledger.map((item) => <span>{item}</span>)}
+      </p>
+
+      <p class="position-line reveal reveal-3">
+        {data.position}
+      </p>
+
+      {data.plate && (
+        <figure class="case-figure">
+          <div class="plate">
+            <img src={data.plate.src} alt={data.plate.alt} loading="lazy" />
+          </div>
+          <figcaption>{data.plate.caption}</figcaption>
+        </figure>
+      )}
+    </div>
+
+    <!-- The reading spine: the five frozen sections -->
+    <article class="wrap">
+      {body.sections.map((section, i) => (
+        <section class="case-section" class:list={{ honest: section.honest }} aria-labelledby={`s-${i}`}>
+          <h2 id={`s-${i}`}>{section.heading}</h2>
+          <div class="doc">
+            {section.designed
+              ? section.paragraphs.map((paragraph) => (
+                  <div class="designed-item">
+                    <p set:html={paragraph} />
+                  </div>
+                ))
+              : section.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
+          </div>
+        </section>
+      ))}
+
+      <!-- Sources: collapsed appendix, native element, no JS -->
+      <details class="sources">
+        <summary>Sources ({body.sources.length})</summary>
+        <ol>
+          {body.sources.map((source) => <li><span set:html={renderSourceLine(source)} /></li>)}
+        </ol>
+      </details>
+
+      <!-- The other case studies -->
+      <nav class="case-nav" aria-label="Case studies">
+        <ul>
+          {cases.map((c) => (
+            <li class:list={{ fwd: c.id !== data.slug }}>
+              {c.id === data.slug ? (
+                <span>
+                  <span class="here">case study, {c.data.tag}</span>
+                  <span class="title">{c.data.short}</span>
+                </span>
+              ) : (
+                <a href={`/work/${c.id}`}>
+                  <span>
+                    <span class="here">case study, {c.data.tag}</span>
+                    <span class="title">{c.data.short}</span>
+                  </span>
+                </a>
+              )}
+              <span class="mark">{c.id === data.slug ? "this page" : c.data.navMark}</span>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- Contact band -->
+      <section class="contact-band">
+        <div>
+          <h2>Working on something like this?</h2>
+          <p class="note">Velocity Partners handles exactly this. The case studies are the reference; email starts the conversation.</p>
+        </div>
+        <div>
+          <a href="/contact" class="btn">Start a conversation</a>
+          <a href={`mailto:${identity.email}`} class="btn btn-ghost">Email Mike</a>
+        </div>
+      </section>
+    </article>
+  </div>
+</FieldLayout>

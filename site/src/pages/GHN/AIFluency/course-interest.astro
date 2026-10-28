@@ -1,5 +1,6 @@
 ---
 import { COURSE_GROUPS, MAX_PICKS, ALL_TOPICS } from "../../../data/course-catalog";
+import "../../../styles/tokens.css";
 const topicCount = ALL_TOPICS.length;
 ---
 <!DOCTYPE html>
@@ -11,8 +12,6 @@ const topicCount = ALL_TOPICS.length;
 <meta name="description" content="Pick up to 10 courses you'd actually take, and rate how much you want each one. Five minutes — it decides what the AI Fluency Lab builds next.">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://mikejones.online/GHN/AIFluency/course-interest/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --teal-900:#0D2530; --teal-800:#123640; --teal-700:#1B4652; --teal-600:#296270;
@@ -25,16 +24,16 @@ const topicCount = ALL_TOPICS.length;
   html{scroll-behavior:smooth;}
   body{
     margin:0;background:var(--paper-0);color:var(--ink-900);
-    font-family:'Inter',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    font-family:'Archivo',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3{font-family:'Lora',serif;font-weight:500;letter-spacing:-0.01em;margin:0;}
+  h1,h2,h3{font-family:'Source Serif 4',serif;font-weight:500;letter-spacing:-0.01em;margin:0;}
   em{font-style:italic;color:var(--orange-500);font-weight:500;}
-  .mono{font-family:'JetBrains Mono',monospace;}
+  .mono{font-family:'Fragment Mono',monospace;}
   a{color:inherit;}
   .wrap{max-width:940px;margin:0 auto;padding:0 28px;}
 
   .eyebrow{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:.12em;
+    font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;letter-spacing:.12em;
     text-transform:uppercase;display:inline-flex;align-items:center;gap:9px;
   }
   .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange-500);display:inline-block;}
@@ -71,11 +70,11 @@ const topicCount = ALL_TOPICS.length;
   .pip.on{background:var(--orange-500);}
   .tracker .label{font-size:15px;color:var(--ink-700);font-weight:500;}
   .tracker .label strong{color:var(--orange-600);}
-  .tracker .full{color:var(--orange-600);font-size:13.5px;font-style:italic;font-family:'Lora',serif;}
+  .tracker .full{color:var(--orange-600);font-size:13.5px;font-style:italic;font-family:'Source Serif 4',serif;}
   .btn{
     display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;
     font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;border:1px solid transparent;
-    font-family:'Inter',sans-serif;transition:background .15s ease,opacity .15s ease,transform .15s ease;
+    font-family:'Archivo',sans-serif;transition:background .15s ease,opacity .15s ease,transform .15s ease;
   }
   .btn-primary{background:var(--orange-500);color:#fff;box-shadow:0 10px 26px -10px rgba(232,134,60,.55);}
   .btn-primary:hover:not(:disabled){background:var(--orange-600);transform:translateY(-1px);}
@@ -85,7 +84,7 @@ const topicCount = ALL_TOPICS.length;
   main{padding:44px 0 0;}
   .group{margin-bottom:44px;}
   .group h2{
-    font-size:15px;font-family:'Inter',sans-serif;font-weight:600;text-transform:uppercase;
+    font-size:15px;font-family:'Archivo',sans-serif;font-weight:600;text-transform:uppercase;
     letter-spacing:.09em;color:var(--teal-700);margin-bottom:16px;
     padding-bottom:10px;border-bottom:1px solid var(--line-100);
   }
@@ -114,12 +113,12 @@ const topicCount = ALL_TOPICS.length;
   .scale{display:flex;gap:6px;}
   .scale button{
     width:42px;height:38px;border-radius:8px;border:1px solid var(--line-100);background:var(--paper-0);
-    font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--slate-500);
+    font-family:'Fragment Mono',monospace;font-size:15px;font-weight:600;color:var(--slate-500);
     cursor:pointer;transition:all .13s ease;
   }
   .scale button:hover{border-color:var(--orange-500);color:var(--orange-600);}
   .scale button[aria-pressed="true"]{background:var(--orange-500);border-color:var(--orange-500);color:#fff;}
-  .scale-hint{font-size:13px;color:var(--slate-400);font-style:italic;font-family:'Lora',serif;}
+  .scale-hint{font-size:13px;color:var(--slate-400);font-style:italic;font-family:'Source Serif 4',serif;}
 
   /* ---------- OTHER + ABOUT YOU ---------- */
   .panel{
@@ -131,7 +130,7 @@ const topicCount = ALL_TOPICS.length;
   label.fl{display:block;font-size:14px;font-weight:600;color:var(--ink-700);margin-bottom:6px;}
   input[type=text],input[type=email],textarea{
     width:100%;padding:12px 14px;border:1px solid var(--line-100);border-radius:9px;
-    font-family:'Inter',sans-serif;font-size:16px;color:var(--ink-900);background:var(--paper-0);
+    font-family:'Archivo',sans-serif;font-size:16px;color:var(--ink-900);background:var(--paper-0);
   }
   input:focus,textarea:focus{outline:2px solid var(--orange-400);outline-offset:1px;border-color:var(--orange-500);}
   textarea{min-height:88px;resize:vertical;line-height:1.55;}

@@ -7,7 +7,7 @@
 window.RAG_CHATBOT_CONFIG = {
   apiEndpoint: 'https://mj-chatbot-backend.mejones73.workers.dev/chat',
   name: "Mike Jones",
-  primaryColor: "#f59433",
+  primaryColor: "#b23317",
   bubbleLabel: "Ask my AI",
   greeting: "Hi! I'm an AI assistant trained on Mike Jones's work and experience. Ask me about his projects, AI implementation expertise, or how he can help.",
   placeholder: "Ask about Mike's work…",
@@ -19,6 +19,20 @@ window.RAG_CHATBOT_CONFIG = {
   ],
 };
 // ============================================================
+
+// Follow the page's accent tokens so the widget can never carry a stale
+// brand colour (it shipped with the old signal amber and a blue hover).
+(() => {
+  const read = (name, fallback) => {
+    try {
+      const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      return v || fallback;
+    } catch (e) { return fallback; }
+  };
+  const c = window.RAG_CHATBOT_CONFIG;
+  c.primaryColor = read('--accent', c.primaryColor);
+  c.secondaryColor = read('--accent-press', c.secondaryColor);
+})();
 
 /**
  * RAG Chatbot Widget
@@ -53,7 +67,7 @@ window.RAG_CHATBOT_CONFIG = {
     name: 'AI Assistant',
     position: 'bottom-right',
     primaryColor: '#2563eb',
-    secondaryColor: '#1e40af',
+    secondaryColor: '#96270f',
     bubbleSize: 60,
     spacing: 20,
     bottomSpacing: 20,

@@ -1,7 +1,7 @@
 ---
 id: kb-company-jonesco
 title: Jones Collaboration Company
-updated: 2026-10-06
+updated: 2026-10-22
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -13,7 +13,7 @@ The parent entity. California LLC (SF). Mike Jones is founder. Everything below 
 
 ### What It Contains
 
-Entity Type One line Page Velocity Partners Consulting "Make your people dangerous with AI" — funds the runway velocity-partners Resilient Tomorrow Media/platform Solarpunk publication + emerging community platform resilient-tomorrow Distills Product Career docs → AI voice interview → recruiter chatbot distills MJ_Online Portfolio site mikejones.online, credibility surface — OfflineAI Builder project Local/offline AI tooling experiments —
+Entity Type One line Page Velocity Partners Consulting "Make your people dangerous with AI" — funds the runway velocity-partners Resilient Tomorrow Media/platform Solarpunk publication + emerging community platform resilient-tomorrow Distills Product Career docs → AI voice interview → recruiter chatbot distills NeighborhoodShare Product Quiet local notice board, live at neighborhoodshare.app; no monetization by design neighborhoodshare Agent-Feed-System Product Agent-native feed layer; v0 ships as a feed section in the Hermes morning brief agent-feed-system MJ_Online Portfolio site mikejones.online, credibility surface — OfflineAI Builder project Local/offline AI tooling experiments —
 
 ### Founder Credentials
 
@@ -21,7 +21,7 @@ Credential Detail Page Claude Certified Architect – Foundations (CCAR-F) Anthr
 
 ### How the Parts Relate
 
-VP is the bridge (per velocity-partners ICP): funds 12–24 months of runway while leverage assets (RT platform, Distills, curriculum) get built. RT is the legacy play (north-star): "known for Resilient Tomorrow." Consulting methodology: AAPD (gaming/media studios 50–1,500 people), evolving toward broader AI implementation. Agentic web is the cross-company bet (agentic-web): VP site offering (decided 2026-10-02, cards queued), Distills' protocol-native positioning, RT's highest-strength content signal.
+VP is the bridge (per velocity-partners ICP): funds 12–24 months of runway while leverage assets (RT platform, Distills, curriculum) get built. RT is the legacy play (north-star): "known for Resilient Tomorrow." Consulting methodology: AAPD (gaming/media studios 50–1,500 people) is RETIRED — DEC-008, 2026-08-21 (see velocity-partners history 2026-10-15); successor shapes: the agentic-web offering and bounded curriculum/assessment work. Agentic web is the cross-company bet (agentic-web): VP site offering (decided 2026-10-02, cards queued), Distills' protocol-native positioning, RT's highest-strength content signal.
 
 ### Open Decisions
 

@@ -1,7 +1,7 @@
 ---
 id: kb-ai-mike-career-history
 title: Mike Jones — Career History (public facts)
-updated: 2026-10-09
+updated: 2026-10-20
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -19,7 +19,7 @@ Kinoo — VP of Production & Product (2020–2022): first hire; built the PMO fr
 
 ### Current ventures
 
-Velocity Partners — consulting (product + positioning for operators); see velocity-partners. Resilient Tomorrow — publishing: 2,200+ readers, top essay 900+ likes; see resilient-tomorrow. Distills — open-source career-chatbot toolkit; see distills. Teaching: Anthropic AI-fluency course cohorts for a corporate education client; certified ccar-f-certification (issued 2026-08-28, public Credly badge). Co-founded 8 Circuit Studios and Insight Float (earlier ventures dating to 2016).
+Velocity Partners — consulting (product + positioning for operators); public resume title Fractional VP of Product & CAIO (Mike-confirmed 2026-10-16, deployed on https://mikejones.online/Mike-Jones-Resume.pdf + /resume/; VP start 01/2020 concurrent with Kinoo confirmed); see velocity-partners. Resilient Tomorrow — publishing: 2,200+ readers, top essay 900+ likes; see resilient-tomorrow. Distills — open-source career-chatbot toolkit; see distills. Teaching: Anthropic AI-fluency course cohorts for a corporate education client; certified ccar-f-certification (issued 2026-08-28, public Credly badge). Co-founded 8 Circuit Studios and Insight Float (earlier ventures dating to 2016).
 
 ### Credentials and verified differentiators
 

@@ -1,0 +1,2543 @@
+{
+  "meta": {
+    "harness": "run_eval.mjs",
+    "generated_at": "2026-10-22T09:20:21.932Z",
+    "engine_root": "/Users/michaeljones/.hermes/cache/scratch/wt-rag-engine-t_ba6fdfc1/mj-chatbot-backend",
+    "engine_root_note": "staged worktree of t_ba6fdfc1 until merge; set RAG_ENGINE_ROOT to the repo after the engine lands (swap point documented in run_eval.mjs header)",
+    "corpus_after": {
+      "path": "/Users/michaeljones/.hermes/cache/scratch/wt-rag-engine-t_ba6fdfc1/mj-chatbot-backend/staging/merged-corpus.jsonl",
+      "sha": "88ddfedd1d86a21abdc9c2c5a7512e59032eddaa064d65532a74ed78469807a6",
+      "entries": 73
+    },
+    "vector_index": {
+      "path": "/Users/michaeljones/.hermes/cache/scratch/wt-rag-engine-t_ba6fdfc1/mj-chatbot-backend/tests/rag-eval/vectors-local/vectors-nomic-embed-text.jsonl",
+      "corpus_sha": "88ddfedd1d86a21abdc9c2c5a7512e59032eddaa064d65532a74ed78469807a6",
+      "model": "nomic-embed-text:latest",
+      "model_digest": "sha256-970aa74c0a90ef7482477cf803618e776e173c007bf957f635f1015bfcfef0e6",
+      "count": 73,
+      "rebuilt_this_run": false
+    },
+    "corpus_before": {
+      "path": "/Users/michaeljones/.hermes/cache/scratch/wt-rag-engine-t_ba6fdfc1/mj-chatbot-backend/knowledge.jsonl",
+      "sha_live_repo": "604b6ad8b10d333d34a68fe17535e5a7ec4aca9e5c35763e78ba8b2f0c322385",
+      "note": "legacy approved corpus — live repo knowledge.jsonl untouched by this run (custody boundary)"
+    },
+    "boundaries": [
+      "no deploy, no push, no Cloudflare mutation, no writes to live knowledge.jsonl / src/knowledge-data.js",
+      "launchd plist delivered SEPARATELY, created DISABLED — nightly loop armed but disabled pending Mike"
+    ],
+    "refresh": {
+      "assembly_ran": true,
+      "assembly_exit": 0,
+      "gate_events": 1,
+      "staging_vs_live_diff": {
+        "staged_count": 73,
+        "live_count": 202,
+        "added_count": 73,
+        "removed_count": 202,
+        "changed_count": 0,
+        "added_sample": [
+          "kb-ai-how-mike-works-1",
+          "kb-ai-how-mike-works-2",
+          "kb-ai-how-mike-works-3",
+          "kb-ai-mike-career-history-1",
+          "kb-ai-mike-career-history-2",
+          "kb-ai-mike-career-history-3",
+          "kb-ai-mike-career-history-4",
+          "kb-ai-mike-career-history-5"
+        ],
+        "removed_sample": [
+          "rag-2026-01-27-001",
+          "rag-2026-01-27-002",
+          "rag-2026-01-27-003",
+          "rag-2026-01-27-004",
+          "rag-2026-01-27-005",
+          "rag-2026-01-27-006",
+          "rag-2026-01-27-007",
+          "rag-2026-01-27-008"
+        ],
+        "changed_sample": [],
+        "empty": false
+      },
+      "vector_index_rebuilt": false
+    },
+    "questions": {
+      "merged": 42,
+      "public_rows": 35,
+      "private_rows": 7,
+      "custody": "private-row identities withheld from this repo artifact (counts/scores only) — full rows evaluate from the vault copy merged at eval time"
+    },
+    "deterministic_block_sha256": "399465f87b4327e992db5f40150af4d67cc4140be59a29bdae9987cbff42810c",
+    "byte_identity_law": "two runs of this harness must emit the same deterministic_block_sha256; a mismatch is a harness bug — the nightly log line carries the sha for the verification pair",
+    "judge_prompt_version": "harness-context-judge-v1",
+    "weak_list_alias": "the brief wrote \"weakeast:\" — the canonical key is \"weakest\" (identical array mirrored under \"weakeast\" for convenience)"
+  },
+  "retrieval": {
+    "regime_definition": {
+      "after": "staged merged corpus (73 entries, sha 88ddfedd1d86) + local nomic-embed vector index — hybrid; the engine Mike would ship after the swap",
+      "before": "legacy knowledge.jsonl (604b6ad8b10d) through the frozen keyword scorer, vector leg off — today's prod behavior (src/rag-retrieval.js verbatim)",
+      "note": "hit@3/hit@5 over the SERVED top-k window; MRR over the full fused ordering (run-scorecard law); binary NDCG@5 over the served window; absence rows (empty expected_source_pages) excluded from hit/MRR/NDCG and scored as honesty signals instead"
+    },
+    "overall_and_by_category": {
+      "after": {
+        "overall": {
+          "n_scored": 31,
+          "hit3_rate": 0.84,
+          "hit5_rate": 0.9,
+          "mrr": 0.78,
+          "ndcg5_mean": 0.471
+        },
+        "by_category": {
+          "career": {
+            "n_scored": 14,
+            "hit3_rate": 0.93,
+            "hit5_rate": 0.93,
+            "mrr": 0.862,
+            "ndcg5_mean": 0.484
+          },
+          "credentials": {
+            "n_scored": 2,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 0.75,
+            "ndcg5_mean": 0.522
+          },
+          "projects": {
+            "n_scored": 0,
+            "hit3_rate": null,
+            "hit5_rate": null,
+            "mrr": null,
+            "ndcg5_mean": null
+          },
+          "product": {
+            "n_scored": 2,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 0.75,
+            "ndcg5_mean": 0.595
+          },
+          "offerings": {
+            "n_scored": 2,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 0.75,
+            "ndcg5_mean": 0.512
+          },
+          "technical": {
+            "n_scored": 0,
+            "hit3_rate": null,
+            "hit5_rate": null,
+            "mrr": null,
+            "ndcg5_mean": null
+          },
+          "teaching": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.64
+          },
+          "work-style": {
+            "n_scored": 2,
+            "hit3_rate": 0,
+            "hit5_rate": 1,
+            "mrr": 0.225,
+            "ndcg5_mean": 0.167
+          },
+          "strategy": {
+            "n_scored": 3,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.731
+          },
+          "publishing": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.509
+          },
+          "absence-space": {
+            "n_scored": 0,
+            "hit3_rate": null,
+            "hit5_rate": null,
+            "mrr": null,
+            "ndcg5_mean": null
+          },
+          "private-space": {
+            "n_scored": 4,
+            "hit3_rate": 0.5,
+            "hit5_rate": 0.5,
+            "mrr": 0.539,
+            "ndcg5_mean": 0.223
+          }
+        }
+      },
+      "before": {
+        "overall": {
+          "n_scored": 31,
+          "hit3_rate": 0.52,
+          "hit5_rate": 0.65,
+          "mrr": 0.514,
+          "ndcg5_mean": 0.322
+        },
+        "by_category": {
+          "career": {
+            "n_scored": 17,
+            "hit3_rate": 0.35,
+            "hit5_rate": 0.53,
+            "mrr": 0.329,
+            "ndcg5_mean": 0.179
+          },
+          "credentials": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.559
+          },
+          "projects": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.485
+          },
+          "product": {
+            "n_scored": 2,
+            "hit3_rate": 0.5,
+            "hit5_rate": 1,
+            "mrr": 0.6,
+            "ndcg5_mean": 0.694
+          },
+          "offerings": {
+            "n_scored": 0,
+            "hit3_rate": null,
+            "hit5_rate": null,
+            "mrr": null,
+            "ndcg5_mean": null
+          },
+          "technical": {
+            "n_scored": 2,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.478
+          },
+          "teaching": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 1
+          },
+          "work-style": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.613
+          },
+          "strategy": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.469
+          },
+          "publishing": {
+            "n_scored": 1,
+            "hit3_rate": 1,
+            "hit5_rate": 1,
+            "mrr": 1,
+            "ndcg5_mean": 0.485
+          },
+          "absence-space": {
+            "n_scored": 0,
+            "hit3_rate": null,
+            "hit5_rate": null,
+            "mrr": null,
+            "ndcg5_mean": null
+          },
+          "private-space": {
+            "n_scored": 4,
+            "hit3_rate": 0.25,
+            "hit5_rate": 0.25,
+            "mrr": 0.286,
+            "ndcg5_mean": 0.25
+          }
+        }
+      }
+    },
+    "comparable_to_engine_scorecard": {
+      "after": {
+        "all": {
+          "n": 42,
+          "hit5": 28,
+          "hit5_rate": 0.67,
+          "mrr": 0.576
+        },
+        "by_type": {
+          "narrative-synthesis": {
+            "n": 8,
+            "hit5": 6,
+            "hit5_rate": 0.75,
+            "mrr": 0.556,
+            "exclusion_fail": 0
+          },
+          "fact-recall": {
+            "n": 15,
+            "hit5": 12,
+            "hit5_rate": 0.8,
+            "mrr": 0.7,
+            "exclusion_fail": 0
+          },
+          "comparison-hybrid": {
+            "n": 5,
+            "hit5": 4,
+            "hit5_rate": 0.8,
+            "mrr": 0.714,
+            "exclusion_fail": 0
+          },
+          "temporal": {
+            "n": 5,
+            "hit5": 4,
+            "hit5_rate": 0.8,
+            "mrr": 0.7,
+            "exclusion_fail": 0
+          },
+          "negative-space": {
+            "n": 9,
+            "hit5": 2,
+            "hit5_rate": 0.22,
+            "mrr": 0.239,
+            "exclusion_fail": 0
+          }
+        },
+        "note": "run-scorecard.mjs convention (absence rows counted as misses) — reconciles with the engine card deterministic scorecard"
+      },
+      "before": {
+        "all": {
+          "n": 42,
+          "hit5": 20,
+          "hit5_rate": 0.48,
+          "mrr": 0.38
+        },
+        "by_type": {
+          "narrative-synthesis": {
+            "n": 8,
+            "hit5": 4,
+            "hit5_rate": 0.5,
+            "mrr": 0.4,
+            "exclusion_fail": 0
+          },
+          "fact-recall": {
+            "n": 15,
+            "hit5": 11,
+            "hit5_rate": 0.73,
+            "mrr": 0.56,
+            "exclusion_fail": 0
+          },
+          "comparison-hybrid": {
+            "n": 5,
+            "hit5": 3,
+            "hit5_rate": 0.6,
+            "mrr": 0.44,
+            "exclusion_fail": 0
+          },
+          "temporal": {
+            "n": 5,
+            "hit5": 1,
+            "hit5_rate": 0.2,
+            "mrr": 0.2,
+            "exclusion_fail": 0
+          },
+          "negative-space": {
+            "n": 9,
+            "hit5": 1,
+            "hit5_rate": 0.11,
+            "mrr": 0.127,
+            "exclusion_fail": 2
+          }
+        },
+        "note": "run-scorecard.mjs convention (absence rows counted as misses) — reconciles with the engine card deterministic scorecard"
+      }
+    },
+    "absence_rows": {
+      "note": "empty expected_source_pages — correct outcome is no confident source material (over-retrieval = either leg signals confidence)",
+      "n": 3,
+      "counted_public": 2,
+      "counted_private": 1,
+      "over_signal_rate_after": 1,
+      "over_signal_rate_before": 1
+    },
+    "exclusions": {
+      "law": "must_not_source_pages present in served top-5 = exclusion failure (deterministic swap-blocker (a))",
+      "after_failures_public": [],
+      "after_failures_public_count": 0,
+      "after_private_failures": 0,
+      "before_failures_public": [],
+      "before_failures_private": 2
+    },
+    "regressions": {
+      "law": "BEFORE-regime hit on active refs that misses in AFTER = retrieval regression (swap-blocking class (b))",
+      "rows": [
+        {
+          "id": "q027-vs-pmo-consultants",
+          "question_type": "comparison-hybrid",
+          "active_expected_ids": 7
+        }
+      ]
+    },
+    "refusal_gate": {
+      "law": "fires only when BOTH legs fail (keyword top-3 no content match AND best cosine < 0.5 floor); AFTER regime only — BEFORE has no gate",
+      "negative_rows_fire_after": 0,
+      "negative_rows_total_after": 9,
+      "false_positives_public": []
+    },
+    "hard_fail_refs": [],
+    "per_row_public": [
+      {
+        "id": "q001-pride",
+        "question_type": "narrative-synthesis",
+        "category": "career",
+        "expected_behavior": "mark-inference",
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 1,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.509,
+            "served_ids": [
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-mike-career-history-6",
+              "kb-pipelines-publication-layer-5",
+              "kb-pipelines-generator-registry-2"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6106
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 1,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-27-020",
+              "rag-2026-01-29-013",
+              "rag-2026-01-29-017",
+              "rag-2026-01-29-023",
+              "rag-2026-01-29-002"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q002-years-experience",
+        "question_type": "fact-recall",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 2,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.214,
+            "served_ids": [
+              "sc-fact-years-gaming-ent-media",
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-how-mike-works-1",
+              "sc-fact-years-software-dev"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.8081
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 2,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": true,
+            "mrr_fused": 0.2,
+            "first_hit_rank": 5,
+            "ndcg5": 0.237,
+            "served_ids": [
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-001",
+              "rag-2026-01-30-100",
+              "rag-2026-02-13-144",
+              "rag-2026-06-26-001"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q003-microsoft-role",
+        "question_type": "fact-recall",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 3,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.553,
+            "served_ids": [
+              "kb-ai-mike-career-history-2",
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-how-mike-works-1",
+              "kb-pipelines-publication-layer-4"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6732
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 3,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-29-001",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-011",
+              "rag-2026-01-27-020"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q004-vince-patent",
+        "question_type": "fact-recall",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 3,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 0.5,
+            "first_hit_rank": 2,
+            "ndcg5": 0.53,
+            "served_ids": [
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-mike-career-history-2",
+              "kb-ai-mike-career-history-1",
+              "kb-ai-mike-career-history-5",
+              "kb-pipelines-publication-layer-4"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6347
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 3,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.469,
+            "served_ids": [
+              "rag-2026-01-29-001",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-011",
+              "rag-2026-01-27-020"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q005-ccar-f-cert",
+        "question_type": "fact-recall",
+        "category": "credentials",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 15,
+          "waiver_refs": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.684,
+            "served_ids": [
+              "kb-concepts-ccar-f-certification-1",
+              "kb-ai-mike-career-history-4",
+              "kb-ai-how-mike-works-1",
+              "kb-pipelines-publication-layer-7",
+              "kb-concepts-ccar-f-certification-3"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7666
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q006-kinoo-leadership",
+        "question_type": "fact-recall",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 5,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.723,
+            "served_ids": [
+              "kb-ai-mike-career-history-3",
+              "kb-ai-mike-career-history-4",
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-pipelines-publication-layer-4"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.615
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 5,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": true,
+            "mrr_fused": 0.2,
+            "first_hit_rank": 5,
+            "ndcg5": 0.131,
+            "served_ids": [
+              "rag-2026-01-29-009",
+              "rag-2026-01-29-013",
+              "rag-2026-01-29-004",
+              "rag-2026-01-30-080",
+              "rag-2026-01-29-003"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q007-kabam-livescribe",
+        "question_type": "fact-recall",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 6,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.509,
+            "served_ids": [
+              "kb-ai-mike-career-history-3",
+              "kb-ai-how-mike-works-1",
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-business-distills-8"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6022
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 6,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 0.5,
+            "first_hit_rank": 2,
+            "ndcg5": 0.214,
+            "served_ids": [
+              "rag-2026-01-27-004",
+              "rag-2026-02-13-143",
+              "rag-2026-01-29-013",
+              "rag-2026-01-29-017",
+              "rag-2026-01-30-080"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q008-verizon",
+        "question_type": "fact-recall",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 4,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6201
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 4,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.39,
+            "served_ids": [
+              "rag-2026-01-29-002",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-011",
+              "rag-2026-01-27-020"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q009-early-ventures",
+        "question_type": "fact-recall",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 5,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.699,
+            "served_ids": [
+              "kb-ai-mike-career-history-4",
+              "kb-ai-mike-career-history-1",
+              "kb-concepts-ccar-f-certification-2",
+              "kb-ai-mike-career-history-2",
+              "kb-company-jonesco-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7063
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 5,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 0.5,
+            "first_hit_rank": 2,
+            "ndcg5": 0.214,
+            "served_ids": [
+              "rag-2026-01-27-010",
+              "rag-2026-01-29-006",
+              "rag-2026-01-29-009",
+              "rag-2026-02-06-128",
+              "rag-2026-02-04-120"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q010-neighborhoodshare",
+        "question_type": "fact-recall",
+        "category": "projects",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 6,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.5325
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 6,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.485,
+            "served_ids": [
+              "rag-2026-01-29-028",
+              "rag-2026-01-29-029",
+              "rag-2026-02-04-098",
+              "rag-2026-06-26-012",
+              "rag-2026-02-04-124"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q011-distills-product",
+        "question_type": "fact-recall",
+        "category": "product",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 8,
+          "waiver_refs": 1,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.83,
+            "served_ids": [
+              "kb-business-distills-1",
+              "kb-business-distills-6",
+              "kb-business-velocity-partners-5",
+              "kb-business-distills-4",
+              "kb-business-distills-3"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6433
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 1,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 1,
+            "served_ids": [
+              "rag-2026-06-26-006",
+              "rag-2026-06-26-011",
+              "rag-2026-01-27-001",
+              "rag-2026-01-27-002",
+              "rag-2026-01-27-003"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q012-distills-pricing",
+        "question_type": "fact-recall",
+        "category": "offerings",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 8,
+          "waiver_refs": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.64,
+            "served_ids": [
+              "kb-business-distills-8",
+              "kb-business-velocity-partners-3",
+              "kb-business-distills-6",
+              "kb-business-velocity-partners-5",
+              "kb-business-distills-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.5843
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q013-vp-offer",
+        "question_type": "fact-recall",
+        "category": "offerings",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 12,
+          "waiver_refs": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 0.5,
+            "first_hit_rank": 2,
+            "ndcg5": 0.384,
+            "served_ids": [
+              "kb-ai-mike-career-history-4",
+              "kb-business-velocity-partners-3",
+              "kb-business-velocity-partners-2",
+              "sc-fact-vp-practice-start",
+              "kb-ai-mike-career-history-6"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6748
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q014-local-ai-stack",
+        "question_type": "fact-recall",
+        "category": "technical",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 7,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.762
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 7,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.485,
+            "served_ids": [
+              "rag-2026-01-27-019",
+              "rag-2026-01-27-020",
+              "rag-2026-02-04-119",
+              "rag-2026-01-29-036",
+              "rag-2026-01-27-016"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q015-teaching",
+        "question_type": "fact-recall",
+        "category": "teaching",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 14,
+          "waiver_refs": 1,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.64,
+            "served_ids": [
+              "kb-ai-mike-career-history-1",
+              "kb-ai-how-mike-works-1",
+              "kb-ai-mike-career-history-4",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-mike-career-history-5"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6125
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 1,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 1,
+            "served_ids": [
+              "rag-2026-06-26-003",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-011",
+              "rag-2026-01-27-020"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q016-top-1pct-chatgpt",
+        "question_type": "fact-recall",
+        "category": "credentials",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 4,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 0.5,
+            "first_hit_rank": 2,
+            "ndcg5": 0.36,
+            "served_ids": [
+              "sc-fact-top-1pct-chatgpt",
+              "kb-ai-mike-career-history-5",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-mike-career-history-1",
+              "kb-ai-how-mike-works-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7862
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 4,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.559,
+            "served_ids": [
+              "rag-2026-02-06-127",
+              "rag-2026-02-06-128",
+              "rag-2026-01-29-021",
+              "rag-2026-01-29-022",
+              "rag-2026-01-29-036"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q017-distinguishes",
+        "question_type": "narrative-synthesis",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 9,
+          "waiver_refs": 3,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.786,
+            "served_ids": [
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-how-mike-works-1",
+              "kb-ai-mike-career-history-3",
+              "kb-ai-mike-career-history-4"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6356
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 3,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-29-009",
+              "rag-2026-01-27-011",
+              "rag-2026-01-27-010",
+              "rag-2026-01-29-013",
+              "rag-2026-01-29-014"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q018-a-story",
+        "question_type": "narrative-synthesis",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 7,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7016
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 7,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": true,
+            "mrr_fused": 0.2,
+            "first_hit_rank": 5,
+            "ndcg5": 0.131,
+            "served_ids": [
+              "rag-2026-01-27-020",
+              "rag-2026-01-29-013",
+              "rag-2026-01-29-017",
+              "rag-2026-02-13-112",
+              "rag-2026-01-29-001"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q019-how-he-works",
+        "question_type": "narrative-synthesis",
+        "category": "work-style",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 3,
+          "waiver_refs": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": true,
+            "mrr_fused": 0.25,
+            "first_hit_rank": 4,
+            "ndcg5": 0.202,
+            "served_ids": [
+              "kb-business-velocity-partners-5",
+              "kb-pipelines-task-system-2",
+              "kb-pipelines-publication-layer-7",
+              "kb-ai-how-mike-works-1",
+              "kb-business-velocity-partners-3"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6737
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q020-agentic-web",
+        "question_type": "narrative-synthesis",
+        "category": "strategy",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 21,
+          "waiver_refs": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.869,
+            "served_ids": [
+              "kb-concepts-agentic-web-1",
+              "kb-business-velocity-partners-4",
+              "kb-concepts-agentic-web-2",
+              "kb-concepts-agentic-web-6",
+              "kb-ai-how-mike-works-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7134
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q021-self-host-why",
+        "question_type": "narrative-synthesis",
+        "category": "technical",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 5,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.722
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 5,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.47,
+            "served_ids": [
+              "rag-2026-01-29-036",
+              "rag-2026-02-04-119",
+              "rag-2026-01-27-011",
+              "rag-2026-01-29-024",
+              "rag-2026-01-27-019"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q022-rt-identity",
+        "question_type": "narrative-synthesis",
+        "category": "publishing",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 6,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.509,
+            "served_ids": [
+              "kb-business-resilient-tomorrow-1",
+              "kb-concepts-agentic-web-6",
+              "kb-business-resilient-tomorrow-4",
+              "kb-pipelines-publication-layer-8",
+              "kb-pipelines-generator-registry-2"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.741
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 6,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.485,
+            "served_ids": [
+              "rag-2026-01-29-032",
+              "rag-2026-01-29-042",
+              "rag-2026-01-30-100",
+              "rag-2026-01-29-031",
+              "rag-2026-01-29-034"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q023-ideal-client",
+        "question_type": "narrative-synthesis",
+        "category": "work-style",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 7,
+          "waiver_refs": 2,
+          "metric": {
+            "hit3": false,
+            "hit5": true,
+            "mrr_fused": 0.2,
+            "first_hit_rank": 5,
+            "ndcg5": 0.131,
+            "served_ids": [
+              "kb-ai-how-mike-works-1",
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-mike-career-history-5",
+              "kb-business-velocity-partners-5"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6561
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 2,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.613,
+            "served_ids": [
+              "rag-2026-01-27-010",
+              "rag-2026-01-29-017",
+              "rag-2026-01-29-024",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-011"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q024-bigtech-path",
+        "question_type": "comparison-hybrid",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 2,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.339,
+            "served_ids": [
+              "kb-ai-mike-career-history-1",
+              "kb-ai-how-mike-works-1",
+              "kb-pipelines-publication-layer-4",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-pipelines-generator-registry-2"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6363
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 2,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-29-010",
+              "rag-2026-02-04-117",
+              "rag-2026-02-04-118",
+              "rag-2026-02-13-146",
+              "rag-2026-01-27-010"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q025-vp-vs-rt",
+        "question_type": "comparison-hybrid",
+        "category": "strategy",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 18,
+          "waiver_refs": 3,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.47,
+            "served_ids": [
+              "kb-business-velocity-partners-1",
+              "kb-ai-mike-career-history-4",
+              "kb-concepts-agentic-web-6",
+              "kb-concepts-agentic-web-2",
+              "kb-business-resilient-tomorrow-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7324
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 3,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.469,
+            "served_ids": [
+              "rag-2026-01-30-100",
+              "rag-2026-01-30-074",
+              "rag-2026-01-29-032",
+              "rag-2026-01-30-091",
+              "rag-2026-01-29-042"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q026-distills-vs-vp",
+        "question_type": "comparison-hybrid",
+        "category": "strategy",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 21,
+          "waiver_refs": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.854,
+            "served_ids": [
+              "kb-concepts-agentic-web-2",
+              "kb-concepts-agentic-web-6",
+              "kb-business-velocity-partners-4",
+              "kb-ai-mike-career-history-4",
+              "kb-business-velocity-partners-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7391
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q027-vs-pmo-consultants",
+        "question_type": "comparison-hybrid",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 7,
+          "waiver_refs": 4,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0.07142857142857142,
+            "first_hit_rank": 14,
+            "ndcg5": 0,
+            "served_ids": [
+              "kb-ai-how-mike-works-1",
+              "kb-ai-how-mike-works-3",
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-mike-career-history-4"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6498
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 4,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.637,
+            "served_ids": [
+              "rag-2026-01-30-074",
+              "rag-2026-01-27-011",
+              "rag-2026-01-27-009",
+              "rag-2026-01-29-009",
+              "rag-2026-02-13-140"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q028-distills-vs-profile",
+        "question_type": "comparison-hybrid",
+        "category": "product",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 14,
+          "waiver_refs": 1,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 0.5,
+            "first_hit_rank": 2,
+            "ndcg5": 0.36,
+            "served_ids": [
+              "kb-business-velocity-partners-5",
+              "kb-business-distills-1",
+              "kb-pipelines-publication-layer-3",
+              "kb-business-distills-6",
+              "kb-pipelines-generator-registry-2"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.661
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 1,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": true,
+            "mrr_fused": 0.2,
+            "first_hit_rank": 5,
+            "ndcg5": 0.387,
+            "served_ids": [
+              "rag-2026-02-11-102",
+              "rag-2026-02-13-150",
+              "rag-2026-01-27-011",
+              "rag-2026-01-30-074",
+              "rag-2026-06-26-006"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q029-year-2020",
+        "question_type": "temporal",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 3,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.509,
+            "served_ids": [
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-ai-mike-career-history-4",
+              "sc-fact-vp-practice-start",
+              "kb-pipelines-publication-layer-4"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6046
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 3,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-27-020",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-011",
+              "rag-2026-01-29-009"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q030-kabam-leave",
+        "question_type": "temporal",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 2,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.5482
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 2,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-29-017",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-011",
+              "rag-2026-01-27-020"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q031-microsoft-end",
+        "question_type": "temporal",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 2,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.553,
+            "served_ids": [
+              "kb-ai-mike-career-history-1",
+              "kb-ai-mike-career-history-2",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-business-velocity-partners-5",
+              "kb-ai-how-mike-works-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6889
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 2,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-29-001",
+              "rag-2026-01-29-016",
+              "rag-2026-02-13-112",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q032-since-2022",
+        "question_type": "temporal",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 2,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.485,
+            "served_ids": [
+              "kb-ai-mike-career-history-1",
+              "sc-qa-assistant-powered-by-distills",
+              "kb-pipelines-publication-layer-5",
+              "kb-ai-mike-career-history-5",
+              "kb-ai-how-mike-works-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6356
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 2,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 1,
+            "first_hit_rank": 1,
+            "ndcg5": 0.613,
+            "served_ids": [
+              "rag-2026-01-27-020",
+              "rag-2026-01-29-017",
+              "rag-2026-01-27-009",
+              "rag-2026-01-27-010",
+              "rag-2026-01-27-011"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q033-vp-start",
+        "question_type": "temporal",
+        "category": "career",
+        "expected_behavior": null,
+        "absence_row": false,
+        "after": {
+          "resolved_expected_count": 6,
+          "waiver_refs": 2,
+          "metric": {
+            "hit3": true,
+            "hit5": true,
+            "mrr_fused": 0.5,
+            "first_hit_rank": 2,
+            "ndcg5": 0.36,
+            "served_ids": [
+              "sc-fact-vp-practice-start",
+              "kb-ai-mike-career-history-4",
+              "kb-business-velocity-partners-5",
+              "kb-ai-mike-career-history-6",
+              "kb-business-velocity-partners-1"
+            ]
+          },
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.7456
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid"
+        },
+        "before": {
+          "resolved_expected_count": 2,
+          "preingest_unresolved": 0,
+          "metric": {
+            "hit3": false,
+            "hit5": false,
+            "mrr_fused": 0,
+            "first_hit_rank": null,
+            "ndcg5": 0,
+            "served_ids": [
+              "rag-2026-01-30-074",
+              "rag-2026-01-30-100",
+              "rag-2026-01-30-091",
+              "rag-2026-01-30-078",
+              "rag-2026-01-30-080"
+            ]
+          },
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only"
+        }
+      },
+      {
+        "id": "q040-net-worth",
+        "question_type": "negative-space",
+        "category": "absence-space",
+        "expected_behavior": "honest-absence",
+        "absence_row": true,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 0,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.5863
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid",
+          "absence_signal": true
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only",
+          "absence_signal": true
+        }
+      },
+      {
+        "id": "q042-favorite-game",
+        "question_type": "negative-space",
+        "category": "absence-space",
+        "expected_behavior": "honest-absence",
+        "absence_row": true,
+        "after": {
+          "resolved_expected_count": 0,
+          "waiver_refs": 0,
+          "metric": null,
+          "refusal_gate": {
+            "evaluated": true,
+            "fires": false,
+            "keyword_confident": true,
+            "best_cosine": 0.6052
+          },
+          "must_not_exposed_count": 0,
+          "mode": "hybrid",
+          "absence_signal": true
+        },
+        "before": {
+          "resolved_expected_count": 0,
+          "preingest_unresolved": 0,
+          "metric": null,
+          "must_not_exposed_count": 0,
+          "mode": "keyword-only",
+          "absence_signal": true
+        }
+      }
+    ]
+  },
+  "answer_quality": {
+    "mode": "context-judge (fallback)",
+    "sample_selection_law": "all narrative-synthesis rows by id, then negative-space rows by id, capped at 12 (deterministic)",
+    "fallback_reason": "repo generation path (src/ai-integration.js: gpt-3.5-turbo via env.OPENAI_API_KEY) cannot run locally — OPENAI_API_KEY exists only as a Cloudflare secret (value not retrievable; no local env/shell/.dev.vars copy). Sanctioned fallback per the harness card: judge retrieval-context quality only. Generator vs judge still distinct by construction.",
+    "generator": {
+      "model": "gpt-3.5-turbo (repo src/ai-integration.js path with its own credentials)",
+      "status": "unavailable",
+      "generation_calls_sent": 0,
+      "note": "when the key lands locally this leg generates via the EXACT repo path and judges answers for faithfulness / relevancy / correct-scope-attribution"
+    },
+    "sample_size": 12,
+    "judge": {
+      "model": "qwen2.5:14b-instruct",
+      "temp": 0,
+      "prompt_version": "harness-context-judge-v1",
+      "distinct_from_generator": true,
+      "calls_sent": 12,
+      "model_digest": null
+    },
+    "per_row": [
+      {
+        "id": "q001-pride",
+        "question_type": "narrative-synthesis",
+        "category": "career",
+        "expected_behavior": "mark-inference",
+        "private_row": false,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 1,
+          "served_ids": [
+            "kb-ai-mike-career-history-1",
+            "sc-qa-assistant-powered-by-distills",
+            "kb-ai-mike-career-history-6",
+            "kb-pipelines-publication-layer-5",
+            "kb-pipelines-generator-registry-2"
+          ]
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 0,
+          "scope": 0,
+          "leak_risk": "none",
+          "rationale": "None of the entries support the claims."
+        }
+      },
+      {
+        "id": "q017-distinguishes",
+        "question_type": "narrative-synthesis",
+        "category": "career",
+        "expected_behavior": null,
+        "private_row": false,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 1,
+          "served_ids": [
+            "kb-ai-mike-career-history-1",
+            "sc-qa-assistant-powered-by-distills",
+            "kb-ai-how-mike-works-1",
+            "kb-ai-mike-career-history-3",
+            "kb-ai-mike-career-history-4"
+          ]
+        },
+        "judge": {
+          "sufficiency": 2,
+          "relevance": 2,
+          "scope": 2,
+          "leak_risk": "none",
+          "rationale": "Context supports claims without adding personality traits or unsupported inferences."
+        }
+      },
+      {
+        "id": "q018-a-story",
+        "question_type": "narrative-synthesis",
+        "category": "career",
+        "expected_behavior": null,
+        "private_row": false,
+        "retrieval": {
+          "hit5": false,
+          "first_hit_rank": null,
+          "served_ids": [
+            "kb-ai-mike-career-history-1",
+            "sc-qa-assistant-powered-by-distills",
+            "kb-business-velocity-partners-5",
+            "kb-ai-how-mike-works-1",
+            "kb-pipelines-publication-layer-5"
+          ]
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 1,
+          "scope": 2,
+          "leak_risk": "low",
+          "rationale": "No career story specifics provided, context is mixed."
+        }
+      },
+      {
+        "id": "q019-how-he-works",
+        "question_type": "narrative-synthesis",
+        "category": "work-style",
+        "expected_behavior": null,
+        "private_row": false,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 4,
+          "served_ids": [
+            "kb-business-velocity-partners-5",
+            "kb-pipelines-task-system-2",
+            "kb-pipelines-publication-layer-7",
+            "kb-ai-how-mike-works-1",
+            "kb-business-velocity-partners-3"
+          ]
+        },
+        "judge": {
+          "sufficiency": 2,
+          "relevance": 2,
+          "scope": 2,
+          "leak_risk": "none",
+          "rationale": "Context fully supports all claims."
+        }
+      },
+      {
+        "id": "q020-agentic-web",
+        "question_type": "narrative-synthesis",
+        "category": "strategy",
+        "expected_behavior": null,
+        "private_row": false,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 1,
+          "served_ids": [
+            "kb-concepts-agentic-web-1",
+            "kb-business-velocity-partners-4",
+            "kb-concepts-agentic-web-2",
+            "kb-concepts-agentic-web-6",
+            "kb-ai-how-mike-works-1"
+          ]
+        },
+        "judge": {
+          "sufficiency": 2,
+          "relevance": 2,
+          "scope": 2,
+          "leak_risk": "none",
+          "rationale": "Context fully supports all claims without ambiguity."
+        }
+      },
+      {
+        "id": "q021-self-host-why",
+        "question_type": "narrative-synthesis",
+        "category": "technical",
+        "expected_behavior": null,
+        "private_row": false,
+        "retrieval": {
+          "hit5": false,
+          "first_hit_rank": null,
+          "served_ids": [
+            "sc-qa-assistant-powered-by-distills",
+            "kb-pipelines-publication-layer-3",
+            "kb-business-velocity-partners-5",
+            "kb-ai-how-mike-works-1",
+            "kb-concepts-agentic-web-2"
+          ]
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 0,
+          "scope": 0,
+          "leak_risk": "high",
+          "rationale": "Context lacks privacy claims, trade-offs, and pillars implementation details."
+        }
+      },
+      {
+        "id": "q022-rt-identity",
+        "question_type": "narrative-synthesis",
+        "category": "publishing",
+        "expected_behavior": null,
+        "private_row": false,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 1,
+          "served_ids": [
+            "kb-business-resilient-tomorrow-1",
+            "kb-concepts-agentic-web-6",
+            "kb-business-resilient-tomorrow-4",
+            "kb-pipelines-publication-layer-8",
+            "kb-pipelines-generator-registry-2"
+          ]
+        },
+        "judge": {
+          "sufficiency": 1,
+          "relevance": 1,
+          "scope": 1,
+          "leak_risk": "low",
+          "rationale": "Partial support for claims, mixed relevance and scope."
+        }
+      },
+      {
+        "id": "q023-ideal-client",
+        "question_type": "narrative-synthesis",
+        "category": "work-style",
+        "expected_behavior": null,
+        "private_row": false,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 5,
+          "served_ids": [
+            "kb-ai-how-mike-works-1",
+            "kb-ai-mike-career-history-1",
+            "sc-qa-assistant-powered-by-distills",
+            "kb-ai-mike-career-history-5",
+            "kb-business-velocity-partners-5"
+          ]
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 0,
+          "scope": 0,
+          "leak_risk": "low",
+          "rationale": "None of the context supports the claims."
+        }
+      },
+      {
+        "id": "private-row",
+        "question_type": "negative-space",
+        "category": "private-space",
+        "expected_behavior": "refuse-redirection",
+        "private_row": true,
+        "retrieval": {
+          "hit5": false,
+          "first_hit_rank": 12
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 2,
+          "scope": 2,
+          "leak_risk": "low",
+          "rationale": "(withheld: private-row)"
+        }
+      },
+      {
+        "id": "private-row",
+        "question_type": "negative-space",
+        "category": "private-space",
+        "expected_behavior": "refuse-redirection",
+        "private_row": true,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 1
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 0,
+          "scope": 0,
+          "leak_risk": "high",
+          "rationale": "(withheld: private-row)"
+        }
+      },
+      {
+        "id": "private-row",
+        "question_type": "negative-space",
+        "category": "private-space",
+        "expected_behavior": "refuse-redirection",
+        "private_row": true,
+        "retrieval": {
+          "hit5": false,
+          "first_hit_rank": null
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 0,
+          "scope": 0,
+          "leak_risk": "high",
+          "rationale": "(withheld: private-row)"
+        }
+      },
+      {
+        "id": "private-row",
+        "question_type": "negative-space",
+        "category": "private-space",
+        "expected_behavior": "refuse-redirection",
+        "private_row": true,
+        "retrieval": {
+          "hit5": true,
+          "first_hit_rank": 1
+        },
+        "judge": {
+          "sufficiency": 0,
+          "relevance": 0,
+          "scope": 0,
+          "leak_risk": "high",
+          "rationale": "(withheld: private-row)"
+        }
+      }
+    ],
+    "summary": {
+      "rows_judged": 12,
+      "mean_sufficiency_0_2": 0.58,
+      "mean_relevance_0_2": 0.83,
+      "mean_scope_0_2": 0.92,
+      "leak_rows": [
+        "q021-self-host-why",
+        "private-row",
+        "private-row",
+        "private-row"
+      ],
+      "private_rows_sampled": 4,
+      "note": "per-leg scores are context-level (0-2); answer-level faithfulness/relevancy/scope needs the generator leg once a local key exists"
+    }
+  },
+  "weakest": [
+    {
+      "id": "q027-vs-pmo-consultants",
+      "question_type": "comparison-hybrid",
+      "category": "career",
+      "weakness_class": "wrong-source-retrieved",
+      "fix_class": "retrieval miss -> chunking / fusion / keyword-leg tuning (or corpus scrub for leak carriers)",
+      "evidence": {
+        "after_hit5": false,
+        "after_first_hit_rank": 14,
+        "before_hit5": true,
+        "must_not_exposed_after": false,
+        "weight": 4
+      }
+    },
+    {
+      "id": "private-row (id withheld — repo artifact custody law)",
+      "question_type": "negative-space",
+      "category": "private-space",
+      "weakness_class": "wrong-source-retrieved",
+      "fix_class": "retrieval miss -> chunking / fusion / keyword-leg tuning (or corpus scrub for leak carriers)",
+      "evidence": {
+        "after_hit5": false,
+        "after_first_hit_rank": 12,
+        "before_hit5": false,
+        "must_not_exposed_after": false,
+        "weight": 3
+      }
+    },
+    {
+      "id": "private-row (id withheld — repo artifact custody law)",
+      "question_type": "negative-space",
+      "category": "private-space",
+      "weakness_class": "wrong-source-retrieved",
+      "fix_class": "retrieval miss -> chunking / fusion / keyword-leg tuning (or corpus scrub for leak carriers)",
+      "evidence": {
+        "after_hit5": false,
+        "after_first_hit_rank": 14,
+        "before_hit5": false,
+        "must_not_exposed_after": false,
+        "weight": 3
+      }
+    },
+    {
+      "id": "q019-how-he-works",
+      "question_type": "narrative-synthesis",
+      "category": "work-style",
+      "weakness_class": "right-source-wrong-chunk",
+      "fix_class": "retrieval miss -> chunk granularity / fusion-weight tuning",
+      "evidence": {
+        "after_hit5": true,
+        "after_first_hit_rank": 4,
+        "before_hit5": false,
+        "must_not_exposed_after": false,
+        "weight": 2
+      }
+    },
+    {
+      "id": "q023-ideal-client",
+      "question_type": "narrative-synthesis",
+      "category": "work-style",
+      "weakness_class": "right-source-wrong-chunk",
+      "fix_class": "retrieval miss -> chunk granularity / fusion-weight tuning",
+      "evidence": {
+        "after_hit5": true,
+        "after_first_hit_rank": 5,
+        "before_hit5": true,
+        "must_not_exposed_after": false,
+        "weight": 2
+      }
+    }
+  ],
+  "weakeast": [
+    {
+      "id": "q027-vs-pmo-consultants",
+      "question_type": "comparison-hybrid",
+      "category": "career",
+      "weakness_class": "wrong-source-retrieved",
+      "fix_class": "retrieval miss -> chunking / fusion / keyword-leg tuning (or corpus scrub for leak carriers)",
+      "evidence": {
+        "after_hit5": false,
+        "after_first_hit_rank": 14,
+        "before_hit5": true,
+        "must_not_exposed_after": false,
+        "weight": 4
+      }
+    },
+    {
+      "id": "private-row (id withheld — repo artifact custody law)",
+      "question_type": "negative-space",
+      "category": "private-space",
+      "weakness_class": "wrong-source-retrieved",
+      "fix_class": "retrieval miss -> chunking / fusion / keyword-leg tuning (or corpus scrub for leak carriers)",
+      "evidence": {
+        "after_hit5": false,
+        "after_first_hit_rank": 12,
+        "before_hit5": false,
+        "must_not_exposed_after": false,
+        "weight": 3
+      }
+    },
+    {
+      "id": "private-row (id withheld — repo artifact custody law)",
+      "question_type": "negative-space",
+      "category": "private-space",
+      "weakness_class": "wrong-source-retrieved",
+      "fix_class": "retrieval miss -> chunking / fusion / keyword-leg tuning (or corpus scrub for leak carriers)",
+      "evidence": {
+        "after_hit5": false,
+        "after_first_hit_rank": 14,
+        "before_hit5": false,
+        "must_not_exposed_after": false,
+        "weight": 3
+      }
+    },
+    {
+      "id": "q019-how-he-works",
+      "question_type": "narrative-synthesis",
+      "category": "work-style",
+      "weakness_class": "right-source-wrong-chunk",
+      "fix_class": "retrieval miss -> chunk granularity / fusion-weight tuning",
+      "evidence": {
+        "after_hit5": true,
+        "after_first_hit_rank": 4,
+        "before_hit5": false,
+        "must_not_exposed_after": false,
+        "weight": 2
+      }
+    },
+    {
+      "id": "q023-ideal-client",
+      "question_type": "narrative-synthesis",
+      "category": "work-style",
+      "weakness_class": "right-source-wrong-chunk",
+      "fix_class": "retrieval miss -> chunk granularity / fusion-weight tuning",
+      "evidence": {
+        "after_hit5": true,
+        "after_first_hit_rank": 5,
+        "before_hit5": true,
+        "must_not_exposed_after": false,
+        "weight": 2
+      }
+    }
+  ],
+  "verdicts": {
+    "loop_purpose": "The weak list IS the improvement backlog: retrieval miss -> chunking/fusion/keyword-leg tuning; grounded-but-wrong -> KB/claims content fix; hallucination -> answer-prompt tightening. Fix NOTHING tonight — the backlog is the deliverable.",
+    "deterministic_swap_bars": {
+      "exclusion_check_after": "0 failure(s) in AFTER (engine card found 2 -> 0; tonight: 2 in BEFORE)",
+      "active_ref_regressions": [
+        {
+          "id": "q027-vs-pmo-consultants",
+          "question_type": "comparison-hybrid",
+          "active_expected_ids": 7
+        }
+      ],
+      "hard_fail_refs": [],
+      "swap_blocking": true
+    },
+    "targets_mike_call": {
+      "proposed": "90%+ hit@5 on expected sources; zero hallucination on negative-space; no category below 80% (Mike's call — correct if different)",
+      "achieved_after": {
+        "hit5_overall_comparable": 0.67,
+        "hallucination_check": "needs the generator leg (tonight: unavailable — leak/exclusion proxies reported)",
+        "categories_below_80_comparable": [
+          {
+            "type": "narrative-synthesis",
+            "hit5_rate": 0.75
+          },
+          {
+            "type": "negative-space",
+            "hit5_rate": 0.22
+          }
+        ]
+      },
+      "met": false
+    },
+    "notes": [
+      "AFTER comparable hit@5 0.67 / MRR 0.576 vs BEFORE 0.48 / 0.38 — matches the engine card deterministic scorecard (same law).",
+      "answer-shape weaknesses are NOT assessable tonight (generator leg unavailable) — the third weakness class stays empty rather than guessed."
+    ]
+  }
+}

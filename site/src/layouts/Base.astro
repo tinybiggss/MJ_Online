@@ -6,39 +6,31 @@ interface Props {
   description?: string;
   /** Tailwind classes applied to <body> — sets per-direction background/text. */
   bodyClass?: string;
-  /** Which Google font families to load. */
-  fonts?: ("sans" | "mono" | "serif")[];
   /** If true, renders a noindex/nofollow meta tag (for unlisted pages). */
   noindex?: boolean;
   /** Social share image, relative to site root. Defaults to the branded card. */
   image?: string;
+  /** Optional theme pin for document pages: "light" = paper. Unset = desk (site default). */
+  dataTheme?: "light" | "dark" | "auto";
 }
 
 const {
   title = "Mike Jones — AI Implementation Expert",
   description = "Mike Jones helps people and organizations operate at the intersection of AI, autonomy, and resilience. 29 years building systems that ship.",
   bodyClass = "bg-field-bg text-field-ink font-body antialiased",
-  fonts = [],
   noindex = false,
   image = "/img/og-default.png",
+  dataTheme = undefined,
 } = Astro.props;
 
 // Absolute URLs for social meta (Open Graph / Twitter require them).
 // Astro.site is set to https://mikejones.online in astro.config.mjs.
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
-
-// Build a single Google Fonts request for the families this page needs.
-const families: Record<string, string> = {
-  sans: "Inter:wght@300;400;500;600;700;800;900",
-  mono: "JetBrains+Mono:wght@400;500;600;700",
-  serif: "Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700",
-};
-const fontParam = fonts.map((f) => `family=${families[f]}`).join("&");
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" {...dataTheme ? { "data-theme": dataTheme } : {}}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,13 +38,6 @@ const fontParam = fonts.map((f) => `family=${families[f]}`).join("&");
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/png" href="/img/logos/favicon-jones-co.png" />
-    {fonts.length > 0 && (
-      <>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href={`https://fonts.googleapis.com/css2?${fontParam}&display=swap`} rel="stylesheet" />
-      </>
-    )}
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

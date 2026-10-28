@@ -3,9 +3,9 @@
     "name": "MJ_Online",
     "full_name": "MikeJones.online - Personal Website & Portfolio",
     "tagline": "AI Implementation Expert Portfolio with RAG Knowledge Base and Multi-Agent Coordination",
-    "status": "Phase 8 - Live & polished; mobile nav fix shipped 2026-06-29",
+    "status": "Phase 8 - Live & polished; GHN course-interest ballot tallied 2026-08-24 (only 2 real responses — re-run queued)",
     "start_date": "2026-01-28",
-    "current_date": "2026-06-29",
+    "current_date": "2026-08-24",
     "domain": "MikeJones.online",
     "platform": "Migrating: Ghost Pro → self-hosted static (Astro) on Cloudflare Pages",
     "theme": "Kyoto (Premium)",
@@ -402,6 +402,75 @@
         "No label changes - risks legal non-compliance"
       ],
       "impact": "Legal compliance with FTC and 3 state laws. Ethical transparency. Clear user expectations about AI capabilities and limitations."
+    },
+    {
+      "id": "DEC-020",
+      "title": "Branded social share card over cropped headshot for Open Graph",
+      "date": "2026-07-07",
+      "context": "Adding Open Graph/Twitter meta needed a preview image. The available headshots are square (1024x1024); OG images are landscape 1200x630 (1.91:1).",
+      "decision": "Generate a branded 1200x630 card (on-brand near-black background, amber accent, homepage B&W headshot, name + 'AI that holds up under load' tagline) via a repeatable ImageMagick script, referenced site-wide from Base.astro with an optional per-page override prop.",
+      "rationale": "Cropping a square headshot to 1.91:1 chops the face; a composed card preserves the portrait, carries the name/tagline as text for a stronger unfurl, and stays consistent with the 'Field' design system. A script keeps it reproducible when the headshot or tagline changes.",
+      "alternatives_considered": [
+        "Raw center-crop of the square headshot - cuts off top/bottom of the face",
+        "Padded square headshot on brand background - weaker, no messaging",
+        "Color 'professional' headshot - clashes with the site's monochrome + amber aesthetic"
+      ],
+      "impact": "Every page now unfurls with a polished, on-brand preview (image + name + tagline) on LinkedIn/X/Slack/iMessage/Facebook. Reproducible via scripts/build-og-image.sh."
+    },
+    {
+      "id": "DEC-021",
+      "title": "Constrained-choice ballot with per-respondent normalization for course interest",
+      "date": "2026-08-19",
+      "context": "Mike wanted the cohort to rank 46 candidate future sessions. He cycled through several mechanics out loud — rate everything 1-10, pick a top 5, pick a top 10 and rate 1-5 — and asked for a recommendation.",
+      "decision": "Pick up to 10 (hard cap enforced live in the UI), rate each 1-5, then normalize each respondent's ratings by their own total at scoring time. Report three numbers per topic: vote count (breadth), mean rating (intensity), and normalized score.",
+      "rationale": "Strict ranking of 46 items causes fatigue and abandonment. Unconstrained rating causes inflation — everyone marks everything high and the signal flattens. Capping selections forces the tradeoff, which is the actual information wanted; the 1-5 rating preserves intensity that pure ranking discards. Normalization fixes the remaining failure mode: without it, a voter who rates all ten picks a 5 outweighs one who rated honestly. Verified with a synthetic inflater in the tally script — their five all-5 picks scored 0.200 each while a topic picked by three different people scored 1.359.",
+      "alternatives_considered": [
+        "Strict 1-46 ranking — highest fidelity, but nobody finishes it",
+        "1-10 rating on every item with no cap — inflation makes results unusable",
+        "Fixed point budget (spend 25 points) — equivalent math, heavier cognitive load in the UI"
+      ]
+    },
+    {
+      "id": "DEC-022",
+      "title": "Two-tier storage for survey responses: Resend email always, D1 opportunistically",
+      "date": "2026-08-19",
+      "context": "The ballot needed persistence the night before class. The Pages project is dashboard-configured with no wrangler.toml and no database binding; adding D1 requires manual dashboard work only Mike can do.",
+      "decision": "The function always emails each vote via Resend (reusing the RESEND_API_KEY / CONTACT_TO / CONTACT_FROM vars the contact and waitlist forms already use), with a machine-readable JSON block appended for tallying. It additionally inserts into a D1 binding named SURVEY_DB when one exists, and silently skips when it does not.",
+      "rationale": "Ships same-day with zero new configuration while leaving a clean upgrade path that needs no frontend change. A D1 failure is caught and logged rather than blocking the response, so the email path stays authoritative.",
+      "alternatives_considered": [
+        "D1 only — correct long-term but blocked on dashboard setup the night before class",
+        "KV — same binding problem, worse query story for tallying",
+        "Third-party form service — new vendor, new data location, no reuse of proven pattern"
+      ]
+    },
+    {
+      "id": "DEC-023",
+      "title": "Instructor run-of-show and cohort-facing page carry different content",
+      "date": "2026-08-19",
+      "context": "The Week 3 page was built from Mike's run-of-show, which is his live teaching notes: talking points, transition lines, a narrated demo script, and a pre-class checklist.",
+      "decision": "Strip all instructor scaffolding from the web page — transitions, narration scripts, prep checklist, the internal changelog. Keep and visually elevate the retention content instead, via a repeated orange callout component for every 'remember this' point, ending with the three takeaways.",
+      "rationale": "The two artifacts have different readers. Mike reads the run-of-show while teaching; the cohort reads the page before, during, and after. Publishing the talk track would spoil the delivery and bury what the cohort should retain. Eleven callouts became the page's visual spine.",
+      "alternatives_considered": [
+        "Publish the run-of-show verbatim — fastest, but reads as someone else's notes",
+        "Summarize each block in prose — loses the scannable 'what do I remember' layer"
+      ]
+    },
+    {
+      "id": "DEC-024",
+      "title": "Exclude Mike's three form-test ballots; treat the course-interest run as 2 responses",
+      "date": "2026-08-24",
+      "context": "Five ballots were captured on 2026-08-19. One was explicitly labeled 'Mike Jones Test'. Two more landed anonymously 90 seconds apart (18:26 and 18:27 UTC) during form verification; one of those rated 7 of 10 picks 5/5, a submit-without-reading pattern. Corvus's 08-21 tally was blocked on which of these were real.",
+      "decision": "Mike confirmed all three were his own tests. They are excluded. The canonical dataset is ~/responses-final.jsonl (2 votes); the full 5-ballot extraction is preserved at ~/responses.jsonl. The prior 4-response 'Tally A' scenario is marked void and do-not-cite.",
+      "rationale": "The exclusion changes the outcome materially, not marginally. Under 'Tally A' the top two topics were Skills/Plugins/Connectors and Effective Research Techniques; both were carried by Mike's own test ballots and fall to the bottom third once removed. Only two topics survive in both top-fives. Leaving the tests in would have manufactured the appearance of cohort consensus out of the instructor's own clicks — the worst possible input to a curriculum decision.",
+      "alternatives_considered": "Keep all four non-labeled ballots and note the uncertainty (rejected: publishes a ranking known to be contaminated); drop only the 10-pick all-5s ballot on pattern evidence (rejected: guessing when the author was available to ask)."
+    },
+    {
+      "id": "DEC-025",
+      "title": "Do not choose Week 1-2 build sessions from the first ballot run",
+      "date": "2026-08-24",
+      "context": "The finalized tally is 2 responses from a cohort of roughly 20 — about a 10% response rate. Every topic has exactly one vote, so breadth carries no signal and 31 of 46 topics scored zero. The two respondents overlap only on RAG-adjacent material.",
+      "decision": "Treat the result as directional only and re-run the ballot rather than selecting topics from it. Re-run in-class and time-boxed, on a shorter list.",
+      "rationale": "Both real votes arrived at 21:23 and 23:18 UTC, hours after class ended — everyone who left the room without voting never came back. That points at timing and ballot length as the failure, not cohort disinterest, and both are fixable. The #1 result (Your Second Brain, 0.263) is a single person's 5/5 on a 5-pick ballot; it cannot carry a curriculum decision."
     }
   ],
   "phases_completed": [
@@ -2818,6 +2887,85 @@
         "Moved the CTA into the mobile panel and hid it on the bar to avoid crowding at 320px"
       ],
       "author": "Claude + Mike"
+    },
+    {
+      "date": "2026-07-07",
+      "phase": "Phase 8 - Post-launch polish",
+      "milestone": "Open Graph + Twitter card social meta and branded share image added",
+      "summary": "Site had only partial Open Graph (og:title/description/type) and no share image, no Twitter card, no canonical — so shared links unfurled as bare, image-less previews. Added the complete social meta set in Base.astro (inherited by every page) plus a branded 1200x630 share card. Merged to main, auto-deployed to Cloudflare Pages, verified live.",
+      "key_changes": [
+        "Base.astro: added og:image (+width/height/alt), og:url, og:site_name, canonical link, and full twitter:summary_large_image set; URLs built absolute from Astro.site; optional `image` prop lets any page override the share image",
+        "public/img/og-default.png: 1200x630 branded card (near-black field-bg, amber signal accent, homepage B&W headshot, name + 'AI that holds up under load' tagline)",
+        "scripts/build-og-image.sh: repeatable ImageMagick generator so the card can be rebuilt when headshot/tagline change",
+        "Verified live: og:image + twitter:card render with absolute URLs on homepage and per-page (About shows its own title/url); og-default.png returns HTTP 200",
+        "Committed 28cf4a2, fast-forward merged to main, pushed; GitHub Actions -> Cloudflare Pages deploy succeeded (~34s)"
+      ],
+      "decisions_made": [
+        "Built a branded social card (headshot + name + tagline on brand background) rather than cropping the square 1024x1024 headshot to 1.91:1 — a raw crop would chop off the face; the card also carries name/tagline text for a stronger unfurl",
+        "Used the homepage B&W headshot (not the color 'professional' one) so the card matches the site's actual monochrome + amber aesthetic",
+        "Fixed the rounded-corner mask bug: alpha mask must be white-on-black (white=keep); the first attempt drew the rounded rect in default black, zeroing opacity and rendering the panel fully transparent"
+      ],
+      "author": "Claude + Mike"
+    },
+    {
+      "date": "2026-08-19",
+      "phase": "Phase 8 - Post-launch polish",
+      "milestone": "GHN AI Fluency Lab Week 3 syllabus + course-interest ballot shipped",
+      "summary": "Built the Week 3 session site for the GHN CCAR-F cohort from Mike's run-of-show, which he revised three times mid-session (news anchors dropped then restored to six, a taught frameworks block added, Block 4 voting added). Added a 46-item course-interest ballot with a Pages Function backend and a normalized tally script. Bumped font sizes ~10% across all four AI Fluency Lab pages for legibility. Three commits, all deployed to production and verified live.",
+      "key_changes": [
+        "site/src/pages/GHN/AIFluency/week-3/index.astro: 75-min agenda; taught frameworks block (3A's / 4D's / 3E's + Safe) with the diagram; six news anchors incl. optional and required-pivot styling; five-stage spec-driven cycle (Specify, write-and-review, Plan w/ adversarial review, Tasks, Implement); benchmarking reality check; 11 'remember this' callouts",
+        "site/src/pages/GHN/AIFluency/course-interest.astro: 46-topic ballot, cap of 10 enforced live, 1-5 rating per pick, localStorage draft recovery, write-in field, optional identity",
+        "site/src/data/course-catalog.ts: catalog renumbered 1-46 and keyed by stable slug (run-of-show numbering started at 6 with duplicates at 11/12/35 and gaps at 20/24)",
+        "site/functions/api/course-interest.ts: validation (cap, id shape, rating range, honeypot) + Resend email + optional D1 SURVEY_DB insert",
+        "site/scripts/tally-course-interest.mjs: votes / avg / normalized score, plus write-ins",
+        "Font bump: 231 font-size values + clamp() heads across all four Lab pages, plus explicit body{font-size:17px}",
+        "Fixes: stranded 'Sending…' button on the sticky tracker (d27cfbe); archived HF Open LLM Leaderboard swapped for Artificial Analysis + direct HF model hub link (ee27e43)"
+      ],
+      "commits": [
+        "289a84d",
+        "d27cfbe",
+        "ee27e43"
+      ],
+      "verification": "Production checked after each deploy: week-3 and course-interest pages 200, both diagrams 200, all five Block 3 reference links 200. API validation exercised against the real workerd runtime via `wrangler pages dev` (over-cap rejected, honeypot silently accepted, malformed ids and out-of-range ratings filtered) and again against production. Mike confirmed a real submission delivered email successfully."
+    },
+    {
+      "date": "2026-08-24",
+      "phase": "Phase 8 - Post-launch polish",
+      "milestone": "Course-interest votes tallied and finalized — 2 real responses",
+      "summary": "Re-extracted the ballots from the raw vote emails and independently recomputed the tally; Corvus's 2026-08-21 figures reproduced exactly. Mike confirmed three of the five captured ballots were his own form tests, resolving the ambiguity that had blocked the 08-21 report. Final result is 2 real responses (~10% of the cohort) with 31 of 46 topics receiving zero votes — too thin to drive the Week 1-2 build decision, so a re-run was queued instead.",
+      "key_changes": [
+        "~/responses-final.jsonl: new canonical dataset, 2 real votes; ~/responses.jsonl (full 5-ballot extraction) left intact",
+        "Corvus/Operations/GHN-Course-Interest-Tally-2026-08-21.md: rewritten to final; 'Tally A' scenario marked void and do-not-cite; response-rate finding promoted above the ranking",
+        "TASKS.md: tally task moved to Completed; 'Re-run the course-interest ballot' added to Next Up as the follow-on"
+      ],
+      "results": {
+        "responses_real": 2,
+        "responses_excluded_as_tests": 3,
+        "topics_with_any_vote": 15,
+        "topics_on_ballot": 46,
+        "top_5_by_normalized_score": [
+          {
+            "topic": "Your Second Brain",
+            "score": 0.263
+          },
+          {
+            "topic": "Vibe-Coding a Product End-to-End",
+            "score": 0.211
+          },
+          {
+            "topic": "RAG Evaluation",
+            "score": 0.211
+          },
+          {
+            "topic": "Sandboxing Agents Before Deployment",
+            "score": 0.158
+          },
+          {
+            "topic": "Containment & Blast-Radius Design",
+            "score": 0.158
+          }
+        ]
+      }
     }
   ],
   "agent_workflows": [
@@ -2972,7 +3120,7 @@
       ]
     }
   ],
-  "current_status": "Live at mikejones.online (Astro on Cloudflare Pages). Mobile hamburger navigation added and deployed 2026-06-29.",
-  "last_updated": "2026-06-29",
+  "current_status": "Live at mikejones.online (Astro on Cloudflare Pages). GHN AI Fluency Lab Week 3 syllabus and 46-item course-interest ballot shipped and verified in production 2026-08-19.",
+  "last_updated": "2026-08-24",
   "version": "2.1-field (Astro on Cloudflare Pages, live + polished)"
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T20:55:03.454Z",
+  "generatedAt": "2026-10-28T17:11:45.845Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
@@ -23,7 +23,7 @@
     {
       "id": "kb-ai-mike-career-history",
       "title": "Mike Jones — Career History (public facts)",
-      "updated": "2026-10-09",
+      "updated": "2026-10-20",
       "summary": "Mike Jones has 29 years in gaming, entertainment, and media technology.",
       "path": "/agents/kb/kb-ai-mike-career-history.md",
       "files": [
@@ -33,7 +33,7 @@
     {
       "id": "kb-business-distills",
       "title": "Distills",
-      "updated": "2026-10-06",
+      "updated": "2026-10-24",
       "summary": "Product.",
       "path": "/agents/kb/kb-business-distills.md",
       "files": [
@@ -43,7 +43,7 @@
     {
       "id": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
-      "updated": "2026-10-09",
+      "updated": "2026-10-26",
       "summary": "Media + platform.",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "files": [
@@ -53,7 +53,7 @@
     {
       "id": "kb-business-velocity-partners",
       "title": "Velocity Partners",
-      "updated": "2026-10-06",
+      "updated": "2026-10-28",
       "summary": "Consulting arm.",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "files": [
@@ -63,7 +63,7 @@
     {
       "id": "kb-company-jonesco",
       "title": "Jones Collaboration Company",
-      "updated": "2026-10-06",
+      "updated": "2026-10-22",
       "summary": "The parent entity.",
       "path": "/agents/kb/kb-company-jonesco.md",
       "files": [
@@ -73,7 +73,7 @@
     {
       "id": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
-      "updated": "2026-10-06",
+      "updated": "2026-10-28",
       "summary": "Thesis (Mike, DEC 2026-09-17, restated live 2026-09-29): within 12–18 months, sites stop being rendered UIs and become data/action endpoints queried by agents via protocols like MCP.",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
       "files": [
@@ -93,17 +93,18 @@
     {
       "id": "kb-pipelines-generator-registry",
       "title": "Generator Registry",
-      "updated": "2026-10-09",
+      "updated": "2026-10-28",
       "summary": "What writes into this vault, where, and whether it's alive.",
       "path": "/agents/kb/kb-pipelines-generator-registry.md",
       "files": [
-        "kb-pipelines-generator-registry.md"
+        "kb-pipelines-generator-registry-part1.md",
+        "kb-pipelines-generator-registry-part2.md"
       ]
     },
     {
       "id": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
-      "updated": "2026-10-02",
+      "updated": "2026-10-28",
       "summary": "What it is: the adapter layer between jonesco's KB and the public surfaces.",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "files": [
@@ -123,7 +124,7 @@
     {
       "id": "kb-pipelines-task-system",
       "title": "Task System",
-      "updated": "2026-10-08",
+      "updated": "2026-10-27",
       "summary": "What it is: Mike's personal Kanban — the claim layer for how work is captured, decided, and tracked across all four businesses.",
       "path": "/agents/kb/kb-pipelines-task-system.md",
       "files": [

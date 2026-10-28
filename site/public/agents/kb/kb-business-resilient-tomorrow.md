@@ -1,7 +1,7 @@
 ---
 id: kb-business-resilient-tomorrow
 title: Resilient Tomorrow
-updated: 2026-10-09
+updated: 2026-10-26
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -17,7 +17,7 @@ Tagline: "Build your exit. Without burning anything down." Archetype: Outlaw (60
 
 ### The Staircase Model (load-bearing)
 
-1. Perspective — "The system did this to you." 2. Practical Path — "Here's the audit. Here's the first step." 3. Peer Belonging — "You're not alone." Community is the side effect, not the selling point. Evidence: individual- framed articles outperform collective-organizing CTAs by ~10x (16,316 views / 378 signups vs ~1,250 views / net subscriber loss).
+1. Perspective — "The system did this to you." 2. Practical Path — "Here's the audit. Here's the first step." 3. Peer Belonging — "You're not alone." Community is the side effect, not the selling point. Evidence: individual-framed articles outperform collective-organizing CTAs by ~10x (16,316 views / 378 signups vs ~1,250 views / net subscriber loss). Strategic teaching direction (2026-10-26): Teach people to regain control one system at a time. Each class should create a concrete win, then connect the learner to the tools, formulas, or options for the next step. The aim is to stay half a step ahead and show the way—not to wait for a complete platform before teaching. The first class and its specific outcome remain undecided; the working note is the raw hub Resilient Tomorrow/RT Content Engine.md.
 
 ### Seven Pillars
 

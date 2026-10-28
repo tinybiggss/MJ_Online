@@ -1,0 +1,545 @@
+/* ==========================================================================
+   /work + case-study component layer: "Notebook" grammar
+   --------------------------------------------------------------------------
+   Ported from content-drafts/design/comps/comps.css (the comp component
+   layer, minus the comp's own header/footer shell, which the site's
+   FieldLayout already provides via the mapped tokens). Consumes the token
+   layer in tokens.css. No JavaScript anywhere: <details>, :focus-visible,
+   and CSS-only theme hooks.
+
+   Three fixes Mike called out in review are built in:
+   1. the lead case row carries the product plate (see .entry.lead);
+   2. the case-row status column is a fixed 12rem measure, so "live, zero
+      paying users" cannot raggedly wrap the "Read the case study" affordance
+      into an orphan (see .entry grid);
+   3. every plate is matted and keylined (surface-2 mat, hairline-strong
+      border), so white diagram exports read as tipped-in artifacts, never
+      pasted images (see .plate).
+   ========================================================================== */
+
+.wrap {
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.mono {
+  font-family: var(--face-data);
+  font-weight: 400;
+  letter-spacing: var(--track-data);
+}
+
+/* The ruled page: hairline between every top-level section. */
+.sheet-rules > section {
+  border-top: 1px solid var(--hairline);
+}
+
+/* ---- Page opening ---------------------------------------------------------- */
+
+.page-head {
+  padding-block: var(--space-2xl) var(--space-xl);
+}
+
+.display {
+  font-weight: var(--weight-display-heavy);
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--track-display);
+  text-wrap: balance;
+  max-width: 14ch;
+}
+
+.page-head .lede {
+  margin-top: var(--space-md);
+  max-width: var(--measure-ui);
+  color: var(--ink-2);
+  font-size: var(--text-lg);
+  line-height: var(--leading-doc);
+  font-family: var(--face-doc);
+}
+
+/* The resume PDF: pinned into the opening, never the primary action. */
+.resume-slink {
+  margin-top: var(--space-md);
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+}
+.resume-slink a {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--hairline-strong);
+  transition: color var(--dur-instant) var(--ease-out-expo);
+}
+.resume-slink a:hover { color: var(--ink); }
+
+/* ---- Section heads ---------------------------------------------------------- */
+
+.section-head {
+  padding-block: var(--space-xl) var(--space-lg);
+}
+.section-head h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--track-ui);
+}
+.section-head .hint {
+  margin-top: var(--space-2xs);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  max-width: var(--measure-ui);
+}
+
+/* ---- /work: the three case-study entries ------------------------------------ */
+
+.entries {
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.entry {
+  display: grid;
+  /* The lead row's status column at a fixed 12rem measure keeps a long status
+     like "live, zero paying users" on one line instead of ragging over two.
+     minmax(0,1fr) keeps track sizing from being blown out by a wide plate. */
+  grid-template-columns: 13rem minmax(0, 1fr) 12rem;
+  gap: var(--space-lg);
+  padding-block: var(--space-lg);
+  padding-inline: var(--space-sm);
+  border-bottom: 1px solid var(--hairline);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-out-expo);
+}
+.entry:hover {
+  background: var(--surface);
+}
+/* Review fix 1: the lead row carries its product plate. */
+.entry .plate-row {
+  display: block;
+  width: min(34rem, 100%);
+  margin-top: var(--space-md);
+}
+
+.entry .tag {
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+  align-self: start;
+  padding-top: var(--space-2xs);
+}
+.entry h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--track-ui);
+  line-height: 1.25;
+  max-width: 34ch;
+  text-wrap: pretty;
+}
+.entry .diag {
+  margin-top: var(--space-xs);
+  font-family: var(--face-doc);
+  font-size: var(--text-base);
+  line-height: var(--leading-doc);
+  color: var(--ink-2);
+  max-width: var(--measure-doc);
+}
+.entry .state {
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+  text-align: right;
+  align-self: start;
+  padding-top: var(--space-2xs);
+}
+.entry .state .go {
+  display: block;
+  margin-top: var(--space-2xs);
+  color: var(--accent);
+  font-weight: var(--weight-strong);
+}
+.entry:hover .state .go { color: var(--accent-press); }
+
+/* ---- /work: ways to engage --------------------------------------------------- */
+
+.engagements {
+  list-style: none;
+}
+.engagements li {
+  border-bottom: 1px solid var(--hairline);
+  padding-block: var(--space-sm);
+}
+.engagements li:last-child { border-bottom: 0; }
+.engagements .row {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr) 10rem;
+  gap: var(--space-lg);
+  align-items: baseline;
+  text-decoration: none;
+  font-size: var(--text-sm);
+}
+.engagements .name {
+  font-weight: var(--weight-strong);
+  font-size: var(--text-base);
+}
+.engagements .role {
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+  margin-left: var(--space-2xs);
+  text-transform: lowercase;
+}
+.engagements .state {
+  color: var(--ink-2);
+  text-align: right;
+  font-size: var(--text-xs);
+}
+
+/* ---- /work: systems index ----------------------------------------------------- */
+
+.index-group {
+  padding-block: var(--space-md);
+}
+.index-group + .index-group {
+  border-top: 1px solid var(--hairline);
+}
+.index-group h3 {
+  font-family: var(--face-data);
+  font-weight: 400;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  padding-bottom: var(--space-sm);
+}
+.index-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--space-xl);
+}
+.index-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding-block: var(--space-sm);
+  border-top: 1px solid var(--hairline);
+}
+.index-item h4 {
+  font-size: var(--text-base);
+  font-weight: var(--weight-strong);
+}
+.index-item p {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  line-height: var(--leading-ui);
+  max-width: var(--measure-ui);
+}
+.index-item .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-sm);
+  color: var(--ink-3);
+  font-family: var(--face-data);
+  font-size: var(--text-2xs);
+}
+.index-item a.more {
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-strong);
+  text-decoration: none;
+  width: fit-content;
+}
+.index-item a.more:hover { text-decoration: underline; }
+.index-item.read h4 a {
+  color: var(--accent);
+}
+.index-item.read h4 a:hover { color: var(--accent-press); }
+
+/* Image plates: real screenshots, matted and keylined so they read as
+   artifacts being tipped into the notebook, never as pasted exports.
+   (Review fix 3: the raw white diagram exports needed a consistent plate
+   treatment; every plate now shares this mat + keyline.) */
+.plate {
+  border: 1px solid var(--hairline-strong);
+  background: var(--surface-2);
+  padding: var(--space-xs);
+}
+.plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  margin-inline: auto;
+}
+
+/* ---- Case study page ----------------------------------------------------------- */
+
+.article-head {
+  padding-block: var(--space-xl) var(--space-lg);
+}
+.crumbs {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: baseline;
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+  margin-bottom: var(--space-md);
+}
+.crumbs a {
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.crumbs a:hover { color: var(--ink); }
+
+.article-title {
+  font-weight: var(--weight-display-heavy);
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: var(--track-display);
+  text-wrap: balance;
+  max-width: 24ch;
+}
+
+.ledger {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  margin-top: var(--space-lg);
+  padding-block: var(--space-sm);
+  border-top: 1px solid var(--hairline-strong);
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink-2);
+  font-family: var(--face-data);
+  font-size: var(--text-xs);
+}
+
+.position-line {
+  margin-top: var(--space-xl);
+  font-family: var(--face-doc);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: var(--leading-doc);
+  max-width: var(--measure-doc);
+  text-wrap: pretty;
+}
+.position-line::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  background: var(--accent);
+  margin-bottom: var(--space-sm);
+}
+
+/* Reading body */
+.doc {
+  font-family: var(--face-doc);
+  font-size: var(--text-lg);
+  line-height: var(--leading-doc);
+  max-width: var(--measure-doc);
+}
+.doc p + p {
+  margin-top: var(--space-md);
+}
+.doc strong {
+  font-weight: 600;
+  font-style: normal;
+}
+.doc code,
+.doc .receipt {
+  font-family: var(--face-data);
+  font-size: 0.82em;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.24em;
+}
+
+.case-section {
+  padding-block: var(--space-xl) var(--space-md);
+}
+.case-section h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--track-ui);
+  margin-bottom: var(--space-md);
+}
+/* The honest section carries the evidence mark. */
+.case-section.honest h2::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  background: var(--accent);
+  margin-top: var(--space-2xs);
+}
+
+/* Designed items: ruled sub-rows */
+.designed-item {
+  border-top: 1px solid var(--hairline);
+  padding-block: var(--space-md);
+}
+.designed-item:first-of-type { border-top: 0; }
+
+/* Figure at the head of the reading flow */
+.case-figure {
+  margin-block: var(--space-lg);
+  max-width: var(--measure-doc);
+}
+.case-figure figcaption {
+  margin-top: var(--space-2xs);
+  color: var(--ink-3);
+  font-family: var(--face-data);
+  font-size: var(--text-2xs);
+}
+
+/* Sources: collapsed appendix, native details, no JS */
+.sources {
+  border-top: 1px solid var(--hairline-strong);
+  margin-top: var(--space-xl);
+}
+.sources summary {
+  cursor: pointer;
+  padding-block: var(--space-md);
+  color: var(--ink-2);
+  font-family: var(--face-data);
+  font-size: var(--text-sm);
+  list-style-position: outside;
+}
+.sources summary::marker {
+  color: var(--accent);
+}
+.sources summary:hover { color: var(--ink); }
+.sources ol {
+  list-style: none;
+  counter-reset: receipt;
+  padding-bottom: var(--space-lg);
+}
+.sources li {
+  counter-increment: receipt;
+  display: grid;
+  grid-template-columns: 3ch 1fr;
+  gap: var(--space-md);
+  padding-block: var(--space-sm);
+  border-top: 1px solid var(--hairline);
+  font-family: var(--face-doc);
+  font-size: var(--text-sm);
+  line-height: var(--leading-ui);
+  color: var(--ink-2);
+}
+.sources li::before {
+  content: counter(receipt, decimal-leading-zero);
+  font-family: var(--face-data);
+  color: var(--accent);
+  font-size: var(--text-xs);
+  padding-top: 0.15em;
+}
+
+/* End-of-page case index */
+.case-nav {
+  border-top: 1px solid var(--hairline-strong);
+  margin-top: var(--space-xl);
+}
+.case-nav ul {
+  list-style: none;
+}
+.case-nav li {
+  border-bottom: 1px solid var(--hairline);
+  padding-block: var(--space-md);
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr) 15rem;
+  gap: var(--space-lg);
+  align-items: baseline;
+}
+.case-nav .here {
+  color: var(--ink-3);
+  font-family: var(--face-data);
+  font-size: var(--text-xs);
+  display: block;
+}
+.case-nav .title {
+  font-weight: var(--weight-strong);
+  font-size: var(--text-base);
+  color: var(--ink);
+}
+.case-nav .fwd .title {
+  color: var(--accent);
+}
+.case-nav a {
+  display: contents;
+}
+.case-nav a:hover .title { text-decoration: underline; }
+.case-nav .mark {
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+  text-align: right;
+}
+
+/* Contact band */
+.contact-band {
+  margin-top: var(--space-2xl);
+  border-top: 1px solid var(--hairline-strong);
+  padding-block: var(--space-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+.contact-band h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--track-ui);
+}
+.contact-band .note {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  max-width: var(--measure-ui);
+}
+.btn {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: var(--weight-strong);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background var(--dur-instant) var(--ease-out-expo);
+}
+.btn:hover { background: var(--accent-press); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--hairline-strong);
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+/* Motion: one authored moment per page, load-time reveal, staggered.
+   (The base .reveal gesture lives in global.css.) */
+.reveal-2 { animation-delay: 70ms; }
+.reveal-3 { animation-delay: 140ms; }
+.reveal-4 { animation-delay: 210ms; }
+
+/* ---- Small screens ---------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .entry,
+  .engagements .row,
+  .case-nav li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xs);
+  }
+  .entry .state,
+  .engagements .state,
+  .case-nav .mark {
+    text-align: left;
+  }
+  .index-items {
+    grid-template-columns: 1fr;
+  }
+  .page-head {
+    padding-block: var(--space-xl) var(--space-lg);
+  }
+  .display {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+  }
+}

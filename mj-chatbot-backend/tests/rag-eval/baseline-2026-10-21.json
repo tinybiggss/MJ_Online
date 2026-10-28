@@ -1,0 +1,174 @@
+{
+  "snapshot_utc": "2026-10-21T07:01:25Z",
+  "probes_utc": "2026-10-21T07:03:57Z",
+  "purpose": "BEFORE-state baseline for overnight RAG improvement work; mirrors the 2026-10-20 hand reference counts.",
+  "repo": "/Users/michaeljones/Dev/MJ_Online/mj-chatbot-backend",
+  "endpoint": "https://mj-chatbot-backend.mejones73.workers.dev/chat",
+  "field_name": "message",
+  "field_name_source": "API-DOCUMENTATION.md lines 35-40 (task draft said 'question'; repo doc is authoritative)",
+  "environment_note": "Live endpoint returns Cloudflare 403 error 1010 to default Python user-agent; probes must send a browser UA (as the embedded widget's browser does). Probe metadata: retrievalTime=0 on all probes.",
+  "corpus_sha256": "ba1322f55aadbf3c38e5917914c5c31c5cc3c1b27a8b3779cf9a8a43490ee415",
+  "corpus_file": "knowledge.jsonl",
+  "entry_count_total": 202,
+  "entry_counts_by_type": {
+    "fact": 90,
+    "fit_assessment": 3,
+    "narrative": 60,
+    "qa_pair": 20,
+    "technical": 29
+  },
+  "reference_check_2026_10_20": {
+    "entries": 202,
+    "fact": 90,
+    "narrative": 60,
+    "technical": 29,
+    "qa_pair": 20,
+    "fit_assessment": 3,
+    "match": true
+  },
+  "corpus_last_commit": "1226478",
+  "corpus_last_commit_date": "2026-06-26T15:20:32-07:00",
+  "corpus_last_commit_date_utc": "2026-06-26T22:20:32Z",
+  "corpus_last_commit_subject": "chatbot: refresh KB -- add GHN/Corvus/Distills/AI+ADHD, correct RT (2,100+) and NeighborhoodShare status",
+  "git_status_verbatim_at_snapshot": [
+    " M ../CLAUDE.md",
+    " M ../PROJECT-MEMORY.json",
+    " M ../TASKS.md",
+    " D ../assets/photos/headshot-professional.png",
+    " M ../site/public/agents/kb/index.json",
+    " M ../site/public/agents/kb/kb-ai-mike-career-history.md",
+    " M ../site/public/agents/kb/kb-business-distills.md",
+    " M ../site/public/agents/kb/kb-business-velocity-partners.md",
+    " M ../site/public/agents/kb/kb-company-jonesco.md",
+    " M ../site/public/agents/kb/kb-concepts-agentic-web.md",
+    " M ../site/public/agents/kb/kb-pipelines-generator-registry.md",
+    " M ../site/public/agents/kb/kb-pipelines-publication-layer.md",
+    " M ../site/public/agents/kb/search-index.json",
+    "?? ../.astro/",
+    "?? ../.claude/CLAUDE-pre-2026-10-09.md",
+    "?? ../AGENTS.md",
+    "?? ../live-instructor.png",
+    "?? scripts/",
+    "?? staging/"
+  ],
+  "pre_existing_dirty": "ALL lines above pre-existed this run; treated as NOT-YOURS and untouched. Only new files written under tests/rag-eval/.",
+  "no_deploy_performed": true,
+  "answers": [
+    {
+      "probe": "a",
+      "q": "How many years of experience does Mike Jones have?",
+      "verbatim": "Mike Jones has 29 years of experience in technology, starting in 1997. His expertise spans various areas such as program and project management, AI implementation, and LLM integration. Additionally, he has a background in gaming, entertainment, and media industries, showcasing a diverse and extensive career history. If you'd like to learn more about his specific projects and accomplishments over the years, feel free to explore further or schedule a call with Mike for a more in-depth discussion.",
+      "flags": [
+        "fail_blended_or_flat_scoped_claims",
+        "expected_pattern_confirmed",
+        "both_claims_present_in_corpus_but_no_scope_attribution"
+      ],
+      "grounded": true,
+      "evidence": "Answer leads with 29y-technology as the global number and never states the 24+ years PM scope (corpus fact rag-2026-01-30-080 has the 29 years claim; the 24+ PM claim is also in corpus). Numbers accurate per corpus; failure is unattributed scope.",
+      "metadata": {
+        "retrievalTime": 0,
+        "aiGenerationTime": 3362,
+        "totalTime": 3362,
+        "entriesFound": 5,
+        "topics": [
+          "projects",
+          "experience",
+          "career_history",
+          "velocity_partners"
+        ]
+      }
+    },
+    {
+      "probe": "b",
+      "q": "What is the thing Mike is most proud of in his career?",
+      "verbatim": "Mike is most proud of his ability to create efficiency and better systems in his work. He is driven by identifying how work should flow, addressing gaps, and making improvements that benefit the team and the organization. Whether it's through developing innovative processes like the 'C3PO' at Kinoo, building the AI Memory System to maintain context, or transforming content pipelines at Verizon to achieve significant time and cost savings, Mike's dedication to improving systems and workflows is a consistent source of pride for him. His focus on people-centered solutions and creating opportunities for growth further demonstrates his commitment to making a positive impact through his work.",
+      "flags": [
+        "fail_inference_asserted_as_fact",
+        "expected_pattern_confirmed",
+        "zero_corpus_hits: substring 'proud' appears 0 times in knowledge.jsonl"
+      ],
+      "grounded": false,
+      "evidence": "No pride claim was ever captured; generator asserts 'a consistent source of pride for him' as settled fact, synthesized from efficiency/systems narratives.",
+      "metadata": {
+        "retrievalTime": 0,
+        "aiGenerationTime": 2605,
+        "totalTime": 2605,
+        "entriesFound": 5,
+        "topics": [
+          "career_history",
+          "about",
+          "project_ai_memory"
+        ]
+      }
+    },
+    {
+      "probe": "c",
+      "q": "What does Mike charge?",
+      "verbatim": "Mike offers three consulting service tiers with varying prices:\n1. Workflow Assessment + Playbook: A 2-week engagement priced at $4k-$12k.\n2. Implementation Sprint: A 3-week engagement priced at $8k-$25k.\n3. Fractional PMO Retainer: Ongoing support priced at $6k-$18k per month.\n\nThese prices reflect the range of services and support Mike provides to his clients. If you're interested in learning more about a specific service tier or discussing pricing further, feel free to reach out for more details.",
+      "flags": [
+        "pass_grounded",
+        "matches_corpus_qa_pair_rag-2026-01-27-009"
+      ],
+      "grounded": true,
+      "evidence": "qa_pair rag-2026-01-27-009 lists the same three tiers and dollar ranges the bot returned.",
+      "metadata": {
+        "retrievalTime": 0,
+        "aiGenerationTime": 2668,
+        "totalTime": 2668,
+        "entriesFound": 5,
+        "topics": [
+          "services",
+          "fit",
+          "skills",
+          "career_history"
+        ]
+      }
+    },
+    {
+      "probe": "d",
+      "q": "What was Mike's role at Xbox?",
+      "verbatim": "I don't have that information in my knowledge base.",
+      "flags": [
+        "fail_false_negative_dont_know"
+      ],
+      "grounded": true,
+      "evidence": "Bot returned 'I don't have that information in my knowledge base.' while entriesFound=5; corpus has 9 xbox-mentioning entries incl. official Microsoft title fact rag-2026-02-05-126, so relevant facts exist but were not surfaced.",
+      "metadata": {
+        "retrievalTime": 0,
+        "aiGenerationTime": 1637,
+        "totalTime": 1637,
+        "entriesFound": 5,
+        "topics": [
+          "about",
+          "services",
+          "fit",
+          "skills",
+          "career_history"
+        ]
+      }
+    },
+    {
+      "probe": "e",
+      "q": "What certifications does Mike hold?",
+      "verbatim": "Mike Jones holds the following certifications: \n- Project Management Professional (PMP) from the Project Management Institute\n- Certified Scrum Master (CSM) from the Scrum Alliance\n- Certified Scrum Product Owner (CSPO) from the Scrum Alliance\n- Product Management certification from Skillsoft\n- NLP Master Practitioner from the NLP Institute of California\n\nIf you are interested in how these certifications inform his consulting services, I can provide more details or help you explore specific projects where Mike applies these skills. Is there anything else about Mike's work I can help you with?",
+      "flags": [
+        "pass_grounded"
+      ],
+      "grounded": true,
+      "evidence": "PMP/Scrum/Skillsoft/NLP all present in corpus; topics include 'certifications'.",
+      "metadata": {
+        "retrievalTime": 0,
+        "aiGenerationTime": 2783,
+        "totalTime": 2783,
+        "entriesFound": 5,
+        "topics": [
+          "career_history",
+          "certifications",
+          "services",
+          "fit",
+          "skills"
+        ]
+      }
+    }
+  ]
+}

@@ -9,14 +9,14 @@ export const identity = {
   name: "Mike Jones",
   title: "AI Implementation Expert & LLM Integration Specialist",
   company: "Jones Collaboration Company, LLC",
-  location: "San Jose, CA — serving everywhere",
+  location: "San Jose, CA, serving everywhere",
   email: "mike@jones-co.us",
   tagline: "I help people and organizations operate at the intersection of AI, autonomy, and resilience.",
   // Short positioning line used in heroes
-  heroLead: "29 years building systems that ship —",
+  heroLead: "29 years building systems that ship.",
   heroEmphasis: "now making AI actually work inside organizations.",
   intro:
-    "For nearly three decades I've shipped products and led teams at the edge of what technology makes possible — from the launch of the original Xbox to AI-augmented operating models today. I turn fast-moving AI capability into systems people can actually run.",
+    "For nearly three decades I've shipped products and led teams at the edge of what technology makes possible: from the launch of the original Xbox to AI-augmented operating models today. I turn fast-moving AI capability into systems people can actually run.",
 };
 
 export const stats = [
@@ -28,7 +28,7 @@ export const stats = [
   { value: "Top 1%", unit: "", label: "ChatGPT user globally" },
 ];
 
-/** The venture ecosystem — the spine of the portfolio. */
+/** The venture ecosystem: the spine of the portfolio. */
 export const ventures = [
   {
     key: "velocity",
@@ -36,7 +36,7 @@ export const ventures = [
     role: "Consulting",
     tagline: "Making AI actually work inside organizations.",
     description:
-      "Fractional PMO + AI implementation for teams that need AI to move from demo to dependable. Built on AAPD — AI-Augmented Process Design.",
+      "Fractional PMO + AI implementation for teams that need AI to move from demo to dependable. Built on AAPD: AI-Augmented Process Design.",
     status: "Active",
     accent: "indigo",
     href: "https://velocitypartners.io",
@@ -47,7 +47,7 @@ export const ventures = [
     role: "Teaching",
     tagline: "AI & Claude Code courses for senior career-changers.",
     description:
-      "A teaching partnership with Ron Nash's GHN Academy — helping directors and VPs build AI fluency and reposition their expertise. First live class ran May 2026; AI Fluency Lab cohorts have been running since August 2026 — syllabus at mikejones.online/GHN/AIFluency. Now building the Claude Certified Architect – Foundations (CCAR-F) course with Ron — syllabus approved, Week 1 in active development.",
+      "A teaching partnership with Ron Nash's GHN Academy: helping directors and VPs build AI fluency and reposition their expertise. First live class ran May 2026; AI Fluency Lab cohorts have been running since August 2026, syllabus at mikejones.online/GHN/AIFluency. Now building the Claude Certified Architect – Foundations (CCAR-F) course with Ron: syllabus approved, Week 1 in active development.",
     status: "Cohorts running",
     accent: "amber",
     href: "https://gethirednowprograms.com/",
@@ -58,7 +58,7 @@ export const ventures = [
     role: "Publishing",
     tagline: "Practical resilience for people exiting the default.",
     description:
-      "A publication and growing community on building parallel systems — 2,200+ readers across 27 dispatches, organized around a 7 Pillars framework. Top essay: \"7 Steps to Quietly Exit a System\" (16,000+ readers).",
+      "A publication and growing community on building parallel systems: 2,200+ readers across 27 dispatches, organized around a 7 Pillars framework. Top essay: \"7 Steps to Quietly Exit a System\" (16,000+ readers).",
     status: "2,200+ readers",
     accent: "forest",
     href: "https://resilient-tomorrow.com",
@@ -69,17 +69,17 @@ export const ventures = [
     role: "Product",
     tagline: "Your career, as an interactive AI.",
     description:
-      "An AI SaaS that turns your career into an interactive chatbot — a way for a recruiter or hiring manager to get to know you before the first call. It grew out of my own frustration with a portfolio that buried the answers people actually wanted. The assistant on this page is powered by it. Now open source: the engine ships as Distill (github.com/Jones-Co/distill, MIT) — parse your career docs into a knowledge base, deepen it through an AI-conducted interview, and deploy a ~15KB embeddable chat widget.",
-    status: "Open source — Feb 2026",
+      "An AI SaaS that turns your career into an interactive chatbot: a way for a recruiter or hiring manager to get to know you before the first call. It grew out of my own frustration with a portfolio that buried the answers people actually wanted. The assistant on this page is powered by it. Now open source: the engine ships as Distill (github.com/Jones-Co/distill, MIT), parse your career docs into a knowledge base, deepen it through an AI-conducted interview, and deploy a ~15KB embeddable chat widget.",
+    status: "Open source: Feb 2026",
     accent: "cyan",
     href: "https://distills.app",
   },
 ];
 
 /**
- * Things Mike has built — proof of hands-on depth.
+ * Things Mike has built: proof of hands-on depth.
  * `group` drives the Work page sections; `featured` surfaces on the home page.
- * `img` is optional — cards render text-forward when there's no real screenshot
+ * `img` is optional: cards render text-forward when there's no real screenshot
  * (no colored-block placeholders, per the design system).
  */
 export interface Project {
@@ -88,7 +88,7 @@ export interface Project {
   blurb: string;
   tags: string[];
   img?: string;
-  /** Transparent-background diagram — render on white, contained (not cropped). */
+  /** Transparent-background diagram: render on white, contained (not cropped). */
   diagram?: boolean;
   /** Show the whole image (object-contain) on the dark panel instead of cropping. */
   contain?: boolean;
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     name: "Corvus",
     group: "AI Systems & Agents",
     blurb:
-      "A persistent personal AI agent — semantic memory on local Ollama embeddings, hybrid Python + LLM execution, and cron-driven daily briefings. Privacy-first, runs on a Mac Mini.",
+      "A persistent personal AI agent: semantic memory on local Ollama embeddings, hybrid Python + LLM execution, and cron-driven daily briefings. Privacy-first, runs on a Mac Mini.",
     tags: ["Agent orchestration", "Local embeddings", "Python", "Memory design"],
     img: "/img/projects/corvus.jpg",
     contain: true,
@@ -113,7 +113,7 @@ export const projects: Project[] = [
     name: "AI Memory System",
     group: "AI Systems & Agents",
     blurb:
-      "A cross-AI JSONL memory layer I built because no tool had one — Claude had no persistent memory, ChatGPT's couldn't be exported, my local model's couldn't be reached. A shared ledger (plus a validation agent) gives all three persistent, shared context.",
+      "A cross-AI JSONL memory layer I built because no tool had one: Claude had no persistent memory, ChatGPT's couldn't be exported, my local model's couldn't be reached. A shared ledger (plus a validation agent) gives all three persistent, shared context.",
     tags: ["RAG", "JSONL", "Context engineering"],
     img: "/img/projects/offline-ai-workflow.png",
     diagram: true,
@@ -123,7 +123,7 @@ export const projects: Project[] = [
     name: "OfflineAI / Local LLM",
     group: "AI Systems & Agents",
     blurb:
-      "A privacy-first, self-hosted LLM stack — Ollama, OpenWebUI, and an MCP bridge, auto-starting and always on.",
+      "A privacy-first, self-hosted LLM stack: Ollama, OpenWebUI, and an MCP bridge, auto-starting and always on.",
     tags: ["Ollama", "Self-hosted", "MCP"],
     img: "/img/projects/offline-ai-architecture.png",
     diagram: true,
@@ -133,21 +133,21 @@ export const projects: Project[] = [
     name: "Mission Control",
     group: "AI Systems & Agents",
     blurb:
-      "An operations dashboard for a fleet of AI agents, with ADHD-aware UX — a \"Three Things\" focus widget, brain-dump triage, and a signal-filtered activity feed.",
+      "An operations dashboard for a fleet of AI agents, with ADHD-aware UX: a \"Three Things\" focus widget, brain-dump triage, and a signal-filtered activity feed.",
     tags: ["Dashboard UX", "Agent ops", "Signal-to-noise"],
   },
   {
     name: "Agent Executive Suite",
     group: "AI Systems & Agents",
     blurb:
-      "A multi-agent org structure — a chief-of-staff agent plus ops, sales, and product agents coordinating across every venture.",
+      "A multi-agent org structure: a chief-of-staff agent plus ops, sales, and product agents coordinating across every venture.",
     tags: ["Multi-agent", "Org design", "Delegation"],
   },
   {
     name: "Apollo Media Server",
     group: "Infrastructure & Self-Hosting",
     blurb:
-      "A fully self-hosted media stack — Jellyfin, Radarr/Sonarr automation, VPN kill-switch, mergerfs storage, Tailscale remote access — documented so anyone can run it.",
+      "A fully self-hosted media stack: Jellyfin, Radarr/Sonarr automation, VPN kill-switch, mergerfs storage, Tailscale remote access, documented so anyone can run it.",
     tags: ["Docker", "Linux", "Storage architecture", "VPN"],
     link: "https://resilienttomorrow.substack.com/p/apollo-build-guide-the-full-automated",
     linkLabel: "Full build guide (June 2026)",
@@ -156,21 +156,21 @@ export const projects: Project[] = [
     name: "Local Voice Control",
     group: "Infrastructure & Self-Hosting",
     blurb:
-      "A privacy-first home voice system — Home Assistant + Wyoming with on-prem speech, routing deterministic commands locally and complex queries to a local LLM.",
+      "A privacy-first home voice system: Home Assistant + Wyoming with on-prem speech, routing deterministic commands locally and complex queries to a local LLM.",
     tags: ["Home Assistant", "Wyoming", "Local LLM", "Privacy by design"],
   },
   {
     name: "Home Solar Array",
     group: "Community & Real-World",
     blurb:
-      "A DIY-designed residential solar + 32 kWh battery system — full energy modeling, structural and permitting work, phased rollout, at a fraction of installer cost.",
+      "A DIY-designed residential solar + 32 kWh battery system: full energy modeling, structural and permitting work, phased rollout, at a fraction of installer cost.",
     tags: ["Energy modeling", "Systems design", "Permitting"],
   },
   {
     name: "NeighborhoodShare",
     group: "Community & Real-World",
     blurb:
-      "A neighbor-to-neighbor tool-sharing platform — snap a photo and AI catalogs the tool down to brand and model. It reached 170 users across 20 communities before I wound it down: tool-sharing proved too infrequent to stay top-of-mind. I'm folding the idea into a larger, multi-purpose community platform.",
+      "A neighbor-to-neighbor tool-sharing platform: snap a photo and AI catalogs the tool down to brand and model. It reached 170 users across 20 communities before I wound it down: tool-sharing proved too infrequent to stay top-of-mind. I'm folding the idea into a larger, multi-purpose community platform.",
     tags: ["React", "GPT-4o Vision", "Go-to-market"],
     img: "/img/projects/neighborhoodshare-home.png",
   },
@@ -184,26 +184,26 @@ export const projectGroups = [
   "Community & Real-World",
 ] as const;
 
-/** A distinctive thread Mike is developing — AI as executive-function support. */
+/** A distinctive thread Mike is developing: AI as executive-function support. */
 export const adhd = {
   title: "AI as executive function",
   lead: "Using AI to work with an ADHD brain, not against it.",
   body:
-    "I'm building — and living in — a system that externalizes memory, makes time visible, and reduces the friction between intention and action. Corvus captures and triages; daily briefings surface the one next thing; AI handles the mechanics so attention goes where it matters. It's resilience at the scale of a single mind, and it's becoming a framework I want to teach.",
+    "I'm building, and living in, a system that externalizes memory, makes time visible, and reduces the friction between intention and action. Corvus captures and triages; daily briefings surface the one next thing; AI handles the mechanics so attention goes where it matters. It's resilience at the scale of a single mind, and it's becoming a framework I want to teach.",
   tags: ["Executive function", "Neurodivergent UX", "Applied AI"],
 };
 
 /** Career milestones for the "Operator" timeline / résumé strip. */
 export const career = [
-  { years: "2023–", org: "Velocity Partners", what: "Founder — AI implementation & fractional PMO" },
+  { years: "2023–", org: "Velocity Partners", what: "Founder: AI implementation & fractional PMO" },
   { years: "2022–", org: "Independent R&D", what: "OfflineAI, Resilient Tomorrow, NeighborhoodShare" },
-  { years: "2020–22", org: "Kinoo", what: "Principal Technical Program Manager — AR family comms (CES Innovation Award)" },
-  { years: "2017–20", org: "8 Circuit Studios", what: "Co-founder / COO — Web3 gaming" },
-  { years: "2009–15", org: "Livescribe · Kabam · Disney Interactive", what: "Director-level roles — gaming & connected hardware" },
-  { years: "1999–2009", org: "Microsoft — Xbox & Xbox 360", what: "Launch teams, 6 AAA titles, SDK patent" },
+  { years: "2020–22", org: "Kinoo", what: "Principal Technical Program Manager: AR family comms (CES Innovation Award)" },
+  { years: "2017–20", org: "8 Circuit Studios", what: "Co-founder / COO: Web3 gaming" },
+  { years: "2009–15", org: "Livescribe · Kabam · Disney Interactive", what: "Director-level roles: gaming & connected hardware" },
+  { years: "1999–2009", org: "Microsoft: Xbox & Xbox 360", what: "Launch teams, 6 AAA titles, SDK patent" },
 ];
 
-/** Resilient Tomorrow's 7 Pillars — featured in the Groundwork direction. */
+/** Resilient Tomorrow's 7 Pillars: featured in the Groundwork direction. */
 export const pillars = [
   "Food Sovereignty",
   "Energy Autonomy",
@@ -221,9 +221,9 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ];
 
-// === KB:BEGIN generated (do not hand-edit — regenerate: node scripts/kb-to-content.mjs)
+// === KB:BEGIN generated (do not hand-edit, regenerate: node scripts/kb-to-content.mjs)
 /**
- * GENERATED REGION — rendered from KB claims by site/scripts/kb-to-content.mjs.
+ * GENERATED REGION: rendered from KB claims by site/scripts/kb-to-content.mjs.
  * DO NOT hand-edit. Flow: KB (public: yes pages only, default-deny) → staging
  * (site/content.staging/) → Mike reviews staged.diff → publish-content.mjs
  * applies + builds + commits. Nothing pushes unattended. Design:
@@ -232,7 +232,7 @@ export const nav = [
  * FIELD MAP (what is generated vs hand-maintained, and why):
  *   certifications GENERATED ← KB/concepts/ccar-f-certification.md (public: yes).
  *   Everything below this region's exports is hand-maintained: its KB sources
- *   are public: no (default-deny) or confidential — see the generator's FIELD
+ *   are public: no (default-deny) or confidential, see the generator's FIELD
  *   MAP header comment for the page-by-page mapping.
  *   Provenance for Certification[] ← KB/concepts/ccar-f-certification.md (public: yes):
  *     name ← fact table "Official name"; abbrev ← "Exam code" (first token;

@@ -16,7 +16,7 @@ Agent querying: GET /agents/query?q=<terms> returns JSON {query, results:[{id, t
 - [Jones Collaboration Company](/agents/kb/kb-company-jonesco.md): The parent entity.
 - [The Agentic Web](/agents/kb/kb-concepts-agentic-web.md): Thesis (Mike, DEC 2026-09-17, restated live 2026-09-29): within 12–18 months, sites stop being rendered UIs and become data/action endpoints queried by agents via protocols like MCP.
 - [Claude Certified Architect - Foundations](/agents/kb/kb-concepts-ccar-f-certification.md): Mike's Anthropic certification, earned 2026-08-28.
-- [Generator Registry](/agents/kb/kb-pipelines-generator-registry.md): What writes into this vault, where, and whether it's alive.
+- [Generator Registry](/agents/kb/kb-pipelines-generator-registry-part1.md): What writes into this vault, where, and whether it's alive.
 - [Publication Layer](/agents/kb/kb-pipelines-publication-layer.md): What it is: the adapter layer between jonesco's KB and the public surfaces.
 - [RT Content Pipeline](/agents/kb/kb-pipelines-rt-content-pipeline.md): Intended flow: trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish.
 - [Task System](/agents/kb/kb-pipelines-task-system.md): What it is: Mike's personal Kanban — the claim layer for how work is captured, decided, and tracked across all four businesses.

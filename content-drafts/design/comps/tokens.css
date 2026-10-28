@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Comp mirror of site/src/styles/tokens.css ("Notebook" system)
+   --------------------------------------------------------------------------
+   Source of truth: ../../../site/src/styles/tokens.css is authoritative.
+   This mirror differs in exactly one way: @font-face URLs are relative
+   (fonts/ in this folder) so the comps open from disk. The values below are
+   a literal copy of the source of truth. If a token changes in the site,
+   change it here before review.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-latin-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fragment Mono";
+  src: url("fonts/fragment-mono-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fragment Mono";
+  src: url("fonts/fragment-mono-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---- Theme: desk (dark, site default) ----------------------------------- */
+
+:root,
+:root[data-theme="dark"] {
+  --bg: #121418;
+  --surface: #1a1d22;
+  --surface-2: #22262c;
+  --hairline: #2c3036;
+  --hairline-strong: #41464e;
+  --ink: #ebe8e1;
+  --ink-2: #a29e96;
+  --ink-3: #8a867e;
+  --accent: #e56c4a;
+  --accent-ink: #1a0d09;
+  --accent-press: #f2916f;
+  --danger: #c75c8c;
+  --selection: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+/* ---- Theme: paper (light, document pages) -------------------------------- */
+
+:root[data-theme="light"] {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --surface-2: #f3f1ea;
+  --hairline: #e5e3db;
+  --hairline-strong: #c9c6bb;
+  --ink: #1c1a15;
+  --ink-2: #514e45;
+  --ink-3: #6b675c;
+  --accent: #b23317;
+  --accent-ink: #fff5ef;
+  --accent-press: #96270f;
+  --danger: #a61e4d;
+  --selection: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* ---- Type, space, radius, elevation, motion ------------------------------ */
+
+:root {
+  --face-ui: "Archivo", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+  --face-doc: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --face-data: "Fragment Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.4375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.5rem;
+  --text-display: clamp(2.5rem, 6.5vw, 4.375rem);
+
+  --weight-ui: 500;
+  --weight-strong: 600;
+  --weight-display: 700;
+  --weight-display-heavy: 800;
+
+  --track-ui: -0.011em;
+  --track-display: -0.022em;
+  --track-data: 0;
+  --leading-ui: 1.5;
+  --leading-doc: 1.65;
+  --leading-display: 1.02;
+
+  --measure-doc: 66ch;
+  --measure-ui: 48ch;
+
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 5rem;
+  --space-3xl: 8rem;
+
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  --raise-sheet: 0 1px 2px rgb(0 0 0 / 0.05), 0 8px 24px rgb(0 0 0 / 0.07);
+  --raise-pop: 0 2px 4px rgb(0 0 0 / 0.08), 0 16px 48px rgb(0 0 0 / 0.14);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.6, 0, 0.2, 1);
+  --dur-instant: 120ms;
+  --dur-fast: 180ms;
+  --dur-slow: 480ms;
+  --reveal-travel: 12px;
+
+  --focus-outline: 2px solid var(--accent);
+  --focus-offset: 3px;
+}

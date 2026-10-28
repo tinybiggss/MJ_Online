@@ -8,17 +8,14 @@ interface Props {
   description?: string;
   /** Current path, used to mark the active nav item. */
   active?: string;
+  /** Passthrough for document pages: pins the paper theme on <html>. */
+  dataTheme?: "light" | "dark" | "auto";
 }
-const { title, description, active = "" } = Astro.props;
+const { title, description, active = "", dataTheme } = Astro.props;
 const isActive = (href: string) => active === href || (href !== "/" && active.startsWith(href));
 ---
 
-<Base title={title} description={description}>
-  <link
-    slot="head"
-    rel="stylesheet"
-    href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800,900&f[]=satoshi@400,500,700&display=swap"
-  />
+<Base title={title} description={description} dataTheme={dataTheme}>
 
   <a
     href="#main"

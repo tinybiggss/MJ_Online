@@ -1,0 +1,240 @@
+/* ==========================================================================
+   mikejones.online design tokens: "Notebook" system
+   --------------------------------------------------------------------------
+   Direction: design as diagnosis, shipped with its receipts. Every claim on
+   the page can be traced to a source, so the brand's one accent is the
+   record red used only for evidence marks, links that act, and the one
+   primary control. Structure is ruled lines, not boxes.
+
+   Two themes, chosen from the use scene:
+     data-theme="dark"  (site default  : the desk, lamp-lit working room)
+     data-theme="light" (document pages: /work and case studies, paper)
+     data-theme="auto"  (follows prefers-color-scheme, no JS needed)
+
+   Fonts are self-hosted in /public/fonts (OFL licensed):
+     Archivo 500/600/700/800  : UI + display voice
+     Source Serif 4 400/400i/600 : long-form document body (case studies)
+     Fragment Mono 400/400i   : data, receipts, citations, figures
+   No font CDN, no Google services. Fonts load from files this repo ships.
+
+   Source of truth: this file. global.css maps Tailwind theme slots onto
+   these variables via @theme inline, so every existing utility class keeps
+   its name and re-skins automatically. The design comps in
+   content-drafts/design/comps/ carry a mirrored copy (font URLs are
+   relative there) until the routes adopt this layout.
+   ========================================================================== */
+
+/* ---- Font faces (self-hosted) ------------------------------------------ */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/archivo-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/archivo-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/archivo-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/archivo-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/archivo-latin-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fragment Mono";
+  src: url("/fonts/fragment-mono-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fragment Mono";
+  src: url("/fonts/fragment-mono-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---- Theme: desk (dark, site default) ----------------------------------- */
+
+:root,
+:root[data-theme="dark"] {
+  --bg: #121418;
+  --surface: #1a1d22;
+  --surface-2: #22262c;
+  --hairline: #2c3036;
+  --hairline-strong: #41464e;
+  --ink: #ebe8e1;
+  --ink-2: #a29e96;
+  --ink-3: #8a867e;
+  --accent: #e56c4a;
+  --accent-ink: #1a0d09;
+  --accent-press: #f2916f;
+  --danger: #c75c8c;
+  --selection: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+/* ---- Theme: paper (light, document pages) -------------------------------- */
+
+:root[data-theme="light"] {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --surface-2: #f3f1ea;
+  --hairline: #e5e3db;
+  --hairline-strong: #c9c6bb;
+  --ink: #1c1a15;
+  --ink-2: #514e45;
+  --ink-3: #6b675c;
+  --accent: #b23317;
+  --accent-ink: #fff5ef;
+  --accent-press: #96270f;
+  --danger: #a61e4d;
+  --selection: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* ---- Auto theme (no JS): follows the OS when pinned to auto -------------- */
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme="auto"] {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --surface-2: #f3f1ea;
+    --hairline: #e5e3db;
+    --hairline-strong: #c9c6bb;
+    --ink: #1c1a15;
+    --ink-2: #514e45;
+    --ink-3: #6b675c;
+    --accent: #b23317;
+    --accent-ink: #fff5ef;
+    --accent-press: #96270f;
+    --danger: #a61e4d;
+    --selection: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    --bg: #121418;
+    --surface: #1a1d22;
+    --surface-2: #22262c;
+    --hairline: #2c3036;
+    --hairline-strong: #41464e;
+    --ink: #ebe8e1;
+    --ink-2: #a29e96;
+    --ink-3: #8a867e;
+    --accent: #e56c4a;
+    --accent-ink: #1a0d09;
+    --accent-press: #f2916f;
+    --danger: #c75c8c;
+    --selection: color-mix(in srgb, var(--accent) 32%, transparent);
+  }
+}
+
+/* ---- Type ---------------------------------------------------------------- */
+
+:root {
+  --face-ui: "Archivo", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+  --face-doc: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --face-data: "Fragment Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-2xs: 0.6875rem;   /* 11px: mono receipts, fine print */
+  --text-xs: 0.8125rem;    /* 13px: metadata */
+  --text-sm: 0.875rem;     /* 14px: secondary UI */
+  --text-base: 1rem;       /* 16px: UI body */
+  --text-lg: 1.1875rem;    /* 19px: document body */
+  --text-xl: 1.4375rem;    /* 23px: card titles, lead paragraphs */
+  --text-2xl: 1.75rem;     /* 28px: section titles */
+  --text-3xl: 2.5rem;      /* 40px: page display, small end */
+  --text-display: clamp(2.5rem, 6.5vw, 4.375rem); /* page display, floor 40px cap 70px */
+
+  --weight-ui: 500;
+  --weight-strong: 600;
+  --weight-display: 700;
+  --weight-display-heavy: 800;
+
+  --track-ui: -0.011em;
+  --track-display: -0.022em;   /* floor -0.04em per craft rules, gentler for a document voice */
+  --track-data: 0;
+  --leading-ui: 1.5;
+  --leading-doc: 1.65;         /* long-form reading */
+  --leading-display: 1.02;
+
+  --measure-doc: 66ch;         /* long-form reading measure */
+  --measure-ui: 48ch;
+}
+
+/* ---- Space, radius, elevation, motion ------------------------------------ */
+
+:root {
+  /* Space: 4px base, doubling into the display steps */
+  --space-2xs: 0.25rem;   /*  4 */
+  --space-xs: 0.5rem;     /*  8 */
+  --space-sm: 0.75rem;    /* 12 */
+  --space-md: 1.25rem;    /* 20 */
+  --space-lg: 2rem;       /* 32 */
+  --space-xl: 3rem;       /* 48 */
+  --space-2xl: 5rem;      /* 80 */
+  --space-3xl: 8rem;      /*128 */
+
+  --radius-none: 0;
+  --radius-sm: 2px;       /* inputs, tags */
+  --radius-md: 4px;       /* primary controls only */
+  --radius-pill: 999px;
+
+  /* Elevation: paper sheets, never glows. Offset + blur, always. */
+  --raise-sheet: 0 1px 2px rgb(0 0 0 / 0.05), 0 8px 24px rgb(0 0 0 / 0.07);
+  --raise-pop: 0 2px 4px rgb(0 0 0 / 0.08), 0 16px 48px rgb(0 0 0 / 0.14);
+
+  /* Motion: one reveal gesture, exponential ease-out, from visible */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.6, 0, 0.2, 1);
+  --dur-instant: 120ms;
+  --dur-fast: 180ms;
+  --dur-slow: 480ms;
+  --reveal-travel: 12px;
+
+  --focus-outline: 2px solid var(--accent);
+  --focus-offset: 3px;
+}
