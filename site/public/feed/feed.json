@@ -24,7 +24,14 @@
         "audience": [
           "public"
         ],
-        "type": "essay"
+        "type": "essay",
+        "mirrors": [
+          {
+            "platform": "bluesky",
+            "url": "https://bsky.app/profile/resilienttomorrow.substack.com/post/3mz4nlvwvw32h",
+            "date": "2026-10-30"
+          }
+        ]
       }
     },
     {

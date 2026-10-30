@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T21:44:40.702Z",
+  "generated_at": "2026-10-30T00:00:00.000Z",
   "canonical": "https://mikejones.online/feed/feed.json",
   "spec": "https://jsonfeed.org/version/1.1",
   "slices": [
@@ -66,7 +66,7 @@
       "last_post": "2026-10-30T18:46:57.000Z"
     },
     "kb": {
-      "last_modified": "2026-10-30T19:09:42.081Z"
+      "last_modified": "2026-10-30T00:00:00.000Z"
     }
   },
   "totals": {
