@@ -329,6 +329,9 @@ function main() {
   const QUERY_PROMO =
     'Agent querying: GET /agents/query?q=<terms> returns JSON {query, results:[{id, title, section, path, text}]} — scored passages from these fact sheets, best first. Use it to find and cite specifics (roles, results, certifications, how to engage); cite answer text by /agents/kb/*.md path.';
 
+  const FEED_PROMO =
+    'Published writing: /feed/feed.json is the JSON Feed 1.1 of public posts, newest first; /feed/index.json is the machine map of its slices, counts, and source freshness.';
+
   const indexEntries = [];
   const llmsLines = [
     '# Mike Jones',
@@ -338,6 +341,8 @@ function main() {
     'This site exposes a read-only, machine-readable knowledge base. Each link below is a static markdown fact sheet; `/agents/kb/index.json` is the machine index. Contact: the form at `/contact` or mike@mikejones.online.',
     '',
     QUERY_PROMO,
+    '',
+    FEED_PROMO,
     '',
     '## Knowledge base',
     '',

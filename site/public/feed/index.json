@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-10-30T21:10:26.370Z",
+  "canonical": "https://mikejones.online/feed/feed.json",
+  "slices": [
+    {
+      "slug": "public",
+      "feed_url": "https://mikejones.online/feed/feed.json",
+      "atom_url": "https://mikejones.online/feed/atom.xml",
+      "item_count": 20,
+      "token_required": false
+    }
+  ],
+  "sources": {
+    "published_log": {
+      "dir": "Social/Published",
+      "items": 0
+    },
+    "substack": {
+      "url": "https://resilienttomorrow.substack.com/feed",
+      "fetched": true,
+      "items": 20,
+      "merged": 20,
+      "last_post": "2026-10-30T18:46:57.000Z"
+    },
+    "kb": {
+      "last_modified": "2026-10-30T19:09:42.081Z"
+    }
+  },
+  "totals": {
+    "items": 20
+  },
+  "note": "P0: public slice only. Audiences work/friends/family/agents are defined in docs/spec/v1-publisher.md §5 and ship in P1/P2."
+}

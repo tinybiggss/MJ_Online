@@ -29,6 +29,24 @@ export default defineConfig({
         },
       },
     },
+    {
+      // Regenerate the syndication feed the same way: feed-build.mjs keeps
+      // committed output when the vault is absent, so CI ships what was committed.
+      name: 'feed-build',
+      hooks: {
+        'astro:build:start': async () => {
+          const { execFileSync } = await import('node:child_process');
+          try {
+            execFileSync('node', ['scripts/feed-build.mjs'], {
+              stdio: 'inherit',
+              cwd: new URL('.', import.meta.url).pathname,
+            });
+          } catch (err) {
+            console.warn('[feed-build] regeneration failed; building with committed output.', err);
+          }
+        },
+      },
+    },
   ],
   vite: {
     plugins: [tailwindcss()],

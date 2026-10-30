@@ -1,0 +1,177 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Mike Jones",
+  "home_page_url": "https://mikejones.online",
+  "feed_url": "https://mikejones.online/feed/feed.json",
+  "description": "Mike Jones — product, AI, and resilience. Essays and dispatches, published at mikejones.online.",
+  "icon": "https://mikejones.online/img/logos/favicon-jones-co.png",
+  "language": "en-US",
+  "authors": [
+    {
+      "name": "Mike Jones",
+      "url": "https://mikejones.online"
+    }
+  ],
+  "items": [
+    {
+      "id": "substack-three-ways-to-own-your-corner-of",
+      "url": "https://resilienttomorrow.substack.com/p/three-ways-to-own-your-corner-of",
+      "title": "Own Your Corner of the Web",
+      "summary": "3 Ways to Prepare for the Agentic Web",
+      "content_text": "3 Ways to Prepare for the Agentic Web",
+      "date_published": "2026-10-30T18:46:57.000Z"
+    },
+    {
+      "id": "substack-your-agent-their-terms",
+      "url": "https://resilienttomorrow.substack.com/p/your-agent-their-terms",
+      "title": "Your Agent, Their Terms",
+      "summary": "A friend tried Muse. We should have a big talk about this.",
+      "content_text": "A friend tried Muse. We should have a big talk about this.",
+      "date_published": "2026-10-08T21:31:17.000Z"
+    },
+    {
+      "id": "substack-the-revolution-already-started-its",
+      "url": "https://resilienttomorrow.substack.com/p/the-revolution-already-started-its",
+      "title": "The Revolution Already Started. It’s Happening Quietly on Your Street.",
+      "summary": "If you’ve ever caught yourself saying, “It’s just a hobby,” you were describing the off-ramp and didn’t know it.",
+      "content_text": "If you’ve ever caught yourself saying, “It’s just a hobby,” you were describing the off-ramp and didn’t know it.",
+      "date_published": "2026-07-22T21:22:33.000Z"
+    },
+    {
+      "id": "substack-your-expertise-is-the-asset-your",
+      "url": "https://resilienttomorrow.substack.com/p/your-expertise-is-the-asset-your",
+      "title": "Your Expertise Is the Asset. Your Job Is Just One Way of Renting It Out.",
+      "summary": "There are other buyers — and the first step to reaching them is smaller than you think.",
+      "content_text": "There are other buyers — and the first step to reaching them is smaller than you think.",
+      "date_published": "2026-06-25T20:11:56.000Z"
+    },
+    {
+      "id": "substack-apollo-build-guide-the-full-automated",
+      "url": "https://resilienttomorrow.substack.com/p/apollo-build-guide-the-full-automated",
+      "title": "Apollo Build Guide: The Full Automated Media Server",
+      "summary": "This is the complete build behind Apollo — my home media server — for readers who’ve finished the article You Don’t own Your Movies and want to take the next step from The Starter Kit to the automation, privacy, and resilience layer on top.",
+      "content_text": "This is the complete build behind Apollo — my home media server — for readers who’ve finished the article You Don’t own Your Movies and want to take the next step from The Starter Kit to the automation, privacy, and resilience layer on top.",
+      "date_published": "2026-06-11T22:34:52.000Z"
+    },
+    {
+      "id": "substack-you-dont-own-the-movies-you-paid",
+      "url": "https://resilienttomorrow.substack.com/p/you-dont-own-the-movies-you-paid",
+      "title": "They Can Delete the Movies You Paid For. Here's How to Keep Them.",
+      "summary": "Streaming, cloud photos, the documents you write — you have access, not possession. A $150 box and a free app is the smallest way to own a piece of it back, and the first step costs nothing.",
+      "content_text": "Streaming, cloud photos, the documents you write — you have access, not possession. A $150 box and a free app is the smallest way to own a piece of it back, and the first step costs nothing.",
+      "date_published": "2026-06-11T22:32:30.000Z"
+    },
+    {
+      "id": "substack-your-after-school-waitlist-is-2-years",
+      "url": "https://resilienttomorrow.substack.com/p/your-after-school-waitlist-is-2-years",
+      "title": "22.6 Million Kids, No After-School Spot. Neighbors Are Building the Free Fix.",
+      "summary": "Your school district can’t solve this. Your neighbors can.",
+      "content_text": "Your school district can’t solve this. Your neighbors can.",
+      "date_published": "2026-06-04T18:12:00.000Z"
+    },
+    {
+      "id": "substack-build-a-community-site-with-ai-live",
+      "url": "https://resilienttomorrow.substack.com/p/build-a-community-site-with-ai-live",
+      "title": "Build a Community Site with AI - LIVE COURSE",
+      "summary": "A Hands-On Introduction to Creating Community Infrastructure with AI",
+      "content_text": "A Hands-On Introduction to Creating Community Infrastructure with AI",
+      "date_published": "2026-05-05T21:46:16.000Z"
+    },
+    {
+      "id": "substack-solarpunk-isnt-coming-its-already",
+      "url": "https://resilienttomorrow.substack.com/p/solarpunk-isnt-coming-its-already",
+      "title": "Solarpunk isn’t coming. It’s already here.",
+      "summary": "The future isn't waiting on policy. It's being built block by block, by people who stopped asking permission.",
+      "content_text": "The future isn't waiting on policy. It's being built block by block, by people who stopped asking permission.",
+      "date_published": "2026-04-17T20:09:17.000Z"
+    },
+    {
+      "id": "substack-anthropic-did-the-right-thing-thats",
+      "url": "https://resilienttomorrow.substack.com/p/anthropic-did-the-right-thing-thats",
+      "title": "Anthropic Did the Right Thing. That's the Problem.",
+      "summary": "The Vote They Can't Rig",
+      "content_text": "The Vote They Can't Rig",
+      "date_published": "2026-03-09T18:22:09.000Z"
+    },
+    {
+      "id": "substack-what-if-everything-you-were-told",
+      "url": "https://resilienttomorrow.substack.com/p/what-if-everything-you-were-told",
+      "title": "What If Everything You Were Told About Progress Is Wrong?",
+      "summary": "Evidence that centralized systems are the exception—and why that matters now",
+      "content_text": "Evidence that centralized systems are the exception—and why that matters now",
+      "date_published": "2026-02-10T22:36:07.000Z"
+    },
+    {
+      "id": "substack-what-sign-are-you-still-putting-in",
+      "url": "https://resilienttomorrow.substack.com/p/what-sign-are-you-still-putting-in",
+      "title": "What Sign Are You Still Putting in the Window?",
+      "summary": "A Prime Minister just said the quiet part out loud—and it changes what pretending costs",
+      "content_text": "A Prime Minister just said the quiet part out loud—and it changes what pretending costs",
+      "date_published": "2026-01-21T21:25:18.000Z"
+    },
+    {
+      "id": "substack-7-pillars-to-loosen-the-systems-grip",
+      "url": "https://resilienttomorrow.substack.com/p/7-pillars-to-loosen-the-systems-grip",
+      "title": "7 Pillars to Loosen the System's Grip on You—Without Burning It Down",
+      "summary": "You don't have to drop out. You can build in parallel.",
+      "content_text": "You don't have to drop out. You can build in parallel.",
+      "date_published": "2025-12-16T19:42:47.000Z"
+    },
+    {
+      "id": "substack-were-building-our-own-power-gridbecause",
+      "url": "https://resilienttomorrow.substack.com/p/were-building-our-own-power-gridbecause",
+      "title": "What Happens When Neighbors Build Their Own Power Grid",
+      "summary": "Rising bills aren’t the end of the story. They’re the beginning of a movement to build what private equity can’t own, buy, or sell.",
+      "content_text": "Rising bills aren’t the end of the story. They’re the beginning of a movement to build what private equity can’t own, buy, or sell.",
+      "date_published": "2025-08-28T21:02:38.000Z"
+    },
+    {
+      "id": "substack-the-community-defense-playbook",
+      "url": "https://resilienttomorrow.substack.com/p/the-community-defense-playbook",
+      "title": "The Community Defense Playbook",
+      "summary": "Your Complete Guide to Building Communities Too Strong to Sell",
+      "content_text": "Your Complete Guide to Building Communities Too Strong to Sell",
+      "date_published": "2025-08-14T15:02:49.000Z"
+    },
+    {
+      "id": "substack-your-neighborhood-is-being-sold-while",
+      "url": "https://resilienttomorrow.substack.com/p/your-neighborhood-is-being-sold-while",
+      "title": "Your Neighborhood Is Being Sold While You Sleep",
+      "summary": "The 7-step takeover playbook—why the same moves hit city after city, and how to make yours too strong to sell",
+      "content_text": "The 7-step takeover playbook—why the same moves hit city after city, and how to make yours too strong to sell",
+      "date_published": "2025-08-14T15:01:56.000Z"
+    },
+    {
+      "id": "substack-you-wanted-actionheres-what-were",
+      "url": "https://resilienttomorrow.substack.com/p/you-wanted-actionheres-what-were",
+      "title": "You Wanted Action—Here’s What We’re Building (And How to Join)",
+      "summary": "A peek behind the curtain: NeighborhoodShare beta, Offramp assistant, and what’s coming next",
+      "content_text": "A peek behind the curtain: NeighborhoodShare beta, Offramp assistant, and what’s coming next",
+      "date_published": "2025-07-21T21:45:28.000Z"
+    },
+    {
+      "id": "substack-imagination-was-the-first-thing-they",
+      "url": "https://resilienttomorrow.substack.com/p/imagination-was-the-first-thing-they",
+      "title": "The Imagination Heist: What Did You Really Lose?",
+      "summary": "It wasn’t your time or your data—they took your ability to imagine something better.",
+      "content_text": "It wasn’t your time or your data—they took your ability to imagine something better.",
+      "date_published": "2025-06-24T22:17:30.000Z"
+    },
+    {
+      "id": "substack-power-to-the-people-reclaiming-your",
+      "url": "https://resilienttomorrow.substack.com/p/power-to-the-people-reclaiming-your",
+      "title": "Power to the People: Reclaiming Your Energy Sovereignty",
+      "summary": "Step 2 (article 4) in the “7 Steps to Quietly Exit a System That Wants You Dependent” Series",
+      "content_text": "Step 2 (article 4) in the “7 Steps to Quietly Exit a System That Wants You Dependent” Series",
+      "date_published": "2025-06-13T21:40:27.000Z"
+    },
+    {
+      "id": "substack-convenience-is-the-cage",
+      "url": "https://resilienttomorrow.substack.com/p/convenience-is-the-cage",
+      "title": "Convenience Is the Cage: Why Redefining Wealth Is the First Step to Freedom",
+      "summary": "Most people think wealth means having money.",
+      "content_text": "Most people think wealth means having money.",
+      "date_published": "2025-06-06T22:32:31.000Z"
+    }
+  ]
+}

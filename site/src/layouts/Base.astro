@@ -38,6 +38,8 @@ const imageURL = new URL(image, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/png" href="/img/logos/favicon-jones-co.png" />
+    <link rel="alternate" type="application/feed+json" href="/feed/feed.json" title="Mike Jones — JSON Feed" />
+    <link rel="alternate" type="application/atom+xml" href="/feed/atom.xml" title="Mike Jones — Atom" />
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

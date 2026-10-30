@@ -6,6 +6,8 @@ This site exposes a read-only, machine-readable knowledge base. Each link below 
 
 Agent querying: GET /agents/query?q=<terms> returns JSON {query, results:[{id, title, section, path, text}]} — scored passages from these fact sheets, best first. Use it to find and cite specifics (roles, results, certifications, how to engage); cite answer text by /agents/kb/*.md path.
 
+Published writing: /feed/feed.json is the JSON Feed 1.1 of public posts, newest first; /feed/index.json is the machine map of its slices, counts, and source freshness.
+
 ## Knowledge base
 
 - [How Mike Works](/agents/kb/kb-ai-how-mike-works.md): How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated.
