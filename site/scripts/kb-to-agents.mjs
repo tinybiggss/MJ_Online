@@ -26,20 +26,46 @@
  * Usage:
  *   node scripts/kb-to-agents.mjs             # regenerate public/ agents output
  *   node scripts/kb-to-agents.mjs --dry       # summary only, writes nothing
+ *   node scripts/kb-to-agents.mjs --digest    # print the published-projection digests, writes nothing
+ *   node scripts/kb-to-agents.mjs --json      # stdout is one JSON object, no human summary
  *   KB_DIR=/path/to/KB node scripts/kb-to-agents.mjs
+ *   KB_OUT_DIR=/tmp/x/agents/kb node scripts/kb-to-agents.mjs   # render somewhere other than public/
+ *   LLMS_OUT=/tmp/x/llms.txt                                    # same, for llms.txt
+ *
+ * The digest hashes what a reader receives, not the vault file: the nightly KB pass
+ * bumps `updated:`, appends History lines and writer stamps, and none of that changes
+ * a published claim. feed-notice.mjs compares it to the committed digest.json to tell
+ * a real edit from bookkeeping.
  */
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 
 const SITE_DIR = path.resolve(new URL('..', import.meta.url).pathname);
 const PUBLIC_DIR = path.join(SITE_DIR, 'public');
-const AGENTS_DIR = path.join(PUBLIC_DIR, 'agents', 'kb');
-const LLMS_TXT = path.join(PUBLIC_DIR, 'llms.txt');
+const AGENTS_DIR = process.env.KB_OUT_DIR ? path.resolve(process.env.KB_OUT_DIR) : path.join(PUBLIC_DIR, 'agents', 'kb');
+const LLMS_TXT = resolveLlmsPath();
 const KB_DIR = process.env.KB_DIR || '/Users/michaeljones/Dev/Obsidian/Mike_Thinking_Space/KB';
 const DRY = process.argv.includes('--dry');
+const DIGEST = process.argv.includes('--digest');
+const JSON_OUT = process.argv.includes('--json');
+// With --json, stdout belongs to the one JSON object.
+const say = (...args) => {
+  if (!JSON_OUT) console.log(...args);
+};
+
+/** A redirected export must never touch the real llms.txt; an agents/kb tree keeps public/'s layout. */
+function resolveLlmsPath() {
+  if (process.env.LLMS_OUT) return path.resolve(process.env.LLMS_OUT);
+  if (!process.env.KB_OUT_DIR) return path.join(PUBLIC_DIR, 'llms.txt');
+  const outDir = path.resolve(process.env.KB_OUT_DIR);
+  const parent = path.dirname(outDir);
+  const root = path.basename(outDir) === 'kb' && path.basename(parent) === 'agents' ? path.dirname(parent) : parent;
+  return path.join(root, 'llms.txt');
+}
 
 // ------------------------------------------------------------------ filtering
-const CONFIDENTIAL_PAGE_VALUES = new Set(['ghn', 'internal']);
+const NOT_CONFIDENTIAL_VALUES = new Set(['none', 'no', 'false']);
 const SKIP_PAGES = new Set(['SCHEMA.md', 'index.md', 'log.md']);
 const EXCLUDED_SECTIONS = /^(sources?|history)\b/i;
 const MIN_CHUNK_CHARS = 80;
@@ -67,6 +93,25 @@ function parseFrontmatter(text) {
     if (fm) fields[fm[1]] = fm[2].trim();
   }
   return { fields, body: text.slice(m[0].length) };
+}
+
+/** Only an absent key or an explicit negative passes; a bare or quoted value still blocks. */
+function isConfidentialPage(fields) {
+  if (!Object.hasOwn(fields, 'confidential')) return false;
+  const value = fields['confidential'].replace(/\s+#.*$/, '').replace(/^["']|["']$/g, '').trim().toLowerCase();
+  return !NOT_CONFIDENTIAL_VALUES.has(value);
+}
+
+/** Comments are the vault's internal voice. Unterminated, one hides the rest of the file. */
+function stripHtmlComments(text) {
+  let out = text;
+  let previous;
+  // Repeated because removing one comment can join the pieces around it into another.
+  do {
+    previous = out;
+    out = out.replace(/<!--[\s\S]*?-->/g, '');
+  } while (out !== previous);
+  return out.replace(/<!--[\s\S]*$/, '');
 }
 
 function lineIsConfidential(line) {
@@ -150,11 +195,10 @@ function loadPages(kbDir) {
       else if (e.isFile() && e.name.endsWith('.md') && !SKIP_PAGES.has(e.name)) {
         const text = fs.readFileSync(p, 'utf8');
         const { fields, body } = parseFrontmatter(text);
-        const conf = (fields['confidential'] || 'none').toLowerCase();
         const pub = (fields['public'] || 'no').toLowerCase() === 'yes';
         const rel = path.relative(kbDir, p).split(path.sep).join('/');
-        if (CONFIDENTIAL_PAGE_VALUES.has(conf)) {
-          excluded.push({ rel, reason: `confidential: ${conf} — never public` });
+        if (isConfidentialPage(fields)) {
+          excluded.push({ rel, reason: `confidential: ${fields['confidential']} — never public` });
         } else if (!pub) {
           excluded.push({ rel, reason: 'default-deny (public: no)' });
         } else {
@@ -169,7 +213,9 @@ function loadPages(kbDir) {
 
 // ---------------------------------------------------------------- page render
 function renderPage(page) {
-  const { intro, sections } = splitSections(page.body);
+  // Before any line or section logic, so a comment can neither open a section nor
+  // pad one past MIN_CHUNK_CHARS: an appended stamp must not change what gets emitted.
+  const { intro, sections } = splitSections(stripHtmlComments(page.body));
   const title = page.fields['title'] || page.rel;
   const updated = page.fields['updated'] || null;
   let cleanedIntro = cleanLines(intro.join('\n'));
@@ -260,7 +306,7 @@ function renderPage(page) {
     })
   );
 
-  return { title, updated, summary, chunks, files, searchEntries, redactedEmpty: false };
+  return { title, updated, summary, chunks, files, searchEntries, bodyParts, redactedEmpty: false };
 }
 
 /** Split an emitted bodyPart back into heading + prose for search entries.
@@ -273,11 +319,43 @@ function sectionMeta(bodyPart) {
   return { section, raw: text };
 }
 
+// --------------------------------------------------------------------- digest
+/** sha256 of the published projection: body chunks only, comments and whitespace runs removed. */
+function pageDigest(bodyParts) {
+  const projection = stripHtmlComments(bodyParts.join('\n\n')).replace(/\s+/g, ' ').trim();
+  return `sha256:${createHash('sha256').update(projection).digest('hex')}`;
+}
+
+function digestView(rendered, orphans) {
+  const pages = {};
+  for (const r of rendered) {
+    if (!r.chunks?.length) continue;
+    pages[`kb-${slugify(r.page.rel)}`] = { digest: pageDigest(r.bodyParts), updated: r.updated, files: r.files };
+  }
+  return { generated_at: new Date().toISOString(), pages, orphans };
+}
+
+/** .md files on disk that this export does not contain. */
+function unreferencedFiles(rendered) {
+  const expected = new Set(rendered.flatMap((r) => r.files || []));
+  let names = [];
+  try {
+    names = fs.readdirSync(AGENTS_DIR);
+  } catch {
+    return [];
+  }
+  return names.filter((name) => name.endsWith('.md') && !expected.has(name)).sort();
+}
+
 // ----------------------------------------------------------------------- main
 function main() {
   const dry = DRY || !fs.existsSync(KB_DIR);
   if (!fs.existsSync(KB_DIR)) {
     console.error(`KB_DIR not found: ${KB_DIR} — CI/cloud build: keeping committed agents output as-is.`);
+    if (DIGEST) {
+      console.log(JSON.stringify({ error: 'kb_absent' }));
+      process.exit(2);
+    }
   }
 
   const { pages, excluded } = fs.existsSync(KB_DIR) ? loadPages(KB_DIR) : { pages: [], excluded: [] };
@@ -316,11 +394,24 @@ function main() {
     emptyAfterRedaction: rendered.filter((r) => r.redactedEmpty).map((r) => r.page.rel),
     pages: rendered.map((r) => ({ rel: r.page.rel, files: r.files?.length || 0 })),
   };
-  console.log('--- KB → agents export (summary) ---');
-  console.log(JSON.stringify(summary, null, 2));
+
+  if (DIGEST) {
+    const view = digestView(rendered, unreferencedFiles(rendered));
+    if (JSON_OUT) {
+      console.log(JSON.stringify(view));
+    } else {
+      for (const [id, entry] of Object.entries(view.pages)) console.log(`${entry.digest}  ${id}`);
+      console.log(`${Object.keys(view.pages).length} page(s), orphans: ${view.orphans.join(', ') || 'none'}`);
+    }
+    return;
+  }
+
+  say('--- KB → agents export (summary) ---');
+  say(JSON.stringify(summary, null, 2));
 
   if (dry) {
-    console.log('Dry run (or KB absent): wrote nothing.');
+    say('Dry run (or KB absent): wrote nothing.');
+    if (JSON_OUT) console.log(JSON.stringify(summary));
     return;
   }
 
@@ -350,7 +441,7 @@ function main() {
 
   for (const r of rendered) {
     if (!r.chunks || !r.chunks.length) {
-      console.log(`   skip (no emit after redaction): KB/${r.page.rel}`);
+      say(`   skip (no emit after redaction): KB/${r.page.rel}`);
       continue;
     }
     const base = `kb-${slugify(r.page.rel)}`;
@@ -381,16 +472,13 @@ function main() {
       title: r.title,
       updated: r.updated,
       summary: r.summary,
-      path: `/agents/kb/${base}.md`,
+      // The first file, not `${base}.md`: a split page has no file by that name.
+      path: `/agents/kb/${r.files[0]}`,
       files: r.files,
     });
-    // Clean stale parts: if page was previously multi-part, part2.. remain.
-    for (let i = r.chunks.length + 1; i < 10; i++) {
-      const stale = path.join(AGENTS_DIR, `${base}-part${i}.md`);
-      if (fs.existsSync(stale)) fs.rmSync(stale);
-    }
   }
 
+  fs.mkdirSync(path.dirname(LLMS_TXT), { recursive: true });
   fs.writeFileSync(LLMS_TXT, llmsLines.join('\n') + '\n');
   fs.writeFileSync(
     path.join(AGENTS_DIR, 'index.json'),
@@ -420,9 +508,20 @@ function main() {
     ) + '\n'
   );
 
-  console.log(`\nWrote ${indexEntries.length} page(s) → ${AGENTS_DIR.replace(SITE_DIR + '/', 'site/')}`);
-  console.log(`Wrote ${LLMS_TXT.replace(SITE_DIR + '/', 'site/')}`);
-  console.log(`Wrote search-index.json (${searchEntries.length} entries) — endpoint /agents/query`);
+  // A file the index doesn't list is a page that was published and no longer is. This
+  // also covers a page that shrank from several parts or was redacted down to nothing.
+  const orphans = unreferencedFiles(rendered);
+  for (const name of orphans) {
+    fs.rmSync(path.join(AGENTS_DIR, name));
+    say(`   removed orphan: ${name}`);
+  }
+  fs.writeFileSync(path.join(AGENTS_DIR, 'digest.json'), JSON.stringify(digestView(rendered, orphans), null, 2) + '\n');
+
+  say(`\nWrote ${indexEntries.length} page(s) → ${AGENTS_DIR.replace(SITE_DIR + '/', 'site/')}`);
+  say(`Wrote ${LLMS_TXT.replace(SITE_DIR + '/', 'site/')}`);
+  say(`Wrote search-index.json (${searchEntries.length} entries) — endpoint /agents/query`);
+  say(`Wrote digest.json (${orphans.length} orphan(s) removed)`);
+  if (JSON_OUT) console.log(JSON.stringify({ ...summary, orphansRemoved: orphans }));
 }
 
 /** First-sentence summary helper (falls back to page summary). */

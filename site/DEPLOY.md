@@ -58,3 +58,7 @@ The form is progressively enhanced: with JS it submits via `fetch` and shows inl
 - `public/robots.txt` + generated `sitemap-index.xml` are included for SEO.
 - **Chatbot:** `src/components/ChatbotSlot.astro` currently loads the existing custom widget as a placeholder. To switch to the Distills career-bot, replace the two `<script>` tags there with the Distills embed snippet — nothing else changes.
 - The Substack RSS feed is fetched **at build time**. New essays appear on the next deploy/rebuild. To auto-refresh, add a Cloudflare Pages **Deploy Hook** on a cron (e.g. daily) later.
+
+## Feed and agent export
+
+`public/feed/` (`scripts/feed-build.mjs`) and `public/agents/` + `public/llms.txt` (`scripts/kb-to-agents.mjs`) are two generators writing into `public/`. Commit them together or not at all: a partial `git add` ships artifacts that disagree, and Cloudflare Pages has no vault, so what is committed is what serves. `npm run feed:notice` is the detector: run on its own, it reports what a rebuild would change and what the publication log doesn't know about, staging its findings in `content.staging/feed-notice/` and a kanban card. It is never wired into the build, because a build must not create cards, and it never writes `public/`, the vault, or git.

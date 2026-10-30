@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Mike Jones</title>
+  <subtitle>Product, AI, and resilience — published at mikejones.online.</subtitle>
+  <link rel="self" href="https://mikejones.online/feed/public/atom.xml"/>
+  <link rel="alternate" type="text/html" href="https://mikejones.online"/>
+  <id>https://mikejones.online/</id>
+  <updated>2026-10-30T00:00:00.000Z</updated>
+  <author><name>Mike Jones</name><uri>https://mikejones.online</uri></author>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/three-ways-to-own-your-corner-of</id>
+    <title>Three Ways to Own Your Corner of the Web</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/three-ways-to-own-your-corner-of"/>
+    <published>2026-10-30T00:00:00.000Z</published>
+    <updated>2026-10-30T00:00:00.000Z</updated>
+    <summary>AI agents are changing how people get found. Start with a page and an assistant, then see what they do with it. The last time I could feel a technology opening up the world, I didn&apos;t know what to do with it. It was the early nineties. The internet was arriving. I felt the…</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/your-agent-their-terms</id>
+    <title>Your Agent, Their Terms</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/your-agent-their-terms"/>
+    <published>2026-10-08T21:31:17.000Z</published>
+    <updated>2026-10-08T21:31:17.000Z</updated>
+    <summary>A friend tried Muse. We should have a big talk about this.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/the-revolution-already-started-its</id>
+    <title>The Revolution Already Started. It’s Happening Quietly on Your Street.</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/the-revolution-already-started-its"/>
+    <published>2026-07-22T21:22:33.000Z</published>
+    <updated>2026-07-22T21:22:33.000Z</updated>
+    <summary>If you’ve ever caught yourself saying, “It’s just a hobby,” you were describing the off-ramp and didn’t know it.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/your-expertise-is-the-asset-your</id>
+    <title>Your Expertise Is the Asset. Your Job Is Just One Way of Renting It Out.</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/your-expertise-is-the-asset-your"/>
+    <published>2026-06-25T20:11:56.000Z</published>
+    <updated>2026-06-25T20:11:56.000Z</updated>
+    <summary>There are other buyers — and the first step to reaching them is smaller than you think.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/apollo-build-guide-the-full-automated</id>
+    <title>Apollo Build Guide: The Full Automated Media Server</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/apollo-build-guide-the-full-automated"/>
+    <published>2026-06-11T22:34:52.000Z</published>
+    <updated>2026-06-11T22:34:52.000Z</updated>
+    <summary>This is the complete build behind Apollo — my home media server — for readers who’ve finished the article You Don’t own Your Movies and want to take the next step from The Starter Kit to the automation, privacy, and resilience layer on top.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/you-dont-own-the-movies-you-paid</id>
+    <title>They Can Delete the Movies You Paid For. Here&apos;s How to Keep Them.</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/you-dont-own-the-movies-you-paid"/>
+    <published>2026-06-11T22:32:30.000Z</published>
+    <updated>2026-06-11T22:32:30.000Z</updated>
+    <summary>Streaming, cloud photos, the documents you write — you have access, not possession. A $150 box and a free app is the smallest way to own a piece of it back, and the first step costs nothing.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/your-after-school-waitlist-is-2-years</id>
+    <title>22.6 Million Kids, No After-School Spot. Neighbors Are Building the Free Fix.</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/your-after-school-waitlist-is-2-years"/>
+    <published>2026-06-04T18:12:00.000Z</published>
+    <updated>2026-06-04T18:12:00.000Z</updated>
+    <summary>Your school district can’t solve this. Your neighbors can.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/build-a-community-site-with-ai-live</id>
+    <title>Build a Community Site with AI - LIVE COURSE</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/build-a-community-site-with-ai-live"/>
+    <published>2026-05-05T21:46:16.000Z</published>
+    <updated>2026-05-05T21:46:16.000Z</updated>
+    <summary>A Hands-On Introduction to Creating Community Infrastructure with AI</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/solarpunk-isnt-coming-its-already</id>
+    <title>Solarpunk isn’t coming. It’s already here.</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/solarpunk-isnt-coming-its-already"/>
+    <published>2026-04-17T20:09:17.000Z</published>
+    <updated>2026-04-17T20:09:17.000Z</updated>
+    <summary>The future isn&apos;t waiting on policy. It&apos;s being built block by block, by people who stopped asking permission.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/anthropic-did-the-right-thing-thats</id>
+    <title>Anthropic Did the Right Thing. That&apos;s the Problem.</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/anthropic-did-the-right-thing-thats"/>
+    <published>2026-03-09T18:22:09.000Z</published>
+    <updated>2026-03-09T18:22:09.000Z</updated>
+    <summary>The Vote They Can&apos;t Rig</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/what-if-everything-you-were-told</id>
+    <title>What If Everything You Were Told About Progress Is Wrong?</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/what-if-everything-you-were-told"/>
+    <published>2026-02-10T22:36:07.000Z</published>
+    <updated>2026-02-10T22:36:07.000Z</updated>
+    <summary>Evidence that centralized systems are the exception—and why that matters now</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/what-sign-are-you-still-putting-in</id>
+    <title>What Sign Are You Still Putting in the Window?</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/what-sign-are-you-still-putting-in"/>
+    <published>2026-01-21T21:25:18.000Z</published>
+    <updated>2026-01-21T21:25:18.000Z</updated>
+    <summary>A Prime Minister just said the quiet part out loud—and it changes what pretending costs</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/7-pillars-to-loosen-the-systems-grip</id>
+    <title>7 Pillars to Loosen the System&apos;s Grip on You—Without Burning It Down</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/7-pillars-to-loosen-the-systems-grip"/>
+    <published>2025-12-16T19:42:47.000Z</published>
+    <updated>2025-12-16T19:42:47.000Z</updated>
+    <summary>You don&apos;t have to drop out. You can build in parallel.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/were-building-our-own-power-gridbecause</id>
+    <title>What Happens When Neighbors Build Their Own Power Grid</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/were-building-our-own-power-gridbecause"/>
+    <published>2025-08-28T21:02:38.000Z</published>
+    <updated>2025-08-28T21:02:38.000Z</updated>
+    <summary>Rising bills aren’t the end of the story. They’re the beginning of a movement to build what private equity can’t own, buy, or sell.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/the-community-defense-playbook</id>
+    <title>The Community Defense Playbook</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/the-community-defense-playbook"/>
+    <published>2025-08-14T15:02:49.000Z</published>
+    <updated>2025-08-14T15:02:49.000Z</updated>
+    <summary>Your Complete Guide to Building Communities Too Strong to Sell</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/your-neighborhood-is-being-sold-while</id>
+    <title>Your Neighborhood Is Being Sold While You Sleep</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/your-neighborhood-is-being-sold-while"/>
+    <published>2025-08-14T15:01:56.000Z</published>
+    <updated>2025-08-14T15:01:56.000Z</updated>
+    <summary>The 7-step takeover playbook—why the same moves hit city after city, and how to make yours too strong to sell</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/you-wanted-actionheres-what-were</id>
+    <title>You Wanted Action—Here’s What We’re Building (And How to Join)</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/you-wanted-actionheres-what-were"/>
+    <published>2025-07-21T21:45:28.000Z</published>
+    <updated>2025-07-21T21:45:28.000Z</updated>
+    <summary>A peek behind the curtain: NeighborhoodShare beta, Offramp assistant, and what’s coming next</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/imagination-was-the-first-thing-they</id>
+    <title>The Imagination Heist: What Did You Really Lose?</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/imagination-was-the-first-thing-they"/>
+    <published>2025-06-24T22:17:30.000Z</published>
+    <updated>2025-06-24T22:17:30.000Z</updated>
+    <summary>It wasn’t your time or your data—they took your ability to imagine something better.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/power-to-the-people-reclaiming-your</id>
+    <title>Power to the People: Reclaiming Your Energy Sovereignty</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/power-to-the-people-reclaiming-your"/>
+    <published>2025-06-13T21:40:27.000Z</published>
+    <updated>2025-06-13T21:40:27.000Z</updated>
+    <summary>Step 2 (article 4) in the “7 Steps to Quietly Exit a System That Wants You Dependent” Series</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/convenience-is-the-cage</id>
+    <title>Convenience Is the Cage: Why Redefining Wealth Is the First Step to Freedom</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/convenience-is-the-cage"/>
+    <published>2025-06-06T22:32:31.000Z</published>
+    <updated>2025-06-06T22:32:31.000Z</updated>
+    <summary>Most people think wealth means having money.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+</feed>

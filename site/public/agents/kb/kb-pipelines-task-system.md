@@ -21,4 +21,4 @@ Retiring the rollover's task half (local.mike.task-rollover LaunchAgent still ca
 
 ### Related
 
-generator-registry — which generators write into the vault; task-intake and the orchestrator sweep are registered there publication-layer — the reader-side rule that surface publishing is gated; the task system is where those stage-and-approve cards live how-mike-works — agent collaboration rules; the task system is where they are enforced <!-- writer: kb-nightly 2026-10-27T03:01 -->
+generator-registry — which generators write into the vault; task-intake and the orchestrator sweep are registered there publication-layer — the reader-side rule that surface publishing is gated; the task system is where those stage-and-approve cards live how-mike-works — agent collaboration rules; the task system is where they are enforced

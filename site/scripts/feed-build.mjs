@@ -2,16 +2,20 @@
 /**
  * feed-build.mjs — publication-layer adapter: vault + Substack → public syndication feed.
  *
- * Implements P0 of docs/spec/v1-publisher.md (agent-feed-system): one canonical
+ * Implements P0 and P1 of docs/spec/v1-publisher.md (agent-feed-system): one canonical
  * public feed at /feed/feed.json (JSON Feed 1.1) + /feed/atom.xml (Atom mirror)
- * + /feed/index.json (machine map: slices, counts, sources).
+ * + /feed/index.json (machine map: slices, counts, sources), with the public slice
+ * aliased at /feed/public/. Other audiences are derived and counted, never written:
+ * an untokened /feed/friends/ would be friends-only content at a public URL.
  *
  * Design rules inherited from the publication layer, not invented here:
  *   - Default-deny on audience. An item publishes only when it carries an
  *     `audience` including `public`. Nothing is promotional-by-default. A log
- *     entry with no audience, or one outside the taxonomy, does not publish.
+ *     entry with no audience, or a free-text one, does not publish. An array-form
+ *     declaration naming a slug outside the taxonomy aborts the build.
  *   - `confidential:` hard-blocks. A source marked confidential never crosses,
  *     even if it also says public, and its Substack copy is held back with it.
+ *     It is never counted, listed, or named.
  *   - Static only. No API, no database, no runtime. Files are generated at
  *     build time and shipped by Cloudflare Pages.
  *   - Commit is the gate. When the vault is absent (CI/cloud build) the
@@ -56,6 +60,8 @@ const KB_DIR = path.join(VAULT, 'KB');
 const SITE_URL = 'https://mikejones.online';
 const FEED_URL = `${SITE_URL}/feed/feed.json`;
 const ATOM_URL = `${SITE_URL}/feed/atom.xml`;
+const PUBLIC_FEED_URL = `${SITE_URL}/feed/public/feed.json`;
+const PUBLIC_ATOM_URL = `${SITE_URL}/feed/public/atom.xml`;
 const SUBSTACK_FEED = 'https://resilienttomorrow.substack.com/feed';
 // The build hook waits on this script, so a stalled fetch would stall the build.
 const FETCH_TIMEOUT_MS = 15000;
@@ -77,7 +83,21 @@ const FORM_TO_TYPE = {
   link: 'link',
 };
 
+// Only these directories may exist under the feed dir. P2 grows this set when tokens ship.
+const EMITTED_SLICES = ['public'];
+const GATED_SLICE_META = {
+  work: { label: 'Clients and collaborators', token_required: true, note: 'P2 — capability-token path not built' },
+  friends: { label: 'Friends', token_required: true, note: 'P2 — capability-token path not built' },
+  family: { label: 'Family', token_required: true, note: 'P2 — capability-token path not built' },
+  agents: { label: 'Agents', token_required: 'per-item', note: 'agent surface is /feed/index.json + /llms.txt' },
+};
+// astro.config.mjs keys on this: every other generator failure falls back to the committed
+// output, but a fail-closed assertion has to stop the build.
+const EXIT_FAIL_CLOSED = 3;
+
 const log = (...a) => console.log('[feed]', ...a);
+
+class FailClosedError extends Error {}
 
 // --- helpers ---------------------------------------------------------------
 
@@ -96,7 +116,8 @@ function parseLenientFrontmatter(head) {
   return fm;
 }
 
-function readFrontmatter(file) {
+/** `strict` rethrows a YAML failure, for callers where a lenient read would lose `platforms:`. */
+function readFrontmatter(file, { strict = false } = {}) {
   const raw = fs.readFileSync(file, 'utf8');
   if (!raw.startsWith('---')) return { fm: {}, body: raw };
   const end = raw.indexOf('\n---', 3);
@@ -107,6 +128,7 @@ function readFrontmatter(file) {
   try {
     fm = yaml.load(head) || {};
   } catch (err) {
+    if (strict) throw err;
     const lenient = parseLenientFrontmatter(head);
     log(`frontmatter parse failed (${err.message.split('\n')[0]}) — lenient read for ${path.basename(file)}: ${Object.keys(lenient).join(',') || 'nothing'}`);
     fm = lenient;
@@ -138,7 +160,28 @@ function normaliseAudience(v) {
     if (AUDIENCES.includes(slug)) out.add(slug);
     else log(`unknown audience "${slice(raw, 40)}" ignored (not in taxonomy)`);
   }
-  return [...out];
+  return AUDIENCES.filter((slug) => out.has(slug));
+}
+
+/**
+ * An array is a deliberate declaration, so a slug the taxonomy can't name is a typo that
+ * must stop the build. A scalar stays a default-deny: the drafts folder has long
+ * descriptive sentences under `audience:`, and those were never meant as slugs.
+ */
+function assertAudienceSlugs(declared, file) {
+  if (!Array.isArray(declared)) return;
+  for (const raw of declared) {
+    const slug = String(raw).trim().toLowerCase();
+    if (slug && !AUDIENCES.includes(slug)) {
+      throw new FailClosedError(`${path.basename(file)}: audience "${raw}" is not in the taxonomy (${AUDIENCES.join(', ')})`);
+    }
+  }
+}
+
+/** Calendar date of a log's platform entry. YAML reads an unquoted date as a Date. */
+function platformDate(value) {
+  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : value.toISOString().slice(0, 10);
+  return value ? String(value).trim() : null;
 }
 
 function slice(s, n) {
@@ -247,7 +290,7 @@ function normaliseUrl(value) {
   try {
     const url = new URL(String(value ?? '').trim());
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return '';
-    return `https://${url.host.toLowerCase()}${url.pathname.replace(/\/+$/, '')}`;
+    return `https://${url.host.toLowerCase().replace(/^www\./, '')}${url.pathname.replace(/\/+$/, '')}`;
   } catch {
     return '';
   }
@@ -303,11 +346,14 @@ function newestMTime(dir) {
  * appear. The merge needs those, or the same post would come back through Substack,
  * which treats everything it carries as public. An entry that simply declares no
  * audience is denied here but not blocked, since it asserts nothing about the post.
+ * `withheld` holds the audience of each gated entry: counted in its slices, never emitted.
+ * A confidential entry is in `blocked` only, so it reaches no count.
  */
 function loadPublishedItems() {
-  if (!fs.existsSync(PUBLISHED_DIR)) return { items: [], blocked: [] };
+  if (!fs.existsSync(PUBLISHED_DIR)) return { items: [], blocked: [], withheld: [] };
   const items = [];
   const blocked = [];
+  const withheld = [];
   for (const file of fs.readdirSync(PUBLISHED_DIR).filter((f) => f.endsWith('.md') && !/^readme/i.test(f))) {
     const full = path.join(PUBLISHED_DIR, file);
     const { fm } = readFrontmatter(full);
@@ -338,9 +384,14 @@ function loadPublishedItems() {
       continue;
     }
 
+    // After the confidential checks on purpose: a blocked item is never named, even by an error.
+    assertAudienceSlugs(fm.audience, full);
+    if (draftPath) assertAudienceSlugs(draftFm.audience, draftPath);
+
     const finalAudience = normaliseAudience(fm.audience ?? draftFm.audience);
     if (finalAudience.length && !finalAudience.includes('public')) {
-      block(`audience ${finalAudience.join(',')} is not public (P0 ships the public slice only)`);
+      block(`audience ${finalAudience.join(',')} is withheld until tokens ship (P2)`);
+      withheld.push({ audience: finalAudience });
       continue;
     }
     if (!finalAudience.includes('public')) {
@@ -380,10 +431,10 @@ function loadPublishedItems() {
       audience: finalAudience,
       type,
       source: draftPath ? path.relative(VAULT, draftPath) : path.relative(VAULT, full),
-      platforms: platforms.map((p) => ({ platform: String(p.platform || ''), url: String(p.url), date: isoDate(p.date) })),
+      platforms: platforms.map((p) => ({ platform: String(p.platform || ''), url: String(p.url), date: platformDate(p.date) })),
     });
   }
-  return { items, blocked };
+  return { items, blocked, withheld };
 }
 
 // --- source 2: the Substack feed ------------------------------------------
@@ -470,29 +521,47 @@ function mergeItems(published, substackItems, blocked = []) {
 
 // --- emitters --------------------------------------------------------------
 
-function buildJsonFeed(items) {
+/** Every logged surface except the item's own url, once each. Platforms are links, not streams. */
+function mirrorsOf(entry) {
+  const seen = new Set([normaliseUrl(entry.url)]);
+  const mirrors = [];
+  for (const p of entry.platforms || []) {
+    const key = normaliseUrl(p.url);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    mirrors.push({ platform: p.platform, url: p.url, date: p.date ?? null });
+  }
+  return mirrors;
+}
+
+function buildJsonFeed(items, { feedUrl = FEED_URL } = {}) {
   return {
     version: 'https://jsonfeed.org/version/1.1',
     title: 'Mike Jones',
     home_page_url: SITE_URL,
-    feed_url: FEED_URL,
+    feed_url: feedUrl,
     description:
       'Mike Jones — product, AI, and resilience. Essays and dispatches, published at mikejones.online.',
     icon: `${SITE_URL}/img/logos/favicon-jones-co.png`,
     language: 'en-US',
     authors: [{ name: 'Mike Jones', url: SITE_URL }],
-    items: items.map((i) => ({
-      id: i.id,
-      url: i.url,
-      title: i.title,
-      summary: i.summary || undefined,
-      // JSON Feed 1.1 requires content_html or content_text on every item. This
-      // repeats the summary, so it publishes no article text.
-      content_text: i.summary || i.title,
-      date_published: i.date_published,
-      tags: i.tags.length ? i.tags : undefined,
-      // content_html intentionally omitted at P0: summary + link (open question #3).
-    })),
+    items: items.map((i) => {
+      const mirrors = mirrorsOf(i);
+      return {
+        id: i.id,
+        url: i.url,
+        title: i.title,
+        summary: i.summary || undefined,
+        // JSON Feed 1.1 requires content_html or content_text on every item. This
+        // repeats the summary, so it publishes no article text.
+        content_text: i.summary || i.title,
+        date_published: i.date_published,
+        tags: i.tags.length ? i.tags : undefined,
+        // content_html intentionally omitted at P0: summary + link (open question #3).
+        // No vault path here: no reader needs one, and it would advertise vault structure.
+        _mj: { audience: i.audience, type: i.type, ...(mirrors.length ? { mirrors } : {}) },
+      };
+    }),
   };
 }
 
@@ -507,7 +576,7 @@ function escapeXml(s) {
     .replace(/'/g, '&apos;');
 }
 
-function buildAtom(items) {
+function buildAtom(items, { atomUrl = ATOM_URL } = {}) {
   const updated = items[0]?.date_published || new Date().toISOString();
   const entries = items
     .map(
@@ -515,7 +584,7 @@ function buildAtom(items) {
     <id>${escapeXml(i.url)}</id>
     <title>${escapeXml(i.title)}</title>
     <link rel="alternate" href="${escapeXml(i.url)}"/>
-    <published>${i.date_published}</published>
+${mirrorsOf(i).map((m) => `    <link rel="related" type="text/html" href="${escapeXml(m.url)}"/>\n`).join('')}    <published>${i.date_published}</published>
     <updated>${i.date_published}</updated>
     <summary>${escapeXml(i.summary)}</summary>
     <author><name>Mike Jones</name></author>
@@ -526,7 +595,7 @@ function buildAtom(items) {
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Mike Jones</title>
   <subtitle>Product, AI, and resilience — published at mikejones.online.</subtitle>
-  <link rel="self" href="${ATOM_URL}"/>
+  <link rel="self" href="${escapeXml(atomUrl)}"/>
   <link rel="alternate" type="text/html" href="${SITE_URL}"/>
   <id>${SITE_URL}/</id>
   <updated>${updated}</updated>
@@ -536,15 +605,75 @@ ${entries}
 `;
 }
 
+// --- slices ----------------------------------------------------------------
+
+function countBy(values) {
+  const counts = {};
+  for (const value of values) counts[value] = (counts[value] || 0) + 1;
+  return counts;
+}
+
+/** One entry per audience in taxonomy order. Gated slices get a count and no URL. */
+function buildSlices(items, withheld) {
+  const declared = [...items, ...withheld].map((entry) => entry.audience);
+  return AUDIENCES.map((slug) => {
+    const item_count = declared.filter((audience) => audience.includes(slug)).length;
+    if (slug === 'public') {
+      return { slug, label: 'Public', feed_url: PUBLIC_FEED_URL, atom_url: PUBLIC_ATOM_URL, item_count, token_required: false, emitted: true };
+    }
+    const { label, token_required, note } = GATED_SLICE_META[slug];
+    return { slug, label, feed_url: null, atom_url: null, item_count, token_required, emitted: false, note };
+  });
+}
+
+/** Last check before anything is written: what is about to be served, against what was declared. */
+function assertServedSlices(slices, canonicalFeed, servedFeeds) {
+  const publicSlice = slices.find((s) => s.slug === 'public');
+  if (publicSlice.item_count !== canonicalFeed.items.length) {
+    throw new FailClosedError(`public slice counts ${publicSlice.item_count} item(s) but the canonical feed has ${canonicalFeed.items.length}`);
+  }
+  for (const [slug, feed] of Object.entries(servedFeeds)) {
+    const slice = slices.find((s) => s.slug === slug);
+    if (!slice?.emitted) throw new FailClosedError(`slice "${slug}" is being served but is not declared emitted`);
+    for (const entry of feed.items) {
+      if (!entry._mj?.audience?.includes(slug)) {
+        throw new FailClosedError(`served slice "${slug}" contains item ${entry.id}, whose audience lacks that slug`);
+      }
+    }
+  }
+}
+
+/** A gated slice left behind by an earlier build must never survive into a shipped dist/. */
+function removeUnemittedSliceDirs(outDir, emitted = EMITTED_SLICES) {
+  let entries;
+  try {
+    entries = fs.readdirSync(outDir, { withFileTypes: true });
+  } catch {
+    return;
+  }
+  for (const entry of entries) {
+    if (!(entry.isDirectory() || entry.isSymbolicLink()) || emitted.includes(entry.name)) continue;
+    if (DRY) {
+      log(`would remove directory not in the emit set: ${entry.name}/`);
+      continue;
+    }
+    fs.rmSync(path.join(outDir, entry.name), { recursive: true, force: true });
+    log(`removed directory not in the emit set: ${entry.name}/`);
+  }
+}
+
 // --- main ------------------------------------------------------------------
 
 async function main() {
+  // First, so that no early return below can leave a stale gated slice in place.
+  removeUnemittedSliceDirs(OUT_DIR);
+
   if (!fs.existsSync(SOCIAL)) {
     console.error(`[feed] vault Social/ not found (${SOCIAL}) — CI/cloud build: keeping committed feed output.`);
     return;
   }
 
-  const { items: published, blocked } = loadPublishedItems();
+  const { items: published, blocked, withheld } = loadPublishedItems();
   const { items: substackItems, fetched } = await loadSubstackItems();
 
   // A network failure must not rewrite the feed down to the log's few items.
@@ -555,12 +684,12 @@ async function main() {
 
   const { items, added: addedFromSubstack } = mergeItems(published, substackItems, blocked);
 
+  const slices = buildSlices(items, withheld);
   const index = {
     generated_at: new Date().toISOString(),
     canonical: FEED_URL,
-    slices: [
-      { slug: 'public', feed_url: FEED_URL, atom_url: ATOM_URL, item_count: items.length, token_required: false },
-    ],
+    spec: 'https://jsonfeed.org/version/1.1',
+    slices,
     sources: {
       published_log: { dir: 'Social/Published', items: published.length },
       substack: {
@@ -572,12 +701,20 @@ async function main() {
       },
       kb: { last_modified: fs.existsSync(KB_DIR) ? newestMTime(KB_DIR) : null },
     },
-    totals: { items: items.length },
-    note: 'P0: public slice only. Audiences work/friends/family/agents are defined in docs/spec/v1-publisher.md §5 and ship in P1/P2.',
+    totals: {
+      items: items.length,
+      by_type: countBy(items.map((entry) => entry.type)),
+      by_audience: Object.fromEntries(slices.filter((s) => s.item_count > 0).map((s) => [s.slug, s.item_count])),
+    },
+    note: 'P1: audience tags drive slices; only public is served until tokens ship (P2).',
   };
 
   const feed = buildJsonFeed(items);
   const atom = buildAtom(items);
+  const publicFeed = buildJsonFeed(items, { feedUrl: PUBLIC_FEED_URL });
+  const publicAtom = buildAtom(items, { atomUrl: PUBLIC_ATOM_URL });
+
+  assertServedSlices(slices, feed, { public: publicFeed });
 
   log(`items: ${items.length} (log ${published.length}, substack ${substackItems.length}, merged ${addedFromSubstack})`);
   log(`newest: ${items[0]?.date_published || 'none'} — ${items[0]?.title || ''}`);
@@ -591,11 +728,18 @@ async function main() {
   fs.writeFileSync(path.join(OUT_DIR, 'feed.json'), `${JSON.stringify(feed, null, 2)}\n`);
   fs.writeFileSync(path.join(OUT_DIR, 'atom.xml'), atom);
   fs.writeFileSync(path.join(OUT_DIR, 'index.json'), `${JSON.stringify(index, null, 2)}\n`);
-  log(`wrote ${path.relative(SITE, OUT_DIR)}/{feed.json,atom.xml,index.json}`);
+  fs.mkdirSync(path.join(OUT_DIR, 'public'), { recursive: true });
+  fs.writeFileSync(path.join(OUT_DIR, 'public', 'feed.json'), `${JSON.stringify(publicFeed, null, 2)}\n`);
+  fs.writeFileSync(path.join(OUT_DIR, 'public', 'atom.xml'), publicAtom);
+  log(`wrote ${path.relative(SITE, OUT_DIR)}/{feed.json,atom.xml,index.json,public/feed.json,public/atom.xml}`);
 }
 
 export {
   summarise,
+  readFrontmatter,
+  identityKeys,
+  SUBSTACK_FEED,
+  assertServedSlices,
   normaliseAudience,
   isConfidential,
   escapeXml,
@@ -613,6 +757,6 @@ const invokedDirectly =
 if (invokedDirectly) {
   main().catch((err) => {
     console.error('[feed] build failed:', err);
-    process.exitCode = 1;
+    process.exitCode = err instanceof FailClosedError ? EXIT_FAIL_CLOSED : 1;
   });
 }

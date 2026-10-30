@@ -1,13 +1,56 @@
 {
-  "generated_at": "2026-10-30T21:13:53.888Z",
+  "generated_at": "2026-10-30T21:44:40.702Z",
   "canonical": "https://mikejones.online/feed/feed.json",
+  "spec": "https://jsonfeed.org/version/1.1",
   "slices": [
     {
       "slug": "public",
-      "feed_url": "https://mikejones.online/feed/feed.json",
-      "atom_url": "https://mikejones.online/feed/atom.xml",
+      "label": "Public",
+      "feed_url": "https://mikejones.online/feed/public/feed.json",
+      "atom_url": "https://mikejones.online/feed/public/atom.xml",
       "item_count": 20,
-      "token_required": false
+      "token_required": false,
+      "emitted": true
+    },
+    {
+      "slug": "work",
+      "label": "Clients and collaborators",
+      "feed_url": null,
+      "atom_url": null,
+      "item_count": 0,
+      "token_required": true,
+      "emitted": false,
+      "note": "P2 — capability-token path not built"
+    },
+    {
+      "slug": "friends",
+      "label": "Friends",
+      "feed_url": null,
+      "atom_url": null,
+      "item_count": 0,
+      "token_required": true,
+      "emitted": false,
+      "note": "P2 — capability-token path not built"
+    },
+    {
+      "slug": "family",
+      "label": "Family",
+      "feed_url": null,
+      "atom_url": null,
+      "item_count": 0,
+      "token_required": true,
+      "emitted": false,
+      "note": "P2 — capability-token path not built"
+    },
+    {
+      "slug": "agents",
+      "label": "Agents",
+      "feed_url": null,
+      "atom_url": null,
+      "item_count": 0,
+      "token_required": "per-item",
+      "emitted": false,
+      "note": "agent surface is /feed/index.json + /llms.txt"
     }
   ],
   "sources": {
@@ -27,7 +70,13 @@
     }
   },
   "totals": {
-    "items": 20
+    "items": 20,
+    "by_type": {
+      "essay": 20
+    },
+    "by_audience": {
+      "public": 20
+    }
   },
-  "note": "P0: public slice only. Audiences work/friends/family/agents are defined in docs/spec/v1-publisher.md §5 and ship in P1/P2."
+  "note": "P1: audience tags drive slices; only public is served until tokens ship (P2)."
 }

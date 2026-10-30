@@ -157,6 +157,11 @@ const isActive = (href: string) => active === href || (href !== "/" && active.st
       </div>
       <div class="mt-10 flex flex-col items-start justify-between gap-2 border-t border-field-line pt-6 text-sm text-field-faint sm:flex-row sm:items-center">
         <span>© {new Date().getFullYear()} {identity.company}</span>
+        <span>
+          <a href="/feed/feed.json" class="transition-colors hover:text-field-ink">JSON feed</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/feed/atom.xml" class="transition-colors hover:text-field-ink">Atom feed</a>
+        </span>
         <span>{identity.location}</span>
       </div>
     </div>

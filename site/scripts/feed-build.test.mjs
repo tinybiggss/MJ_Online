@@ -16,6 +16,7 @@ import {
   parseSubstackRss,
   buildJsonFeed,
   buildAtom,
+  assertServedSlices,
 } from './feed-build.mjs';
 
 const SCRIPT = fileURLToPath(new URL('./feed-build.mjs', import.meta.url));
@@ -207,6 +208,7 @@ describe('normaliseUrl', () => {
       'https://ResilientTomorrow.Substack.COM/p/three-ways',
       'https://resilienttomorrow.substack.com/p/three-ways?utm_source=x&utm_medium=y',
       'https://resilienttomorrow.substack.com/p/three-ways/?utm_source=x#comments',
+      'https://www.resilienttomorrow.substack.com/p/three-ways',
     ]) {
       expect(normaliseUrl(variant), variant).toBe(canonical);
     }
@@ -360,6 +362,33 @@ describe('buildAtom', () => {
   });
 });
 
+describe('assertServedSlices', () => {
+  const slices = [
+    { slug: 'public', item_count: 1, emitted: true },
+    { slug: 'friends', item_count: 1, emitted: false },
+  ];
+
+  it('accepts a served slice whose items all declare it', () => {
+    const feed = buildJsonFeed([item()]);
+    expect(() => assertServedSlices(slices, feed, { public: feed })).not.toThrow();
+  });
+
+  it('throws when a served slice holds an item whose audience lacks that slug', () => {
+    const feed = buildJsonFeed([item({ audience: ['friends'] })]);
+    expect(() => assertServedSlices(slices, feed, { public: feed })).toThrow(/lacks that slug/);
+  });
+
+  it('throws when the public count disagrees with the canonical feed', () => {
+    const feed = buildJsonFeed([item(), item({ id: 'b' })]);
+    expect(() => assertServedSlices(slices, feed, { public: feed })).toThrow(/public slice counts 1/);
+  });
+
+  it('throws when a slice not declared emitted is being served', () => {
+    const feed = buildJsonFeed([item({ audience: ['public', 'friends'] })]);
+    expect(() => assertServedSlices(slices, feed, { friends: feed })).toThrow(/not declared emitted/);
+  });
+});
+
 describe('committed artifact', () => {
   // The exact file Cloudflare Pages serves when the vault is absent.
   const committedFeed = JSON.parse(
@@ -394,6 +423,35 @@ describe('committed artifact', () => {
     expect(XMLValidator.validate(atom)).toBe(true);
     expect(atom.match(/<entry>/g)).toHaveLength(committedFeed.items.length);
     expect(index.totals.items).toBe(committedFeed.items.length);
+  });
+
+  it('serves the public alias with the same items, pointing at itself', () => {
+    const alias = JSON.parse(readFileSync(new URL('../public/feed/public/feed.json', import.meta.url), 'utf8'));
+    const atom = readFileSync(new URL('../public/feed/public/atom.xml', import.meta.url), 'utf8');
+    expect(alias.items).toEqual(committedFeed.items);
+    expect(alias.feed_url).toBe('https://mikejones.online/feed/public/feed.json');
+    expect(committedFeed.feed_url).toBe('https://mikejones.online/feed/feed.json');
+    expect(XMLValidator.validate(atom)).toBe(true);
+    expect(atom).toContain('<link rel="self" href="https://mikejones.online/feed/public/atom.xml"/>');
+    expect(atom.match(/<entry>/g)).toHaveLength(alias.items.length);
+  });
+
+  it('declares all five slices and serves only public', () => {
+    const index = JSON.parse(readFileSync(new URL('../public/feed/index.json', import.meta.url), 'utf8'));
+    expect(index.slices.map((slice) => slice.slug)).toEqual(['public', 'work', 'friends', 'family', 'agents']);
+    expect(index.slices.filter((slice) => slice.emitted).map((slice) => slice.slug)).toEqual(['public']);
+    const directories = readdirSync(new URL('../public/feed/', import.meta.url), { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name);
+    expect(directories).toEqual(['public']);
+  });
+
+  it('carries audience and type on every item, and no vault path', () => {
+    for (const entry of committedFeed.items) {
+      expect(entry._mj.audience, entry.id).toContain('public');
+      expect(entry._mj.type, entry.id).toBeTruthy();
+      expect(entry._mj.source, entry.id).toBeUndefined();
+    }
   });
 });
 
@@ -481,6 +539,120 @@ describe('running the script against a fixture vault', () => {
     writeLog('declared', `title: Declared\naudience: public\n${platformsFor('declared')}`);
     expect(run(['--no-net', '--dry']).status).toBe(0);
     expect(readdirSync(outDir)).toEqual([]);
+  });
+
+  describe('audience slices', () => {
+    const allServedText = () => {
+      const collect = (dir) =>
+        readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+          const full = path.join(dir, entry.name);
+          return entry.isDirectory() ? collect(full) : [readFileSync(full, 'utf8')];
+        });
+      return collect(outDir).join('\n');
+    };
+    const emittedDirs = () =>
+      readdirSync(outDir, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name);
+    const readIndex = () => JSON.parse(readFileSync(path.join(outDir, 'index.json'), 'utf8'));
+    const sliceOf = (slug) => readIndex().slices.find((slice) => slice.slug === slug);
+
+    it('withholds a friends-only item from every served file and directory, and counts it', () => {
+      writeLog('declared', `title: Declared\naudience: [public]\n${platformsFor('declared')}`);
+      writeLog('private-letter', `title: Private Letter\naudience: ["friends"]\n${platformsFor('private-letter')}`);
+      expect(run().status).toBe(0);
+      expect(allServedText()).not.toMatch(/private-letter|Private Letter/i);
+      expect(emittedDirs()).toEqual(['public']);
+      expect(sliceOf('friends')).toMatchObject({ item_count: 1, emitted: false, feed_url: null, atom_url: null, token_required: true });
+      expect(sliceOf('public').item_count).toBe(1);
+      expect(readIndex().totals.by_audience).toEqual({ public: 1, friends: 1 });
+    });
+
+    it('emits a public+friends item in public only, with its audience in taxonomy order', () => {
+      writeLog('shared', `title: Shared\naudience: ["friends", "public"]\n${platformsFor('shared')}`);
+      expect(run().status).toBe(0);
+      for (const name of ['feed.json', 'public/feed.json']) {
+        const { items } = JSON.parse(readFileSync(path.join(outDir, name), 'utf8'));
+        expect(items.map((entry) => entry._mj.audience)).toEqual([['public', 'friends']]);
+      }
+      expect(emittedDirs()).toEqual(['public']);
+      expect(sliceOf('friends')).toMatchObject({ item_count: 1, emitted: false });
+      expect(sliceOf('public')).toMatchObject({ item_count: 1, emitted: true, token_required: false });
+    });
+
+    it('aborts on an array-form slug outside the taxonomy, naming the file and slug, writing nothing', () => {
+      writeLog('typo-note', `title: Typo\naudience: ["publc"]\n${platformsFor('typo-note')}`);
+      const result = run();
+      expect(result.status).not.toBe(0);
+      expect(result.stderr).toContain('typo-note.md');
+      expect(result.stderr).toContain('publc');
+      expect(readdirSync(outDir)).toEqual([]);
+    });
+
+    it('aborts on a bad array-form slug in the source draft too', () => {
+      writeFileSync(path.join(vaultDir, 'Social/Drafts/bad-draft.md'), '---\naudience: ["frends"]\n---\n\nText.\n');
+      writeLog('fine', `title: Fine\naudience: [public]\nsource_draft: "[[Social/Drafts/bad-draft]]"\n${platformsFor('fine')}`);
+      const result = run();
+      expect(result.status).not.toBe(0);
+      expect(result.stderr).toContain('bad-draft.md');
+      expect(result.stderr).toContain('frends');
+    });
+
+    it('keeps a free-text audience a silent default-deny, not a failure', () => {
+      writeLog('free-text', `title: Free Text\naudience: "Resilient Tomorrow readers (~2,300)"\n${platformsFor('free-text')}`);
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual([]);
+    });
+
+    it('keeps a confidential item out of every count and file, whatever its audience says', () => {
+      writeLog('hidden-case', `title: Hidden Case\naudience: ["friends", "publc"]\nconfidential: ghn\n${platformsFor('hidden-case')}`);
+      const result = run();
+      expect(result.status).toBe(0);
+      expect(allServedText()).not.toMatch(/hidden-case|Hidden Case/i);
+      const index = readIndex();
+      expect(index.slices.map((slice) => slice.item_count)).toEqual([0, 0, 0, 0, 0]);
+      expect(index.totals).toEqual({ items: 0, by_type: {}, by_audience: {} });
+    });
+
+    it('lists mirrors except the primary, in JSON and Atom', () => {
+      writeLog(
+        'mirrored',
+        `title: Mirrored\naudience: [public]\nplatforms:\n  - platform: substack\n    form: article\n    url: https://x.test/p/mirrored\n    date: 2026-10-30\n  - platform: bluesky\n    form: post\n    url: https://bsky.app/profile/x/post/1\n    date: 2026-10-31\n  - platform: linkedin\n    form: post\n    url: null\n`,
+      );
+      expect(run().status).toBe(0);
+      const [entry] = JSON.parse(readFileSync(path.join(outDir, 'feed.json'), 'utf8')).items;
+      expect(entry.url).toBe('https://x.test/p/mirrored');
+      expect(entry._mj.mirrors).toEqual([{ platform: 'bluesky', url: 'https://bsky.app/profile/x/post/1', date: '2026-10-31' }]);
+      const atom = readFileSync(path.join(outDir, 'atom.xml'), 'utf8');
+      expect(atom.match(/rel="related"/g)).toHaveLength(1);
+      expect(atom).toContain('<link rel="related" type="text/html" href="https://bsky.app/profile/x/post/1"/>');
+    });
+
+    it('omits mirrors entirely when the primary is the only surface', () => {
+      writeLog('solo', `title: Solo\naudience: [public]\n${platformsFor('solo')}`);
+      expect(run().status).toBe(0);
+      const [entry] = JSON.parse(readFileSync(path.join(outDir, 'feed.json'), 'utf8')).items;
+      expect(entry._mj).toEqual({ audience: ['public'], type: 'essay' });
+    });
+
+    it('deletes a stale gated directory left by an earlier build', () => {
+      mkdirSync(path.join(outDir, 'friends'));
+      writeFileSync(path.join(outDir, 'friends/feed.json'), 'leak');
+      const result = run();
+      expect(result.status).toBe(0);
+      expect(result.stdout).toContain('removed directory not in the emit set: friends/');
+      expect(emittedDirs()).toEqual(['public']);
+    });
+
+    it('deletes a stale gated directory even when the vault is absent', () => {
+      mkdirSync(path.join(outDir, 'friends'));
+      expect(run(['--no-net'], path.join(workDir, 'no-such-vault')).status).toBe(0);
+      expect(emittedDirs()).toEqual([]);
+    });
+
+    it('leaves a stale directory in place on a dry run, because a dry run writes nothing', () => {
+      mkdirSync(path.join(outDir, 'friends'));
+      expect(run(['--no-net', '--dry']).status).toBe(0);
+      expect(readdirSync(outDir)).toEqual(['friends']);
+    });
   });
 
   it('does not run the build when the module is merely imported', () => {

@@ -42,6 +42,8 @@ export default defineConfig({
               cwd: new URL('.', import.meta.url).pathname,
             });
           } catch (err) {
+            // Exit 3 is a fail-closed audience assertion: stop, or it is a warning nobody reads.
+            if (err.status === 3) throw err;
             console.warn('[feed-build] regeneration failed; building with committed output.', err);
           }
         },
