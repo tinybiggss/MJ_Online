@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T21:10:26.370Z",
+  "generated_at": "2026-10-30T21:13:53.888Z",
   "canonical": "https://mikejones.online/feed/feed.json",
   "slices": [
     {
@@ -13,13 +13,13 @@
   "sources": {
     "published_log": {
       "dir": "Social/Published",
-      "items": 0
+      "items": 1
     },
     "substack": {
       "url": "https://resilienttomorrow.substack.com/feed",
       "fetched": true,
       "items": 20,
-      "merged": 20,
+      "merged": 19,
       "last_post": "2026-10-30T18:46:57.000Z"
     },
     "kb": {
