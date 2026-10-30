@@ -22,6 +22,8 @@
  *     committed output is kept and nothing is regenerated — the same fallback
  *     kb-to-agents.mjs uses. A build alone is not a publication.
  *   - One direction: vault → feed. This script never writes into the vault.
+ *   - Same input, same bytes. No field reads the clock or an mtime, so a rebuild that
+ *     dirties the tree means the content moved.
  *
  * Sources, in precedence order:
  *   1. Social/Published/*.md  — the publication log; authoritative for an item's
@@ -65,6 +67,11 @@ const PUBLIC_ATOM_URL = `${SITE_URL}/feed/public/atom.xml`;
 const SUBSTACK_FEED = 'https://resilienttomorrow.substack.com/feed';
 // The build hook waits on this script, so a stalled fetch would stall the build.
 const FETCH_TIMEOUT_MS = 15000;
+// Atom requires a feed-level <updated> even with no entries. Fixed, because output is a
+// function of its input: the same input must rebuild to the same bytes.
+const EMPTY_FEED_UPDATED = '1970-01-01T00:00:00.000Z';
+// The KB export skips these too (kb-to-agents.mjs SKIP_PAGES).
+const KB_BOOKKEEPING_PAGES = new Set(['SCHEMA.md', 'index.md', 'log.md']);
 
 const DRY = process.argv.includes('--dry');
 const NO_NET = process.argv.includes('--no-net');
@@ -311,32 +318,40 @@ function isoDate(value) {
   return Number.isNaN(d.getTime()) ? null : d.toISOString();
 }
 
-function newestMTime(dir) {
-  let newest = 0;
-  const walk = (d, depth = 0) => {
-    if (depth > 4) return;
-    let entries;
-    try {
-      entries = fs.readdirSync(d, { withFileTypes: true });
-    } catch {
-      return;
+/** The later of two ISO timestamps, either of which may be null. */
+function laterOf(a, b) {
+  if (!a || !b) return a || b;
+  return new Date(b) > new Date(a) ? b : a;
+}
+
+function newestPublished(items) {
+  return items.reduce((newest, entry) => laterOf(newest, entry.date_published), null);
+}
+
+/**
+ * Newest `updated:` across the pages the KB export publishes. Read from content, not mtime:
+ * a touched file or a private page moving must not change what this repo commits. The
+ * lenient parser directly, because readFrontmatter's fallback logs filenames, private ones too.
+ */
+function newestKbUpdate(dir) {
+  let newest = null;
+  let entries;
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return null;
+  }
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      newest = laterOf(newest, newestKbUpdate(full));
+    } else if (entry.isFile() && entry.name.endsWith('.md') && !KB_BOOKKEEPING_PAGES.has(entry.name)) {
+      const head = fs.readFileSync(full, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      const fm = head ? parseLenientFrontmatter(head[1]) : {};
+      if (String(fm.public).toLowerCase() === 'yes' && !isConfidential(fm)) newest = laterOf(newest, isoDate(fm.updated));
     }
-    for (const e of entries) {
-      if (e.name.startsWith('.') || e.name === 'node_modules') continue;
-      const p = path.join(d, e.name);
-      if (e.isDirectory()) walk(p, depth + 1);
-      else if (e.isFile()) {
-        try {
-          const mt = fs.statSync(p).mtimeMs;
-          if (mt > newest) newest = mt;
-        } catch {
-          /* ignore */
-        }
-      }
-    }
-  };
-  walk(dir);
-  return newest ? new Date(newest).toISOString() : null;
+  }
+  return newest;
 }
 
 // --- source 1: the publication log ----------------------------------------
@@ -354,7 +369,8 @@ function loadPublishedItems() {
   const items = [];
   const blocked = [];
   const withheld = [];
-  for (const file of fs.readdirSync(PUBLISHED_DIR).filter((f) => f.endsWith('.md') && !/^readme/i.test(f))) {
+  // Sorted: readdir order is the filesystem's, and it decides which of two same-dated items comes first.
+  for (const file of fs.readdirSync(PUBLISHED_DIR).filter((f) => f.endsWith('.md') && !/^readme/i.test(f)).sort()) {
     const full = path.join(PUBLISHED_DIR, file);
     const { fm } = readFrontmatter(full);
     const slug = String(fm.piece || path.basename(file, '.md'));
@@ -577,7 +593,8 @@ function escapeXml(s) {
 }
 
 function buildAtom(items, { atomUrl = ATOM_URL } = {}) {
-  const updated = items[0]?.date_published || new Date().toISOString();
+  // Every entry's <updated> is its date_published, so this is the newest entry's <updated>.
+  const updated = newestPublished(items) ?? EMPTY_FEED_UPDATED;
   const entries = items
     .map(
       (i) => `  <entry>
@@ -686,7 +703,7 @@ async function main() {
 
   const slices = buildSlices(items, withheld);
   const index = {
-    generated_at: new Date().toISOString(),
+    generated_at: newestPublished(items),
     canonical: FEED_URL,
     spec: 'https://jsonfeed.org/version/1.1',
     slices,
@@ -699,7 +716,7 @@ async function main() {
         merged: addedFromSubstack,
         last_post: substackItems[0]?.date_published || null,
       },
-      kb: { last_modified: fs.existsSync(KB_DIR) ? newestMTime(KB_DIR) : null },
+      kb: { last_modified: newestKbUpdate(KB_DIR) },
     },
     totals: {
       items: items.length,

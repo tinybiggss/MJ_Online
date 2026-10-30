@@ -129,6 +129,8 @@ describe('feed-notice', () => {
     const result = await notice();
     expect(result.exitCode).toBe(0);
     expect(result.output.findings).toEqual([]);
+    // A rebuild of unchanged input is byte-identical, so not even bookkeeping moved.
+    expect(result.output.bookkeeping).toEqual([]);
     expect(existsSync(stagingRoot)).toBe(false);
   });
 
@@ -484,25 +486,57 @@ describe('feed-notice', () => {
     it('stages a persisting source failure every run, but cards it only once', async () => {
       const home = workDir;
       mkdirSync(path.join(home, '.hermes/profiles/content'), { recursive: true });
-      const { bin, calls } = fakeHermes();
+      const { bin, creates } = fakeHermes();
       const card = { hermesBin: bin, home, assignee: 'content', board: 'default', priority: '40' };
       expect((await notice({ noNet: true, card, now: new Date('2026-10-30T20:00:00Z') })).exitCode).toBe(10);
       expect((await notice({ noNet: true, card, now: new Date('2026-10-31T20:00:00Z') })).exitCode).toBe(10);
-      expect(calls()).toHaveLength(1);
+      expect(creates()).toHaveLength(1);
     });
   });
 
   // A stand-in binary, so the card contract is exercised with no real board anywhere near it.
-  function fakeHermes({ exitCode = 0 } = {}) {
+  // Keeps the real CLI's contract: `create` on a known key returns that card's id and leaves
+  // its body alone, `show --json` nests the body under task, and `comment` takes positional text.
+  function fakeHermes({ exitCode = 0, existingBody = null, failOn = null, noId = false, dropComments = false } = {}) {
     const logFile = path.join(workDir, 'hermes-calls.log');
+    const stateFile = path.join(workDir, 'hermes-cards.json');
     const bin = path.join(workDir, 'fake-hermes');
-    writeFileSync(bin, `#!/bin/sh\nfor arg in "$@"; do printf '%s\\037' "$arg" >> "${logFile}"; done\nprintf '\\n' >> "${logFile}"\necho '{"id":"t_fake"}'\nexit ${exitCode}\n`);
+    writeFileSync(
+      bin,
+      `#!${process.execPath}
+const fs = require('node:fs');
+const [logFile, stateFile] = ${JSON.stringify([logFile, stateFile])};
+const options = ${JSON.stringify({ exitCode, existingBody, failOn, noId, dropComments })};
+const args = process.argv.slice(2);
+fs.appendFileSync(logFile, args.join('\\u001f') + '\\u001e');
+const verb = args[3];
+if (options.exitCode || options.failOn === verb) process.exit(options.exitCode || 1);
+const cards = fs.existsSync(stateFile) ? JSON.parse(fs.readFileSync(stateFile, 'utf8')) : {};
+const save = () => fs.writeFileSync(stateFile, JSON.stringify(cards));
+const byId = (id) => Object.values(cards).find((card) => card.id === id);
+if (verb === 'create') {
+  const key = args[args.indexOf('--idempotency-key') + 1];
+  const count = Object.keys(cards).length;
+  const body = count === 0 && options.existingBody !== null ? options.existingBody : fs.readFileSync(args[args.indexOf('--body-file') + 1], 'utf8');
+  cards[key] ??= { id: count === 0 ? 't_fake' : 't_fake' + count, body, comments: [] };
+  save();
+  console.log(JSON.stringify(options.noId ? {} : { id: cards[key].id, body: cards[key].body }));
+} else if (verb === 'show') {
+  const card = byId(args[4]);
+  console.log(JSON.stringify({ task: { id: card.id, body: card.body }, comments: card.comments.map((body) => ({ author: 'x', body })) }));
+} else if (verb === 'comment') {
+  if (!options.dropComments) byId(args[4]).comments.push(args[5]);
+  save();
+}
+`,
+    );
     chmodSync(bin, 0o755);
     const calls = () =>
       existsSync(logFile)
-        ? readFileSync(logFile, 'utf8').split('\n').filter(Boolean).map((line) => line.split('\u001f').filter(Boolean))
+        ? readFileSync(logFile, 'utf8').split('\u001e').filter(Boolean).map((line) => line.split('\u001f').filter(Boolean))
         : [];
-    return { bin, calls };
+    const callsOf = (verb) => calls().filter((args) => args[3] === verb);
+    return { bin, calls, creates: () => callsOf('create'), comments: () => callsOf('comment') };
   }
 
   describe('delivery', () => {
@@ -517,15 +551,16 @@ describe('feed-notice', () => {
     });
 
     it('invokes hermes with the exact contract, carrying the report and its absolute path', async () => {
-      const { bin, calls } = fakeHermes();
+      const { bin, creates } = fakeHermes();
       const result = await notice({ card: cardOptions(bin), now: day('10-30') });
       expect(result.exitCode).toBe(10);
-      expect(result.output.delivered).toMatchObject({ ok: true, id: 't_fake', key: 'feed-notice-2026-10-30' });
+      expect(result.output.delivered).toMatchObject({ ok: true, id: 't_fake', shown_in: 'body' });
 
-      const [args] = calls();
+      const [args] = creates();
       const reportFile = args[args.indexOf('--body-file') + 1];
       expect(args.slice(0, 9)).toEqual(['kanban', '--board', 'default', 'create', '--assignee', 'content', '--priority', '40', '--idempotency-key']);
-      expect(args[9]).toBe('feed-notice-2026-10-30');
+      expect(args[9]).toBe(result.output.delivered.key);
+      expect(args[9]).toMatch(/^feed-notice-2026-10-30-[0-9a-f]{8}$/);
       expect(args).toContain('--json');
       expect(args.at(-1)).toBe('feed notice 2026-10-30 — 2 finding(s) [drift, kb]');
       expect(path.isAbsolute(reportFile)).toBe(true);
@@ -533,17 +568,83 @@ describe('feed-notice', () => {
     });
 
     it('writes at most one card a day, and delivers a late finding the next day', async () => {
-      const { bin, calls } = fakeHermes();
+      const { bin, creates } = fakeHermes();
       await notice({ card: cardOptions(bin), now: day('10-30') });
       writeFileSync(path.join(vaultDir, 'KB/pipelines/beta.md'), kbPage('Beta Page').replace('reviewed', 'approved'));
       const later = await notice({ card: cardOptions(bin), now: new Date('2026-10-30T21:00:00Z') });
       expect(later.exitCode).toBe(10);
       expect(later.output.delivered.reason).toBe('already_carded_today');
-      expect(calls()).toHaveLength(1);
+      expect(creates()).toHaveLength(1);
 
       await notice({ card: cardOptions(bin), now: day('10-31') });
-      expect(calls()).toHaveLength(2);
-      expect(calls()[1][9]).toBe('feed-notice-2026-10-31');
+      expect(creates()).toHaveLength(2);
+      expect(creates()[1][9]).toMatch(/^feed-notice-2026-10-31-/);
+    });
+
+    describe('the idempotency key', () => {
+      const keyFor = async () => (await notice({ card: { disabled: true }, dry: false, now: day('10-30') })).output.delivered.key;
+
+      it('stays the same for the same findings and moves when they change', async () => {
+        const first = await keyFor();
+        rmSync(stagingRoot, { recursive: true });
+        expect(await keyFor()).toBe(first);
+        rmSync(stagingRoot, { recursive: true });
+        writeFileSync(path.join(vaultDir, 'KB/pipelines/beta.md'), kbPage('Beta Page').replace('reviewed', 'approved'));
+        expect(await keyFor()).not.toBe(first);
+      });
+    });
+
+    describe('confirming what the card shows', () => {
+      const STALE = '### F3 kb_drift (medium) — kb:some-other-page\n';
+
+      it('comments the report onto a card whose body is stale, and only then reports ok', async () => {
+        const { bin, creates, comments } = fakeHermes({ existingBody: STALE });
+        const result = await notice({ card: cardOptions(bin), now: day('10-30') });
+        expect(creates()).toHaveLength(1);
+        expect(comments()).toHaveLength(1);
+        const [args] = comments();
+        expect(args.slice(0, 5)).toEqual(['kanban', '--board', 'default', 'comment', 't_fake']);
+        expect(args[5]).toContain('kb:kb-pipelines-alpha');
+        // The real CLI has no --body-file on comment, and would exit 2 on one.
+        expect(args).not.toContain('--body-file');
+        expect(result.output.delivered).toMatchObject({ ok: true, id: 't_fake', shown_in: 'comment' });
+        expect(ledger().seen['kb_drift:kb:kb-pipelines-alpha'].last_carded).toBe('2026-10-30');
+      });
+
+      it('does not comment when the body already shows every finding', async () => {
+        const { bin, comments } = fakeHermes();
+        await notice({ card: cardOptions(bin), now: day('10-30') });
+        expect(comments()).toEqual([]);
+      });
+
+      it('does not take a longer id in the body for the id it is looking for', async () => {
+        const { bin, comments } = fakeHermes({ existingBody: '— kb:kb-pipelines-alpha-two\n— drift:site/public/agents/kb\n' });
+        await notice({ card: cardOptions(bin), now: day('10-30') });
+        expect(comments()).toHaveLength(1);
+      });
+
+      it('does not repeat a comment an earlier run already left', async () => {
+        const { bin, comments } = fakeHermes({ existingBody: STALE });
+        await notice({ card: cardOptions(bin), now: day('10-30') });
+        rmSync(path.join(stagingRoot, 'ledger.json'));
+        const again = await notice({ card: cardOptions(bin), now: new Date('2026-10-30T21:00:00Z') });
+        expect(comments()).toHaveLength(1);
+        expect(again.output.delivered).toMatchObject({ ok: true, shown_in: 'comment' });
+      });
+
+      it.each([
+        ['the read back fails', { failOn: 'show' }, 'readback_failed'],
+        ['the comment fails', { existingBody: STALE, failOn: 'comment' }, 'comment_failed'],
+        ['the comment does not land', { existingBody: STALE, dropComments: true }, 'comment_unconfirmed'],
+        ['create returns no id', { noId: true }, 'card_id_unknown'],
+      ])('reports failure and keeps the card owed when %s', async (_label, options, reason) => {
+        const { bin } = fakeHermes(options);
+        const result = await notice({ card: cardOptions(bin), now: day('10-30') });
+        expect(result.exitCode).toBe(10);
+        expect(result.output.delivered).toMatchObject({ attempted: true, ok: false, reason });
+        expect(ledger().seen['kb_drift:kb:kb-pipelines-alpha']).toMatchObject({ last_carded: null, card_owed: true });
+        expect(runDirs()).toHaveLength(1);
+      });
     });
 
     it('warns and keeps exit 10 for a phantom assignee, and does not call hermes', async () => {
@@ -583,9 +684,70 @@ describe('feed-notice', () => {
       expect(calls()).toEqual([]);
     });
 
+    describe('a finding that vanishes and returns', () => {
+      const clearFinding = () => writeFileSync(path.join(vaultDir, 'KB/pipelines/alpha.md'), kbPage('Alpha Page'));
+      const at = (hour) => new Date(`2026-10-30T${hour}:00:00Z`);
+
+      it('keeps last_carded through the run where it is gone', async () => {
+        const { bin } = fakeHermes();
+        await notice({ card: cardOptions(bin), now: at('20') });
+        clearFinding();
+        expect((await notice({ card: cardOptions(bin), now: at('21') })).exitCode).toBe(0);
+        expect(ledger().seen['kb_drift:kb:kb-pipelines-alpha']).toMatchObject({ last_carded: '2026-10-30', gone_since: '2026-10-30' });
+      });
+
+      it('is not carded again the same day', async () => {
+        const { bin, creates } = fakeHermes();
+        await notice({ card: cardOptions(bin), now: at('20') });
+        clearFinding();
+        await notice({ card: cardOptions(bin), now: at('21') });
+        makeFinding();
+        const back = await notice({ card: cardOptions(bin), now: at('22') });
+        expect(back.exitCode).toBe(0);
+        expect(creates()).toHaveLength(1);
+        expect(back.output.still_open).toContain('kb:kb-pipelines-alpha');
+        expect(ledger().seen['kb_drift:kb:kb-pipelines-alpha'].gone_since).toBeUndefined();
+      });
+
+      it('is still recognised the next day, inside the seven-day window', async () => {
+        const { bin, creates } = fakeHermes();
+        await notice({ card: cardOptions(bin), now: day('10-30') });
+        clearFinding();
+        await notice({ card: cardOptions(bin), now: new Date('2026-10-30T21:00:00Z') });
+        makeFinding();
+        expect((await notice({ card: cardOptions(bin), now: day('10-31') })).exitCode).toBe(0);
+        expect(creates()).toHaveLength(1);
+      });
+
+      it('still counts today\'s card against the one-a-day limit once its findings are gone', async () => {
+        const { bin, creates } = fakeHermes();
+        await notice({ card: cardOptions(bin), now: at('20') });
+        clearFinding();
+        writeFileSync(path.join(vaultDir, 'KB/pipelines/beta.md'), kbPage('Beta Page').replace('reviewed', 'approved'));
+        const other = await notice({ card: cardOptions(bin), now: at('21') });
+        expect(other.output.delivered.reason).toBe('already_carded_today');
+        expect(creates()).toHaveLength(1);
+      });
+
+      it('fires again once the window has passed, and is forgotten if it never returns', async () => {
+        const { bin, creates } = fakeHermes();
+        await notice({ card: cardOptions(bin), now: day('10-01') });
+        clearFinding();
+        await notice({ card: cardOptions(bin), now: day('10-02') });
+        makeFinding();
+        expect((await notice({ card: cardOptions(bin), now: day('10-09') })).exitCode).toBe(10);
+        expect(creates()).toHaveLength(2);
+
+        clearFinding();
+        await notice({ card: cardOptions(bin), now: day('10-10') });
+        await notice({ card: cardOptions(bin), now: day('10-17') });
+        expect(ledger().seen).toEqual({});
+      });
+    });
+
     describe('ledger', () => {
       it('records a finding, then stays silent, leaving the ledger as the only thing moved', async () => {
-        const { bin, calls } = fakeHermes();
+        const { bin, creates } = fakeHermes();
         expect((await notice({ card: cardOptions(bin), now: day('10-30') })).exitCode).toBe(10);
         expect(ledger().version).toBe(1);
         expect(ledger().seen['kb_drift:kb:kb-pipelines-alpha']).toEqual({ first_seen: '2026-10-30', last_seen: '2026-10-30', last_carded: '2026-10-30', runs: 1 });
@@ -595,22 +757,22 @@ describe('feed-notice', () => {
         expect(quiet.output.findings).toEqual([]);
         expect(quiet.output.still_open).toContain('kb:kb-pipelines-alpha');
         expect(runDirs()).toHaveLength(1);
-        expect(calls()).toHaveLength(1);
+        expect(creates()).toHaveLength(1);
         expect(ledger().seen['kb_drift:kb:kb-pipelines-alpha']).toMatchObject({ last_seen: '2026-10-31', last_carded: '2026-10-30', runs: 2 });
       });
 
       it('nags a high finding after seven days, but never a medium one', async () => {
-        const { bin, calls } = fakeHermes();
+        const { bin, creates } = fakeHermes();
         await notice({ card: cardOptions(bin), now: day('10-01') });
         expect((await notice({ card: cardOptions(bin), now: day('10-07') })).exitCode).toBe(0);
         const nag = await notice({ card: cardOptions(bin), now: day('10-08') });
         expect(nag.exitCode).toBe(10);
-        expect(calls()).toHaveLength(2);
+        expect(creates()).toHaveLength(2);
         expect(nag.output.findings.map((f) => f.id)).toEqual(['drift:site/public/agents/kb']);
         expect(nag.output.still_open).toEqual(['kb:kb-pipelines-alpha']);
       });
 
-      it('removes a finding that disappears, so that it fires again if it returns', async () => {
+      it('removes a finding that disappears uncarded, so that it fires again if it returns', async () => {
         await notice();
         writeFileSync(path.join(vaultDir, 'KB/pipelines/alpha.md'), kbPage('Alpha Page'));
         expect((await notice()).exitCode).toBe(0);
@@ -684,6 +846,16 @@ describe('feed-notice', () => {
       expect(snapshot(vaultDir)).toEqual(vaultBefore);
       expect(snapshot(publicDir)).toEqual(publicBefore);
     });
+
+    it('leaves the real public/ alone when it is the baseline, on a run that renders both exports', async () => {
+      dirty();
+      const repoPublic = fileURLToPath(new URL('../public/', import.meta.url));
+      const repoArtifacts = () => [snapshot(path.join(repoPublic, 'agents')), snapshot(path.join(repoPublic, 'feed')), statSync(path.join(repoPublic, 'llms.txt')).mtimeMs];
+      const before = repoArtifacts();
+      const result = await runNotice({ vaultDir, stagingRoot, rssXml: rss(OLD_POST), feedArgs: ['--no-net'], gitStatus: () => '', card: { disabled: true } });
+      expect(result.output.findings.map((f) => f.id)).toContain('drift:site/public/feed');
+      expect(repoArtifacts()).toEqual(before);
+    });
   });
 
   describe('the command line', () => {
@@ -692,6 +864,28 @@ describe('feed-notice', () => {
         encoding: 'utf8',
         env: { ...process.env, VAULT_DIR: vaultDir, FEED_NOTICE_STAGING: stagingRoot, FEED_NOTICE_NO_CARD: '1', ...env },
       });
+
+    it.each(['--help', '-h'])('%s prints every flag and touches nothing', (flag) => {
+      mkdirSync(path.join(workDir, '.hermes/profiles/content'), { recursive: true });
+      const { bin, calls } = fakeHermes();
+      const vaultBefore = snapshot(vaultDir);
+      const result = cli([flag], { FEED_NOTICE_NO_CARD: '', HERMES_BIN: bin, HOME: workDir });
+      expect(result.status).toBe(0);
+      for (const option of ['--dry', '--no-net', '--json', '--help']) expect(result.stdout).toContain(option);
+      expect(existsSync(stagingRoot)).toBe(false);
+      expect(calls()).toEqual([]);
+      expect(snapshot(vaultDir)).toEqual(vaultBefore);
+    });
+
+    it('refuses an unknown flag rather than falling through to a live run', () => {
+      mkdirSync(path.join(workDir, '.hermes/profiles/content'), { recursive: true });
+      const { bin, calls } = fakeHermes();
+      const result = cli(['--hlep'], { FEED_NOTICE_NO_CARD: '', HERMES_BIN: bin, HOME: workDir });
+      expect(result.status).toBe(1);
+      expect(result.stderr).toContain('--hlep');
+      expect(existsSync(stagingRoot)).toBe(false);
+      expect(calls()).toEqual([]);
+    });
 
     it('exits 2, quietly, when the vault is absent', () => {
       const result = cli([], { VAULT_DIR: path.join(workDir, 'no-such-vault') });

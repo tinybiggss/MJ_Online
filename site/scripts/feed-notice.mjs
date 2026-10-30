@@ -22,15 +22,17 @@
  *   node scripts/feed-notice.mjs --dry      # compute + print, write nothing, card nothing
  *   node scripts/feed-notice.mjs --no-net   # skip Substack: F1 and the feed half of F4
  *   node scripts/feed-notice.mjs --json     # one JSON object on stdout
+ *   node scripts/feed-notice.mjs --help     # usage, touching nothing
  *
  * Environment: VAULT_DIR, HERMES_BIN, FEED_NOTICE_ASSIGNEE (content), FEED_NOTICE_BOARD
  * (default), FEED_NOTICE_PRIORITY (40). For tests: FEED_NOTICE_STAGING, FEED_NOTICE_NO_CARD=1.
  *
  * Exit: 0 nothing to report · 10 findings staged (card attempted) · 1 detector error
- * (unreadable or unparsable vault input) · 2 VAULT_DIR absent (silent no-op).
+ * (unreadable or unparsable vault input, or a bad argument) · 2 VAULT_DIR absent (silent no-op).
  */
 
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -84,15 +86,39 @@ const FINDING_LABELS = {
 };
 const SEVERITY_ORDER = ['high', 'medium', 'low'];
 
-// Regenerating always moves these, so comparing them would report a change every time.
-const VOLATILE_KEYS = new Set(['generated_at', 'generatedAt']);
 // The nightly KB pass moves these without changing a published claim (plan D2). A real edit
 // still fires through the digest, so these are recorded in notice.json rather than fired on.
-const BOOKKEEPING_KEYS = new Set(['updated', 'last_modified', 'orphans']);
+// The generated stamps are here because they derive from `updated:` and item dates.
+const BOOKKEEPING_KEYS = new Set(['updated', 'last_modified', 'orphans', 'generated_at', 'generatedAt']);
+
+const KNOWN_FLAGS = new Set(['--dry', '--no-net', '--json']);
+const USAGE = `Usage: node scripts/feed-notice.mjs [options]
+
+Compares the vault and Substack against the artifacts committed under public/, stages what it
+finds, and writes one kanban card. Never writes the vault or public/. A run with no options is
+live: it fetches Substack, writes the staging tree and the ledger, and may create a card.
+
+Options:
+  --dry        compute and print; write nothing and card nothing
+  --no-net     skip Substack: no unlogged-post check and no feed half of the rebuild check
+  --json       print one JSON object on stdout instead of the report
+  -h, --help   print this and exit 0, touching nothing
+
+Environment:
+  VAULT_DIR              vault to read (default /Users/michaeljones/Dev/Obsidian/Mike_Thinking_Space)
+  HERMES_BIN             hermes binary for the card
+  FEED_NOTICE_ASSIGNEE   card assignee (default content)
+  FEED_NOTICE_BOARD      kanban board (default default)
+  FEED_NOTICE_PRIORITY   card priority (default 40)
+  FEED_NOTICE_STAGING    staging root (default content.staging/feed-notice)
+  FEED_NOTICE_NO_CARD=1  stage without writing a card
+
+Exit: 0 nothing to report · 10 findings staged (card attempted) · 1 detector error or bad
+argument · 2 VAULT_DIR absent (silent no-op)`;
 
 class DetectorError extends Error {}
 
-const warn = (message) => console.error(`[feed-notice] ${message}`);
+const warn =(message) => console.error(`[feed-notice] ${message}`);
 
 // --- time ------------------------------------------------------------------
 
@@ -504,7 +530,6 @@ function diffJson(before, after, at, diffs) {
   const bothObjects = before && after && typeof before === 'object' && typeof after === 'object' && !Array.isArray(before) && !Array.isArray(after);
   if (bothObjects) {
     for (const key of new Set([...Object.keys(before), ...Object.keys(after)])) {
-      if (VOLATILE_KEYS.has(key)) continue;
       const child = at ? `${at}.${key}` : key;
       if (BOOKKEEPING_KEYS.has(key)) {
         if (JSON.stringify(before[key]) !== JSON.stringify(after[key])) diffs.bookkeeping.push(child);
@@ -518,8 +543,6 @@ function diffJson(before, after, at, diffs) {
 }
 
 function comparableText(name, text) {
-  // Atom's feed-level <updated> falls back to the clock only when there are no entries.
-  if (name.endsWith('.xml') && !text.includes('<entry>')) return text.replace(/<updated>[^<]*<\/updated>/g, '');
   if (name.endsWith('.md')) return text.replace(/^updated: .*\n/m, '');
   return text;
 }
@@ -785,6 +808,12 @@ function readLedger(file) {
 
 const ledgerKey = (finding) => `${finding.kind}:${finding.id}`;
 
+/** A vanished finding is remembered only for the window in which it may not be carded again. */
+function dropExpired(ledger, today) {
+  const seen = Object.entries(ledger.seen).filter(([, entry]) => !entry.gone_since || daysBetween(entry.last_carded, today) < NAG_AFTER_DAYS);
+  return { ...ledger, seen: Object.fromEntries(seen) };
+}
+
 /**
  * `carded` findings deserve a card. Everything else in `reported` is staged without one.
  * A source failure is always reported and never escalated, so it stages but cards only once.
@@ -808,9 +837,19 @@ function classify(findings, ledger, today) {
   return { carded, reported, silent };
 }
 
-/** Rebuilt from the current findings, so one that disappears fires again if it returns. */
+/**
+ * A finding that disappears keeps its entry if it was ever carded: §4.5 never cards the same
+ * finding twice inside seven days, and today's card still counts against the one-a-day limit.
+ * Past that window dropExpired forgets it, so it fires again if it returns. Never carded means
+ * nothing to remember, and a card it was owed is moot now that it is gone.
+ */
 function nextLedger(ledger, findings, { today, cardedToday, cardOwed }) {
   const seen = {};
+  for (const [key, before] of Object.entries(ledger.seen)) {
+    if (!before.last_carded) continue;
+    const { card_owed: _moot, ...kept } = before;
+    seen[key] = { ...kept, gone_since: before.gone_since ?? today };
+  }
   for (const finding of findings) {
     const key = ledgerKey(finding);
     const before = ledger.seen[key];
@@ -946,9 +985,58 @@ function cardTitle(date, findings) {
   return `feed notice ${date} — ${findings.length} finding(s) [${kinds.join(', ')}]`;
 }
 
+/** Content-addressed: the same findings on the same day are one card, however many runs ask. */
+function cardKey(date, findings) {
+  const ids = findings.map((finding) => finding.id).sort().join('\n');
+  return `feed-notice-${date}-${createHash('sha256').update(ids).digest('hex').slice(0, 8)}`;
+}
+
+/** Whole ids only: kb:kb-alpha must not count as present because kb:kb-alpha-two is. */
+function mentionsId(text, id) {
+  const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`(?<![\\w:./-])${escaped}(?![\\w:./-])`).test(text);
+}
+
+/** Every piece of text a reader of the card sees, or null if it could not be read. */
+function readCardText(hermes, id) {
+  const result = hermes(['show', id, '--json']);
+  if (result.error || result.status !== 0) return null;
+  const shown = readJsonText(result.stdout);
+  if (typeof shown?.task?.body !== 'string') return null;
+  return { body: shown.task.body, comments: (shown.comments ?? []).map((comment) => comment.body).join('\n') };
+}
+
+/**
+ * `create` on an existing key returns that card's id, exits 0, and leaves its body alone
+ * (hermes_cli/kanban_db.py), so its exit code says nothing about what the card shows. The read
+ * back decides. A stale card gets the report as a comment, unless an earlier run already did that.
+ */
+function confirmCardShows({ hermes, key, id, findings, reportFile }) {
+  const fail = (reason, detail) => {
+    warn(`*** CARD NOT CONFIRMED (${id}): ${detail}. The finding stays staged and the card stays owed.`);
+    return { attempted: true, ok: false, key, id, reason };
+  };
+  const ids = findings.map((finding) => finding.id);
+  const hasAll = (text) => ids.every((findingId) => mentionsId(text, findingId));
+
+  const shown = readCardText(hermes, id);
+  if (!shown) return fail('readback_failed', 'could not read the card back');
+  if (hasAll(shown.body)) return { attempted: true, ok: true, key, id, shown_in: 'body' };
+  if (hasAll(`${shown.body}\n${shown.comments}`)) return { attempted: true, ok: true, key, id, shown_in: 'comment' };
+
+  // Positional: `kanban comment` takes its body as text and has no --body-file.
+  const commented = hermes(['comment', id, fs.readFileSync(reportFile, 'utf8'), '--author', 'feed-notice']);
+  if (commented.error || commented.status !== 0) {
+    return fail('comment_failed', commented.error?.message ?? (commented.stderr || '').trim());
+  }
+  const after = readCardText(hermes, id);
+  if (!after || !hasAll(`${after.body}\n${after.comments}`)) return fail('comment_unconfirmed', 'the comment is not on the card');
+  return { attempted: true, ok: true, key, id, shown_in: 'comment' };
+}
+
 /** Never throws, and never touches the exit code: a delivery failure must not lose the finding. */
 function deliverCard({ card, date, findings, reportFile }) {
-  const key = `feed-notice-${date}`;
+  const key = cardKey(date, findings);
   if (card.disabled) return { attempted: false, ok: false, key, reason: 'FEED_NOTICE_NO_CARD' };
 
   const bin = resolveHermesBin(card.hermesBin, card.home);
@@ -962,16 +1050,18 @@ function deliverCard({ card, date, findings, reportFile }) {
     warn(`*** NO CARD WRITTEN: assignee "${card.assignee}" has no profile at ${profile}. The finding stays staged. Fix FEED_NOTICE_ASSIGNEE.`);
     return { attempted: false, ok: false, key, reason: 'assignee_absent' };
   }
-  const result = spawnSync(
-    bin,
-    ['kanban', '--board', card.board, 'create', '--assignee', card.assignee, '--priority', String(card.priority), '--idempotency-key', key, '--body-file', reportFile, '--json', cardTitle(date, findings)],
-    { encoding: 'utf8', timeout: CHILD_TIMEOUT_MS },
-  );
+  const hermes = (args) => spawnSync(bin, ['kanban', '--board', card.board, ...args], { encoding: 'utf8', timeout: CHILD_TIMEOUT_MS });
+  const result = hermes(['create', '--assignee', card.assignee, '--priority', String(card.priority), '--idempotency-key', key, '--body-file', reportFile, '--json', cardTitle(date, findings)]);
   if (result.error || result.status !== 0) {
     warn(`*** CARD WRITE FAILED: ${result.error?.message ?? (result.stderr || '').trim()}. The finding stays staged.`);
     return { attempted: true, ok: false, key, reason: 'hermes_failed' };
   }
-  return { attempted: true, ok: true, key, id: readJsonText(result.stdout)?.id ?? null };
+  const id = readJsonText(result.stdout)?.id;
+  if (!id) {
+    warn('*** CARD NOT CONFIRMED: create returned no card id, so it cannot be read back. The finding stays staged.');
+    return { attempted: true, ok: false, key, reason: 'card_id_unknown' };
+  }
+  return confirmCardShows({ hermes, key, id, findings, reportFile });
 }
 
 function readJsonText(text) {
@@ -1007,7 +1097,8 @@ async function runNotice({
   const { date: today, dirName } = timeParts(now);
 
   const ledgerFile = path.join(stagingRoot, 'ledger.json');
-  const ledger = readLedger(ledgerFile);
+  const storedLedger = readLedger(ledgerFile);
+  const ledger = dropExpired(storedLedger, today);
   const { carded, reported, silent } = classify(findings, ledger, today);
   const summary = {
     generated_at: now.toISOString(),
@@ -1021,7 +1112,7 @@ async function runNotice({
 
   if (!reported.length) {
     // Silence is a valid output. Only the ledger moves, and only if it has something to record.
-    if (!dry && (findings.length || Object.keys(ledger.seen).length)) {
+    if (!dry && (findings.length || Object.keys(storedLedger.seen).length)) {
       fs.mkdirSync(stagingRoot, { recursive: true });
       fs.writeFileSync(ledgerFile, `${JSON.stringify(nextLedger(ledger, findings, { today, cardedToday: new Set(), cardOwed: new Set() }), null, 2)}\n`);
     }
@@ -1040,7 +1131,7 @@ async function runNotice({
 
   // At most one card a day. A finding that arrives after today's card waits for tomorrow's.
   const alreadyCarded = Object.values(ledger.seen).some((entry) => entry.last_carded === today);
-  let delivered = { attempted: false, ok: false, key: `feed-notice-${today}`, reason: carded.length ? 'already_carded_today' : 'nothing_new' };
+  let delivered = { attempted: false, ok: false, key: cardKey(today, reported), reason: carded.length ? 'already_carded_today' : 'nothing_new' };
   if (carded.length && !alreadyCarded) {
     delivered = deliverCard({ card, date: today, findings: reported, reportFile: path.join(runDir, 'report.md') });
   }
@@ -1066,6 +1157,18 @@ async function runNotice({
 
 async function main() {
   const args = process.argv.slice(2);
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(USAGE);
+    return;
+  }
+  // Before anything runs: a mistyped flag must not fall through to a live run.
+  const unknown = args.filter((arg) => !KNOWN_FLAGS.has(arg));
+  if (unknown.length) {
+    warn(`unknown argument: ${unknown.join(' ')}`);
+    console.error(USAGE);
+    process.exitCode = EXIT_ERROR;
+    return;
+  }
   const dry = args.includes('--dry');
   const jsonOut = args.includes('--json');
   const noNet = args.includes('--no-net');

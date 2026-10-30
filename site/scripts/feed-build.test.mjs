@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -652,6 +652,65 @@ describe('running the script against a fixture vault', () => {
       mkdirSync(path.join(outDir, 'friends'));
       expect(run(['--no-net', '--dry']).status).toBe(0);
       expect(readdirSync(outDir)).toEqual(['friends']);
+    });
+  });
+
+  describe('determinism', () => {
+    const FILES = ['feed.json', 'atom.xml', 'index.json', 'public/feed.json', 'public/atom.xml'];
+    const output = () => FILES.map((name) => readFileSync(path.join(outDir, name), 'utf8'));
+    const readIndex = () => JSON.parse(readFileSync(path.join(outDir, 'index.json'), 'utf8'));
+    const writeKb = (name, frontmatter) => {
+      mkdirSync(path.join(vaultDir, 'KB'), { recursive: true });
+      writeFileSync(path.join(vaultDir, 'KB', name), `---\n${frontmatter}\n---\n\nBody.\n`);
+    };
+
+    beforeEach(() => {
+      writeFileSync(
+        path.join(vaultDir, 'Social/Published/old.md'),
+        '---\ntitle: Old\naudience: [public]\nfirst_published: 2026-10-01\nplatforms:\n  - platform: substack\n    url: https://x.test/p/old\n---\n',
+      );
+      writeFileSync(
+        path.join(vaultDir, 'Social/Published/new.md'),
+        '---\ntitle: New\naudience: [public]\nfirst_published: 2026-10-20\nplatforms:\n  - platform: substack\n    url: https://x.test/p/new\n---\n',
+      );
+    });
+
+    it('writes byte-identical output for identical input, whatever the clock or mtimes say', () => {
+      writeKb('page.md', 'updated: 2026-10-05\npublic: yes');
+      expect(run().status).toBe(0);
+      const first = output();
+      utimesSync(path.join(vaultDir, 'KB/page.md'), new Date('2030-01-01'), new Date('2030-01-01'));
+      expect(run().status).toBe(0);
+      expect(output()).toEqual(first);
+    });
+
+    it('stamps index.json and Atom with the newest item, not the build', () => {
+      expect(run().status).toBe(0);
+      expect(readIndex().generated_at).toBe('2026-10-20T00:00:00.000Z');
+      const atom = readFileSync(path.join(outDir, 'atom.xml'), 'utf8');
+      expect(atom.split('<entry>')[0]).toContain('<updated>2026-10-20T00:00:00.000Z</updated>');
+    });
+
+    it('takes the newest date from the entries, whatever order they arrive in', () => {
+      const atom = buildAtom([item({ date_published: '2026-10-01T00:00:00.000Z' }), item({ date_published: '2026-10-20T00:00:00.000Z' })]);
+      expect(atom.split('<entry>')[0]).toContain('<updated>2026-10-20T00:00:00.000Z</updated>');
+    });
+
+    it('gives an empty feed a fixed <updated> and a null generated_at', () => {
+      rmSync(path.join(vaultDir, 'Social/Published/old.md'));
+      rmSync(path.join(vaultDir, 'Social/Published/new.md'));
+      expect(run().status).toBe(0);
+      expect(readIndex().generated_at).toBeNull();
+      expect(readFileSync(path.join(outDir, 'atom.xml'), 'utf8')).toContain('<updated>1970-01-01T00:00:00.000Z</updated>');
+    });
+
+    it('reads kb.last_modified from the newest published updated:, ignoring private pages', () => {
+      writeKb('page.md', 'updated: 2026-10-05\npublic: yes');
+      writeKb('private.md', 'updated: 2026-12-25\npublic: no');
+      writeKb('client.md', 'updated: 2026-12-26\npublic: yes\nconfidential: ghn');
+      writeKb('log.md', 'updated: 2026-12-27\npublic: yes');
+      expect(run().status).toBe(0);
+      expect(readIndex().sources.kb.last_modified).toBe('2026-10-05T00:00:00.000Z');
     });
   });
 

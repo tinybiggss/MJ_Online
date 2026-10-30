@@ -36,6 +36,9 @@
  * bumps `updated:`, appends History lines and writer stamps, and none of that changes
  * a published claim. feed-notice.mjs compares it to the committed digest.json to tell
  * a real edit from bookkeeping.
+ *
+ * Same input, same bytes: no field reads the clock or an mtime, so generatedAt and
+ * generated_at are the newest `updated:` among the published pages.
  */
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
@@ -189,7 +192,8 @@ function loadPages(kbDir) {
     } catch {
       return;
     }
-    for (const e of entries.sort((a, b) => a.name.localeCompare(b.name))) {
+    // A fixed locale: launchd and a terminal can default to different ones.
+    for (const e of entries.sort((a, b) => a.name.localeCompare(b.name, 'en'))) {
       const p = path.join(dir, e.name);
       if (e.isDirectory()) walk(p);
       else if (e.isFile() && e.name.endsWith('.md') && !SKIP_PAGES.has(e.name)) {
@@ -326,13 +330,19 @@ function pageDigest(bodyParts) {
   return `sha256:${createHash('sha256').update(projection).digest('hex')}`;
 }
 
+/** Newest `updated:` among the pages that emit anything. Null when none carries a usable date. */
+function newestUpdated(rendered) {
+  const times = rendered.filter((r) => r.chunks?.length).map((r) => Date.parse(r.updated)).filter(Number.isFinite);
+  return times.length ? new Date(Math.max(...times)).toISOString() : null;
+}
+
 function digestView(rendered, orphans) {
   const pages = {};
   for (const r of rendered) {
     if (!r.chunks?.length) continue;
     pages[`kb-${slugify(r.page.rel)}`] = { digest: pageDigest(r.bodyParts), updated: r.updated, files: r.files };
   }
-  return { generated_at: new Date().toISOString(), pages, orphans };
+  return { generated_at: newestUpdated(rendered), pages, orphans };
 }
 
 /** .md files on disk that this export does not contain. */
@@ -478,13 +488,15 @@ function main() {
     });
   }
 
+  const generatedAt = newestUpdated(rendered);
+
   fs.mkdirSync(path.dirname(LLMS_TXT), { recursive: true });
   fs.writeFileSync(LLMS_TXT, llmsLines.join('\n') + '\n');
   fs.writeFileSync(
     path.join(AGENTS_DIR, 'index.json'),
     JSON.stringify(
       {
-        generatedAt: new Date().toISOString(),
+        generatedAt,
         site: 'https://mikejones.online',
         description: 'Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt',
         llmsTxt: '/llms.txt',
@@ -499,7 +511,7 @@ function main() {
     path.join(AGENTS_DIR, 'search-index.json'),
     JSON.stringify(
       {
-        generatedAt: new Date().toISOString(),
+        generatedAt,
         endpoint: '/agents/query',
         entries: searchEntries,
       },
@@ -515,7 +527,9 @@ function main() {
     fs.rmSync(path.join(AGENTS_DIR, name));
     say(`   removed orphan: ${name}`);
   }
-  fs.writeFileSync(path.join(AGENTS_DIR, 'digest.json'), JSON.stringify(digestView(rendered, orphans), null, 2) + '\n');
+  // Describes the export as written, so orphans is what is left after removal. Naming the
+  // removed files here would make the next identical run rewrite this file without them.
+  fs.writeFileSync(path.join(AGENTS_DIR, 'digest.json'), JSON.stringify(digestView(rendered, unreferencedFiles(rendered)), null, 2) + '\n');
 
   say(`\nWrote ${indexEntries.length} page(s) → ${AGENTS_DIR.replace(SITE_DIR + '/', 'site/')}`);
   say(`Wrote ${LLMS_TXT.replace(SITE_DIR + '/', 'site/')}`);

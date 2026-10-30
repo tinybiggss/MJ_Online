@@ -166,15 +166,62 @@ describe('kb-to-agents', () => {
       expect(emitted).toContain('Kept section');
     });
 
-    it('removes orphans, names them in digest.json, and keeps the sidecar files', () => {
+    it('removes orphans, keeps the sidecar files, and writes the digest of what is left', () => {
       expect(run().status).toBe(0);
+      const clean = readFileSync(path.join(outDir, 'digest.json'), 'utf8');
       writeFileSync(path.join(outDir, 'kb-gone.md'), 'old');
-      expect(run().status).toBe(0);
+      const result = run();
+      expect(result.status).toBe(0);
+      expect(result.stdout).toContain('removed orphan: kb-gone.md');
       expect(existsSync(path.join(outDir, 'kb-gone.md'))).toBe(false);
-      expect(JSON.parse(readFileSync(path.join(outDir, 'digest.json'), 'utf8')).orphans).toEqual(['kb-gone.md']);
+      // Naming it here would make the next identical run rewrite this file.
+      expect(readFileSync(path.join(outDir, 'digest.json'), 'utf8')).toBe(clean);
       for (const kept of ['index.json', 'search-index.json', 'digest.json']) {
         expect(existsSync(path.join(outDir, kept))).toBe(true);
       }
+    });
+
+    describe('determinism', () => {
+      const exported = () =>
+        Object.fromEntries(
+          [...readdirSync(outDir).map((name) => path.join(outDir, name)), llmsPath].map((file) => [path.basename(file), readFileSync(file, 'utf8')]),
+        );
+      const changedFiles = (before, after) =>
+        Object.keys({ ...before, ...after }).filter((name) => before[name] !== after[name]).sort();
+
+      it('writes byte-identical output for identical input, whatever the clock or mtimes say', () => {
+        expect(run().status).toBe(0);
+        const first = exported();
+        utimesSync(path.join(kbDir, 'pipelines/alpha.md'), new Date('2030-01-01'), new Date('2030-01-01'));
+        expect(run().status).toBe(0);
+        expect(exported()).toEqual(first);
+      });
+
+      it('stamps every generated file with the newest published updated:, ignoring private pages', () => {
+        writePage('pipelines/beta.md', page({ title: 'Beta', updated: '2026-10-20' }));
+        writePage('private/draft.md', page({ title: 'Private', updated: '2026-12-25', frontmatter: 'public: no' }));
+        expect(run().status).toBe(0);
+        for (const [name, field] of [['index.json', 'generatedAt'], ['search-index.json', 'generatedAt'], ['digest.json', 'generated_at']]) {
+          expect(JSON.parse(readFileSync(path.join(outDir, name), 'utf8'))[field], name).toBe('2026-10-20T00:00:00.000Z');
+        }
+      });
+
+      it('has no stamp to report when no page carries a date', () => {
+        writePage('pipelines/alpha.md', page().replace(/^updated: .*\n/m, ''));
+        writePage('pipelines/beta.md', page({ title: 'Beta' }).replace(/^updated: .*\n/m, ''));
+        expect(run().status).toBe(0);
+        expect(JSON.parse(readFileSync(path.join(outDir, 'index.json'), 'utf8')).generatedAt).toBeNull();
+      });
+
+      it('changes exactly the affected files when one page\'s prose changes', () => {
+        expect(run().status).toBe(0);
+        const before = exported();
+        const alpha = path.join(kbDir, 'pipelines/alpha.md');
+        writeFileSync(alpha, readFileSync(alpha, 'utf8').replace('Details of how the thing works', 'Details of how the thing runs'));
+        expect(run().status).toBe(0);
+        // Section text, not the page summary, so index.json and llms.txt do not move.
+        expect(changedFiles(before, exported())).toEqual(['digest.json', 'kb-pipelines-alpha.md', 'search-index.json']);
+      });
     });
 
     it('keeps -part files of a split page and points index.json at one that exists', () => {
