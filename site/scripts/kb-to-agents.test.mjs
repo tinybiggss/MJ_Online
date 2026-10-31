@@ -275,12 +275,12 @@ describe('kb-to-agents', () => {
 describe('committed export', () => {
   const dir = fileURLToPath(new URL('../public/agents/kb/', import.meta.url));
 
-  // Held deliberately: the ship commit for feed v1 keeps the pre-hygiene export
-  // (see "ship: feed v1 only"). The regeneration that satisfies these two
-  // assertions publishes a mail-triage detail that has never been public, so it
-  // waits on Mike's ruling. Re-enable (it -> it) the moment that export ships;
-  // until then the guard reports the truth: the public export is stale.
-  it.skip('publishes no writer stamp or comment, and no file its index omits', () => {
+  // Live since 2026-10-30 23:17: the held export shipped (commit 4c7d500) —
+  // the automation registry left the public export on Mike's ruling
+  // (public: no at the source), the last four writer stamps were stripped,
+  // and digest.json is the committed baseline again. These two guards keep
+  // /agents/kb honest: regenerate drifts and stray stamps get caught in CI.
+  it('publishes no writer stamp or comment, and no file its index omits', () => {
     const index = JSON.parse(readFileSync(path.join(dir, 'index.json'), 'utf8'));
     const listed = new Set(index.pages.flatMap((entry) => entry.files));
     for (const name of readdirSync(dir)) {
@@ -289,7 +289,7 @@ describe('committed export', () => {
     }
   });
 
-  it.skip('carries a digest.json covering every indexed page', () => {
+  it('carries a digest.json covering every indexed page', () => {
     const index = JSON.parse(readFileSync(path.join(dir, 'index.json'), 'utf8'));
     const digest = JSON.parse(readFileSync(path.join(dir, 'digest.json'), 'utf8'));
     expect(Object.keys(digest.pages).sort()).toEqual(index.pages.map((entry) => entry.id).sort());
