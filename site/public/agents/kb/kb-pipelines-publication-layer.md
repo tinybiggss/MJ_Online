@@ -1,7 +1,7 @@
 ---
 id: kb-pipelines-publication-layer
 title: Publication Layer
-updated: 2026-10-30
+updated: 2026-10-31
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -25,7 +25,7 @@ Surface Adapter State mikejones.online Astro content.ts — KB:BEGIN/END region 
 
 ### Open work
 
-Backfill of the facts the t_90718efd run established: DONE 2026-09-25 — ccar-f-certification (public: yes), jonesco credentials row, Stale downloadable /Mike-Jones-Resume.pdf on mikejones.online; vault resume (Career/Resume/) is also pre-cert. Regeneration needs Mike's call. Adapter mechanism per surface (build-time generation vs staged-diff script): decided for two surfaces — Distills RAG and mikejones.online content.ts both use gated staged-diff scripts writing to a staging dir (mj-chatbot-backend/staging/, site/content.staging/). Other surfaces still TBD. Vault-root CLAUDE.md WRITTEN 2026-09-25 (Mike approved in-session). Phase 2 DONE: nightly KB-maintenance cron wired 2026-09-25 (kb-nightly-maintenance, 03:00 daily); session-end convention in live use since 2026-09-25.
+Backfill of the facts the t_90718efd run established: DONE 2026-09-25 — ccar-f-certification (public: yes), jonesco credentials row, Stale downloadable /Mike-Jones-Resume.pdf on mikejones.online; vault resume (Career/Resume/) is also pre-cert. Regeneration needs Mike's call. Adapter mechanism per surface (build-time generation vs staged-diff script): decided for two surfaces — Distills RAG and mikejones.online content.ts both use gated staged-diff scripts writing to a staging dir (mj-chatbot-backend/staging/, site/content.staging/). Other surfaces still TBD. Vault-root CLAUDE.md WRITTEN 2026-09-25 (Mike approved in-session). Phase 2 DONE: nightly KB-maintenance cron wired 2026-09-25 (kb-nightly-maintenance, 03:00 daily); session-end convention in live use since 2026-09-25. Workflow spec on paper (2026-10-30), awaiting Mike: the step-by-step operational gate a *public automations page* would pass before going live on mikejones.online — approval-evidence standard, drift re-approval rule for stale content, unpublish procedure. It implements this page's rule for one prospective surface and changes nothing now: feature option t_a857b360, nothing scheduled, review ticket T-2026-10-31-ZJ1; artifact Finished Products/Artifacts/kanban/t_520c2740/t_520c2740_2026-10-31_publication-gate-workflow-spec.md. Its load-bearing lesson from the 2026-10-30 incident: the public: marker alone is not a content screen — the registry was withdrawn (public: no, t_c1a52c37) because schedules, job ids, state-file paths and a never-public triage sentence rode an export that only asked "is this public?".
 
 ### Adapter: Distills RAG (pilot — built 2026-09-25, staged for approval)
 

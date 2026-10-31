@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T00:00:00.000Z",
+  "generatedAt": "2026-10-31T00:00:00.000Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
@@ -73,7 +73,7 @@
     {
       "id": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
-      "updated": "2026-10-30",
+      "updated": "2026-10-31",
       "summary": "Thesis (Mike, DEC 2026-09-17, restated live 2026-09-29): within 12–18 months, sites stop being rendered UIs and become data/action endpoints queried by agents via protocols like MCP.",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
       "files": [
@@ -93,7 +93,7 @@
     {
       "id": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
-      "updated": "2026-10-30",
+      "updated": "2026-10-31",
       "summary": "What it is: the adapter layer between jonesco's KB and the public surfaces.",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "files": [
