@@ -1,7 +1,7 @@
 ---
 id: kb-business-resilient-tomorrow
 title: Resilient Tomorrow
-updated: 2026-10-26
+updated: 2026-10-30
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -29,4 +29,4 @@ Energy · Food · Governance · Health · Shelter · Finance · Connection (voic
 
 ### Content Machinery
 
-Substack publication is live. The content generation pipeline (trend-watcher → generator → adapter) is not operational — v1 never fully worked, scheduler died 2026-07-28, v2 revision is intended. See rt-content-pipeline and generator-registry.
+Substack publication is live. The content generation pipeline (trend-watcher → generator → adapter) is not operational — v1 never fully worked, scheduler died 2026-07-28. The "v2 revision is intended" line this page carried from 2026-09-24 is superseded: Mike's 2026-10-29 single-home ruling froze the RT second pipeline (682 md to _Archive/2026-10/rt-content-pre-social/) and made Social/ the only drafting, adaptation and published-log home. The replacement is a runbook (Operations/content-pipeline.md) plus one unit shipped by hand at a time — not a rebuilt machine. What *is* automated is measurement, not production: two launchd agents pull Substack nightly (posts/notes/daily CSVs 23:30, note stats 23:45). The missing leg is the text archive — Resilient Tomorrow/Published/ (renamed from Completed Articles 2026-10-29) had nothing after 2026-07-22, including the 2026-10-08 Muse piece; the record layer is now the log at Social/Published/ (URLs, not copies; no retro backfill), with the archiver tracked on the T-card Tasks/T-2026-10-29-CB8. Subscriber numbers are hand-entered because the pull's subscriber leg has 403'd since ~2026-10-02. See rt-content-pipeline and generator-registry.

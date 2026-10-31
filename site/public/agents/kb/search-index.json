@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T17:12:25.517Z",
+  "generatedAt": "2026-10-30T00:00:00.000Z",
   "endpoint": "/agents/query",
   "entries": [
     {
@@ -187,7 +187,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Resilient Tomorrow",
-      "updated": "2026-10-26",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "Media + platform. The legacy play (north-star): \"known for Resilient Tomorrow. Teaching people how to build technology that makes their lives more independent and connected.\""
     },
@@ -196,7 +196,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Identity",
-      "updated": "2026-10-26",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "Tagline: \"Build your exit. Without burning anything down.\" Archetype: Outlaw (60-70%) + Sage (30-40%) — the rebel who found the exits, calmly showing them NOT: prepper site, self-help, activism, guru platform, charity"
     },
@@ -205,7 +205,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "The Staircase Model (load-bearing)",
-      "updated": "2026-10-26",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "1. Perspective — \"The system did this to you.\" 2. Practical Path — \"Here's the audit. Here's the first step.\" 3. Peer Belonging — \"You're not alone.\" Community is the side effect, not the selling point. Evidence: individual-framed articles outperform collective-organizing CTAs by ~10x (16,316 views / 378 signups vs ~1,250 views / net subscriber loss). Strategic teaching direction (2026-10-26): Teach people to regain control one system at a time. Each class should create a concrete win, then connect the learner to the tools, formulas, or options for the next step. The aim is to stay half a step ahead and show the way—not to wait for a complete platform before teaching. The first class and its specific outcome remain undecided; the working note is the raw hub Resilient Tomorrow/RT Content Engine.md."
     },
@@ -214,7 +214,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Seven Pillars",
-      "updated": "2026-10-26",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "Energy · Food · Governance · Health · Shelter · Finance · Connection (voice lines for each live in Resilient Tomorrow/CLAUDE.md)"
     },
@@ -223,7 +223,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Product Architecture",
-      "updated": "2026-10-26",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "` RT Tools / Scorecard (free entry — individual, not collective) → RT Community / The Commons ($50/mo) → RT Courses (member-created, revenue share) → RT Commons Fund (member-funded grants) ` Front door is Tools (individual), not Community (collective)."
     },
@@ -232,9 +232,9 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Content Machinery",
-      "updated": "2026-10-26",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
-      "text": "Substack publication is live. The content generation pipeline (trend-watcher → generator → adapter) is not operational — v1 never fully worked, scheduler died 2026-07-28, v2 revision is intended. See rt-content-pipeline and generator-registry."
+      "text": "Substack publication is live. The content generation pipeline (trend-watcher → generator → adapter) is not operational — v1 never fully worked, scheduler died 2026-07-28. The \"v2 revision is intended\" line this page carried from 2026-09-24 is superseded: Mike's 2026-10-29 single-home ruling froze the RT second pipeline (682 md to _Archive/2026-10/rt-content-pre-social/) and made Social/ the only drafting, adaptation and published-log home. The replacement is a runbook (Operations/content-pipeline.md) plus one unit shipped by hand at a time — not a rebuilt machine. What *is* automated is measurement, not production: two launchd agents pull Substack nightly (posts/notes/daily CSVs 23:30, note stats 23:45). The missing leg is the text archive — Resilient Tomorrow/Published/ (renamed from Completed Articles 2026-10-29) had nothing after 2026-07-22, including the 2026-10-08 Muse piece; the record layer is now the log at Social/Published/ (URLs, not copies; no retro backfill), with the archiver tracked on the T-card Tasks/T-2026-10-29-CB8. Subscriber numbers are hand-entered because the pull's subscriber leg has 403'd since ~2026-10-02. See rt-content-pipeline and generator-registry."
     },
     {
       "id": "kb-business-velocity-partners-velocity-partners",
@@ -358,7 +358,7 @@
       "pageId": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
       "section": "The Agentic Web",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
       "text": "Thesis (Mike, DEC 2026-09-17, restated live 2026-09-29): within 12–18 months, sites stop being rendered UIs and become data/action endpoints queried by agents via protocols like MCP. Platform-centric distribution ends; data becomes queryable; the personal agent is the interface. This is a working thesis Mike is betting businesses on, not an established market. The brief's own honest counterweight: consumer agent-first traffic is still small and no one has proven a revenue model. The shift is load-bearing at the infrastructure layer (protocols, registries, agent runtimes) while the UX layer is immature — the window where first-mover position accrues."
     },
@@ -367,7 +367,7 @@
       "pageId": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
       "section": "Why It Matters Here",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
       "text": "Drives live decisions across three businesses: Velocity Partners — the 2026-10-02 Gamma-rebuild answers made the agentic web the site's real offering: \"prepare your business for the Agentic web\" — knowledge bases, agentic indexes, KB-driven bots (same pattern as distills), with the site rebuilt to be findable by agents and indexable. Implementation cards T-2026-10-02-VK7 (velocitypartners.io) and T-2026-10-02-HAJ (jones-co.us), queued — decided, not built. *(Updated 2026-10-28: the VP leg IS built — deployed to Cloudflare Pages velocitypartners-io.pages.dev 2026-10-26 with the agent layer live; Mike rejected the design/frame the same day and a direction pick (T-2026-10-27-CZM) gates the rebuild, prod still on Gamma. jones-co.us is still queued. See velocity-partners.)* Velocity Partners pricing stance — the \"public data made discoverable to agents + verification\" extension of the KB offering has zero observed service demand (Offerings Analysis 2026-10-03): an R&D bet with a kill criterion, not a service to lead with. Resilient Tomorrow — the agentic-web post is RT's highest-strength content signal (\"agents all the way down\"); Mike articulated the full thesis live 2026-09-29 (Todd Taber 1:1) and a prep-for-the-agentic-web social topic is staged (T-2026-10-02-63V). Distills — positioning: protocol-native personal publisher; agents consume it directly. Lead surface is authenticated audience-tagged RSS — evolution of a primitive every agent runtime already understands — before in"
     },
@@ -376,7 +376,7 @@
       "pageId": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
       "section": "Protocol Stack (brief, verified reachable 2026-09-18)",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
       "text": "Layer Protocol Stance Agent ↔ tool MCP (+ official Registry as discovery — \"listing is the new SEO\") primary surface Agent ↔ agent Google A2A watch; do not build first Docs discovery llms.txt ship everywhere now — the floor Policy agents.txt watch; ship permissive early Semantics schema.org / JSON-LD table stakes Feeds RSS/Atom + auth extensions Distills' lead surface Browser layer WebMCP watchlist Stacking rule: llms.txt + schema.org is the floor, an MCP server is the agent-native surface, A2A is the later scaling layer."
     },
@@ -385,7 +385,7 @@
       "pageId": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
       "section": "Smallest Viable Surface (brief recommendation)",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
       "text": "llms.txt + schema.org markup now; a read-only MCP server this quarter; list in the MCP Registry early. Distills diverges: authenticated audience-tagged RSS first, MCP wrapper later. Deliberately deferred: A2A surfaces, agent payments, write/transaction endpoints — real but premature until read-only surfaces get agent traffic."
     },
@@ -394,18 +394,18 @@
       "pageId": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
       "section": "Claim History",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
-      "text": "2026-09-17 — thesis decision; brief commissioned 2026-09-18 — brief delivered: evidence check, protocol map, per-project surfaces 2026-09-29 — articulated end-to-end live (Todd Taber 1:1); staged same day as draft social scripts (Resilient Tomorrow/Content Drafts/2026-09-29/) 2026-10-02 — became a named VP offering, a social topic, and the indexability ruling for both public sites 2026-10-03 — priced in the Offerings Analysis (public/verification half = bet, not service) 2026-10-05 — grill (T-2026-10-02-NHM) made the person-roof portfolio page the active instantiation: \"portfolio page agent-queryable + updated (Distills read-only demo, scoped security surface) + VP agentic-web page pointing at it\" = the Friday artifact; Day 1 live-site audit done 2026-10-05 (T-2026-10-05-AQW). The RSS-lead Distills framing above is untouched. 2026-10-09 — the person-brand leg went LIVE: mikejones.online change-set in prod (VK7 ship, commit 9b3c9b3) — agent-queryable portfolio page + /agents/ query endpoint + llms.txt verified live; velocitypartners.io agentic-web page stays pending, blocked by Mike (10-09 20:56) until the Distills SMB review closes (T-2026-10-09-CHZ). 2026-10-12 — demand-side evidence + gate amendment (SMB company-KB leg): the Reddit demand-mining probe (Distills/Competition/ 2026-10-12-reddit-demand-probe.md) found 0/49 sampled SMB-owner threads asking for agent-facing surfaces — builders are ahead of buyers, owner demand estimated 6–18 months out. Mike's OQ-1 decision (week"
+      "text": "2026-09-17 — thesis decision; brief commissioned 2026-09-18 — brief delivered: evidence check, protocol map, per-project surfaces 2026-09-29 — articulated end-to-end live (Todd Taber 1:1); staged same day as draft social scripts (since 2026-10-29 at _Archive/2026-10/rt-content-pre-social/Content Drafts/2026-09-29/) 2026-10-02 — became a named VP offering, a social topic, and the indexability ruling for both public sites 2026-10-03 — priced in the Offerings Analysis (public/verification half = bet, not service) 2026-10-05 — grill (T-2026-10-02-NHM) made the person-roof portfolio page the active instantiation: \"portfolio page agent-queryable + updated (Distills read-only demo, scoped security surface) + VP agentic-web page pointing at it\" = the Friday artifact; Day 1 live-site audit done 2026-10-05 (T-2026-10-05-AQW). The RSS-lead Distills framing above is untouched. 2026-10-09 — the person-brand leg went LIVE: mikejones.online change-set in prod (VK7 ship, commit 9b3c9b3) — agent-queryable portfolio page + /agents/ query endpoint + llms.txt verified live; velocitypartners.io agentic-web page stays pending, blocked by Mike (10-09 20:56) until the Distills SMB review closes (T-2026-10-09-CHZ). 2026-10-12 — demand-side evidence + gate amendment (SMB company-KB leg): the Reddit demand-mining probe (Distills/Competition/ 2026-10-12-reddit-demand-probe.md) found 0/49 sampled SMB-owner threads asking for agent-facing surfaces — builders are ahead of buyers, owner demand estimated 6–1"
     },
     {
       "id": "kb-concepts-agentic-web-related",
       "pageId": "kb-concepts-agentic-web",
       "title": "The Agentic Web",
       "section": "Related",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-concepts-agentic-web.md",
-      "text": "distills — protocol-native personal publisher positioning velocity-partners — carries the agentic-web offering resilient-tomorrow — highest-strength content signal task-system — Mike's own working instantiation of agents as the interface <!-- writer: kb-nightly 2026-10-28T03:00 -->"
+      "text": "distills — protocol-native personal publisher positioning velocity-partners — carries the agentic-web offering resilient-tomorrow — highest-strength content signal task-system — Mike's own working instantiation of agents as the interface"
     },
     {
       "id": "kb-concepts-ccar-f-certification-claude-certified-architect-foundations",
@@ -444,56 +444,11 @@
       "text": "publication-layer — the run whose open work this backfill closes jonesco — parent entity the credential attaches to"
     },
     {
-      "id": "kb-pipelines-generator-registry-generator-registry",
-      "pageId": "kb-pipelines-generator-registry",
-      "title": "Generator Registry",
-      "section": "Generator Registry",
-      "updated": "2026-10-28",
-      "path": "/agents/kb/kb-pipelines-generator-registry-part1.md",
-      "text": "What writes into this vault, where, and whether it's alive. Agents check this before trusting vault content: a note from a dead generator is stale by definition, no matter its date."
-    },
-    {
-      "id": "kb-pipelines-generator-registry-alive",
-      "pageId": "kb-pipelines-generator-registry",
-      "title": "Generator Registry",
-      "section": "Alive",
-      "updated": "2026-10-28",
-      "path": "/agents/kb/kb-pipelines-generator-registry-part1.md",
-      "text": "Generator What it does Writes to Schedule hermes morning-briefing Daily brief. Priorities come from the daily note's ## Week Priorities section ONLY — there is no week-file fallback, so a brief that fires before the 11:00 sweep reports \"no priorities block\" even when the week file holds priorities (Operations/automation.md changelog 2026-10-24, open gap) Week and Daily Plans/ 07:00 daily, 08:00 weekend (both slots precede the first 11:00 sweep) hermes important-mail monitor Mail triage Projects/*/Email-Threads/ every 30 min hermes ADD shutdown Daily close-out: hot spot, staging add-friendly-agent data/ 21:00 daily hermes ADD weekly review Sunday review sweep add-friendly-agent data/ Sun 18:00 hermes kb-nightly-maintenance Nightly KB pass: lint, last-24h sweep, stale flags, registry freshness KB/ + report (telegram) 03:00 daily hermes task-intake (adopt.py) Adopts board-root cards into Tasks/ (id, created, defaults) Tasks/ every 10 min hermes orchestrator-sweep-day (ops profile since 2026-10-26) Personal-kanban sweep: executes resolved cards, routes work cards (hermes/claude/codex), bounded inbox triage; writes ## Week Priorities into today's daily note from the live week file via the _Active Weekly Plan pointer (its only Week-and-Daily-Plans write, idempotent, verify-on-reread, never creates notes) Tasks/ via task-system CLI, hermes kanban, Week and Daily Plans/ (one section) 11:00 + 15:00 daily (id e99f2561b15e; moved off default with a WRITE-SCOPE STAMP) hermes orchestrator"
-    },
-    {
-      "id": "kb-pipelines-generator-registry-paused-ended-bounded-watches-paused-early-or-a-watch-removed",
-      "pageId": "kb-pipelines-generator-registry",
-      "title": "Generator Registry",
-      "section": "Paused / ended (bounded watches paused early, or a watch removed)",
-      "updated": "2026-10-28",
-      "path": "/agents/kb/kb-pipelines-generator-registry-part2.md",
-      "text": "Rows are kept as the record even after their job record is gone from jobs.json. Local AI Build ×2, RAG overnight GO, feed-sys codex close and minimax-promo-revert had their job records deleted 2026-10-26 on Mike's OK; the two remaining one-shot records still in jobs.json are fixbatch-go-1435 and nswave1-go-1520 (both enabled: false, state completed). Generator What it does Writes to Status hermes Local AI Build Price Watch (ends Oct 8) — id 55206889f927 6-hourly price-watch ticks for Mike's local AI server build against ~/.hermes/price-watches/local-ai-build.json Telegram + price-watch state file (no vault writes) paused 2026-10-07 ~12:07 by Mike after ordering the Andromeda prebuilt (day plan 10-07); 2 of 18 ticks unused; job disabled in jobs.json hermes Local AI Build Hourly — Prime Day (Oct 6-7) — id d7e9d51b97c4 Hourly Prime-Day ticks + R9700-prebuilt sweep; final tick was to deliver the sale summary + prebuilt-vs-parts verdict Telegram + price-watch state file paused 2026-10-07 ~12:07 by Mike, same reason; the planned final 23:10 SALE-SUMMARY tick never ran (last full tick #30, 11:10: all flat, GPU floor $1,699.99 AMZ ASRock, DIY $2,910.92 vs BB prebuilt $2,899.99) hermes CarPiHAT restock watch (daily) — id 13b53e7a564b Monitor-gated restock/price watch for the Tacoma cyberdeck Phase 1 dock: carpihat-restock-monitor.py polled the thepihut.com CarPiHAT feed (agent posted only on a listing change) Telegram only ended 2026-10-19 — job record DELETED from jobs.json (not disa"
-    },
-    {
-      "id": "kb-pipelines-generator-registry-dead-scheduler-died-2026-07-28-2-months-unrun-as-of-this-page-s-creation",
-      "pageId": "kb-pipelines-generator-registry",
-      "title": "Generator Registry",
-      "section": "Dead (scheduler died 2026-07-28, ~2 months unrun as of this page's creation)",
-      "updated": "2026-10-28",
-      "path": "/agents/kb/kb-pipelines-generator-registry-part2.md",
-      "text": "Generator What it did Output went to Note rt-platform-adapter Channel adaptation (largest writer: 1,000+ notes) RT/Content Adapted/ part of rt-content-pipeline rt-content-generator Article drafts RT/Content Drafts/ same rt-trend-watcher-{reddit,youtube,substack,exa} Source scraping RT/Trend Reports/ same rt-signal-scorer Scored trends RT/Trend Reports/Scored/ same dreaming-nightly Session consolidation AI Sessions/ pattern worked; trigger died obsidian-cleanup / obsidian-bridge Vault hygiene Tasks/, Corvus/ superseded or dead ops-audit Ops audits Corvus/Operations/ dead email-triage Thread captures Projects/*/Email-Threads/ Hermes mail monitor covers part of this Interactive sessions (how-mike-works — Claude Code, Corvus) also write vault-wide but are on-demand, not scheduled."
-    },
-    {
-      "id": "kb-pipelines-generator-registry-how-to-read-this",
-      "pageId": "kb-pipelines-generator-registry",
-      "title": "Generator Registry",
-      "section": "How to Read This",
-      "updated": "2026-10-28",
-      "path": "/agents/kb/kb-pipelines-generator-registry-part2.md",
-      "text": "Alive = scheduled today in a live scheduler (Hermes cron verified in .hermes/cron/jobs.json — the default profile — plus ~/.hermes/profiles/ops/cron/jobs.json for the ops-profile rows: 23 default + 3 ops = 26 enabled as of 2026-10-27, or launchd agent verified via launchctl list) Dead = emitted notes exist but no scheduler references them (verified: OpenClaw crons.db empty, 0-byte, marked DEAD-20260728; jobs archived to _pre-migration-archive-2026-07-17/) The nightly KB maintenance pass (Phase 2) keeps this page current — it is the registry's designated owner"
-    },
-    {
       "id": "kb-pipelines-publication-layer-publication-layer",
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Publication Layer",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "What it is: the adapter layer between jonesco's KB and the public surfaces. The KB holds claims; this layer renders public claims into each surface. Core built 2026-09-25 (see adapters below); remaining surfaces await migration or wiring."
     },
@@ -502,7 +457,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "The rule",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "KB facts carry a public: marker (publication-grade: sourced, approved, no confidential leakage) — only marked facts flow to surfaces. Gated publish: agents stage surface changes from the KB, Mike approves once, then they fan out. Nothing publishes unattended (a typo must not go live on six domains). One direction: KB → surfaces. A surface never edits the KB directly; corrections enter through a maintenance pass, per SCHEMA."
     },
@@ -511,16 +466,16 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Surfaces and their adapters",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
-      "text": "Surface Adapter State mikejones.online Astro content.ts — KB:BEGIN/END region generated from public: yes pages; /agents/ query layer LIVE in prod 2026-10-09 — first KB→surface deployment (VK7 ship: commit 9b3c9b3, CI 37988799634; verified 200 on index.json, query, llms.txt) LinkedIn KB feeds Career/LinkedIn/Profile.md, linkedin-sync skill pushes (diff→sync gate) Profile.md exists; token renewal cycle live — tokens last refreshed 2026-09-25 (renewal job, generator-registry row), current refresh token expires ~Nov 14 (carried flag in KB/log.md); validity not re-verified this pass jones-co.us Next.js; Mike decided 2026-09-25: index it, public company face — first-class surface Gamma-hosted, no repo — collect + rebuild + migrate to Cloudflare Pages before it can be a KB consumer velocitypartners.io Wire as KB consumer; the 10-12 rebuild already ships an agent layer (/llms.txt, /agents/kb, /agents/query) but its 5 fact sheets are hand-built, not adapter-generated Repo + Cloudflare Pages deploy since 2026-10-26 (~/Dev/velocitypartners-io, project velocitypartners-io.pages.dev) — the \"Gamma-hosted, no repo\" prerequisite is half-cleared; prod still Gamma and DNS untouched, design rejected 2026-10-26 with a direction pick pending (velocity-partners) resilient-tomorrow.com Wire as KB consumer, keep current design; redesign later live; content pipeline v2 pending (rt-content-pipeline) Distills RAG Cheapest leg: ingest KB markdown directly; feeds the JS bot on mikejones.online adapter bu"
+      "text": "Surface Adapter State mikejones.online Astro content.ts — KB:BEGIN/END region generated from public: yes pages; /agents/ query layer LIVE in prod 2026-10-09 — first KB→surface deployment (VK7 ship: commit 9b3c9b3, CI 37988799634; verified 200 on index.json, query, llms.txt) LinkedIn KB feeds Career/LinkedIn/Profile.md, linkedin-sync skill pushes (diff→sync gate) Profile.md exists; token renewal cycle live — tokens last refreshed 2026-09-25 (renewal job, generator-registry row), current refresh token expires ~Nov 14 (carried flag in KB/log.md); validity not re-verified this pass jones-co.us Next.js; Mike decided 2026-09-25: index it, public company face — first-class surface Gamma-hosted, no repo — collect + rebuild + migrate to Cloudflare Pages before it can be a KB consumer velocitypartners.io Wire as KB consumer; the 10-12 rebuild already ships an agent layer (/llms.txt, /agents/kb, /agents/query) but its 5 fact sheets are hand-built, not adapter-generated Repo + Cloudflare Pages deploy since 2026-10-26 (~/Dev/velocitypartners-io, project velocitypartners-io.pages.dev) — the \"Gamma-hosted, no repo\" prerequisite is half-cleared; prod still Gamma and DNS untouched, design rejected 2026-10-26 with a direction pick pending (velocity-partners) resilient-tomorrow.com Wire as KB consumer, keep current design; redesign later live; content pipeline v2 superseded 2026-10-29 — one pipeline, homed at Social/; drafts→adapt→publish run through Operations/content-pipeline.md, record layer"
     },
     {
       "id": "kb-pipelines-publication-layer-decisions-mike-2026-09-25",
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Decisions (Mike, 2026-09-25)",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "1. Gated publish — agents stage, Mike approves once, then publish. 2. LinkedIn runs through one funnel: KB → Profile.md → linkedin-sync. 3. VP + RT: wire as KB consumers first; redesign is a later project. 4. jones-co.us becomes the public company face: index it, treat it as first-class."
     },
@@ -529,7 +484,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Open work",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "Backfill of the facts the t_90718efd run established: DONE 2026-09-25 — ccar-f-certification (public: yes), jonesco credentials row, Stale downloadable /Mike-Jones-Resume.pdf on mikejones.online; vault resume (Career/Resume/) is also pre-cert. Regeneration needs Mike's call. Adapter mechanism per surface (build-time generation vs staged-diff script): decided for two surfaces — Distills RAG and mikejones.online content.ts both use gated staged-diff scripts writing to a staging dir (mj-chatbot-backend/staging/, site/content.staging/). Other surfaces still TBD. Vault-root CLAUDE.md WRITTEN 2026-09-25 (Mike approved in-session). Phase 2 DONE: nightly KB-maintenance cron wired 2026-09-25 (kb-nightly-maintenance, 03:00 daily); session-end convention in live use since 2026-09-25."
     },
@@ -538,7 +493,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Adapter: Distills RAG (pilot — built 2026-09-25, staged for approval)",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "The cheapest leg, proven end to end. Correction to the original design: the live chain is not ~/dev/distill-app (that is the multi-tenant SaaS). It is ~/dev/MJ_Online/mj-chatbot-backend — a dedicated Cloudflare Worker. Mechanism. mj-chatbot-backend/scripts/kb-to-rag.mjs reads KB//*.md directly from the vault (no content duplication), strips frontmatter and Sources/History sections, chunks each page by ## section into the distill RAG JSONL schema (narrative entries; topic from page type; source: = the KB path, so every claim stays traceable), and writes only into mj-chatbot-backend/staging/: knowledge.jsonl, knowledge-data.js (the CommonJS module the Worker ingests, same format src/knowledge-loader.js produces), staged.diff, and stage-report.md (human-readable summary for the approval gate). Live chain it feeds. mikejones.online pages → distill-chatbot-widget.js (RAG_CHATBOT_CONFIG → mj-chatbot-backend Worker /chat) → Worker loads src/knowledge-data.js at boot → src/rag-retrieval.js keyword scoring → Claude. The bot changes only when knowledge.jsonl + src/knowledge-data.js are replaced AND the Worker redeploys — apply and deploy are deliberate human steps after approval. How to run. ` cd ~/dev/MJ_Online/mj-chatbot-backend node scripts/kb-to-rag.mjs # dry run, prints summary, writes nothing node scripts/kb-to-rag.mjs --stage # writes staging/ only; live files untouched ` After Mike approves: `cp staging/knowledge.jsonl knowledge.jsonl && cp staging/knowledge-data.js src/knowled"
     },
@@ -547,7 +502,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Adapter: mikejones.online content.ts (built 2026-09-25, staged for approval)",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "Second leg. ~/dev/MJ_Online/site/scripts/kb-to-content.mjs reads KB//*.md directly (read-only input; the generator never writes into KB/), keeps only and renders them into a KB:BEGIN/KB:END region at the end of site/src/lib/content.ts — a generated region inside the hand-maintained file. Everything outside the region stays hand-edited; the page-by-page mapping (generated vs hand-maintained, and why) lives in the generator's FIELD MAP header comment. Today the only public: yes page is ccar-f-certification → generated export certifications (name, abbrev, issuer, issued/issuedDisplay, expires, proofUrl, scope — parsed from the page's Fact|Value table with per-field provenance). resume.astro renders it in Recognition; the hardcoded cert line How to run. ` cd ~/dev/MJ_Online/site node scripts/kb-to-content.mjs # dry run — summary only, writes nothing node scripts/kb-to-content.mjs --stage # writes site/content.staging/ ONLY node scripts/publish-content.mjs # plan — what --apply would do node scripts/publish-content.mjs --apply # AFTER Mike approves the staged diff: ` The commit is the approval gate: publish-content.mjs commits after approval and never pushes — git push is Mike's manual step (Cloudflare Pages auto-deploys on push to main). First publish includes the plumbing (generator, publish helper, resume.astro, site/.gitignore); later publishes need only site/src/lib/content.ts. Safety rails: apply refuses when the working tree's content.ts has hand-edits staging didn't start "
     },
@@ -556,45 +511,63 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Related",
-      "updated": "2026-10-28",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
-      "text": "resilient-tomorrow — RT footer dead Bluesky/LinkedIn buttons (out of scope, flagged) generator-registry — this layer is the reader side; that page is the writer side rag-corpus-design-2026-10-21 — the RAG leg's design-of-record; its Layer-A law supersedes this page's pilot decision point <!-- writer: kb-nightly 2026-10-28T03:00 -->"
+      "text": "resilient-tomorrow — RT footer dead Bluesky/LinkedIn buttons (out of scope, flagged) generator-registry — this layer is the reader side; that page is the writer side rag-corpus-design-2026-10-21 — the RAG leg's design-of-record; its Layer-A law supersedes this page's pilot decision point"
     },
     {
       "id": "kb-pipelines-rt-content-pipeline-rt-content-pipeline",
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "RT Content Pipeline",
-      "updated": "2026-10-02",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
-      "text": "Intended flow: trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish. Current state: not operational. Details: v1 was built but \"never fully operational\" (Mike, 2026-09-24) — he moved on before finishing it OpenClaw cron scheduler died 2026-07-28; with it died the trend-watcher family and the nightly generation runs ~1,200 generated notes from the dead era now quarantined in _Archive/2026-09/ Substack publication itself is live and hand-fed; the pipeline was supposed to automate the top of the funnel"
+      "text": "Intended flow (v1 design): trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish. Current state (verified 2026-10-29/30): the top of that funnel is dead and accepted as dead; the rest of the pipeline is manual and single-homed at Social/. This is no longer a \"revise v2\" page — it records what runs, what does not, and where the procedure lives."
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline-one-pipeline-one-home",
+      "pageId": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "section": "One pipeline, one home",
+      "updated": "2026-10-30",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "text": "Mike's ruling 2026-10-29 (kanban t_81b71d28) froze the RT second pipeline wholesale: Resilient Tomorrow/Content Adapted/ (541 md), Content Drafts/ (124 md) and Drafts/ (17 md) — 682 files — moved to _Archive/2026-10/rt-content-pre-social/, promotion into Social/Adapted/ is on-demand item by item, and the Oct-2 TRIAGE-INDEX.md Keep/Trash pass is retired. The RT pipeline's own strategy docs moved to Social/Research/. So the v1 \"v2 revision intended\" intent recorded here on 2026-09-24 is superseded: there is no second pipeline to revise. The live procedure is Operations/content-pipeline.md (runbook, verified live 2026-10-29) and the replacement shape is Projects/content-pipeline/PLAN.md — ship one unit by hand, automate only what proves itself."
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline-what-does-not-run",
+      "pageId": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "section": "What does not run",
+      "updated": "2026-10-30",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "text": "Stage Last sign of life Consequence Trend watchers (Reddit/X/YouTube/Substack/exa) newest trend report + scored set on disk: 2026-09-27 No automated signal feed; ideas come from Mike Signal scorer none since the scheduler died — Content generator ~930 generated notes quarantined in _Archive/2026-09/ Nothing auto-drafts Platform adapter — Cuts are made per piece, by hand, into Social/Adapted/<draft-name>/ Atomizer newest atom set 2026-10-08 Atoms lag pieces; built on demand The old wording here — \"OpenClaw cron scheduler died 2026-07-28; with it died the trend-watcher family\" — is half true and half misleading: the scheduler did die 2026-07-28, but reports kept being produced for two more months (newest 2026-09-27) before stopping. Anyone tempted to revive v1 should read Operations/content-pipeline.md §2 first: do not rebuild from the v1 spec."
+    },
+    {
+      "id": "kb-pipelines-rt-content-pipeline-what-does-run",
+      "pageId": "kb-pipelines-rt-content-pipeline",
+      "title": "RT Content Pipeline",
+      "section": "What does run",
+      "updated": "2026-10-30",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "text": "Two launchd agents, not Hermes cron, verified by launchctl list and their own logs on 2026-10-29 (both loaded, both exiting 0): com.jones-co.rt-substack-daily-pull — 23:30 daily; post, note and subscriber CSVs into ~/.openclaw/workspace/projects/ResilientTomorrow/data/. Post metadata is current (knows your-agent-their-terms, id 219345302). Its subscriber leg has failed HTTP 403 on every run since ~2026-10-02 (cookie scope, not a rebuild). com.jones-co.rt-substack-stats-pull — 23:45 daily; note stats into Resilient Tomorrow/Analytics/data/notes-stats.jsonl, last capture 2026-10-29T06:45Z. The missing leg is the text archive. Resilient Tomorrow/Published/ (renamed from Completed Articles on 2026-10-29, 31 notes) had nothing after 2026-07-22 — the 2026-10-08 Muse piece never landed — and nothing compared the folder against the feed, so the gap went unseen for three months. The record layer is now a log at Social/Published/ (one note per piece, URLs not copies; schema in that folder's README, no retro backfill). The archiver is net-new, not a repair: the old rt_migrate_to_obsidian.py in ~/Dev/RT_articles/automation/ is a one-time migration with a hardcoded destination. Tracked on T-2026-10-29-CB8 (kanban t_e8d0afc5); drift guard is posts-CSV row count vs note count."
     },
     {
       "id": "kb-pipelines-rt-content-pipeline-what-worked-in-v1",
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "What Worked in v1",
-      "updated": "2026-10-02",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
-      "text": "Signal scoring → trend reports have real content (147 written) Adapter produced per-channel versions with solid frontmatter conventions (source_draft, scheduled_date, platform keys) — worth keeping in v2 Draft structure: one folder per date, N drafts, per-channel files"
-    },
-    {
-      "id": "kb-pipelines-rt-content-pipeline-v2-intent",
-      "pageId": "kb-pipelines-rt-content-pipeline",
-      "title": "RT Content Pipeline",
-      "section": "v2 Intent",
-      "updated": "2026-10-02",
-      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
-      "text": "Revise into something actually functional. Open design questions: Which stages to keep vs collapse (trend-watcher alone may not justify 4 separate scrapers) Run under Hermes cron (the scheduler that actually works today) vs fixing OpenClaw's runtime Generation cadence: weekly compile vs nightly run Quality gate: v1 generated volume nobody read — v2 needs a human-review checkpoint before anything reaches drafts"
+      "text": "Trend reports carry real content — measured on disk 2026-10-30: 48 trend reports + 46 scored signal sets (Resilient Tomorrow/Trend Reports/, 2026-06-27 → 2026-09-27). The \"147 written\" figure this page carried from 2026-09-24 is not reproducible from the folder; treat the on-disk count as the fact. Adapter produced per-channel versions with solid frontmatter conventions (source_draft, scheduled_date, platform keys) — worth keeping. Draft structure: one folder per date, N drafts, per-channel files."
     },
     {
       "id": "kb-pipelines-rt-content-pipeline-related",
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "Related",
-      "updated": "2026-10-02",
+      "updated": "2026-10-30",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
-      "text": "generator-registry — this pipeline's emitters are listed there as dead resilient-tomorrow — the business this pipeline feeds"
+      "text": "generator-registry — this pipeline's emitters are listed there as dead resilient-tomorrow — the business this pipeline feeds publication-layer — the gate this pipeline publishes through"
     },
     {
       "id": "kb-pipelines-task-system-task-system",
@@ -630,7 +603,7 @@
       "section": "Related",
       "updated": "2026-10-27",
       "path": "/agents/kb/kb-pipelines-task-system.md",
-      "text": "generator-registry — which generators write into the vault; task-intake and the orchestrator sweep are registered there publication-layer — the reader-side rule that surface publishing is gated; the task system is where those stage-and-approve cards live how-mike-works — agent collaboration rules; the task system is where they are enforced <!-- writer: kb-nightly 2026-10-27T03:01 -->"
+      "text": "generator-registry — which generators write into the vault; task-intake and the orchestrator sweep are registered there publication-layer — the reader-side rule that surface publishing is gated; the task system is where those stage-and-approve cards live how-mike-works — agent collaboration rules; the task system is where they are enforced"
     }
   ]
 }

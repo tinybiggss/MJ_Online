@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-10-30T00:00:00.000Z",
+  "pages": {
+    "kb-ai-how-mike-works": {
+      "digest": "sha256:ca4a6499746b3d88ff6e26e53e7e4265cc317d4d50264c97e657f1b5dc116bcc",
+      "updated": "2026-10-02",
+      "files": [
+        "kb-ai-how-mike-works.md"
+      ]
+    },
+    "kb-ai-mike-career-history": {
+      "digest": "sha256:8db79d366ca64529da7042a715d289fe3bd0f0f65c769101d9581e8a0b0948e9",
+      "updated": "2026-10-20",
+      "files": [
+        "kb-ai-mike-career-history.md"
+      ]
+    },
+    "kb-business-distills": {
+      "digest": "sha256:7c786ad1b55c2b4a733d6291e500ea7cb2d7c705c1fafec665a1ccc126f33787",
+      "updated": "2026-10-24",
+      "files": [
+        "kb-business-distills.md"
+      ]
+    },
+    "kb-business-resilient-tomorrow": {
+      "digest": "sha256:3c73ee6ff394551b799680013ff097c6b4ffb3a92f9ba319b6e0dcfbd90e705d",
+      "updated": "2026-10-30",
+      "files": [
+        "kb-business-resilient-tomorrow.md"
+      ]
+    },
+    "kb-business-velocity-partners": {
+      "digest": "sha256:6f831ca40943f7e5461f8e2358e4f8c127bf2bde8946d48e5e5f2fce9a432431",
+      "updated": "2026-10-28",
+      "files": [
+        "kb-business-velocity-partners.md"
+      ]
+    },
+    "kb-company-jonesco": {
+      "digest": "sha256:351e644f240810a776e8a05665ebb976a24f778ae940b2bb36470e220fef0c26",
+      "updated": "2026-10-22",
+      "files": [
+        "kb-company-jonesco.md"
+      ]
+    },
+    "kb-concepts-agentic-web": {
+      "digest": "sha256:e32ea729b46b569ea30753b3ae96c02c8900bd5e371b77374b549c8a904c1709",
+      "updated": "2026-10-30",
+      "files": [
+        "kb-concepts-agentic-web.md"
+      ]
+    },
+    "kb-concepts-ccar-f-certification": {
+      "digest": "sha256:6716f2046cd7b18eabd0ee5a8df1d6e00509937d5e392c276f5732a44962c53c",
+      "updated": "2026-09-25",
+      "files": [
+        "kb-concepts-ccar-f-certification.md"
+      ]
+    },
+    "kb-pipelines-publication-layer": {
+      "digest": "sha256:56181b977c92c937e1f58564298bb7d00e3c0237347e67fa160d1be3513fa9ad",
+      "updated": "2026-10-30",
+      "files": [
+        "kb-pipelines-publication-layer.md"
+      ]
+    },
+    "kb-pipelines-rt-content-pipeline": {
+      "digest": "sha256:bd824d787681b2190d715bcc511708a769b27b3296145ad02618be21f62f4638",
+      "updated": "2026-10-30",
+      "files": [
+        "kb-pipelines-rt-content-pipeline.md"
+      ]
+    },
+    "kb-pipelines-task-system": {
+      "digest": "sha256:3ed62a573323f139103ee82ea7c7cfefe22093360aa242433f667eb93b8ea45b",
+      "updated": "2026-10-27",
+      "files": [
+        "kb-pipelines-task-system.md"
+      ]
+    }
+  },
+  "orphans": []
+}
