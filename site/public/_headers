@@ -15,3 +15,16 @@
 # Images can cache for a week
 /img/*
   Cache-Control: public, max-age=604800
+
+# Agent export, feed and llms.txt: deploys replace whole pages, so caching
+# must never pin a removed or stale file. Kept short after the 2026-10-30
+# registry removal — the zone cache kept serving the deleted files for hours
+# (zone default s-maxage=604800) because a Pages deploy does not purge it.
+/agents/*
+  Cache-Control: public, max-age=0, must-revalidate, s-maxage=60
+
+/feed/*
+  Cache-Control: public, max-age=0, must-revalidate, s-maxage=60
+
+/llms.txt
+  Cache-Control: public, max-age=0, must-revalidate, s-maxage=60
