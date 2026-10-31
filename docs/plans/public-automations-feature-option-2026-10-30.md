@@ -197,14 +197,15 @@ Run over the real sources on 2026-10-30 (projection card, 23:35 PT; I spot-check
 |---|---|---|---|---|---|---|
 | `KB/pipelines/generator-registry.md` (35 table rows) | 32 | 12 | 71 | 7 | 93 | 5 |
 | `content-drafts/case-studies/agent-stack.md` | 0 | 0 | **2, plus body hits the earlier run missed (4.4)** | 0 | **3 quoted health strings** | 1 |
-| `add-friendly-agent.md` (**live**) | 3 | 0 | 0 | 0 | 0 | 0 |
+| `add-friendly-agent.md`, **live served bytes** (curl, 2026-10-31) | **1** | 0 | 0 | 0 | 0 | 0 |
+| `content-drafts/.../add-friendly-agent.md` (staging draft, not served) | 3 | 0 | 3+ | 0 | 0 | 0 |
 | `distills.md`, `neighborhoodshare.md` (**live**) | 0 | 0 | 0 | 0 | 0 | 0 |
 
 The registry cannot be published by any transform that preserves its language: 32 job ids, 12 card ids, 71 state-path tokens, 7 cron expressions and five third-party names sit inside 35 rows of prose. The unit of the table is a row; the unit of publication is a sentence. That is the whole argument against the generator, with numbers.
 
 ### 4.3 The live precedent that the new page does not inherit
 
-`add-friendly-agent.md` is live on `/work` and publishes three job ids inside `~/.hermes/cron/output/<id>/` receipts (verified: lines 89, 90, 92). Under a strict reading of X-1 that page is a latent problem. The new page needs no ids at all, so this does not block it; it is your call as D-6.
+`add-friendly-agent.md` is live on `/work` and its **served bytes carry one job id**, inside a frozen `~/.hermes/cron/output/577137c655f2/` receipt (re-verified by curl on 2026-10-31; the staging draft carried three, but only one survived curation into the published copy). No state paths are served; `/work/distills` and `/work/neighborhoodshare` carry zero ids and zero paths. Under a strict reading of X-1 that one frozen receipt path is a latent problem. The new page needs no ids at all, so this does not block it; it is your call as D-6, and the exposure is one page, one hash.
 
 ### 4.4 Leaks in the draft, and a correction to the input measurement
 
@@ -329,7 +330,7 @@ Not required, and a reason the earlier specs overstated the work: no schema chan
 | D-3 | Do the honest failures go in? | **Yes, as classes.** "What I'd change" is what makes the page credible; the lessons are what a client buys. The open mail-triage instance stays out until the fix lands (R-4). | Failure classes out; the page loses its best section and its `diag` becomes decorative. |
 | D-4 | Route and pointer. | **`/work/agent-stack` case study, plus one `CASE_PROJECTS` entry attaching it to the existing "Agent Executive Suite" row** (which also sets `short` to that name). Cheaper and more honest than a tenth system row: no "nine systems" copy churn, no new screenshot. | Case study only, unlinked from the Systems index; readers reach it from the `/work` case list. |
 | D-5 | Does the case study carry an `asOf`, turning on the S-1 lint? | **Yes.** ~25 lines, it refuses a stale count at publish, and it is the only guard left once the detector is gone. | No guard: the page ships a dated count with nothing checking the date, and decay is unbounded. |
-| D-6 | Does the live `add-friendly-agent` page keep its three job ids inside receipt paths? | **Grandfather frozen receipt paths as provenance; scope X-1 to live identifiers, and write the distinction into R-3.** Rationale: a receipt path in a dated citation is provenance, not an enumeration handle; re-publishing an otherwise-fine page to delete three hashes costs more than it buys. | The new page ships clean and the old one keeps an undocumented exception. |
+| D-6 | Does the live `add-friendly-agent` page keep its **one** job id inside a frozen receipt path? | **Grandfather frozen receipt paths as provenance; scope X-1 to live identifiers, and write the distinction into R-3.** Rationale: a receipt path in a dated citation is provenance, not an enumeration handle; re-publishing an otherwise-fine page to delete one hash costs more than it buys. The exposure is narrower than the inputs claimed: one hash, one page, no state paths (4.3). | The new page ships clean and the old one keeps an undocumented exception. |
 
 ---
 
@@ -405,7 +406,7 @@ Use this if you later ask for the page. Every box is checkable, not a judgement 
 - `site/src/pages/work.astro`: the Systems index copies `content.ts` rows; `CASE_PROJECTS` maps `cases[0]` only, keyed by the case's `short`; the description string says "Three product design case studies" and the hint says "Nine systems".
 - `site/src/lib/content.ts`: an "Agent Executive Suite" row exists ("multi-agent org structure: a chief-of-staff agent plus ops, sales and product agents..."), which is the natural Systems-index anchor for this page.
 - `content-drafts/case-studies/agent-stack.md`: 99 lines; lines 29 and 67 carry the stale "33 jobs, 26 enabled"; line 67 cites `~/.hermes/cron/jobs.json`; line 85 cites a `~/.openclaw/workspace/...` cron-health log; line 86 the live Ollama endpoint; line 41 the body sentence "port 3333 over Tailscale"; lines 35 and 39 quote `pipeline_health: ok` and `feed-fidelity: OK`; line 39 names the eight agent personas; line 90 "Needs from Mike"; line 94 `GHN`.
-- `content-drafts/case-studies/add-friendly-agent.md`: lines 89, 90, 92 publish three job ids inside `~/.hermes/cron/output/<id>/` receipts.
+- `content-drafts/case-studies/add-friendly-agent.md` (staging draft): lines 89, 90, 92 publish three job ids inside `~/.hermes/cron/output/<id>/` receipts, and further down it cites `~/.hermes/cron/jobs.json` and two `~/.hermes/skills/` paths. The **published** copy in `site/src/content/case-studies/` carries one of those ids and none of the state paths, and the live URL serves exactly that (curl, 2026-10-31). The draft is the leaky artifact; the site is not.
 - `KB/ai/how-mike-works.md`: 53 lines, `public: yes`.
 
 **Inherited from the input cards (not re-run by me):**
@@ -426,3 +427,39 @@ Use this if you later ask for the page. Every box is checkable, not a judgement 
 No generator, no lint, no `asOf` field, no page, no staging, no publish, no commit to site source, no vault edit, no KB edit, no schema change, no route, no cron, no detector. This is a document, and the only thing it changes is what the next worker reads.
 
 If you want the page, the smallest true next step is: answer D-1 to D-6, then hand a card to content for the curation pass with sections 3 and 4 attached, and to release for the site edits in 6.4. If you don't, the option stays captured here and nothing decays except the numbers, which are dated.
+
+---
+
+## 14. Root-card verification (t_a857b360), run independently after consolidation
+
+This section was written by the root option card, not by the card that drafted sections 0-13. It exists because a consolidated spec inherits its siblings' errors, and two of the numbers below decide what Mike is being asked to rule on. Everything here was re-run from scratch on 2026-10-31, not read off an input document.
+
+### 14.1 Re-verified, now with my own commands
+
+| Claim | How I checked it | Result |
+|---|---|---|
+| The registry's count is stale | `jq` over the four job stores, 2026-10-31 | default 26 records / 24 enabled, ops 4/4, dev-lead 2/2, roy 2/2 = **34 records, 32 enabled**. Unchanged two hours after the 23:36 count in 5.2, so the gap is structural, not a snapshot artifact. Registry says 31. |
+| Six required headings, non-empty `Sources`, frozen copy | read `site/scripts/publish-case-studies.mjs` | `REQUIRED = [The problem, What was actually blocking use, What I designed, What I'd change, Growth read, Sources]`. Confirmed: `Growth read` cannot be stripped, `Sources` cannot be emptied. |
+| `CASE_ORDER` is build-enforced | read `site/src/lib/case-studies.ts` | Confirmed at lines 25-27: a published case file with no slot throws `published case file has no slot in CASE_ORDER`. |
+| Systems index keys on `short` and maps one case | read `site/src/pages/work.astro` | `CASE_PROJECTS` maps `cases[0]` only, keyed by `short`; description string says "Three product design case studies"; hint says "Nine systems". |
+| An "Agent Executive Suite" row exists to anchor to | read `site/src/lib/content.ts` | Confirmed, line 140, group "AI Systems & Agents". D-4 is a mapping line, not a new row. |
+| Every leak 4.4 lists is in the draft | `grep -nE` over `content-drafts/case-studies/agent-stack.md` | All confirmed at the stated lines: 29 (33/26), 35 (`pipeline_health`), 39 (personas + `feed-fidelity`), 41 (port 3333, Tailscale), 67-71 (state paths), 79 (port 3333 again), 85 (`.openclaw` log), 86 (endpoint), 90/94 (Needs from Mike, GHN). Two more body hits than the input measurement claimed. |
+| The withdrawal guard is live | `curl` the four withdrawn export paths | All four answer **410**, not 200 and not 404. The middleware's `REMOVED_EXPORTS` set covers exactly those names. |
+
+### 14.2 One correction, carried into 4.2, 4.3, D-6 and 12
+
+The inputs said the **live** `/work/add-friendly-agent` page publishes **three** job ids. It publishes **one**. Three is the count in the staging draft `content-drafts/case-studies/add-friendly-agent.md`; the published copy in `site/src/content/case-studies/` carries one of them (`577137c655f2`), and the served bytes at `https://mikejones.online/work/add-friendly-agent/` carry exactly that one, inside one `~/.hermes/cron/output/577137c655f2/` receipt. No state paths are served. `/work/distills` and `/work/neighborhoodshare` carry zero hex ids and zero paths (curl, 2026-10-31).
+
+Why it matters: D-6 is the only decision on this list that touches a page already in public. Narrowed to one hash on one page, the "grandfather it and write the exception down" recommendation is clearly cheaper than a re-publish, and the reason the sibling cards over-weighted it was a measurement taken on the draft and labelled live. The general lesson is the one 4.4 already states: measure the artifact that ships, not the one in the drafts folder.
+
+### 14.3 Residual risk, ranked as it stands tonight
+
+1. **Nothing decay-checks the page once it ships** (R-5, tradeoff 1). The date is the whole defence. Accepted knowingly or not at all.
+2. **The count will be wrong within a week of any measurement.** 32 tonight, 31 in the registry, 33 in the draft. Only a same-session count at staging is publishable.
+3. **A rewrite can re-introduce a leak the screens do not name.** The per-sentence test (6.3) is the only control for that, and it is Mike's, not a machine's.
+4. **One frozen receipt path stays live on an older page** (D-6). One hash, one page, documented either way.
+5. **The persona names publish eight role-to-name mappings** (9.11, tradeoff 7). Reversible in one line if Mike reads them as topology.
+
+### 14.4 What this root card did not do
+
+No build, no staging, no publish, no site source change, no schema change, no route, no cron, no vault write, no KB edit — the only files touched are this document and its own corrections. The registry stays `public: no`; the four withdrawn export paths stay 410. Answering D-1 through D-6 is what turns this from a captured option into work.
