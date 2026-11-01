@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T00:00:00.000Z",
+  "generatedAt": "2026-11-01T00:00:00.000Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
@@ -113,7 +113,7 @@
     {
       "id": "kb-pipelines-task-system",
       "title": "Task System",
-      "updated": "2026-10-27",
+      "updated": "2026-11-01",
       "summary": "What it is: Mike's personal Kanban — the claim layer for how work is captured, decided, and tracked across all four businesses.",
       "path": "/agents/kb/kb-pipelines-task-system.md",
       "files": [
