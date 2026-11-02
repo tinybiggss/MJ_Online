@@ -1,7 +1,7 @@
 ---
 id: kb-pipelines-rt-content-pipeline
 title: RT Content Pipeline
-updated: 2026-10-30
+updated: 2026-11-02
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -9,7 +9,7 @@ source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 
 ## RT Content Pipeline
 
-Intended flow (v1 design): trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish. Current state (verified 2026-10-29/30): the top of that funnel is dead and accepted as dead; the rest of the pipeline is manual and single-homed at Social/. This is no longer a "revise v2" page — it records what runs, what does not, and where the procedure lives.
+Intended flow (v1 design): trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish. Current state (verified 2026-11-01 23:30, archive leg first scheduled run): the top of that funnel is dead and accepted as dead; the rest of the pipeline is manual and single-homed at Social/; the measurement and the text archive both run as launchd legs. This is no longer a "revise v2" page — it records what runs, what does not, and where the procedure lives.
 
 ### One pipeline, one home
 
@@ -21,7 +21,11 @@ Stage Last sign of life Consequence Trend watchers (Reddit/X/YouTube/Substack/ex
 
 ### What does run
 
-Two launchd agents, not Hermes cron, verified by launchctl list and their own logs on 2026-10-29 (both loaded, both exiting 0): com.jones-co.rt-substack-daily-pull — 23:30 daily; post, note and subscriber CSVs into ~/.openclaw/workspace/projects/ResilientTomorrow/data/. Post metadata is current (knows your-agent-their-terms, id 219345302). Its subscriber leg has failed HTTP 403 on every run since ~2026-10-02 (cookie scope, not a rebuild). com.jones-co.rt-substack-stats-pull — 23:45 daily; note stats into Resilient Tomorrow/Analytics/data/notes-stats.jsonl, last capture 2026-10-29T06:45Z. The missing leg is the text archive. Resilient Tomorrow/Published/ (renamed from Completed Articles on 2026-10-29, 31 notes) had nothing after 2026-07-22 — the 2026-10-08 Muse piece never landed — and nothing compared the folder against the feed, so the gap went unseen for three months. The record layer is now a log at Social/Published/ (one note per piece, URLs not copies; schema in that folder's README, no retro backfill). The archiver is net-new, not a repair: the old rt_migrate_to_obsidian.py in ~/Dev/RT_articles/automation/ is a one-time migration with a hardcoded destination. Tracked on T-2026-10-29-CB8 (kanban t_e8d0afc5); drift guard is posts-CSV row count vs note count.
+Two launchd agents, not Hermes cron, verified by launchctl list and their own logs on 2026-10-29 (both loaded, both exiting 0): com.jones-co.rt-substack-daily-pull — 23:30 daily; post, note and subscriber CSVs into ~/.openclaw/workspace/projects/ResilientTomorrow/data/. Post metadata is current (knows your-agent-their-terms, id 219345302). Its subscriber leg has failed HTTP 403 on every run since ~2026-10-02 (cookie scope, not a rebuild). Leg 5 since 2026-11-01: the text archive (below). com.jones-co.rt-substack-stats-pull — 23:45 daily; note stats into Resilient Tomorrow/Analytics/data/notes-stats.jsonl, rewritten each run as a current snapshot (2 notes tracked), last capture 2026-11-02T07:45Z.
+
+### The archive leg — LIVE since 2026-11-01
+
+rt_archive.py (~/.openclaw/workspace/skills/substack-cookie-auth/rt_archive.py, built off kanban t_e8d0afc5) runs as the fifth leg of the 23:30 pull: every Substack post with no vault note is archived into Resilient Tomorrow/Published/ as text plus frontmatter (url, canonical_url, published, dek, cover_url, rss_guid, captured, post_id, audience, body_format, body_complete). A Social/Published/ log note is written only when no existing note references that canonical URL. Then a drift guard compares the public archive's post set — /api/v1/archive paged at limit=12; limit=25/50 silently truncate to 23 — against the note set, and on mismatch raises one high-priority T- card per drift hash (deduped, closed cards ignored) instead of failing quietly. Verified state this pass: 33 archive posts / 33 log notes, 0 missing, 0 orphans; first scheduled run 2026-11-01 23:30 exited ok (run-2026-11.log: mode=nightly posts=33 missing=0 guard=ok; drift-state.json last_ok 2026-11-01T23:30:10-08:00). Backfilled the two gaps recorded on this page on 2026-10-30: 2026-10-08-your-agent-their-terms.md and 2026-10-30-three-ways-to-own-your-corner-of.md, in both the text archive and the log. Superseded wording, kept per contradiction policy. As of 2026-10-30 (sources Resilient Tomorrow/Published/, Operations/content-pipeline.md) this section read: *"The missing leg is the text archive. Resilient Tomorrow/Published/ … had nothing after 2026-07-22 — the 2026-10-08 Muse piece never landed — and nothing compared the folder against the feed, so the gap went unseen for three months. The record layer is now a log at Social/Published/ (one note per piece, URLs not copies; schema in that folder's README, no retro backfill). The archiver is net-new, not a repair … Tracked on T-2026-10-29-CB8 (kanban t_e8d0afc5); drift guard is posts-CSV row count vs note count."* Every clause there is now false or closed: the folder is current, the comparison runs nightly against the feed rather than the CSV, both retro entries exist, the guard keys on canonical URLs/post ids rather than row counts, and T-2026-10-29-CB8 is status: resolved (closed 2026-11-01). What survived unchanged is the record-layer split: text copies live in Resilient Tomorrow/Published/ (the folder Mike browses), and the canonical "what have I published" record is the generated Social/Published/ log — URLs and metadata, one row per piece, never hand-edited. The old one-time migrator rt_migrate_to_obsidian.py in ~/Dev/RT_articles/automation/ is still dead weight, not the archiver.
 
 ### What Worked in v1
 

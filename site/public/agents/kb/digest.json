@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T00:00:00.000Z",
+  "generated_at": "2026-11-02T00:00:00.000Z",
   "pages": {
     "kb-ai-how-mike-works": {
       "digest": "sha256:ca4a6499746b3d88ff6e26e53e7e4265cc317d4d50264c97e657f1b5dc116bcc",
@@ -23,8 +23,8 @@
       ]
     },
     "kb-business-resilient-tomorrow": {
-      "digest": "sha256:3c73ee6ff394551b799680013ff097c6b4ffb3a92f9ba319b6e0dcfbd90e705d",
-      "updated": "2026-10-30",
+      "digest": "sha256:4ad9f23e0c10b36dbd703a50bf95a8c7048025a12f476ef79151b345787782ca",
+      "updated": "2026-11-02",
       "files": [
         "kb-business-resilient-tomorrow.md"
       ]
@@ -58,15 +58,15 @@
       ]
     },
     "kb-pipelines-publication-layer": {
-      "digest": "sha256:96e49e4dd36bb4bf4a1573ddb84afebef492f0a087326c7cfa71a95c65c254d5",
-      "updated": "2026-10-31",
+      "digest": "sha256:1946e72902a87b985e79e47a5f8cb4fc1f012a8d0f3904a2603714666805767b",
+      "updated": "2026-11-02",
       "files": [
         "kb-pipelines-publication-layer.md"
       ]
     },
     "kb-pipelines-rt-content-pipeline": {
-      "digest": "sha256:bd824d787681b2190d715bcc511708a769b27b3296145ad02618be21f62f4638",
-      "updated": "2026-10-30",
+      "digest": "sha256:a3f22f4e963689939dde7c612bae39e8990f1ab90c2f8747e6f0bbd01caa9292",
+      "updated": "2026-11-02",
       "files": [
         "kb-pipelines-rt-content-pipeline.md"
       ]
