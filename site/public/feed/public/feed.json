@@ -14,6 +14,26 @@
   ],
   "items": [
     {
+      "id": "2026-11-03-opinion-carousel",
+      "url": "https://www.instagram.com/p/DfTMf0Fmgkw/",
+      "title": "Where does its opinion come from?",
+      "content_text": "Where does its opinion come from?",
+      "date_published": "2026-11-03T00:00:00.000Z",
+      "_mj": {
+        "audience": [
+          "public"
+        ],
+        "type": "essay",
+        "mirrors": [
+          {
+            "platform": "bluesky",
+            "url": "https://bsky.app/profile/resilienttomorrow.substack.com/post/3mzh3qkrwcx2s",
+            "date": "2026-11-03"
+          }
+        ]
+      }
+    },
+    {
       "id": "2026-10-29-agentic-web-owning-discovery",
       "url": "https://resilienttomorrow.substack.com/p/three-ways-to-own-your-corner-of",
       "title": "Three Ways to Own Your Corner of the Web",
