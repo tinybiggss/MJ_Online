@@ -14,6 +14,19 @@
   ],
   "items": [
     {
+      "id": "2026-11-04-mark-day-muse-cut",
+      "url": "https://resilienttomorrow.substack.com/p/muse-vs-mike",
+      "title": "Mark Day's cut — Your Agent, Their Terms (Meta Muse)",
+      "content_text": "Mark Day's cut — Your Agent, Their Terms (Meta Muse)",
+      "date_published": "2026-11-04T00:00:00.000Z",
+      "_mj": {
+        "audience": [
+          "public"
+        ],
+        "type": "note"
+      }
+    },
+    {
       "id": "2026-11-03-opinion-carousel",
       "url": "https://www.instagram.com/p/DfTMf0Fmgkw/",
       "title": "Where does its opinion come from?",
@@ -29,6 +42,57 @@
             "platform": "bluesky",
             "url": "https://bsky.app/profile/resilienttomorrow.substack.com/post/3mzh3qkrwcx2s",
             "date": "2026-11-03"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026-11-02-voted-with-my-agent",
+      "url": "https://substack.com/@resilienttomorrow/note/c-377065705",
+      "title": "I Asked an AI Who to Vote For",
+      "summary": "Posted 2026-11-02. See the distribution log below; LinkedIn, Bluesky, and the Substack Note are the remaining three, and all three have paste-ready copy in this note. All nine surfaces live, 2026-11-02. 1. YouTube title. It went out as \"Voting in the AI Era: Trust and…",
+      "content_text": "Posted 2026-11-02. See the distribution log below; LinkedIn, Bluesky, and the Substack Note are the remaining three, and all three have paste-ready copy in this note. All nine surfaces live, 2026-11-02. 1. YouTube title. It went out as \"Voting in the AI Era: Trust and…",
+      "date_published": "2026-11-02T00:00:00.000Z",
+      "_mj": {
+        "audience": [
+          "public"
+        ],
+        "type": "note",
+        "mirrors": [
+          {
+            "platform": "youtube",
+            "url": "https://www.youtube.com/shorts/soiQjQe6zwU",
+            "date": "2026-11-02"
+          },
+          {
+            "platform": "tiktok",
+            "url": "https://www.tiktok.com/@mikejonesrt/video/7703698129299705118",
+            "date": "2026-11-02"
+          },
+          {
+            "platform": "instagram",
+            "url": "https://www.instagram.com/p/DfQVxoyg4Yn/",
+            "date": "2026-11-02"
+          },
+          {
+            "platform": "linkedin",
+            "url": "https://lnkd.in/p/gwxKREV8",
+            "date": "2026-11-02"
+          },
+          {
+            "platform": "bluesky",
+            "url": "https://bsky.app/profile/resilienttomorrow.substack.com/post/3mzedxibfzs2s",
+            "date": "2026-11-02"
+          },
+          {
+            "platform": "mastodon",
+            "url": "https://mastodon.social/@ResilientTomorrow/117549153998259086",
+            "date": "2026-11-02"
+          },
+          {
+            "platform": "x",
+            "url": "https://x.com/IsMikeJones/status/2117380263512854559",
+            "date": "2026-11-02"
           }
         ]
       }
@@ -299,20 +363,6 @@
       "summary": "Step 2 (article 4) in the “7 Steps to Quietly Exit a System That Wants You Dependent” Series",
       "content_text": "Step 2 (article 4) in the “7 Steps to Quietly Exit a System That Wants You Dependent” Series",
       "date_published": "2025-06-13T21:40:27.000Z",
-      "_mj": {
-        "audience": [
-          "public"
-        ],
-        "type": "essay"
-      }
-    },
-    {
-      "id": "substack-convenience-is-the-cage",
-      "url": "https://resilienttomorrow.substack.com/p/convenience-is-the-cage",
-      "title": "Convenience Is the Cage: Why Redefining Wealth Is the First Step to Freedom",
-      "summary": "Most people think wealth means having money.",
-      "content_text": "Most people think wealth means having money.",
-      "date_published": "2025-06-06T22:32:31.000Z",
       "_mj": {
         "audience": [
           "public"

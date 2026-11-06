@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T00:00:00.000Z",
+  "generated_at": "2026-11-04T00:00:00.000Z",
   "canonical": "https://mikejones.online/feed/feed.json",
   "spec": "https://jsonfeed.org/version/1.1",
   "slices": [
@@ -8,7 +8,7 @@
       "label": "Public",
       "feed_url": "https://mikejones.online/feed/public/feed.json",
       "atom_url": "https://mikejones.online/feed/public/atom.xml",
-      "item_count": 21,
+      "item_count": 22,
       "token_required": false,
       "emitted": true
     },
@@ -56,26 +56,27 @@
   "sources": {
     "published_log": {
       "dir": "Social/Published",
-      "items": 2
+      "items": 4
     },
     "substack": {
       "url": "https://resilienttomorrow.substack.com/feed",
       "fetched": true,
       "items": 20,
-      "merged": 19,
-      "last_post": "2026-10-30T18:46:57.000Z"
+      "merged": 18,
+      "last_post": "2026-11-05T19:11:42.000Z"
     },
     "kb": {
-      "last_modified": "2026-11-04T00:00:00.000Z"
+      "last_modified": "2026-11-06T00:00:00.000Z"
     }
   },
   "totals": {
-    "items": 21,
+    "items": 22,
     "by_type": {
-      "essay": 21
+      "note": 2,
+      "essay": 20
     },
     "by_audience": {
-      "public": 21
+      "public": 22
     }
   },
   "note": "P1: audience tags drive slices; only public is served until tokens ship (P2)."

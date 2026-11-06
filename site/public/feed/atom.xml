@@ -5,8 +5,17 @@
   <link rel="self" href="https://mikejones.online/feed/atom.xml"/>
   <link rel="alternate" type="text/html" href="https://mikejones.online"/>
   <id>https://mikejones.online/</id>
-  <updated>2026-11-03T00:00:00.000Z</updated>
+  <updated>2026-11-04T00:00:00.000Z</updated>
   <author><name>Mike Jones</name><uri>https://mikejones.online</uri></author>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/muse-vs-mike</id>
+    <title>Mark Day&apos;s cut — Your Agent, Their Terms (Meta Muse)</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/muse-vs-mike"/>
+    <published>2026-11-04T00:00:00.000Z</published>
+    <updated>2026-11-04T00:00:00.000Z</updated>
+    <summary></summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
   <entry>
     <id>https://www.instagram.com/p/DfTMf0Fmgkw/</id>
     <title>Where does its opinion come from?</title>
@@ -15,6 +24,22 @@
     <published>2026-11-03T00:00:00.000Z</published>
     <updated>2026-11-03T00:00:00.000Z</updated>
     <summary></summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
+  <entry>
+    <id>https://substack.com/@resilienttomorrow/note/c-377065705</id>
+    <title>I Asked an AI Who to Vote For</title>
+    <link rel="alternate" href="https://substack.com/@resilienttomorrow/note/c-377065705"/>
+    <link rel="related" type="text/html" href="https://www.youtube.com/shorts/soiQjQe6zwU"/>
+    <link rel="related" type="text/html" href="https://www.tiktok.com/@mikejonesrt/video/7703698129299705118"/>
+    <link rel="related" type="text/html" href="https://www.instagram.com/p/DfQVxoyg4Yn/"/>
+    <link rel="related" type="text/html" href="https://lnkd.in/p/gwxKREV8"/>
+    <link rel="related" type="text/html" href="https://bsky.app/profile/resilienttomorrow.substack.com/post/3mzedxibfzs2s"/>
+    <link rel="related" type="text/html" href="https://mastodon.social/@ResilientTomorrow/117549153998259086"/>
+    <link rel="related" type="text/html" href="https://x.com/IsMikeJones/status/2117380263512854559"/>
+    <published>2026-11-02T00:00:00.000Z</published>
+    <updated>2026-11-02T00:00:00.000Z</updated>
+    <summary>Posted 2026-11-02. See the distribution log below; LinkedIn, Bluesky, and the Substack Note are the remaining three, and all three have paste-ready copy in this note. All nine surfaces live, 2026-11-02. 1. YouTube title. It went out as &quot;Voting in the AI Era: Trust and…</summary>
     <author><name>Mike Jones</name></author>
   </entry>
   <entry>
@@ -187,15 +212,6 @@
     <published>2025-06-13T21:40:27.000Z</published>
     <updated>2025-06-13T21:40:27.000Z</updated>
     <summary>Step 2 (article 4) in the “7 Steps to Quietly Exit a System That Wants You Dependent” Series</summary>
-    <author><name>Mike Jones</name></author>
-  </entry>
-  <entry>
-    <id>https://resilienttomorrow.substack.com/p/convenience-is-the-cage</id>
-    <title>Convenience Is the Cage: Why Redefining Wealth Is the First Step to Freedom</title>
-    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/convenience-is-the-cage"/>
-    <published>2025-06-06T22:32:31.000Z</published>
-    <updated>2025-06-06T22:32:31.000Z</updated>
-    <summary>Most people think wealth means having money.</summary>
     <author><name>Mike Jones</name></author>
   </entry>
 </feed>

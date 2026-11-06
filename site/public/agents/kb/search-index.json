@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T00:00:00.000Z",
+  "generatedAt": "2026-11-06T00:00:00.000Z",
   "endpoint": "/agents/query",
   "entries": [
     {
@@ -7,16 +7,16 @@
       "pageId": "kb-ai-how-mike-works",
       "title": "How Mike Works",
       "section": "How Mike Works",
-      "updated": "2026-10-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-ai-how-mike-works.md",
-      "text": "How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated. Say \"I'm not sure\" over a confident wrong answer. Disagree when warranted — he wants decisions made, not options surfaced. Systems thinker: frameworks and pipelines. One deciding factor beats a pros/cons list. Agents are teammates: named, with memory and continuity. Naming convention: {Task-Description}-{Number}, e.g. Manifesto-Draft-#15 — never opaque \"Agent #15\". Mistakes are learning opportunities; explain what broke before fixing. ADD-friendly session rules apply (hot spot at open, stubby list ≤3, capture don't hold, session close = state saved): see the add-friendly-core skill and ~/dev/add-friendly-agent/."
+      "text": "How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated. Say \"I'm not sure\" over a confident wrong answer. Disagree when warranted — he wants decisions made, not options surfaced. Systems thinker: frameworks and pipelines. One deciding factor beats a pros/cons list. Agents are teammates: named, with memory and continuity. Naming convention: {Task-Description}-{Number}, e.g. Manifesto-Draft-#15 — never opaque \"Agent #15\". Mistakes are learning opportunities; explain what broke before fixing. ADD-friendly session rules apply (hot spot at open, stubby list ≤3, capture don't hold, session close = state saved): see the add-friendly-core skill and ~/dev/add-friendly-agent/. Taste decisions are veto decisions, not selection decisions. Mike can reject reliably but cannot select — \"I have no developed sense of what looks good.\" Never present a menu of drafts, logos or layouts, and never send him to hunt references. Nominate ONE artifact and justify it on criteria he can check without taste (holds at 16px, says the intended thing, close to what he already owns), then offer veto. For identity work the order is brief → territories → one constructed asset in the context it will live in → veto-only. (Source: T-2026-11-02-9TK, 2026-11-05 ruling; see velocity-partners for the case history.)"
     },
     {
       "id": "kb-ai-how-mike-works-standing-conventions",
       "pageId": "kb-ai-how-mike-works",
       "title": "How Mike Works",
       "section": "Standing Conventions",
-      "updated": "2026-10-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-ai-how-mike-works.md",
       "text": "PROJECT-MEMORY.json at each project root (Claude Code convention) — decisions with rationale, phases, changelog. TASKS.md alongside. Cross-project decision ledger: /Volumes/MacMini_Extended/llm-memory/memory.jsonl (append via the ledger tool, never direct writes). Voice reference for drafting Mike's prose: ~/.openclaw/workspace/Corvus/Voice/mike-voice.md"
     },
@@ -25,7 +25,7 @@
       "pageId": "kb-ai-how-mike-works",
       "title": "How Mike Works",
       "section": "What This Page Is For",
-      "updated": "2026-10-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-ai-how-mike-works.md",
       "text": "Any AI serving Mike across businesses should internalize this page first, then north-star for direction, then the business pages for context — starting from jonesco, the parent entity. This is also the template for the per-client \"how this client works\" page in the consulting product — every engagement starts by writing one."
     },
@@ -187,7 +187,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Resilient Tomorrow",
-      "updated": "2026-11-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "Media + platform. The legacy play (north-star): \"known for Resilient Tomorrow. Teaching people how to build technology that makes their lives more independent and connected.\""
     },
@@ -196,7 +196,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Identity",
-      "updated": "2026-11-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "Tagline: \"Build your exit. Without burning anything down.\" Archetype: Outlaw (60-70%) + Sage (30-40%) — the rebel who found the exits, calmly showing them NOT: prepper site, self-help, activism, guru platform, charity"
     },
@@ -205,7 +205,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "The Staircase Model (load-bearing)",
-      "updated": "2026-11-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "1. Perspective — \"The system did this to you.\" 2. Practical Path — \"Here's the audit. Here's the first step.\" 3. Peer Belonging — \"You're not alone.\" Community is the side effect, not the selling point. Evidence: individual-framed articles outperform collective-organizing CTAs by ~10x (16,316 views / 378 signups vs ~1,250 views / net subscriber loss). Strategic teaching direction (2026-10-26): Teach people to regain control one system at a time. Each class should create a concrete win, then connect the learner to the tools, formulas, or options for the next step. The aim is to stay half a step ahead and show the way—not to wait for a complete platform before teaching. The first class and its specific outcome remain undecided; the working note is the raw hub Resilient Tomorrow/RT Content Engine.md."
     },
@@ -214,7 +214,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Seven Pillars",
-      "updated": "2026-11-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "Energy · Food · Governance · Health · Shelter · Finance · Connection (voice lines for each live in Resilient Tomorrow/CLAUDE.md)"
     },
@@ -223,7 +223,7 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Product Architecture",
-      "updated": "2026-11-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "text": "` RT Tools / Scorecard (free entry — individual, not collective) → RT Community / The Commons ($50/mo) → RT Courses (member-created, revenue share) → RT Commons Fund (member-funded grants) ` Front door is Tools (individual), not Community (collective)."
     },
@@ -232,16 +232,16 @@
       "pageId": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
       "section": "Content Machinery",
-      "updated": "2026-11-02",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
-      "text": "Substack publication is live. The content generation pipeline (trend-watcher → generator → adapter) is not operational — v1 never fully worked, scheduler died 2026-07-28. The \"v2 revision is intended\" line this page carried from 2026-09-24 is superseded: Mike's 2026-10-29 single-home ruling froze the RT second pipeline (682 md to _Archive/2026-10/rt-content-pre-social/) and made Social/ the only drafting, adaptation and published-log home. The replacement is a runbook (Operations/content-pipeline.md) plus one unit shipped by hand at a time — not a rebuilt machine. What *is* automated is measurement, not production: two launchd agents pull Substack nightly (posts/notes/daily CSVs 23:30, note stats 23:45). Since 2026-11-01 the text archive is automated too — rt_archive.py runs as leg 5 of the 23:30 pull, archiving every post with no vault note into Resilient Tomorrow/Published/ and logging it in Social/Published/ only when no note cites that canonical URL; a nightly drift guard compares the public archive's post set against the note set and raises a T- card on any mismatch. Verified 2026-11-01 23:30: 33 posts / 33 log notes, 0 missing, guard ok, and the backfill closed both gaps (2026-10-08 Muse, 2026-10-30 \"Three Ways…\"). The 2026-10-30 wording on this page — \"the missing leg is the text archive … had nothing after 2026-07-22 … no retro backfill … archiver tracked on Tasks/T-2026-10-29-CB8\" — is superseded; the card is resolved (2026-11-01). The split it described survives: te"
+      "text": "Substack publication is live. The content generation pipeline (trend-watcher → generator → adapter) is not operational — v1 never fully worked, scheduler died 2026-07-28. The \"v2 revision is intended\" line this page carried from 2026-09-24 is superseded: Mike's 2026-10-29 single-home ruling froze the RT second pipeline (682 md to _Archive/2026-10/rt-content-pre-social/) and made Social/ the only drafting, adaptation and published-log home. The replacement is a runbook (Operations/content-pipeline.md) plus one unit shipped by hand at a time — not a rebuilt machine. Reaffirmed 2026-11-05 (kanban t_acabf0b3): the Resilient Tomorrow/Article …/ folders had regrown a second drafting home, so both live drafts were moved into Social/Drafts/<date>-<slug>/ and the convention was retired; Operations/content-surfaces.md now fixes one sentence per surface so the same map does not get rewritten by each agent. What *is* automated is measurement, not production: two launchd agents pull Substack nightly (posts/notes/daily CSVs 23:30, note stats 23:45). Since 2026-11-01 the text archive is automated too — rt_archive.py runs as leg 5 of the 23:30 pull, archiving every post with no vault note into Resilient Tomorrow/Published/ and logging it in Social/Published/ only when no note cites that canonical URL; a nightly drift guard compares the public archive's post set against the note set and raises a T- card on any mismatch. Verified 2026-11-01 23:30: 33 posts / 33 log notes, 0 missing, guard ok, "
     },
     {
       "id": "kb-business-velocity-partners-velocity-partners",
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "Velocity Partners",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "text": "Consulting arm. Core revenue. The bridge that funds resilient-tomorrow."
     },
@@ -250,7 +250,7 @@
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "Offer (repositioned 2026-08-21)",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "text": "Shape: curriculum, one-to-many, bounded programs — not open-ended retainers IP: reusable by default (a curriculum compounds; a retainer doesn't) Stance: augment-not-replace — a commercial argument (stalled rollouts trace to fear), not just an ethical one Old offer (\"I rebuild your operations with agents\", bespoke): superseded; retained in history of Velocity Partners.md Pending hook change (Mike 2026-10-13, resume rebuild): \"Product Evaluation, Fractional COO, and AI Process Integration\" — replaces the resume-side hook; VP-site copy not yet updated (history 2026-10-15)."
     },
@@ -259,7 +259,7 @@
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "Offerings Decomposition (2026-10-03; grill date Mon 2026-10-05)",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "text": "Velocity Partners/Offerings-Analysis-2026-10-03.md (draft-for-grill, pricing estimates) reframes VP as one fractional-executive platform with three productized components: Offering 1 AI-readiness assessment (front door, est. $7.5K–$15K fixed) · Offering 2 knowledge base as source of truth for AI (delivery, est. $15K–$25K pilot + maintenance retainer) · Offering 3 AI instruction + certification cohorts (one-to-many scale lever, aligned with full rate set 2026-10-05: $10K/mo · 40h (direction + advisory, prototyping capped ≤10h/mo; floor $7.5K; max 2 concurrent retainers by the bandwidth (zero observed demand for the public/agent-discoverability half — an R&D bet, see agentic-web). Open grill questions: 90-day wedge, the Offering-2 builder trap vs \"director, not doer\", bandwidth covenant (max retainers). Analysis is grounded but supersedes nothing until Mike grills it 2026-10-05."
     },
@@ -268,7 +268,7 @@
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "Agentic-Web Offering Decided (2026-10-02; not yet built)",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "text": "Mike's Gamma-rebuild answers (T-2026-09-25-GAM1, resolved 2026-10-02) made the agentic web VP's site-level offering: \"prepare your business for the Agentic web\" — knowledge bases, agentic indexes, KB-driven bots (same pattern as distills). velocitypartners.io to be rebuilt as a simple house-style page with that offer, findable by agents, made indexable (was noindex), DNS moved off GoDaddy to Cloudflare, \"26 years\" → 29. Implementation cards T-2026-10-02-VK7 (VP site) and T-2026-10-02-HAJ (jones-co.us rebuild) queued — decided, not built. Thesis detail: agentic-web."
     },
@@ -277,7 +277,7 @@
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "Person-Brand Leg Live (2026-10-09); VP Site Blocked on Distills",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "text": "The mikejones.online leg of the person-roof portfolio shipped. The live-portfolio change-set went to prod 2026-10-09 13:45 PT — commit 9b3c9b3, CI run 37988799634 (VK7 ship; card T-2026-10-09-CHZ) — with the LinkedIn-approved headline integrated and headshot-bw.png live on the homepage. Re-verified live in the 10-09 15:00 PT sweep: mikejones.online /agents/kb/index.json 200, /llms.txt 200, /agents/query?q=xbox returns the career-history result (mike-career-history). The KB→surface chain this run exercised is publication-layer's first live deployment. velocitypartners.io — REBUILT LOCALLY 2026-10-12, deploy-gated on Mike. *(Superseded 2026-10-26: the rebuild deployed to pages.dev and the design was rejected the same day — see \"VP Site: Position Approved, Frame Rejected\" below. Kept as history.)* House-style Astro page + agent layer (/llms.txt, /agents/kb, /agents/query) lives in ~/Dev/velocitypartners-io (commits bb3f1af / a652cfa / 609b66f; local-only — no remote, no deploy, DNS untouched; CC adversarial gate r2 APPROVE recorded in PLAN.md). 29-years fixed; content re-extracted and preserved verbatim per the CC gate; rate-free marketing belt (aborts on $-figures). Preview ready for Mike review; his 3 pending decisions: (1) approve the Cloudflare Pages deploy, (2) stand up mail routing or swap the displayed address (hello@velocitypartners.io is undeliverable today — zone has no MX/TXT, dig-verified), (3) approve the GoDaddy→Cloudflare NS cutover sequence. In prod, velocitypart"
     },
@@ -286,16 +286,25 @@
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "VP Site: Position Approved, Frame Rejected (2026-10-26)",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "text": "The 10-12 deploy gate finally opened — and closed on the other issue. Approved, then shipped to pages.dev. Mike read the index-v2 preview 2026-10-26 ~13:05 (\"I ran through the index-v2, and I think it's great. Let's go with it.\") — taken as confirming the five positioning lines in Velocity Partners/VP-Positioning-Rework-2026-10-16.md (the approving run made that ruling; it was never line-by-line with Mike and stays vetoable). Shipped to Cloudflare Pages project velocitypartners-io (commit e527b84, dual adversarial gate r4: Claude Code + Codex both APPROVE; /, /llms.txt, /agents/kb/index.json, /agents/query all probed green). Rejected ~15:50 the same day — design and frame, not positioning. Verbatim: *\"If I were to land on this page, I would not hire this company. The little eyebrows after Velocity Partners, the VP-01.rev2016: there's just so much, everything about this. I'm the eyebrow. I don't like the eyebrows.\"* The positioning approval stands; the furniture (kicker labels, visible VP-01 / rev 2026 build strings, deck-shaped section openers) does not. Three directions delivered 2026-10-26 15:43 (design lane, kanban t_9fe20a3f): a 9-failure mechanical critique plus three real HTML comps — A The Letter (Notion grammar), B Working Proof (Vercel grammar: proof in the first viewport), C The Brief (Coinbase grammar) — with RECOMMENDATION.md picking B on one deciding factor. All comps verified: banned-list clean, 1440/390 with no horizontal scroll, proof hrefs 200, cal.com CTA, n"
+    },
+    {
+      "id": "kb-business-velocity-partners-vp-brand-identity-mark-generation-suspended-2026-11-06",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "VP Brand Identity — Mark Generation Suspended (2026-11-06)",
+      "updated": "2026-11-06",
+      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "text": "The site frame and the mark are two separate gates; both are open, on different terms. Mark v1 (2026-11-02, kanban t_f4310b8e) — four directions on one deciding factor (16px legibility): PROMPT, SHEAR, PROOF, RIG, recommendation PROOF. Rejected 2026-11-04 (\"one's a V, one is a weird-shaped box… there isn't anything special about any of these\"). What Mike values in the mark he already has: the check (getting things done) with a wave passing along it (movement). Mark v2 (2026-11-05) — swelled/ridden/woken stroke family rebuilt from the words, flat colour. Delivered; nominee rejected 2026-11-06, and a third round rejected the same day. Mark generation is now SUSPENDED — the failures were method failures, not drawing failures. The reworked process (post-mortem in ~/Dev/velocitypartners-io/design/IDENTITY-PROCESS.md, 2026-11-06): the brand brief never existed, so every round generated against agent-mined fragments; ideas were never vetoed before geometry, only finished artwork was; and every delivery was a naked symbol instead of the lockup in context. Replacement order: (1) one-page brief from the approved positioning lines only, Mike strikes/edits; (2) three word-level territories including monogram and wordmark-first, Mike strikes two; (3) one constructed lockup per surviving territory, delivered in context (header + LinkedIn + tab), veto-only; (4) spec + gate; (5) Daedalus swap ticket. Card: T-2026-11-02-9TK (velocity partners, high, mike) — blocked, and it no longer means \"pi"
     },
     {
       "id": "kb-business-velocity-partners-strategic-frame",
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "Strategic Frame",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "text": "VP is a bridge, not a destination. Every engagement is judged on one question: *does this shorten the bridge or lengthen it?* Binding constraint is bandwidth, not values — a fully consumed 40-hour week is one whose work *feeds RT instead of competing with it*: aligned work produces two outputs from the same hours (the engagement + the RT material), unaligned work produces one."
     },
@@ -304,9 +313,9 @@
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
       "section": "Open Items",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "path": "/agents/kb/kb-business-velocity-partners.md",
-      "text": "VP site: Mike picks a design direction (T-2026-10-27-CZM) before the rebuild resumes — the 10-12 rebuild is now on pages.dev, position approved, design rejected 2026-10-26; prod still serves the old Gamma site (history 2026-10-28) Pitch deck refresh to ICP-approved framing AAPD methodology retired (DEC-008, 2026-08-21) — \"still core, role evolving\" superseded 2026-10-15; successor shapes: the agentic-web offering + the agent-terms/gate-review candidate (history 2026-10-15) RT content pipeline revival would create aligned-work capacity (rt-content-pipeline)"
+      "text": "VP site: Mike picks a design direction (T-2026-10-27-CZM) before the rebuild resumes — the 10-12 rebuild is now on pages.dev, position approved, design rejected 2026-10-26; prod still serves the old Gamma site (history 2026-10-28) VP mark/identity: suspended until a one-page brand brief is approved (T-2026-11-02-9TK blocked; brief → territories → one lockup in context → veto-only → spec → swap). Separate gate from the site frame (history 2026-11-06) Pitch deck refresh to ICP-approved framing AAPD methodology retired (DEC-008, 2026-08-21) — \"still core, role evolving\" superseded 2026-10-15; successor shapes: the agentic-web offering + the agent-terms/gate-review candidate (history 2026-10-15) RT content pipeline revival would create aligned-work capacity (rt-content-pipeline)"
     },
     {
       "id": "kb-company-jonesco-jones-collaboration-company",
@@ -520,7 +529,7 @@
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "RT Content Pipeline",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "text": "Intended flow (v1 design): trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish. Current state (verified 2026-11-01 23:30, archive leg first scheduled run): the top of that funnel is dead and accepted as dead; the rest of the pipeline is manual and single-homed at Social/; the measurement and the text archive both run as launchd legs. This is no longer a \"revise v2\" page — it records what runs, what does not, and where the procedure lives."
     },
@@ -529,7 +538,7 @@
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "One pipeline, one home",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "text": "Mike's ruling 2026-10-29 (kanban t_81b71d28) froze the RT second pipeline wholesale: Resilient Tomorrow/Content Adapted/ (541 md), Content Drafts/ (124 md) and Drafts/ (17 md) — 682 files — moved to _Archive/2026-10/rt-content-pre-social/, promotion into Social/Adapted/ is on-demand item by item, and the Oct-2 TRIAGE-INDEX.md Keep/Trash pass is retired. The RT pipeline's own strategy docs moved to Social/Research/. So the v1 \"v2 revision intended\" intent recorded here on 2026-09-24 is superseded: there is no second pipeline to revise. The live procedure is Operations/content-pipeline.md (runbook, verified live 2026-10-29) and the replacement shape is Projects/content-pipeline/PLAN.md — ship one unit by hand, automate only what proves itself."
     },
@@ -538,7 +547,7 @@
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "What does not run",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "text": "Stage Last sign of life Consequence Trend watchers (Reddit/X/YouTube/Substack/exa) newest trend report + scored set on disk: 2026-09-27 No automated signal feed; ideas come from Mike Signal scorer none since the scheduler died — Content generator ~930 generated notes quarantined in _Archive/2026-09/ Nothing auto-drafts Platform adapter — Cuts are made per piece, by hand, into Social/Adapted/<draft-name>/ Atomizer newest atom set 2026-10-08 Atoms lag pieces; built on demand The old wording here — \"OpenClaw cron scheduler died 2026-07-28; with it died the trend-watcher family\" — is half true and half misleading: the scheduler did die 2026-07-28, but reports kept being produced for two more months (newest 2026-09-27) before stopping. Anyone tempted to revive v1 should read Operations/content-pipeline.md §2 first: do not rebuild from the v1 spec."
     },
@@ -547,7 +556,7 @@
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "What does run",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "text": "Two launchd agents, not Hermes cron, verified by launchctl list and their own logs on 2026-10-29 (both loaded, both exiting 0): com.jones-co.rt-substack-daily-pull — 23:30 daily; post, note and subscriber CSVs into ~/.openclaw/workspace/projects/ResilientTomorrow/data/. Post metadata is current (knows your-agent-their-terms, id 219345302). Its subscriber leg has failed HTTP 403 on every run since ~2026-10-02 (cookie scope, not a rebuild). Leg 5 since 2026-11-01: the text archive (below). com.jones-co.rt-substack-stats-pull — 23:45 daily; note stats into Resilient Tomorrow/Analytics/data/notes-stats.jsonl, rewritten each run as a current snapshot (2 notes tracked), last capture 2026-11-02T07:45Z."
     },
@@ -556,16 +565,16 @@
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "The archive leg — LIVE since 2026-11-01",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
-      "text": "rt_archive.py (~/.openclaw/workspace/skills/substack-cookie-auth/rt_archive.py, built off kanban t_e8d0afc5) runs as the fifth leg of the 23:30 pull: every Substack post with no vault note is archived into Resilient Tomorrow/Published/ as text plus frontmatter (url, canonical_url, published, dek, cover_url, rss_guid, captured, post_id, audience, body_format, body_complete). A Social/Published/ log note is written only when no existing note references that canonical URL. Then a drift guard compares the public archive's post set — /api/v1/archive paged at limit=12; limit=25/50 silently truncate to 23 — against the note set, and on mismatch raises one high-priority T- card per drift hash (deduped, closed cards ignored) instead of failing quietly. Verified state at the 2026-11-04 pass: 33 archive posts (README excluded), 0 missing, 0 orphans, and the nightly has exited guard=ok on every tick since the first one — run-2026-11.log reads posts=33 missing=0 wrote=0 guard=ok through 2026-11-03T23:30:20, and drift-state.json last_ok is now 2026-11-03T23:30:20-08:00 with no alarm hash pending. Social/Published/ holds three log notes (2026-10-08, 2026-10-29, 2026-11-03). Backfilled the two gaps recorded on this page on 2026-10-30: 2026-10-08-your-agent-their-terms.md and 2026-10-30-three-ways-to-own-your-corner-of.md, in both the text archive and the log. Superseded wording, kept per contradiction policy. As of 2026-10-30 (sources Resilient Tomorrow/Published/, Operations/content-pipelin"
+      "text": "rt_archive.py (~/.openclaw/workspace/skills/substack-cookie-auth/rt_archive.py, built off kanban t_e8d0afc5) runs as the fifth leg of the 23:30 pull: every Substack post with no vault note is archived into Resilient Tomorrow/Published/ as text plus frontmatter (url, canonical_url, published, dek, cover_url, rss_guid, captured, post_id, audience, body_format, body_complete). A Social/Published/ log note is written only when no existing note references that canonical URL. Then a drift guard compares the public archive's post set — /api/v1/archive paged at limit=12; limit=25/50 silently truncate to 23 — against the note set, and on mismatch raises one high-priority T- card per drift hash (deduped, closed cards ignored) instead of failing quietly. Verified state at the 2026-11-05 pass: 33 archive posts (README excluded), 0 missing, 0 orphans in the vault, but the leg is no longer green: the 2026-11-04 23:30 tick logged posts=12 missing=0 wrote=0 guard=drift (launchd.err.log: [posts] FAILED: HTTP Error 400: Bad Request, then [guard] DRIFT: 0 missing, 21 orphans -> task T-2026-11-04-EWF). The 12 is the fetch, not the vault — the archive folder still holds all 33 notes — so the guard's 21 \"vault note with no published post\" rows are a downstream symptom of a truncated/failed posts fetch, and the high-priority card it opened describes the wrong side of the break. drift-state.json now carries last_ok 2026-11-03T23:30:20-08:00 and last_alarm_hash 4aa0d7a7e17c. Social/Published/ holds f"
     },
     {
       "id": "kb-pipelines-rt-content-pipeline-repair-mode-a-partial-note-can-be-fixed-shipped-2026-11-02",
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "Repair mode — a partial note can be fixed (shipped 2026-11-02)",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "text": "The archive's immutability rule had no way back: a note captured `body_complete: false` (truncated API body, a mid-post paywall) stayed partial even after the cookie was refreshed and the full body was fetchable. rt_archive.py now carries the repair path (vault card T-2026-11-01-YXJ, kanban t_4b3b967c): --list-incomplete — prints every partial note with its source URL, no network needed. --repair-incomplete [--dry-run] [--slug X] — re-fetches only those notes. Where the body now clears the completeness test it rewrites that one note in place: same filename, body_complete: true, captured kept as the original capture, recaptured: <ts> added beneath it, incomplete_reason dropped, every other frontmatter byte and every other note untouched. Where it still cannot, the note keeps what it has and says so out loud: `incomplete_reason: \"body N/M words (P%)\" plus a > [!warning] Partial capture` callout under the H1. The write path can no longer record a partial silently either: it retries a short body once (fetch_body_best), then marks the new note, logs INCOMPLETE <path>, appends incomplete=N to run-<month>.log, and the guard's body_complete=false warning names the repair command. Frontmatter convention was chosen deliberately: body_complete stays the machine flag (no second status enum for downstream readers to learn), with recaptured and incomplete_reason as additives. State at 2026-11-03: 0 partial notes in the vault, so repair has had nothing to rewrite here; the path was exercise"
     },
@@ -574,7 +583,7 @@
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "What Worked in v1",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "text": "Trend reports carry real content — measured on disk 2026-10-30: 48 trend reports + 46 scored signal sets (Resilient Tomorrow/Trend Reports/, 2026-06-27 → 2026-09-27). The \"147 written\" figure this page carried from 2026-09-24 is not reproducible from the folder; treat the on-disk count as the fact. Adapter produced per-channel versions with solid frontmatter conventions (source_draft, scheduled_date, platform keys) — worth keeping. Draft structure: one folder per date, N drafts, per-channel files."
     },
@@ -583,7 +592,7 @@
       "pageId": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
       "section": "Related",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "text": "generator-registry — this pipeline's emitters are listed there as dead resilient-tomorrow — the business this pipeline feeds publication-layer — the gate this pipeline publishes through"
     },

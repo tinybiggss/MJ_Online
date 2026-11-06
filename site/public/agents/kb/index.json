@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T00:00:00.000Z",
+  "generatedAt": "2026-11-06T00:00:00.000Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
@@ -13,7 +13,7 @@
     {
       "id": "kb-ai-how-mike-works",
       "title": "How Mike Works",
-      "updated": "2026-10-02",
+      "updated": "2026-11-06",
       "summary": "How to collaborate with Mike (for any agent or collaborator): Direct, peer-level, opinionated.",
       "path": "/agents/kb/kb-ai-how-mike-works.md",
       "files": [
@@ -43,7 +43,7 @@
     {
       "id": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
-      "updated": "2026-11-02",
+      "updated": "2026-11-06",
       "summary": "Media + platform.",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "files": [
@@ -53,7 +53,7 @@
     {
       "id": "kb-business-velocity-partners",
       "title": "Velocity Partners",
-      "updated": "2026-10-28",
+      "updated": "2026-11-06",
       "summary": "Consulting arm.",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "files": [
@@ -103,7 +103,7 @@
     {
       "id": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "summary": "Intended flow (v1 design): trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish.",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "files": [
