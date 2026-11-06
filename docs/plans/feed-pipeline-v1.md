@@ -406,6 +406,7 @@ No component, no JS, no visual weight competing with the Substack CTA.
 | WebSub hub, Micropub, IndieAuth, MCP subscribe manifest | P3/P4, on demonstrated need. |
 | Analytics, per-reader counting, pixels | v1 non-goal; the kill metric is opens, nothing finer. |
 | Backfilling 31 RT pieces into the log | `Social/Published/README.md` rule 5 forbids exactly this, and it is the accumulation the vault already had to freeze and archive once. |
+| Migrating the RT archive into the log, or editing its notes to fit the feed's schema | The feed reads `Resilient Tomorrow/Published/` at build time instead (source 4, 2026-11-06, `site/scripts/feed-build.mjs`): frontmatter only, no body text, no vault writes, no data moved, reversible by deleting one function. The row above stays true — the log is never backfilled. `audience:` there stays Substack's vocabulary (`everyone` / `only_paid`); the mapping to the feed's taxonomy lives in the generator, not in the notes. |
 | Rewriting `/writing` to render from the feed instead of fetching Substack | It works, it costs a build-order dependency, and it buys consistency rather than capability. Note it; don't do it. |
 
 ---
