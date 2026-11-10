@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T23:03:01.037Z",
+    "generated_at": "2026-11-10T23:07:46.244Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,22 +155,22 @@
     }
   ],
   "stats": {
-    "loops_running": 31,
-    "loops_total": 33,
+    "loops_running": 32,
+    "loops_total": 34,
     "completed_oneshots": 2,
     "loops_paused": 0,
     "patterns_in_use": 6,
     "annotations_missing": 0,
     "retired_annotations": 0,
     "by_pattern": {
-      "gate": 8,
+      "gate": 9,
       "brief": 4,
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T23:03:01.037Z"
+    "generated_at": "2026-11-10T23:07:46.244Z"
   },
   "loops": [
     {
@@ -185,8 +185,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Opens the content feed the automated pipeline published this morning and confirms it carries what it claims to carry.",
       "why": "A pipeline that publishes the wrong thing on time is worse than one that fails loudly."
@@ -203,8 +201,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "The same verification on the days the pipeline runs on a different clock.",
       "why": "Different schedule, same lie risk."
@@ -221,8 +217,6 @@
         "Local log"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Checks that the whole overnight chain actually ran, and reports the silence rather than waiting to be noticed.",
       "why": "An automation that stops is indistinguishable from an automation with nothing to say."
@@ -240,8 +234,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Resolves the active week plan, reads the calendar and the overnight mail triage, lists open cards, and recommends the first move.",
       "why": "The most expensive part of my morning used to be rebuilding context I already had yesterday."
@@ -259,8 +251,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "delivery_queued",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Same assembly at a weekend pace — no work calendar, more on the house and the family.",
       "why": "A weekend that starts without a plan turns into a list of errands someone else wrote."
@@ -277,8 +267,6 @@
         "Local log"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "A single nudge at the hour the morning block can actually begin, and nothing before it.",
       "why": "The gap between available and started is where most of my day used to go."
@@ -295,8 +283,6 @@
         "Local log"
       ],
       "state": "completed",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": false,
       "does": null,
       "why": null
@@ -313,8 +299,6 @@
         "Session that fired it"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Renews a posting credential on a timer so it never lapses in the middle of a campaign.",
       "why": "Credentials fail at the moment of use, which is the worst possible moment to learn about it."
@@ -331,8 +315,6 @@
         "Session that fired it"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Once a month, checks whether a vendor I decided to walk away from has billed me anyway.",
       "why": "A decision is not done when I make it. It is done when something is watching the party that disagrees with it."
@@ -349,8 +331,6 @@
         "Local log"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Turns machine and job failures into tracked cards with an owner instead of log lines nobody reads.",
       "why": "A failure that only exists in a log has not been reported to anyone."
@@ -367,8 +347,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
@@ -386,8 +364,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Runs the nightly pass over the knowledge base: consistency, links, and the publish gate that decides what may leave.",
       "why": "The archive is only an asset if it stays internally consistent while I am not looking."
@@ -404,8 +380,6 @@
         "Desk chat"
       ],
       "state": "running",
-      "last_status": "delivery_queued",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Re-measures a machine's throughput against its own baseline and reports the gap.",
       "why": "Hardware degrades politely. Nothing tells you it got slower."
@@ -423,8 +397,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Reads what arrived, applies a bar for what counts as important, and surfaces only the messages that clear it.",
       "why": "Inbox work is unbounded. A bar turns it into a finite queue."
@@ -441,8 +413,6 @@
         "All channels"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Watches for the periodic export that proves published posts exist, and records the ones it finds.",
       "why": "Distribution is a system with receipts. If a post is not recorded it did not happen."
@@ -459,8 +429,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Compares what the live domain serves against what the last deploy actually built, and fails when they disagree.",
       "why": "A green build and a correct site are different claims. Only one of them is checkable from outside."
@@ -477,11 +445,25 @@
         "Desk chat"
       ],
       "state": "completed",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": false,
       "does": null,
       "why": null
+    },
+    {
+      "name": "Clef shadow gate review",
+      "public_name": "Shadow gate review",
+      "slug": "shadow-gate-review",
+      "band": "tend",
+      "pattern": "gate",
+      "cadence": "13th of the month, 09:20",
+      "schedule": "20 9 13 11 *",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
+      "annotated": true,
+      "does": "Reads the log left by a gate running in shadow mode and joins it against that gate's own run reports, then prints a verdict against criteria written down before the run began.",
+      "why": "A gate that suppresses things is only safe once it has been watched suppressing long enough to count its misses. The decision to arm it belongs to a loop that counts them, not to my impression of how it has been going."
     },
     {
       "name": "finished-products-sweep",
@@ -495,8 +477,6 @@
         "Local log"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Walks everything in flight and pushes the pieces that have stopped moving.",
       "why": "Nothing I make dies of difficulty. It dies of being fourth in a queue."
@@ -513,8 +493,6 @@
         "Session that fired it"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Adopts new task cards, normalises them, and routes each to the place it will actually be seen.",
       "why": "A task that lives in a chat message is not a task, it is a rumour."
@@ -531,8 +509,6 @@
         "All channels"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
       "why": "The quiet failures are the ones attached to something a customer is using."
@@ -549,8 +525,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Checks that the watchers are alive and that each one's last verdict is recent enough to mean something.",
       "why": "Every watcher I add is a new thing that can die quietly. Something has to watch the watchmen."
@@ -567,8 +541,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Publishes the scheduled feed item to its own channel with no human in the loop.",
       "why": "A channel that only posts when I remember is a hobby."
@@ -586,8 +558,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Tracks state-level AI legislation and surfaces movement worth writing about.",
       "why": "Beat coverage is a watchlist, not a mood."
@@ -604,8 +574,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Tracks a specific item's price and tells me when it moves past a line. Target and buyer withheld.",
       "why": "The pattern is what matters here: a watch is cheaper than a decision made twice a week."
@@ -622,8 +590,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "The same price-watch pattern, running on a build for someone else's house. Details withheld.",
       "why": "Same loop, different owner — which is the point of building loops rather than one-off tasks."
@@ -640,8 +606,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Watches one tool's price daily and reports changes above a threshold.",
       "why": "A purchase I would otherwise re-research every time I walked past the project."
@@ -658,8 +622,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Pulls the day's signal through a standing topic filter and delivers only what clears it.",
       "why": "I want to be current on four subjects, not informed about everything."
@@ -676,8 +638,6 @@
         "Local log"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Rebuilds this page from the live scheduler every hour and publishes it only if the bytes actually changed.",
       "why": "The page you are reading is itself a loop. It will not publish while the working tree is dirty, or from any branch but the deploy branch — the same refusal discipline the rest of the system uses, applied to its own documentation."
@@ -695,8 +655,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Twice a week, scores the money moves that are open and asks which one is stalling.",
       "why": "Revenue does not fail on a decision. It fails on a decision nobody revisited."
@@ -713,8 +671,6 @@
         "All channels"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Surfaces what actually got done before the next week's plan is allowed to overwrite it.",
       "why": "Momentum is a fact about the record. Without the ritual it is only a feeling."
@@ -732,8 +688,6 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Closes the working day at a fixed hour: capture what is open, name tomorrow's first move, stop.",
       "why": "The stop time is the feature. Everything else here is downstream of being able to end the day."
@@ -744,15 +698,13 @@
       "slug": "weekly-review",
       "band": "close",
       "pattern": "ritual",
-      "cadence": "Sun, 18:00",
-      "schedule": "0 18 * * 0",
+      "cadence": "Mon, 07:15",
+      "schedule": "15 7 * * 1",
       "channels": [
         "Local log",
         "Telegram"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "Closes the week: what shipped, what stalled, what the record says versus what I remember.",
       "why": "A week nobody closed is a week I will misremember in my own favour."
@@ -769,8 +721,6 @@
         "Local log"
       ],
       "state": "running",
-      "last_status": "ok",
-      "failure_streak": 0,
       "annotated": true,
       "does": "The same close, run through the accommodations the rest of the week is designed around.",
       "why": "The review has to be shaped for the brain doing the reviewing, or it becomes the thing I skip."

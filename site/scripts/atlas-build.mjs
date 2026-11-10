@@ -181,8 +181,9 @@ for (const job of live) {
     schedule: job.schedule_display || job.schedule?.display || job.schedule?.expr || "",
     channels: publicChannel(job.deliver, channelMap),
     state: done ? "completed" : paused ? "paused" : "running",
-    last_status: job.last_status || null,
-    failure_streak: job.failure_streak || 0,
+    // live status is deliberately NOT shipped: it is never rendered, and it
+    // changes every time any job fires, which made the publish job commit an
+    // identical page on the hour. Failure state is the ping job's business.
     annotated: Boolean(ann),
     does: ann?.does || null,
     why: ann?.why || null,

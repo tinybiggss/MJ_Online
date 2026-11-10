@@ -285,6 +285,13 @@
       "pattern": "watcher",
       "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
+    },
+    "Clef shadow gate review": {
+      "public_name": "Shadow gate review",
+      "band": "tend",
+      "pattern": "gate",
+      "does": "Reads the log left by a gate running in shadow mode and joins it against that gate's own run reports, then prints a verdict against criteria written down before the run began.",
+      "why": "A gate that suppresses things is only safe once it has been watched suppressing long enough to count its misses. The decision to arm it belongs to a loop that counts them, not to my impression of how it has been going."
     }
   },
   "clusters": [
