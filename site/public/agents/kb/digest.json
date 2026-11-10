@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T00:00:00.000Z",
+  "generated_at": "2026-11-10T00:00:00.000Z",
   "pages": {
     "kb-ai-how-mike-works": {
       "digest": "sha256:c866540ad4a13ab938900c5dba004b8901b749b2db487a25deee03516dd5f8ba",
@@ -23,15 +23,15 @@
       ]
     },
     "kb-business-resilient-tomorrow": {
-      "digest": "sha256:0fac95ff9ba2f2be0ac8302cfd65e3eab44c328b71dcc80dd7ede766167abb50",
-      "updated": "2026-11-06",
+      "digest": "sha256:950d5658bfa4d981691f24e05ac87eaacb68cc4d4566812b4e62e324a9b9c463",
+      "updated": "2026-11-10",
       "files": [
         "kb-business-resilient-tomorrow.md"
       ]
     },
     "kb-business-velocity-partners": {
-      "digest": "sha256:44ee056311ee58e4b291dc0324c150f2fe07ad856f1835ae7fe61ded1e544f93",
-      "updated": "2026-11-06",
+      "digest": "sha256:cfed3fcd2e288f575311efb150d54e4a25a894077aedcf32812d24802d51d341",
+      "updated": "2026-11-10",
       "files": [
         "kb-business-velocity-partners.md"
       ]
@@ -65,15 +65,15 @@
       ]
     },
     "kb-pipelines-rt-content-pipeline": {
-      "digest": "sha256:9246fe6b951572852a0c05d54e3a2378b0538ba84c709919e02c416793089bbd",
-      "updated": "2026-11-05",
+      "digest": "sha256:298957b5525427d0e42e2f24d3b105577176332cef8820ba2ded133fc4388115",
+      "updated": "2026-11-10",
       "files": [
         "kb-pipelines-rt-content-pipeline.md"
       ]
     },
     "kb-pipelines-task-system": {
-      "digest": "sha256:240151c3ec8026814c812daa531f4092a870fa759f046a087be7adbf06e2dc49",
-      "updated": "2026-11-01",
+      "digest": "sha256:aa1b07b4a7524201bb2427e26d82157de66499508c1fced400dc38fa1c84d665",
+      "updated": "2026-11-07",
       "files": [
         "kb-pipelines-task-system.md"
       ]

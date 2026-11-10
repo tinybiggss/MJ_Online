@@ -5,8 +5,17 @@
   <link rel="self" href="https://mikejones.online/feed/atom.xml"/>
   <link rel="alternate" type="text/html" href="https://mikejones.online"/>
   <id>https://mikejones.online/</id>
-  <updated>2026-11-04T00:00:00.000Z</updated>
+  <updated>2026-11-09T18:56:54.000Z</updated>
   <author><name>Mike Jones</name><uri>https://mikejones.online</uri></author>
+  <entry>
+    <id>https://resilienttomorrow.substack.com/p/a-blue-wave-wont-build-what-we-need</id>
+    <title>A Blue Wave Won’t Build What We Need</title>
+    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/a-blue-wave-wont-build-what-we-need"/>
+    <published>2026-11-09T18:56:54.000Z</published>
+    <updated>2026-11-09T18:56:54.000Z</updated>
+    <summary>The election is an opportunity. What we demand from our leaders, and what we build with our neighbors, will determine what changes.</summary>
+    <author><name>Mike Jones</name></author>
+  </entry>
   <entry>
     <id>https://resilienttomorrow.substack.com/p/muse-vs-mike</id>
     <title>Mark Day&apos;s cut — Your Agent, Their Terms (Meta Muse)</title>
@@ -203,15 +212,6 @@
     <published>2025-06-24T22:17:30.000Z</published>
     <updated>2025-06-24T22:17:30.000Z</updated>
     <summary>It wasn’t your time or your data—they took your ability to imagine something better.</summary>
-    <author><name>Mike Jones</name></author>
-  </entry>
-  <entry>
-    <id>https://resilienttomorrow.substack.com/p/power-to-the-people-reclaiming-your</id>
-    <title>Power to the People: Reclaiming Your Energy Sovereignty</title>
-    <link rel="alternate" href="https://resilienttomorrow.substack.com/p/power-to-the-people-reclaiming-your"/>
-    <published>2025-06-13T21:40:27.000Z</published>
-    <updated>2025-06-13T21:40:27.000Z</updated>
-    <summary>Step 2 (article 4) in the “7 Steps to Quietly Exit a System That Wants You Dependent” Series</summary>
     <author><name>Mike Jones</name></author>
   </entry>
 </feed>

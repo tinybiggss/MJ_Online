@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T00:00:00.000Z",
+  "generatedAt": "2026-11-10T00:00:00.000Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
@@ -43,7 +43,7 @@
     {
       "id": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
-      "updated": "2026-11-06",
+      "updated": "2026-11-10",
       "summary": "Media + platform.",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "files": [
@@ -53,7 +53,7 @@
     {
       "id": "kb-business-velocity-partners",
       "title": "Velocity Partners",
-      "updated": "2026-11-06",
+      "updated": "2026-11-10",
       "summary": "Consulting arm.",
       "path": "/agents/kb/kb-business-velocity-partners.md",
       "files": [
@@ -103,7 +103,7 @@
     {
       "id": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
-      "updated": "2026-11-05",
+      "updated": "2026-11-10",
       "summary": "Intended flow (v1 design): trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish.",
       "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
       "files": [
@@ -113,7 +113,7 @@
     {
       "id": "kb-pipelines-task-system",
       "title": "Task System",
-      "updated": "2026-11-01",
+      "updated": "2026-11-07",
       "summary": "What it is: Mike's personal Kanban — the claim layer for how work is captured, decided, and tracked across all four businesses.",
       "path": "/agents/kb/kb-pipelines-task-system.md",
       "files": [
