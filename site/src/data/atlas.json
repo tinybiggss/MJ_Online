@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T22:49:11.276Z",
+    "generated_at": "2026-11-10T22:49:42.322Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -86,7 +86,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T22:49:11.276Z"
+    "generated_at": "2026-11-10T22:49:42.322Z"
   },
   "loops": [
     {
@@ -180,7 +180,7 @@
       ],
       "state": "running",
       "last_status": "delivery_queued",
-      "last_run_hours": 49.4,
+      "last_run_hours": 49.5,
       "failure_streak": 0,
       "annotated": true,
       "does": "Same assembly at a weekend pace — no work calendar, more on the house and the family.",
@@ -315,7 +315,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 11.7,
+      "last_run_hours": 11.8,
       "failure_streak": 0,
       "annotated": true,
       "does": "Runs the nightly pass over the knowledge base: consistency, links, and the publish gate that decides what may leave.",
@@ -334,7 +334,7 @@
       ],
       "state": "running",
       "last_status": "delivery_queued",
-      "last_run_hours": 49.4,
+      "last_run_hours": 49.5,
       "failure_streak": 0,
       "annotated": true,
       "does": "Re-measures a machine's throughput against its own baseline and reports the gap.",
@@ -449,7 +449,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 0.1,
+      "last_run_hours": 0.2,
       "failure_streak": 0,
       "annotated": true,
       "does": "Adopts new task cards, normalises them, and routes each to the place it will actually be seen.",
@@ -468,7 +468,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 145.3,
+      "last_run_hours": 145.4,
       "failure_streak": 0,
       "annotated": true,
       "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
@@ -526,7 +526,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 29.7,
+      "last_run_hours": 29.8,
       "failure_streak": 0,
       "annotated": true,
       "does": "Tracks state-level AI legislation and surfaces movement worth writing about.",
