@@ -420,7 +420,7 @@
       "order": 50,
       "title": "Memory",
       "line": "A knowledge base with an index, so a profile can find the right page without loading the archive.",
-      "thesis": "The valuable part is not that I keep notes. It is that there is an index over them, and a fixed order in which a profile looks things up, so a session can start with ten lines of pointers instead of a hundred thousand tokens of context. Most of what I know about organising this I took from Karpathy's writing on knowledge bases and from a decade of watching wikis rot, then narrowed to one rule: never make the model read the corpus to find one page.",
+      "thesis": "The valuable part is not that I keep notes. It is that there is an index over them, and a fixed order in which a profile looks things up, so a session can start with ten lines of pointers instead of a hundred thousand tokens of context. Most of what I know about organizing this I took from Karpathy's writing on knowledge bases and from a decade of watching wikis rot, then narrowed to one rule: never make the model read the corpus to find one page.",
       "items": [
         {
           "title": "An index, not a pile",

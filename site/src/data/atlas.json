@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T22:50:40.036Z",
+    "generated_at": "2026-11-10T22:52:54.012Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -72,21 +72,21 @@
     }
   ],
   "stats": {
-    "loops_running": 30,
+    "loops_running": 31,
     "loops_total": 33,
-    "completed_oneshots": 3,
+    "completed_oneshots": 2,
     "patterns_in_use": 6,
     "annotations_missing": 0,
     "retired_annotations": 0,
     "by_pattern": {
-      "gate": 7,
+      "gate": 8,
       "brief": 4,
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T22:50:40.036Z"
+    "generated_at": "2026-11-10T22:52:54.012Z"
   },
   "loops": [
     {
@@ -190,7 +190,6 @@
       "cadence": "Weekdays, 09:15",
       "schedule": "15 9 * * 1-5",
       "channels": [
-        "Telegram",
         "Local log"
       ],
       "state": "running",
@@ -593,7 +592,7 @@
       "channels": [
         "Local log"
       ],
-      "state": "completed",
+      "state": "running",
       "last_status": null,
       "failure_streak": 0,
       "annotated": true,
@@ -827,7 +826,7 @@
       "order": 50,
       "title": "Memory",
       "line": "A knowledge base with an index, so a profile can find the right page without loading the archive.",
-      "thesis": "The valuable part is not that I keep notes. It is that there is an index over them, and a fixed order in which a profile looks things up, so a session can start with ten lines of pointers instead of a hundred thousand tokens of context. Most of what I know about organising this I took from Karpathy's writing on knowledge bases and from a decade of watching wikis rot, then narrowed to one rule: never make the model read the corpus to find one page.",
+      "thesis": "The valuable part is not that I keep notes. It is that there is an index over them, and a fixed order in which a profile looks things up, so a session can start with ten lines of pointers instead of a hundred thousand tokens of context. Most of what I know about organizing this I took from Karpathy's writing on knowledge bases and from a decade of watching wikis rot, then narrowed to one rule: never make the model read the corpus to find one page.",
       "items": [
         {
           "title": "An index, not a pile",
