@@ -1,0 +1,186 @@
+---
+/**
+ * /system/<cluster>/ — one part of the system, in full.
+ *
+ * One template for all seven: the two frames (rules, repair) and the five
+ * clusters. Rhythms is the only one with a bespoke body (bands + loop rows);
+ * everything else is items. Native <details> and real links mean the whole thing
+ * works with JavaScript off.
+ */
+import FieldLayout from "../../layouts/FieldLayout.astro";
+import {
+  sections, running, oneshots, bands, patterns, stats, stamp,
+  countFor, unitFor, patternName,
+} from "../../lib/atlas";
+
+export function getStaticPaths() {
+  return sections.map((c: any) => ({ params: { cluster: c.id }, props: { cluster: c } }));
+}
+
+const { cluster } = Astro.props;
+const idx = sections.findIndex((c: any) => c.id === cluster.id);
+const prev = idx > 0 ? sections[idx - 1] : null;
+const next = idx < sections.length - 1 ? sections[idx + 1] : null;
+const isRhythms = cluster.id === "rhythms";
+const rows = isRhythms ? running : [];
+
+const title = `${cluster.title} — the system | Mike Jones`;
+const description = cluster.line;
+---
+
+<FieldLayout title={title} description={description} active="/system">
+  <!-- ------------------------------------------------------------ masthead -->
+  <section class="border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 pt-10 pb-12 md:pt-14 md:pb-16">
+      <div class="flex flex-wrap items-baseline justify-between gap-3 font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
+        <a href="/system/" class="transition-colors hover:text-signal">← The system</a>
+        <span class="tabular-nums">{String(idx + 1).padStart(2, "0")} / {String(sections.length).padStart(2, "0")}</span>
+      </div>
+
+      <h1 class="mt-8 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em]">
+        {cluster.title}
+      </h1>
+
+      <div class="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+        <span class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-signal">
+          {cluster.frame_label ?? `${countFor(cluster.id)} ${unitFor(cluster.id)}`}
+        </span>
+        <span class="max-w-[52ch] text-sm leading-relaxed text-field-muted">{cluster.line}</span>
+      </div>
+
+      <p class="mt-8 max-w-[64ch] text-lg leading-relaxed text-field-muted">{cluster.thesis}</p>
+    </div>
+  </section>
+
+  {isRhythms ? (
+    /* ------------------------------------------------------------ rhythms */
+    <section class="border-b border-field-line">
+      <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+        <div class="border-t border-field-line">
+          {bands.map((band: any) => {
+            const bandRows = rows.filter((l: any) => l.band === band.id);
+            if (!bandRows.length) return null;
+            return (
+              <div class="pt-10">
+                <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-field-line pb-2">
+                  <h2 class="font-display text-lg font-semibold tracking-[-0.01em]">{band.title}</h2>
+                  <p class="max-w-[52ch] text-[0.8125rem] leading-relaxed text-field-faint">{band.line}</p>
+                </div>
+
+                <div class="divide-y divide-field-line">
+                  {bandRows.map((l: any) => (
+                    <details class="group/row" data-loop={l.slug} id={l.slug}>
+                      <summary class="flex cursor-pointer list-none flex-wrap items-baseline gap-x-4 gap-y-1 py-4 transition-colors hover:text-signal">
+                        <span class="w-full whitespace-nowrap font-data text-2xs uppercase tracking-[0.04em] text-field-faint sm:w-44 sm:shrink-0">
+                          {l.cadence}
+                        </span>
+                        <span class="flex-1 font-display text-base font-medium tracking-[-0.01em]">{l.public_name}</span>
+                        <span class="font-data text-2xs text-field-faint group-open/row:text-signal">
+                          {l.channels.join(" · ")}
+                        </span>
+                      </summary>
+
+                      <div class="pb-6 pl-0 sm:pl-48">
+                        <p class="max-w-[62ch] text-sm leading-relaxed text-field-ink">{l.does}</p>
+                        <div class="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-2 border-l-2 border-field-line pl-4">
+                          <span class="font-data text-2xs uppercase tracking-[0.12em] text-signal">{patternName(l.pattern)}</span>
+                          <span class="max-w-[54ch] text-[0.8125rem] leading-relaxed text-field-muted">{l.why}</span>
+                        </div>
+                        <p class="mt-4 font-data text-2xs text-field-faint">
+                          schedule <span class="text-field-muted">{l.schedule}</span>
+                        </p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {oneshots.length > 0 && (
+          <p class="mt-12 max-w-[68ch] border-t border-field-line pt-5 font-data text-2xs leading-relaxed text-field-faint">
+            Not listed above: {oneshots.length} dated one-shots that have already fired. They carry a real date instead of a
+            cadence, run once, and retire — the same six shapes with an end.
+          </p>
+        )}
+
+        <div class="mt-12 border-t border-field-line pt-8">
+          <h2 class="font-display text-base font-semibold">The shapes these come from</h2>
+          <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            {patterns.map((p: any) => (
+              <span class="font-data text-2xs text-field-muted">
+                <span class="tabular-nums text-signal">{String(stats.by_pattern[p.id] ?? 0).padStart(2, "0")}</span>{" "}
+                {p.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : (
+    /* -------------------------------------------------------------- items */
+    <section class="border-b border-field-line">
+      <div class="mx-auto max-w-6xl px-6 py-10 md:py-14">
+        <div class="grid gap-x-12 gap-y-0 border-t border-field-line md:grid-cols-2">
+          {(cluster.items ?? []).map((item: any) => (
+            <div class="border-b border-field-line py-6">
+              <h2 class="font-display text-base font-semibold tracking-[-0.01em]">{item.title}</h2>
+              <p class="mt-1.5 font-data text-2xs uppercase tracking-[0.1em] text-field-faint">{item.meta}</p>
+              <p class="mt-3 text-sm leading-relaxed text-field-muted">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ------------------------------------------------------------ footer nav -->
+  <section class="bg-field-panel">
+    <div class="mx-auto max-w-6xl px-6 py-10">
+      <div class="grid gap-6 md:grid-cols-2">
+        {prev ? (
+          <a href={`/system/${prev.id}/`} class="group border-field-line transition-colors hover:border-signal">
+            <span class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">← {prev.title}</span>
+            <p class="mt-2 text-sm leading-relaxed text-field-muted transition-colors group-hover:text-signal">{prev.line}</p>
+          </a>
+        ) : (
+          <a href="/system/" class="group">
+            <span class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">← The system</span>
+            <p class="mt-2 text-sm leading-relaxed text-field-muted transition-colors group-hover:text-signal">Back to the map</p>
+          </a>
+        )}
+        {next ? (
+          <a href={`/system/${next.id}/`} class="group md:text-right">
+            <span class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">{next.title} →</span>
+            <p class="mt-2 text-sm leading-relaxed text-field-muted transition-colors group-hover:text-signal">{next.line}</p>
+          </a>
+        ) : (
+          <a href="/system/" class="group md:text-right">
+            <span class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">The system →</span>
+            <p class="mt-2 text-sm leading-relaxed text-field-muted transition-colors group-hover:text-signal">Back to the map</p>
+          </a>
+        )}
+      </div>
+
+      <p class="mt-8 border-t border-field-line pt-5 font-data text-2xs leading-relaxed text-field-faint">
+        generated <span class="text-field-muted">{stamp}</span> from the scheduler store ·
+        {stats.loops_running} loops · {stats.annotations_missing} undescribed
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Enhancement only: open the row a deep link points at.
+    const open = () => {
+      const id = decodeURIComponent(location.hash.replace(/^#/, ""));
+      const el = id ? document.getElementById(id) : null;
+      if (el instanceof HTMLDetailsElement) {
+        el.open = true;
+        el.scrollIntoView({ block: "center" });
+      }
+    };
+    window.addEventListener("hashchange", open);
+    open();
+  </script>
+</FieldLayout>

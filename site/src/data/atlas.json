@@ -1,0 +1,1013 @@
+{
+  "meta": {
+    "version": 1,
+    "generated_at": "2026-11-10T22:47:47.745Z",
+    "source": "hermes scheduler store on the owning machine",
+    "contract": "committed artifact; CI ships it, never regenerates it"
+  },
+  "hero": {
+    "eyebrow": "The system, live",
+    "title": "How this site is made",
+    "lead": "This page describes the machine that produces everything else here. It is not a diagram of an idea — it reads the running system and draws it, so what you are looking at is this week's configuration, not an essay about one.",
+    "note": "Counts and schedules below are read from the scheduler itself. Prose is written by hand. Where the two disagree, the scheduler wins and the page says so."
+  },
+  "patterns": [
+    {
+      "id": "brief",
+      "name": "Brief",
+      "line": "Assemble scattered state into one decision-ready page.",
+      "when": "Use when the cost is not the work but the looking-around before the work."
+    },
+    {
+      "id": "watcher",
+      "name": "Watcher",
+      "line": "Poll a source, stay quiet until something changes.",
+      "when": "Use when the interesting event is rare and the checking is frequent."
+    },
+    {
+      "id": "sweep",
+      "name": "Sweep",
+      "line": "Walk a backlog on a timer and finish what went stale.",
+      "when": "Use when work dies from neglect rather than difficulty."
+    },
+    {
+      "id": "intake",
+      "name": "Intake",
+      "line": "Turn an external event into a tracked object with an owner.",
+      "when": "Use when things arrive faster than you can file them."
+    },
+    {
+      "id": "gate",
+      "name": "Gate",
+      "line": "Verify a claim before it is allowed to be true.",
+      "when": "Use when the failure mode is a confident wrong answer."
+    },
+    {
+      "id": "ritual",
+      "name": "Ritual",
+      "line": "A scheduled hour that forces a decision you would defer.",
+      "when": "Use when the thing is important and never urgent."
+    }
+  ],
+  "bands": [
+    {
+      "id": "orient",
+      "title": "Orient",
+      "line": "Runs before I am useful, so the first decision of the day is not reconstruction."
+    },
+    {
+      "id": "tend",
+      "title": "Tend",
+      "line": "Continuous. Watches, files, verifies, and cleans while I am doing something else."
+    },
+    {
+      "id": "harvest",
+      "title": "Harvest",
+      "line": "Pulls the outside world in on a schedule instead of on a whim."
+    },
+    {
+      "id": "close",
+      "title": "Review & close",
+      "line": "Daily, weekly, and monthly stops that make me look at what I did."
+    }
+  ],
+  "stats": {
+    "loops_running": 29,
+    "loops_total": 32,
+    "completed_oneshots": 3,
+    "patterns_in_use": 6,
+    "annotations_missing": 0,
+    "retired_annotations": 0,
+    "by_pattern": {
+      "gate": 7,
+      "brief": 4,
+      "ritual": 6,
+      "watcher": 7,
+      "intake": 3,
+      "sweep": 2
+    },
+    "generated_at": "2026-11-10T22:47:47.745Z"
+  },
+  "loops": [
+    {
+      "name": "T1 feed-fidelity watch (weekday)",
+      "public_name": "Feed-fidelity watch",
+      "slug": "feed-fidelity-watch",
+      "band": "orient",
+      "pattern": "gate",
+      "cadence": "Weekdays, 07:12",
+      "schedule": "12 7 * * 1-5",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 7.6,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Opens the content feed the automated pipeline published this morning and confirms it carries what it claims to carry.",
+      "why": "A pipeline that publishes the wrong thing on time is worse than one that fails loudly."
+    },
+    {
+      "name": "T1 feed-fidelity watch (weekend)",
+      "public_name": "Feed-fidelity watch, weekend",
+      "slug": "feed-fidelity-watch-weekend",
+      "band": "orient",
+      "pattern": "gate",
+      "cadence": "Weekends, 08:12",
+      "schedule": "12 8 * * 6,0",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 54.6,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "The same verification on the days the pipeline runs on a different clock.",
+      "why": "Different schedule, same lie risk."
+    },
+    {
+      "name": "Liveness probe",
+      "public_name": "Liveness probe",
+      "slug": "liveness-probe",
+      "band": "orient",
+      "pattern": "gate",
+      "cadence": "Daily, 07:15",
+      "schedule": "15 7 * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 6.4,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Checks that the whole overnight chain actually ran, and reports the silence rather than waiting to be noticed.",
+      "why": "An automation that stops is indistinguishable from an automation with nothing to say."
+    },
+    {
+      "name": "Morning briefing",
+      "public_name": "Morning brief",
+      "slug": "morning-brief",
+      "band": "orient",
+      "pattern": "brief",
+      "cadence": "Weekdays, 07:00",
+      "schedule": "0 7 * * 1-5",
+      "channels": [
+        "Desk chat",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 7.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Resolves the active week plan, reads the calendar and the overnight mail triage, lists open cards, and recommends the first move.",
+      "why": "The most expensive part of my morning used to be rebuilding context I already had yesterday."
+    },
+    {
+      "name": "Morning briefing (weekend)",
+      "public_name": "Morning brief, weekend",
+      "slug": "morning-brief-weekend",
+      "band": "orient",
+      "pattern": "brief",
+      "cadence": "Weekends, 08:00",
+      "schedule": "0 8 * * 6,0",
+      "channels": [
+        "Desk chat",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "delivery_queued",
+      "last_run_hours": 49.4,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Same assembly at a weekend pace — no work calendar, more on the house and the family.",
+      "why": "A weekend that starts without a plan turns into a list of errands someone else wrote."
+    },
+    {
+      "name": "Workday start reminder",
+      "public_name": "Workday start",
+      "slug": "workday-start",
+      "band": "orient",
+      "pattern": "ritual",
+      "cadence": "Weekdays, 09:15",
+      "schedule": "15 9 * * 1-5",
+      "channels": [
+        "Telegram",
+        "Local log"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 5.5,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "A single nudge at the hour the morning block can actually begin, and nothing before it.",
+      "why": "The gap between available and started is where most of my day used to go."
+    },
+    {
+      "name": "andromeda-research-wake (one-shot)",
+      "public_name": "andromeda-research-wake (one-shot)",
+      "slug": "andromeda-research-wake-one-shot",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "29th of the month, 00:10",
+      "schedule": "10 0 29 10 *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "completed",
+      "last_status": "ok",
+      "last_run_hours": 303.6,
+      "failure_streak": 0,
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "Atlas publish",
+      "public_name": "Atlas publish",
+      "slug": "atlas-publish",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Hourly, at :00",
+      "schedule": "0 * * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "completed",
+      "last_status": null,
+      "last_run_hours": null,
+      "failure_streak": 0,
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "LinkedIn token renewal",
+      "public_name": "Credential renewal",
+      "slug": "credential-renewal",
+      "band": "tend",
+      "pattern": "watcher",
+      "cadence": "Daily, 09:00",
+      "schedule": "every day at 9am",
+      "channels": [
+        "Session that fired it"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 5.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Renews a posting credential on a timer so it never lapses in the middle of a campaign.",
+      "why": "Credentials fail at the moment of use, which is the worst possible moment to learn about it."
+    },
+    {
+      "name": "Riverside elapse check",
+      "public_name": "Decision enforcement",
+      "slug": "decision-enforcement",
+      "band": "tend",
+      "pattern": "gate",
+      "cadence": "1st of the month, 10:00",
+      "schedule": "0 10 1 * *",
+      "channels": [
+        "Session that fired it"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 220.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Once a month, checks whether a vendor I decided to walk away from has billed me anyway.",
+      "why": "A decision is not done when I make it. It is done when something is watching the party that disagrees with it."
+    },
+    {
+      "name": "Failure intake (fleet → cards)",
+      "public_name": "Failure intake",
+      "slug": "failure-intake",
+      "band": "tend",
+      "pattern": "intake",
+      "cadence": "Hourly, at :00",
+      "schedule": "0 * * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 0.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Turns machine and job failures into tracked cards with an owner instead of log lines nobody reads.",
+      "why": "A failure that only exists in a log has not been reported to anyone."
+    },
+    {
+      "name": "kb-nightly-maintenance",
+      "public_name": "Knowledge-base gate",
+      "slug": "knowledge-base-gate",
+      "band": "tend",
+      "pattern": "sweep",
+      "cadence": "Daily, 03:00",
+      "schedule": "0 3 * * *",
+      "channels": [
+        "Local log",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 11.7,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Runs the nightly pass over the knowledge base: consistency, links, and the publish gate that decides what may leave.",
+      "why": "The archive is only an asset if it stays internally consistent while I am not looking."
+    },
+    {
+      "name": "Fleet benchmark drift check",
+      "public_name": "Machine drift check",
+      "slug": "machine-drift-check",
+      "band": "tend",
+      "pattern": "gate",
+      "cadence": "Sun, 04:00",
+      "schedule": "every sunday 4am",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
+      "last_status": "delivery_queued",
+      "last_run_hours": 49.4,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Re-measures a machine's throughput against its own baseline and reports the gap.",
+      "why": "Hardware degrades politely. Nothing tells you it got slower."
+    },
+    {
+      "name": "Important-mail monitor",
+      "public_name": "Mail triage",
+      "slug": "mail-triage",
+      "band": "tend",
+      "pattern": "intake",
+      "cadence": "Every 30 minutes",
+      "schedule": "*/30 * * * *",
+      "channels": [
+        "Local log",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 0.3,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Reads what arrived, applies a bar for what counts as important, and surfaces only the messages that clear it.",
+      "why": "Inbox work is unbounded. A bar turns it into a finite queue."
+    },
+    {
+      "name": "LinkedIn export watcher",
+      "public_name": "Post-export watcher",
+      "slug": "post-export-watcher",
+      "band": "tend",
+      "pattern": "watcher",
+      "cadence": "Every 30 minutes",
+      "schedule": "every 30m",
+      "channels": [
+        "All channels"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 0.3,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Watches for the periodic export that proves published posts exist, and records the ones it finds.",
+      "why": "Distribution is a system with receipts. If a post is not recorded it did not happen."
+    },
+    {
+      "name": "release-site-health",
+      "public_name": "Release verification",
+      "slug": "release-verification",
+      "band": "tend",
+      "pattern": "gate",
+      "cadence": "Daily, 08:15",
+      "schedule": "15 8 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 6.5,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Compares what the live domain serves against what the last deploy actually built, and fails when they disagree.",
+      "why": "A green build and a correct site are different claims. Only one of them is checkable from outside."
+    },
+    {
+      "name": "RT Bluesky publish (post-title-test)",
+      "public_name": "RT Bluesky publish (post-title-test)",
+      "slug": "rt-bluesky-publish-post-title-test",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "30th of the month, 13:46",
+      "schedule": "46 13 30 10 *",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "completed",
+      "last_status": "ok",
+      "last_run_hours": 266,
+      "failure_streak": 0,
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "finished-products-sweep",
+      "public_name": "Stalled-work sweep",
+      "slug": "stalled-work-sweep",
+      "band": "tend",
+      "pattern": "sweep",
+      "cadence": "Every 15 minutes",
+      "schedule": "*/15 * * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 0,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Walks everything in flight and pushes the pieces that have stopped moving.",
+      "why": "Nothing I make dies of difficulty. It dies of being fourth in a queue."
+    },
+    {
+      "name": "task-intake",
+      "public_name": "Task intake",
+      "slug": "task-intake",
+      "band": "tend",
+      "pattern": "intake",
+      "cadence": "Every 10 minutes",
+      "schedule": "*/10 * * * *",
+      "channels": [
+        "Session that fired it"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 0.1,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Adopts new task cards, normalises them, and routes each to the place it will actually be seen.",
+      "why": "A task that lives in a chat message is not a task, it is a rumour."
+    },
+    {
+      "name": "supabase-pat-watchdog",
+      "public_name": "Token expiry watchdog",
+      "slug": "token-expiry-watchdog",
+      "band": "tend",
+      "pattern": "watcher",
+      "cadence": "1st & 15th of the month, 09:07",
+      "schedule": "7 9 1,15 * *",
+      "channels": [
+        "All channels"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 145.3,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
+      "why": "The quiet failures are the ones attached to something a customer is using."
+    },
+    {
+      "name": "Watcher guard (chain health)",
+      "public_name": "Watcher guard",
+      "slug": "watcher-guard",
+      "band": "tend",
+      "pattern": "gate",
+      "cadence": "Hourly, at :20",
+      "schedule": "20 * * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 0.5,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Checks that the watchers are alive and that each one's last verdict is recent enough to mean something.",
+      "why": "Every watcher I add is a new thing that can die quietly. Something has to watch the watchmen."
+    },
+    {
+      "name": "Agentic feed (T1) - Agentic Feed channel",
+      "public_name": "Automated channel feed",
+      "slug": "automated-channel-feed",
+      "band": "harvest",
+      "pattern": "brief",
+      "cadence": "Daily, 07:00",
+      "schedule": "0 7 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 7.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Publishes the scheduled feed item to its own channel with no human in the loop.",
+      "why": "A channel that only posts when I remember is a hobby."
+    },
+    {
+      "name": "RT AI Policy Watch (weekly)",
+      "public_name": "Policy watch",
+      "slug": "policy-watch",
+      "band": "harvest",
+      "pattern": "watcher",
+      "cadence": "Mon, 09:00",
+      "schedule": "0 9 * * 1",
+      "channels": [
+        "Local log",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 29.7,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Tracks state-level AI legislation and surfaces movement worth writing about.",
+      "why": "Beat coverage is a watchlist, not a mood."
+    },
+    {
+      "name": "Price watch: xTool M2 (Anna gift)",
+      "public_name": "Purchase watch (redacted)",
+      "slug": "purchase-watch-redacted",
+      "band": "harvest",
+      "pattern": "watcher",
+      "cadence": "Every 12 hours",
+      "schedule": "every 720m",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 1.6,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Tracks a specific item's price and tells me when it moves past a line. Target and buyer withheld.",
+      "why": "The pattern is what matters here: a watch is cheaper than a decision made twice a week."
+    },
+    {
+      "name": "In-laws media build — class price watch",
+      "public_name": "Purchase watch, family project (redacted)",
+      "slug": "purchase-watch-family-project-redacted",
+      "band": "harvest",
+      "pattern": "watcher",
+      "cadence": "Daily, 09:00 & 21:00",
+      "schedule": "0 9,21 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 5.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "The same price-watch pattern, running on a build for someone else's house. Details withheld.",
+      "why": "Same loop, different owner — which is the point of building loops rather than one-off tasks."
+    },
+    {
+      "name": "DEWALT track saw price watch",
+      "public_name": "Purchase watch, workshop",
+      "slug": "purchase-watch-workshop",
+      "band": "harvest",
+      "pattern": "watcher",
+      "cadence": "Daily, 07:30",
+      "schedule": "30 7 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 7.3,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Watches one tool's price daily and reports changes above a threshold.",
+      "why": "A purchase I would otherwise re-research every time I walked past the project."
+    },
+    {
+      "name": "Topic news digest",
+      "public_name": "Topic digest",
+      "slug": "topic-digest",
+      "band": "harvest",
+      "pattern": "brief",
+      "cadence": "Weekdays, 08:00",
+      "schedule": "0 8 * * 1-5",
+      "channels": [
+        "Local log",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 6.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Pulls the day's signal through a standing topic filter and delivers only what clears it.",
+      "why": "I want to be current on four subjects, not informed about everything."
+    },
+    {
+      "name": "Money momentum check",
+      "public_name": "Money check",
+      "slug": "money-check",
+      "band": "close",
+      "pattern": "ritual",
+      "cadence": "Mon & Thu, 16:00",
+      "schedule": "0 16 * * 1,4",
+      "channels": [
+        "Desk chat",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 22.7,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Twice a week, scores the money moves that are open and asks which one is stalling.",
+      "why": "Revenue does not fail on a decision. It fails on a decision nobody revisited."
+    },
+    {
+      "name": "Accomplished Monday — weekly progress ritual",
+      "public_name": "Progress ritual",
+      "slug": "progress-ritual",
+      "band": "close",
+      "pattern": "ritual",
+      "cadence": "Mon, 18:15",
+      "schedule": "every monday 18:15",
+      "channels": [
+        "All channels"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 20.5,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Surfaces what actually got done before the next week's plan is allowed to overwrite it.",
+      "why": "Momentum is a fact about the record. Without the ritual it is only a feeling."
+    },
+    {
+      "name": "ADD shutdown",
+      "public_name": "Shutdown",
+      "slug": "shutdown",
+      "band": "close",
+      "pattern": "ritual",
+      "cadence": "Daily, 21:00",
+      "schedule": "every day at 21:00",
+      "channels": [
+        "Desk chat",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 17.7,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Closes the working day at a fixed hour: capture what is open, name tomorrow's first move, stop.",
+      "why": "The stop time is the feature. Everything else here is downstream of being able to end the day."
+    },
+    {
+      "name": "Weekly review",
+      "public_name": "Weekly review",
+      "slug": "weekly-review",
+      "band": "close",
+      "pattern": "ritual",
+      "cadence": "Sun, 18:00",
+      "schedule": "0 18 * * 0",
+      "channels": [
+        "Local log",
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 44.8,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Closes the week: what shipped, what stalled, what the record says versus what I remember.",
+      "why": "A week nobody closed is a week I will misremember in my own favour."
+    },
+    {
+      "name": "ADD weekly review",
+      "public_name": "Weekly review, attention pass",
+      "slug": "weekly-review-attention-pass",
+      "band": "close",
+      "pattern": "ritual",
+      "cadence": "Sun, 18:00",
+      "schedule": "every sunday at 18:00",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "last_status": "ok",
+      "last_run_hours": 44.7,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "The same close, run through the accommodations the rest of the week is designed around.",
+      "why": "The review has to be shaped for the brain doing the reviewing, or it becomes the thing I skip."
+    }
+  ],
+  "clusters": [
+    {
+      "id": "rhythms",
+      "order": 10,
+      "title": "Rhythms",
+      "line": "The scheduled loops. Work that happens because a clock says so, not because I remembered.",
+      "thesis": "Every loop below is one of six patterns. That is the whole trick: I do not write automations, I fill in a small set of shapes. A new problem that looks like a watcher gets the watcher template, not a new invention.",
+      "derived_from": "cron"
+    },
+    {
+      "id": "repair",
+      "kind": "frame",
+      "slot": "after",
+      "nav": "Repair",
+      "title": "Repair",
+      "line": "The system watches its own loops. A failure becomes a card owned by a profile, not a memory owned by me.",
+      "thesis": "Every automation I have is a thing that can stop working quietly, and a schedule that silently stops is worse than no schedule because I still believe it ran. So the fleet is watched by two loops that are not allowed to depend on the loops they watch: an hourly intake that turns failures into owned work, and a liveness probe that checks the artifacts are fresh rather than trusting that a job reported success. Repair is routed, not remembered.",
+      "items": [
+        {
+          "title": "Every job in every profile is watched",
+          "meta": "hourly",
+          "body": "The intake reads the job store of every profile, not just this one, plus the liveness probe's newest report. A loop that fails in a profile I am not looking at still produces work."
+        },
+        {
+          "title": "Classified, then owned",
+          "meta": "cron → ops · machine → IT ops · artifact → ops · unknown → product",
+          "body": "Each failure is classified by kind, and each class has an owning profile. Cron and artifact problems go to the ops profile, machine and resource problems to IT ops, ownership and attribution to ops, and anything unclassifiable to product triage with a 24-hour escalation if nobody claims it."
+        },
+        {
+          "title": "Three strikes, not one",
+          "meta": "a transient gets two chances",
+          "body": "Error, timeout and delivery failures have to repeat three times before they earn a card, so a blip does not become a task. Configuration and delivery blocks are actionable on the first occurrence — but only when a target genuinely needs a platform the profile does not have; a stale status is not a defect."
+        },
+        {
+          "title": "Freshness, not self-report",
+          "meta": "the liveness probe",
+          "body": "A job that reports success is not evidence that its artifact exists. The probe checks that the outputs are recent, so the failure mode I actually care about — a silent no-op — cannot hide behind a green run."
+        },
+        {
+          "title": "Cards are the handoff",
+          "meta": "deduped while open",
+          "body": "One card per profile, job, class and error while it stays open, so a flapping loop does not flood the board. The card carries a pre-diagnosis, so the profile that picks it up starts from a hypothesis instead of a log."
+        },
+        {
+          "title": "Where repair stops being automatic",
+          "meta": "the honest limit",
+          "body": "Repair is routed within the hour, but the notice is not instant: a job has to earn a card before anyone is told, so the first two failures are invisible unless I look. And a loop that has never run at all looks different from one that failed — that gap is closed by the probe, not by the error channel."
+        }
+      ],
+      "order": 20,
+      "frame_label": "watches every loop above",
+      "short": "Repair",
+      "index_tag": "watches"
+    },
+    {
+      "id": "operations",
+      "kind": "frame",
+      "slot": "before",
+      "nav": "Operations & rules",
+      "title": "Operations & rules",
+      "line": "The written constraints every loop runs inside, and the discipline that keeps the writing true.",
+      "thesis": "The highest-leverage artifact in this whole system is not a model or a script. It is a few hundred lines of written constraint: who the agent is, how it should work with me, and what it may never do. That difference — between an assistant that helps and one that quietly damages something — lives almost entirely in instruction files. So they are versioned like code, and the documentation of the machine is held to the same rule: change the machine, change the page, or the page becomes a lie.",
+      "items": [
+        {
+          "title": "Instruction files, layered",
+          "meta": "identity · working agreement · task",
+          "body": "Three files do three jobs. One says who the agent is and how it sounds — the voice file is the difference between output I would sign and output that reads like a machine. One says how to work with me. One is per-task context and expires with the task."
+        },
+        {
+          "title": "The working agreements",
+          "meta": "the ones that change output most",
+          "body": "Nothing scheduled before 09:15. Lead with the next action, not the analysis. Make the decision instead of surfacing it. Disagree in the open when I'm wrong. Those four rules do more for output quality than any model upgrade."
+        },
+        {
+          "title": "Hard rules and refusals",
+          "meta": "what an agent may never do",
+          "body": "Never publish without approval. Never write outside the sanctioned paths. Never send mail, spend money, or touch credentials on its own initiative. Never edit the record to make it agree with the outcome — append a claim instead."
+        },
+        {
+          "title": "Rules are versioned; drift is a bug",
+          "meta": "instruction files live in git",
+          "body": "A rule that exists only in a conversation did not happen. The instruction files are diffs I can read and revert, and when an agent does the wrong thing the first question is which file failed to say otherwise."
+        },
+        {
+          "title": "Operations is the manual for the machine",
+          "meta": "one page per mechanism",
+          "body": "Every scheduled loop, gate, and integration has an Operations page: what it does, what it costs, who owns it, and how to fix it at 2am. Written for the version of me who has forgotten why."
+        },
+        {
+          "title": "Change the machine, change the page",
+          "meta": "the propagation rule",
+          "body": "A change to a cron, a workflow, or an ownership boundary updates its Operations page in the same turn it changes the machine. The nightly drift check exists for the times I don't — it compares what is documented against what is actually scheduled and reports the difference."
+        }
+      ],
+      "order": 30,
+      "frame_label": "constrains every loop below",
+      "short": "Rules",
+      "index_tag": "constrains"
+    },
+    {
+      "id": "conversations",
+      "order": 40,
+      "title": "Conversations",
+      "line": "The sessions I have on a cadence, and the protocol I use to brief them.",
+      "thesis": "The scheduled loops handle what is known. Sessions handle what is not: planning, closeout, and the quarterly reset. The thing worth copying is not my prompts, it is the four things I say every time.",
+      "items": [
+        {
+          "title": "Weekly planning",
+          "meta": "Monday morning",
+          "body": "A working session, not a status meeting. We open the week file, settle priorities against what is actually open, and commit to a shape for the week. The output is a written plan that the rest of the week's automations read — the morning brief resolves its priorities from this file, so the session's real product is machine-readable."
+        },
+        {
+          "title": "Weekly closeout",
+          "meta": "Monday, before the next plan",
+          "body": "What shipped, what stalled, what I said I would do and did not. It runs before planning on purpose: you cannot honestly plan a week with last week's unfinished business still unexamined."
+        },
+        {
+          "title": "Quarterly planning",
+          "meta": "Quarterly",
+          "body": "The larger reset: what the quarter was for, what it produced, what the next one is actually for. The weekly cadence has no way to notice that the whole direction is wrong, so this exists to ask that question on a schedule instead of after a bad month."
+        },
+        {
+          "title": "The briefing protocol",
+          "meta": "Every session, in this order",
+          "body": "Four moves, always the same. Context: what the agent needs to know that it cannot see. Requirements: what done looks like, concretely enough to argue with. Intent: why this and not the obvious alternative — because intent is the thing that lets a system disagree with me usefully. Then the closer: what am I missing, and what would you do differently. The last one is not politeness. It is the only part of the protocol that has ever caught a real mistake before I shipped it."
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "order": 50,
+      "title": "Memory",
+      "line": "A knowledge base with an index, so a profile can find the right page without loading the archive.",
+      "thesis": "The valuable part is not that I keep notes. It is that there is an index over them, and a fixed order in which a profile looks things up, so a session can start with ten lines of pointers instead of a hundred thousand tokens of context. Most of what I know about organising this I took from Karpathy's writing on knowledge bases and from a decade of watching wikis rot, then narrowed to one rule: never make the model read the corpus to find one page.",
+      "items": [
+        {
+          "title": "An index, not a pile",
+          "meta": "the Karpathy borrow",
+          "body": "Every layer has a hand-maintained index: what exists, what each thing answers, where it lives. A profile reads the index first, decides, then opens one or two pages. The corpus is the archive; the index is the interface."
+        },
+        {
+          "title": "Search order is the design",
+          "meta": "cheapest first",
+          "body": "Index, then the named page, then the log, then a full-text search — only if the earlier steps came up empty. Written down, because an agent left to choose will grep the whole vault every time and pay for it in context."
+        },
+        {
+          "title": "Three layers, three write rules",
+          "meta": "events / operations / knowledge",
+          "body": "Events record what happened and are append-only. Operations describes how the system works and is edited on purpose. Knowledge holds durable claims and gets citations. Different layers, different permissions, different lifetimes."
+        },
+        {
+          "title": "A page is a citation, not a note",
+          "meta": "the KB convention",
+          "body": "A knowledge page earns its place by being quotable: a claim, its source, and the date it was true. Anything that cannot be cited stays in events."
+        },
+        {
+          "title": "Context is a budget",
+          "meta": "why the index is worth maintaining",
+          "body": "Every token spent loading the wrong thing is a token not spent thinking. The index is overhead I pay to keep that budget small, and it is the single highest-leverage file in the vault."
+        },
+        {
+          "title": "Derived, never duplicated",
+          "meta": "export, don't copy",
+          "body": "Surfaces are compiled from the vault by a build step, not maintained beside it. Two copies of one fact is a future argument with yourself about which one is wrong."
+        },
+        {
+          "title": "The write policy",
+          "meta": "enforced, not requested",
+          "body": "Which agent may write where is a file, and the gate reads the file. An agent that cannot write to a zone leaves a claim in the log instead, and the owner promotes it."
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "order": 60,
+      "title": "Work",
+      "line": "The loops that produce things, not the projects they produce them for.",
+      "thesis": "Four production loops stay while projects come and go. Every one of them starts the same way, with a brief that has three parts — the context, the requirements, and the intent — because a loop that begins with a vague idea produces a confident artifact that solves the wrong problem. The brief is where I do the thinking, so the machine does not have to guess it.",
+      "items": [
+        {
+          "title": "Every loop starts with a brief",
+          "meta": "context · requirements · intent",
+          "body": "Context: what is true now, and what already exists. Requirements: what the artifact must do, and what would make it wrong. Intent: why this, why now, what it is for. Three parts, written down, before any drafting starts."
+        },
+        {
+          "title": "Content loop",
+          "meta": "idea → draft → adversarial edit → publish → record",
+          "body": "The draft is never the last step. An edit pass argues with it, and the published piece is recorded back into the vault with its claims cited."
+        },
+        {
+          "title": "Video loop",
+          "meta": "record → transcribe → edit the transcript",
+          "body": "Cut in text, not in a timeline: the transcript is the edit decision list, and the timeline is generated from it. Faster, reviewable, and the source of a written artifact as a by-product."
+        },
+        {
+          "title": "Product loop",
+          "meta": "kickoff → cards → build → adversarial review → ship → verify",
+          "body": "Work is decomposed into cards before it is built. A second agent attacks the result before it ships, and the loop closes by verifying the thing works in the place it was actually deployed."
+        },
+        {
+          "title": "Site loop",
+          "meta": "change → preview → approval → deploy → probe",
+          "body": "Nothing publishes on a claim. It publishes after a preview and an explicit approval, and then a probe confirms the live URL answers."
+        }
+      ]
+    },
+    {
+      "id": "delivery",
+      "order": 70,
+      "title": "Delivery",
+      "line": "Where output lands, and why the channel is part of the design.",
+      "thesis": "A loop that produces something nobody sees is a hobby. Delivery is chosen per artifact: how interruptive it should be, how durable it needs to be, and who else is allowed to read it.",
+      "items": [
+        {
+          "title": "Telegram",
+          "meta": "primary channel",
+          "body": "The interrupt channel. Briefs, alerts, and anything with a decision deadline. It is on my phone and not in my inbox, which is the entire argument: the inbox is where things go to be handled later, and these are things that need handling now."
+        },
+        {
+          "title": "Signal",
+          "meta": "the addition",
+          "body": "The intent is a second, more private channel for anything that involves another person's information — family logistics, household, the things that should not sit in a cloud chat log. Same loop, different door. It is the clearest example of the design principle that a delivery target is a property of the artifact, not of the system."
+        },
+        {
+          "title": "Desk chat",
+          "meta": "working surface",
+          "body": "The long-form surface where a session actually happens. Everything that requires thinking gets done here and only the conclusion travels."
+        },
+        {
+          "title": "Email",
+          "meta": "durable, addressed",
+          "body": "The slow channel, used when the artifact needs to outlive the conversation or go to someone who is not in the system."
+        },
+        {
+          "title": "The sites themselves",
+          "meta": "public surface",
+          "body": "The furthest-downstream delivery target: a page a stranger can read, a feed a machine can poll, a retrieval endpoint an agent can query. This page is that channel describing itself."
+        }
+      ]
+    }
+  ],
+  "ground": {
+    "title": "Ground",
+    "line": "What the loops run on: the models, the tools, and the machines.",
+    "thesis": "None of this is the interesting part, and all of it is what people ask about first. The stack is deliberately unremarkable — several model providers, chosen per task, and a small number of machines with one job each.",
+    "stack": [
+      {
+        "title": "Models",
+        "body": "Several providers in rotation, selected per task rather than per loyalty: a fast general model for loop work and drafting, a strong reasoning model for planning and review, and local inference on my own hardware for anything that should not leave the house. The routing is the skill; the models are interchangeable.",
+        "meta": "rotation, not loyalty"
+      },
+      {
+        "title": "Voice",
+        "body": "Nearly everything I write starts as speech. Voice-to-text is not an accessibility feature here, it is the input method — it is why a brief can be four paragraphs long and why I can hold a specification in my head while walking.",
+        "meta": "speech first"
+      },
+      {
+        "title": "Video",
+        "body": "Transcript-based editing, described in the Work loop.",
+        "meta": "edit the transcript"
+      },
+      {
+        "title": "Coding agents",
+        "body": "Two or three in parallel, each scoped to one task with its own working directory. Coordination is a card and a written brief, not a chat window shared between them.",
+        "meta": "delegation with review"
+      },
+      {
+        "title": "Publishing surfaces",
+        "body": "One canonical home per idea and mirrors elsewhere, recorded in a ledger so the record of what shipped exists independently of any platform.",
+        "meta": "compile, don't copy"
+      }
+    ],
+    "fleet": [
+      {
+        "title": "One always-on host",
+        "role": "agent runtime",
+        "body": "The machine that never sleeps, because every scheduled loop runs somewhere and a laptop is not a schedule."
+      },
+      {
+        "title": "One media host",
+        "role": "storage and playback",
+        "body": "The library and everything that serves it."
+      },
+      {
+        "title": "One compute host",
+        "role": "local inference",
+        "body": "Own GPU, own models, nothing leaves the network. This is the machine that makes the private tier possible."
+      },
+      {
+        "title": "One portable",
+        "role": "couch",
+        "body": "Reading and review, not production. Naming what a machine is for is most of the reason the fleet stays legible."
+      }
+    ]
+  },
+  "redactions": {
+    "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern — the loop is the point — and drops the target, the buyer, and the amount."
+  },
+  "drift": {
+    "unannotated": [],
+    "retired": []
+  }
+}

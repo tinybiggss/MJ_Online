@@ -1,0 +1,303 @@
+---
+/**
+ * /system/ — the overview: the map, the six shapes, and the way in.
+ *
+ * Detail lives one click down at /system/<cluster>/. This page answers "what is
+ * this and how is it shaped"; the subpages answer "how does that part work".
+ */
+import FieldLayout from "../../layouts/FieldLayout.astro";
+import {
+  hero, patterns, stats, clusters, ground, sections, tiles,
+  frameBefore, frameAfter, countFor, unitFor, groundCount, stamp,
+} from "../../lib/atlas";
+
+const title = "The system — how this site is made | Mike Jones";
+const description =
+  "A live map of the AI operating system behind this site: 29 scheduled loops built from six shapes, the rules that constrain them, the memory layer, four production loops, and the loop that repairs the rest.";
+---
+
+<FieldLayout title={title} description={description} active="/system">
+  <!-- ---------------------------------------------------------------- hero -->
+  <section class="border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24 md:pb-16">
+      <p class="font-data text-2xs uppercase tracking-[0.18em] text-signal">{hero.eyebrow}</p>
+      <h1 class="mt-5 max-w-4xl font-display text-[clamp(2.25rem,6vw,4rem)] font-bold leading-[1.02] tracking-[-0.022em]">
+        {hero.title}
+      </h1>
+      <p class="mt-7 max-w-[62ch] text-lg leading-relaxed text-field-muted">{hero.lead}</p>
+      <p class="mt-6 max-w-[70ch] border-l-2 border-field-line pl-4 font-data text-2xs leading-relaxed text-field-faint">
+        {hero.note}
+      </p>
+
+      <dl class="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 border-y border-field-line py-7 md:grid-cols-4">
+        <div>
+          <dt class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">Scheduled loops</dt>
+          <dd class="mt-2 font-display text-3xl font-bold tabular-nums">{stats.loops_running}</dd>
+        </div>
+        <div>
+          <dt class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">Shapes in use</dt>
+          <dd class="mt-2 font-display text-3xl font-bold tabular-nums">{stats.patterns_in_use}</dd>
+        </div>
+        <div>
+          <dt class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">Undescribed</dt>
+          <dd class="mt-2 font-display text-3xl font-bold tabular-nums">{stats.annotations_missing}</dd>
+        </div>
+        <div>
+          <dt class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">Read from the scheduler</dt>
+          <dd class="mt-2 font-data text-sm leading-relaxed text-field-muted">{stamp}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------- map -->
+  <section id="map" class="scroll-mt-24 border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">The map</h2>
+        <p class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">Pick a layer — every arrow goes somewhere</p>
+      </div>
+
+      <!-- Row 1 · signal in -->
+      <div class="mt-10 grid gap-y-3 md:grid-cols-[8.5rem_1fr] md:items-start md:gap-x-8">
+        <div class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint md:pt-2.5">Signal in</div>
+        <div class="flex flex-wrap gap-2">
+          {["Calendar", "Mail", "Feeds & news", "Repos & deploys", "The vault", "Voice", "Dated one-shots"].map((s) => (
+            <span class="rounded-sm border border-field-line px-2.5 py-1 font-data text-2xs text-field-muted">{s}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-3 grid md:grid-cols-[8.5rem_1fr] md:gap-x-8">
+        <div class="pl-1 font-data text-2xs text-field-faint">↓</div>
+      </div>
+
+      <!-- Rules: the frame above the system -->
+      <div class="mt-3 grid gap-y-3 md:grid-cols-[8.5rem_1fr] md:items-start md:gap-x-8">
+        <a href={`/system/${frameBefore.id}/`} class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint transition-colors hover:text-signal md:pt-3">
+          {frameBefore.short}
+        </a>
+        <a href={`/system/${frameBefore.id}/`} class="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 rounded-sm border border-dashed border-field-line px-4 py-3 transition-colors hover:border-signal/60 hover:bg-field-panel">
+          <span class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-signal">{frameBefore.frame_label}</span>
+          <span class="max-w-[64ch] text-[0.8125rem] leading-relaxed text-field-muted">{frameBefore.line}</span>
+        </a>
+      </div>
+
+      <div class="mt-3 grid md:grid-cols-[8.5rem_1fr] md:gap-x-8">
+        <div class="pl-1 font-data text-2xs text-field-faint">↓</div>
+      </div>
+
+      <!-- Row 2 · the system proper -->
+      <div class="mt-3 grid gap-y-3 md:grid-cols-[8.5rem_1fr] md:items-start md:gap-x-8">
+        <div class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint md:pt-2.5">The system</div>
+        <div class="grid gap-px overflow-hidden rounded-sm border border-field-line bg-field-line sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {tiles.map((c, i) => (
+            <a
+              href={`/system/${c.id}/`}
+              data-tile={c.id}
+              class="group flex min-h-[10.5rem] flex-col gap-3 bg-field-bg p-4 transition-colors hover:bg-field-panel"
+            >
+              <span class="font-data text-2xs tabular-nums text-field-faint">0{i + 1}</span>
+              <span class="font-display text-[0.9375rem] font-semibold leading-tight tracking-[-0.01em] transition-colors group-hover:text-signal">
+                {c.title}
+              </span>
+              <span class="whitespace-nowrap font-data text-2xs text-signal">
+                {countFor(c.id)} <span class="text-field-faint">{unitFor(c.id)}</span>
+              </span>
+              <p class="mt-auto text-[0.75rem] leading-relaxed text-field-muted">{c.line}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-3 grid md:grid-cols-[8.5rem_1fr] md:gap-x-8">
+        <div class="pl-1 font-data text-2xs text-field-faint">↓</div>
+      </div>
+
+      <!-- Repair: the frame beneath the system -->
+      <div class="mt-3 grid gap-y-3 md:grid-cols-[8.5rem_1fr] md:items-start md:gap-x-8">
+        <a href={`/system/${frameAfter.id}/`} class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint transition-colors hover:text-signal md:pt-3">
+          {frameAfter.short}
+        </a>
+        <a href={`/system/${frameAfter.id}/`} class="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 rounded-sm border border-dashed border-field-line px-4 py-3 transition-colors hover:border-signal/60 hover:bg-field-panel">
+          <span class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-signal">{frameAfter.frame_label}</span>
+          <span class="max-w-[64ch] text-[0.8125rem] leading-relaxed text-field-muted">{frameAfter.line}</span>
+        </a>
+      </div>
+
+      <div class="mt-3 grid md:grid-cols-[8.5rem_1fr] md:gap-x-8">
+        <div class="pl-1 font-data text-2xs text-field-faint">↓</div>
+      </div>
+
+      <!-- Row 3 · ground -->
+      <div class="mt-3 grid gap-y-3 md:grid-cols-[8.5rem_1fr] md:items-start md:gap-x-8">
+        <div class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint md:pt-2">Ground</div>
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="#ground" class="rounded-sm border border-field-line px-2.5 py-1 font-data text-2xs text-field-muted transition-colors hover:border-signal hover:text-signal">
+            Stack
+          </a>
+          <a href="#ground" class="rounded-sm border border-field-line px-2.5 py-1 font-data text-2xs text-field-muted transition-colors hover:border-signal hover:text-signal">
+            Fleet
+          </a>
+          <span class="font-data text-2xs text-field-faint">{groundCount} moving parts the loops run on</span>
+        </div>
+      </div>
+
+      <p class="mt-10 max-w-[68ch] text-sm leading-relaxed text-field-muted">
+        Nothing above is drawn by hand. The tiles, the counts, the schedules and the delivery channels are read out of the
+        running scheduler on the machine that owns it; the sentences are written by me. When a loop is added and not yet
+        described, it appears here anyway and the undescribed count goes up — a gap you can see beats a page that quietly
+        stops being true.
+      </p>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------- the six shapes -->
+  <section id="shapes" class="scroll-mt-24 border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">Six shapes, {stats.loops_running} loops</h2>
+      <p class="mt-4 max-w-[62ch] text-base leading-relaxed text-field-muted">
+        This is the part worth stealing. I do not write {stats.loops_running} automations — I fill in six shapes. A new
+        problem gets an existing shape, or it gets nothing until I've decided it needs a seventh.
+      </p>
+
+      <div class="mt-10 border-t border-field-line">
+        {patterns.map((p) => (
+          <div class="grid gap-2 border-b border-field-line py-5 md:grid-cols-[9rem_1fr_15rem] md:gap-x-8">
+            <div class="flex items-baseline gap-3">
+              <span class="font-data text-2xs tabular-nums text-signal">
+                {String(stats.by_pattern[p.id] ?? 0).padStart(2, "0")}
+              </span>
+              <span class="font-display text-base font-semibold">{p.name}</span>
+            </div>
+            <p class="text-sm leading-relaxed text-field-ink">{p.line}</p>
+            <p class="text-[0.8125rem] leading-relaxed text-field-faint">{p.when}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------------ the index -->
+  <section id="index" class="scroll-mt-24 border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">Every part, in order</h2>
+        <p class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">Seven sections — each one opens</p>
+      </div>
+
+      <div class="mt-10 border-t border-field-line">
+        {sections.map((c, i) => (
+          <a href={`/system/${c.id}/`} class="group grid grid-cols-[2rem_1fr] items-baseline gap-x-4 gap-y-2 border-b border-field-line py-6 transition-colors hover:bg-field-panel md:grid-cols-[2rem_12rem_1fr_9rem] md:gap-x-8">
+            <span class="font-data text-2xs tabular-nums text-field-faint">{String(i + 1).padStart(2, "0")}</span>
+            <span class="font-display text-lg font-semibold tracking-[-0.01em] transition-colors group-hover:text-signal">
+              {c.title}
+            </span>
+            <span class="col-span-2 text-sm leading-relaxed text-field-muted md:col-span-1">{c.line}</span>
+            <span class="col-start-2 whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-field-faint md:col-start-auto md:text-right">
+              {c.index_tag ?? `${countFor(c.id)} ${unitFor(c.id)}`} <span class="text-signal">→</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- --------------------------------------------------------------- ground -->
+  <section id="ground" class="scroll-mt-24 border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">{ground.title}</h2>
+      <p class="mt-6 max-w-[64ch] text-base leading-relaxed text-field-muted">{ground.thesis}</p>
+
+      <div class="mt-10 grid gap-x-12 md:grid-cols-2">
+        <div>
+          <h3 class="border-b-2 border-field-line pb-2 font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
+            Stack
+          </h3>
+          {ground.stack.map((s: any) => (
+            <div class="border-b border-field-line py-5">
+              <h4 class="font-display text-base font-semibold">{s.title}</h4>
+              <p class="mt-1.5 font-data text-2xs uppercase tracking-[0.1em] text-field-faint">{s.meta}</p>
+              <p class="mt-3 text-sm leading-relaxed text-field-muted">{s.body}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-10 md:mt-0">
+          <h3 class="border-b-2 border-field-line pb-2 font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
+            Fleet
+          </h3>
+          {ground.fleet.map((s: any) => (
+            <div class="border-b border-field-line py-5">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+                <h4 class="font-display text-base font-semibold">{s.title}</h4>
+                <span class="font-data text-2xs uppercase tracking-[0.1em] text-signal">{s.role}</span>
+              </div>
+              <p class="mt-2 text-sm leading-relaxed text-field-muted">{s.body}</p>
+            </div>
+          ))}
+          <p class="mt-6 font-data text-2xs leading-relaxed text-field-faint">
+            More machines get their own pages as they join. Roles, not addresses: nothing here describes how to reach
+            one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --------------------------------------------------- what is withheld -->
+  <section id="withheld" class="border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">What is deliberately not on these pages</h2>
+      <p class="mt-5 max-w-[64ch] text-base leading-relaxed text-field-muted">
+        Publishing the system is not the same as publishing the way in. Three things stay out, and the line is drawn by a
+        build gate rather than by memory:
+      </p>
+      <div class="mt-8 grid gap-x-12 gap-y-6 border-t border-field-line pt-8 md:grid-cols-3">
+        <div>
+          <h3 class="font-display text-base font-semibold">Instructions, not just shape</h3>
+          <p class="mt-2 text-sm leading-relaxed text-field-muted">
+            You can see that a gate exists and what it verifies. Not the prompts, the paths, or the checks it runs.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display text-base font-semibold">People and purchases</h3>
+          <p class="mt-2 text-sm leading-relaxed text-field-muted">
+            A watch on a gift keeps its schedule and its shape and loses its target. The loop is the interesting part; who
+            it is for is not mine to publish.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display text-base font-semibold">Anything that is a key</h3>
+          <p class="mt-2 text-sm leading-relaxed text-field-muted">
+            No credentials, no endpoints, no addresses, no hostnames. The public knowledge export aborts the build if a
+            confidential token survives, and these pages ship through the same gate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -------------------------------------------------------- colophon -->
+  <section class="bg-field-panel">
+    <div class="mx-auto max-w-6xl px-6 py-12">
+      <div class="grid gap-x-12 gap-y-6 md:grid-cols-[1fr_auto]">
+        <div>
+          <h2 class="font-display text-lg font-semibold">How these pages stay true</h2>
+          <p class="mt-3 max-w-[62ch] text-sm leading-relaxed text-field-muted">
+            A generator reads the scheduler, merges it with a hand-written annotation file, and writes a data file that is
+            committed with the pages. An hourly job rebuilds it, publishes only when the bytes actually changed, and stays
+            silent when they didn't. A nightly drift check compares the committed file against the live scheduler and
+            reports a loop that appeared, moved, or stopped. If a loop is new and undescribed, it still appears, marked as
+            undescribed.
+          </p>
+        </div>
+        <div class="font-data text-2xs leading-relaxed text-field-faint">
+          <div>generated <span class="text-field-muted">{stamp}</span></div>
+          <div>source <span class="text-field-muted">scheduler store, owning machine</span></div>
+          <div>loops <span class="text-field-muted">{stats.loops_total}</span> · active <span class="text-field-muted">{stats.loops_running}</span> · retired <span class="text-field-muted">{stats.completed_oneshots}</span></div>
+          <div>undescribed <span class="text-field-muted">{stats.annotations_missing}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</FieldLayout>
