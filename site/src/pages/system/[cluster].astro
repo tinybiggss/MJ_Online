@@ -114,7 +114,12 @@ const description = cluster.line;
         )}
 
         <div class="mt-12 border-t border-field-line pt-8">
-          <h2 class="font-display text-base font-semibold">The shapes these come from</h2>
+          <div class="flex flex-wrap items-baseline justify-between gap-3">
+            <h2 class="font-display text-base font-semibold">The shapes these come from</h2>
+            <a href="/system/six-shapes/" class="font-data text-2xs uppercase tracking-[0.1em] text-field-faint transition-colors hover:text-signal">
+              The Six Shapes →
+            </a>
+          </div>
           <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
             {patterns.map((p: any) => (
               <span class="font-data text-2xs text-field-muted">

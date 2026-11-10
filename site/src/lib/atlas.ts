@@ -6,7 +6,7 @@
  */
 import atlas from "../data/atlas.json";
 
-export const { hero, patterns, bands, stats, loops, clusters, ground } = atlas as any;
+export const { hero, patterns, bands, stats, loops, clusters, ground, shapes_page: shapesPage } = atlas as any;
 
 export const running = loops.filter((l: any) => l.state === "running");
 export const oneshots = loops.filter((l: any) => l.state !== "running");

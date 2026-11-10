@@ -1,0 +1,156 @@
+---
+/**
+ * /system/six-shapes/ — the framework itself.
+ *
+ * The one page here that would still be worth reading if the rest of the system
+ * disappeared: six shapes, one rule, and what each shape refuses to become.
+ */
+import FieldLayout from "../../../layouts/FieldLayout.astro";
+import { shapesPage, patterns, stats, sections } from "../../../lib/atlas";
+
+const title = "The Six Shapes — a small vocabulary for delegated work | Mike Jones";
+const description =
+  `${stats.loops_running} scheduled loops, six shapes, one rule: a new problem gets an existing shape, or it waits.`;
+
+// name/line/when come from the pattern table; the rest is written copy.
+const shapes = shapesPage.shapes.map((s: any) => {
+  const p = patterns.find((x: any) => x.id === s.id) ?? {};
+  return { ...s, name: p.name, line: p.line, when: p.when, count: stats.by_pattern[s.id] ?? 0 };
+});
+---
+
+<FieldLayout title={title} description={description} active="/system">
+  <!-- ------------------------------------------------------------ masthead -->
+  <section class="border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 pt-10 pb-12 md:pt-14 md:pb-16">
+      <div class="flex flex-wrap items-baseline justify-between gap-3 font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
+        <a href="/system/" class="transition-colors hover:text-signal">← The system</a>
+        <span>reference</span>
+      </div>
+
+      <p class="mt-8 font-data text-2xs uppercase tracking-[0.18em] text-signal">{shapesPage.eyebrow}</p>
+      <h1 class="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em]">
+        {shapesPage.title}
+      </h1>
+      <p class="mt-7 max-w-[64ch] text-lg leading-relaxed text-field-muted">{shapesPage.lead}</p>
+
+      <div class="mt-10 grid gap-x-10 gap-y-4 border-l-2 border-signal pl-5 md:grid-cols-[1fr_1fr] md:items-start">
+        <p class="font-display text-xl font-semibold leading-snug tracking-[-0.01em] md:text-2xl">
+          “{shapesPage.rule}”
+        </p>
+        <p class="max-w-[46ch] text-sm leading-relaxed text-field-muted">{shapesPage.rule_note}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- -------------------------------------------------------------- shapes -->
+  <section class="border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <div class="border-t border-field-line">
+        {shapes.map((s: any, i: number) => (
+          <article id={s.id} class="scroll-mt-24 border-b border-field-line py-10 md:py-12">
+            <div class="grid gap-x-10 gap-y-6 md:grid-cols-[3rem_1fr]">
+              <div class="font-data text-2xs tabular-nums text-field-faint md:pt-2">{String(i + 1).padStart(2, "0")}</div>
+
+              <div>
+                <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                  <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">{s.name}</h2>
+                  <a href="/system/rhythms/" class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-signal transition-opacity hover:opacity-70">
+                    {s.count} {s.count === 1 ? "loop" : "loops"} →
+                  </a>
+                </div>
+                <p class="mt-3 max-w-[58ch] text-lg leading-relaxed text-field-ink">{s.line}</p>
+                <p class="mt-2 max-w-[58ch] text-sm leading-relaxed text-field-faint">{s.when}</p>
+
+                <div class="mt-8 grid gap-x-10 gap-y-7 md:grid-cols-3">
+                  <div>
+                    <h3 class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">How it works</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-field-muted">{s.how}</p>
+                  </div>
+                  <div>
+                    <h3 class="font-data text-2xs uppercase tracking-[0.14em] text-signal">The invariant</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-field-ink">{s.invariant}</p>
+                    <p class="mt-3 text-sm leading-relaxed text-field-muted">{s.refuses}</p>
+                  </div>
+                  <div>
+                    <h3 class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">In the fleet</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-field-muted">{s.fleet}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------------ choosing -->
+  <section class="border-b border-field-line bg-field-panel">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">When two shapes both fit</h2>
+      <p class="mt-4 max-w-[62ch] text-base leading-relaxed text-field-muted">
+        The question is not which one is more capable. It is which one produces the right thing on a day when nothing is
+        wrong, because that is most days.
+      </p>
+
+      <div class="mt-10 border-t border-field-line">
+        {shapesPage.choosing.map((row: any) => (
+          <div class="grid gap-1 border-b border-field-line py-4 md:grid-cols-[1fr_9rem_1fr] md:items-baseline md:gap-x-8">
+            <p class="text-sm leading-relaxed text-field-ink">{row.q}</p>
+            <p class="font-data text-2xs uppercase tracking-[0.1em] text-signal md:text-right">{row.a}</p>
+            <p class="text-[0.8125rem] leading-relaxed text-field-faint">{row.why}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------------ template -->
+  <section class="border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <div class="grid gap-x-12 gap-y-8 md:grid-cols-[1.1fr_1fr]">
+        <div>
+          <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">Filling them in is the part that stays private</h2>
+          <p class="mt-4 max-w-[56ch] text-base leading-relaxed text-field-muted">
+            You can see that a gate exists and what it verifies. You cannot see the prompts, the paths, or the checks —
+            those are the map of how to operate my machine, and publishing the shape is not the same as publishing the
+            way in.
+          </p>
+          <p class="mt-4 max-w-[56ch] text-base leading-relaxed text-field-muted">
+            What does travel is the scaffold: three rule files doing three different jobs, the working agreements that
+            actually changed my output, the five things I refuse to automate, and the test I apply on day one.
+          </p>
+        </div>
+        <div class="rounded-sm border border-field-line px-5 py-6">
+          <p class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">The scaffold</p>
+          <p class="mt-3 font-display text-lg font-semibold">six-shapes</p>
+          <p class="mt-2 text-sm leading-relaxed text-field-muted">
+            A public template: the six shapes with their invariants, three rule files, four agreements, five refusals,
+            and the day-one test.
+          </p>
+          <a
+            href="https://github.com/tinybiggss/six-shapes"
+            class="mt-5 inline-flex items-center gap-2 font-data text-2xs uppercase tracking-[0.1em] text-signal transition-opacity hover:opacity-70"
+          >
+            github.com/tinybiggss/six-shapes <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------------------------------------------------------- foot -->
+  <section class="bg-field-panel">
+    <div class="mx-auto max-w-6xl px-6 py-10">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <p class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
+          {stats.loops_running} loops · {stats.patterns_in_use} shapes · {stats.annotations_missing} undescribed
+        </p>
+        <a href="/system/" class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint transition-colors hover:text-signal">
+          The system →
+        </a>
+      </div>
+    </div>
+  </section>
+</FieldLayout>

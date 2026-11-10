@@ -1,11 +1,11 @@
 ---
 id: kb-business-velocity-partners
-title: Velocity Partners
+title: Velocity Partners (part 1/2)
 updated: 2026-11-10
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
-# Velocity Partners
+# Velocity Partners (part 1/2)
 
 ## Velocity Partners
 
@@ -35,14 +35,6 @@ The 10-12 deploy gate finally opened — and closed on the other issue. Approved
 
 The site frame and the mark are two separate gates; both are open, on different terms. Mark v1 (2026-11-02, kanban t_f4310b8e) — four directions on one deciding factor (16px legibility): PROMPT, SHEAR, PROOF, RIG, recommendation PROOF. Rejected 2026-11-04 ("one's a V, one is a weird-shaped box… there isn't anything special about any of these"). What Mike values in the mark he already has: the check (getting things done) with a wave passing along it (movement). Mark v2 (2026-11-05) — swelled/ridden/woken stroke family rebuilt from the words, flat colour. Delivered; nominee rejected 2026-11-06, and a third round rejected the same day. Mark generation is now SUSPENDED — the failures were method failures, not drawing failures. The reworked process (post-mortem in ~/Dev/velocitypartners-io/design/IDENTITY-PROCESS.md, 2026-11-06): the brand brief never existed, so every round generated against agent-mined fragments; ideas were never vetoed before geometry, only finished artwork was; and every delivery was a naked symbol instead of the lockup in context. Replacement order: (1) one-page brief from the approved positioning lines only, Mike strikes/edits; (2) three word-level territories including monogram and wordmark-first, Mike strikes two; (3) one constructed lockup per surviving territory, delivered in context (header + LinkedIn + tab), veto-only; (4) spec + gate; (5) Daedalus swap ticket. Card: T-2026-11-02-9TK (velocity partners, high, mike) — blocked, and it no longer means "pick one of four". No geometry until the brief is approved. The standing selection method is on how-mike-works.
 
-### VP Site: Park Overruled — Cutover Ordered, Not Yet Performed (2026-11-09)
+### VP Site: Park Overruled — Cutover Ordered (2026-11-09)
 
 The posting decision is made; only the registrar chore is outstanding. 2026-11-09 weekly planning, Mike overruled the park: *"I want to get the Velocity Partners page posted. We have to do the DNS cutover. That's it."* Target: Tuesday 2026-11-10 first thing (he said he might do it that evening). The park in *VP Site Blocked on Distills* held for consulting work and for the mark; it no longer holds for posting the page. The page that ships is already built, so for the site the copy question is closed: ~/Dev/velocitypartners-io/page/index.html, copy locked in COPY-2026-11-05.md, pricing locked in PRICING-2026-11-05.md — Shipping Read $18,000 fixed; Advisory $8,000/month, two days a month, three-month minimum. The art gate (mark/identity, T-2026-11-02-9TK) is still open and separate. Only step left is DNS: Mike pastes the two Cloudflare nameservers into the GoDaddy panel (~5 min), then `~/Dev/velocitypartners-io/scripts/dns-cutover.py zone|godaddy|wait|pages|verify` confirms propagation and that apex + www serve the new page. The domain carries no MX records, so the move cannot break email — the risk that usually blocks a cutover is absent here. Verified NOT performed at this pass (2026-11-10 03:01, dig + curl): NS still ns57/ns58.domaincontrol.com; apex A 3.137.108.170 + 3.136.232.26; www still CNAMEs sites.gamma.app; apex and www both answer 200 with the old Gamma page (title "Velocity Partners", "Make Work Flow — AI-augmented PMO…", still noindex, nofollow). So the 2026-10-12/10-26 claim "prod still serves the old Gamma site, DNS untouched" still holds today. Card trap: T-2026-11-09-ZCF reads status: resolved, but it was closed as a duplicate of T-2026-11-05-NQN — that resolution is not the cutover landing. NQN is the live card and is on-deck; read its agent log for state.
-
-### Strategic Frame
-
-VP is a bridge, not a destination. Every engagement is judged on one question: *does this shorten the bridge or lengthen it?* Binding constraint is bandwidth, not values — a fully consumed 40-hour week is one whose work *feeds RT instead of competing with it*: aligned work produces two outputs from the same hours (the engagement + the RT material), unaligned work produces one.
-
-### Open Items
-
-VP site: posting ordered 2026-11-09 — page built with locked copy + pricing (COPY/PRICING-2026-11-05), DNS cutover to Cloudflare Pages is the only step left and had NOT run as of 2026-11-10 03:01 (live card T-2026-11-05-NQN; T-2026-11-09-ZCF was closed as its duplicate, not as completion). Prod still serves the old Gamma site VP mark/identity: suspended until a one-page brand brief is approved (T-2026-11-02-9TK blocked; brief → territories → one lockup in context → veto-only → spec → swap). Separate gate from the site frame (history 2026-11-06) Pitch deck refresh to ICP-approved framing AAPD methodology retired (DEC-008, 2026-08-21) — "still core, role evolving" superseded 2026-10-15; successor shapes: the agentic-web offering + the agent-terms/gate-review candidate (history 2026-10-15) RT content pipeline revival would create aligned-work capacity (rt-content-pipeline)

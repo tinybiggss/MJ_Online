@@ -242,7 +242,7 @@
       "title": "Velocity Partners",
       "section": "Velocity Partners",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "Consulting arm. Core revenue. The bridge that funds resilient-tomorrow."
     },
     {
@@ -251,7 +251,7 @@
       "title": "Velocity Partners",
       "section": "Offer (repositioned 2026-08-21)",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "Shape: curriculum, one-to-many, bounded programs — not open-ended retainers IP: reusable by default (a curriculum compounds; a retainer doesn't) Stance: augment-not-replace — a commercial argument (stalled rollouts trace to fear), not just an ethical one Old offer (\"I rebuild your operations with agents\", bespoke): superseded; retained in history of Velocity Partners.md Pending hook change (Mike 2026-10-13, resume rebuild): \"Product Evaluation, Fractional COO, and AI Process Integration\" — replaces the resume-side hook; VP-site copy not yet updated (history 2026-10-15)."
     },
     {
@@ -260,7 +260,7 @@
       "title": "Velocity Partners",
       "section": "Offerings Decomposition (2026-10-03; grill date Mon 2026-10-05)",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "Velocity Partners/Offerings-Analysis-2026-10-03.md (draft-for-grill, pricing estimates) reframes VP as one fractional-executive platform with three productized components: Offering 1 AI-readiness assessment (front door, est. $7.5K–$15K fixed) · Offering 2 knowledge base as source of truth for AI (delivery, est. $15K–$25K pilot + maintenance retainer) · Offering 3 AI instruction + certification cohorts (one-to-many scale lever, aligned with full rate set 2026-10-05: $10K/mo · 40h (direction + advisory, prototyping capped ≤10h/mo; floor $7.5K; max 2 concurrent retainers by the bandwidth (zero observed demand for the public/agent-discoverability half — an R&D bet, see agentic-web). Open grill questions: 90-day wedge, the Offering-2 builder trap vs \"director, not doer\", bandwidth covenant (max retainers). Analysis is grounded but supersedes nothing until Mike grills it 2026-10-05."
     },
     {
@@ -269,7 +269,7 @@
       "title": "Velocity Partners",
       "section": "Agentic-Web Offering Decided (2026-10-02; not yet built)",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "Mike's Gamma-rebuild answers (T-2026-09-25-GAM1, resolved 2026-10-02) made the agentic web VP's site-level offering: \"prepare your business for the Agentic web\" — knowledge bases, agentic indexes, KB-driven bots (same pattern as distills). velocitypartners.io to be rebuilt as a simple house-style page with that offer, findable by agents, made indexable (was noindex), DNS moved off GoDaddy to Cloudflare, \"26 years\" → 29. Implementation cards T-2026-10-02-VK7 (VP site) and T-2026-10-02-HAJ (jones-co.us rebuild) queued — decided, not built. Thesis detail: agentic-web."
     },
     {
@@ -278,7 +278,7 @@
       "title": "Velocity Partners",
       "section": "Person-Brand Leg Live (2026-10-09); VP Site Blocked on Distills",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "The mikejones.online leg of the person-roof portfolio shipped. The live-portfolio change-set went to prod 2026-10-09 13:45 PT — commit 9b3c9b3, CI run 37988799634 (VK7 ship; card T-2026-10-09-CHZ) — with the LinkedIn-approved headline integrated and headshot-bw.png live on the homepage. Re-verified live in the 10-09 15:00 PT sweep: mikejones.online /agents/kb/index.json 200, /llms.txt 200, /agents/query?q=xbox returns the career-history result (mike-career-history). The KB→surface chain this run exercised is publication-layer's first live deployment. velocitypartners.io — REBUILT LOCALLY 2026-10-12, deploy-gated on Mike. *(Superseded 2026-10-26: the rebuild deployed to pages.dev and the design was rejected the same day — see \"VP Site: Position Approved, Frame Rejected\" below. Kept as history.)* House-style Astro page + agent layer (/llms.txt, /agents/kb, /agents/query) lives in ~/Dev/velocitypartners-io (commits bb3f1af / a652cfa / 609b66f; local-only — no remote, no deploy, DNS untouched; CC adversarial gate r2 APPROVE recorded in PLAN.md). 29-years fixed; content re-extracted and preserved verbatim per the CC gate; rate-free marketing belt (aborts on $-figures). Preview ready for Mike review; his 3 pending decisions: (1) approve the Cloudflare Pages deploy, (2) stand up mail routing or swap the displayed address (hello@velocitypartners.io is undeliverable today — zone has no MX/TXT, dig-verified), (3) approve the GoDaddy→Cloudflare NS cutover sequence. In prod, velocitypart"
     },
     {
@@ -287,7 +287,7 @@
       "title": "Velocity Partners",
       "section": "VP Site: Position Approved, Frame Rejected (2026-10-26)",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "The 10-12 deploy gate finally opened — and closed on the other issue. Approved, then shipped to pages.dev. Mike read the index-v2 preview 2026-10-26 ~13:05 (\"I ran through the index-v2, and I think it's great. Let's go with it.\") — taken as confirming the five positioning lines in Velocity Partners/VP-Positioning-Rework-2026-10-16.md (the approving run made that ruling; it was never line-by-line with Mike and stays vetoable). Shipped to Cloudflare Pages project velocitypartners-io (commit e527b84, dual adversarial gate r4: Claude Code + Codex both APPROVE; /, /llms.txt, /agents/kb/index.json, /agents/query all probed green). Rejected ~15:50 the same day — design and frame, not positioning. Verbatim: *\"If I were to land on this page, I would not hire this company. The little eyebrows after Velocity Partners, the VP-01.rev2016: there's just so much, everything about this. I'm the eyebrow. I don't like the eyebrows.\"* The positioning approval stands; the furniture (kicker labels, visible VP-01 / rev 2026 build strings, deck-shaped section openers) does not. Three directions delivered 2026-10-26 15:43 (design lane, kanban t_9fe20a3f): a 9-failure mechanical critique plus three real HTML comps — A The Letter (Notion grammar), B Working Proof (Vercel grammar: proof in the first viewport), C The Brief (Coinbase grammar) — with RECOMMENDATION.md picking B on one deciding factor. All comps verified: banned-list clean, 1440/390 with no horizontal scroll, proof hrefs 200, cal.com CTA, n"
     },
     {
@@ -296,25 +296,34 @@
       "title": "Velocity Partners",
       "section": "VP Brand Identity — Mark Generation Suspended (2026-11-06)",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "The site frame and the mark are two separate gates; both are open, on different terms. Mark v1 (2026-11-02, kanban t_f4310b8e) — four directions on one deciding factor (16px legibility): PROMPT, SHEAR, PROOF, RIG, recommendation PROOF. Rejected 2026-11-04 (\"one's a V, one is a weird-shaped box… there isn't anything special about any of these\"). What Mike values in the mark he already has: the check (getting things done) with a wave passing along it (movement). Mark v2 (2026-11-05) — swelled/ridden/woken stroke family rebuilt from the words, flat colour. Delivered; nominee rejected 2026-11-06, and a third round rejected the same day. Mark generation is now SUSPENDED — the failures were method failures, not drawing failures. The reworked process (post-mortem in ~/Dev/velocitypartners-io/design/IDENTITY-PROCESS.md, 2026-11-06): the brand brief never existed, so every round generated against agent-mined fragments; ideas were never vetoed before geometry, only finished artwork was; and every delivery was a naked symbol instead of the lockup in context. Replacement order: (1) one-page brief from the approved positioning lines only, Mike strikes/edits; (2) three word-level territories including monogram and wordmark-first, Mike strikes two; (3) one constructed lockup per surviving territory, delivered in context (header + LinkedIn + tab), veto-only; (4) spec + gate; (5) Daedalus swap ticket. Card: T-2026-11-02-9TK (velocity partners, high, mike) — blocked, and it no longer means \"pi"
     },
     {
-      "id": "kb-business-velocity-partners-vp-site-park-overruled-cutover-ordered-not-yet-performed-2026-11-09",
+      "id": "kb-business-velocity-partners-vp-site-park-overruled-cutover-ordered-2026-11-09",
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
-      "section": "VP Site: Park Overruled — Cutover Ordered, Not Yet Performed (2026-11-09)",
+      "section": "VP Site: Park Overruled — Cutover Ordered (2026-11-09)",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "text": "The posting decision is made; only the registrar chore is outstanding. 2026-11-09 weekly planning, Mike overruled the park: *\"I want to get the Velocity Partners page posted. We have to do the DNS cutover. That's it.\"* Target: Tuesday 2026-11-10 first thing (he said he might do it that evening). The park in *VP Site Blocked on Distills* held for consulting work and for the mark; it no longer holds for posting the page. The page that ships is already built, so for the site the copy question is closed: ~/Dev/velocitypartners-io/page/index.html, copy locked in COPY-2026-11-05.md, pricing locked in PRICING-2026-11-05.md — Shipping Read $18,000 fixed; Advisory $8,000/month, two days a month, three-month minimum. The art gate (mark/identity, T-2026-11-02-9TK) is still open and separate. Only step left is DNS: Mike pastes the two Cloudflare nameservers into the GoDaddy panel (~5 min), then `~/Dev/velocitypartners-io/scripts/dns-cutover.py zone|godaddy|wait|pages|verify` confirms propagation and that apex + www serve the new page. The domain carries no MX records, so the move cannot break email — the risk that usually blocks a cutover is absent here. Verified NOT performed at this pass (2026-11-10 03:01, dig + curl): NS still ns57/ns58.domaincontrol.com; apex A 3.137.108.170 + 3.136.232.26; www still CNAMEs sites.gamma.app; apex and www both answer 200 with the old Gamma page (title \"Velocity Partners\", \"Make Work Flow — AI-augmented PMO…\", still noindex, nofollow). So the 2026-10-12"
+    },
+    {
+      "id": "kb-business-velocity-partners-vp-site-live-cutover-complete-and-verified-2026-11-10",
+      "pageId": "kb-business-velocity-partners",
+      "title": "Velocity Partners",
+      "section": "VP Site LIVE — Cutover Complete and Verified (2026-11-10)",
+      "updated": "2026-11-10",
+      "path": "/agents/kb/kb-business-velocity-partners-part2.md",
+      "text": "The page is posted. velocitypartners.io serves the new build — the first time the rebuilt VP site has been reachable on the real domain. Cutover executed 2026-11-10 10:45 PT, verified complete 12:56 PT (card T-2026-11-05-NQN, now resolved). Mike renewed the domain first — the registry expired 2026-11-12, two days out, and expiry is now 2027-11-12 — then saved the Cloudflare nameservers at GoDaddy. Registry delegation verified as aitana.ns.cloudflare.com + jose.ns.cloudflare.com; zone velocitypartners.io (e3b3455598c0d492896d463a44096158, free plan) went active 10:51:46, 17 minutes after the save. Live proof on the real domain, all 200: / (title \"Velocity Partners — a read on your product and your pipeline\"), /five-places/, /llms.txt, /agents/query?q=decision (JSON), /agents/kb/index.json, /sitemap-index.xml, /robots.txt; www serves the same bytes. The old Gamma copy (\"Make Work Flow\") is gone from the apex — 0 occurrences — and both public resolvers return the Cloudflare pair. TLS is Google Trust Services WE1, valid 2026-11-10 → 2027-02-08. There was a ~1-hour public outage in the middle, and it is part of the record: at 10:51 the apex still answered 200 because resolvers held GoDaddy; once delegation moved, the Gamma page stopped serving and the new one had no certificate yet — ClientHello answered sslv3 alert handshake failure on apex and www, IPv4 and IPv6, while both Pages custom domains read pending. It cleared without intervention by 12:56. Rollback (paste ns57/ns58 bac"
     },
     {
       "id": "kb-business-velocity-partners-strategic-frame",
       "pageId": "kb-business-velocity-partners",
       "title": "Velocity Partners",
-      "section": "Strategic Frame",
+      "section": "Strategic Frame:",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part2.md",
       "text": "VP is a bridge, not a destination. Every engagement is judged on one question: *does this shorten the bridge or lengthen it?* Binding constraint is bandwidth, not values — a fully consumed 40-hour week is one whose work *feeds RT instead of competing with it*: aligned work produces two outputs from the same hours (the engagement + the RT material), unaligned work produces one."
     },
     {
@@ -323,8 +332,8 @@
       "title": "Velocity Partners",
       "section": "Open Items",
       "updated": "2026-11-10",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
-      "text": "VP site: posting ordered 2026-11-09 — page built with locked copy + pricing (COPY/PRICING-2026-11-05), DNS cutover to Cloudflare Pages is the only step left and had NOT run as of 2026-11-10 03:01 (live card T-2026-11-05-NQN; T-2026-11-09-ZCF was closed as its duplicate, not as completion). Prod still serves the old Gamma site VP mark/identity: suspended until a one-page brand brief is approved (T-2026-11-02-9TK blocked; brief → territories → one lockup in context → veto-only → spec → swap). Separate gate from the site frame (history 2026-11-06) Pitch deck refresh to ICP-approved framing AAPD methodology retired (DEC-008, 2026-08-21) — \"still core, role evolving\" superseded 2026-10-15; successor shapes: the agentic-web offering + the agent-terms/gate-review candidate (history 2026-10-15) RT content pipeline revival would create aligned-work capacity (rt-content-pipeline)"
+      "path": "/agents/kb/kb-business-velocity-partners-part2.md",
+      "text": "VP site: LIVE since 2026-11-10 12:56 PT — velocitypartners.io serves the new build on Cloudflare Pages (apex + www 200, TLS via Google Trust Services, www → apex 301). Closed on the way: the DNS cutover (T-2026-11-05-NQN resolved), the domain renewal to 2027-11-12, the home page's canonical/og tags and the www redirect (both shipped 13:41). Still true: the repo has no git remote, so every change is a wrangler upload (history 2026-11-10) VP mark/identity: suspended until a one-page brand brief is approved (T-2026-11-02-9TK blocked; brief → territories → one lockup in context → veto-only → spec → swap). Separate gate from the site frame (history 2026-11-06) Pitch deck refresh to ICP-approved framing AAPD methodology retired (DEC-008, 2026-08-21) — \"still core, role evolving\" superseded 2026-10-15; successor shapes: the agentic-web offering + the agent-terms/gate-review candidate (history 2026-10-15) RT content pipeline revival would create aligned-work capacity (rt-content-pipeline)"
     },
     {
       "id": "kb-company-jonesco-jones-collaboration-company",
@@ -466,7 +475,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Publication Layer",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "What it is: the adapter layer between jonesco's KB and the public surfaces. The KB holds claims; this layer renders public claims into each surface. Core built 2026-09-25 (see adapters below); remaining surfaces await migration or wiring."
     },
@@ -475,7 +484,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "The rule",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "KB facts carry a public: marker (publication-grade: sourced, approved, no confidential leakage) — only marked facts flow to surfaces. Gated publish: agents stage surface changes from the KB, Mike approves once, then they fan out. Nothing publishes unattended (a typo must not go live on six domains). One direction: KB → surfaces. A surface never edits the KB directly; corrections enter through a maintenance pass, per SCHEMA."
     },
@@ -484,16 +493,16 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Surfaces and their adapters",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
-      "text": "Surface Adapter State mikejones.online Astro content.ts — KB:BEGIN/END region generated from public: yes pages; /agents/ query layer LIVE in prod 2026-10-09 — first KB→surface deployment (VK7 ship: commit 9b3c9b3, CI 37988799634; verified 200 on index.json, query, llms.txt) LinkedIn KB feeds Career/LinkedIn/Profile.md, linkedin-sync skill pushes (diff→sync gate) Profile.md exists; token renewal cycle live — tokens last refreshed 2026-09-25 (renewal job, generator-registry row), current refresh token expires ~Nov 14 (carried flag in KB/log.md); validity not re-verified this pass jones-co.us Next.js; Mike decided 2026-09-25: index it, public company face — first-class surface Gamma-hosted, no repo — collect + rebuild + migrate to Cloudflare Pages before it can be a KB consumer velocitypartners.io Wire as KB consumer; the 10-12 rebuild already ships an agent layer (/llms.txt, /agents/kb, /agents/query) but its 5 fact sheets are hand-built, not adapter-generated Repo + Cloudflare Pages deploy since 2026-10-26 (~/Dev/velocitypartners-io, project velocitypartners-io.pages.dev) — the \"Gamma-hosted, no repo\" prerequisite is half-cleared; prod still Gamma and DNS untouched, design rejected 2026-10-26 with a direction pick pending (velocity-partners) resilient-tomorrow.com Wire as KB consumer, keep current design; redesign later live; content pipeline v2 superseded 2026-10-29 — one pipeline, homed at Social/; drafts→adapt→publish run through Operations/content-pipeline.md, record layer"
+      "text": "Surface Adapter State mikejones.online Astro content.ts — KB:BEGIN/END region generated from public: yes pages; /agents/ query layer. Also /system/: a scheduler-derived atlas (job counts, real schedules, delivery channels, failure streaks derived from ~/.hermes/cron/jobs.json; prose hand-curated) rebuilt hourly by the Atlas publish job in generator-registry — that page is NOT KB content and does not pass through the adapter, so whether it falls under this layer's approval gate is Mike's call, not an agent's LIVE in prod 2026-10-09 — first KB→surface deployment (VK7 ship: commit 9b3c9b3, CI 37988799634; verified 200 on index.json, query, llms.txt) LinkedIn KB feeds Career/LinkedIn/Profile.md, linkedin-sync skill pushes (diff→sync gate) Profile.md exists; token renewal cycle live — tokens last refreshed 2026-09-25 (renewal job, generator-registry row), current refresh token expires ~Nov 14 (carried flag in KB/log.md); validity not re-verified this pass jones-co.us Next.js; Mike decided 2026-09-25: index it, public company face — first-class surface Gamma-hosted, no repo — collect + rebuild + migrate to Cloudflare Pages before it can be a KB consumer velocitypartners.io Wire as KB consumer; the agent layer (/llms.txt, /agents/kb, /agents/query) is live in prod, but its 5 fact sheets are hand-built, not adapter-generated LIVE in prod since 2026-11-10 12:56 PT — Cloudflare Pages project velocitypartners-io serving the real domain (zone e3b3455598c0d492896d463a44096158, NS aitana/j"
     },
     {
       "id": "kb-pipelines-publication-layer-decisions-mike-2026-09-25",
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Decisions (Mike, 2026-09-25)",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "1. Gated publish — agents stage, Mike approves once, then publish. 2. LinkedIn runs through one funnel: KB → Profile.md → linkedin-sync. 3. VP + RT: wire as KB consumers first; redesign is a later project. 4. jones-co.us becomes the public company face: index it, treat it as first-class."
     },
@@ -502,7 +511,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Open work",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "Backfill of the facts the t_90718efd run established: DONE 2026-09-25 — ccar-f-certification (public: yes), jonesco credentials row, Stale downloadable /Mike-Jones-Resume.pdf on mikejones.online; vault resume (Career/Resume/) is also pre-cert. Regeneration needs Mike's call. Adapter mechanism per surface (build-time generation vs staged-diff script): decided for two surfaces — Distills RAG and mikejones.online content.ts both use gated staged-diff scripts writing to a staging dir (mj-chatbot-backend/staging/, site/content.staging/). Other surfaces still TBD. Vault-root CLAUDE.md WRITTEN 2026-09-25 (Mike approved in-session). Phase 2 DONE: nightly KB-maintenance cron wired 2026-09-25 (kb-nightly-maintenance, 03:00 daily); session-end convention in live use since 2026-09-25. Workflow spec on paper (2026-10-30), awaiting Mike: the step-by-step operational gate a *public automations page* would pass before going live on mikejones.online — approval-evidence standard, drift re-approval rule for stale content, unpublish procedure. It implements this page's rule for one prospective surface and changes nothing now: feature option t_a857b360, nothing scheduled, review ticket T-2026-10-31-ZJ1; artifact Finished Products/Artifacts/kanban/t_520c2740/t_520c2740_2026-10-31_publication-gate-workflow-spec.md. Its load-bearing lesson from the 2026-10-30 incident: the public: marker alone is not a content screen — the registry was withdrawn (public: no, t_c1a52c37) because schedules, job ids, s"
     },
@@ -511,7 +520,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Adapter: Distills RAG (pilot — built 2026-09-25, staged for approval)",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "The cheapest leg, proven end to end. Correction to the original design: the live chain is not ~/dev/distill-app (that is the multi-tenant SaaS). It is ~/dev/MJ_Online/mj-chatbot-backend — a dedicated Cloudflare Worker. Mechanism. mj-chatbot-backend/scripts/kb-to-rag.mjs reads KB//*.md directly from the vault (no content duplication), strips frontmatter and Sources/History sections, chunks each page by ## section into the distill RAG JSONL schema (narrative entries; topic from page type; source: = the KB path, so every claim stays traceable), and writes only into mj-chatbot-backend/staging/: knowledge.jsonl, knowledge-data.js (the CommonJS module the Worker ingests, same format src/knowledge-loader.js produces), staged.diff, and stage-report.md (human-readable summary for the approval gate). Live chain it feeds. mikejones.online pages → distill-chatbot-widget.js (RAG_CHATBOT_CONFIG → mj-chatbot-backend Worker /chat) → Worker loads src/knowledge-data.js at boot → src/rag-retrieval.js keyword scoring → Claude. The bot changes only when knowledge.jsonl + src/knowledge-data.js are replaced AND the Worker redeploys — apply and deploy are deliberate human steps after approval. How to run. ` cd ~/dev/MJ_Online/mj-chatbot-backend node scripts/kb-to-rag.mjs # dry run, prints summary, writes nothing node scripts/kb-to-rag.mjs --stage # writes staging/ only; live files untouched ` After Mike approves: `cp staging/knowledge.jsonl knowledge.jsonl && cp staging/knowledge-data.js src/knowled"
     },
@@ -520,7 +529,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Adapter: mikejones.online content.ts (built 2026-09-25, staged for approval)",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "Second leg. ~/dev/MJ_Online/site/scripts/kb-to-content.mjs reads KB//*.md directly (read-only input; the generator never writes into KB/), keeps only and renders them into a KB:BEGIN/KB:END region at the end of site/src/lib/content.ts — a generated region inside the hand-maintained file. Everything outside the region stays hand-edited; the page-by-page mapping (generated vs hand-maintained, and why) lives in the generator's FIELD MAP header comment. Today the only public: yes page is ccar-f-certification → generated export certifications (name, abbrev, issuer, issued/issuedDisplay, expires, proofUrl, scope — parsed from the page's Fact|Value table with per-field provenance). resume.astro renders it in Recognition; the hardcoded cert line How to run. ` cd ~/dev/MJ_Online/site node scripts/kb-to-content.mjs # dry run — summary only, writes nothing node scripts/kb-to-content.mjs --stage # writes site/content.staging/ ONLY node scripts/publish-content.mjs # plan — what --apply would do node scripts/publish-content.mjs --apply # AFTER Mike approves the staged diff: ` The commit is the approval gate: publish-content.mjs commits after approval and never pushes — git push is Mike's manual step (Cloudflare Pages auto-deploys on push to main). First publish includes the plumbing (generator, publish helper, resume.astro, site/.gitignore); later publishes need only site/src/lib/content.ts. Safety rails: apply refuses when the working tree's content.ts has hand-edits staging didn't start "
     },
@@ -529,7 +538,7 @@
       "pageId": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
       "section": "Related",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "text": "resilient-tomorrow — RT footer dead Bluesky/LinkedIn buttons (out of scope, flagged) generator-registry — this layer is the reader side; that page is the writer side rag-corpus-design-2026-10-21 — the RAG leg's design-of-record; its Layer-A law supersedes this page's pilot decision point"
     },

@@ -30,10 +30,11 @@
       ]
     },
     "kb-business-velocity-partners": {
-      "digest": "sha256:cfed3fcd2e288f575311efb150d54e4a25a894077aedcf32812d24802d51d341",
+      "digest": "sha256:f6d15a76fb5a9c788d64a718558f905b76db631ca005d1a86209b76d0c7a09be",
       "updated": "2026-11-10",
       "files": [
-        "kb-business-velocity-partners.md"
+        "kb-business-velocity-partners-part1.md",
+        "kb-business-velocity-partners-part2.md"
       ]
     },
     "kb-company-jonesco": {
@@ -58,8 +59,8 @@
       ]
     },
     "kb-pipelines-publication-layer": {
-      "digest": "sha256:1946e72902a87b985e79e47a5f8cb4fc1f012a8d0f3904a2603714666805767b",
-      "updated": "2026-11-02",
+      "digest": "sha256:1a48cc08f0e23284ea8d1310c7cbddac0c1e85bc07526099f87d02bb367cd6b8",
+      "updated": "2026-11-10",
       "files": [
         "kb-pipelines-publication-layer.md"
       ]

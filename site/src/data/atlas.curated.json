@@ -591,5 +591,88 @@
       "origin": "Session that fired it",
       "all": "All channels"
     }
+  },
+  "shapes_page": {
+    "eyebrow": "The framework",
+    "title": "The Six Shapes",
+    "lead": "Thirty-one scheduled loops, six shapes. I do not write automations — I fill in shapes. When something new needs a loop, it gets an existing shape or it waits, and that refusal is what keeps the set small enough to hold in my head.",
+    "rule": "A new problem gets an existing shape, or it waits.",
+    "rule_note": "Not \"or it gets a new shape\". The waiting is the mechanism: most ideas that feel like a new kind of loop look like one of the six once they are written down as a sentence.",
+    "choosing": [
+      {
+        "q": "Does something have to be read?",
+        "a": "Brief",
+        "why": "The output is a page a person acts on, on a clock."
+      },
+      {
+        "q": "Should most days produce nothing?",
+        "a": "Watcher",
+        "why": "The interesting event is rare; silence is the passing grade."
+      },
+      {
+        "q": "Is it about age rather than priority?",
+        "a": "Sweep",
+        "why": "The queue is already known; entropy is the enemy."
+      },
+      {
+        "q": "Did something arrive from outside?",
+        "a": "Intake",
+        "why": "An event needs one object, one owner, one class."
+      },
+      {
+        "q": "Must something be allowed before it is true?",
+        "a": "Gate",
+        "why": "The failure mode is a confident wrong answer."
+      },
+      {
+        "q": "Is it a decision you keep deferring?",
+        "a": "Ritual",
+        "why": "Important, never urgent, needs a slot that cannot be skipped."
+      }
+    ],
+    "shapes": [
+      {
+        "id": "brief",
+        "how": "Gathers from the places state actually lives — calendar, mail, repos, the vault — on a fixed clock, compresses it to one page with a skeleton that never changes, and delivers it before I would have gone looking.",
+        "invariant": "It ends in a decision, not a summary.",
+        "refuses": "It refuses to be a dashboard. If the page does not end in \"do this next\", it is reading, not briefing — and reading is what I was trying to avoid.",
+        "fleet": "A morning page that names the three things needing a decision today and the one it would do first."
+      },
+      {
+        "id": "watcher",
+        "how": "Polls a source on a cadence, keeps a fingerprint of what it last saw, and speaks only when the fingerprint changes. It remembers what it already said, so the same fact is not news twice.",
+        "invariant": "Silence is the success signal.",
+        "refuses": "It refuses to report its own aliveness. A watcher that says \"nothing changed\" every hour has become a clock, and clocks train you to ignore them.",
+        "fleet": "A price watch that says one sentence when the number moves, and nothing for three weeks."
+      },
+      {
+        "id": "sweep",
+        "how": "Enumerates a queue it already knows, finds everything past an age threshold, applies the smallest action that un-sticks each item, and reports a count rather than a story.",
+        "invariant": "The work is chosen by age, not by priority.",
+        "refuses": "It refuses to start new work. A sweep may close, retry, or escalate — never begin. Otherwise it becomes an inbox with a timer.",
+        "fleet": "A nightly pass that closes finished cards, re-queues abandoned ones, and reports one line."
+      },
+      {
+        "id": "intake",
+        "how": "Watches an arrival surface, classifies each event, dedupes it against everything already open, and creates one tracked object with a pre-diagnosis and a named owner.",
+        "invariant": "Every arrival gets one object, one class, one owner — or an explicit park bucket.",
+        "refuses": "It refuses to act on what it filed. Filing and fixing are different loops; the moment intake also fixes, you lose the count that tells you the system is sick.",
+        "fleet": "A failure arriving as one deduped card, routed by class, with the repair still owned by whoever picks it up."
+      },
+      {
+        "id": "gate",
+        "how": "Runs a fixed check set against a proposed change — tests, schema, forbidden tokens, a build — and lets it through only on a pass. A refusal is a first-class outcome with a reason attached, not an exception.",
+        "invariant": "The gate has to be able to say no, and it has to fail closed.",
+        "refuses": "It refuses to warn. A gate that can only warn is a suggestion, and suggestions get clicked through; the point of a gate is that a red stops the line.",
+        "fleet": "These pages: the build aborts if a confidential token survives, so a leak cannot be published by forgetting to check."
+      },
+      {
+        "id": "ritual",
+        "how": "Holds a calendar-shaped slot with a fixed agenda, opens the context you would have had to assemble, asks the same questions every time, and writes the decision where it will be read next week.",
+        "invariant": "The output is a decision, and the loop is cheap to re-run by hand.",
+        "refuses": "It refuses to be optional. A ritual you are allowed to skip is a wish with a calendar entry — and I miss the clock often enough that re-running it by hand has to cost nothing.",
+        "fleet": "A weekly review that ends with three commitments rather than a status report."
+      }
+    ]
   }
 }

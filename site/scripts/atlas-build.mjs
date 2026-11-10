@@ -227,6 +227,7 @@ const atlas = {
   },
   hero: curated.hero,
   patterns: curated.patterns,
+  shapes_page: curated.shapes_page,
   bands: curated.bands,
   stats,
   loops,

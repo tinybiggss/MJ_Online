@@ -55,9 +55,10 @@
       "title": "Velocity Partners",
       "updated": "2026-11-10",
       "summary": "Consulting arm.",
-      "path": "/agents/kb/kb-business-velocity-partners.md",
+      "path": "/agents/kb/kb-business-velocity-partners-part1.md",
       "files": [
-        "kb-business-velocity-partners.md"
+        "kb-business-velocity-partners-part1.md",
+        "kb-business-velocity-partners-part2.md"
       ]
     },
     {
@@ -93,7 +94,7 @@
     {
       "id": "kb-pipelines-publication-layer",
       "title": "Publication Layer",
-      "updated": "2026-11-02",
+      "updated": "2026-11-10",
       "summary": "What it is: the adapter layer between jonesco's KB and the public surfaces.",
       "path": "/agents/kb/kb-pipelines-publication-layer.md",
       "files": [

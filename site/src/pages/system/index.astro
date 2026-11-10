@@ -157,24 +157,30 @@ const description =
   <!-- ------------------------------------------------------- the six shapes -->
   <section id="shapes" class="scroll-mt-24 border-b border-field-line">
     <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
-      <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">Six shapes, {stats.loops_running} loops</h2>
+      <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
+        <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">The Six Shapes</h2>
+        <a href="/system/six-shapes/" class="group font-data text-2xs uppercase tracking-[0.14em] text-field-faint transition-colors hover:text-signal">
+          the framework <span class="text-signal">→</span>
+        </a>
+      </div>
       <p class="mt-4 max-w-[62ch] text-base leading-relaxed text-field-muted">
         This is the part worth stealing. I do not write {stats.loops_running} automations — I fill in six shapes. A new
-        problem gets an existing shape, or it gets nothing until I've decided it needs a seventh.
+        problem gets an existing shape, or it waits, and that refusal is why the set is still small enough to hold in my
+        head.
       </p>
 
       <div class="mt-10 border-t border-field-line">
         {patterns.map((p) => (
-          <div class="grid gap-2 border-b border-field-line py-5 md:grid-cols-[9rem_1fr_15rem] md:gap-x-8">
+          <a href={`/system/six-shapes/#${p.id}`} class="group grid gap-2 border-b border-field-line py-5 transition-colors hover:bg-field-panel md:grid-cols-[9rem_1fr_15rem] md:gap-x-8">
             <div class="flex items-baseline gap-3">
               <span class="font-data text-2xs tabular-nums text-signal">
                 {String(stats.by_pattern[p.id] ?? 0).padStart(2, "0")}
               </span>
-              <span class="font-display text-base font-semibold">{p.name}</span>
+              <span class="font-display text-base font-semibold transition-colors group-hover:text-signal">{p.name}</span>
             </div>
             <p class="text-sm leading-relaxed text-field-ink">{p.line}</p>
             <p class="text-[0.8125rem] leading-relaxed text-field-faint">{p.when}</p>
-          </div>
+          </a>
         ))}
       </div>
     </div>
