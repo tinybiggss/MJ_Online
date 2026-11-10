@@ -105,6 +105,14 @@ const description = cluster.line;
           </p>
         )}
 
+        {stats.loops_paused > 0 && (
+          <p class="mt-6 max-w-[68ch] font-data text-2xs leading-relaxed text-field-faint">
+            {stats.loops_paused} further {stats.loops_paused === 1 ? "loop is" : "loops are"} paused right now — switched
+            off on purpose, not retired. A paused loop is not a finished one, and the count above only ever claims what is
+            actually scheduled.
+          </p>
+        )}
+
         <div class="mt-12 border-t border-field-line pt-8">
           <h2 class="font-display text-base font-semibold">The shapes these come from</h2>
           <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2">

@@ -162,7 +162,12 @@ const unannotated = [];
 for (const job of live) {
   const ann = curated.loops[job.name];
   seen.add(job.name);
-  const active = job.enabled !== false && job.state !== "completed";
+  // Four outcomes, not two: a paused loop is not a retired one. Mapping paused
+  // to "completed" once reported a job I had merely paused as a finished
+  // one-shot — and flipped the loop count every time I toggled it.
+  const done = job.state === "completed";
+  const paused = !done && (Boolean(job.paused_at) || job.state === "paused" || job.enabled === false);
+  const active = !done && !paused;
   const entry = {
     name: job.name,
     public_name: ann?.public_name || job.name,
@@ -175,14 +180,14 @@ for (const job of live) {
     cadence: humanCadence(job),
     schedule: job.schedule_display || job.schedule?.display || job.schedule?.expr || "",
     channels: publicChannel(job.deliver, channelMap),
-    state: active ? "running" : "completed",
+    state: done ? "completed" : paused ? "paused" : "running",
     last_status: job.last_status || null,
     failure_streak: job.failure_streak || 0,
     annotated: Boolean(ann),
     does: ann?.does || null,
     why: ann?.why || null,
   };
-  if (!ann && active) unannotated.push(job.name);
+  if (!ann && !done) unannotated.push(job.name);
   loops.push(entry);
 }
 
@@ -204,6 +209,7 @@ const stats = {
   loops_running: running.length,
   loops_total: loops.length,
   completed_oneshots: loops.filter((l) => l.state === "completed").length,
+  loops_paused: loops.filter((l) => l.state === "paused").length,
   // an unannotated loop is not a seventh shape; it is a hole in the annotation file.
   patterns_in_use: Object.keys(byPattern).filter((k) => k !== "unclassified").length,
   annotations_missing: unannotated.length,

@@ -12,8 +12,10 @@ import {
 } from "../../lib/atlas";
 
 const title = "The system — how this site is made | Mike Jones";
+// Every number on this page is generated — a count typed into prose is a
+// count that goes stale silently.
 const description =
-  "A live map of the AI operating system behind this site: 29 scheduled loops built from six shapes, the rules that constrain them, the memory layer, four production loops, and the loop that repairs the rest.";
+  `A live map of the AI operating system behind this site: ${stats.loops_running} scheduled loops built from six shapes, the rules that constrain them, the memory layer, the production loops, and the loop that repairs the rest.`;
 ---
 
 <FieldLayout title={title} description={description} active="/system">

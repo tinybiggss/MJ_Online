@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T22:52:54.012Z",
+    "generated_at": "2026-11-10T22:53:56.172Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -75,6 +75,7 @@
     "loops_running": 31,
     "loops_total": 33,
     "completed_oneshots": 2,
+    "loops_paused": 0,
     "patterns_in_use": 6,
     "annotations_missing": 0,
     "retired_annotations": 0,
@@ -86,7 +87,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T22:52:54.012Z"
+    "generated_at": "2026-11-10T22:53:56.172Z"
   },
   "loops": [
     {
@@ -571,7 +572,6 @@
       "cadence": "Weekdays, 08:00",
       "schedule": "0 8 * * 1-5",
       "channels": [
-        "Local log",
         "Telegram"
       ],
       "state": "running",
