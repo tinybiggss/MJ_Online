@@ -1,14 +1,14 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T22:50:31.104Z",
+    "generated_at": "2026-11-10T22:50:33.264Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
   "hero": {
     "eyebrow": "The system, live",
     "title": "How this site is made",
-    "lead": "This page describes the machine that produces everything else here. It is not a diagram of an idea \u2014 it reads the running system and draws it, so what you are looking at is this week's configuration, not an essay about one.",
+    "lead": "This page describes the machine that produces everything else here. It is not a diagram of an idea — it reads the running system and draws it, so what you are looking at is this week's configuration, not an essay about one.",
     "note": "Counts and schedules below are read from the scheduler itself. Prose is written by hand. Where the two disagree, the scheduler wins and the page says so."
   },
   "patterns": [
@@ -86,7 +86,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T22:50:31.104Z"
+    "generated_at": "2026-11-10T22:50:33.264Z"
   },
   "loops": [
     {
@@ -95,7 +95,7 @@
       "slug": "feed-fidelity-watch",
       "band": "orient",
       "pattern": "gate",
-      "cadence": "BROKEN CADENCE",
+      "cadence": "Weekdays, 07:12",
       "schedule": "12 7 * * 1-5",
       "channels": [
         "Telegram"
@@ -178,7 +178,7 @@
       "last_status": "delivery_queued",
       "failure_streak": 0,
       "annotated": true,
-      "does": "Same assembly at a weekend pace \u2014 no work calendar, more on the house and the family.",
+      "does": "Same assembly at a weekend pace — no work calendar, more on the house and the family.",
       "why": "A weekend that starts without a plan turns into a list of errands someone else wrote."
     },
     {
@@ -255,7 +255,7 @@
       "why": "A decision is not done when I make it. It is done when something is watching the party that disagrees with it."
     },
     {
-      "name": "Failure intake (fleet \u2192 cards)",
+      "name": "Failure intake (fleet → cards)",
       "public_name": "Failure intake",
       "slug": "failure-intake",
       "band": "tend",
@@ -287,7 +287,7 @@
       "last_status": null,
       "failure_streak": 0,
       "annotated": true,
-      "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks \u2014 and once more when it recovers.",
+      "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
     },
     {
@@ -528,7 +528,7 @@
       "why": "The pattern is what matters here: a watch is cheaper than a decision made twice a week."
     },
     {
-      "name": "In-laws media build \u2014 class price watch",
+      "name": "In-laws media build — class price watch",
       "public_name": "Purchase watch, family project (redacted)",
       "slug": "purchase-watch-family-project-redacted",
       "band": "harvest",
@@ -543,7 +543,7 @@
       "failure_streak": 0,
       "annotated": true,
       "does": "The same price-watch pattern, running on a build for someone else's house. Details withheld.",
-      "why": "Same loop, different owner \u2014 which is the point of building loops rather than one-off tasks."
+      "why": "Same loop, different owner — which is the point of building loops rather than one-off tasks."
     },
     {
       "name": "DEWALT track saw price watch",
@@ -598,7 +598,7 @@
       "failure_streak": 0,
       "annotated": true,
       "does": "Rebuilds this page from the live scheduler every hour and publishes it only if the bytes actually changed.",
-      "why": "The page you are reading is itself a loop. It will not publish while the working tree is dirty, or from any branch but the deploy branch \u2014 the same refusal discipline the rest of the system uses, applied to its own documentation."
+      "why": "The page you are reading is itself a loop. It will not publish while the working tree is dirty, or from any branch but the deploy branch — the same refusal discipline the rest of the system uses, applied to its own documentation."
     },
     {
       "name": "Money momentum check",
@@ -620,7 +620,7 @@
       "why": "Revenue does not fail on a decision. It fails on a decision nobody revisited."
     },
     {
-      "name": "Accomplished Monday \u2014 weekly progress ritual",
+      "name": "Accomplished Monday — weekly progress ritual",
       "public_name": "Progress ritual",
       "slug": "progress-ritual",
       "band": "close",
@@ -719,18 +719,18 @@
         },
         {
           "title": "Classified, then owned",
-          "meta": "cron \u2192 ops \u00b7 machine \u2192 IT ops \u00b7 artifact \u2192 ops \u00b7 unknown \u2192 product",
+          "meta": "cron → ops · machine → IT ops · artifact → ops · unknown → product",
           "body": "Each failure is classified by kind, and each class has an owning profile. Cron and artifact problems go to the ops profile, machine and resource problems to IT ops, ownership and attribution to ops, and anything unclassifiable to product triage with a 24-hour escalation if nobody claims it."
         },
         {
           "title": "Three strikes, not one",
           "meta": "a transient gets two chances",
-          "body": "Error, timeout and delivery failures have to repeat three times before they earn a card, so a blip does not become a task. Configuration and delivery blocks are actionable on the first occurrence \u2014 but only when a target genuinely needs a platform the profile does not have; a stale status is not a defect."
+          "body": "Error, timeout and delivery failures have to repeat three times before they earn a card, so a blip does not become a task. Configuration and delivery blocks are actionable on the first occurrence — but only when a target genuinely needs a platform the profile does not have; a stale status is not a defect."
         },
         {
           "title": "Freshness, not self-report",
           "meta": "the liveness probe",
-          "body": "A job that reports success is not evidence that its artifact exists. The probe checks that the outputs are recent, so the failure mode I actually care about \u2014 a silent no-op \u2014 cannot hide behind a green run."
+          "body": "A job that reports success is not evidence that its artifact exists. The probe checks that the outputs are recent, so the failure mode I actually care about — a silent no-op — cannot hide behind a green run."
         },
         {
           "title": "Cards are the handoff",
@@ -740,7 +740,7 @@
         {
           "title": "Where repair stops being automatic",
           "meta": "the honest limit",
-          "body": "Repair is routed within the hour, but the notice is not instant: a job has to earn a card before anyone is told, so the first two failures are invisible unless I look. And a loop that has never run at all looks different from one that failed \u2014 that gap is closed by the probe, not by the error channel."
+          "body": "Repair is routed within the hour, but the notice is not instant: a job has to earn a card before anyone is told, so the first two failures are invisible unless I look. And a loop that has never run at all looks different from one that failed — that gap is closed by the probe, not by the error channel."
         }
       ],
       "order": 20,
@@ -755,12 +755,12 @@
       "nav": "Operations & rules",
       "title": "Operations & rules",
       "line": "The written constraints every loop runs inside, and the discipline that keeps the writing true.",
-      "thesis": "The highest-leverage artifact in this whole system is not a model or a script. It is a few hundred lines of written constraint: who the agent is, how it should work with me, and what it may never do. That difference \u2014 between an assistant that helps and one that quietly damages something \u2014 lives almost entirely in instruction files. So they are versioned like code, and the documentation of the machine is held to the same rule: change the machine, change the page, or the page becomes a lie.",
+      "thesis": "The highest-leverage artifact in this whole system is not a model or a script. It is a few hundred lines of written constraint: who the agent is, how it should work with me, and what it may never do. That difference — between an assistant that helps and one that quietly damages something — lives almost entirely in instruction files. So they are versioned like code, and the documentation of the machine is held to the same rule: change the machine, change the page, or the page becomes a lie.",
       "items": [
         {
           "title": "Instruction files, layered",
-          "meta": "identity \u00b7 working agreement \u00b7 task",
-          "body": "Three files do three jobs. One says who the agent is and how it sounds \u2014 the voice file is the difference between output I would sign and output that reads like a machine. One says how to work with me. One is per-task context and expires with the task."
+          "meta": "identity · working agreement · task",
+          "body": "Three files do three jobs. One says who the agent is and how it sounds — the voice file is the difference between output I would sign and output that reads like a machine. One says how to work with me. One is per-task context and expires with the task."
         },
         {
           "title": "The working agreements",
@@ -770,7 +770,7 @@
         {
           "title": "Hard rules and refusals",
           "meta": "what an agent may never do",
-          "body": "Never publish without approval. Never write outside the sanctioned paths. Never send mail, spend money, or touch credentials on its own initiative. Never edit the record to make it agree with the outcome \u2014 append a claim instead."
+          "body": "Never publish without approval. Never write outside the sanctioned paths. Never send mail, spend money, or touch credentials on its own initiative. Never edit the record to make it agree with the outcome — append a claim instead."
         },
         {
           "title": "Rules are versioned; drift is a bug",
@@ -785,7 +785,7 @@
         {
           "title": "Change the machine, change the page",
           "meta": "the propagation rule",
-          "body": "A change to a cron, a workflow, or an ownership boundary updates its Operations page in the same turn it changes the machine. The nightly drift check exists for the times I don't \u2014 it compares what is documented against what is actually scheduled and reports the difference."
+          "body": "A change to a cron, a workflow, or an ownership boundary updates its Operations page in the same turn it changes the machine. The nightly drift check exists for the times I don't — it compares what is documented against what is actually scheduled and reports the difference."
         }
       ],
       "order": 30,
@@ -803,7 +803,7 @@
         {
           "title": "Weekly planning",
           "meta": "Monday morning",
-          "body": "A working session, not a status meeting. We open the week file, settle priorities against what is actually open, and commit to a shape for the week. The output is a written plan that the rest of the week's automations read \u2014 the morning brief resolves its priorities from this file, so the session's real product is machine-readable."
+          "body": "A working session, not a status meeting. We open the week file, settle priorities against what is actually open, and commit to a shape for the week. The output is a written plan that the rest of the week's automations read — the morning brief resolves its priorities from this file, so the session's real product is machine-readable."
         },
         {
           "title": "Weekly closeout",
@@ -818,7 +818,7 @@
         {
           "title": "The briefing protocol",
           "meta": "Every session, in this order",
-          "body": "Four moves, always the same. Context: what the agent needs to know that it cannot see. Requirements: what done looks like, concretely enough to argue with. Intent: why this and not the obvious alternative \u2014 because intent is the thing that lets a system disagree with me usefully. Then the closer: what am I missing, and what would you do differently. The last one is not politeness. It is the only part of the protocol that has ever caught a real mistake before I shipped it."
+          "body": "Four moves, always the same. Context: what the agent needs to know that it cannot see. Requirements: what done looks like, concretely enough to argue with. Intent: why this and not the obvious alternative — because intent is the thing that lets a system disagree with me usefully. Then the closer: what am I missing, and what would you do differently. The last one is not politeness. It is the only part of the protocol that has ever caught a real mistake before I shipped it."
         }
       ]
     },
@@ -837,7 +837,7 @@
         {
           "title": "Search order is the design",
           "meta": "cheapest first",
-          "body": "Index, then the named page, then the log, then a full-text search \u2014 only if the earlier steps came up empty. Written down, because an agent left to choose will grep the whole vault every time and pay for it in context."
+          "body": "Index, then the named page, then the log, then a full-text search — only if the earlier steps came up empty. Written down, because an agent left to choose will grep the whole vault every time and pay for it in context."
         },
         {
           "title": "Three layers, three write rules",
@@ -871,31 +871,31 @@
       "order": 60,
       "title": "Work",
       "line": "The loops that produce things, not the projects they produce them for.",
-      "thesis": "Four production loops stay while projects come and go. Every one of them starts the same way, with a brief that has three parts \u2014 the context, the requirements, and the intent \u2014 because a loop that begins with a vague idea produces a confident artifact that solves the wrong problem. The brief is where I do the thinking, so the machine does not have to guess it.",
+      "thesis": "Four production loops stay while projects come and go. Every one of them starts the same way, with a brief that has three parts — the context, the requirements, and the intent — because a loop that begins with a vague idea produces a confident artifact that solves the wrong problem. The brief is where I do the thinking, so the machine does not have to guess it.",
       "items": [
         {
           "title": "Every loop starts with a brief",
-          "meta": "context \u00b7 requirements \u00b7 intent",
+          "meta": "context · requirements · intent",
           "body": "Context: what is true now, and what already exists. Requirements: what the artifact must do, and what would make it wrong. Intent: why this, why now, what it is for. Three parts, written down, before any drafting starts."
         },
         {
           "title": "Content loop",
-          "meta": "idea \u2192 draft \u2192 adversarial edit \u2192 publish \u2192 record",
+          "meta": "idea → draft → adversarial edit → publish → record",
           "body": "The draft is never the last step. An edit pass argues with it, and the published piece is recorded back into the vault with its claims cited."
         },
         {
           "title": "Video loop",
-          "meta": "record \u2192 transcribe \u2192 edit the transcript",
+          "meta": "record → transcribe → edit the transcript",
           "body": "Cut in text, not in a timeline: the transcript is the edit decision list, and the timeline is generated from it. Faster, reviewable, and the source of a written artifact as a by-product."
         },
         {
           "title": "Product loop",
-          "meta": "kickoff \u2192 cards \u2192 build \u2192 adversarial review \u2192 ship \u2192 verify",
+          "meta": "kickoff → cards → build → adversarial review → ship → verify",
           "body": "Work is decomposed into cards before it is built. A second agent attacks the result before it ships, and the loop closes by verifying the thing works in the place it was actually deployed."
         },
         {
           "title": "Site loop",
-          "meta": "change \u2192 preview \u2192 approval \u2192 deploy \u2192 probe",
+          "meta": "change → preview → approval → deploy → probe",
           "body": "Nothing publishes on a claim. It publishes after a preview and an explicit approval, and then a probe confirms the live URL answers."
         }
       ]
@@ -915,7 +915,7 @@
         {
           "title": "Signal",
           "meta": "the addition",
-          "body": "The intent is a second, more private channel for anything that involves another person's information \u2014 family logistics, household, the things that should not sit in a cloud chat log. Same loop, different door. It is the clearest example of the design principle that a delivery target is a property of the artifact, not of the system."
+          "body": "The intent is a second, more private channel for anything that involves another person's information — family logistics, household, the things that should not sit in a cloud chat log. Same loop, different door. It is the clearest example of the design principle that a delivery target is a property of the artifact, not of the system."
         },
         {
           "title": "Desk chat",
@@ -938,7 +938,7 @@
   "ground": {
     "title": "Ground",
     "line": "What the loops run on: the models, the tools, and the machines.",
-    "thesis": "None of this is the interesting part, and all of it is what people ask about first. The stack is deliberately unremarkable \u2014 several model providers, chosen per task, and a small number of machines with one job each.",
+    "thesis": "None of this is the interesting part, and all of it is what people ask about first. The stack is deliberately unremarkable — several model providers, chosen per task, and a small number of machines with one job each.",
     "stack": [
       {
         "title": "Models",
@@ -947,7 +947,7 @@
       },
       {
         "title": "Voice",
-        "body": "Nearly everything I write starts as speech. Voice-to-text is not an accessibility feature here, it is the input method \u2014 it is why a brief can be four paragraphs long and why I can hold a specification in my head while walking.",
+        "body": "Nearly everything I write starts as speech. Voice-to-text is not an accessibility feature here, it is the input method — it is why a brief can be four paragraphs long and why I can hold a specification in my head while walking.",
         "meta": "speech first"
       },
       {
@@ -990,7 +990,7 @@
     ]
   },
   "redactions": {
-    "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern \u2014 the loop is the point \u2014 and drops the target, the buyer, and the amount."
+    "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern — the loop is the point — and drops the target, the buyer, and the amount."
   },
   "drift": {
     "unannotated": [],
