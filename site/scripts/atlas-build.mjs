@@ -21,7 +21,7 @@
  * Run: node scripts/atlas-build.mjs [--check]
  *   --check  exit 1 if the committed atlas.json disagrees with the live store
  */
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
@@ -32,6 +32,7 @@ const outFile = resolve(siteRoot, "src/data/atlas.json");
 const curatedFile = resolve(siteRoot, "src/data/atlas.curated.json");
 
 const JOBS = resolve(homedir(), ".hermes/cron/jobs.json");
+const VAULT = resolve(homedir(), "Dev/Obsidian/Mike_Thinking_Space/.obsidian");
 const check = process.argv.includes("--check");
 
 const curated = JSON.parse(readFileSync(curatedFile, "utf8"));
@@ -219,6 +220,102 @@ const stats = {
   generated_at: new Date().toISOString(),
 };
 
+/* ------------------------------------------------------------------ vault */
+/**
+ * The Obsidian half of the system. Derived from the vault's own plugin store so
+ * an install Mike forgets to write up still appears — published incomplete
+ * (manifest description, marked `annotated: false`) rather than invisible, and
+ * reported by --check like a loop with no annotation.
+ *
+ * Only ENABLED plugins are listed. Installed-but-off is a count, not a claim:
+ * a plugin that is switched off is not part of how the system works today.
+ */
+function readVault() {
+  const pluginsDir = resolve(VAULT, "plugins");
+  if (!existsSync(pluginsDir)) return null;
+
+  const enabledPath = resolve(VAULT, "community-plugins.json");
+  const enabledIds = existsSync(enabledPath) ? JSON.parse(readFileSync(enabledPath, "utf8")) : [];
+  let theme = null;
+  const appearance = resolve(VAULT, "appearance.json");
+  if (existsSync(appearance)) theme = JSON.parse(readFileSync(appearance, "utf8")).cssTheme || null;
+
+  const installed = readdirSync(pluginsDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
+  const enabledSet = new Set(enabledIds);
+
+  const plugins = [];
+  const unannotatedPlugins = [];
+  for (const id of enabledIds) {
+    let manifest = {};
+    try {
+      manifest = JSON.parse(readFileSync(resolve(pluginsDir, id, "manifest.json"), "utf8"));
+    } catch {
+      // installed record but unreadable plugin: still list it, visibly empty
+    }
+    const ann = curated.plugins?.[id];
+    if (!ann) unannotatedPlugins.push(id);
+    plugins.push({
+      id,
+      name: manifest.name || ann?.public_name || id,
+      version: manifest.version || null,
+      role: ann?.role || "unclassified",
+      what: ann?.what || manifest.description || "No manifest, no description.",
+      in_use: ann?.in_use ?? null,
+      annotated: Boolean(ann),
+    });
+  }
+  plugins.sort((a, b) => {
+    const order = (p) => (curated.plugins?.[p.id]?.order ?? 999);
+    const d = order(a) - order(b);
+    return d !== 0 ? d : a.name.localeCompare(b.name);
+  });
+
+  return {
+    enabled: plugins.length,
+    installed: installed.length,
+    off: installed.filter((id) => !enabledSet.has(id)),
+    theme,
+    plugins,
+    unannotated: unannotatedPlugins,
+  };
+}
+
+let vault = readVault();
+let committedVault = null;
+if (!vault) {
+  // No vault on this machine (CI, a fresh clone). The committed atlas already
+  // carries the plugin list; regenerating here would silently delete a section
+  // the site is serving. Keep it and say so.
+  try {
+    committedVault = JSON.parse(readFileSync(outFile, "utf8"));
+  } catch {}
+  if (!committedVault?.vault) {
+    console.error("atlas-build: no vault and no committed plugin list — refusing to build a half atlas.");
+    process.exit(2);
+  }
+  vault = committedVault.vault;
+  console.log("atlas-build: vault not present — keeping the committed plugin list.");
+}
+
+const clusters = curated.clusters.map((c) => ({ ...c }));
+if (vault) {
+  clusters.push({
+    id: "vault",
+    order: curated.vault_page?.order ?? 55,
+    title: curated.vault_page?.title ?? "The vault",
+    line: curated.vault_page?.line ?? "The Obsidian plugins that are switched on, and what each one is here to do.",
+    thesis: curated.vault_page?.thesis ?? "",
+    derived_from: "obsidian",
+    items: vault.plugins.map((p) => ({
+      title: p.name,
+      meta: `${p.version ? `v${p.version} · ` : ""}${p.role}${p.in_use === false ? " · idle" : ""}`,
+      body: p.what,
+    })),
+  });
+}
+
 const atlas = {
   meta: {
     version: curated.version,
@@ -232,10 +329,11 @@ const atlas = {
   bands: curated.bands,
   stats,
   loops,
-  clusters: curated.clusters,
+  clusters,
+  vault: vault ? { ...vault, unannotated: vault.unannotated } : null,
   ground: curated.ground,
   redactions: { note: curated.redactions.note },
-  drift: { unannotated, retired },
+  drift: { unannotated, retired, plugins_unannotated: vault?.unannotated || [] },
 };
 
 if (check) {
@@ -259,6 +357,15 @@ if (check) {
     const liveNames = new Set(loops.map((l) => `${l.name}:${l.cadence}`));
     for (const l of prev.loops || [])
       if (!liveNames.has(`${l.name}:${l.cadence}`)) diff.push(`committed but not live: ${l.name}`);
+
+    // Plugins drift the same way loops do: a new install is published, then named.
+    const prevPlugins = new Map((prev.vault?.plugins || []).map((p) => [p.id, p.version]));
+    for (const p of vault?.plugins || []) {
+      if (!prevPlugins.has(p.id)) diff.push(`plugin installed: ${p.id} (v${p.version})`);
+      else if (prevPlugins.get(p.id) !== p.version) diff.push(`plugin updated: ${p.id} ${prevPlugins.get(p.id)} -> v${p.version}`);
+    }
+    for (const id of prevPlugins.keys())
+      if (!(vault?.plugins || []).some((p) => p.id === id)) diff.push(`plugin gone: ${id}`);
   }
   if (diff.length) {
     console.log("atlas drift:");

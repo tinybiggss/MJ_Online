@@ -294,6 +294,105 @@
       "why": "A gate that suppresses things is only safe once it has been watched suppressing long enough to count its misses. The decision to arm it belongs to a loop that counts them, not to my impression of how it has been going."
     }
   },
+  "plugins": {
+    "obsidian-tasks-plugin": {
+      "order": 10,
+      "public_name": "Tasks",
+      "role": "task layer",
+      "in_use": true,
+      "what": "The query engine behind every task list in the vault. A task is a line of markdown with frontmatter; Tasks reads them back as due, overdue, or waiting. There is no database to get out of step with the notes, because the notes are the database."
+    },
+    "obsidian-day-planner": {
+      "order": 20,
+      "public_name": "Day Planner",
+      "role": "day rhythm",
+      "in_use": true,
+      "what": "Time-blocks the day inside the Day planner note. That note is the one surface agents are not allowed to write to, which is exactly why it is where the thinking goes."
+    },
+    "obsidian-git": {
+      "order": 30,
+      "public_name": "Git",
+      "role": "versioning",
+      "in_use": true,
+      "what": "Commits the vault on a timer and backs it up. An agent's edit arrives as a diff rather than an overwrite, so every automated change is reviewable after the fact."
+    },
+    "dataview": {
+      "order": 40,
+      "public_name": "Dataview",
+      "role": "queries",
+      "in_use": true,
+      "what": "Turns frontmatter into tables and lists. Dashboards are queries over the notes themselves, so a dashboard cannot quietly disagree with what it is summarising."
+    },
+    "obsidian-kanban": {
+      "order": 50,
+      "public_name": "Kanban",
+      "role": "boards",
+      "in_use": true,
+      "what": "Markdown-backed boards. A card is a list item and the board is a rendering of it, which is why the boards survive the plugin being switched off."
+    },
+    "base-board": {
+      "order": 60,
+      "public_name": "Base Board",
+      "role": "bases board",
+      "in_use": true,
+      "what": "Kanban over Obsidian Bases \u2014 the board is built from note properties rather than stored in the plugin's own file format."
+    },
+    "board-view": {
+      "order": 70,
+      "public_name": "Board View",
+      "role": "bases gallery",
+      "in_use": true,
+      "what": "Board and gallery views for Bases, for the cases where a table is the wrong shape for the question."
+    },
+    "tag-wrangler": {
+      "order": 80,
+      "public_name": "Tag Wrangler",
+      "role": "tag hygiene",
+      "in_use": true,
+      "what": "Renames and merges a tag across every note at once. Without it a taxonomy is permanent the day it is written, so the vault could never be reorganised."
+    },
+    "obsidian-style-settings": {
+      "order": 90,
+      "public_name": "Style Settings",
+      "role": "theme tokens",
+      "in_use": true,
+      "what": "Exposes the AnuPpuccin theme's variables as switches. The look stays a setting rather than a fork of the theme that has to be re-applied after every update."
+    },
+    "realclaudian": {
+      "order": 100,
+      "public_name": "Claudian",
+      "role": "agents in the vault",
+      "in_use": true,
+      "what": "Runs Claude Code and other CLI agents in a pane inside Obsidian, so an agent works on the note I am reading instead of in a separate window."
+    },
+    "bookshelf": {
+      "order": 110,
+      "public_name": "Bookshelf",
+      "role": "reading",
+      "in_use": null,
+      "what": "Collects book notes into a shelf with status and progress."
+    },
+    "githobs": {
+      "order": 120,
+      "public_name": "GitHobs",
+      "role": "github issues",
+      "in_use": false,
+      "what": "Edits GitHub issues as notes. Switched on and connected to no repositories yet, so today it is a capability rather than a habit."
+    },
+    "obsidian-custom-frames": {
+      "order": 130,
+      "public_name": "Custom Frames",
+      "role": "web panes",
+      "in_use": false,
+      "what": "Puts a web app into a pane by iframe. Enabled with no frames defined \u2014 the slot exists, nothing is in it."
+    }
+  },
+  "vault_page": {
+    "order": 55,
+    "title": "The vault",
+    "line": "The plugins switched on in Obsidian, and what each one is actually here to do.",
+    "thesis": "The vault is the substrate the rest of the system reads and writes, so its plugins are chosen for one property: whether an agent can work with what they produce. Tasks, boards, and dashboards are all markdown and frontmatter, and Git turns every edit into a diff, which means nothing here stores its state somewhere a script cannot see. Two of these are switched on and doing nothing yet; they are listed as such rather than quietly dropped."
+  },
   "clusters": [
     {
       "id": "rhythms",

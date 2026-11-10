@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T23:07:46.244Z",
+    "generated_at": "2026-11-10T23:19:46.128Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T23:07:46.244Z"
+    "generated_at": "2026-11-10T23:19:46.128Z"
   },
   "loops": [
     {
@@ -965,8 +965,213 @@
           "body": "The furthest-downstream delivery target: a page a stranger can read, a feed a machine can poll, a retrieval endpoint an agent can query. This page is that channel describing itself."
         }
       ]
+    },
+    {
+      "id": "vault",
+      "order": 55,
+      "title": "The vault",
+      "line": "The plugins switched on in Obsidian, and what each one is actually here to do.",
+      "thesis": "The vault is the substrate the rest of the system reads and writes, so its plugins are chosen for one property: whether an agent can work with what they produce. Tasks, boards, and dashboards are all markdown and frontmatter, and Git turns every edit into a diff, which means nothing here stores its state somewhere a script cannot see. Two of these are switched on and doing nothing yet; they are listed as such rather than quietly dropped.",
+      "derived_from": "obsidian",
+      "items": [
+        {
+          "title": "Tasks",
+          "meta": "v8.2.2 · task layer",
+          "body": "The query engine behind every task list in the vault. A task is a line of markdown with frontmatter; Tasks reads them back as due, overdue, or waiting. There is no database to get out of step with the notes, because the notes are the database."
+        },
+        {
+          "title": "Day Planner",
+          "meta": "v0.33.0 · day rhythm",
+          "body": "Time-blocks the day inside the Day planner note. That note is the one surface agents are not allowed to write to, which is exactly why it is where the thinking goes."
+        },
+        {
+          "title": "Git",
+          "meta": "v2.38.6 · versioning",
+          "body": "Commits the vault on a timer and backs it up. An agent's edit arrives as a diff rather than an overwrite, so every automated change is reviewable after the fact."
+        },
+        {
+          "title": "Dataview",
+          "meta": "v0.5.68 · queries",
+          "body": "Turns frontmatter into tables and lists. Dashboards are queries over the notes themselves, so a dashboard cannot quietly disagree with what it is summarising."
+        },
+        {
+          "title": "Kanban",
+          "meta": "v2.0.51 · boards",
+          "body": "Markdown-backed boards. A card is a list item and the board is a rendering of it, which is why the boards survive the plugin being switched off."
+        },
+        {
+          "title": "Base Board",
+          "meta": "v2.6.1 · bases board",
+          "body": "Kanban over Obsidian Bases — the board is built from note properties rather than stored in the plugin's own file format."
+        },
+        {
+          "title": "Board View",
+          "meta": "v1.0.3 · bases gallery",
+          "body": "Board and gallery views for Bases, for the cases where a table is the wrong shape for the question."
+        },
+        {
+          "title": "Tag Wrangler",
+          "meta": "v0.6.4 · tag hygiene",
+          "body": "Renames and merges a tag across every note at once. Without it a taxonomy is permanent the day it is written, so the vault could never be reorganised."
+        },
+        {
+          "title": "Style Settings",
+          "meta": "v1.0.9 · theme tokens",
+          "body": "Exposes the AnuPpuccin theme's variables as switches. The look stays a setting rather than a fork of the theme that has to be re-applied after every update."
+        },
+        {
+          "title": "Claudian",
+          "meta": "v2.2.6 · agents in the vault",
+          "body": "Runs Claude Code and other CLI agents in a pane inside Obsidian, so an agent works on the note I am reading instead of in a separate window."
+        },
+        {
+          "title": "Bookshelf",
+          "meta": "v0.21.3 · reading",
+          "body": "Collects book notes into a shelf with status and progress."
+        },
+        {
+          "title": "GitHobs",
+          "meta": "v1.1.1 · github issues · idle",
+          "body": "Edits GitHub issues as notes. Switched on and connected to no repositories yet, so today it is a capability rather than a habit."
+        },
+        {
+          "title": "Custom Frames",
+          "meta": "v2.6.0 · web panes · idle",
+          "body": "Puts a web app into a pane by iframe. Enabled with no frames defined — the slot exists, nothing is in it."
+        }
+      ]
     }
   ],
+  "vault": {
+    "enabled": 13,
+    "installed": 16,
+    "off": [
+      "mermaid-tools",
+      "smart-templates",
+      "weekly-goal-tracker"
+    ],
+    "theme": "AnuPpuccin",
+    "plugins": [
+      {
+        "id": "obsidian-tasks-plugin",
+        "name": "Tasks",
+        "version": "8.2.2",
+        "role": "task layer",
+        "what": "The query engine behind every task list in the vault. A task is a line of markdown with frontmatter; Tasks reads them back as due, overdue, or waiting. There is no database to get out of step with the notes, because the notes are the database.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "obsidian-day-planner",
+        "name": "Day Planner",
+        "version": "0.33.0",
+        "role": "day rhythm",
+        "what": "Time-blocks the day inside the Day planner note. That note is the one surface agents are not allowed to write to, which is exactly why it is where the thinking goes.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "obsidian-git",
+        "name": "Git",
+        "version": "2.38.6",
+        "role": "versioning",
+        "what": "Commits the vault on a timer and backs it up. An agent's edit arrives as a diff rather than an overwrite, so every automated change is reviewable after the fact.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "dataview",
+        "name": "Dataview",
+        "version": "0.5.68",
+        "role": "queries",
+        "what": "Turns frontmatter into tables and lists. Dashboards are queries over the notes themselves, so a dashboard cannot quietly disagree with what it is summarising.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "obsidian-kanban",
+        "name": "Kanban",
+        "version": "2.0.51",
+        "role": "boards",
+        "what": "Markdown-backed boards. A card is a list item and the board is a rendering of it, which is why the boards survive the plugin being switched off.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "base-board",
+        "name": "Base Board",
+        "version": "2.6.1",
+        "role": "bases board",
+        "what": "Kanban over Obsidian Bases — the board is built from note properties rather than stored in the plugin's own file format.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "board-view",
+        "name": "Board View",
+        "version": "1.0.3",
+        "role": "bases gallery",
+        "what": "Board and gallery views for Bases, for the cases where a table is the wrong shape for the question.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "tag-wrangler",
+        "name": "Tag Wrangler",
+        "version": "0.6.4",
+        "role": "tag hygiene",
+        "what": "Renames and merges a tag across every note at once. Without it a taxonomy is permanent the day it is written, so the vault could never be reorganised.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "obsidian-style-settings",
+        "name": "Style Settings",
+        "version": "1.0.9",
+        "role": "theme tokens",
+        "what": "Exposes the AnuPpuccin theme's variables as switches. The look stays a setting rather than a fork of the theme that has to be re-applied after every update.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "realclaudian",
+        "name": "Claudian",
+        "version": "2.2.6",
+        "role": "agents in the vault",
+        "what": "Runs Claude Code and other CLI agents in a pane inside Obsidian, so an agent works on the note I am reading instead of in a separate window.",
+        "in_use": true,
+        "annotated": true
+      },
+      {
+        "id": "bookshelf",
+        "name": "Bookshelf",
+        "version": "0.21.3",
+        "role": "reading",
+        "what": "Collects book notes into a shelf with status and progress.",
+        "in_use": null,
+        "annotated": true
+      },
+      {
+        "id": "githobs",
+        "name": "GitHobs",
+        "version": "1.1.1",
+        "role": "github issues",
+        "what": "Edits GitHub issues as notes. Switched on and connected to no repositories yet, so today it is a capability rather than a habit.",
+        "in_use": false,
+        "annotated": true
+      },
+      {
+        "id": "obsidian-custom-frames",
+        "name": "Custom Frames",
+        "version": "2.6.0",
+        "role": "web panes",
+        "what": "Puts a web app into a pane by iframe. Enabled with no frames defined — the slot exists, nothing is in it.",
+        "in_use": false,
+        "annotated": true
+      }
+    ],
+    "unannotated": []
+  },
   "ground": {
     "title": "Ground",
     "line": "What the loops run on: the models, the tools, and the machines.",
@@ -1026,6 +1231,7 @@
   },
   "drift": {
     "unannotated": [],
-    "retired": []
+    "retired": [],
+    "plugins_unannotated": []
   }
 }
