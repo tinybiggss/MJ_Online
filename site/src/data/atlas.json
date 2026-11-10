@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T22:47:47.745Z",
+    "generated_at": "2026-11-10T22:48:27.365Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -72,11 +72,11 @@
     }
   ],
   "stats": {
-    "loops_running": 29,
-    "loops_total": 32,
+    "loops_running": 30,
+    "loops_total": 33,
     "completed_oneshots": 3,
-    "patterns_in_use": 6,
-    "annotations_missing": 0,
+    "patterns_in_use": 7,
+    "annotations_missing": 1,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 7,
@@ -84,9 +84,10 @@
       "ritual": 6,
       "watcher": 7,
       "intake": 3,
+      "unclassified": 1,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T22:47:47.745Z"
+    "generated_at": "2026-11-10T22:48:27.365Z"
   },
   "loops": [
     {
@@ -300,6 +301,25 @@
       "annotated": true,
       "does": "Turns machine and job failures into tracked cards with an owner instead of log lines nobody reads.",
       "why": "A failure that only exists in a log has not been reported to anyone."
+    },
+    {
+      "name": "First-failure ping",
+      "public_name": "First-failure ping",
+      "slug": "first-failure-ping",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Every 15 minutes",
+      "schedule": "*/15 * * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "last_status": null,
+      "last_run_hours": null,
+      "failure_streak": 0,
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "kb-nightly-maintenance",
@@ -662,7 +682,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 17.7,
+      "last_run_hours": 17.8,
       "failure_streak": 0,
       "annotated": true,
       "does": "Closes the working day at a fixed hour: capture what is open, name tomorrow's first move, stop.",
@@ -701,7 +721,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 44.7,
+      "last_run_hours": 44.8,
       "failure_streak": 0,
       "annotated": true,
       "does": "The same close, run through the accommodations the rest of the week is designed around.",
@@ -1007,7 +1027,9 @@
     "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern — the loop is the point — and drops the target, the buyer, and the amount."
   },
   "drift": {
-    "unannotated": [],
+    "unannotated": [
+      "First-failure ping"
+    ],
     "retired": []
   }
 }
