@@ -49,13 +49,6 @@ function publicChannel(raw, map) {
     .filter((v, i, a) => a.indexOf(v) === i);
 }
 
-function hoursSince(iso) {
-  if (!iso) return null;
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return null;
-  return Math.round(((Date.now() - d.getTime()) / 36e5) * 10) / 10;
-}
-
 const DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 /** "1-5" -> [1,2,3,4,5]; "6,0" -> [6,0]; "1,4" -> [1,4]; "*" -> null */
@@ -184,7 +177,6 @@ for (const job of live) {
     channels: publicChannel(job.deliver, channelMap),
     state: active ? "running" : "completed",
     last_status: job.last_status || null,
-    last_run_hours: hoursSince(job.last_run_at),
     failure_streak: job.failure_streak || 0,
     annotated: Boolean(ann),
     does: ann?.does || null,
