@@ -271,6 +271,20 @@
       "pattern": "ritual",
       "does": "Closes the working day at a fixed hour: capture what is open, name tomorrow's first move, stop.",
       "why": "The stop time is the feature. Everything else here is downstream of being able to end the day."
+    },
+    "Atlas publish": {
+      "public_name": "Atlas publish",
+      "band": "close",
+      "pattern": "gate",
+      "does": "Rebuilds this page from the live scheduler every hour and publishes it only if the bytes actually changed.",
+      "why": "The page you are reading is itself a loop. It will not publish while the working tree is dirty, or from any branch but the deploy branch — the same refusal discipline the rest of the system uses, applied to its own documentation."
+    },
+    "First-failure ping": {
+      "public_name": "First-failure ping",
+      "band": "tend",
+      "pattern": "watcher",
+      "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
+      "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
     }
   },
   "clusters": [

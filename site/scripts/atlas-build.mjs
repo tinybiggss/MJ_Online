@@ -212,7 +212,8 @@ const stats = {
   loops_running: running.length,
   loops_total: loops.length,
   completed_oneshots: loops.filter((l) => l.state === "completed").length,
-  patterns_in_use: Object.keys(byPattern).length,
+  // an unannotated loop is not a seventh shape; it is a hole in the annotation file.
+  patterns_in_use: Object.keys(byPattern).filter((k) => k !== "unclassified").length,
   annotations_missing: unannotated.length,
   retired_annotations: retired.length,
   by_pattern: byPattern,

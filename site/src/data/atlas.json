@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T22:48:27.365Z",
+    "generated_at": "2026-11-10T22:49:06.463Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -75,19 +75,18 @@
     "loops_running": 30,
     "loops_total": 33,
     "completed_oneshots": 3,
-    "patterns_in_use": 7,
-    "annotations_missing": 1,
+    "patterns_in_use": 6,
+    "annotations_missing": 0,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 7,
       "brief": 4,
       "ritual": 6,
-      "watcher": 7,
+      "watcher": 8,
       "intake": 3,
-      "unclassified": 1,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T22:48:27.365Z"
+    "generated_at": "2026-11-10T22:49:06.463Z"
   },
   "loops": [
     {
@@ -201,7 +200,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 5.5,
+      "last_run_hours": 5.6,
       "failure_streak": 0,
       "annotated": true,
       "does": "A single nudge at the hour the morning block can actually begin, and nothing before it.",
@@ -221,25 +220,6 @@
       "state": "completed",
       "last_status": "ok",
       "last_run_hours": 303.6,
-      "failure_streak": 0,
-      "annotated": false,
-      "does": null,
-      "why": null
-    },
-    {
-      "name": "Atlas publish",
-      "public_name": "Atlas publish",
-      "slug": "atlas-publish",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "Hourly, at :00",
-      "schedule": "0 * * * *",
-      "channels": [
-        "Local log"
-      ],
-      "state": "completed",
-      "last_status": null,
-      "last_run_hours": null,
       "failure_streak": 0,
       "annotated": false,
       "does": null,
@@ -307,7 +287,7 @@
       "public_name": "First-failure ping",
       "slug": "first-failure-ping",
       "band": "tend",
-      "pattern": null,
+      "pattern": "watcher",
       "cadence": "Every 15 minutes",
       "schedule": "*/15 * * * *",
       "channels": [
@@ -317,9 +297,9 @@
       "last_status": null,
       "last_run_hours": null,
       "failure_streak": 0,
-      "annotated": false,
-      "does": null,
-      "why": null
+      "annotated": true,
+      "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
+      "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
     },
     {
       "name": "kb-nightly-maintenance",
@@ -412,7 +392,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 6.5,
+      "last_run_hours": 6.6,
       "failure_streak": 0,
       "annotated": true,
       "does": "Compares what the live domain serves against what the last deploy actually built, and fails when they disagree.",
@@ -450,7 +430,7 @@
       ],
       "state": "running",
       "last_status": "ok",
-      "last_run_hours": 0,
+      "last_run_hours": 0.1,
       "failure_streak": 0,
       "annotated": true,
       "does": "Walks everything in flight and pushes the pieces that have stopped moving.",
@@ -628,6 +608,25 @@
       "annotated": true,
       "does": "Pulls the day's signal through a standing topic filter and delivers only what clears it.",
       "why": "I want to be current on four subjects, not informed about everything."
+    },
+    {
+      "name": "Atlas publish",
+      "public_name": "Atlas publish",
+      "slug": "atlas-publish",
+      "band": "close",
+      "pattern": "gate",
+      "cadence": "Hourly, at :00",
+      "schedule": "0 * * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "completed",
+      "last_status": null,
+      "last_run_hours": null,
+      "failure_streak": 0,
+      "annotated": true,
+      "does": "Rebuilds this page from the live scheduler every hour and publishes it only if the bytes actually changed.",
+      "why": "The page you are reading is itself a loop. It will not publish while the working tree is dirty, or from any branch but the deploy branch — the same refusal discipline the rest of the system uses, applied to its own documentation."
     },
     {
       "name": "Money momentum check",
@@ -1027,9 +1026,7 @@
     "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern — the loop is the point — and drops the target, the buyer, and the amount."
   },
   "drift": {
-    "unannotated": [
-      "First-failure ping"
-    ],
+    "unannotated": [],
     "retired": []
   }
 }
