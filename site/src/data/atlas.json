@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T22:53:56.172Z",
+    "generated_at": "2026-11-10T23:00:30.050Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -87,7 +87,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-10T22:53:56.172Z"
+    "generated_at": "2026-11-10T23:00:30.050Z"
   },
   "loops": [
     {
@@ -284,7 +284,7 @@
         "Telegram"
       ],
       "state": "running",
-      "last_status": null,
+      "last_status": "ok",
       "failure_streak": 0,
       "annotated": true,
       "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
@@ -593,7 +593,7 @@
         "Local log"
       ],
       "state": "running",
-      "last_status": null,
+      "last_status": "ok",
       "failure_streak": 0,
       "annotated": true,
       "does": "Rebuilds this page from the live scheduler every hour and publishes it only if the bytes actually changed.",
