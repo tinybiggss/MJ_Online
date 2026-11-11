@@ -146,3 +146,26 @@ html {
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------- assistant
+   The Distills bubble is fixed bottom-right, z 999999, and ships a ~100px
+   "Ask my AI" label beside a 60px button. On a phone that is 44% of the
+   viewport parked over live text, so below md it becomes the icon alone; the
+   button keeps its aria-label and the widget keeps its corner. The footer
+   carries matching bottom padding so its last line is never underneath it. */
+@media (max-width: 767px) {
+  .rag-chatbot-bubble-label {
+    display: none !important;
+  }
+  .rag-chatbot-widget {
+    gap: 0 !important;
+  }
+  .rag-chatbot-bubble {
+    width: 52px !important;
+    height: 52px !important;
+  }
+  .rag-chatbot-bubble svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}

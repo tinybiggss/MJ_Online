@@ -52,6 +52,32 @@ const description =
     </div>
   </section>
 
+  <!-- ------------------------------------------------- in-page waypoints -->
+  <nav aria-label="On this page" class="sticky top-[68px] z-30 border-b border-field-line bg-field-bg/92 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl gap-x-1 overflow-x-auto px-4 [scrollbar-width:none] md:px-6">
+      {[
+        { id: "map", label: "Map" },
+        { id: "shapes", label: "Shapes" },
+        { id: "index", label: "Parts" },
+        { id: "ground", label: "Ground" },
+        { id: "withheld", label: "Withheld" },
+      ].map((s) => (
+        <a
+          href={`#${s.id}`}
+          class="inline-flex min-h-[44px] items-center whitespace-nowrap px-2.5 font-data text-2xs uppercase tracking-[0.14em] text-field-faint transition-colors hover:text-signal"
+        >
+          {s.label}
+        </a>
+      ))}
+      <a
+        href="#top"
+        class="ml-auto hidden shrink-0 items-center px-2.5 font-data text-2xs uppercase tracking-[0.14em] text-field-faint transition-colors hover:text-signal md:inline-flex"
+      >
+        ↑ top
+      </a>
+    </div>
+  </nav>
+
   <!-- ----------------------------------------------------------------- map -->
   <section id="map" class="scroll-mt-24 border-b border-field-line">
     <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
@@ -81,7 +107,7 @@ const description =
         </a>
         <a href={`/system/${frameBefore.id}/`} class="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 rounded-sm border border-dashed border-field-line px-4 py-3 transition-colors hover:border-signal/60 hover:bg-field-panel">
           <span class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-signal">{frameBefore.frame_label}</span>
-          <span class="max-w-[64ch] text-[0.8125rem] leading-relaxed text-field-muted">{frameBefore.line}</span>
+          <span class="max-w-[64ch] text-[0.875rem] leading-relaxed text-field-muted">{frameBefore.line}</span>
         </a>
       </div>
 
@@ -93,20 +119,19 @@ const description =
       <div class="mt-3 grid gap-y-3 md:grid-cols-[8.5rem_1fr] md:items-start md:gap-x-8">
         <div class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint md:pt-2.5">The system</div>
         <div class="grid gap-px overflow-hidden rounded-sm border border-field-line bg-field-line sm:grid-cols-2 lg:grid-cols-4">
-          {tiles.map((c, i) => (
+          {tiles.map((c) => (
             <a
               href={`/system/${c.id}/`}
               data-tile={c.id}
               class="group flex min-h-[10.5rem] flex-col gap-3 bg-field-bg p-4 transition-colors hover:bg-field-panel"
             >
-              <span class="font-data text-2xs tabular-nums text-field-faint">0{i + 1}</span>
               <span class="font-display text-[0.9375rem] font-semibold leading-tight tracking-[-0.01em] transition-colors group-hover:text-signal">
                 {c.title}
               </span>
               <span class="whitespace-nowrap font-data text-2xs text-signal">
                 {countFor(c.id)} <span class="text-field-faint">{unitFor(c.id)}</span>
               </span>
-              <p class="mt-auto text-[0.75rem] leading-relaxed text-field-muted">{c.line}</p>
+              <p class="mt-auto text-[0.875rem] leading-relaxed text-field-muted">{c.line}</p>
             </a>
           ))}
         </div>
@@ -123,7 +148,7 @@ const description =
         </a>
         <a href={`/system/${frameAfter.id}/`} class="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 rounded-sm border border-dashed border-field-line px-4 py-3 transition-colors hover:border-signal/60 hover:bg-field-panel">
           <span class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-signal">{frameAfter.frame_label}</span>
-          <span class="max-w-[64ch] text-[0.8125rem] leading-relaxed text-field-muted">{frameAfter.line}</span>
+          <span class="max-w-[64ch] text-[0.875rem] leading-relaxed text-field-muted">{frameAfter.line}</span>
         </a>
       </div>
 
@@ -172,14 +197,12 @@ const description =
       <div class="mt-10 border-t border-field-line">
         {patterns.map((p) => (
           <a href={`/system/six-shapes/#${p.id}`} class="group grid gap-2 border-b border-field-line py-5 transition-colors hover:bg-field-panel md:grid-cols-[9rem_1fr_15rem] md:gap-x-8">
-            <div class="flex items-baseline gap-3">
-              <span class="font-data text-2xs tabular-nums text-signal">
-                {String(stats.by_pattern[p.id] ?? 0).padStart(2, "0")}
-              </span>
+            <div class="flex flex-wrap items-baseline gap-x-2.5">
               <span class="font-display text-base font-semibold transition-colors group-hover:text-signal">{p.name}</span>
+              <span class="font-data text-2xs tabular-nums text-field-faint">{stats.by_pattern[p.id] ?? 0} loops</span>
             </div>
             <p class="text-sm leading-relaxed text-field-ink">{p.line}</p>
-            <p class="text-[0.8125rem] leading-relaxed text-field-faint">{p.when}</p>
+            <p class="text-[0.875rem] leading-relaxed text-field-faint">{p.when}</p>
           </a>
         ))}
       </div>
@@ -202,7 +225,7 @@ const description =
               {c.title}
             </span>
             <span class="col-span-2 text-sm leading-relaxed text-field-muted md:col-span-1">{c.line}</span>
-            <span class="col-start-2 whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-field-faint md:col-start-auto md:text-right">
+            <span class="-my-2 col-start-2 inline-flex min-h-[44px] items-center whitespace-nowrap font-data text-2xs uppercase tracking-[0.1em] text-field-faint md:col-start-auto md:justify-end md:text-right">
               {c.index_tag ?? `${countFor(c.id)} ${unitFor(c.id)}`} <span class="text-signal">→</span>
             </span>
           </a>

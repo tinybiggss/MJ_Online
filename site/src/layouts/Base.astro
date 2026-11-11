@@ -58,7 +58,7 @@ const imageURL = new URL(image, Astro.site);
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <slot name="head" />
   </head>
-  <body class={bodyClass}>
+  <body class={bodyClass} id="top">
     <slot />
   </body>
 </html>
