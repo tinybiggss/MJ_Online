@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T05:15:04.900Z",
+    "generated_at": "2026-11-11T08:00:30.243Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -156,8 +156,8 @@
   ],
   "stats": {
     "loops_running": 32,
-    "loops_total": 35,
-    "completed_oneshots": 3,
+    "loops_total": 34,
+    "completed_oneshots": 2,
     "loops_paused": 0,
     "patterns_in_use": 6,
     "annotations_missing": 0,
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-11T05:15:04.900Z"
+    "generated_at": "2026-11-11T08:00:30.243Z"
   },
   "loops": [
     {
@@ -512,22 +512,6 @@
       "annotated": true,
       "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
       "why": "The quiet failures are the ones attached to something a customer is using."
-    },
-    {
-      "name": "W2 Claude gate (deferred past the 5h limit)",
-      "public_name": "W2 Claude gate (deferred past the 5h limit)",
-      "slug": "w2-claude-gate-deferred-past-the-5h-limit",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "10th of the month, 19:20",
-      "schedule": "20 19 10 11 *",
-      "channels": [
-        "Telegram"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
     },
     {
       "name": "Watcher guard (chain health)",
@@ -1382,6 +1366,7 @@
       "blocked",
       "done",
       "ready",
+      "running",
       "scheduled",
       "todo"
     ]
