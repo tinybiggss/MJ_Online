@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T04:00:31.684Z",
+    "generated_at": "2026-11-11T05:15:04.900Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-11T04:00:31.684Z"
+    "generated_at": "2026-11-11T05:15:04.900Z"
   },
   "loops": [
     {
@@ -1056,6 +1056,123 @@
           "body": "Puts a web app into a pane by iframe. Enabled with no frames defined — the slot exists, nothing is in it."
         }
       ]
+    },
+    {
+      "id": "crew",
+      "order": 45,
+      "title": "The crew",
+      "line": "The seats work arrives in — and why they are separate profiles.",
+      "thesis": "A profile is not a personality; it is a permission boundary with a voice. Each seat carries its own model, its own skills in scope, its own scheduler and its own lane on the board, so a judgement made in one seat cannot be quietly overruled by another seat's context. The roster is an org chart of what may be decided where — and the reason to keep eleven of them instead of one good generalist is that no single context can hold the editor, the release manager and the red team at once without all three collapsing into the same agreeable voice.",
+      "derived_from": "hermes profiles",
+      "frame_label": "11 seats",
+      "items": [
+        {
+          "title": "Corvus",
+          "meta": "default lane · orchestration",
+          "body": "The seat you talk to. It holds the conversation, the scheduler and the board, and dispatches almost everything rather than doing it: it is the only profile with your live context, which makes it the worst place for deep work and the right place to decide who should do it. It exists so that one agent is accountable for what you asked for, even when nine others did the work."
+        },
+        {
+          "title": "Daedalus",
+          "meta": "dev-lead · sequencing the build",
+          "body": "Turns a plan into cards and a plan into code: sequences the build, splits it into units one worker can finish, and owns the lanes where changes are made. It exists because delegation without a sequencing decision produces parallel work that cannot merge — the work is done and still cannot land."
+        },
+        {
+          "title": "Perkins",
+          "meta": "content · writing and editing",
+          "body": "Writing and editing, plus the publishing pipeline. The voice file is her authority and her constraint: she drafts, cuts and critiques, and she does not ship. Publication is your decision, made deliberately, not a step in her workflow — so everything that goes out sounds like one person rather than like whichever agent touched it last."
+        },
+        {
+          "title": "Spock",
+          "meta": "product · the red team",
+          "body": "The red team. Pre-mortems, stress tests, and the standing obligation to disagree: the only seat whose value is measured by the objections it raises before you commit, not by what it builds. It exists because a decision with no adversary in the room is a decision nobody has tested."
+        },
+        {
+          "title": "Norman",
+          "meta": "design · interface judgement",
+          "body": "Interface judgement: flows, critique, specs, and the argument for why a screen is wrong. It exists because design review conducted by the same seat that wrote the code reviews intentions, not the interface — and the interface is the part the reader actually meets."
+        },
+        {
+          "title": "Callimachus",
+          "meta": "ops · fleet hygiene",
+          "body": "Fleet hygiene: the vault, the inbox, the cron inventory, the runbooks that keep the other seats honest. It exists because the system's failure mode is not a crash — it is slow accumulation. Stale jobs, orphaned notes, loops nobody reads, and nothing ever announces them."
+        },
+        {
+          "title": "Scotty",
+          "meta": "release · deploys and rollbacks",
+          "body": "Builds, deploys and rollbacks on a deadline-bound queue. It exists because shipping is a different discipline from building: one optimises for a change being correct, the other for a change being reversible at 2am. Both matter, and they are not the same judgement."
+        },
+        {
+          "title": "Alfred",
+          "meta": "cfo · money",
+          "body": "Money: monetisation analysis, the portfolio ledger, and what each project actually costs to keep alive. It exists so the question 'is this worth doing' has an owner holding the numbers, instead of being settled by whoever is most enthusiastic that week."
+        },
+        {
+          "title": "Roy",
+          "meta": "roy · IT operations",
+          "body": "IT operations: every machine and device, host inventories, and the runbook for the night something breaks. It exists because infrastructure knowledge that lives in one agent's context disappears when that context does — the machine stays up, the knowledge of why does not."
+        },
+        {
+          "title": "Don",
+          "meta": "marketing · go-to-market",
+          "body": "Go-to-market: positioning, funnels, launch copy, and the plain answer to who this is for. It exists so the claim made in public is written by the seat that has to defend it, rather than borrowed from a spec written for engineers."
+        },
+        {
+          "title": "research",
+          "meta": "research · cited argument maps",
+          "body": "Cited argument maps: given a question, it returns what the record says with sources attached, and separates what is known from what is assumed. It exists so that 'we looked into it' is a claim that can be checked. This seat has no display name yet — an unnamed seat is one the orchestrator describes badly, which is worth fixing."
+        }
+      ]
+    },
+    {
+      "id": "floor",
+      "order": 65,
+      "title": "The floor",
+      "line": "The board where work becomes cards before it becomes commits.",
+      "thesis": "Cron is the heartbeat; the board is where work actually happens. Nothing is executed until it exists as a card with a brief, an owner and a definition of done, because a conversation that produced work leaves no record and cannot be checked. The board is also the only place the system admits it is stuck: a blocked card, or a card sitting ready with nobody to pick it up, is a fact on a screen rather than a feeling in the room.",
+      "derived_from": "kanban.db",
+      "frame_label": "10 lanes",
+      "items": [
+        {
+          "title": "A card, not a conversation",
+          "meta": "the unit of work",
+          "body": "Work begins as a card: what it is, who owns it, and what finishing looks like. A conversation that produced work leaves no artifact and cannot be reviewed, so it does not count as done. The card is the only thing that can be blocked, gated, or closed — which is why everything worth keeping becomes one."
+        },
+        {
+          "title": "The lifecycle",
+          "meta": "triage → ready → running → review → done",
+          "body": "A card moves through five positions. Blocked and scheduled are parking lots, not stages of progress: a card in either is waiting on something outside the system, and the system records which something. A card that sits ready with no worker for long enough is a fault to be found, not a state to be tolerated."
+        },
+        {
+          "title": "Lanes are seats",
+          "meta": "the assignee is a profile",
+          "body": "The assignee on a card is a profile, not a person on a team. Dispatch spawns a worker carrying that seat's model, skills and voice, so the work arrives in the right register with the right permissions. The lane totals also tell you where work actually lands, which is not always where it was designed to land."
+        },
+        {
+          "title": "The board and the ledger",
+          "meta": "two records, one truth",
+          "body": "Two records, deliberately different. The tasks ledger in the vault holds what has been committed to, in the order it was committed. The board holds what is being executed, in the order it can move. The ledger is the source of truth and the board is the factory floor: when they disagree, the ledger wins and the board is wrong — a rule that sounds pedantic until the first time it settles an argument."
+        },
+        {
+          "title": "The gate",
+          "meta": "cross-model adversarial review",
+          "body": "Plans, specs and code pass two reviewers drawn from different models before a card closes. A reviewer that finds nothing has to say so and explain why; a rejection has to name the defect it found. The point is not consensus. It is that one model's blind spot is rarely shared by the other's, and a claim that survives both is worth more than a claim either one likes."
+        },
+        {
+          "title": "What this page will not show",
+          "meta": "redaction",
+          "body": "Counts, lanes and mechanisms — never a card id, a title, or a body. Some cards carry family and financial work, so the board is published as an instrument panel and not as a window. The same rule applies to the vault: what is shown is what can be shown without exposing the material."
+        },
+        {
+          "title": "The numbers",
+          "meta": "measured to 10 November 2026",
+          "body": "240 cards opened since 21 September, 222 closed — 42 of them in the last seven days. Eleven lanes. The median card closes in ten minutes and nine in ten close inside about two hours. Five were blocked at the moment of counting. This count is a still, not a feed: it is taken when the page is edited, because a number that redraws itself hourly turns a static site into a machine that commits every hour."
+        },
+        {
+          "title": "The lanes, as they stand",
+          "meta": "read from the board",
+          "body": "content, default, design, dev-lead, marketing, ops, product, release, research, roy. 2 further lanes on the board are not seats — work assigned there is work no profile picks up. Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead."
+        }
+      ]
     }
   ],
   "vault": {
@@ -1245,9 +1362,97 @@
   "redactions": {
     "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern — the loop is the point — and drops the target, the buyer, and the amount."
   },
+  "board": {
+    "lanes": [
+      "content",
+      "daedalus",
+      "default",
+      "design",
+      "dev-lead",
+      "hermes",
+      "marketing",
+      "ops",
+      "product",
+      "release",
+      "research",
+      "roy"
+    ],
+    "states": [
+      "archived",
+      "blocked",
+      "done",
+      "ready",
+      "scheduled",
+      "todo"
+    ]
+  },
+  "crew": {
+    "count": 11,
+    "seats": [
+      {
+        "alias": "default",
+        "name": "Corvus"
+      },
+      {
+        "alias": "dev-lead",
+        "name": "Daedalus"
+      },
+      {
+        "alias": "content",
+        "name": "Perkins"
+      },
+      {
+        "alias": "product",
+        "name": "Spock"
+      },
+      {
+        "alias": "design",
+        "name": "Norman"
+      },
+      {
+        "alias": "ops",
+        "name": "Callimachus"
+      },
+      {
+        "alias": "release",
+        "name": "Scotty"
+      },
+      {
+        "alias": "cfo",
+        "name": "Alfred"
+      },
+      {
+        "alias": "roy",
+        "name": "Roy"
+      },
+      {
+        "alias": "marketing",
+        "name": "Don"
+      },
+      {
+        "alias": "research",
+        "name": "research"
+      }
+    ]
+  },
   "drift": {
     "unannotated": [],
     "retired": [],
-    "plugins_unannotated": []
+    "plugins_unannotated": [],
+    "seats_undescribed": [],
+    "board_lanes": [
+      "content",
+      "daedalus",
+      "default",
+      "design",
+      "dev-lead",
+      "hermes",
+      "marketing",
+      "ops",
+      "product",
+      "release",
+      "research",
+      "roy"
+    ]
   }
 }

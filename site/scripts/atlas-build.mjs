@@ -22,6 +22,7 @@
  *   --check  exit 1 if the committed atlas.json disagrees with the live store
  */
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
@@ -282,6 +283,70 @@ function readVault() {
   };
 }
 
+/* ------------------------------------------------------------------ floor */
+/**
+ * The board. STRUCTURE ONLY — lanes and states, read from kanban.db so a new
+ * lane shows up without an edit. Counts are deliberately NOT derived: card
+ * counts move hourly, and a page that rewrites itself hourly churns a commit
+ * every hour (the reason live status came out, see d2837e5). The numbers are a
+ * dated measurement living in the curated file, like the vault's prose.
+ *
+ * Nothing here may carry a card id, a title or a body: some of them hold family
+ * and financial work. Aggregates and mechanisms only.
+ */
+const KANBAN = resolve(homedir(), ".hermes/kanban.db");
+const PROFILES = resolve(homedir(), ".hermes/profiles");
+
+function sqlRows(sql) {
+  if (!existsSync(KANBAN)) return null;
+  try {
+    return execFileSync("sqlite3", [KANBAN, sql], { encoding: "utf8" })
+      .split("\n")
+      .map((s) => s.trim())
+      .filter(Boolean);
+  } catch {
+    return null;
+  }
+}
+
+function readBoard() {
+  const lanes = sqlRows("select distinct assignee from tasks where assignee is not null and assignee <> '' order by 1");
+  const states = sqlRows("select distinct status from tasks order by 1");
+  if (!lanes || !states) return null;
+  return { lanes, states };
+}
+
+/**
+ * The crew. Derived from the profiles on disk, so a seat Mike adds appears and
+ * a seat he removes disappears — and an undescribed one is published with its
+ * own manifest line rather than left out. Same contract as the plugins.
+ * The default profile has no profile.yaml; it is the seat you talk to.
+ */
+function readCrew() {
+  if (!existsSync(PROFILES)) return null;
+  const seats = [{ alias: "default", name: "Corvus", purpose: null }];
+  for (const dir of readdirSync(PROFILES, { withFileTypes: true })) {
+    if (!dir.isDirectory()) continue;
+    let name = null;
+    let purpose = null;
+    try {
+      const y = readFileSync(resolve(PROFILES, dir.name, "profile.yaml"), "utf8");
+      const pick = (k) => {
+        const m = new RegExp(`^${k}:\\s*(.+)$`, "m").exec(y);
+        return m ? m[1].trim().replace(/^["']|["']$/g, "") : null;
+      };
+      name = pick("display_name");
+      purpose = pick("description");
+    } catch {
+      // profile dir with no readable profile.yaml: still a seat, visibly unnamed
+    }
+    seats.push({ alias: dir.name, name: name || dir.name, purpose });
+  }
+  const orderOf = (s) => curated.crew_page?.seats?.[s.alias]?.order ?? 999;
+  seats.sort((a, b) => orderOf(a) - orderOf(b) || a.alias.localeCompare(b.alias));
+  return { count: seats.length, seats };
+}
+
 let vault = readVault();
 let committedVault = null;
 if (!vault) {
@@ -316,6 +381,62 @@ if (vault) {
   });
 }
 
+const board = readBoard();
+const crew = readCrew();
+const undescribedSeats = crew
+  ? crew.seats.filter((s) => !curated.crew_page?.seats?.[s.alias]).map((s) => s.alias)
+  : [];
+
+if (crew && curated.crew_page) {
+  clusters.push({
+    id: "crew",
+    order: curated.crew_page.order ?? 45,
+    title: curated.crew_page.title ?? "The crew",
+    line: curated.crew_page.line ?? "",
+    thesis: curated.crew_page.thesis ?? "",
+    derived_from: "hermes profiles",
+    frame_label: `${crew.count} seats`,
+    items: crew.seats.map((s) => {
+      const c = curated.crew_page.seats?.[s.alias] || {};
+      return {
+        title: c.public_name || s.name,
+        meta: c.meta || s.alias,
+        body: c.why || s.purpose || "Undescribed seat: profile.yaml describes it, but nothing here does yet.",
+      };
+    }),
+  });
+}
+
+// Only lanes that are seats are published. A lane whose name is not a profile
+// receives work nothing can pick up — a defect in the board, not a division of
+// labour — so it is counted out of the roster.
+const seatAliases = new Set((crew?.seats || []).map((s) => s.alias));
+const lanesShown = (board?.lanes || []).filter((l) => seatAliases.has(l));
+
+if (board && curated.board_page) {
+  clusters.push({
+    id: "floor",
+    order: curated.board_page.order ?? 65,
+    title: curated.board_page.title ?? "The floor",
+    line: curated.board_page.line ?? "",
+    thesis: curated.board_page.thesis ?? "",
+    derived_from: "kanban.db",
+    frame_label: `${lanesShown.length} lanes`,
+    items: [
+      ...(curated.board_page.items || []),
+      {
+        title: "The lanes, as they stand",
+        meta: "read from the board",
+        body: `${lanesShown.join(", ")}.${
+          board.lanes.length - lanesShown.length
+            ? ` ${board.lanes.length - lanesShown.length} further lanes on the board are not seats — work assigned there is work no profile picks up.`
+            : ""
+        } Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead.`,
+      },
+    ],
+  });
+}
+
 const atlas = {
   meta: {
     version: curated.version,
@@ -333,7 +454,17 @@ const atlas = {
   vault: vault ? { ...vault, unannotated: vault.unannotated } : null,
   ground: curated.ground,
   redactions: { note: curated.redactions.note },
-  drift: { unannotated, retired, plugins_unannotated: vault?.unannotated || [] },
+  board: board ? { lanes: board.lanes, states: board.states } : null,
+  crew: crew
+    ? { count: crew.count, seats: crew.seats.map((s) => ({ alias: s.alias, name: s.name })) }
+    : null,
+  drift: {
+    unannotated,
+    retired,
+    plugins_unannotated: vault?.unannotated || [],
+    seats_undescribed: undescribedSeats,
+    board_lanes: board?.lanes || [],
+  },
 };
 
 if (check) {
@@ -366,6 +497,14 @@ if (check) {
     }
     for (const id of prevPlugins.keys())
       if (!(vault?.plugins || []).some((p) => p.id === id)) diff.push(`plugin gone: ${id}`);
+
+    // The crew and the board drift the same way: a new seat or a new lane is
+    // published first, then written up.
+    if ((prev.drift?.seats_undescribed || []).join() !== undescribedSeats.join())
+      diff.push(`seats undescribed [${undescribedSeats.join(", ")}]`);
+    const prevLanes = prev.drift?.board_lanes || [];
+    if (prevLanes.join() !== (board?.lanes || []).join())
+      diff.push(`board lanes [${(board?.lanes || []).join(", ")}] (was ${prevLanes.join(", ")})`);
   }
   if (diff.length) {
     console.log("atlas drift:");

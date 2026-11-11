@@ -29,7 +29,8 @@ export const patternName = (id: string) => patterns.find((p: any) => p.id === id
 export const countFor = (id: string) =>
   id === "rhythms" ? running.length : (clusterById(id)?.items?.length ?? 0);
 
-export const unitFor = (id: string) => (id === "rhythms" ? "loops" : "entries");
+export const unitFor = (id: string) =>
+  id === "rhythms" ? "loops" : id === "crew" ? "seats" : id === "floor" ? "parts" : "entries";
 
 export const groundCount = ground.stack.length + ground.fleet.length;
 
