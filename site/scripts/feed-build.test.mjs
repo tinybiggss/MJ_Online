@@ -11,6 +11,7 @@ import {
   isConfidential,
   escapeXml,
   normaliseUrl,
+  substackSlug,
   titleSlug,
   mergeItems,
   parseSubstackRss,
@@ -293,6 +294,62 @@ describe('mergeItems', () => {
 
   it('drops anything that does not include public, as a last gate', () => {
     expect(mergeItems([item({ audience: ['friends'] })], []).items).toEqual([]);
+  });
+
+  it('lets RSS win a post the archive also holds, keeping RSS’s excerpt', () => {
+    const rss = item({ id: 'substack-piece', title: 'RSS Title', summary: 'Real excerpt.' });
+    const archive = item({ id: 'substack-piece', title: 'Archive Title', summary: '' });
+    const { items, added, addedFromArchive } = mergeItems([], [rss], [], [archive]);
+    expect(items).toHaveLength(1);
+    expect(items[0].summary).toBe('Real excerpt.');
+    expect(added).toBe(1);
+    expect(addedFromArchive).toBe(0);
+  });
+
+  it('gives an RSS item and its archive note the same id, so the guid survives the window', () => {
+    const [rss] = parseSubstackRss(
+      `<?xml version="1.0"?><rss version="2.0"><channel><title>RT</title><item>
+        <title>Convenience Is the Cage</title>
+        <description><![CDATA[<p>Substack's real excerpt.</p>]]></description>
+        <link>https://resilienttomorrow.substack.com/p/convenience-is-the-cage</link>
+        <pubDate>Fri, 06 Jun 2025 13:00:00 GMT</pubDate>
+      </item></channel></rss>`,
+    );
+    const archive = item({
+      id: `substack-${substackSlug(rss.url)}`,
+      url: rss.url,
+      title: 'Convenience Is the Cage',
+      summary: '',
+      date_published: '2025-06-06T00:00:00.000Z',
+    });
+    expect(archive.id).toBe(rss.id);
+    // Same post, two sources: one item, and the archive cannot replace the excerpt.
+    const { items, addedFromArchive } = mergeItems([], [rss], [], [archive]);
+    expect(items).toHaveLength(1);
+    expect(items[0].id).toBe('substack-convenience-is-the-cage');
+    expect(items[0].summary).toBe("Substack's real excerpt.");
+    expect(addedFromArchive).toBe(0);
+  });
+
+  it('admits an archive item only when no earlier source carried it', () => {
+    const rss = item({ id: 'substack-window', url: 'https://x.test/p/window', title: 'In the Window' });
+    const archive = item({
+      id: 'substack-evicted',
+      url: 'https://x.test/p/evicted',
+      title: 'Evicted',
+      date_published: '2025-01-01T00:00:00.000Z',
+    });
+    const { items, addedFromArchive } = mergeItems([], [rss], [], [archive]);
+    expect(items.map((entry) => entry.id)).toEqual(['substack-window', 'substack-evicted']);
+    expect(addedFromArchive).toBe(1);
+  });
+});
+
+describe('substackSlug', () => {
+  it('is the one slug definition the RSS id and the archive id share', () => {
+    expect(substackSlug('https://resilienttomorrow.substack.com/p/convenience-is-the-cage')).toBe('convenience-is-the-cage');
+    expect(substackSlug('https://resilienttomorrow.substack.com/p/a-slug/?utm_source=rss#comments')).toBe('a-slug');
+    expect(substackSlug('https://x.test/not-a-post')).toBe('');
   });
 });
 
@@ -652,6 +709,261 @@ describe('running the script against a fixture vault', () => {
       mkdirSync(path.join(outDir, 'friends'));
       expect(run(['--no-net', '--dry']).status).toBe(0);
       expect(readdirSync(outDir)).toEqual(['friends']);
+    });
+  });
+
+  // Source 4: the archive behind the RSS window. Same boundary as above — the gate is
+  // proven where notes become published output, not by unit-testing the loader.
+  describe('the archive leg', () => {
+    const archiveDir = () => path.join(vaultDir, 'Resilient Tomorrow/Published');
+    const writeArchive = (name, frontmatter) => {
+      mkdirSync(archiveDir(), { recursive: true });
+      writeFileSync(path.join(archiveDir(), `${name}.md`), `---\n${frontmatter}\n---\n\nNote body, never parsed.\n`);
+    };
+    const readFeed = () => JSON.parse(readFileSync(path.join(outDir, 'feed.json'), 'utf8'));
+    const readIndex = () => JSON.parse(readFileSync(path.join(outDir, 'index.json'), 'utf8'));
+    const archiveCounts = () => readIndex().sources.archive;
+    const articleUrl = (slug) => `https://resilienttomorrow.substack.com/p/${slug}`;
+    const note = (fields) => fields.join('\n');
+
+    it('admits a plain legacy note that declares no audience, and counts it', () => {
+      writeArchive(
+        '2025-01-22-legacy',
+        note(['title: "A Legacy Post"', 'status: published', `url: ${articleUrl('a-legacy-post')}`, 'date: 2025-01-22']),
+      );
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual(['substack-a-legacy-post']);
+      expect(readFeed().items[0]).toMatchObject({
+        url: articleUrl('a-legacy-post'),
+        title: 'A Legacy Post',
+        date_published: '2025-01-22T00:00:00.000Z',
+      });
+      expect(readFeed().items[0]._mj).toEqual({ audience: ['public'], type: 'essay' });
+      expect(archiveCounts()).toEqual({ dir: 'Resilient Tomorrow/Published', items: 1, admitted: 1, withheld: 0 });
+    });
+
+    it('withholds an only_paid note and counts it instead of dropping it silently', () => {
+      writeArchive(
+        'paid',
+        note(['title: "Paid Post"', 'status: published', 'audience: only_paid', `url: ${articleUrl('paid')}`, 'date: 2025-02-01']),
+      );
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual([]);
+      expect(archiveCounts()).toEqual({ dir: 'Resilient Tomorrow/Published', items: 1, admitted: 0, withheld: 1 });
+    });
+
+    it('withholds a note that is not status: published, and counts it', () => {
+      writeArchive(
+        'draft',
+        note(['title: "Still a Draft"', 'status: draft', `url: ${articleUrl('still-a-draft')}`, 'date: 2025-02-01']),
+      );
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual([]);
+      expect(readIndex().totals.items).toBe(0);
+      expect(archiveCounts()).toMatchObject({ admitted: 0, withheld: 1 });
+    });
+
+    it('withholds an audience value the archive cannot map, and says so', () => {
+      writeArchive(
+        'odd-audience',
+        note(['title: "Odd"', 'status: published', 'audience: teammates', `url: ${articleUrl('odd')}`, 'date: 2025-02-01']),
+      );
+      const result = run();
+      expect(result.status).toBe(0);
+      expect(publishedIds()).toEqual([]);
+      expect(result.stdout).toContain('teammates');
+      expect(archiveCounts()).toMatchObject({ admitted: 0, withheld: 1 });
+    });
+
+    it('maps everyone to public, in scalar and array form', () => {
+      writeArchive(
+        'everyone',
+        note(['title: "Everyone"', 'status: published', 'audience: everyone', `url: ${articleUrl('everyone')}`, 'date: 2025-02-01']),
+      );
+      writeArchive(
+        'everyone-array',
+        note(['title: "Everyone Array"', 'status: published', 'audience: [everyone]', `url: ${articleUrl('everyone-array')}`, 'date: 2025-02-02']),
+      );
+      expect(run().status).toBe(0);
+      expect(publishedIds().sort()).toEqual(['substack-everyone', 'substack-everyone-array']);
+      expect(archiveCounts()).toEqual({ dir: 'Resilient Tomorrow/Published', items: 2, admitted: 2, withheld: 0 });
+    });
+
+    it('does not read a declared-but-empty audience as the absent default-allow', () => {
+      for (const empty of ['audience:', 'audience: ""', 'audience: []']) {
+        rmSync(path.join(archiveDir(), 'empty.md'), { force: true });
+        writeArchive(
+          'empty',
+          note(['title: "Empty"', 'status: published', empty, `url: ${articleUrl('empty')}`, 'date: 2025-02-01']),
+        );
+        expect(run().status, empty).toBe(0);
+        expect(publishedIds(), empty).toEqual([]);
+        expect(archiveCounts(), empty).toMatchObject({ items: 1, admitted: 0, withheld: 1 });
+      }
+    });
+
+    it('withholds a note whose url is not a public Substack article', () => {
+      writeArchive(
+        'elsewhere',
+        note(['title: "Elsewhere"', 'status: published', 'url: https://example.test/p/elsewhere', 'date: 2025-02-01']),
+      );
+      writeArchive(
+        'not-an-article',
+        note(['title: "Not An Article"', 'status: published', 'url: https://resilienttomorrow.substack.com/about', 'date: 2025-02-01']),
+      );
+      writeArchive(
+        'no-slug',
+        note(['title: "No Slug"', 'status: published', `url: ${articleUrl('')}`, 'date: 2025-02-01']),
+      );
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual([]);
+      expect(archiveCounts()).toMatchObject({ items: 3, admitted: 0, withheld: 3 });
+    });
+
+    it('falls back to date: when published: is a flag rather than a date', () => {
+      writeArchive(
+        'flag',
+        note(['title: "Flag"', 'status: published', 'published: true', `url: ${articleUrl('flag')}`, 'date: 2025-04-04']),
+      );
+      expect(run().status).toBe(0);
+      expect(readFeed().items[0].date_published).toBe('2025-04-04T00:00:00.000Z');
+    });
+
+    it('takes the id from the URL, not the filename, when the stem differs from the slug', () => {
+      writeArchive(
+        '2025-06-06-Convenience-Is-The-Cage-Why-Redefining-Wealth-Is-The-First-Step',
+        note(['title: "Convenience Is the Cage"', 'status: published', `url: ${articleUrl('convenience-is-the-cage')}`, 'date: 2025-06-06']),
+      );
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual(['substack-convenience-is-the-cage']);
+    });
+
+    it('prefers canonical_url over url and publishes no body text when no summary is authored', () => {
+      writeArchive(
+        'deks',
+        note([
+          'title: "Dek Only"',
+          'status: published',
+          `url: ${articleUrl('stale-url')}`,
+          `canonical_url: ${articleUrl('canonical-one')}`,
+          'date: 2026-10-08',
+        ]),
+      );
+      expect(run().status).toBe(0);
+      const [entry] = readFeed().items;
+      expect(entry.url).toBe(articleUrl('canonical-one'));
+      expect(entry.summary).toBeUndefined();
+      expect(entry.content_text).toBe('Dek Only');
+    });
+
+    it('uses an authored summary, falling back to dek, and never the body', () => {
+      writeArchive(
+        'authored',
+        note([
+          'title: "Authored"',
+          'status: published',
+          `url: ${articleUrl('authored')}`,
+          'date: 2025-03-01',
+          'summary: "The real excerpt."',
+        ]),
+      );
+      writeArchive(
+        'dek',
+        note(['title: "Dek"', 'status: published', `url: ${articleUrl('dek')}`, 'date: 2025-03-02', 'dek: "A subtitle, not the body."']),
+      );
+      expect(run().status).toBe(0);
+      const byId = Object.fromEntries(readFeed().items.map((entry) => [entry.id, entry]));
+      expect(byId['substack-authored'].summary).toBe('The real excerpt.');
+      expect(byId['substack-dek'].summary).toBe('A subtitle, not the body.');
+    });
+
+    it('carries themes as tags, and omits tags when there are none', () => {
+      writeArchive(
+        'tagged',
+        note([
+          'title: "Tagged"',
+          'status: published',
+          `url: ${articleUrl('tagged')}`,
+          'date: 2025-03-01',
+          'themes: [community_resilience, tool_sharing]',
+        ]),
+      );
+      writeArchive('untagged', note(['title: "Untagged"', 'status: published', `url: ${articleUrl('untagged')}`, 'date: 2025-03-02']));
+      expect(run().status).toBe(0);
+      const byId = Object.fromEntries(readFeed().items.map((entry) => [entry.id, entry]));
+      expect(byId['substack-tagged'].tags).toEqual(['community_resilience', 'tool_sharing']);
+      expect(byId['substack-untagged'].tags).toBeUndefined();
+    });
+
+    it('keeps one item when the publication log already carries the same post', () => {
+      const shared = articleUrl('logged');
+      writeLog(
+        'logged',
+        `title: Log Title\naudience: public\nplatforms:\n  - platform: substack\n    form: article\n    url: ${shared}\n    date: 2026-10-01`,
+      );
+      writeArchive('archive-of-logged', note(['title: "Archive Title"', 'status: published', `url: ${shared}`, 'date: 2026-10-01']));
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual(['logged']);
+      expect(readIndex().sources.archive).toMatchObject({ admitted: 1, withheld: 0 });
+    });
+
+    it('never counts or names a confidential note', () => {
+      writeArchive(
+        'leaky',
+        note(['title: "Leaky Secret"', 'status: published', 'confidential: ghn', `url: ${articleUrl('leaky')}`, 'date: 2025-01-01']),
+      );
+      expect(run().status).toBe(0);
+      expect(publishedIds()).toEqual([]);
+      expect(JSON.stringify(readIndex())).not.toMatch(/leaky|Leaky/i);
+      expect(archiveCounts()).toEqual({ dir: 'Resilient Tomorrow/Published', items: 0, admitted: 0, withheld: 0 });
+    });
+
+    it('keeps a confidential note unnamed even when its frontmatter fails strict YAML', () => {
+      writeArchive(
+        'broken-secret',
+        note([
+          'title: "Broken Secret"',
+          'title: "Duplicate Key"',
+          'status: published',
+          'confidential: ghn',
+          `url: ${articleUrl('broken-secret')}`,
+          'date: 2025-01-01',
+        ]),
+      );
+      const result = run();
+      expect(result.status).toBe(0);
+      expect(publishedIds()).toEqual([]);
+      expect(result.stdout).not.toContain('broken-secret');
+      expect(JSON.stringify(readIndex())).not.toMatch(/broken-secret|Broken Secret/i);
+      expect(archiveCounts()).toEqual({ dir: 'Resilient Tomorrow/Published', items: 0, admitted: 0, withheld: 0 });
+    });
+
+    it('builds green with no archive directory, leaving the log items unchanged', () => {
+      writeLog('declared', `title: Declared\naudience: public\n${platformsFor('declared')}`);
+      const result = run();
+      expect(result.status).toBe(0);
+      expect(result.stdout).toContain('archive dir not found');
+      expect(publishedIds()).toEqual(['declared']);
+      expect(archiveCounts()).toEqual({ dir: 'Resilient Tomorrow/Published', items: 0, admitted: 0, withheld: 0 });
+    });
+
+    it('still supplies the archive with no network, which is the point of the leg', () => {
+      writeArchive(
+        'offline',
+        note(['title: "Offline"', 'status: published', `url: ${articleUrl('offline')}`, 'date: 2025-01-01']),
+      );
+      expect(run(['--no-net']).status).toBe(0);
+      expect(publishedIds()).toEqual(['substack-offline']);
+    });
+
+    it('leaves the archive directory untouched', () => {
+      writeArchive(
+        'untouched',
+        note(['title: "Untouched"', 'status: published', `url: ${articleUrl('untouched')}`, 'date: 2025-01-01']),
+      );
+      const before = readdirSync(archiveDir()).map((name) => [name, readFileSync(path.join(archiveDir(), name), 'utf8')]);
+      expect(run().status).toBe(0);
+      expect(readdirSync(archiveDir()).map((name) => [name, readFileSync(path.join(archiveDir(), name), 'utf8')])).toEqual(before);
     });
   });
 

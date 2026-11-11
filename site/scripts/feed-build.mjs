@@ -34,11 +34,19 @@
  *      Public by definition, `essay` type, unless the log explicitly blocks the
  *      same post. If the fetch fails the existing output is kept, because the
  *      log alone would silently shrink the feed.
+ *   4. Resilient Tomorrow/Published/*.md — the backfilled archive, last and least.
+ *      It can only add a post the 20-item window has evicted: RSS supplied every
+ *      item it carries, and first admission wins, because RSS has Substack's real
+ *      excerpt and the archive note usually has none. Its gate is its own: status
+ *      published, a public Substack /p/ URL, and the archive's Substack audience
+ *      vocabulary mapped by ARCHIVE_AUDIENCE_ABSENT_IS_PUBLIC. The id comes from
+ *      the URL's slug, never the filename, so an item's guid is the same whether
+ *      the window or the archive supplied it.
  *
  * Usage:
  *   node scripts/feed-build.mjs            # regenerate public/feed/*
  *   node scripts/feed-build.mjs --dry      # summary only, writes nothing
- *   node scripts/feed-build.mjs --no-net   # skip the Substack fetch, log items only
+ *   node scripts/feed-build.mjs --no-net   # skip the Substack fetch, log + archive only
  *   VAULT_DIR=/path/to/vault node scripts/feed-build.mjs
  *   FEED_OUT_DIR=/tmp/out node scripts/feed-build.mjs   # tests write here, not public/
  */
@@ -57,6 +65,21 @@ const VAULT = process.env.VAULT_DIR || '/Users/michaeljones/Dev/Obsidian/Mike_Th
 const SOCIAL = path.join(VAULT, 'Social');
 const PUBLISHED_DIR = path.join(SOCIAL, 'Published');
 const DRAFTS_DIR = path.join(SOCIAL, 'Drafts');
+// Source 4. The backfilled Substack archive: what the platform served, not a drafting
+// surface, so it is read-only here like every other source.
+const ARCHIVE_DIR = path.join(VAULT, 'Resilient Tomorrow', 'Published');
+const ARCHIVE_DIR_LABEL = 'Resilient Tomorrow/Published';
+// The archive's `audience` vocabulary is Substack's, not this feed's taxonomy.
+const ARCHIVE_AUDIENCE_MAP = { everyone: ['public'] };
+const ARCHIVE_AUDIENCE_WITHHELD = new Set(['only_paid']);
+const SUBSTACK_ARTICLE_PREFIX = 'https://resilienttomorrow.substack.com/p/';
+
+// R2 — the generator's one default-allow, and it is scoped to ARCHIVE_DIR alone.
+// 31 of the 33 notes in that folder predate the `audience:` field (the 2 that carry it
+// say `everyone`). The evidence for publicness is the published Substack article URL,
+// which is all the folder holds. Invalidate this — flip it false, or delete the source —
+// the moment a note appears there that is not a published public Substack post.
+const ARCHIVE_AUDIENCE_ABSENT_IS_PUBLIC = true;
 const KB_DIR = path.join(VAULT, 'KB');
 
 const SITE_URL = 'https://mikejones.online';
@@ -124,7 +147,7 @@ function parseLenientFrontmatter(head) {
 }
 
 /** `strict` rethrows a YAML failure, for callers where a lenient read would lose `platforms:`. */
-function readFrontmatter(file, { strict = false } = {}) {
+function readFrontmatter(file, { strict = false, quiet = false } = {}) {
   const raw = fs.readFileSync(file, 'utf8');
   if (!raw.startsWith('---')) return { fm: {}, body: raw };
   const end = raw.indexOf('\n---', 3);
@@ -137,7 +160,9 @@ function readFrontmatter(file, { strict = false } = {}) {
   } catch (err) {
     if (strict) throw err;
     const lenient = parseLenientFrontmatter(head);
-    log(`frontmatter parse failed (${err.message.split('\n')[0]}) — lenient read for ${path.basename(file)}: ${Object.keys(lenient).join(',') || 'nothing'}`);
+    // `quiet` drops the filename: the archive leg reads confidential notes too, and a
+    // parse failure there must not name one that the gate is about to hide.
+    log(`frontmatter parse failed (${err.message.split('\n')[0]}) — lenient read${quiet ? '' : ` for ${path.basename(file)}`}: ${Object.keys(lenient).join(',') || 'nothing'}`);
     fm = lenient;
   }
   return { fm, body };
@@ -303,6 +328,15 @@ function normaliseUrl(value) {
   }
 }
 
+/**
+ * `…/p/<slug>` → `<slug>`, cut at a query, a fragment, or a trailing path. The single
+ * definition of a Substack post's slug: the RSS id and the archive id both come from
+ * here, which is what makes an item's guid survive the move from one to the other.
+ */
+function substackSlug(url) {
+  return String(url ?? '').split('/p/')[1]?.split(/[/?#]/)[0] || '';
+}
+
 function titleSlug(title) {
   return String(title ?? '')
     .normalize('NFKD')
@@ -462,7 +496,7 @@ function parseSubstackRss(xml) {
   if (!channel) return [];
   const parsed = asArray(channel.item).map((it) => {
     const link = typeof it.link === 'string' ? it.link : it.link?.['#text'] || it.link?.['@_href'] || '';
-    const id = link.split('/p/')[1]?.split(/[/?#]/)[0] || link;
+    const id = substackSlug(link) || link;
     const date = isoDate(it.pubDate || it['dc:date']);
     return {
       id: `substack-${id}`,
@@ -497,6 +531,126 @@ async function loadSubstackItems() {
   }
 }
 
+// --- source 4: the archive behind the RSS window ---------------------------
+
+/**
+ * Archive `audience` → feed audience. `everyone` is public; `only_paid` is not; a note
+ * with no `audience:` key at all is public here only (ARCHIVE_AUDIENCE_ABSENT_IS_PUBLIC).
+ * A key that is present but empty is not the same thing — it asserts nothing usable, so
+ * it is withheld like any other unmapped value. Null means withheld.
+ */
+function archiveAudience(fm, file) {
+  if (!Object.hasOwn(fm, 'audience')) {
+    if (ARCHIVE_AUDIENCE_ABSENT_IS_PUBLIC) return ['public'];
+    log(`skip ${path.basename(file)}: no audience in the archive note — default-deny`);
+    return null;
+  }
+  const declared = asArray(fm.audience)
+    .map((value) => String(value).trim().toLowerCase())
+    .filter(Boolean);
+  if (declared.length === 0) {
+    log(`skip ${path.basename(file)}: audience is declared but empty — withheld`);
+    return null;
+  }
+  // hasOwn, not a plain lookup: `audience: constructor` must not read Object.prototype.
+  if (declared.every((value) => Object.hasOwn(ARCHIVE_AUDIENCE_MAP, value))) {
+    return [...new Set(declared.flatMap((value) => ARCHIVE_AUDIENCE_MAP[value]))];
+  }
+  if (declared.every((value) => ARCHIVE_AUDIENCE_WITHHELD.has(value))) return null;
+  log(`skip ${path.basename(file)}: archive audience "${slice(declared.join(','), 40)}" has no feed mapping — withheld`);
+  return null;
+}
+
+/**
+ * Reads the backfilled archive. Every note here is a published Substack post, and the
+ * folder trails the platform by a day, so this leg's job is the posts the 20-item window
+ * has evicted — not the newest one. `mergeItems` admission order gives RSS the win on any
+ * post it also carries, so an archive note never replaces Substack's real excerpt.
+ *
+ * `confidential:` is checked first and the note is then invisible: never counted, never
+ * named. Every other failure is counted in `withheld` so a gate miss is visible in
+ * index.json instead of silently shrinking the feed.
+ */
+function loadArchiveItems() {
+  const result = { items: [], read: 0, withheld: 0 };
+  if (!fs.existsSync(ARCHIVE_DIR)) {
+    // Not a failure: a cloud build has no vault at all and main() has already returned.
+    // In a local build this is a half-mounted vault, so say it out loud — the item count
+    // drops by everything only this leg carries, and index.json will show the zeros.
+    log(`archive dir not found (${ARCHIVE_DIR_LABEL}) — no archive items this build`);
+    return result;
+  }
+
+  // Sorted: readdir order is the filesystem's, and it would decide same-dated tie order.
+  for (const file of fs.readdirSync(ARCHIVE_DIR).filter((f) => f.endsWith('.md') && !/^readme/i.test(f)).sort()) {
+    const full = path.join(ARCHIVE_DIR, file);
+    const { fm } = readFrontmatter(full, { quiet: true });
+    if (isConfidential(fm)) continue;
+    result.read += 1;
+
+    const withhold = (reason) => {
+      log(`skip ${file}: ${reason}`);
+      result.withheld += 1;
+    };
+
+    if (String(fm.status ?? '').trim().toLowerCase() !== 'published') {
+      withhold('archive note is not status: published');
+      continue;
+    }
+
+    const url = String(fm.canonical_url || fm.url || '').trim();
+    if (!url.startsWith(SUBSTACK_ARTICLE_PREFIX)) {
+      withhold('archive note has no public Substack article url');
+      continue;
+    }
+    // Same slug parse as parseSubstackRss: an id must never be the bare `substack-`.
+    const slug = substackSlug(url);
+    if (!slug) {
+      withhold('archive note url has no article slug');
+      continue;
+    }
+
+    const audience = archiveAudience(fm, full);
+    if (!audience) {
+      result.withheld += 1;
+      continue;
+    }
+
+    const title = String(fm.title ?? '').trim();
+    if (!title) {
+      withhold('archive note has no title');
+      continue;
+    }
+
+    // `published:` is on the notes the archiver captured with the extended schema; the
+    // 31 legacy notes carry the same date under `date:`. YAML hands back a Date. A
+    // `published:` that is not a date (Obsidian's `published: true`) falls through.
+    const date = isoDate(fm.published) || isoDate(fm.date);
+    if (!date) {
+      withhold('archive note has no usable date');
+      continue;
+    }
+
+    const summary = summarise(fm.summary || fm.dek || '');
+    result.items.push({
+      // From the URL, never the filename: 15 of the 31 legacy stems differ from their
+      // live slug, and a filename-derived id would change the guid on every item that
+      // crosses out of the RSS window.
+      id: `substack-${slug}`,
+      url,
+      title,
+      summary,
+      date_published: date,
+      tags: [...new Set(asArray(fm.themes).map((theme) => String(theme).trim()).filter(Boolean))],
+      audience,
+      type: 'essay',
+      source: path.relative(VAULT, full),
+      platforms: [{ platform: 'substack', url, date }],
+    });
+  }
+  return result;
+}
+
 // --- merge -----------------------------------------------------------------
 
 /** Every signal that identifies a post: its URLs, its title, and its id. */
@@ -510,10 +664,11 @@ function identityKeys(entry) {
 }
 
 /**
- * The log wins on identity and Substack fills gaps. A post appears once, and a post
- * the log blocked stays out however Substack spells its URL or title.
+ * The log wins on identity, Substack fills gaps, and the archive is last by construction:
+ * `admit` marks every key it sees, so a post any earlier source carried cannot be
+ * admitted again. A post the log blocked stays out however a later source spells it.
  */
-function mergeItems(published, substackItems, blocked = []) {
+function mergeItems(published, substackItems, blocked = [], archiveItems = []) {
   const seen = new Set(blocked.flatMap(identityKeys));
   const items = [];
   let added = 0;
@@ -531,8 +686,14 @@ function mergeItems(published, substackItems, blocked = []) {
   for (const entry of substackItems) {
     if (admit(entry)) added += 1;
   }
-  items.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
-  return { items, added };
+  let addedFromArchive = 0;
+  for (const entry of archiveItems) {
+    if (admit(entry)) addedFromArchive += 1;
+  }
+  // Newest first, then by id: the archive supplies day-precision dates where RSS supplies
+  // timestamps, and the tiebreaker keeps the order independent of which source won.
+  items.sort((a, b) => new Date(b.date_published) - new Date(a.date_published) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  return { items, added, addedFromArchive };
 }
 
 // --- emitters --------------------------------------------------------------
@@ -692,6 +853,7 @@ async function main() {
 
   const { items: published, blocked, withheld } = loadPublishedItems();
   const { items: substackItems, fetched } = await loadSubstackItems();
+  const archive = loadArchiveItems();
 
   // A network failure must not rewrite the feed down to the log's few items.
   if (!NO_NET && !fetched) {
@@ -699,7 +861,12 @@ async function main() {
     return;
   }
 
-  const { items, added: addedFromSubstack } = mergeItems(published, substackItems, blocked);
+  const { items, added: addedFromSubstack, addedFromArchive } = mergeItems(
+    published,
+    substackItems,
+    blocked,
+    archive.items,
+  );
 
   const slices = buildSlices(items, withheld);
   const index = {
@@ -715,6 +882,14 @@ async function main() {
         items: substackItems.length,
         merged: addedFromSubstack,
         last_post: substackItems[0]?.date_published || null,
+      },
+      archive: {
+        // read = admitted + withheld, always: a note the gate stopped is a number here,
+        // not silence. A confidential note is in none of the three.
+        dir: ARCHIVE_DIR_LABEL,
+        items: archive.read,
+        admitted: archive.items.length,
+        withheld: archive.withheld,
       },
       kb: { last_modified: newestKbUpdate(KB_DIR) },
     },
@@ -733,7 +908,7 @@ async function main() {
 
   assertServedSlices(slices, feed, { public: publicFeed });
 
-  log(`items: ${items.length} (log ${published.length}, substack ${substackItems.length}, merged ${addedFromSubstack})`);
+  log(`items: ${items.length} (log ${published.length}, substack ${substackItems.length}, merged ${addedFromSubstack}, archive ${addedFromArchive})`);
   log(`newest: ${items[0]?.date_published || 'none'} — ${items[0]?.title || ''}`);
 
   if (DRY) {
@@ -761,6 +936,7 @@ export {
   isConfidential,
   escapeXml,
   normaliseUrl,
+  substackSlug,
   titleSlug,
   mergeItems,
   parseSubstackRss,

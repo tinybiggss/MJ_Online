@@ -8,7 +8,7 @@
       "label": "Public",
       "feed_url": "https://mikejones.online/feed/public/feed.json",
       "atom_url": "https://mikejones.online/feed/public/atom.xml",
-      "item_count": 22,
+      "item_count": 37,
       "token_required": false,
       "emitted": true
     },
@@ -65,18 +65,24 @@
       "merged": 18,
       "last_post": "2026-11-09T18:56:54.000Z"
     },
+    "archive": {
+      "dir": "Resilient Tomorrow/Published",
+      "items": 34,
+      "admitted": 34,
+      "withheld": 0
+    },
     "kb": {
       "last_modified": "2026-11-11T00:00:00.000Z"
     }
   },
   "totals": {
-    "items": 22,
+    "items": 37,
     "by_type": {
-      "essay": 20,
+      "essay": 35,
       "note": 2
     },
     "by_audience": {
-      "public": 22
+      "public": 37
     }
   },
   "note": "P1: audience tags drive slices; only public is served until tokens ship (P2)."
