@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T00:00:00.000Z",
+  "generated_at": "2026-11-10T00:00:00.000Z",
   "pages": {
     "kb-ai-how-mike-works": {
       "digest": "sha256:c866540ad4a13ab938900c5dba004b8901b749b2db487a25deee03516dd5f8ba",
@@ -23,8 +23,8 @@
       ]
     },
     "kb-business-resilient-tomorrow": {
-      "digest": "sha256:ea2abc87d4615198a253afa4135bc9642d168399e82711a1ad2ff759f34882fc",
-      "updated": "2026-11-11",
+      "digest": "sha256:950d5658bfa4d981691f24e05ac87eaacb68cc4d4566812b4e62e324a9b9c463",
+      "updated": "2026-11-10",
       "files": [
         "kb-business-resilient-tomorrow.md"
       ]

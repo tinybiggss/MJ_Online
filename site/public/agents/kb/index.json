@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T00:00:00.000Z",
+  "generatedAt": "2026-11-10T00:00:00.000Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
@@ -43,7 +43,7 @@
     {
       "id": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
-      "updated": "2026-11-11",
+      "updated": "2026-11-10",
       "summary": "Media + platform.",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "files": [

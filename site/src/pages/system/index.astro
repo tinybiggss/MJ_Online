@@ -6,7 +6,6 @@
  * this and how is it shaped"; the subpages answer "how does that part work".
  */
 import FieldLayout from "../../layouts/FieldLayout.astro";
-import FlowMap from "../../components/FlowMap.astro";
 import {
   hero, patterns, stats, clusters, ground, sections, tiles,
   frameBefore, frameAfter, countFor, unitFor, groundCount, stamp,
@@ -50,26 +49,6 @@ const description =
           <dd class="mt-2 font-data text-sm leading-relaxed text-field-muted">{stamp}</dd>
         </div>
       </dl>
-    </div>
-  </section>
-
-  <!-- ---------------------------------------------------------------- flow -->
-  <section id="flow" class="scroll-mt-24 border-b border-field-line">
-    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
-      <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
-        <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">How it fits together</h2>
-        <p class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
-          {stats.loops_running} loops · five stages · one decision
-        </p>
-      </div>
-      <p class="mt-4 max-w-[62ch] text-base leading-relaxed text-field-muted">
-        Everything below is a stage in one loop. The loops do not do the work — they prepare it, check it, and carry it,
-        so that the only place a decision gets made is the box in the middle.
-      </p>
-
-      <div class="mt-10">
-        <FlowMap />
-      </div>
     </div>
   </section>
 
