@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T08:00:30.243Z",
+    "generated_at": "2026-11-11T09:00:30.068Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 32,
-    "loops_total": 34,
+    "loops_running": 35,
+    "loops_total": 37,
     "completed_oneshots": 2,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 0,
+    "annotations_missing": 3,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,9 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2
+      "sweep": 2,
+      "unclassified": 3
     },
-    "generated_at": "2026-11-11T08:00:30.243Z"
+    "generated_at": "2026-11-11T09:00:30.068Z"
   },
   "loops": [
     {
@@ -512,6 +513,54 @@
       "annotated": true,
       "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
       "why": "The quiet failures are the ones attached to something a customer is using."
+    },
+    {
+      "name": "W2 cron.jobs source — dual gate",
+      "public_name": "W2 cron.jobs source — dual gate",
+      "slug": "w2-cron-jobs-source-dual-gate",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 04:40",
+      "schedule": "40 4 * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "W2 DEC-2026-003 — dual gate",
+      "public_name": "W2 DEC-2026-003 — dual gate",
+      "slug": "w2-dec-2026-003-dual-gate",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 04:20",
+      "schedule": "20 4 * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "W2 registry — Codex gate leg",
+      "public_name": "W2 registry — Codex gate leg",
+      "slug": "w2-registry-codex-gate-leg",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 04:10",
+      "schedule": "10 4 * * *",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "Watcher guard (chain health)",
@@ -1366,7 +1415,6 @@
       "blocked",
       "done",
       "ready",
-      "running",
       "scheduled",
       "todo"
     ]
@@ -1421,7 +1469,11 @@
     ]
   },
   "drift": {
-    "unannotated": [],
+    "unannotated": [
+      "W2 registry — Codex gate leg",
+      "W2 DEC-2026-003 — dual gate",
+      "W2 cron.jobs source — dual gate"
+    ],
     "retired": [],
     "plugins_unannotated": [],
     "seats_undescribed": [],
