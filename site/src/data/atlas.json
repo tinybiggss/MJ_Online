@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T01:00:31.846Z",
+    "generated_at": "2026-11-11T04:00:31.684Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 33,
+    "loops_running": 32,
     "loops_total": 35,
-    "completed_oneshots": 2,
+    "completed_oneshots": 3,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 1,
+    "annotations_missing": 0,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,10 +168,9 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2,
-      "unclassified": 1
+      "sweep": 2
     },
-    "generated_at": "2026-11-11T01:00:31.846Z"
+    "generated_at": "2026-11-11T04:00:31.684Z"
   },
   "loops": [
     {
@@ -525,7 +524,7 @@
       "channels": [
         "Telegram"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1247,9 +1246,7 @@
     "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern — the loop is the point — and drops the target, the buyer, and the amount."
   },
   "drift": {
-    "unannotated": [
-      "W2 Claude gate (deferred past the 5h limit)"
-    ],
+    "unannotated": [],
     "retired": [],
     "plugins_unannotated": []
   }
