@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T09:00:30.068Z",
+    "generated_at": "2026-11-11T13:00:31.865Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 35,
+    "loops_running": 32,
     "loops_total": 37,
-    "completed_oneshots": 2,
+    "completed_oneshots": 5,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 3,
+    "annotations_missing": 0,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,10 +168,9 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2,
-      "unclassified": 3
+      "sweep": 2
     },
-    "generated_at": "2026-11-11T09:00:30.068Z"
+    "generated_at": "2026-11-11T13:00:31.865Z"
   },
   "loops": [
     {
@@ -525,7 +524,7 @@
       "channels": [
         "Local log"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -541,7 +540,7 @@
       "channels": [
         "Local log"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -557,7 +556,7 @@
       "channels": [
         "Local log"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1469,11 +1468,7 @@
     ]
   },
   "drift": {
-    "unannotated": [
-      "W2 registry — Codex gate leg",
-      "W2 DEC-2026-003 — dual gate",
-      "W2 cron.jobs source — dual gate"
-    ],
+    "unannotated": [],
     "retired": [],
     "plugins_unannotated": [],
     "seats_undescribed": [],
