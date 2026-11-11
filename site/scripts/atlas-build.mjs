@@ -208,6 +208,9 @@ const running = loops.filter((l) => l.state === "running");
 const byPattern = {};
 for (const l of running) byPattern[l.pattern || "unclassified"] = (byPattern[l.pattern || "unclassified"] || 0) + 1;
 
+const byBand = {};
+for (const l of running) byBand[l.band || "unplaced"] = (byBand[l.band || "unplaced"] || 0) + 1;
+
 const stats = {
   loops_running: running.length,
   loops_total: loops.length,
@@ -218,6 +221,7 @@ const stats = {
   annotations_missing: unannotated.length,
   retired_annotations: retired.length,
   by_pattern: byPattern,
+  by_band: byBand,
   generated_at: new Date().toISOString(),
 };
 

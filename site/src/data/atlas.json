@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T13:00:31.865Z",
+    "generated_at": "2026-11-11T19:27:50.746Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -170,7 +170,13 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-11T13:00:31.865Z"
+    "by_band": {
+      "orient": 6,
+      "tend": 14,
+      "harvest": 6,
+      "close": 6
+    },
+    "generated_at": "2026-11-11T19:27:50.746Z"
   },
   "loops": [
     {
