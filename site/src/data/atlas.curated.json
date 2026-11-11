@@ -286,7 +286,7 @@
       "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
     },
-    "Clef shadow gate review": {
+    "Clef gate audit": {
       "public_name": "Shadow gate review",
       "band": "tend",
       "pattern": "gate",
@@ -701,7 +701,7 @@
   "shapes_page": {
     "eyebrow": "The framework",
     "title": "The Six Shapes",
-    "lead": "Thirty-one scheduled loops, six shapes. I do not write automations — I fill in shapes. When something new needs a loop, it gets an existing shape or it waits, and that refusal is what keeps the set small enough to hold in my head.",
+    "lead": "Every loop on this site is one of six shapes. I do not write automations — I fill in shapes. When something new needs a loop, it gets an existing shape or it waits, and that refusal is what keeps the set small enough to hold in my head.",
     "rule": "A new problem gets an existing shape, or it waits.",
     "rule_note": "Not \"or it gets a new shape\". The waiting is the mechanism: most ideas that feel like a new kind of loop look like one of the six once they are written down as a sentence.",
     "choosing": [

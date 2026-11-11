@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T13:00:31.865Z",
+    "generated_at": "2026-11-11T19:46:21.808Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -52,7 +52,7 @@
   "shapes_page": {
     "eyebrow": "The framework",
     "title": "The Six Shapes",
-    "lead": "Thirty-one scheduled loops, six shapes. I do not write automations — I fill in shapes. When something new needs a loop, it gets an existing shape or it waits, and that refusal is what keeps the set small enough to hold in my head.",
+    "lead": "Every loop on this site is one of six shapes. I do not write automations — I fill in shapes. When something new needs a loop, it gets an existing shape or it waits, and that refusal is what keeps the set small enough to hold in my head.",
     "rule": "A new problem gets an existing shape, or it waits.",
     "rule_note": "Not \"or it gets a new shape\". The waiting is the mechanism: most ideas that feel like a new kind of loop look like one of the six once they are written down as a sentence.",
     "choosing": [
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-11T13:00:31.865Z"
+    "generated_at": "2026-11-11T19:46:21.808Z"
   },
   "loops": [
     {
@@ -450,15 +450,15 @@
       "why": null
     },
     {
-      "name": "Clef shadow gate review",
+      "name": "Clef gate audit",
       "public_name": "Shadow gate review",
       "slug": "shadow-gate-review",
       "band": "tend",
       "pattern": "gate",
-      "cadence": "13th of the month, 09:20",
-      "schedule": "20 9 13 11 *",
+      "cadence": "Daily, 09:20",
+      "schedule": "20 9 * * *",
       "channels": [
-        "Desk chat"
+        "Telegram"
       ],
       "state": "running",
       "annotated": true,
