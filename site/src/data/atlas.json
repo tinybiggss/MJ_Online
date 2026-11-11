@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-10T23:19:46.128Z",
+    "generated_at": "2026-11-11T01:00:31.846Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 32,
-    "loops_total": 34,
+    "loops_running": 33,
+    "loops_total": 35,
     "completed_oneshots": 2,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 0,
+    "annotations_missing": 1,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,9 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2
+      "sweep": 2,
+      "unclassified": 1
     },
-    "generated_at": "2026-11-10T23:19:46.128Z"
+    "generated_at": "2026-11-11T01:00:31.846Z"
   },
   "loops": [
     {
@@ -512,6 +513,22 @@
       "annotated": true,
       "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
       "why": "The quiet failures are the ones attached to something a customer is using."
+    },
+    {
+      "name": "W2 Claude gate (deferred past the 5h limit)",
+      "public_name": "W2 Claude gate (deferred past the 5h limit)",
+      "slug": "w2-claude-gate-deferred-past-the-5h-limit",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "10th of the month, 19:20",
+      "schedule": "20 19 10 11 *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "Watcher guard (chain health)",
@@ -1230,7 +1247,9 @@
     "note": "Applied by the build. A job whose public name ends in (redacted) keeps its schedule and its pattern — the loop is the point — and drops the target, the buyer, and the amount."
   },
   "drift": {
-    "unannotated": [],
+    "unannotated": [
+      "W2 Claude gate (deferred past the 5h limit)"
+    ],
     "retired": [],
     "plugins_unannotated": []
   }
