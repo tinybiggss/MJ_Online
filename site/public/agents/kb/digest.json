@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T00:00:00.000Z",
+  "generated_at": "2026-11-12T00:00:00.000Z",
   "pages": {
     "kb-ai-how-mike-works": {
       "digest": "sha256:c866540ad4a13ab938900c5dba004b8901b749b2db487a25deee03516dd5f8ba",
@@ -30,8 +30,8 @@
       ]
     },
     "kb-business-velocity-partners": {
-      "digest": "sha256:f6d15a76fb5a9c788d64a718558f905b76db631ca005d1a86209b76d0c7a09be",
-      "updated": "2026-11-10",
+      "digest": "sha256:834bbc212a82a9df6bc1b11c6f48b496ac913ae89c73b400a1026f42cce423fa",
+      "updated": "2026-11-12",
       "files": [
         "kb-business-velocity-partners-part1.md",
         "kb-business-velocity-partners-part2.md"
