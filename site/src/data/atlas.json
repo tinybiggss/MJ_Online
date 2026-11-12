@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-12T22:00:00.809Z",
+    "generated_at": "2026-11-12T23:00:00.818Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 36,
+    "loops_running": 35,
     "loops_total": 42,
-    "completed_oneshots": 6,
+    "completed_oneshots": 7,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 4,
+    "annotations_missing": 3,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,10 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "unclassified": 4,
-      "sweep": 2
+      "sweep": 2,
+      "unclassified": 3
     },
-    "generated_at": "2026-11-12T22:00:00.809Z"
+    "generated_at": "2026-11-12T23:00:00.818Z"
   },
   "loops": [
     {
@@ -363,7 +363,7 @@
       "channels": [
         "Session that fired it"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1564,7 +1564,6 @@
     "unannotated": [
       "Monthly AI review",
       "Monthly AI review — TEST",
-      "kanban requeue t_67a7fd9d after codex quota",
       "RT pipeline: first unattended-run check"
     ],
     "retired": [],
