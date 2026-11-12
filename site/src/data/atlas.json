@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-12T09:00:02.953Z",
+    "generated_at": "2026-11-12T17:00:03.307Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 35,
+    "loops_running": 34,
     "loops_total": 40,
-    "completed_oneshots": 5,
+    "completed_oneshots": 6,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 3,
+    "annotations_missing": 2,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -169,9 +169,9 @@
       "watcher": 8,
       "intake": 3,
       "sweep": 2,
-      "unclassified": 3
+      "unclassified": 2
     },
-    "generated_at": "2026-11-12T09:00:02.953Z"
+    "generated_at": "2026-11-12T17:00:03.307Z"
   },
   "loops": [
     {
@@ -559,7 +559,7 @@
       "channels": [
         "Desk chat"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1520,7 +1520,6 @@
   },
   "drift": {
     "unannotated": [
-      "VP offer page review reminder",
       "Monthly AI review",
       "Monthly AI review — TEST"
     ],
