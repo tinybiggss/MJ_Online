@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-12T21:05:09.352Z",
+    "generated_at": "2026-11-12T22:00:00.809Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 34,
-    "loops_total": 40,
+    "loops_running": 36,
+    "loops_total": 42,
     "completed_oneshots": 6,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 2,
+    "annotations_missing": 4,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,10 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2,
-      "unclassified": 2
+      "unclassified": 4,
+      "sweep": 2
     },
-    "generated_at": "2026-11-12T21:05:09.352Z"
+    "generated_at": "2026-11-12T22:00:00.809Z"
   },
   "loops": [
     {
@@ -353,6 +353,22 @@
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
     },
     {
+      "name": "kanban requeue t_67a7fd9d after codex quota",
+      "public_name": "kanban requeue t_67a7fd9d after codex quota",
+      "slug": "kanban-requeue-t-67a7fd9d-after-codex-quota",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once in 72m",
+      "schedule": "once in 72m",
+      "channels": [
+        "Session that fired it"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
       "name": "kb-nightly-maintenance",
       "public_name": "Knowledge-base gate",
       "slug": "knowledge-base-gate",
@@ -480,6 +496,22 @@
         "Desk chat"
       ],
       "state": "completed",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "RT pipeline: first unattended-run check",
+      "public_name": "RT pipeline: first unattended-run check",
+      "slug": "rt-pipeline-first-unattended-run-check",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once in 630m",
+      "schedule": "once in 630m",
+      "channels": [
+        "Session that fired it"
+      ],
+      "state": "running",
       "annotated": false,
       "does": null,
       "why": null
@@ -1147,7 +1179,7 @@
       "line": "The seats work arrives in — and why they are separate profiles.",
       "thesis": "A profile is not a personality; it is a permission boundary with a voice. Each seat carries its own model, its own skills in scope, its own scheduler and its own lane on the board, so a judgement made in one seat cannot be quietly overruled by another seat's context. The roster is an org chart of what may be decided where — and the reason to keep eleven of them instead of one good generalist is that no single context can hold the editor, the release manager and the red team at once without all three collapsing into the same agreeable voice. Seats do not call each other: work moves as a card carrying a written brief, picked up when that seat is free, so a handoff is a thing on the board rather than a conversation inside a context window — and it can be read back weeks later.",
       "derived_from": "hermes profiles",
-      "frame_label": "11 seats",
+      "frame_label": "12 seats",
       "items": [
         {
           "title": "Corvus",
@@ -1203,6 +1235,11 @@
           "title": "research",
           "meta": "research · cited argument maps",
           "body": "Cited argument maps: given a question, it returns what the record says with sources attached, and separates what is known from what is assumed. It exists so that 'we looked into it' is a claim that can be checked. This seat has no display name yet — an unnamed seat is one the orchestrator describes badly, which is worth fixing."
+        },
+        {
+          "title": "probe-ok",
+          "meta": "probe-ok",
+          "body": "Undescribed seat: profile.yaml describes it, but nothing here does yet."
         }
       ]
     },
@@ -1253,7 +1290,7 @@
         {
           "title": "The lanes, as they stand",
           "meta": "read from the board",
-          "body": "content, default, design, dev-lead, hermes, marketing, ops, product, release, research, roy. Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead."
+          "body": "content, default, design, dev-lead, hermes, marketing, ops, product, release, research, roy. 1 further lanes on the board are not seats — work assigned there is work no profile picks up. Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead."
         }
       ]
     }
@@ -1457,19 +1494,21 @@
       "product",
       "release",
       "research",
-      "roy"
+      "roy",
+      "worker"
     ],
     "states": [
       "archived",
       "blocked",
       "done",
+      "ready",
       "running",
       "scheduled",
       "todo"
     ]
   },
   "crew": {
-    "count": 11,
+    "count": 12,
     "seats": [
       {
         "alias": "default",
@@ -1514,17 +1553,25 @@
       {
         "alias": "research",
         "name": "research"
+      },
+      {
+        "alias": "probe-ok",
+        "name": "probe-ok"
       }
     ]
   },
   "drift": {
     "unannotated": [
       "Monthly AI review",
-      "Monthly AI review — TEST"
+      "Monthly AI review — TEST",
+      "kanban requeue t_67a7fd9d after codex quota",
+      "RT pipeline: first unattended-run check"
     ],
     "retired": [],
     "plugins_unannotated": [],
-    "seats_undescribed": [],
+    "seats_undescribed": [
+      "probe-ok"
+    ],
     "board_lanes": [
       "content",
       "default",
@@ -1536,7 +1583,8 @@
       "product",
       "release",
       "research",
-      "roy"
+      "roy",
+      "worker"
     ]
   }
 }
