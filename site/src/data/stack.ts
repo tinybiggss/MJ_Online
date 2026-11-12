@@ -139,3 +139,74 @@ export const layers: Layer[] = [
 ];
 
 export const instruments = layers.flatMap((l) => l.items);
+
+/**
+ * The wiring — a trunk with branches, not a mesh.
+ *
+ * Every edge here starts at the hub. No instrument calls another instrument;
+ * the only exception is the record, which the hub reads and writes, and the
+ * only cyclic path runs through a person. This shape is the claim: swap a
+ * model and nothing else on the diagram moves.
+ */
+export type Branch = {
+  label: string;
+  items: string[];
+  returns: string;
+  /** "both" draws the read/write rail instead of a one-way call. */
+  dir?: "out" | "both";
+};
+
+export const flow = {
+  entry: {
+    label: "In",
+    items: ["Wispr Flow", "Conduit"],
+    line: "Typed on a desk or spoken into a phone. Both land as the same prompt, so nothing downstream knows which.",
+  },
+  hub: {
+    line: "Seats in one process. The scheduler fires them, the board carries work between them, and no two of them share a context window.",
+  },
+  branches: [
+    {
+      label: "Models",
+      items: ["Ollama", "Claude", "ChatGPT"],
+      returns: "text, per call",
+    },
+    {
+      label: "Builders",
+      items: ["Claude Code", "Codex"],
+      returns: "a diff, not a conversation",
+    },
+    {
+      label: "Record",
+      items: ["Obsidian"],
+      returns: "read first, written last",
+      dir: "both",
+    },
+    {
+      label: "Hands",
+      items: ["himalaya · icalBuddy · gh · ffmpeg"],
+      returns: "text, so a loop can close on it",
+    },
+    {
+      label: "Page",
+      items: ["Astro · Cloudflare Pages"],
+      returns: "this page, on push",
+    },
+  ] as Branch[],
+  close: {
+    via: "Telegram",
+    human: "you",
+    line: "A loop reports on the same thread it was asked from. Your reply is the next instruction — the only edge that crosses a person, and the reason the system has a loop instead of a pipeline.",
+  },
+};
+
+/** Build-time guard: an instrument with no edge is a tool the diagram lies about. */
+export const unflowed = instruments
+  .map((i) => i.name)
+  .filter(
+    (n) =>
+      n !== "Hermes Agent" &&
+      !flow.entry.items.includes(n) &&
+      !flow.close.via.includes(n) &&
+      !flow.branches.some((b) => b.items.includes(n)),
+  );
