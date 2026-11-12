@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-12T17:00:03.307Z",
+    "generated_at": "2026-11-12T21:00:03.089Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -171,7 +171,7 @@
       "sweep": 2,
       "unclassified": 2
     },
-    "generated_at": "2026-11-12T17:00:03.307Z"
+    "generated_at": "2026-11-12T21:00:03.089Z"
   },
   "loops": [
     {
@@ -1253,7 +1253,7 @@
         {
           "title": "The lanes, as they stand",
           "meta": "read from the board",
-          "body": "content, default, design, dev-lead, marketing, ops, product, release, research, roy. 2 further lanes on the board are not seats — work assigned there is work no profile picks up. Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead."
+          "body": "content, default, design, dev-lead, marketing, ops, product, release, research, roy. 1 further lanes on the board are not seats — work assigned there is work no profile picks up. Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead."
         }
       ]
     }
@@ -1448,7 +1448,6 @@
   "board": {
     "lanes": [
       "content",
-      "daedalus",
       "default",
       "design",
       "dev-lead",
@@ -1464,7 +1463,7 @@
       "archived",
       "blocked",
       "done",
-      "ready",
+      "running",
       "scheduled",
       "todo"
     ]
@@ -1528,7 +1527,6 @@
     "seats_undescribed": [],
     "board_lanes": [
       "content",
-      "daedalus",
       "default",
       "design",
       "dev-lead",
