@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-11T23:00:00.925Z",
+    "generated_at": "2026-11-12T00:00:02.649Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 32,
-    "loops_total": 37,
+    "loops_running": 33,
+    "loops_total": 38,
     "completed_oneshots": 5,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 0,
+    "annotations_missing": 1,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,9 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2
+      "sweep": 2,
+      "unclassified": 1
     },
-    "generated_at": "2026-11-11T23:00:00.925Z"
+    "generated_at": "2026-11-12T00:00:02.649Z"
   },
   "loops": [
     {
@@ -512,6 +513,22 @@
       "annotated": true,
       "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
       "why": "The quiet failures are the ones attached to something a customer is using."
+    },
+    {
+      "name": "VP offer page review reminder",
+      "public_name": "VP offer page review reminder",
+      "slug": "vp-offer-page-review-reminder",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once at 2026-11-12 08:30",
+      "schedule": "once at 2026-11-12 08:30",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "W2 cron.jobs source — dual gate",
@@ -1469,7 +1486,9 @@
     ]
   },
   "drift": {
-    "unannotated": [],
+    "unannotated": [
+      "VP offer page review reminder"
+    ],
     "retired": [],
     "plugins_unannotated": [],
     "seats_undescribed": [],
