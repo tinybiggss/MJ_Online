@@ -1145,7 +1145,7 @@
       "order": 45,
       "title": "The crew",
       "line": "The seats work arrives in — and why they are separate profiles.",
-      "thesis": "A profile is not a personality; it is a permission boundary with a voice. Each seat carries its own model, its own skills in scope, its own scheduler and its own lane on the board, so a judgement made in one seat cannot be quietly overruled by another seat's context. The roster is an org chart of what may be decided where — and the reason to keep eleven of them instead of one good generalist is that no single context can hold the editor, the release manager and the red team at once without all three collapsing into the same agreeable voice.",
+      "thesis": "A profile is not a personality; it is a permission boundary with a voice. Each seat carries its own model, its own skills in scope, its own scheduler and its own lane on the board, so a judgement made in one seat cannot be quietly overruled by another seat's context. The roster is an org chart of what may be decided where — and the reason to keep eleven of them instead of one good generalist is that no single context can hold the editor, the release manager and the red team at once without all three collapsing into the same agreeable voice. Seats do not call each other: work moves as a card carrying a written brief, picked up when that seat is free, so a handoff is a thing on the board rather than a conversation inside a context window — and it can be read back weeks later.",
       "derived_from": "hermes profiles",
       "frame_label": "11 seats",
       "items": [

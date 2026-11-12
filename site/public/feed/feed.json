@@ -37,7 +37,29 @@
         "audience": [
           "public"
         ],
-        "type": "note"
+        "type": "note",
+        "mirrors": [
+          {
+            "platform": "youtube",
+            "url": "https://www.youtube.com/shorts/b9ignT1MJ10",
+            "date": "2026-11-05"
+          },
+          {
+            "platform": "instagram",
+            "url": "https://www.instagram.com/p/DfXwPDhPnz4/",
+            "date": "2026-11-05"
+          },
+          {
+            "platform": "tiktok",
+            "url": "https://www.tiktok.com/@mikejonesrt/video/7704405248818957599",
+            "date": "2026-11-05"
+          },
+          {
+            "platform": "bluesky",
+            "url": "https://bsky.app/profile/resilienttomorrow.substack.com/post/3mzj5rjto522j",
+            "date": "2026-11-04"
+          }
+        ]
       }
     },
     {

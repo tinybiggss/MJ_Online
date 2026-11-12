@@ -33,8 +33,9 @@ export const layers: Layer[] = [
       {
         name: "Hermes Agent",
         where: "always-on host · this desktop",
+        href: "/system/crew/",
         job: "Runs the scheduler, holds the profiles, the skills and the board. Every loop on this site is a job it fires; every page here is written by it.",
-        why: "One process that owns state, so cron, notes and the board cannot disagree about what happened.",
+        why: "Eleven seats inside one process — each pinning its own model and its own skills in scope, none of them sharing a context window with the others. One process to keep running, eleven permission boundaries to reason inside of.",
       },
       {
         name: "Conduit",
