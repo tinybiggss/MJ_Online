@@ -324,7 +324,12 @@ function readBoard() {
  */
 function readCrew() {
   if (!existsSync(PROFILES)) return null;
-  const seats = [{ alias: "default", name: "Corvus", purpose: null }];
+  // Seats. The default profile (the one Mike talks to — Corvus) carries a second
+  // routing alias: cards authored from the agent itself are stamped assignee
+  // "hermes" by the tooling, so that lane resolves to THIS seat, not to nobody.
+  const seats = [
+    { alias: "default", aliases: ["hermes"], name: "Corvus", purpose: null },
+  ];
   for (const dir of readdirSync(PROFILES, { withFileTypes: true })) {
     if (!dir.isDirectory()) continue;
     let name = null;
@@ -410,7 +415,9 @@ if (crew && curated.crew_page) {
 // Only lanes that are seats are published. A lane whose name is not a profile
 // receives work nothing can pick up — a defect in the board, not a division of
 // labour — so it is counted out of the roster.
-const seatAliases = new Set((crew?.seats || []).map((s) => s.alias));
+const seatAliases = new Set(
+  (crew?.seats || []).flatMap((s) => [s.alias, ...(s.aliases || [])]),
+);
 const lanesShown = (board?.lanes || []).filter((l) => seatAliases.has(l));
 
 if (board && curated.board_page) {
