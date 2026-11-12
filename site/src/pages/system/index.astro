@@ -6,9 +6,10 @@
  * this and how is it shaped"; the subpages answer "how does that part work".
  */
 import FieldLayout from "../../layouts/FieldLayout.astro";
+import { layers, instruments } from "../../data/stack";
 import {
   hero, patterns, stats, clusters, ground, sections, tiles,
-  frameBefore, frameAfter, countFor, unitFor, groundCount, stamp,
+  frameBefore, frameAfter, countFor, unitFor, stamp,
 } from "../../lib/atlas";
 
 const title = "The system — how this site is made | Mike Jones";
@@ -59,6 +60,7 @@ const description =
         { id: "map", label: "Map" },
         { id: "shapes", label: "Shapes" },
         { id: "index", label: "Parts" },
+        { id: "stack", label: "Stack" },
         { id: "ground", label: "Ground" },
         { id: "withheld", label: "Withheld" },
       ].map((s) => (
@@ -160,13 +162,13 @@ const description =
       <div class="mt-3 grid gap-y-3 md:grid-cols-[8.5rem_1fr] md:items-start md:gap-x-8">
         <div class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint md:pt-2">Ground</div>
         <div class="flex flex-wrap items-center gap-2">
-          <a href="#ground" class="rounded-sm border border-field-line px-2.5 py-1 font-data text-2xs text-field-muted transition-colors hover:border-signal hover:text-signal">
+          <a href="#stack" class="rounded-sm border border-field-line px-2.5 py-1 font-data text-2xs text-field-muted transition-colors hover:border-signal hover:text-signal">
             Stack
           </a>
           <a href="#ground" class="rounded-sm border border-field-line px-2.5 py-1 font-data text-2xs text-field-muted transition-colors hover:border-signal hover:text-signal">
             Fleet
           </a>
-          <span class="font-data text-2xs text-field-faint">{groundCount} moving parts the loops run on</span>
+          <span class="font-data text-2xs text-field-faint">{instruments.length} instruments on {ground.fleet.length} machines</span>
         </div>
       </div>
 
@@ -234,44 +236,88 @@ const description =
     </div>
   </section>
 
+  <!-- ---------------------------------------------------------------- stack -->
+  <section id="stack" class="scroll-mt-24 border-b border-field-line">
+    <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">The stack, by name</h2>
+        <p class="font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
+          {instruments.length} instruments · {layers.length} layers
+        </p>
+      </div>
+      <p class="mt-6 max-w-[64ch] text-base leading-relaxed text-field-muted">
+        The map above is what these do together. This is what they are — named, because a system described only as
+        "several model providers" gives you nothing to check it against. The tool is rarely the interesting decision; why
+        that one and not the obvious alternative is.
+      </p>
+
+      <div class="mt-12 space-y-12">
+        {layers.map((layer) => (
+          <div class="md:grid md:grid-cols-[8.5rem_1fr] md:gap-x-8">
+            <div class="md:pt-3">
+              <h3 class="whitespace-nowrap font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
+                {layer.title}
+              </h3>
+              <p class="mt-1.5 hidden max-w-[15ch] font-data text-2xs leading-relaxed text-field-faint/70 md:block">
+                {layer.note}
+              </p>
+            </div>
+            <div class="mt-3 border-t border-field-line md:mt-0">
+              {layer.items.map((it) => (
+                <div class="grid gap-x-6 gap-y-2 border-b border-field-line py-5 sm:grid-cols-[10rem_1fr]">
+                  <div>
+                    <h4 class="font-display text-base font-semibold tracking-[-0.01em]">
+                      {it.href ? (
+                        <a href={it.href} class="transition-colors hover:text-signal">{it.name}</a>
+                      ) : (
+                        it.name
+                      )}
+                    </h4>
+                    <p class="mt-1 font-data text-2xs uppercase tracking-[0.1em] text-signal/80">{it.where}</p>
+                  </div>
+                  <div>
+                    <p class="max-w-[62ch] text-[0.9375rem] leading-relaxed text-field-ink">{it.job}</p>
+                    <p class="mt-2 max-w-[62ch] text-sm leading-relaxed text-field-muted">{it.why}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10 max-w-[68ch] border-l-2 border-field-line pl-4 font-data text-2xs leading-relaxed text-field-faint">
+        Nothing on this list is here because it is popular. Each one is either a command that returns text, a file the
+        agent can read, or a surface I actually look at — the rest of the category is not adopted, not missing. A stack
+        this short is the point: every addition costs a place to check.
+      </p>
+    </div>
+  </section>
+
   <!-- --------------------------------------------------------------- ground -->
   <section id="ground" class="scroll-mt-24 border-b border-field-line">
     <div class="mx-auto max-w-6xl px-6 py-14 md:py-20">
       <h2 class="font-display text-2xl font-bold tracking-[-0.02em]">{ground.title}</h2>
-      <p class="mt-6 max-w-[64ch] text-base leading-relaxed text-field-muted">{ground.thesis}</p>
+      <p class="mt-6 max-w-[64ch] text-base leading-relaxed text-field-muted">
+        The instruments above run on four machines, each with one job. Which machine a loop runs on is the last design
+        decision, not the first — but it is the one that decides what is a schedule and what is a laptop that happens to
+        be open.
+      </p>
 
-      <div class="mt-10 grid gap-x-12 md:grid-cols-2">
-        <div>
-          <h3 class="border-b-2 border-field-line pb-2 font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
-            Stack
-          </h3>
-          {ground.stack.map((s: any) => (
-            <div class="border-b border-field-line py-5">
+      <div class="mt-10 grid gap-x-12 gap-y-px md:grid-cols-2">
+        {ground.fleet.map((s: any) => (
+          <div class="border-b border-field-line py-5">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-3">
               <h4 class="font-display text-base font-semibold">{s.title}</h4>
-              <p class="mt-1.5 font-data text-2xs uppercase tracking-[0.1em] text-field-faint">{s.meta}</p>
-              <p class="mt-3 text-sm leading-relaxed text-field-muted">{s.body}</p>
+              <span class="font-data text-2xs uppercase tracking-[0.1em] text-signal">{s.role}</span>
             </div>
-          ))}
-        </div>
-        <div class="mt-10 md:mt-0">
-          <h3 class="border-b-2 border-field-line pb-2 font-data text-2xs uppercase tracking-[0.14em] text-field-faint">
-            Fleet
-          </h3>
-          {ground.fleet.map((s: any) => (
-            <div class="border-b border-field-line py-5">
-              <div class="flex flex-wrap items-baseline justify-between gap-x-3">
-                <h4 class="font-display text-base font-semibold">{s.title}</h4>
-                <span class="font-data text-2xs uppercase tracking-[0.1em] text-signal">{s.role}</span>
-              </div>
-              <p class="mt-2 text-sm leading-relaxed text-field-muted">{s.body}</p>
-            </div>
-          ))}
-          <p class="mt-6 font-data text-2xs leading-relaxed text-field-faint">
-            More machines get their own pages as they join. Roles, not addresses: nothing here describes how to reach
-            one.
-          </p>
-        </div>
+            <p class="mt-2 max-w-[52ch] text-sm leading-relaxed text-field-muted">{s.body}</p>
+          </div>
+        ))}
       </div>
+      <p class="mt-6 font-data text-2xs leading-relaxed text-field-faint">
+        More machines get their own pages as they join. Roles, not addresses: nothing here describes how to reach one.
+      </p>
     </div>
   </section>
 
