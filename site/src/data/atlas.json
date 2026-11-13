@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-13T01:00:00.991Z",
+    "generated_at": "2026-11-13T08:00:01.264Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 36,
+    "loops_running": 35,
     "loops_total": 43,
-    "completed_oneshots": 7,
+    "completed_oneshots": 8,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 4,
+    "annotations_missing": 3,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,10 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "unclassified": 4,
+      "unclassified": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-13T01:00:00.991Z"
+    "generated_at": "2026-11-13T08:00:01.264Z"
   },
   "loops": [
     {
@@ -527,7 +527,7 @@
       "channels": [
         "Session that fired it"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1578,7 +1578,6 @@
     "unannotated": [
       "Monthly AI review",
       "Monthly AI review — TEST",
-      "RT pipeline: first unattended-run check",
       "Friday: the sentence + the certified copies"
     ],
     "retired": [],
