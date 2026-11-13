@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-13T08:00:01.264Z",
+    "generated_at": "2026-11-13T18:00:01.306Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 35,
+    "loops_running": 33,
     "loops_total": 43,
-    "completed_oneshots": 8,
+    "completed_oneshots": 10,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 3,
+    "annotations_missing": 1,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,10 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "unclassified": 3,
-      "sweep": 2
+      "sweep": 2,
+      "unclassified": 1
     },
-    "generated_at": "2026-11-13T08:00:01.264Z"
+    "generated_at": "2026-11-13T18:00:01.306Z"
   },
   "loops": [
     {
@@ -363,7 +363,7 @@
       "channels": [
         "Telegram"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -463,7 +463,7 @@
         "Desk chat",
         "Telegram"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1576,9 +1576,7 @@
   },
   "drift": {
     "unannotated": [
-      "Monthly AI review",
-      "Monthly AI review — TEST",
-      "Friday: the sentence + the certified copies"
+      "Monthly AI review"
     ],
     "retired": [],
     "plugins_unannotated": [],
