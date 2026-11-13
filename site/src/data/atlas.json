@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-13T00:00:01.101Z",
+    "generated_at": "2026-11-13T01:00:00.991Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,12 +155,12 @@
     }
   ],
   "stats": {
-    "loops_running": 35,
-    "loops_total": 42,
+    "loops_running": 36,
+    "loops_total": 43,
     "completed_oneshots": 7,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 3,
+    "annotations_missing": 4,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
@@ -168,10 +168,10 @@
       "ritual": 6,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2,
-      "unclassified": 3
+      "unclassified": 4,
+      "sweep": 2
     },
-    "generated_at": "2026-11-13T00:00:01.101Z"
+    "generated_at": "2026-11-13T01:00:00.991Z"
   },
   "loops": [
     {
@@ -351,6 +351,22 @@
       "annotated": true,
       "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
+    },
+    {
+      "name": "Friday: the sentence + the certified copies",
+      "public_name": "Friday: the sentence + the certified copies",
+      "slug": "friday-the-sentence-the-certified-copies",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once at 2026-11-13 09:15",
+      "schedule": "once at 2026-11-13 09:15",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "kanban requeue t_67a7fd9d after codex quota",
@@ -1562,7 +1578,8 @@
     "unannotated": [
       "Monthly AI review",
       "Monthly AI review — TEST",
-      "RT pipeline: first unattended-run check"
+      "RT pipeline: first unattended-run check",
+      "Friday: the sentence + the certified copies"
     ],
     "retired": [],
     "plugins_unannotated": [],
