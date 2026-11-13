@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T00:00:00.000Z",
+  "generatedAt": "2026-11-13T00:00:00.000Z",
   "site": "https://mikejones.online",
   "description": "Read-only machine index of Mike Jones knowledge-base fact sheets. Human entry point: /llms.txt",
   "llmsTxt": "/llms.txt",
@@ -43,7 +43,7 @@
     {
       "id": "kb-business-resilient-tomorrow",
       "title": "Resilient Tomorrow",
-      "updated": "2026-11-11",
+      "updated": "2026-11-13",
       "summary": "Media + platform.",
       "path": "/agents/kb/kb-business-resilient-tomorrow.md",
       "files": [
@@ -104,11 +104,12 @@
     {
       "id": "kb-pipelines-rt-content-pipeline",
       "title": "RT Content Pipeline",
-      "updated": "2026-11-10",
+      "updated": "2026-11-13",
       "summary": "Intended flow (v1 design): trend-watcher (Reddit/X/YouTube/Substack/exa) → signal-scorer → trend report → content-generator → article drafts → platform-adapter (per-channel versions) → publish.",
-      "path": "/agents/kb/kb-pipelines-rt-content-pipeline.md",
+      "path": "/agents/kb/kb-pipelines-rt-content-pipeline-part1.md",
       "files": [
-        "kb-pipelines-rt-content-pipeline.md"
+        "kb-pipelines-rt-content-pipeline-part1.md",
+        "kb-pipelines-rt-content-pipeline-part2.md"
       ]
     },
     {
