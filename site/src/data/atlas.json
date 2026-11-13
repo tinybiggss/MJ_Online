@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-13T18:00:01.306Z",
+    "generated_at": "2026-11-13T22:00:28.645Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -171,7 +171,7 @@
       "sweep": 2,
       "unclassified": 1
     },
-    "generated_at": "2026-11-13T18:00:01.306Z"
+    "generated_at": "2026-11-13T22:00:28.645Z"
   },
   "loops": [
     {
@@ -1517,6 +1517,7 @@
       "archived",
       "blocked",
       "done",
+      "running",
       "scheduled",
       "todo"
     ]
