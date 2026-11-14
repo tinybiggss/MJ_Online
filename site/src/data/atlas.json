@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-14T05:31:17.422Z",
+    "generated_at": "2026-11-14T05:33:19.637Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-14T05:31:17.422Z"
+    "generated_at": "2026-11-14T05:33:19.637Z"
   },
   "loops": [
     {
@@ -1300,7 +1300,7 @@
         {
           "title": "The lanes, as they stand",
           "meta": "read from the board",
-          "body": "content, default, design, dev-lead, hermes, marketing, ops, product, release, research, roy. One further lane on the board is not a seat — work assigned there is work no profile picks up. Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead."
+          "body": "content, default, design, dev-lead, hermes, marketing, ops, product, release, research, roy. Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead."
         }
       ]
     }
@@ -1504,8 +1504,7 @@
       "product",
       "release",
       "research",
-      "roy",
-      "worker"
+      "roy"
     ],
     "states": [
       "archived",
@@ -1583,8 +1582,7 @@
       "product",
       "release",
       "research",
-      "roy",
-      "worker"
+      "roy"
     ]
   }
 }

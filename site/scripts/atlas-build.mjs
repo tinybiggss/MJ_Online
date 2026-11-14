@@ -310,7 +310,11 @@ function sqlRows(sql) {
 }
 
 function readBoard() {
-  const lanes = sqlRows("select distinct assignee from tasks where assignee is not null and assignee <> '' order by 1");
+  // Archived cards are not work in flight: they are probes and abandoned tickets
+  // kept for the record, and their assignee is nobody's lane.
+  const lanes = sqlRows(
+    "select distinct assignee from tasks where assignee is not null and assignee <> '' and status <> 'archived' order by 1",
+  );
   const states = sqlRows("select distinct status from tasks order by 1");
   if (!lanes || !states) return null;
   return { lanes, states };
