@@ -1,7 +1,7 @@
 ---
 id: kb-business-velocity-partners
 title: Velocity Partners (part 2/2)
-updated: 2026-11-12
+updated: 2026-11-14
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -14,6 +14,10 @@ The page is posted. velocitypartners.io serves the new build — the first time 
 ### Strategic Frame:
 
 VP is a bridge, not a destination. Every engagement is judged on one question: *does this shorten the bridge or lengthen it?* Binding constraint is bandwidth, not values — a fully consumed 40-hour week is one whose work *feeds RT instead of competing with it*: aligned work produces two outputs from the same hours (the engagement + the RT material), unaligned work produces one.
+
+### Pipeline
+
+Target buyer as stated 2026-11-13 (Mike, verbatim): *"I want to shop people looking for RAG / KB / web agent ready for their businesses, product/workflow/team work or PM management as identified on Substack."* Ranked by warmth: RAG/KB/web agent (buying a build) → product/workflow/team (buying judgement) → PM (buying a steady hand). Sourcing is his own audience — Substack Notes replies on the last three RT pieces, reply-thread commenters on the RAG/KB and agent posts, subscribers who opened 3+ of the last 5 sends — not cold outbound, and the unit is one named person and one thirty-minute conversation (T-2026-11-13-12Z). This names the buyer; it does not supersede the 2026-08-21 ICP-approved offer shape (bounded curriculum).
 
 ### Open Items
 

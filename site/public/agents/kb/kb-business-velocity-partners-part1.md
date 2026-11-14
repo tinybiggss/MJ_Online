@@ -1,7 +1,7 @@
 ---
 id: kb-business-velocity-partners
 title: Velocity Partners (part 1/2)
-updated: 2026-11-12
+updated: 2026-11-14
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
