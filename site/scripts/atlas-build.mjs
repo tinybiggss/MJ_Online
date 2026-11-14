@@ -330,26 +330,33 @@ function readCrew() {
   const seats = [
     { alias: "default", aliases: ["hermes"], name: "Corvus", purpose: null },
   ];
+  // A seat is a profile with a MANIFEST. A directory carrying no profile.yaml is
+  // a scratch profile (a probe, an abandoned experiment) and counting it publishes
+  // a seat nobody can address — it is reported in drift instead, so its appearance
+  // is visible without inflating the roster.
+  const anonymous = [];
   for (const dir of readdirSync(PROFILES, { withFileTypes: true })) {
     if (!dir.isDirectory()) continue;
-    let name = null;
-    let purpose = null;
+    let y;
     try {
-      const y = readFileSync(resolve(PROFILES, dir.name, "profile.yaml"), "utf8");
-      const pick = (k) => {
-        const m = new RegExp(`^${k}:\\s*(.+)$`, "m").exec(y);
-        return m ? m[1].trim().replace(/^["']|["']$/g, "") : null;
-      };
-      name = pick("display_name");
-      purpose = pick("description");
+      y = readFileSync(resolve(PROFILES, dir.name, "profile.yaml"), "utf8");
     } catch {
-      // profile dir with no readable profile.yaml: still a seat, visibly unnamed
+      anonymous.push(dir.name);
+      continue;
     }
-    seats.push({ alias: dir.name, name: name || dir.name, purpose });
+    const pick = (k) => {
+      const m = new RegExp(`^${k}:\\s*(.+)$`, "m").exec(y);
+      return m ? m[1].trim().replace(/^["']|["']$/g, "") : null;
+    };
+    const name = pick("display_name");
+    const purpose = pick("description");
+    // The board stamps cards with the display name as often as with the alias, so
+    // the display name is a lane alias of the same seat, not a lane of its own.
+    seats.push({ alias: dir.name, aliases: name ? [name.toLowerCase()] : [], name: name || dir.name, purpose });
   }
   const orderOf = (s) => curated.crew_page?.seats?.[s.alias]?.order ?? 999;
   seats.sort((a, b) => orderOf(a) - orderOf(b) || a.alias.localeCompare(b.alias));
-  return { count: seats.length, seats };
+  return { count: seats.length, seats, anonymous };
 }
 
 let vault = readVault();
@@ -416,7 +423,15 @@ if (crew && curated.crew_page) {
 // receives work nothing can pick up — a defect in the board, not a division of
 // labour — so it is counted out of the roster.
 const seatAliases = new Set(
-  (crew?.seats || []).flatMap((s) => [s.alias, ...(s.aliases || [])]),
+  (crew?.seats || []).flatMap((s) => [
+    s.alias,
+    ...(s.aliases || []),
+    // The curated file may name a seat differently from its manifest; both are
+    // that seat's lane names.
+    ...(curated.crew_page?.seats?.[s.alias]?.public_name
+      ? [curated.crew_page.seats[s.alias].public_name.toLowerCase()]
+      : []),
+  ]),
 );
 const lanesShown = (board?.lanes || []).filter((l) => seatAliases.has(l));
 
@@ -435,9 +450,11 @@ if (board && curated.board_page) {
         title: "The lanes, as they stand",
         meta: "read from the board",
         body: `${lanesShown.join(", ")}.${
-          board.lanes.length - lanesShown.length
-            ? ` ${board.lanes.length - lanesShown.length} further lanes on the board are not seats — work assigned there is work no profile picks up.`
-            : ""
+          board.lanes.length - lanesShown.length === 1
+            ? ` One further lane on the board is not a seat — work assigned there is work no profile picks up.`
+            : board.lanes.length - lanesShown.length > 1
+              ? ` ${board.lanes.length - lanesShown.length} further lanes on the board are not seats — work assigned there is work no profile picks up.`
+              : ""
         } Lane names come from the board itself, not from this file: a lane exists because work was assigned to it. Structure is derived on every build; every number on this page is dated in the curated file instead.`,
       },
     ],
@@ -470,6 +487,7 @@ const atlas = {
     retired,
     plugins_unannotated: vault?.unannotated || [],
     seats_undescribed: undescribedSeats,
+    profiles_without_manifest: crew?.anonymous || [],
     board_lanes: board?.lanes || [],
   },
 };
