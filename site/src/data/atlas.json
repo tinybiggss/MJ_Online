@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-14T05:33:19.637Z",
+    "generated_at": "2026-11-14T06:00:28.631Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -156,8 +156,8 @@
   ],
   "stats": {
     "loops_running": 33,
-    "loops_total": 43,
-    "completed_oneshots": 10,
+    "loops_total": 40,
+    "completed_oneshots": 7,
     "loops_paused": 0,
     "patterns_in_use": 6,
     "annotations_missing": 0,
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-14T05:33:19.637Z"
+    "generated_at": "2026-11-14T06:00:28.631Z"
   },
   "loops": [
     {
@@ -588,54 +588,6 @@
       "schedule": "once at 2026-11-12 08:30",
       "channels": [
         "Desk chat"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
-    },
-    {
-      "name": "W2 cron.jobs source — dual gate",
-      "public_name": "W2 cron.jobs source — dual gate",
-      "slug": "w2-cron-jobs-source-dual-gate",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "Daily, 04:40",
-      "schedule": "40 4 * * *",
-      "channels": [
-        "Local log"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
-    },
-    {
-      "name": "W2 DEC-2026-003 — dual gate",
-      "public_name": "W2 DEC-2026-003 — dual gate",
-      "slug": "w2-dec-2026-003-dual-gate",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "Daily, 04:20",
-      "schedule": "20 4 * * *",
-      "channels": [
-        "Local log"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
-    },
-    {
-      "name": "W2 registry — Codex gate leg",
-      "public_name": "W2 registry — Codex gate leg",
-      "slug": "w2-registry-codex-gate-leg",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "Daily, 04:10",
-      "schedule": "10 4 * * *",
-      "channels": [
-        "Local log"
       ],
       "state": "completed",
       "annotated": false,
