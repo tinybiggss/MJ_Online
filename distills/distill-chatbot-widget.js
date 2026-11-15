@@ -464,7 +464,12 @@ window.RAG_CHATBOT_CONFIG = {
             if (sendBtn) sendBtn.disabled = !input.value.trim();
           });
           input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              // IME-safe: the Enter that confirms a composition must not send.
+              if (e.isComposing || e.keyCode === 229) return;
+              handleSend();
+            }
           });
         }
         if (sendBtn) sendBtn.addEventListener('click', handleSend);
