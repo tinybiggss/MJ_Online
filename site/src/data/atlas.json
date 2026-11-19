@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-14T06:00:28.631Z",
+    "generated_at": "2026-11-19T00:00:30.704Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-14T06:00:28.631Z"
+    "generated_at": "2026-11-19T00:00:30.704Z"
   },
   "loops": [
     {
@@ -1136,6 +1136,11 @@
           "title": "Custom Frames",
           "meta": "v2.6.0 · web panes · idle",
           "body": "Puts a web app into a pane by iframe. Enabled with no frames defined — the slot exists, nothing is in it."
+        },
+        {
+          "title": "Excalidraw",
+          "meta": "v2.29.2 · unclassified",
+          "body": "Sketch Your Mind. Edit and view Excalidraw drawings. Enter the world of 4D Visual PKM."
         }
       ]
     },
@@ -1258,8 +1263,8 @@
     }
   ],
   "vault": {
-    "enabled": 13,
-    "installed": 16,
+    "enabled": 14,
+    "installed": 17,
     "off": [
       "mermaid-tools",
       "smart-templates",
@@ -1383,9 +1388,20 @@
         "what": "Puts a web app into a pane by iframe. Enabled with no frames defined — the slot exists, nothing is in it.",
         "in_use": false,
         "annotated": true
+      },
+      {
+        "id": "obsidian-excalidraw-plugin",
+        "name": "Excalidraw",
+        "version": "2.29.2",
+        "role": "unclassified",
+        "what": "Sketch Your Mind. Edit and view Excalidraw drawings. Enter the world of 4D Visual PKM.",
+        "in_use": null,
+        "annotated": false
       }
     ],
-    "unannotated": []
+    "unannotated": [
+      "obsidian-excalidraw-plugin"
+    ]
   },
   "ground": {
     "title": "Ground",
@@ -1518,7 +1534,9 @@
   "drift": {
     "unannotated": [],
     "retired": [],
-    "plugins_unannotated": [],
+    "plugins_unannotated": [
+      "obsidian-excalidraw-plugin"
+    ],
     "seats_undescribed": [],
     "profiles_without_manifest": [
       "probe-ok"
