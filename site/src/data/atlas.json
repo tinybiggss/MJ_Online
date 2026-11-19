@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-19T17:00:31.315Z",
+    "generated_at": "2026-11-19T23:00:31.177Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -156,8 +156,8 @@
   ],
   "stats": {
     "loops_running": 33,
-    "loops_total": 39,
-    "completed_oneshots": 6,
+    "loops_total": 38,
+    "completed_oneshots": 5,
     "loops_paused": 0,
     "patterns_in_use": 6,
     "annotations_missing": 0,
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-19T17:00:31.315Z"
+    "generated_at": "2026-11-19T23:00:31.177Z"
   },
   "loops": [
     {
@@ -361,22 +361,6 @@
       "schedule": "once at 2026-11-13 09:15",
       "channels": [
         "Telegram"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
-    },
-    {
-      "name": "kanban requeue t_67a7fd9d after codex quota",
-      "public_name": "kanban requeue t_67a7fd9d after codex quota",
-      "slug": "kanban-requeue-t-67a7fd9d-after-codex-quota",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "once in 72m",
-      "schedule": "once in 72m",
-      "channels": [
-        "Session that fired it"
       ],
       "state": "completed",
       "annotated": false,
