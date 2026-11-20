@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-20T08:00:31.346Z",
+    "generated_at": "2026-11-20T18:00:31.589Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -156,8 +156,8 @@
   ],
   "stats": {
     "loops_running": 33,
-    "loops_total": 37,
-    "completed_oneshots": 4,
+    "loops_total": 35,
+    "completed_oneshots": 2,
     "loops_paused": 0,
     "patterns_in_use": 6,
     "annotations_missing": 0,
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-20T08:00:31.346Z"
+    "generated_at": "2026-11-20T18:00:31.589Z"
   },
   "loops": [
     {
@@ -352,22 +352,6 @@
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
     },
     {
-      "name": "Friday: the sentence + the certified copies",
-      "public_name": "Friday: the sentence + the certified copies",
-      "slug": "friday-the-sentence-the-certified-copies",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "once at 2026-11-13 09:15",
-      "schedule": "once at 2026-11-13 09:15",
-      "channels": [
-        "Telegram"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
-    },
-    {
       "name": "kb-nightly-maintenance",
       "public_name": "Knowledge-base gate",
       "slug": "knowledge-base-gate",
@@ -416,23 +400,6 @@
       "annotated": true,
       "does": "Reads what arrived, applies a bar for what counts as important, and surfaces only the messages that clear it.",
       "why": "Inbox work is unbounded. A bar turns it into a finite queue."
-    },
-    {
-      "name": "Monthly AI review — TEST",
-      "public_name": "Monthly AI review — TEST",
-      "slug": "monthly-ai-review-test",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "once at 2026-11-13 09:30",
-      "schedule": "once at 2026-11-13 09:30",
-      "channels": [
-        "Desk chat",
-        "Telegram"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
     },
     {
       "name": "LinkedIn export watcher",
