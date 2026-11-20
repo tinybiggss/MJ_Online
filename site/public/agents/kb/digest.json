@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T00:00:00.000Z",
+  "generated_at": "2026-11-20T00:00:00.000Z",
   "pages": {
     "kb-ai-how-mike-works": {
       "digest": "sha256:c866540ad4a13ab938900c5dba004b8901b749b2db487a25deee03516dd5f8ba",
@@ -23,15 +23,15 @@
       ]
     },
     "kb-business-resilient-tomorrow": {
-      "digest": "sha256:4d13464a79c114039048083075685083f75c3d054f127b3861dc92f49618801d",
-      "updated": "2026-11-13",
+      "digest": "sha256:aa74a39693df5149a0ab9420901d4c93463c3898177719fd6e59d8bba3c4e072",
+      "updated": "2026-11-20",
       "files": [
         "kb-business-resilient-tomorrow.md"
       ]
     },
     "kb-business-velocity-partners": {
-      "digest": "sha256:7d48763b334b2219d54ff0c12dd35739c1f8cfc9d73332754aeb4e2df1fae4a1",
-      "updated": "2026-11-14",
+      "digest": "sha256:1e1553d6e5d845f285ff04e2b0ab9a23701a4e8c046fe4a472e2199fa418c05e",
+      "updated": "2026-11-17",
       "files": [
         "kb-business-velocity-partners-part1.md",
         "kb-business-velocity-partners-part2.md"

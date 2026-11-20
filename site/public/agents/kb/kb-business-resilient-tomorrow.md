@@ -1,7 +1,7 @@
 ---
 id: kb-business-resilient-tomorrow
 title: Resilient Tomorrow
-updated: 2026-11-13
+updated: 2026-11-20
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
@@ -14,6 +14,10 @@ Media + platform. The legacy play (north-star): "known for Resilient Tomorrow. T
 ### Identity
 
 Tagline: "Build your exit. Without burning anything down." Archetype: Outlaw (60-70%) + Sage (30-40%) — the rebel who found the exits, calmly showing them NOT: prepper site, self-help, activism, guru platform, charity
+
+### Discovery — What Search Says (2026-11-15)
+
+One pass of Google-autocomplete mining over 18 niche seeds — 468 probes, 4,406 unique suggestions; report …/finished-products/artifacts/rt-autocomplete-mining-2026-11-15.md: The surface returns buying intent, not learning intent. Across the 4,406 suggestions: 40 "near me", 41 "vs" comparisons, 39 price queries (many non-US), and exactly 1 "best X" and 2 "how to". People who type resilience terms are mostly already sold and shopping for a physical thing — barrels, batteries, radios, a year of food. That is not RT's business, and it is not a content lane. "Solarpunk" is voice, not a discovery keyword. 259 solarpunk suggestions, 11 of them practice-oriented (4%); the rest are fiction, aesthetic, anime, city-builders, wallpapers. Keep the word as identity (above) and stop treating it as the search entry point. Community and mutual aid is the largest clean cluster — 439 suggestions, 429 of them non-local (genuinely topical, not retail) — and what already answers it is policy papers and academic work. That is the clearest editorial seam the mining found. The follow-up is still Mike's call (T-2026-11-19-2WV, on-deck): A one-page printable artifact per published piece, B a standalone Grid-Down Checklist, C a community-resilience playbook series. The recommendation on record is A then B. A digital-products shop is ruled out by the evidence: the purchase intent in this niche is barrels and radios, not PDFs.
 
 ### The Staircase Model (load-bearing)
 
