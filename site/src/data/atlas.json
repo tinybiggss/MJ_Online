@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-19T23:00:31.177Z",
+    "generated_at": "2026-11-20T08:00:31.346Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -156,8 +156,8 @@
   ],
   "stats": {
     "loops_running": 33,
-    "loops_total": 38,
-    "completed_oneshots": 5,
+    "loops_total": 37,
+    "completed_oneshots": 4,
     "loops_paused": 0,
     "patterns_in_use": 6,
     "annotations_missing": 0,
@@ -170,7 +170,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-19T23:00:31.177Z"
+    "generated_at": "2026-11-20T08:00:31.346Z"
   },
   "loops": [
     {
@@ -476,22 +476,6 @@
       "schedule": "46 13 30 10 *",
       "channels": [
         "Desk chat"
-      ],
-      "state": "completed",
-      "annotated": false,
-      "does": null,
-      "why": null
-    },
-    {
-      "name": "RT pipeline: first unattended-run check",
-      "public_name": "RT pipeline: first unattended-run check",
-      "slug": "rt-pipeline-first-unattended-run-check",
-      "band": "tend",
-      "pattern": null,
-      "cadence": "once in 630m",
-      "schedule": "once in 630m",
-      "channels": [
-        "Session that fired it"
       ],
       "state": "completed",
       "annotated": false,
