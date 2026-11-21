@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T00:00:00.000Z",
+  "generated_at": "2026-11-21T00:00:00.000Z",
   "pages": {
     "kb-ai-how-mike-works": {
       "digest": "sha256:c866540ad4a13ab938900c5dba004b8901b749b2db487a25deee03516dd5f8ba",
@@ -23,8 +23,8 @@
       ]
     },
     "kb-business-resilient-tomorrow": {
-      "digest": "sha256:aa74a39693df5149a0ab9420901d4c93463c3898177719fd6e59d8bba3c4e072",
-      "updated": "2026-11-20",
+      "digest": "sha256:129f466423b6c3b335b6a853d8fdb5f63197a47d89732e6f55520281dd29b2e5",
+      "updated": "2026-11-21",
       "files": [
         "kb-business-resilient-tomorrow.md"
       ]
@@ -66,8 +66,8 @@
       ]
     },
     "kb-pipelines-rt-content-pipeline": {
-      "digest": "sha256:289751264108410e7c9c7adcad6004306dba3585fa431e39387ea1ff989679c7",
-      "updated": "2026-11-13",
+      "digest": "sha256:e46671a2e3b36486f0dbafc91ee9fffbdd30b29d444baa121724cde6f618d3ea",
+      "updated": "2026-11-21",
       "files": [
         "kb-pipelines-rt-content-pipeline-part1.md",
         "kb-pipelines-rt-content-pipeline-part2.md"

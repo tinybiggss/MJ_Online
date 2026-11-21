@@ -1,7 +1,7 @@
 ---
 id: kb-pipelines-rt-content-pipeline
 title: RT Content Pipeline (part 2/2)
-updated: 2026-11-13
+updated: 2026-11-21
 source: Mike Jones public knowledge base (https://mikejones.online/llms.txt)
 ---
 
