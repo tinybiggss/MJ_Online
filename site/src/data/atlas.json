@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-21T16:00:31.995Z",
+    "generated_at": "2026-11-21T19:00:58.769Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 37,
-    "loops_total": 39,
+    "loops_running": 42,
+    "loops_total": 44,
     "completed_oneshots": 2,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 4,
+    "annotations_missing": 9,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
+      "unclassified": 9,
       "watcher": 8,
       "intake": 3,
-      "sweep": 2,
-      "unclassified": 4
+      "sweep": 2
     },
-    "generated_at": "2026-11-21T16:00:31.995Z"
+    "generated_at": "2026-11-21T19:00:58.769Z"
   },
   "loops": [
     {
@@ -289,6 +289,22 @@
       "why": null
     },
     {
+      "name": "APC BE900G3 UPS price watch",
+      "public_name": "APC BE900G3 UPS price watch",
+      "slug": "apc-be900g3-ups-price-watch",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 07:30",
+      "schedule": "30 7 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
       "name": "LinkedIn token renewal",
       "public_name": "Credential renewal",
       "slug": "credential-renewal",
@@ -303,6 +319,22 @@
       "annotated": true,
       "does": "Renews a posting credential on a timer so it never lapses in the middle of a campaign.",
       "why": "Credentials fail at the moment of use, which is the worst possible moment to learn about it."
+    },
+    {
+      "name": "CyberPower CP1000PFCLCD price watch",
+      "public_name": "CyberPower CP1000PFCLCD price watch",
+      "slug": "cyberpower-cp1000pfclcd-price-watch",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 07:30",
+      "schedule": "30 7 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "Riverside elapse check",
@@ -351,6 +383,22 @@
       "annotated": true,
       "does": "Reads every profile's job store every fifteen minutes and tells me the first time a loop breaks — and once more when it recovers.",
       "why": "Repair waits for a third failure before it earns a card. That is correct for repair and wrong for notice: a loop that broke at nine and gets a card at noon has been quietly lying to me all morning."
+    },
+    {
+      "name": "HGST HC510 10TB price watch",
+      "public_name": "HGST HC510 10TB price watch",
+      "slug": "hgst-hc510-10tb-price-watch",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 07:30",
+      "schedule": "30 7 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "kb-nightly-maintenance",
@@ -515,6 +563,22 @@
       "why": null
     },
     {
+      "name": "ServerPartDeals 8TB drive price watch",
+      "public_name": "ServerPartDeals 8TB drive price watch",
+      "slug": "serverpartdeals-8tb-drive-price-watch",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 07:30",
+      "schedule": "30 7 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
       "name": "Clef gate audit",
       "public_name": "Shadow gate review",
       "slug": "shadow-gate-review",
@@ -561,6 +625,22 @@
       "annotated": true,
       "does": "Adopts new task cards, normalises them, and routes each to the place it will actually be seen.",
       "why": "A task that lives in a chat message is not a task, it is a rumour."
+    },
+    {
+      "name": "TerraMaster D4-320 price watch",
+      "public_name": "TerraMaster D4-320 price watch",
+      "slug": "terramaster-d4-320-price-watch",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 07:30",
+      "schedule": "30 7 * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "supabase-pat-watchdog",
@@ -1520,7 +1600,12 @@
       "Ripping surfacing W1 (of 4)",
       "Ripping surfacing W2 (of 4)",
       "Ripping surfacing W3 (of 4)",
-      "Ripping surfacing W4 (of 4)"
+      "Ripping surfacing W4 (of 4)",
+      "APC BE900G3 UPS price watch",
+      "CyberPower CP1000PFCLCD price watch",
+      "TerraMaster D4-320 price watch",
+      "ServerPartDeals 8TB drive price watch",
+      "HGST HC510 10TB price watch"
     ],
     "retired": [],
     "plugins_unannotated": [
