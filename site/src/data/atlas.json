@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-24T19:00:06.925Z",
+    "generated_at": "2026-11-24T21:00:07.181Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 42,
-    "loops_total": 44,
+    "loops_running": 44,
+    "loops_total": 46,
     "completed_oneshots": 2,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 9,
+    "annotations_missing": 11,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 9,
+      "unclassified": 11,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-24T19:00:06.925Z"
+    "generated_at": "2026-11-24T21:00:07.181Z"
   },
   "loops": [
     {
@@ -451,6 +451,22 @@
       "why": "Inbox work is unbounded. A bar turns it into a finite queue."
     },
     {
+      "name": "MC disposition gate re-run",
+      "public_name": "MC disposition gate re-run",
+      "slug": "mc-disposition-gate-re-run",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once at 2026-11-24 15:10",
+      "schedule": "once at 2026-11-24 15:10",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
       "name": "LinkedIn export watcher",
       "public_name": "Post-export watcher",
       "slug": "post-export-watcher",
@@ -657,6 +673,22 @@
       "annotated": true,
       "does": "Watches the expiry clock on a product credential twice a month and raises it before it lapses.",
       "why": "The quiet failures are the ones attached to something a customer is using."
+    },
+    {
+      "name": "Unblock/advance MC wave cards after the gate CLIs' usage walls clear",
+      "public_name": "Unblock/advance MC wave cards after the gate CLIs' usage walls clear",
+      "slug": "unblock-advance-mc-wave-cards-after-the-gate-clis-usage-walls-clear",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once in 3h",
+      "schedule": "once in 3h",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "Watcher guard (chain health)",
@@ -1606,7 +1638,9 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch"
+      "HGST HC510 10TB price watch",
+      "MC disposition gate re-run",
+      "Unblock/advance MC wave cards after the gate CLIs' usage walls clear"
     ],
     "retired": [],
     "plugins_unannotated": [
