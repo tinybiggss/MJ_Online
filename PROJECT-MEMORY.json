@@ -3118,9 +3118,32 @@
         "Verify dashboard at https://mj-chatbot-backend.mejones73.workers.dev/analytics",
         "Begin Tier 3: Weekly analytics reviews"
       ]
+    },
+    {
+      "date": "2026-11-24",
+      "phase": "Atlas publish rail (hourly cron 209cf925f192)",
+      "milestone": "GitHub HTTPS receive-pack rejected the atlas push with 500s — remote-side, intermittent; the stranded commits landed on retry",
+      "summary": "Three scheduled atlas pushes and two manual attempts were rejected by GitHub's HTTPS receive-pack endpoint with 'remote: Internal Server Error', a fresh Request ID each time: D3D3:2D086D:5168C:D9AC6:6B05FAD8 at 2026-11-24T21:00:09Z, C161:151483:128A96:335049:6B06250A at 2026-11-25T00:00:11Z, E1E2:2ED6BE:1B4F9C:4EB157:6B063318 at 2026-11-25T01:00:09Z. The same commits pushed clean minutes later on the same host, credential and HTTPS remote (a30deda at 00:32Z; 1292cd2 at 01:01:44Z, 95 s after the scheduler's own attempt at that exact commit was rejected), and a scratch branch pushed fine over SSH at 00:31Z. So the fault is intermittent and GitHub-side, not the script, the objects or the repo: no branch protection, no rulesets, no hooks, permissions.push=true, repo 55.8 MB, gh auth as tinybiggss with repo scope. GitHub Status carried an open 'Disruption with some GitHub services' incident from 2026-11-25T00:08Z.",
+      "key_changes": [
+        "c0056ad (13:00) and a30deda (16:00) atlas refreshes stranded locally by the rejected pushes; landed 2026-11-25T00:32Z — public /system/ then read 'loops 46 · active 42 · retired 4' where it had read 44/42/2",
+        "1292cd2 (17:00 refresh) pushed 2026-11-25T01:01:44Z — public /system/ reads 'loops 48 · active 44 · retired 4'",
+        "No repo-side change made: the elimination checks (protection, rulesets, hooks, permissions) all came back clean, so nothing was 'fixed' here"
+      ],
+      "results": {
+        "scheduled_push_failures": 3,
+        "manual_https_attempts_rejected": 2,
+        "push_succeeded_on_retry": true,
+        "ssh_push_while_https_failed": "succeeded (scratch branch, 2026-11-25T00:31Z)"
+      },
+      "lesson": "A '[remote rejected] main ... Internal Server Error' is GitHub refusing the ref update, not a local defect, and it is worth one immediate retry before any diagnosis: a retry cleared it here every time it was tried. Eliminate the repo config quickly (protection, rulesets, hooks, permissions) so 'remote-side' is a measured claim, and quote the Request IDs — they are the only handle GitHub Support can act on. The job itself has no retry, so one transient 5xx becomes an hourly red that says nothing about the atlas while the public page quietly serves stale data.",
+      "next_steps": [
+        "Bounded retry in ~/.hermes/scripts/atlas_publish.sh (3 attempts, 20/40 s backoff, optional SSH fallback on the last) handed off on kanban t_72d8c592 — cron health lane (roy), because the script belongs to the default profile's scheduler",
+        "If 500s recur outside a GitHub incident, file with GitHub Support quoting the Request IDs above"
+      ],
+      "agent": "Scotty (release), kanban t_a114e141"
     }
   ],
   "current_status": "Live at mikejones.online (Astro on Cloudflare Pages). GHN AI Fluency Lab Week 3 syllabus and 46-item course-interest ballot shipped and verified in production 2026-08-19.",
-  "last_updated": "2026-08-24",
+  "last_updated": "2026-11-24",
   "version": "2.1-field (Astro on Cloudflare Pages, live + polished)"
 }
