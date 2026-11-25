@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-24T21:00:07.181Z",
+    "generated_at": "2026-11-25T00:00:08.606Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 44,
+    "loops_running": 42,
     "loops_total": 46,
-    "completed_oneshots": 2,
+    "completed_oneshots": 4,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 11,
+    "annotations_missing": 9,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 11,
+      "unclassified": 9,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-24T21:00:07.181Z"
+    "generated_at": "2026-11-25T00:00:08.606Z"
   },
   "loops": [
     {
@@ -461,7 +461,7 @@
       "channels": [
         "Desk chat"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -685,7 +685,7 @@
       "channels": [
         "Local log"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1638,9 +1638,7 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch",
-      "MC disposition gate re-run",
-      "Unblock/advance MC wave cards after the gate CLIs' usage walls clear"
+      "HGST HC510 10TB price watch"
     ],
     "retired": [],
     "plugins_unannotated": [
