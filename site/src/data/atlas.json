@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-25T09:00:07.061Z",
+    "generated_at": "2026-11-25T10:00:07.159Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 43,
+    "loops_running": 42,
     "loops_total": 49,
-    "completed_oneshots": 6,
+    "completed_oneshots": 7,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 10,
+    "annotations_missing": 9,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 10,
+      "unclassified": 9,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-25T09:00:07.061Z"
+    "generated_at": "2026-11-25T10:00:07.159Z"
   },
   "loops": [
     {
@@ -509,7 +509,7 @@
       "channels": [
         "Desk chat"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1622,6 +1622,7 @@
       "archived",
       "blocked",
       "done",
+      "ready",
       "running",
       "scheduled",
       "todo"
@@ -1686,8 +1687,7 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch",
-      "NS m18e gate after quota reset"
+      "HGST HC510 10TB price watch"
     ],
     "retired": [],
     "plugins_unannotated": [
