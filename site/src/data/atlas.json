@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-25T00:00:08.606Z",
+    "generated_at": "2026-11-25T01:00:06.869Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 42,
-    "loops_total": 46,
+    "loops_running": 44,
+    "loops_total": 48,
     "completed_oneshots": 4,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 9,
+    "annotations_missing": 11,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 9,
+      "unclassified": 11,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-25T00:00:08.606Z"
+    "generated_at": "2026-11-25T01:00:06.869Z"
   },
   "loops": [
     {
@@ -271,6 +271,22 @@
       "annotated": true,
       "does": "A single nudge at the hour the morning block can actually begin, and nothing before it.",
       "why": "The gap between available and started is where most of my day used to go."
+    },
+    {
+      "name": "20:18 backstop: wake the week-plan card only if the 20:12 guard failed",
+      "public_name": "20:18 backstop: wake the week-plan card only if the 20:12 guard failed",
+      "slug": "20-18-backstop-wake-the-week-plan-card-only-if-the-20-12-guard-failed",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once at 2026-11-24 20:18",
+      "schedule": "once at 2026-11-24 20:18",
+      "channels": [
+        "Local log"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
     },
     {
       "name": "andromeda-research-wake (one-shot)",
@@ -462,6 +478,22 @@
         "Desk chat"
       ],
       "state": "completed",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "MC night gate sweep",
+      "public_name": "MC night gate sweep",
+      "slug": "mc-night-gate-sweep",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once at 2026-11-24 20:15",
+      "schedule": "once at 2026-11-24 20:15",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
       "annotated": false,
       "does": null,
       "why": null
@@ -1638,7 +1670,9 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch"
+      "HGST HC510 10TB price watch",
+      "20:18 backstop: wake the week-plan card only if the 20:12 guard failed",
+      "MC night gate sweep"
     ],
     "retired": [],
     "plugins_unannotated": [
