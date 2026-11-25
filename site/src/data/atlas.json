@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-25T10:00:07.159Z",
+    "generated_at": "2026-11-25T11:00:08.733Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 42,
-    "loops_total": 49,
+    "loops_running": 44,
+    "loops_total": 51,
     "completed_oneshots": 7,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 9,
+    "annotations_missing": 11,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 9,
+      "unclassified": 11,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-25T10:00:07.159Z"
+    "generated_at": "2026-11-25T11:00:08.733Z"
   },
   "loops": [
     {
@@ -494,6 +494,38 @@
         "Desk chat"
       ],
       "state": "completed",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "MC t_b8c0d7a5 codex r2 after usage reset",
+      "public_name": "MC t_b8c0d7a5 codex r2 after usage reset",
+      "slug": "mc-t-b8c0d7a5-codex-r2-after-usage-reset",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 06:15",
+      "schedule": "15 6 * * *",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "MC wake: unblock t_01f0e0d0 (red_capable re-gate)",
+      "public_name": "MC wake: unblock t_01f0e0d0 (red_capable re-gate)",
+      "slug": "mc-wake-unblock-t-01f0e0d0-red-capable-re-gate",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once in 4h",
+      "schedule": "once in 4h",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
       "annotated": false,
       "does": null,
       "why": null
@@ -1622,7 +1654,6 @@
       "archived",
       "blocked",
       "done",
-      "ready",
       "running",
       "scheduled",
       "todo"
@@ -1687,7 +1718,9 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch"
+      "HGST HC510 10TB price watch",
+      "MC t_b8c0d7a5 codex r2 after usage reset",
+      "MC wake: unblock t_01f0e0d0 (red_capable re-gate)"
     ],
     "retired": [],
     "plugins_unannotated": [
