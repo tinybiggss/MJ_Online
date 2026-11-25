@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-25T03:00:07.147Z",
+    "generated_at": "2026-11-25T05:00:09.933Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 44,
+    "loops_running": 42,
     "loops_total": 48,
-    "completed_oneshots": 4,
+    "completed_oneshots": 6,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 11,
+    "annotations_missing": 9,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 11,
+      "unclassified": 9,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-25T03:00:07.147Z"
+    "generated_at": "2026-11-25T05:00:09.933Z"
   },
   "loops": [
     {
@@ -283,7 +283,7 @@
       "channels": [
         "Local log"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -493,7 +493,7 @@
       "channels": [
         "Desk chat"
       ],
-      "state": "running",
+      "state": "completed",
       "annotated": false,
       "does": null,
       "why": null
@@ -1606,6 +1606,7 @@
       "archived",
       "blocked",
       "done",
+      "running",
       "scheduled",
       "todo"
     ]
@@ -1669,9 +1670,7 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch",
-      "20:18 backstop: wake the week-plan card only if the 20:12 guard failed",
-      "MC night gate sweep"
+      "HGST HC510 10TB price watch"
     ],
     "retired": [],
     "plugins_unannotated": [
