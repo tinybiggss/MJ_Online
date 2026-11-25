@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-25T07:00:07.009Z",
+    "generated_at": "2026-11-25T08:00:07.138Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 42,
-    "loops_total": 48,
+    "loops_running": 43,
+    "loops_total": 49,
     "completed_oneshots": 6,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 9,
+    "annotations_missing": 10,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 9,
+      "unclassified": 10,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-25T07:00:07.009Z"
+    "generated_at": "2026-11-25T08:00:07.138Z"
   },
   "loops": [
     {
@@ -494,6 +494,22 @@
         "Desk chat"
       ],
       "state": "completed",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "NS m18e gate after quota reset",
+      "public_name": "NS m18e gate after quota reset",
+      "slug": "ns-m18e-gate-after-quota-reset",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once in 80m",
+      "schedule": "once in 80m",
+      "channels": [
+        "Desk chat"
+      ],
+      "state": "running",
       "annotated": false,
       "does": null,
       "why": null
@@ -1669,7 +1685,8 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch"
+      "HGST HC510 10TB price watch",
+      "NS m18e gate after quota reset"
     ],
     "retired": [],
     "plugins_unannotated": [
