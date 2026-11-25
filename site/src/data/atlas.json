@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-25T15:00:08.881Z",
+    "generated_at": "2026-11-25T16:00:07.238Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -171,7 +171,7 @@
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-25T15:00:08.881Z"
+    "generated_at": "2026-11-25T16:00:07.238Z"
   },
   "loops": [
     {
@@ -1726,6 +1726,7 @@
     ],
     "seats_undescribed": [],
     "profiles_without_manifest": [
+      "default",
       "probe-ok"
     ],
     "board_lanes": [
