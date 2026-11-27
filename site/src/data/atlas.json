@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-27T07:00:08.757Z",
+    "generated_at": "2026-11-27T23:00:32.754Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 42,
-    "loops_total": 51,
+    "loops_running": 43,
+    "loops_total": 52,
     "completed_oneshots": 9,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 9,
+    "annotations_missing": 10,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 9,
+      "unclassified": 10,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-27T07:00:08.757Z"
+    "generated_at": "2026-11-27T23:00:32.754Z"
   },
   "loops": [
     {
@@ -310,8 +310,8 @@
       "slug": "apc-be900g3-ups-price-watch",
       "band": "tend",
       "pattern": null,
-      "cadence": "Daily, 07:30",
-      "schedule": "30 7 * * *",
+      "cadence": "Hourly, at :23",
+      "schedule": "23 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -342,8 +342,8 @@
       "slug": "cyberpower-cp1000pfclcd-price-watch",
       "band": "tend",
       "pattern": null,
-      "cadence": "Daily, 07:30",
-      "schedule": "30 7 * * *",
+      "cadence": "Hourly, at :29",
+      "schedule": "29 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -406,8 +406,8 @@
       "slug": "hgst-hc510-10tb-price-watch",
       "band": "tend",
       "pattern": null,
-      "cadence": "Daily, 07:30",
-      "schedule": "30 7 * * *",
+      "cadence": "Hourly, at :47",
+      "schedule": "47 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -563,6 +563,22 @@
       "why": "Distribution is a system with receipts. If a post is not recorded it did not happen."
     },
     {
+      "name": "Price-watch hourly window: restore standing cadence",
+      "public_name": "Price-watch hourly window: restore standing cadence",
+      "slug": "price-watch-hourly-window-restore-standing-cadence",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "once at 2026-12-01 00:20",
+      "schedule": "once at 2026-12-01 00:20",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
       "name": "release-site-health",
       "public_name": "Release verification",
       "slug": "release-verification",
@@ -664,8 +680,8 @@
       "slug": "serverpartdeals-8tb-drive-price-watch",
       "band": "tend",
       "pattern": null,
-      "cadence": "Daily, 07:30",
-      "schedule": "30 7 * * *",
+      "cadence": "Hourly, at :41",
+      "schedule": "41 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -728,8 +744,8 @@
       "slug": "terramaster-d4-320-price-watch",
       "band": "tend",
       "pattern": null,
-      "cadence": "Daily, 07:30",
-      "schedule": "30 7 * * *",
+      "cadence": "Hourly, at :35",
+      "schedule": "35 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -825,8 +841,8 @@
       "slug": "purchase-watch-redacted",
       "band": "harvest",
       "pattern": "watcher",
-      "cadence": "Every 12 hours",
-      "schedule": "every 720m",
+      "cadence": "Hourly, at :05",
+      "schedule": "5 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -841,8 +857,8 @@
       "slug": "purchase-watch-family-project-redacted",
       "band": "harvest",
       "pattern": "watcher",
-      "cadence": "Daily, 09:00 & 21:00",
-      "schedule": "0 9,21 * * *",
+      "cadence": "Hourly, at :11",
+      "schedule": "11 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -857,8 +873,8 @@
       "slug": "purchase-watch-workshop",
       "band": "harvest",
       "pattern": "watcher",
-      "cadence": "Daily, 07:30",
-      "schedule": "30 7 * * *",
+      "cadence": "Hourly, at :17",
+      "schedule": "17 * * * *",
       "channels": [
         "Telegram"
       ],
@@ -1654,6 +1670,7 @@
       "archived",
       "blocked",
       "done",
+      "running",
       "scheduled",
       "todo"
     ]
@@ -1717,7 +1734,8 @@
       "CyberPower CP1000PFCLCD price watch",
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
-      "HGST HC510 10TB price watch"
+      "HGST HC510 10TB price watch",
+      "Price-watch hourly window: restore standing cadence"
     ],
     "retired": [],
     "plugins_unannotated": [
