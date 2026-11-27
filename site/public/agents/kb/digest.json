@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T00:00:00.000Z",
+  "generated_at": "2026-11-27T00:00:00.000Z",
   "pages": {
     "kb-ai-how-mike-works": {
       "digest": "sha256:c866540ad4a13ab938900c5dba004b8901b749b2db487a25deee03516dd5f8ba",
@@ -66,8 +66,8 @@
       ]
     },
     "kb-pipelines-rt-content-pipeline": {
-      "digest": "sha256:e46671a2e3b36486f0dbafc91ee9fffbdd30b29d444baa121724cde6f618d3ea",
-      "updated": "2026-11-21",
+      "digest": "sha256:648b1c6c6c6a60f37a9181190e700ab50ba646b4e397b6545c6c10baeafa855a",
+      "updated": "2026-11-27",
       "files": [
         "kb-pipelines-rt-content-pipeline-part1.md",
         "kb-pipelines-rt-content-pipeline-part2.md"
