@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated_at": "2026-11-28T00:00:32.754Z",
+    "generated_at": "2026-11-28T02:00:32.963Z",
     "source": "hermes scheduler store on the owning machine",
     "contract": "committed artifact; CI ships it, never regenerates it"
   },
@@ -155,23 +155,23 @@
     }
   ],
   "stats": {
-    "loops_running": 43,
-    "loops_total": 52,
+    "loops_running": 44,
+    "loops_total": 53,
     "completed_oneshots": 9,
     "loops_paused": 0,
     "patterns_in_use": 6,
-    "annotations_missing": 10,
+    "annotations_missing": 11,
     "retired_annotations": 0,
     "by_pattern": {
       "gate": 9,
       "brief": 4,
       "ritual": 7,
-      "unclassified": 10,
+      "unclassified": 11,
       "watcher": 8,
       "intake": 3,
       "sweep": 2
     },
-    "generated_at": "2026-11-28T00:00:32.754Z"
+    "generated_at": "2026-11-28T02:00:32.963Z"
   },
   "loops": [
     {
@@ -408,6 +408,22 @@
       "pattern": null,
       "cadence": "Hourly, at :47",
       "schedule": "47 * * * *",
+      "channels": [
+        "Telegram"
+      ],
+      "state": "running",
+      "annotated": false,
+      "does": null,
+      "why": null
+    },
+    {
+      "name": "homelab box price watch",
+      "public_name": "homelab box price watch",
+      "slug": "homelab-box-price-watch",
+      "band": "tend",
+      "pattern": null,
+      "cadence": "Daily, 07:30 & 18:30",
+      "schedule": "30 7,18 * * *",
       "channels": [
         "Telegram"
       ],
@@ -1734,7 +1750,8 @@
       "TerraMaster D4-320 price watch",
       "ServerPartDeals 8TB drive price watch",
       "HGST HC510 10TB price watch",
-      "Price-watch hourly window: restore standing cadence"
+      "Price-watch hourly window: restore standing cadence",
+      "homelab box price watch"
     ],
     "retired": [],
     "plugins_unannotated": [
